@@ -1,0 +1,9 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+error[E0616]: field `tick` of struct `Session` is private
+    --> crates\game_core\src\lib.rs:3491:71
+     |
+3491 |             let phase = if self.reduced_motion { 0.0 } else { session.tick as f32 / 60.0 };
+     |                                                                       ^^^^ private field
+
+For more information about this error, try `rustc --explain E0616`.
+error: could not compile `game_core` (lib test) due to 1 previous error

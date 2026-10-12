@@ -36,7 +36,7 @@ fn points(frame: &RenderFrame, camera: [f32; 2]) -> Vec<(Vec2, u32)> {
         .flat_map(|b| {
             b.pixels.iter().map(move |p| {
                 (
-                    b.transforms[p.transform as usize].point(Vec2::from_array(p.local))
+                    b.transforms[p.transform_slot()].point(Vec2::from_array(p.local))
                         - Vec2::from_array(camera)
                         + Vec2::from_array(VIEW) * 0.5
                         - Vec2::from_array(GROUP),
@@ -58,8 +58,7 @@ fn bounds(frame: &RenderFrame, camera: [f32; 2], rect: [f32; 4], tolerance: f32)
                 Vec2::new(-0.5, 0.5),
                 Vec2::splat(0.5),
             ] {
-                let q = b.transforms[p.transform as usize]
-                    .point(Vec2::from_array(p.local) + offset)
+                let q = b.transforms[p.transform_slot()].point(Vec2::from_array(p.local) + offset)
                     - Vec2::from_array(camera)
                     + Vec2::from_array(VIEW) * 0.5
                     - Vec2::from_array(GROUP);
@@ -86,9 +85,12 @@ fn same(a: &RenderFrame, b: &RenderFrame) {
 
 #[test]
 fn map_icon_and_six_biome_objects_are_cached_distinct_unlit_masks() {
-    let (body, _) = menu_icon("map-icon").unwrap();
-    assert_eq!((body.width, body.height), (24, 24));
-    assert!(std::ptr::eq(body, menu_icon("map-icon").unwrap().0));
+    let body = crate::kikai_art::icon("map-icon").unwrap();
+    assert_eq!((body.width, body.height), (32, 32));
+    assert!(std::ptr::eq(
+        body,
+        crate::kikai_art::icon("map-icon").unwrap()
+    ));
     assert!(body.is_occupied(2, 8) && !body.is_occupied(0, 0));
     let mut masks = std::collections::HashSet::new();
     for (kind, body) in MAP_SITES.iter().enumerate() {
@@ -337,14 +339,14 @@ fn sixty_four_markers_and_six_rings_stay_bounded_and_oversize_input_cannot_leak_
             .sum::<usize>(),
         frame.batches.len(),
         MAP_SITES.each_ref().map(|b| b.occupied_count()),
-        menu_icon("map-icon").unwrap().0.occupied_count()
+        crate::kikai_art::icon("map-icon").unwrap().occupied_count()
     );
     assert!(frame.pixel_count < 10_000);
     assert!(frame.batches.iter().all(|b| {
         b.transforms.len() <= 128
             && b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
     }));
     let mut frame = FrameBuilder::new();
     let mut painter = Painter {

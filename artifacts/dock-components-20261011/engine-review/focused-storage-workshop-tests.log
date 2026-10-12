@@ -1,0 +1,20 @@
+(node:16728) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema 6 preserves progression and strips injected components without inventing ownership (6.2464ms)
+✔ schema 7 requires exactly three bounded integer component counts (0.4921ms)
+✔ schema 7 retains component snapshots, rejects stale replay and recovers previous valid counts (10.4577ms)
+✔ database 5 migrates both schema 6 snapshots and prevents a cached database 4 writer (3.0074ms)
+✔ component workshop reveals only discovered recipes and delegates exact authoritative actions (5.0697ms)
+✔ advanced ability recipes include banked crafted components without changing starter training (0.9274ms)
+(node:48136) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema-five migration waits for a real old database connection and prevents old-version writers (10.3512ms)
+✔ an actual version-change event closes obsolete connections and rejects queued and imported writes (2.371ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 330.0514

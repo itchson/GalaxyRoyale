@@ -9,7 +9,9 @@ export const BASELINE_COMMIT = "3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d";
 export const BASELINE_PATH = "apps/game/src/audio.ts";
 export const BASELINE_SHA256 =
   "6e06ef04f40367ab8519adfd445258b0c284d6b1c7ac3d955ea212962c629f64";
-export const MODULE_NAMES = ["audio.js", "audio-state.js", "baseline-audio.js"];
+export const MODULE_NAMES = [
+  "audio.js", "audio-state.js", "title-theme.js", "music-clock.js", "music-score.js", "baseline-audio.js",
+];
 export const HELPER_FILES = [
   "config.mjs",
   "prepare.mjs",

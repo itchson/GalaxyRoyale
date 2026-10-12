@@ -29,7 +29,7 @@ jobs:
           fetch-depth: 0 # Native DSP comparison verifies its exact historical Git source.
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: '24.18.0'
+          node-version: "24.18.0"
       - name: Install locked shell dependencies
         run: |
           npm install --global pnpm@11.3.0
@@ -46,11 +46,29 @@ jobs:
         run: pnpm typecheck
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
-          python-version: '3.12.10'
+          python-version: "3.12.10"
       - name: Install pinned offline asset tooling
         run: python -m pip install -r scripts/asset-requirements.txt
       - name: Exact cell conversions, topology and loss policies
         run: python scripts/asset-pack-tests.py -v
+      - name: KIKAI portraits, current guide canon and authored controls
+        run: python scripts/asset-kikai-tests.py
+      - name: Distinct licensed DORO and TALO cell packs
+        run: python scripts/asset-kikai-profiles-tests.py
+      - name: Detailed KIKAI portraits and exact committed cell packs
+        run: python scripts/asset-kikai-detail-tests.py
+      - name: Detailed native flight controls and reproducible masks
+        run: python scripts/asset-flight-icons-tests.py
+      - name: Detailed shooting-star palette and occupied cells
+        run: python scripts/asset-shooting-star-tests.py
+      - name: Generated PAN dock conversion contracts and frozen native packets
+        run: |
+          python scripts/qa/pan-coop-dock/test_conversion.py
+          python scripts/qa/pan-coop-dock/verify.py
+          cargo test --locked --manifest-path scripts/qa/pan-coop-dock/native/Cargo.toml
+          python scripts/qa/pan-coop-dock/test_256.py
+          python scripts/qa/pan-coop-dock/verify_256.py
+          cargo test --locked --manifest-path scripts/qa/pan-coop-dock/native256/Cargo.toml
       - name: Actual native PixelBody, group and animation extraction
         run: cargo test --locked --manifest-path scripts/asset-native-preview/Cargo.toml
       - name: Extract and audit the accepted dock conversion
@@ -75,7 +93,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: '24.18.0'
+          node-version: "24.18.0"
       - name: Install locked shell dependencies
         run: |
           npm install --global pnpm@11.3.0

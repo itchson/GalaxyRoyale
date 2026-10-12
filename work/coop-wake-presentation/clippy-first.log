@@ -1,0 +1,15 @@
+    Checking engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\engine_core)
+    Checking game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+    Checking game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_web)
+error: casting to the same type is unnecessary (`f32` -> `f32`)
+   --> crates\game_core\src\co_op_replica_wake_tests.rs:404:26
+    |
+404 |     assert_eq!(f64::from(POSITION_LIMIT as f32), 1_000_014.0);
+    |                          ^^^^^^^^^^^^^^^^^^^^^ help: try: `POSITION_LIMIT`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#unnecessary_cast
+    = note: `-D clippy::unnecessary-cast` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::unnecessary_cast)]`
+
+error: could not compile `game_core` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

@@ -1,0 +1,39 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling foldhash v0.2.0
+   Compiling serde_json v1.0.151
+   Compiling memchr v2.8.3
+   Compiling spin v0.12.3
+   Compiling itoa v1.0.18
+   Compiling hashbrown v0.17.1
+   Compiling hecs v0.11.2
+   Compiling syn v3.0.7
+   Compiling glam v0.30.10
+   Compiling serde_derive v1.0.229
+   Compiling bytemuck_derive v1.12.1
+   Compiling bytemuck v1.25.2
+   Compiling engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-dev-bible\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-dev-bible\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 17.68s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 1 test
+edge=Vec2(1000000.0, 0.0); generated_outside_player_domain=17; first_position=[1000036.94, -229.91548]
+
+thread 'co_op_replica::tests::world_edge::actual_edge_chunks_commit_without_removing_generated_entities' (27084) panicked at crates\game_core\src\co_op_replica_tests.rs:121:14:
+called `Result::unwrap()` on an `Err` value: "invalid_entity"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test co_op_replica::tests::world_edge::actual_edge_chunks_commit_without_removing_generated_entities ... FAILED
+
+failures:
+
+failures:
+    co_op_replica::tests::world_edge::actual_edge_chunks_commit_without_removing_generated_entities
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 542 filtered out; finished in 0.14s
+
+error: test failed, to rerun pass `-p game_core --lib`

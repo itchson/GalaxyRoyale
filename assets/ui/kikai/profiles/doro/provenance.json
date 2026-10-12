@@ -1,0 +1,123 @@
+{
+  "type": "DORO",
+  "main_corporation": "PAN",
+  "sub_corporation": "RENKO",
+  "source_path": "assets/concepts/kikai/profiles/doro-reference.png",
+  "source_sha256": "5b31880502297c0e0dc5174779042b14db3ce8cf17f2ac1bbb1aec88dbd45d64",
+  "pillow": "12.3.0",
+  "generation": {
+    "path": "assets/concepts/kikai/profiles/doro-reference.png",
+    "sha256": "5b31880502297c0e0dc5174779042b14db3ce8cf17f2ac1bbb1aec88dbd45d64",
+    "generated_artifact": "exec-503d699f-931f-434c-bc8d-cecaecdc79e1.png",
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "prompt": "Use case: style-transfer. Image 1 is the approved DORA pixel-art STYLE reference only; preserve the existing reference file unchanged. Create ONE distinct DORO adult masculine KIKAI android license portrait, not a recolored female and not a sheet. True detailed hand-crafted retro pixel-art color clusters, crisp cells and restrained shading at the same quality as the supplied reference. Upper-chest bust centered in a tall 3:4 composition, looking forward with slight three-quarter depth. Masculine facial geometry: broader angular jaw, pronounced but friendly brows, wider neck, short emerald PAN hair with a genuinely SHORT SPIKY crown and cropped sides; NO long side locks. Two red RENKO faceted crystal antenna horns, gold eyes, pale ivory mechanical shoulder armor, black articulated synthetic neck with tiny metal/gold connectors. All head, horns and both shoulders fully inside canvas with transparent padding. Friendly neutral expression with closed mouth, facial features clearly visible for later authored blink/speech animation. Same emerald/red/ivory/black/gold material language as reference, no extra accessories, weapons, labels, logos, UI, watermark or background. A genuinely transparent background. This is a single new character design, not DORA with only her haircut changed."
+  },
+  "conversion": {
+    "source_dimensions": [
+      1086,
+      1448
+    ],
+    "crop": [
+      0,
+      0,
+      1086,
+      1448
+    ],
+    "alpha_threshold": 128,
+    "source_nonbinary_alpha_cells": 909018,
+    "source_hard_occupied_cells": 872763,
+    "tight_bbox": [
+      1,
+      59,
+      1086,
+      1448
+    ],
+    "output_dimensions": [
+      96,
+      128
+    ],
+    "fitted_dimensions": [
+      96,
+      123
+    ],
+    "center_offset": [
+      0,
+      2
+    ],
+    "nearest_resize": true,
+    "aspect_policy": "uniform fit; integer output rounding only",
+    "occupied_after_resize": 6829,
+    "quantize_colors": 47,
+    "dither": false,
+    "changed_occupied_color_cells": 6543,
+    "component_policy": "all; no connected-component removal",
+    "output_components_8_neighbor": 1
+  },
+  "manual_authoring": {
+    "facial_patches": {
+      "eyes": [
+        [
+          31,
+          49,
+          43,
+          58
+        ],
+        [
+          49,
+          47,
+          65,
+          56
+        ]
+      ],
+      "iris": [
+        [
+          37,
+          53
+        ],
+        [
+          57,
+          51
+        ]
+      ],
+      "mouth": [
+        40,
+        66,
+        52,
+        74
+      ],
+      "lip": [
+        45,
+        69
+      ],
+      "hair_top": 46,
+      "hair_sides": [
+        31,
+        65,
+        61
+      ],
+      "fringe": [
+        36,
+        48,
+        57
+      ]
+    },
+    "gold_iris_clusters": true,
+    "expression_states": [
+      "neutral",
+      "focused",
+      "concerned",
+      "pleased",
+      "blink"
+    ],
+    "mouth_states": [
+      "rest",
+      "small",
+      "open",
+      "smile"
+    ],
+    "role_selection": "Reviewed head-only green hair/red crystals; no neck or eyebrow recolor"
+  },
+  "exact_import": "asset-pack imports authored binary-alpha PNG layers with provided palette; no resize or removed components",
+  "runtime_boundary": "Host selects layers and corporate colors; JSON metadata alone does not animate"
+}

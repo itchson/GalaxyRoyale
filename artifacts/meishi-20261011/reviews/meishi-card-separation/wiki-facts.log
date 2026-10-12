@@ -1,0 +1,15 @@
+✔ all eight Wiki champion identities, hulls, categories, seed grids and base hulls match the authoritative Rust table (3.8914ms)
+✔ all seventeen ability IDs, effect categories and descriptions match stable Rust registry order (1.3598ms)
+✔ six biome labels/spawn mixes and seed/belt parameters agree with actual Rust generation (1.5146ms)
+✔ boss generations, ship-level gates, save schema and pixel packing facts remain source-backed (3.5562ms)
+✔ Wiki variant cell counts match actual runtime atlas occupancy and provenance; missions keep player-facing terminology (2.2594ms)
+✔ curated reader text retains UTF-8 symbols without legacy decoding artifacts (0.511ms)
+✔ courier guidance includes the actual Haven delivery and source-beacon claim stages (0.9483ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.8937

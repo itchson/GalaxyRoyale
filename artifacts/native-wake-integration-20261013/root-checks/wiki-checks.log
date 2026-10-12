@@ -1,0 +1,28 @@
+✔ all eight Wiki champion identities, hulls, categories, seed grids and base hulls match the authoritative Rust table (2.818ms)
+✔ all seventeen ability IDs, effect categories and descriptions match stable Rust registry order (0.8069ms)
+✔ six biome labels/spawn mixes and seed/belt parameters agree with actual Rust generation (0.9627ms)
+✔ boss generations, ship-level gates, save schema and pixel packing facts remain source-backed (1.7673ms)
+✔ Wiki variant cell counts match actual runtime atlas occupancy and provenance; missions keep player-facing terminology (0.8767ms)
+✔ curated reader text retains UTF-8 symbols without legacy decoding artifacts (0.4766ms)
+✔ courier guidance includes the actual Haven delivery and source-beacon claim stages (0.742ms)
+✔ actual whole-workspace render preserves a focused backward range and middle caret across refreshes (1.7353ms)
+✔ actual Wiki input edits keep Unicode UTF-16 selection and focus after shared rerender (0.5267ms)
+✔ refresh does not steal focus from another control and missing/null selection is safe (0.5491ms)
+✔ gallery serves exact committed native/browser artifacts with distinct classifications and readable provenance (16.7382ms)
+✔ gallery captions preserve observed desktop/QA scope and do not turn a native raster into GPU acceptance (0.3103ms)
+✔ artifact namespace retains exact catalog allowlists and excludes arbitrary records, hidden paths and audio (4.5383ms)
+✔ actual catalog categories, references and classified media all validate and resolve (316.7454ms)
+✔ server and actual UI search cover names, source facts, categories and verification boundaries (2.3515ms)
+✔ rendering escapes every prose/attribute surface and constructs only local allowlisted link shapes (0.3124ms)
+✔ catalog validates stable ids, related links, status and bounded structured content (0.2972ms)
+✔ source/media read paths reject traversal, secrets, unlisted and wrong-type content (9.8366ms)
+✔ catalog itself and listed ancestor links fail closed rather than reading redirected content (7.8772ms)
+✔ HTTP Wiki routes return actual listed bytes, filtered catalog and controlled lookup errors (117.6442ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 548.7146

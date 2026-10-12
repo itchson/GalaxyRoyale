@@ -1,0 +1,101 @@
+(node:27524) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ positive Wake state is sent once per capture even when occupied bodies are cached (8.5459ms)
+✔ Wake send refusal retries the retained piece without reacquiring or refetching (1.7504ms)
+✔ required Wake missing or duplicate state never commits, ACKs or bypasses cells order (5.4324ms)
+✔ accepted pending Wake followed by invalid cells or native commit refusal cannot promote a scene (1.1257ms)
+✔ zero and omitted Wake captures make no Wake request and keep legacy completion (2.0335ms)
+✔ Wake native page rejection leaves completeness unset and cannot ACK (0.8069ms)
+✖ same-tick current-state Wake is forwarded unchanged and native set rejection stays decisive (1.512ms)
+✔ positive Wake quota and all-peer ACK still bound one shared capture (42.2178ms)
+✔ actual two-result host Wake replay cannot satisfy a one-operation capture call (0.8434ms)
+✔ channel ready is separate from native admission and complete replica application (0.8679ms)
+✔ host approval is required before guest join frames and native admission (0.496ms)
+✔ invalid join leaves an owned host world and restoration handle intact (0.2199ms)
+✔ same-room code and lock management do not restart native ownership or guest view (0.6775ms)
+✔ authenticated sender is the native pilot ID, and input is bounded to one local sequence per cadence (7.858ms)
+✔ acknowledged unchanged body signatures reuse cells while pose pages continue (2.3182ms)
+✔ same-count color mutation changes signature and sends actual indexed cells (3.8438ms)
+✔ backpressure does not advance input sequence or grow a queued input history (2.3523ms)
+✔ a rejected remote input retires only its authenticated pilot and preserves the host (1.7787ms)
+✔ host end and guest leave restore native boundaries exactly once without touching local progression (0.7684ms)
+✔ missing native replica never claims connected and returns to a terminal state (0.809ms)
+✔ state contains only controlled presentation data and explicit copy getter owns invitation access (0.2967ms)
+✔ unexpected native SCTP close is generic, not falsely attributed to host intent (0.6506ms)
+✔ invalid elapsed/input cannot become an authority tick or native operation (0.2673ms)
+✔ publication wire enforces finite counts, signature format, roles and token bounds (0.2506ms)
+✔ failed native restoration remains latched and blocks a new session until explicit successful recovery (1.3512ms)
+✔ failed replica restoration retains its recovery handle and cannot reopen gameplay (0.8523ms)
+✔ cancellation while signaling create is pending cannot begin native authority after completion (0.1336ms)
+✔ a stale prior-session callback cannot mutate a replacement native session (1.0457ms)
+✔ native commit refusal cannot mark a staged replica running (0.472ms)
+✔ incomplete or stale publication end cannot install partially received cells (0.3642ms)
+✔ rolling publication quotas remain bounded at120Hz rather than allowing window-boundary bursts (27.1007ms)
+✔ no acknowledged receipt expires only the stalled guest while host simulation remains available (0.6735ms)
+✔ replica binds authenticated host world seed while preserving distinct guest local metadata (0.8773ms)
+✔ one-frame click courses survive sampling cadence and backpressure, then are consumed once (0.877ms)
+✔ cancelInput sends the existing native zero-stick course cancellation, then resumes fresh controls (1.0837ms)
+✔ a synchronous transport end followed by failed native restoration cannot submit another input (0.7334ms)
+✔ an ambiguous successful native begin reply retains ownership until real cleanup (0.1784ms)
+✔ an admitted guest drops a stale published world after 30 seconds without claiming host background simulation (0.7348ms)
+✔ unavailable concrete ports do not launch signaling or publish a connected state (0.1649ms)
+✔ actual 91a18ab publisher rows and indexed cells reach the controller, but partial export cannot claim a complete world (2.5316ms)
+(node:42996) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"scope":"exact native fixture replay and JS serialization, no RTC","pageBytes":17953,"bodyFrameBytes":18038}
+✔ all22 test fixtures retain exact native Git111a bytes (3.5142ms)
+✔ all exact modern native headers and diagnostic pages cross their distinct strict variants (4.3147ms)
+✔ Wake metadata distinguishes absence from malformed presence (1.0807ms)
+✔ Wake pages reject mixed shapes, bad raw/post-f32 numbers and chronology (2.8467ms)
+✔ actual raw transport fixtures decode and both encoded wrapper budgets remain bounded (6.0309ms)
+✔ raw32KiB page span is enforced independently of normalized value/frame bytes (4.5842ms)
+(node:26632) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"scope":"recorded fake native delegate requests, not native execution","stageBytes":46589,"wakeBytes":18004}
+✔ exact native maximum stage and Wake request use the third delegate with matching context (7.6099ms)
+✔ scalar stress Wake request requires its own maximal staged token and roster (2.509ms)
+✔ Wake delegate rejection retains the ownership token for commit/end recovery (1.0328ms)
+✔ actual two-operation host response is preserved without pretending it is one result (0.4706ms)
+✔ equipment extraction delegates to native solo Profile, preserving receiver (0.2211ms)
+✔ equipment extraction fails closed for absent native export and malformed declarations (0.286ms)
+✔ optional owned equipment preserves legacy spec and publication while rejecting inconsistent hulls (0.1995ms)
+✔ ordinary Echo evolution survives native extraction, join and publication boundaries (0.2938ms)
+✔ Echo evolution refuses malformed tokens, wrong slots and persisted progression containers (0.3581ms)
+✔ ordinary Nova and Echo evolution remain independent across native, join and publication boundaries (0.6784ms)
+✔ Nova evolution refuses wrong slots, malformed tokens and missing required fields even with Echo (0.6808ms)
+✔ actual native legacy and evolved Echo value exports replay without invented history or rank clamping (1.2314ms)
+✔ actual native legacy and evolved Nova exports replay with stored rank and no synthetic history (1.0464ms)
+✔ tracked real publication DTOs retain canonical native export hashes and validate wire (1.2299ms)
+✔ actual Galaxy batch delegate preserves receiver and native response bytes (0.2405ms)
+✔ replica port maps real publisher DTOs to exact agreed native operation keys (1.3282ms)
+✔ missing exports report unavailable without pretending that a native replica exists (0.0801ms)
+✔ rejected and malformed end replies retain the native session recovery handle (0.1531ms)
+✔ ambiguous begin response keeps a token for cleanup, explicit native rejection does not (0.113ms)
+✔ stale acquisitions and mismatched sessions are refused before native invocation (0.3187ms)
+✔ unbounded or invalid native response envelopes never become successful operations (0.2383ms)
+✔ complete ef5b55b native operation recording maps through ports with no manufactured success replies (2.9119ms)
+ℹ tests 68
+ℹ suites 0
+ℹ pass 67
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 254.8345
+
+✖ failing tests:
+
+test at scripts\test\coop-controller.test.mjs:603:1
+✖ same-tick current-state Wake is forwarded unchanged and native set rejection stays decisive (1.512ms)
+  Error [TransportError]: publication_revision
+      at fail (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:69:9)
+      at CoopController.#page (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\controller.ts:713:7)
+      at CoopController.#receive (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\controller.ts:682:51)
+      at Object.onFrame (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\controller.ts:239:46)
+      at deliver (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-controller.test.mjs:543:42)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-controller.test.mjs:610:3)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    code: 'publication_revision'
+  }

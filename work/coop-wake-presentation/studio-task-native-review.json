@@ -1,0 +1,53 @@
+{
+  "item": {
+    "id": "task-8508cfc5",
+    "title": "Authoritative co-op Ion Wake trail publication and native presentation",
+    "description": "Actual isolatedbranch setup from332ddd5; independent originaldesign/v2reviewresolved three concrete edge findings. Native author owns bounded active-sample page, atomic replica commit, lifecycle/canonical-clock invariants and shared native quads/WASM operations. Root owns matching JS wire/controller/ports and normalbuild/browser. No implementation or trail RTC/AV pass claimed at dispatch. Native author implementation/tests now complete for independent review: authoritative bounded page, canonical same-tick cache and shared native dots. Exact source/evidence in isolated work/coop-wake-presentation; matching Root browser pipeline and physical RTC/AV gates remain unfinished.",
+    "department": "Native gameplay / presentation",
+    "owner": "/root/audio_score",
+    "status": "active",
+    "priority": "high",
+    "dependencies": [],
+    "acceptanceCriteria": [
+      {
+        "text": "Bounded actual sample snapshot/page and same-tick membership-set, raw-f64/post-f32 and world-edge contracts implemented in native authority/replica.",
+        "met": true
+      },
+      {
+        "text": "Shared host/guest native quad rendering, epoch/expiry/cleanup and meaningful native serializer/regression checks with independent review.",
+        "met": false
+      },
+      {
+        "text": "Matching strict browser pipeline, normaldualbuild and actual current RTC/AV/cleanup evidence recorded.",
+        "met": false
+      }
+    ],
+    "evidence": [
+      {
+        "label": "Integrated native checks, matching normal build and explicit remaining gates",
+        "kind": "artifact",
+        "path": "artifacts/native-wake-integration-20261013/README.md"
+      },
+      {
+        "label": "Actual source/build/check pins",
+        "kind": "artifact",
+        "path": "artifacts/native-wake-integration-20261013/verification.json"
+      },
+      {
+        "label": "Frozen v2 design and independent agreement",
+        "kind": "artifact",
+        "path": "artifacts/native-wake-integration-20261013/trail-design-review/REVIEW.md"
+      },
+      {
+        "label": "Actual isolated native candidate and remaining product gates",
+        "kind": "note",
+        "details": "Native author pass complete in C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-presentation/HANDOFF.md. Source pins0ce2ff57; handoffa6b7aaf5. Actual workspace928pass/19ignored; strictall-targetClippy pass; 192point/960quad capacity and exact18401B page/49452B maximum publication wrapper. Independent source review, Root strictJS/controller/ports, normaldualbuild and realRTC/AV remain open; whole-world-edge asteroid rejection recorded separately. Native implementation does not accept those product gates."
+      }
+    ],
+    "blocker": "",
+    "revision": 2,
+    "createdAt": "2026-10-12T19:15:22.563Z",
+    "updatedAt": "2026-10-12T19:45:16.137Z"
+  },
+  "revision": 1040
+}

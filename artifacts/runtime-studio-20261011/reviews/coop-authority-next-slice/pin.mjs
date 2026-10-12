@@ -1,0 +1,14 @@
+import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { resolve } from "node:path";
+const root = "C:/Users/mitch/Documents/ChatGPT/galaxy-royale";
+const files = ["work/coop-seams-bounded-review.md", "crates/game_core/src/lib.rs", "crates/game_core/src/campaign_runtime.rs", "crates/game_core/src/ship_progression.rs", "crates/game_core/src/abilities.rs", "crates/game_web/src/browser.rs", "apps/game/src/main.ts", "apps/game/src/storage.ts"];
+const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const pins = files.map((path) => { const bytes = readFileSync(resolve(root, path)); return { path, sha256: sha(bytes), bytes: bytes.length }; });
+const report = readFileSync(resolve(import.meta.dirname, "REVIEW.md"));
+const inspectionHead = "99424d9473679d3a2c4b0036e1d981325a82b42d";
+execFileSync("git", ["diff", "--quiet", inspectionHead, "HEAD", "--", ...files.slice(1)], { cwd: root });
+const data = { inspection_head: inspectionHead, root_head: execFileSync("git", ["rev-parse", "HEAD"], { cwd: root }).toString().trim(), unchanged_reviewed_sources_since_inspection: true, scope: "Read-only actual-source verification; no new execution or runtime acceptance", pins, report: { path: "REVIEW.md", sha256: sha(report), bytes: report.length } };
+writeFileSync(resolve(import.meta.dirname, "source-pins.json"), JSON.stringify(data, null, 2) + "\n");
+console.log(JSON.stringify({ ...data.report, manifest_sha256: sha(readFileSync(resolve(import.meta.dirname, "source-pins.json"))), source_pins: pins.length, root_head: data.root_head }));

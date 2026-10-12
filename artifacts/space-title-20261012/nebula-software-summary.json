@@ -1,0 +1,313 @@
+{
+  "scope": "Native packets sampled offline with the current radial soft-material equations.\n\nThis is a NumPy/Pillow software model, not WGSL execution or GPU acceptance.\nPhysical raster is 2x logical; 2x offline sampling approximates pixel coverage.\nThe hard-only column filters the candidate's unchanged filament packets.\n",
+  "physical_raster_scale": 2,
+  "offline_samples_per_axis": 2,
+  "views": [
+    {
+      "file": "lowFalse-t0.0-z0.6000000238418579.png",
+      "reduced": false,
+      "time": 0.0,
+      "zoom": 0.6000000238418579,
+      "quads": 2128,
+      "mean_rgb": [
+        4.722775607638889,
+        5.148573133680555,
+        7.703000217013889
+      ],
+      "max_rgb": [
+        104,
+        76,
+        100
+      ]
+    },
+    {
+      "file": "lowFalse-t0.0-z1.0.png",
+      "reduced": false,
+      "time": 0.0,
+      "zoom": 1.0,
+      "quads": 2128,
+      "mean_rgb": [
+        7.775444878472222,
+        7.184733072916667,
+        10.722216796875
+      ],
+      "max_rgb": [
+        104,
+        76,
+        103
+      ]
+    },
+    {
+      "file": "lowFalse-t0.0-z1.600000023841858.png",
+      "reduced": false,
+      "time": 0.0,
+      "zoom": 1.600000023841858,
+      "quads": 2128,
+      "mean_rgb": [
+        15.216248914930556,
+        12.145751953125,
+        18.07907443576389
+      ],
+      "max_rgb": [
+        104,
+        78,
+        104
+      ]
+    },
+    {
+      "file": "lowFalse-t18.0-z0.6000000238418579.png",
+      "reduced": false,
+      "time": 18.0,
+      "zoom": 0.6000000238418579,
+      "quads": 2128,
+      "mean_rgb": [
+        4.575406901041666,
+        5.046799045138889,
+        7.560791015625
+      ],
+      "max_rgb": [
+        98,
+        71,
+        96
+      ]
+    },
+    {
+      "file": "lowFalse-t18.0-z1.0.png",
+      "reduced": false,
+      "time": 18.0,
+      "zoom": 1.0,
+      "quads": 2128,
+      "mean_rgb": [
+        7.367854817708333,
+        6.902989366319445,
+        10.32868381076389
+      ],
+      "max_rgb": [
+        98,
+        71,
+        97
+      ]
+    },
+    {
+      "file": "lowFalse-t18.0-z1.600000023841858.png",
+      "reduced": false,
+      "time": 18.0,
+      "zoom": 1.600000023841858,
+      "quads": 2128,
+      "mean_rgb": [
+        14.173659939236112,
+        11.426329210069444,
+        17.0736328125
+      ],
+      "max_rgb": [
+        100,
+        72,
+        100
+      ]
+    },
+    {
+      "file": "lowFalse-t36.0-z0.6000000238418579.png",
+      "reduced": false,
+      "time": 36.0,
+      "zoom": 0.6000000238418579,
+      "quads": 2128,
+      "mean_rgb": [
+        4.468999565972222,
+        4.972900390625,
+        7.456325954861111
+      ],
+      "max_rgb": [
+        91,
+        66,
+        93
+      ]
+    },
+    {
+      "file": "lowFalse-t36.0-z1.0.png",
+      "reduced": false,
+      "time": 36.0,
+      "zoom": 1.0,
+      "quads": 2128,
+      "mean_rgb": [
+        7.073849826388889,
+        6.698258463541666,
+        10.038308376736111
+      ],
+      "max_rgb": [
+        93,
+        66,
+        93
+      ]
+    },
+    {
+      "file": "lowFalse-t36.0-z1.600000023841858.png",
+      "reduced": false,
+      "time": 36.0,
+      "zoom": 1.600000023841858,
+      "quads": 2128,
+      "mean_rgb": [
+        13.419265407986112,
+        10.903021918402779,
+        16.33046875
+      ],
+      "max_rgb": [
+        94,
+        67,
+        94
+      ]
+    },
+    {
+      "file": "lowTrue-t0.0-z0.6000000238418579.png",
+      "reduced": true,
+      "time": 0.0,
+      "zoom": 0.6000000238418579,
+      "quads": 538,
+      "mean_rgb": [
+        4.893663194444445,
+        5.256239149305555,
+        7.855056423611111
+      ],
+      "max_rgb": [
+        99,
+        76,
+        103
+      ]
+    },
+    {
+      "file": "lowTrue-t0.0-z1.0.png",
+      "reduced": true,
+      "time": 0.0,
+      "zoom": 1.0,
+      "quads": 538,
+      "mean_rgb": [
+        8.255230034722222,
+        7.48662109375,
+        11.148936631944444
+      ],
+      "max_rgb": [
+        101,
+        78,
+        104
+      ]
+    },
+    {
+      "file": "lowTrue-t0.0-z1.600000023841858.png",
+      "reduced": true,
+      "time": 0.0,
+      "zoom": 1.600000023841858,
+      "quads": 538,
+      "mean_rgb": [
+        16.449479166666666,
+        12.922829861111111,
+        19.177251519097222
+      ],
+      "max_rgb": [
+        102,
+        78,
+        105
+      ]
+    },
+    {
+      "file": "lowTrue-t18.0-z0.6000000238418579.png",
+      "reduced": true,
+      "time": 18.0,
+      "zoom": 0.6000000238418579,
+      "quads": 538,
+      "mean_rgb": [
+        4.720545789930555,
+        5.136805555555555,
+        7.687255859375
+      ],
+      "max_rgb": [
+        95,
+        68,
+        98
+      ]
+    },
+    {
+      "file": "lowTrue-t18.0-z1.0.png",
+      "reduced": true,
+      "time": 18.0,
+      "zoom": 1.0,
+      "quads": 538,
+      "mean_rgb": [
+        7.775759548611111,
+        7.155636935763889,
+        10.68425564236111
+      ],
+      "max_rgb": [
+        97,
+        69,
+        99
+      ]
+    },
+    {
+      "file": "lowTrue-t18.0-z1.600000023841858.png",
+      "reduced": true,
+      "time": 18.0,
+      "zoom": 1.600000023841858,
+      "quads": 538,
+      "mean_rgb": [
+        15.220263671875,
+        12.074050564236112,
+        17.984977213541665
+      ],
+      "max_rgb": [
+        98,
+        70,
+        100
+      ]
+    },
+    {
+      "file": "lowTrue-t36.0-z0.6000000238418579.png",
+      "reduced": true,
+      "time": 36.0,
+      "zoom": 0.6000000238418579,
+      "quads": 538,
+      "mean_rgb": [
+        4.595909288194444,
+        5.050569661458334,
+        7.5653700086805555
+      ],
+      "max_rgb": [
+        92,
+        65,
+        93
+      ]
+    },
+    {
+      "file": "lowTrue-t36.0-z1.0.png",
+      "reduced": true,
+      "time": 36.0,
+      "zoom": 1.0,
+      "quads": 538,
+      "mean_rgb": [
+        7.429725477430556,
+        6.915494791666666,
+        10.344368489583333
+      ],
+      "max_rgb": [
+        92,
+        65,
+        93
+      ]
+    },
+    {
+      "file": "lowTrue-t36.0-z1.600000023841858.png",
+      "reduced": true,
+      "time": 36.0,
+      "zoom": 1.600000023841858,
+      "quads": 538,
+      "mean_rgb": [
+        14.331841362847221,
+        11.45974392361111,
+        17.113861762152776
+      ],
+      "max_rgb": [
+        92,
+        66,
+        94
+      ]
+    }
+  ]
+}

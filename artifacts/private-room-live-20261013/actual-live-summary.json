@@ -1,0 +1,984 @@
+{
+  "scope": "Root operated two actual native WASM Games/controller/transport, approval and RTC on loopback only; no eight-client/TURN/Internet/performance acceptance",
+  "source_commit": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "compiled_source_commit": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+  "build_stamp": {
+    "schemaVersion": 1,
+    "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e",
+    "packageHash": "a1afe6da521b45b60a6e1eae1c6d0269c8837615ffcee478e168d1457e1e242c",
+    "builtAt": "2026-10-12T17:41:53.879Z",
+    "compiledFromHead": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+    "carriedAt": "2026-10-12T18:07:31.395Z",
+    "carryReason": "Only docs/production/evidence, Wiki fixture and isolated unshipped QA helper changed. Runtime source and package hashes rechecked exactly; original build timestamp preserved."
+  },
+  "reports": [
+    {
+      "file": "captures/01a6694d948ef9eb-043b6429d4d65990b76104816e51aa1b64f6106a1370f877428a696a4c9b1cab.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "connected",
+          "mode": "guest",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 1,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/01a6694d948ef9eb-3c583b0f5adb5116618775b6a39178837f8c896d2f6a4b37d8ac2aa85f39115f.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "idle",
+          "mode": "solo",
+          "created": 0,
+          "closed": 0,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "idle",
+          "mode": "solo",
+          "created": 0,
+          "closed": 0,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/01a6694d948ef9eb-587fa256e8b5ce68d657a720cdf541a47bea569920844f7c0e8c6b5c04de11c7.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 1,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "connected",
+          "mode": "guest",
+          "created": 2,
+          "closed": 1,
+          "requests": 1,
+          "timers": 2,
+          "commits": 884,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/01a6694d948ef9eb-69ceaec018091dd4fd6b51786df8fdbc534226c8326b8623d6cc444ad9dd9b0c.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "connected",
+          "mode": "guest",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 281,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/01a6694d948ef9eb-722ac9fbf02fa92ba8e6226e83d681ab5d1d78eaacf6f178c93a70becdd35ae4.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 1,
+          "closed": 1,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 1,
+          "closed": 1,
+          "requests": 0,
+          "timers": 0,
+          "commits": 882,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/01a6694d948ef9eb-74a6568bac66b71907ab5b50463156eba3a449177601c04a6824aa5b9f075823.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session",
+        "guest-leave-restored",
+        "saves-unchanged",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 2,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 1340,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/01a6694d948ef9eb-a6a34c9905807bb3c6b68726c702468dfcd83b101ee9a60f9fc6ca00c282e1e7.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session",
+        "guest-leave-restored",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 2,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 1340,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/01a6694d948ef9eb-e9c78b5a1dc6c07a3596e91790dc347160b88ca91174028687ace61e5098e5d6.json",
+      "backend": "webgpu",
+      "run": "01a6694d948ef9eb",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session",
+        "guest-leave-restored",
+        "saves-unchanged",
+        "saves-unchanged",
+        "dispose-clean"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "disposed",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "disposed",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 1340,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-13bff7a8dfe4cd0de9ee14cb2f302cd4fcd81b438fe66beb3621a707bcd47a16.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "connected",
+          "mode": "guest",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 288,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-1843b9ef954330267ab7b174570980e9eeb5dd2c63d647898dbca897000a8f99.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 1,
+          "closed": 1,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 1,
+          "closed": 1,
+          "requests": 0,
+          "timers": 0,
+          "commits": 672,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-528cafa5037f71ede06b613cc106ca9213d8cb8c92cb0fc130f16399bacf0c15.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "connected",
+          "mode": "guest",
+          "created": 1,
+          "closed": 0,
+          "requests": 1,
+          "timers": 2,
+          "commits": 4,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-8e0399c39a5ff070dad0198849faff31962f1de7d5b1eb8a829963cc715fedc5.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session",
+        "guest-leave-restored",
+        "saves-unchanged",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 2,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 932,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-a5af804c421dafbf0a791419243998ba7244b9a69829a010721c2a0741e3896d.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 1,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "connected",
+          "mode": "guest",
+          "created": 2,
+          "closed": 1,
+          "requests": 1,
+          "timers": 2,
+          "commits": 673,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-a66f8c590301b400ec39191bf5dd0a7dff8d0496644194c2e92f8c070a998b20.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session",
+        "guest-leave-restored",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 2,
+          "requests": 1,
+          "timers": 2,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "ended",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 932,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-e8f48897bde0805c6d8f6b5caedf924e3595e9ac10994d957845f8b94694c84a.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "saves-unchanged",
+        "movement-fire-observed",
+        "host-end-restored",
+        "saves-unchanged",
+        "host-approval-before-rtc",
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session",
+        "guest-leave-restored",
+        "saves-unchanged",
+        "saves-unchanged",
+        "dispose-clean"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "disposed",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "disposed",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "requests": 0,
+          "timers": 0,
+          "commits": 932,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    },
+    {
+      "file": "captures/df35604149c4794f-eb5752199906a256ae987a2e2dd1ce050e54dea3c9772ada591f81c113ea941e.json",
+      "backend": "webgl2",
+      "run": "df35604149c4794f",
+      "checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged"
+      ],
+      "clients": [
+        {
+          "role": "host",
+          "phase": "idle",
+          "mode": "solo",
+          "created": 0,
+          "closed": 0,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        },
+        {
+          "role": "guest",
+          "phase": "idle",
+          "mode": "solo",
+          "created": 0,
+          "closed": 0,
+          "requests": 0,
+          "timers": 0,
+          "commits": 0,
+          "profile_equal": true,
+          "persisted_equal": true
+        }
+      ]
+    }
+  ],
+  "pins": {
+    "live-stage-manifest.json": {
+      "sha256": "2d93e3fd5f28a8418d792fed14838b1a5db531f33f1d08e1b235b8ec5718fb5e",
+      "bytes": 9020
+    },
+    "staged/modules/wire.js": {
+      "sha256": "75e813898bf29e4e1289b43f36934840278c73f81d1e1cce8b6b8f8b8450c43a",
+      "bytes": 19597
+    },
+    "staged/modules/room-code.js": {
+      "sha256": "a214b56d34b44f75d6848664ce48a0d42b54b2c2b1c4191563406bbab62633a4",
+      "bytes": 638
+    },
+    "staged/modules/signaling.js": {
+      "sha256": "39597967098f4c7005a1698d869fe7f9d67cf2c5d7ac2bd62b153652d676c474",
+      "bytes": 6435
+    },
+    "staged/modules/transport.js": {
+      "sha256": "cde1302a8c62cbdf59eefb30de33aeb512950c31528b88a3fdbf2ddb299d76b1",
+      "bytes": 39300
+    },
+    "staged/modules/controller.js": {
+      "sha256": "7f20996fbf02a060981f70b8a644dd6de5c48f07e6c1acc65eb61482fdfbfebe",
+      "bytes": 33618
+    },
+    "staged/modules/wasm-ports.js": {
+      "sha256": "e8b43587a2afa090fad3be5a765b84b3c52448efe5a7ce7671ba17f557c0164a",
+      "bytes": 5682
+    },
+    "staged/modules/storage.js": {
+      "sha256": "bdfa12ec7f2e92ff7271170e09f6bf36fa0b7d6a3f54c2cc1f20ccfe8c1db89e",
+      "bytes": 32146
+    },
+    "staged/wasm-review.html": {
+      "sha256": "642d21fad7864da16aa69f7e3353c49a70ec5ac389a87f68f1582c4663148a79",
+      "bytes": 4127
+    },
+    "staged/wasm-review.js": {
+      "sha256": "f8cfce59e7581c6f41d12b51146944739be77d0e0a22310bdb25b71925c9e1c7",
+      "bytes": 15250
+    },
+    "staged/client.html": {
+      "sha256": "97b8d7dc1daed1fa51b1abb0d98816b1898a0f378d394bdea908b19d57125289",
+      "bytes": 726
+    },
+    "staged/client.js": {
+      "sha256": "6c47a2ff38cc70936201f778d20cbb24be20a23e2b01268152c2dadda3620893",
+      "bytes": 22613
+    },
+    "staged/fifth-shot.js": {
+      "sha256": "7080dcb130d2813117a90852fe51b4581e1fc81ee4cbcf5dc16a34599a9588ea",
+      "bytes": 7227
+    },
+    "captures/01a6694d948ef9eb-043b6429d4d65990b76104816e51aa1b64f6106a1370f877428a696a4c9b1cab.json": {
+      "sha256": "043b6429d4d65990b76104816e51aa1b64f6106a1370f877428a696a4c9b1cab",
+      "bytes": 8439
+    },
+    "captures/01a6694d948ef9eb-3c583b0f5adb5116618775b6a39178837f8c896d2f6a4b37d8ac2aa85f39115f.json": {
+      "sha256": "3c583b0f5adb5116618775b6a39178837f8c896d2f6a4b37d8ac2aa85f39115f",
+      "bytes": 8057
+    },
+    "captures/01a6694d948ef9eb-587fa256e8b5ce68d657a720cdf541a47bea569920844f7c0e8c6b5c04de11c7.json": {
+      "sha256": "587fa256e8b5ce68d657a720cdf541a47bea569920844f7c0e8c6b5c04de11c7",
+      "bytes": 9156
+    },
+    "captures/01a6694d948ef9eb-69ceaec018091dd4fd6b51786df8fdbc534226c8326b8623d6cc444ad9dd9b0c.json": {
+      "sha256": "69ceaec018091dd4fd6b51786df8fdbc534226c8326b8623d6cc444ad9dd9b0c",
+      "bytes": 8596
+    },
+    "captures/01a6694d948ef9eb-722ac9fbf02fa92ba8e6226e83d681ab5d1d78eaacf6f178c93a70becdd35ae4.json": {
+      "sha256": "722ac9fbf02fa92ba8e6226e83d681ab5d1d78eaacf6f178c93a70becdd35ae4",
+      "bytes": 8727
+    },
+    "captures/01a6694d948ef9eb-74a6568bac66b71907ab5b50463156eba3a449177601c04a6824aa5b9f075823.json": {
+      "sha256": "74a6568bac66b71907ab5b50463156eba3a449177601c04a6824aa5b9f075823",
+      "bytes": 9359
+    },
+    "captures/01a6694d948ef9eb-a6a34c9905807bb3c6b68726c702468dfcd83b101ee9a60f9fc6ca00c282e1e7.json": {
+      "sha256": "a6a34c9905807bb3c6b68726c702468dfcd83b101ee9a60f9fc6ca00c282e1e7",
+      "bytes": 9292
+    },
+    "captures/01a6694d948ef9eb-e9c78b5a1dc6c07a3596e91790dc347160b88ca91174028687ace61e5098e5d6.json": {
+      "sha256": "e9c78b5a1dc6c07a3596e91790dc347160b88ca91174028687ace61e5098e5d6",
+      "bytes": 9428
+    },
+    "captures/df35604149c4794f-13bff7a8dfe4cd0de9ee14cb2f302cd4fcd81b438fe66beb3621a707bcd47a16.json": {
+      "sha256": "13bff7a8dfe4cd0de9ee14cb2f302cd4fcd81b438fe66beb3621a707bcd47a16",
+      "bytes": 8596
+    },
+    "captures/df35604149c4794f-1843b9ef954330267ab7b174570980e9eeb5dd2c63d647898dbca897000a8f99.json": {
+      "sha256": "1843b9ef954330267ab7b174570980e9eeb5dd2c63d647898dbca897000a8f99",
+      "bytes": 8727
+    },
+    "captures/df35604149c4794f-528cafa5037f71ede06b613cc106ca9213d8cb8c92cb0fc130f16399bacf0c15.json": {
+      "sha256": "528cafa5037f71ede06b613cc106ca9213d8cb8c92cb0fc130f16399bacf0c15",
+      "bytes": 8441
+    },
+    "captures/df35604149c4794f-8e0399c39a5ff070dad0198849faff31962f1de7d5b1eb8a829963cc715fedc5.json": {
+      "sha256": "8e0399c39a5ff070dad0198849faff31962f1de7d5b1eb8a829963cc715fedc5",
+      "bytes": 9357
+    },
+    "captures/df35604149c4794f-a5af804c421dafbf0a791419243998ba7244b9a69829a010721c2a0741e3896d.json": {
+      "sha256": "a5af804c421dafbf0a791419243998ba7244b9a69829a010721c2a0741e3896d",
+      "bytes": 9156
+    },
+    "captures/df35604149c4794f-a66f8c590301b400ec39191bf5dd0a7dff8d0496644194c2e92f8c070a998b20.json": {
+      "sha256": "a66f8c590301b400ec39191bf5dd0a7dff8d0496644194c2e92f8c070a998b20",
+      "bytes": 9290
+    },
+    "captures/df35604149c4794f-e8f48897bde0805c6d8f6b5caedf924e3595e9ac10994d957845f8b94694c84a.json": {
+      "sha256": "e8f48897bde0805c6d8f6b5caedf924e3595e9ac10994d957845f8b94694c84a",
+      "bytes": 9426
+    },
+    "captures/df35604149c4794f-eb5752199906a256ae987a2e2dd1ce050e54dea3c9772ada591f81c113ea941e.json": {
+      "sha256": "eb5752199906a256ae987a2e2dd1ce050e54dea3c9772ada591f81c113ea941e",
+      "bytes": 8057
+    },
+    "images/webgl2-connected.png": {
+      "sha256": "442c2db3b04ecca272b3ca9f4add588fd3d3ef5e03ffc768129e527f819b212b",
+      "bytes": 120039
+    },
+    "images/webgl2-disposed.png": {
+      "sha256": "219dec3fbc50fceb2ae8ca63c44a2534fbfef7fb667f727de47368a4e70a778f",
+      "bytes": 121771
+    },
+    "images/webgpu-connected.png": {
+      "sha256": "c1dc45c114600188140cc54ffbada76ebef7ccf9ae04a086839f9ea02e5161c9",
+      "bytes": 120159
+    },
+    "images/webgpu-disposed.png": {
+      "sha256": "6c0e8e439a88669752d1a3b64356d48a63d26e07dbcb5513511764741ebc476b",
+      "bytes": 121519
+    },
+    "checks/full-shell-first-failure.log": {
+      "sha256": "e503f907a773ea6fed1596debae972eba5f9c88790e4a80ec4edd6b8e9d70504",
+      "bytes": 72840
+    },
+    "review/focused-functions.log": {
+      "sha256": "dc87aee5eba94e5bd9be96476ac1fb2c9a6be2f6b9bff451ed16bef38baeb7a4",
+      "bytes": 855
+    },
+    "review/pin-review.log": {
+      "sha256": "ee9ee2249033a4b4fe4116fe5bcd05214da5d2654675946894d1c6eeb2003524",
+      "bytes": 1453
+    },
+    "review/pin-review.mjs": {
+      "sha256": "377eab3d470447604261730b07e71f009952c79522d236ec237b67e0d7c0194f",
+      "bytes": 2962
+    },
+    "review/REVIEW.md": {
+      "sha256": "a623cbbd662ae5dfe74805a99b0843dcf0fce3548763d807fb0929d0b74cfdb5",
+      "bytes": 6401
+    },
+    "review/root-helper.diff.patch": {
+      "sha256": "e3456953c2198ecb0b56472d91fefd013d4c9549e2c0b2896d3d297ef19381a4",
+      "bytes": 13079
+    },
+    "review/source-function-edges.log": {
+      "sha256": "d4654c113d28aa763dc1d8b6e7dfb131bd00d74936190014b5b4fb25883263b2",
+      "bytes": 368
+    },
+    "review/source-function-edges.mjs": {
+      "sha256": "a79cae203b1c611d85fa538060436a8e3b18a4c7976267503ceef7e89eadd498",
+      "bytes": 4858
+    },
+    "review/source-pins.json": {
+      "sha256": "cbb241b90de5c79711ab4a107e4beb2a4925aee89ffe5f00dc1880aec1885916",
+      "bytes": 6503
+    },
+    "title-fullness-review/REVIEW.md": {
+      "sha256": "9f1bfce6217efac82b44157d8abe21461230717bd223a279d0a46c8f6282fab6",
+      "bytes": 3800
+    },
+    "title-fullness-review/source-pins.json": {
+      "sha256": "290bf65c7ccb9e0f850561a89db10a416eb3aa17317c0670a873f7101c7ff8f1",
+      "bytes": 3654
+    }
+  }
+}

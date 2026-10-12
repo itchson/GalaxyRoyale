@@ -171,7 +171,7 @@ export class FlightInput {
     // Establish all held state before a Haven callback can disable/reset it.
     if (notifyStart && this.mouseFire && !wasFiring) this.onFireStart();
   }
-  private worldPoint(x: number, y: number): [number, number] | null {
+  worldPoint(x: number, y: number): [number, number] | null {
     const r = this.canvas.getBoundingClientRect();
     if (
       ![

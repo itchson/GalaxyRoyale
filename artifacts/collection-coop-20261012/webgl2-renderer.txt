@@ -1,0 +1,10 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "GALAXY ROYALE // CONSOLE":
+  - heading "GALAXY ROYALE // CONSOLE" [level=2]
+  - paragraph: "HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE"
+  - log "Console output":
+    - paragraph: "> renderer"
+    - paragraph: WEBGL2 / 848 x 480 logical pixels / eight bounded lights
+  - textbox "Console command" [active]:
+    - /placeholder: ENTER COMMAND

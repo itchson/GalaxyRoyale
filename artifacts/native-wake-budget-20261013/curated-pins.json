@@ -1,0 +1,105 @@
+{
+  "scope": "Exact report/probe/compiled-input pins and original/final raw logs; large work-only source archives and build outputs not duplicated in tracked artifacts",
+  "files": [
+    {
+      "file": "compiled-inputs.json",
+      "bytes": 263320,
+      "sha256": "a98e1c5d2b881590e49dc316c7c19d7a3f168a7ced5f5a7d13f03bb337fb366d"
+    },
+    {
+      "file": "compiler.log",
+      "bytes": 201,
+      "sha256": "4b9a8c1d3470825bcc9f452028d0779a83c4e7237762cfa6ab7c9a8b99ae704b"
+    },
+    {
+      "file": "native-probe-first-runtime.log",
+      "bytes": 5384,
+      "sha256": "569eab321caa9510b40179ff1f6281753a11ff663042d48dc843be50d761ef04"
+    },
+    {
+      "file": "native-probe-original.log",
+      "bytes": 3033,
+      "sha256": "55c5a34adf22d846db1b2686d2977cb8cc3c278414081509b48a3b44aa5a4082"
+    },
+    {
+      "file": "native-probe.log",
+      "bytes": 6562,
+      "sha256": "658ea87b7ba747aa83f5941f4515d163859dc2cbb04ad8497f4fb800eb7ea1d4"
+    },
+    {
+      "file": "native-publication-tests.log",
+      "bytes": 1337,
+      "sha256": "9c27bddc6e22ea1478b694f0f84a9e125b497e2d38510f6c9a467c3ee000fb4f"
+    },
+    {
+      "file": "native-wake-tests.log",
+      "bytes": 9519,
+      "sha256": "1e58e2419acf6754f112859d5b5f9742139e021fa5fa56c5147cbc5245c51e51"
+    },
+    {
+      "file": "pin-count-original-failure.log",
+      "bytes": 601,
+      "sha256": "13e8c28422c3d8630da02542f5628d18d1a75ac39ccb61b705f5b0a56ee54aa6"
+    },
+    {
+      "file": "pin-evidence.mjs",
+      "bytes": 5585,
+      "sha256": "9e82d59dbdf8acca573596d3c5a1478d34b266867b7f915421b2a28fd09fe48d"
+    },
+    {
+      "file": "pin-original-failure.log",
+      "bytes": 325,
+      "sha256": "746e5a45055befba46bdd2ed418b8af1dfa12529b3bfdb1b6308ce2c42f262b7"
+    },
+    {
+      "file": "probe-original.rs",
+      "bytes": 6994,
+      "sha256": "d5aa4730d6be08ae51d4324934235e15013a5854d097daba057ea730f2e84254"
+    },
+    {
+      "file": "probe-publication-original.rs",
+      "bytes": 6998,
+      "sha256": "100b26d4e4db8d1f9581b6677a7081943116cd13b12612ea4052fe8582d53df4"
+    },
+    {
+      "file": "probe.rs",
+      "bytes": 7415,
+      "sha256": "802c1c3d07051828c588d9e9b303ef4c4ea194198a314e39ea7b6d8ad97b77c3"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 10046,
+      "sha256": "d802e39d218ce443a0cb17c8fc2ce6d8a507fa72ef53e6eb5dca5ab2e7144fb8"
+    },
+    {
+      "file": "source-pins.json",
+      "bytes": 31265,
+      "sha256": "701f9d836e02f1aa866b9cebb883277dae816fb01c54bd9fe69c9ca70022f8d7"
+    },
+    {
+      "file": "studio-pins.json",
+      "bytes": 294,
+      "sha256": "ff828acafc07c9155c7bb797a92794fcd8e4ccb0198edfef7286a738ac891f6b"
+    },
+    {
+      "file": "studio-review-input.json",
+      "bytes": 1216,
+      "sha256": "b79aa3295736a38f63d9c5201703a7967c5896d8010ad99f3bc4c3e03883e7f0"
+    },
+    {
+      "file": "studio-review-result.json",
+      "bytes": 1316,
+      "sha256": "5a96a860b7bb6d1b36abb40bbe2d5235aebc75b08e3017e8d4e31780fa646d52"
+    },
+    {
+      "file": "verify-snapshot-original.py",
+      "bytes": 1720,
+      "sha256": "c7ea8eb771c5d9a47c37e51ceee22f0a9c91354ed0cab73579f721284adcaead"
+    },
+    {
+      "file": "verify-snapshot.py",
+      "bytes": 2096,
+      "sha256": "6700442ad074c2929ce3214437465f26f0f5a633957eecab81925f1f10920d50"
+    }
+  ]
+}

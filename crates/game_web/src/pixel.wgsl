@@ -2,8 +2,16 @@ struct Affine { a:vec4<f32>, b:vec4<f32> }
 struct TransformTable { values:array<Affine,128> }
 struct Light { position_radius:vec4<f32>, color:vec4<f32> }
 struct Globals { camera:vec4<f32>, ambient:vec4<f32>, lights:array<Light,8>, raster:vec4<f32> }
+// Separate blocks respect the declared 16KiB WebGL2 uniform-block ceiling.
+struct ObjectTable { pairs:array<vec4<u32>,64> }
+struct Caster { x:vec4<f32>, y:vec4<f32>, field:vec4<u32> }
+struct ShadowDescriptors { header:vec4<u32>, casters:array<Caster,8> }
+struct ShadowMasks { words:array<vec4<u32>,1024> }
 @group(0) @binding(0) var<uniform> globals:Globals;
 @group(0) @binding(1) var<uniform> transforms:TransformTable;
+@group(0) @binding(2) var<uniform> objects:ObjectTable;
+@group(0) @binding(3) var<uniform> shadows:ShadowDescriptors;
+@group(0) @binding(4) var<uniform> masks:ShadowMasks;
 struct VertexOut {
   @builtin(position) position:vec4<f32>,
   @location(0) color:vec4<f32>,
@@ -11,10 +19,64 @@ struct VertexOut {
   @location(2) @interpolate(flat) material:vec2<f32>,
   @location(3) particle_uv:vec2<f32>,
   @location(4) @interpolate(flat) coverage:f32,
+  @location(5) @interpolate(flat) surface:vec4<f32>,
+  @location(6) @interpolate(flat) mapped:f32,
+  @location(7) @interpolate(flat) object:vec2<f32>,
+}
+fn blocked_ray(receiver:vec2<f32>,receiver_height:f32,source:vec2<f32>,source_height:f32)->f32 {
+  var blocked=0.0;
+  for(var c=0u;c<min(shadows.header.x,8u);c=c+1u) {
+    let caster=shadows.casters[c];
+    if(caster.field.w==0u || receiver_height>=caster.x.w || caster.x.w>=source_height) { continue; }
+    let fraction=(caster.x.w-receiver_height)/max(source_height-receiver_height,1e-6);
+    let point=mix(receiver,source,clamp(fraction,0.0,1.0));
+    let local=vec2<f32>(dot(caster.x.xy,point)+caster.x.z,dot(caster.y.xy,point)+caster.y.z);
+    let cell=floor(local+vec2<f32>(caster.field.xy)*0.5);
+    if(any(cell<vec2<f32>(0.0)) || any(cell>=vec2<f32>(caster.field.xy))) { continue; }
+    let bit=caster.field.z+u32(cell.y)*128u+u32(cell.x);
+    let word=bit/32u;
+    if(word>=4096u) { continue; }
+    if((masks.words[word/4u][word%4u]&(1u<<(bit%32u)))!=0u) { blocked=1.0; }
+  }
+  return blocked;
+}
+fn shadow_visibility(input:VertexOut,light:Light,index:u32)->f32 {
+  if(input.object.y<0.5 || shadows.header.x==0u || (shadows.header.y&(1u<<index))==0u) { return 1.0; }
+  // Fixed deterministic source samples: no temporal noise or simulation input.
+  let offsets=array<vec2<f32>,4>(vec2<f32>(-1.5,-1.5),vec2<f32>(1.5,-1.5),vec2<f32>(-1.5,1.5),vec2<f32>(1.5,1.5));
+  var blocked=0.0;
+  for(var tap=0u;tap<4u;tap=tap+1u) {
+    blocked=blocked+blocked_ray(input.cell,input.object.x,light.position_radius.xy+offsets[tap],light.color.w);
+  }
+  return 1.0-blocked*0.25;
+}
+fn sign_not_zero(value:vec2<f32>)->vec2<f32> {
+  return select(vec2<f32>(-1.0),vec2<f32>(1.0),value>=vec2<f32>(0.0));
+}
+fn decode_normal(bits:u32)->vec3<f32> {
+  let xy=vec2<f32>(f32((bits>>7u)&255u),f32((bits>>15u)&255u))/255.0*2.0-1.0;
+  var normal=vec3<f32>(xy,1.0-abs(xy.x)-abs(xy.y));
+  if(normal.z<0.0) { normal=vec3<f32>((vec2<f32>(1.0)-abs(xy.yx))*sign_not_zero(xy),normal.z); }
+  return normalize(normal);
+}
+fn surface_normal(local:vec3<f32>,t:Affine)->vec3<f32> {
+  // diag(A,sqrt(abs(det A))) embeds the composed 2D affine in 3D.
+  // Inverse transpose preserves slopes under uniform scale and handles shear
+  // and reflections. Normalize the basis first: tiny quads have no size floor.
+  let magnitude=max(max(abs(t.a.z),abs(t.a.w)),max(abs(t.b.x),abs(t.b.y)));
+  if(magnitude==0.0) { return vec3<f32>(0.0,0.0,1.0); }
+  let x=t.a.zw/magnitude;let y=t.b.xy/magnitude;
+  let determinant=x.x*y.y-x.y*y.x;
+  if(abs(determinant)<1e-12) { return vec3<f32>(0.0,0.0,1.0); }
+  let factor=select(-1.0,1.0,determinant>=0.0)/sqrt(abs(determinant));
+  let xy=vec2<f32>(y.y*local.x-x.y*local.y,-y.x*local.x+x.x*local.y)*factor;
+  return normalize(vec3<f32>(xy,local.z));
 }
 @vertex fn vs_main(@builtin(vertex_index) index:u32,@location(0) center:vec2<f32>,@location(1) rgba:u32,@location(2) slot:u32)->VertexOut {
   let corners=array<vec2<f32>,6>(vec2<f32>(-0.5,-0.5),vec2<f32>(0.5,-0.5),vec2<f32>(-0.5,0.5),vec2<f32>(-0.5,0.5),vec2<f32>(0.5,-0.5),vec2<f32>(0.5,0.5));
-  let t=transforms.values[slot];let local=center+corners[index];var world=t.a.xy+t.a.zw*local.x+t.b.xy*local.y;
+  // Seven slot bits plus optional oct8 normal/linear luminance data retain the
+  // existing 16-byte pixel instance and 32-byte affine table records.
+  let t=transforms.values[slot&127u];let local=center+corners[index];var world=t.a.xy+t.a.zw*local.x+t.b.xy*local.y;
   var coverage=1.0;
   if(t.b.w<0.0) {
     // Filter only soft footprints to two physical raster pixels; compensate area.
@@ -47,23 +109,50 @@ struct VertexOut {
   out.color=vec4<f32>(pow(color.rgb,vec3<f32>(2.2)),color.a);
   out.cell=t.a.xy+t.a.zw*center.x+t.b.xy*center.y;
   out.material=t.b.zw;
+  let pair=objects.pairs[(slot&127u)/2u];
+  let parity=(slot&1u)*2u;
+  out.object=vec2<f32>(bitcast<f32>(pair[parity]),f32(pair[parity+1u]&1u));
   out.particle_uv=corners[index]*2.0;
   out.coverage=coverage;
+  out.surface=vec4<f32>(0.0,0.0,1.0,1.0);out.mapped=0.0;
+  if((slot&0x80000000u)!=0u) {
+    out.surface=vec4<f32>(surface_normal(decode_normal(slot),t),f32((slot>>23u)&255u)/255.0);
+    out.mapped=1.0;
+  }
   return out;
 }
 @fragment fn fs_main(input:VertexOut)->@location(0) vec4<f32> {
   // Each occupied cell receives one color. UI/backgrounds use an unlit material.
   let response=input.material.x;
-  let emission=select(input.material.y,max(0.0,-input.material.y-1.0),input.material.y<0.0);
+  let object_emission=select(input.material.y,max(0.0,-input.material.y-1.0),input.material.y<0.0);
+  let emission=object_emission*input.surface.w;
   var color=input.color.rgb*(1.0-0.12*response+0.3*emission);
+  let receiver=input.object.y>0.5 && shadows.header.x>0u;
+  var contact=0.0;
+  if(receiver && shadows.header.w!=0u) {
+    for(var i=0u;i<8u;i=i+1u) {
+      if((shadows.header.y&(1u<<i))!=0u) { contact=max(contact,1.0-shadow_visibility(input,globals.lights[i],i)); }
+    }
+    // Only the reflected/ambient term receives bounded contact attenuation.
+    // Authored emissive pixels keep their independent energy.
+    color=input.color.rgb*(1.0-0.12*response)*(1.0-0.18*contact)+input.color.rgb*(0.3*emission);
+  }
   if(response>0.0) {
-    color=color*mix(vec3<f32>(1.0),globals.ambient.xyz,clamp(globals.ambient.w*response,0.0,1.0));
+    let grade=mix(vec3<f32>(1.0),globals.ambient.xyz,clamp(globals.ambient.w*response,0.0,1.0));
+    if(receiver) {
+      color=(color-input.color.rgb*(0.3*emission))*grade+input.color.rgb*(0.3*emission);
+    } else { color=color*grade; }
     for(var i=0u;i<8u;i=i+1u) {
       let light=globals.lights[i];
       let delta=input.cell-light.position_radius.xy;
       let radius=max(1.0,light.position_radius.z);
       let attenuation=max(0.0,1.0-dot(delta,delta)/(radius*radius));
-      let energy=attenuation*attenuation*light.position_radius.w*response;
+      var directional=1.0;
+      if(input.mapped>0.0 && light.color.w>0.0) {
+        let toward_light=normalize(vec3<f32>(light.position_radius.xy-input.cell,max(0.0001,light.color.w-input.object.x)));
+        directional=max(0.0,dot(input.surface.xyz,toward_light));
+      }
+      let energy=attenuation*attenuation*light.position_radius.w*response*directional*shadow_visibility(input,light,i);
       color=color+light.color.rgb*(input.color.rgb*0.8+vec3<f32>(0.012))*energy;
     }
   }

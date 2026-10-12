@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "provided",
+    "max_colors": 64,
+    "colors": [
+      0,
+      4279241996,
+      4280491547,
+      4282661941,
+      4286082660,
+      4289832345,
+      4293056975,
+      4294111210,
+      4294835451,
+      4282200874,
+      4285752404,
+      4291015837,
+      4284765461,
+      4288909082,
+      4292793666,
+      4293785001,
+      4281553256,
+      4283270570,
+      4286299616,
+      4281280587,
+      4282926475
+    ]
+  },
+  "defaults": {
+    "alpha": {
+      "mode": "exact"
+    },
+    "components": {
+      "mode": "all"
+    },
+    "resize": {
+      "mode": "none"
+    }
+  },
+  "sprites": [
+    {
+      "name": "icon_status",
+      "source": "source/icon_status.png"
+    },
+    {
+      "name": "icon_map",
+      "source": "source/icon_map.png"
+    },
+    {
+      "name": "icon_settings",
+      "source": "source/icon_settings.png"
+    },
+    {
+      "name": "icon_save",
+      "source": "source/icon_save.png"
+    },
+    {
+      "name": "icon_close",
+      "source": "source/icon_close.png"
+    },
+    {
+      "name": "icon_resume",
+      "source": "source/icon_resume.png"
+    },
+    {
+      "name": "icon_restart",
+      "source": "source/icon_restart.png"
+    },
+    {
+      "name": "icon_title",
+      "source": "source/icon_title.png"
+    },
+    {
+      "name": "icon_quit",
+      "source": "source/icon_quit.png"
+    },
+    {
+      "name": "icon_fullscreen",
+      "source": "source/icon_fullscreen.png"
+    }
+  ],
+  "provenance": {
+    "source_type": "original64-cell-python-authoring",
+    "tool": "asset-flight-icons.py",
+    "loss": "none; exact PNG import",
+    "style_revision": "sports-league-graphite-platinum-facets"
+  }
+}

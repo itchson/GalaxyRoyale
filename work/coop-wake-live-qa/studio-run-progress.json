@@ -1,0 +1,25 @@
+{
+  "item": {
+    "id": "run-fd30e4e8",
+    "title": "Configured native Wake QA helper author · running",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Configured native Wake QA helper author",
+    "state": "running",
+    "observedAt": "2026-10-12T21:36:38.91Z",
+    "taskIds": [
+      "task-d0e4d592"
+    ],
+    "summary": "Active authoring on codex/coop-wake-live-qa from8b0896d. Exact87d role-local native profiles copied; new strict configured fixture/stage guards and bounded observation helper implemented, native client hooks and version5 report gates in progress. No acceptance criteria changed. No listener/normal build/browser/RTC execution; production runtime untouched.",
+    "evidence": [
+      {
+        "label": "Actual active candidate source",
+        "kind": "note",
+        "details": "Current owned edits under scripts/qa/co-op-transport include wake-fixtures.mjs, wake-observation.js, prepare.mjs, server.mjs and client.js; matching focused tests and handoff remain to complete. Frozen87d/f1 branches preserved."
+      }
+    ],
+    "author": "Codex audio_score",
+    "source": "actual QA-helper authoring progress after branch setup",
+    "createdAt": "2026-10-12T21:36:38.979Z"
+  },
+  "revision": 1088
+}

@@ -1,0 +1,254 @@
+{
+  "metal": {
+    "schema": 1,
+    "tool": {
+      "name": "asset-pack",
+      "version": "1.0",
+      "pillow": "12.3.0"
+    },
+    "manifest_sha256": "bb97a80f24c9fe0be232e26626c4eb47e5dd4d6e786baca11ffd120c006ffcb7",
+    "provenance": {},
+    "palette_policy": {
+      "mode": "quantize",
+      "max_colors": 48
+    },
+    "budgets": {
+      "source_pixels": 16777216,
+      "sprite_cells": 65536,
+      "group_cells": 60000,
+      "group_transforms": 256,
+      "animation_frames": 256,
+      "extent": 1000000
+    },
+    "sprites": {
+      "metal": {
+        "source": "sample-metal.png",
+        "source_sha256": "92e8cf185e6cec77fad6470dcd7dbc83ed74a125435a4dec3679e968e94a9515",
+        "policies": {
+          "encoding": "rgba",
+          "cell_grid": [
+            1,
+            1
+          ],
+          "alpha": {
+            "mode": "exact"
+          },
+          "components": {
+            "mode": "all"
+          },
+          "resize": {
+            "mode": "none"
+          },
+          "topology": "holes-allowed"
+        },
+        "topology": "holes-allowed",
+        "source_dimensions": [
+          128,
+          128
+        ],
+        "crop": [
+          0,
+          0,
+          128,
+          128
+        ],
+        "source_cell_count": 16384,
+        "alpha_changed": 0,
+        "transparent_rgb_canonicalized": 0,
+        "source_components_8_connected": 6,
+        "removed_component_cells": 0,
+        "resized": false,
+        "pre_resize_occupied": 6397,
+        "post_resize_occupied": 6397,
+        "metrics": {
+          "occupied": 6397,
+          "components": 13,
+          "hole_cells": 573,
+          "bounds": [
+            1,
+            1,
+            127,
+            127
+          ]
+        },
+        "quantized_color_cells": 5980,
+        "anchor": [
+          0,
+          0
+        ]
+      }
+    },
+    "groups": [],
+    "animations": [],
+    "opaque_extension_fields": [],
+    "cell_content_sha256": "797e95b8c1d94becc5710be3d47fe46f18b7e2a6700ad2bba40e293edf4f0646"
+  },
+  "green": {
+    "schema": 1,
+    "tool": {
+      "name": "asset-pack",
+      "version": "1.0",
+      "pillow": "12.3.0"
+    },
+    "manifest_sha256": "a424c903275f615134375a4a987bd9f4e14c3882ebddfe8b5af30aa00d8c1e13",
+    "provenance": {},
+    "palette_policy": {
+      "mode": "quantize",
+      "max_colors": 9
+    },
+    "budgets": {
+      "source_pixels": 16777216,
+      "sprite_cells": 65536,
+      "group_cells": 60000,
+      "group_transforms": 256,
+      "animation_frames": 256,
+      "extent": 1000000
+    },
+    "sprites": {
+      "green": {
+        "source": "sample-green.png",
+        "source_sha256": "fac0688152f5a28dfc4862b0b6c92aff0735c99d3e8ac8c70082f1393c49657f",
+        "policies": {
+          "encoding": "rgba",
+          "cell_grid": [
+            1,
+            1
+          ],
+          "alpha": {
+            "mode": "exact"
+          },
+          "components": {
+            "mode": "all"
+          },
+          "resize": {
+            "mode": "none"
+          },
+          "topology": "holes-allowed"
+        },
+        "topology": "holes-allowed",
+        "source_dimensions": [
+          128,
+          128
+        ],
+        "crop": [
+          0,
+          0,
+          128,
+          128
+        ],
+        "source_cell_count": 16384,
+        "alpha_changed": 0,
+        "transparent_rgb_canonicalized": 0,
+        "source_components_8_connected": 188,
+        "removed_component_cells": 0,
+        "resized": false,
+        "pre_resize_occupied": 521,
+        "post_resize_occupied": 521,
+        "metrics": {
+          "occupied": 521,
+          "components": 225,
+          "hole_cells": 1,
+          "bounds": [
+            6,
+            5,
+            121,
+            123
+          ]
+        },
+        "quantized_color_cells": 521,
+        "anchor": [
+          0,
+          0
+        ]
+      }
+    },
+    "groups": [],
+    "animations": [],
+    "opaque_extension_fields": [],
+    "cell_content_sha256": "c26c54086af372c44d7f4c455fb00aa10af38e84353a917a42c6f87f340ea955"
+  },
+  "cyan": {
+    "schema": 1,
+    "tool": {
+      "name": "asset-pack",
+      "version": "1.0",
+      "pillow": "12.3.0"
+    },
+    "manifest_sha256": "7cc29d7bf186a05f32cedfedc2cb5c3590029d04b02f5f07b8c98a2da03fd456",
+    "provenance": {},
+    "palette_policy": {
+      "mode": "quantize",
+      "max_colors": 9
+    },
+    "budgets": {
+      "source_pixels": 16777216,
+      "sprite_cells": 65536,
+      "group_cells": 60000,
+      "group_transforms": 256,
+      "animation_frames": 256,
+      "extent": 1000000
+    },
+    "sprites": {
+      "cyan": {
+        "source": "sample-cyan.png",
+        "source_sha256": "cc816462e3010e9b1cf4ff3214377c1b33cae6c556fc16eb94dad10e7729379c",
+        "policies": {
+          "encoding": "rgba",
+          "cell_grid": [
+            1,
+            1
+          ],
+          "alpha": {
+            "mode": "exact"
+          },
+          "components": {
+            "mode": "all"
+          },
+          "resize": {
+            "mode": "none"
+          },
+          "topology": "holes-allowed"
+        },
+        "topology": "holes-allowed",
+        "source_dimensions": [
+          128,
+          128
+        ],
+        "crop": [
+          0,
+          0,
+          128,
+          128
+        ],
+        "source_cell_count": 16384,
+        "alpha_changed": 0,
+        "transparent_rgb_canonicalized": 0,
+        "source_components_8_connected": 60,
+        "removed_component_cells": 0,
+        "resized": false,
+        "pre_resize_occupied": 182,
+        "post_resize_occupied": 182,
+        "metrics": {
+          "occupied": 182,
+          "components": 66,
+          "hole_cells": 0,
+          "bounds": [
+            12,
+            11,
+            116,
+            120
+          ]
+        },
+        "quantized_color_cells": 182,
+        "anchor": [
+          0,
+          0
+        ]
+      }
+    },
+    "groups": [],
+    "animations": [],
+    "opaque_extension_fields": [],
+    "cell_content_sha256": "9deb2921f1c1dd58e37c8e1c553eb36282e252f281160caf2e0211d6612799c4"
+  }
+}

@@ -1,4 +1,21 @@
 /** Semantic controls provide input and accessibility; Rust draws their pixel cells. */
+/** Only the visible glyph window crosses into UI geometry; editing retains the
+ * full DOM value. Native input nodes have a 256-glyph packet bound. */
+export function pixelInputWindow(value: string, selection: number | null) {
+  const cursor = Number.isFinite(selection)
+    ? Math.max(0, Math.min(value.length, selection ?? value.length))
+    : value.length;
+  const glyphs = Array.from(value);
+  const caret = Array.from(value.slice(0, cursor)).length;
+  const start = Math.max(
+    0,
+    Math.min(Math.max(0, glyphs.length - 256), caret - 128),
+  );
+  return {
+    text: glyphs.slice(start, start + 256).join(""),
+    caret: caret - start,
+  };
+}
 export interface PixelUiRuntime {
   set_ui_scene(scene: unknown): void;
 }
@@ -7,6 +24,7 @@ interface Node {
   rect: number[];
   text: string;
   font: number;
+  text_align?: "left" | "center" | "right";
   value: number;
   active: boolean;
   selected: boolean;
@@ -14,7 +32,19 @@ interface Node {
   clip: number[] | null;
   label_rect?: number[];
   control_rect?: number[];
+  portrait_expression?: number;
+  portrait_speaking?: boolean;
+  portrait_kind?: number;
+  portrait_main?: number;
+  portrait_sub?: number;
 }
+const collectionTextKinds = new Set([
+  "collection-name",
+  "collection-state",
+  "collection-meta",
+  "collection-cost",
+  "collection-reason",
+]);
 export class PixelUiBridge {
   private dirty = true;
   private animateUntil = 0;
@@ -53,6 +83,7 @@ export class PixelUiBridge {
       "debug-console",
       "dialogue-screen",
       "death-screen",
+      "droid-screen",
     ])
       if (document.getElementById(id))
         this.observer.observe(document.getElementById(id)!, {
@@ -65,6 +96,14 @@ export class PixelUiBridge {
             "class",
             "disabled",
             "data-active",
+            "aria-pressed",
+            "data-selected",
+            "data-portrait",
+            "data-portrait-expression",
+            "data-portrait-speaking",
+            "data-portrait-kind",
+            "data-portrait-main",
+            "data-portrait-sub",
             "data-pixel-icon",
             "data-pixel-kind",
             "data-pixel-value",
@@ -82,11 +121,27 @@ export class PixelUiBridge {
       this.hover = null;
       this.invalidate();
     });
-    for (const name of ["input", "change", "focusin", "focusout", "scroll"])
+    for (const name of [
+      "input",
+      "change",
+      "focusin",
+      "focusout",
+      "scroll",
+      "pointerdown",
+      "pointerup",
+      "pointercancel",
+      "keydown",
+      "keyup",
+    ])
       document.addEventListener(name, () => this.invalidate(), true);
     // The native input owns editing; its selection can change without an input event.
     document.addEventListener("selectionchange", () => {
-      if (document.activeElement?.id === "console-input") this.invalidate();
+      if (
+        document.activeElement?.id === "console-input" ||
+        (document.activeElement instanceof HTMLInputElement &&
+          document.activeElement.dataset.pixelKind === "input")
+      )
+        this.invalidate();
     });
     window.addEventListener("resize", () => this.invalidate());
     document.fonts.ready.then(() => this.invalidate());
@@ -100,6 +155,7 @@ export class PixelUiBridge {
     const scale = this.scale();
     if (!Number.isFinite(scale) || scale <= 0) return;
     const groups: { position: number[]; nodes: Node[] }[] = [];
+    let feedback: { position: number[]; nodes: Node[] } | null = null;
     const buttonKind = (element: HTMLElement): string => {
       if (["site-button", "dock-button"].includes(element.id))
         return "status-text";
@@ -108,6 +164,7 @@ export class PixelUiBridge {
       const icon = element.dataset.pixelIcon;
       if (
         [
+          "close-icon",
           "settings-icon",
           "resume-icon",
           "restart-icon",
@@ -115,23 +172,37 @@ export class PixelUiBridge {
           "quit-icon",
           "status-icon",
           "map-icon",
+          "fullscreen-icon",
+          "multiplayer-icon",
         ].includes(icon ?? "")
       )
         return icon!;
       if (element.classList.contains("dock-facility")) return "facility-label";
-      if (element.closest(".menu-tabs")) return "nav-tab";
+      if (
+        element.closest(".menu-tabs") ||
+        element.closest("#collection-navigation") ||
+        (element.closest(".collection-filters") && !element.dataset.pixelAction)
+      )
+        return "nav-tab";
       if (element.classList.contains("primary-button")) return "primary-button";
       if (element.classList.contains("restart-button")) return "restart-button";
       if (["return-title", "death-title", "quick-title"].includes(element.id))
         return "exit-button";
       const action = element.dataset.pixelAction;
-      return ["offense-button", "defense-button", "passive-button"].includes(
-        action ?? "",
-      )
+      return [
+        "primary-button",
+        "exit-button",
+        "restart-button",
+        "offense-button",
+        "defense-button",
+        "passive-button",
+      ].includes(action ?? "")
         ? action!
         : "button";
     };
     const textKind = (element: HTMLElement): string => {
+      if (collectionTextKinds.has(element.dataset.pixelKind ?? ""))
+        return element.dataset.pixelKind!;
       if (element.id === "toast") return "warning-text";
       const category = element.closest(".upgrade-category");
       for (const name of ["offense", "defense", "passive"])
@@ -143,7 +214,7 @@ export class PixelUiBridge {
       getComputedStyle(element).display !== "none" &&
       element.getBoundingClientRect().width > 0;
     for (const root of document.querySelectorAll<HTMLElement>(
-      ".launch-card,.menu-card,.console-card,.dialogue-card,.death-card,#game-ui",
+      ".launch-card,.menu-card,.console-card,.dialogue-card,.death-card,.droid-card,#game-ui",
     )) {
       if (!visible(root)) continue;
       const bounds = root.getBoundingClientRect();
@@ -207,11 +278,11 @@ export class PixelUiBridge {
           }
         }
         const font = Math.max(
-          1,
+          0.25,
           Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
         const scrollSelector =
-          ".menu-tabs,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary";
+          ".menu-tabs,.hangar-index,#collection-navigation,#meishi-content,#cargo-content,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#missions-content,#settings-content,#archive-content,#hangar-content,#ship-content,#coop-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
         let clipX = bounds.x,
           clipY = bounds.y,
           clipRight = bounds.x + bounds.width,
@@ -242,6 +313,24 @@ export class PixelUiBridge {
           box.y >= clipBottom
         )
           return;
+        if (kind === "text" && element.id === "dialogue-text") {
+          // The paragraph is its own scroll viewport. Keep its original BCR as
+          // the clip, while native glyphs move through the full content area.
+          const height = Math.max(
+            box.height,
+            Number.isFinite(element.clientHeight) ? element.clientHeight : 0,
+            Number.isFinite(element.scrollHeight) ? element.scrollHeight : 0,
+          );
+          const scroll = Number.isFinite(element.scrollTop)
+            ? Math.max(0, Math.min(element.scrollTop, height - box.height))
+            : 0;
+          box = {
+            x: box.x,
+            y: box.y - scroll,
+            width: box.width,
+            height,
+          } as DOMRect;
+        }
         // CSS layout quantizes to subpixels. Preserve the measured center while
         // recovering only the authored campaign icon size within 1/64 UI unit.
         const authored =
@@ -261,7 +350,14 @@ export class PixelUiBridge {
             area.height / scale,
           ];
         };
-        nodes.push({
+        const coopLabel =
+          element.id === "coop-create" || element.id === "coop-join"
+            ? element.querySelector<HTMLElement>(".coop-button-label")
+            : null;
+        const coopButton = kind.startsWith("co-op-")
+          ? element.closest<HTMLButtonElement>("button")
+          : null;
+        const node: Node = {
           kind,
           rect: [
             (box.x - bounds.x) / scale + (measuredWidth - width) / 2,
@@ -274,6 +370,10 @@ export class PixelUiBridge {
               ? Array.from(text).slice(0, 256).join("")
               : text.replace(/\s+/g, " ").trim().slice(0, 256),
           font,
+          text_align:
+            style.textAlign === "center" || style.textAlign === "right"
+              ? style.textAlign
+              : "left",
           value,
           clip: [
             (clipX - bounds.x) / scale,
@@ -287,9 +387,42 @@ export class PixelUiBridge {
               : element === this.hover ||
                 element.contains(document.activeElement),
           selected:
-            element.dataset.active === "true" ||
-            element.getAttribute("aria-selected") === "true",
-          disabled: element instanceof HTMLButtonElement && element.disabled,
+            kind === "meishi-socket" || kind === "collection-entry"
+              ? element.dataset.active === "true"
+              : element.matches(":active") ||
+                element.dataset.active === "true" ||
+                element.getAttribute("aria-pressed") === "true" ||
+                element.getAttribute("aria-selected") === "true",
+          disabled:
+            (element instanceof HTMLButtonElement && element.disabled) ||
+            Boolean(coopButton?.disabled),
+          ...(coopLabel ? { label_rect: regionRect(coopLabel) } : {}),
+          ...(kind === "portrait"
+            ? {
+                portrait_expression: Math.floor(
+                  Math.max(
+                    0,
+                    Math.min(
+                      3,
+                      Number(element.dataset.portraitExpression) || 0,
+                    ),
+                  ),
+                ),
+                portrait_speaking: element.dataset.portraitSpeaking === "true",
+                ...(value === 9 &&
+                [
+                  element.dataset.portraitKind,
+                  element.dataset.portraitMain,
+                  element.dataset.portraitSub,
+                ].every((token) => token !== undefined && /^[0-2]$/.test(token))
+                  ? {
+                      portrait_kind: Number(element.dataset.portraitKind),
+                      portrait_main: Number(element.dataset.portraitMain),
+                      portrait_sub: Number(element.dataset.portraitSub),
+                    }
+                  : {}),
+              }
+            : {}),
           ...(regions
             ? {
                 ...(regions.label
@@ -299,19 +432,72 @@ export class PixelUiBridge {
                 disabled: regions.control.disabled,
               }
             : {}),
-        });
+        };
+        if (element.id === "toast")
+          feedback = { position: [...position], nodes: [node] };
+        else nodes.push(node);
       };
-      if (root.id !== "game-ui")
+      if (root.classList.contains("launch-card")) {
+        const screen = document
+          .getElementById("launch-screen")!
+          .getBoundingClientRect();
+        groups.push({
+          position: [screen.x / scale, screen.y / scale],
+          nodes: [
+            {
+              kind: "title-backdrop",
+              rect: [0, 0, screen.width / scale, screen.height / scale],
+              text: "",
+              font: 0,
+              value: 0,
+              active: false,
+              selected: false,
+              disabled: false,
+              clip: null,
+            },
+          ],
+        });
+      } else if (root.id !== "game-ui")
         add(
           root,
-          root.classList.contains("console-card") ? "console-panel" : "panel",
+          root.classList.contains("console-card")
+            ? "console-panel"
+            : root.classList.contains("menu-scene")
+              ? "scene"
+              : root.classList.contains("meishi-surface")
+                ? "meishi-panel"
+                : "panel",
+          "",
+          Number(root.dataset.pixelValue ?? 0),
+        );
+      if (
+        root.classList.contains("menu-scene") &&
+        root.classList.contains("meishi-surface")
+      )
+        add(
+          root.querySelector<HTMLElement>("#meishi-content")!,
+          "meishi-panel",
+          "",
+          Number(root.dataset.pixelValue ?? 0),
         );
       if (root.classList.contains("dialogue-card")) {
         const portrait = root.querySelector<HTMLElement>(".dialogue-portrait");
         if (portrait)
           add(portrait, "portrait", "", Number(portrait.dataset.portrait ?? 0));
       }
-      for (const art of root.querySelectorAll<HTMLElement>("[data-pixel-kind]"))
+      for (const art of root.querySelectorAll<HTMLElement>(
+        "[data-pixel-kind]",
+      )) {
+        // Measured collection copy is emitted once by the text loop below.
+        if (collectionTextKinds.has(art.dataset.pixelKind ?? "")) continue;
+        if (
+          art.dataset.pixelKind === "input" &&
+          art instanceof HTMLInputElement
+        ) {
+          const window = pixelInputWindow(art.value, art.selectionStart);
+          add(art, "input", window.text, window.caret);
+          continue;
+        }
         add(
           art,
           art.dataset.pixelKind ?? "",
@@ -320,6 +506,7 @@ export class PixelUiBridge {
             : "",
           Number(art.dataset.pixelValue ?? 0),
         );
+      }
       if (root.classList.contains("console-card")) {
         const input = root.querySelector<HTMLInputElement>("#console-input");
         if (input)
@@ -334,15 +521,13 @@ export class PixelUiBridge {
       }
       if (root.classList.contains("launch-card")) {
         add(root.querySelector<HTMLElement>("h1")!, "logo");
-        const crest = root.querySelector<HTMLElement>(".title-crest");
-        if (crest) add(crest, "seal");
       }
       const selectors =
         root.id === "game-ui"
           ? document.body.classList.contains("engine-flight")
-            ? ".dock-facility,#save-indicator,#site-button,#dock-button,#pause-button,#map-button,#flight-settings,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker"
+            ? ".dock-facility,#save-indicator,#site-button,#dock-button,#pause-button,#map-button,#flight-settings,#multiplayer-button,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker,#toolbar-hint"
             : "#toast"
-          : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#quest-content li";
+          : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#missions-content li";
       for (const child of root.querySelectorAll<HTMLElement>(selectors)) {
         if (
           ["status-text", "warning-text"].includes(
@@ -368,7 +553,8 @@ export class PixelUiBridge {
                 : child.id === "save-indicator"
                   ? ""
                   : child.innerText,
-          child.id === "save-indicator" ||
+          collectionTextKinds.has(child.dataset.pixelKind ?? "") ||
+            child.id === "save-indicator" ||
             child.classList.contains("dock-facility")
             ? Number(child.dataset.pixelValue ?? 0)
             : 0,
@@ -380,7 +566,12 @@ export class PixelUiBridge {
         )) {
           // These accessible marker buttons were emitted once by the artwork
           // loop. Their hitboxes do not become generic frames or text objects.
-          if (["map-home", "map-site"].includes(button.dataset.pixelKind ?? ""))
+          if (
+            ["map-home", "map-site", "garage-bay"].includes(
+              button.dataset.pixelKind ?? "",
+            ) ||
+            button.classList.contains("hangar-hull")
+          )
             continue;
           add(
             button,
@@ -420,8 +611,17 @@ export class PixelUiBridge {
         for (const rank of root.querySelectorAll<HTMLElement>(".rank-dots"))
           add(rank, "rank", "", rank.querySelectorAll(".earned").length);
       }
+      // Child artwork belongs above the measured button's backing, while
+      // keeping the semantic hitbox and label in the same local UI group.
+      nodes.sort(
+        (a, b) =>
+          Number(a.kind.startsWith("co-op-")) -
+          Number(b.kind.startsWith("co-op-")),
+      );
       groups.push({ position, nodes: nodes.slice(0, 256) });
     }
+    // Feedback must remain above opaque menu stages and card artwork.
+    if (feedback) groups.push(feedback);
     this.runtime.set_ui_scene({ groups });
   }
 }

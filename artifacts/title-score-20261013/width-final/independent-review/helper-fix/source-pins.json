@@ -1,0 +1,196 @@
+{
+  "capturedAt": "2026-10-12T18:02:51.444Z",
+  "baseHead": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+  "node": "v24.18.0",
+  "modifiedSources": {
+    "scripts/qa/audio-review/review.js": {
+      "workingBytes": 16248,
+      "workingSha256": "15aa75998c5da89826d538484ad88e7a5b7610962c3bc1f6d3a2e7d2ecc53855",
+      "normalizedLfBytes": 16248,
+      "normalizedLfSha256": "15aa75998c5da89826d538484ad88e7a5b7610962c3bc1f6d3a2e7d2ecc53855",
+      "baseCommit": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "baseGitBytes": 15762,
+      "baseGitSha256": "ad77ed4dd10cd3497b80e37a02ce4b1c56483fa016abc10720494686a8917368"
+    },
+    "scripts/qa/audio-review/fixtures.test.mjs": {
+      "workingBytes": 12453,
+      "workingSha256": "ddd792c34acbff37392e653f1fa903676bcf3451a2fd9134eb6a34c76f5dece8",
+      "normalizedLfBytes": 12453,
+      "normalizedLfSha256": "ddd792c34acbff37392e653f1fa903676bcf3451a2fd9134eb6a34c76f5dece8",
+      "baseCommit": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "baseGitBytes": 8801,
+      "baseGitSha256": "f545da623ea2bf8491d3cb9093a0dfdbcdb7bebb1f9aef1a27a508fcce6cd8b4"
+    }
+  },
+  "ownEvidence": {
+    "handoff.md": {
+      "bytes": 4462,
+      "sha256": "0f957befd8b7cee513f221a0ab498d98c6ada8e21b38096a920f462d20b6a103"
+    },
+    "review-before.js": {
+      "bytes": 16253,
+      "sha256": "85149988415a1e2a6f93284171c7b34555e13e22a6ba4b1e3337db18ceb523f7"
+    },
+    "regression-before.log": {
+      "bytes": 1886,
+      "sha256": "4632a32cf1fb39c6d064c6e812d97e501248e31a964fc6c6981d3251686f9290"
+    },
+    "qa-tests.log": {
+      "bytes": 2107,
+      "sha256": "85a950571a6c87498a04d1d0d5a9e4345a4f9af89e42f810f2ed507aa4b9cee8"
+    },
+    "qa-tests-with-unintended-server-checks.log": {
+      "bytes": 2644,
+      "sha256": "2790a279eef2b52ea407214cbb850afc30f88febfb7e22b52be5be6c65abe052"
+    },
+    "capability-after-format.log": {
+      "bytes": 465,
+      "sha256": "044c562f8a950b2ee2ff090097473a242294973dee6b668f592618c9cb1a84d6"
+    },
+    "format.log": {
+      "bytes": 88,
+      "sha256": "1684bd8974991ef3c151520c8c95cfdd04b14ba68da03ef91d343f06cf1f41be"
+    },
+    "diff-check.log": {
+      "bytes": 262,
+      "sha256": "3bf8e46865f48ff2ade33cd5603058b26976e3357c3cc9879217e46aadc096ab"
+    },
+    "diff.patch": {
+      "bytes": 10753,
+      "sha256": "aae69d978cb586ed7a9aa9f40abf861421f6525094d5e43280f2cce7d6f03ff1"
+    },
+    "pin-evidence.mjs": {
+      "bytes": 6145,
+      "sha256": "24af424ad1770b986f58200a82d229c59ec21636f66acf2bd06e208bff07953f"
+    }
+  },
+  "commands": [
+    {
+      "command": "node --test --test-name-pattern='actual renderer preserves absent native panner capability' scripts/qa/audio-review/fixtures.test.mjs",
+      "stage": "before fix",
+      "exitCode": 1,
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "log": "regression-before.log"
+    },
+    {
+      "command": "node --test --test-name-pattern='^(?!actual loopback HTTP|occupied-port CLI|autoquit closes)' scripts/qa/audio-review/helper.test.mjs scripts/qa/audio-review/fixtures.test.mjs scripts/qa/audio-review/metrics.test.mjs",
+      "stage": "after fix; exclusion failed",
+      "exitCode": 0,
+      "tests": 21,
+      "pass": 21,
+      "fail": 0,
+      "log": "qa-tests-with-unintended-server-checks.log",
+      "deviation": "Three ephemeral loopback server checks inadvertently executed, then closed normally."
+    },
+    {
+      "command": "node --test --test-skip-pattern='actual loopback HTTP|occupied-port CLI|autoquit closes' scripts/qa/audio-review/helper.test.mjs scripts/qa/audio-review/fixtures.test.mjs scripts/qa/audio-review/metrics.test.mjs",
+      "stage": "after fix, before final formatting; intended no-server scope",
+      "exitCode": 0,
+      "tests": 18,
+      "pass": 18,
+      "fail": 0,
+      "excludedServerTests": 3,
+      "log": "qa-tests.log"
+    },
+    {
+      "command": "node node_modules/prettier/bin/prettier.cjs --write scripts/qa/audio-review/review.js scripts/qa/audio-review/fixtures.test.mjs",
+      "exitCode": 0,
+      "prettier": "3.9.9",
+      "log": "format.log"
+    },
+    {
+      "command": "node --test --test-name-pattern='actual renderer preserves absent native panner capability|exported offline adapter' scripts/qa/audio-review/fixtures.test.mjs",
+      "stage": "final formatted source bytes; no server tests",
+      "exitCode": 0,
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "log": "capability-after-format.log"
+    },
+    {
+      "command": "git diff --check -- scripts/qa/audio-review/review.js scripts/qa/audio-review/fixtures.test.mjs",
+      "exitCode": 0,
+      "log": "diff-check.log"
+    }
+  ],
+  "priorV3Preservation": {
+    "sourcePinsPath": "work/title-score-native-width-v3/source-pins.json",
+    "sourcePinsBytes": 2618,
+    "sourcePinsSha256": "6e496b2b9fc0bc940a7428041403561a266147cef92f055c41a7f55415be69c9",
+    "originalHelperSha256": "85149988415a1e2a6f93284171c7b34555e13e22a6ba4b1e3337db18ceb523f7",
+    "beforeCopySha256": "85149988415a1e2a6f93284171c7b34555e13e22a6ba4b1e3337db18ceb523f7",
+    "beforeCopyMatchesCaptureHelper": true,
+    "reportPath": "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/report.json",
+    "reportBytes": 110266,
+    "reportSha256": "5369b426b6d297ce48b9dc0321af7ac3eaa5db8d996b903980c1cc6afc37bba6",
+    "reportMatchesRecordedPreAmendmentHash": true,
+    "runtimeSources": {
+      "apps/game/src/title-theme.ts": {
+        "bytes": 2917,
+        "sha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135",
+        "equalsPriorCaptureSource": true
+      },
+      "apps/game/src/audio.ts": {
+        "bytes": 51881,
+        "sha256": "96160ba46e050f3bc334adac9f874f6f318724af04388aa9345e850a103c4156",
+        "equalsPriorCaptureSource": true
+      },
+      "apps/game/src/audio-state.ts": {
+        "bytes": 11471,
+        "sha256": "c3c9a3c5b34b1001e4d1dd1de531e70dbcd945826b31022e0619187d0ec1b76f",
+        "equalsPriorCaptureSource": true
+      },
+      "apps/game/src/music-clock.ts": {
+        "bytes": 4084,
+        "sha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9",
+        "equalsPriorCaptureSource": true
+      },
+      "apps/game/src/music-score.ts": {
+        "bytes": 807,
+        "sha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683",
+        "equalsPriorCaptureSource": true
+      }
+    },
+    "preservedWavs": {
+      "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/prior-engine.wav": {
+        "bytes": 2304044,
+        "sha256": "7b1a1340407b92da56dae33ecf001134e65750d2c8495d930840b54d0ccd8156",
+        "equalsExistingReportHash": true
+      },
+      "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/warm-engine.wav": {
+        "bytes": 2304044,
+        "sha256": "f21bc45263480e8f176fb8f5ac5cbce013145836f518c305266d6d481d22d2f6",
+        "equalsExistingReportHash": true
+      },
+      "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/representative-mix.wav": {
+        "bytes": 4224044,
+        "sha256": "8dd6a9dbbb3edc8b1467e1112f24bfe73659c5f078dda0e0b62005597f011c36",
+        "equalsExistingReportHash": true
+      },
+      "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/max-bus-burst.wav": {
+        "bytes": 1920044,
+        "sha256": "60edec171987f2ed347a2d732b164ad88d04bef511911377242acaf6175f0c52",
+        "equalsExistingReportHash": true
+      },
+      "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/current-score.wav": {
+        "bytes": 9216044,
+        "sha256": "717a9797ed53be4f7b98c1be3283779a52c62034f54bc3a25a3abb2ac7fd9bea",
+        "equalsExistingReportHash": true
+      },
+      "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/title-score.wav": {
+        "bytes": 18432044,
+        "sha256": "12e1c7f3efd853851ea146871bd32585b8375a52a121aa87c9bfa4f6f4053ea5",
+        "equalsExistingReportHash": true
+      },
+      "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066/title-transition.wav": {
+        "bytes": 12288044,
+        "sha256": "8e808c18e1b64a4b570fdf5cd9212f713a973357650204f08a419c4636c56da0",
+        "equalsExistingReportHash": true
+      }
+    },
+    "freshRenderThisCorrection": false
+  },
+  "scope": "QA-only capability correction and actual helper/analytic tests. No production runtime change, commit, production bundle, broad build, browser, new native DSP render or listening/fidelity acceptance. Execution deviation is preserved explicitly."
+}

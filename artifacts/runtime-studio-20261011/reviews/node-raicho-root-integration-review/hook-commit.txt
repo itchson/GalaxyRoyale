@@ -1,0 +1,7 @@
+commit 8242c09650482a15019e8e1f0f96b35debed8d58
+Author:     Codex <codex@openai.com>
+AuthorDate: Sun Oct 11 20:50:44 2026 +1000
+Commit:     Codex <codex@openai.com>
+CommitDate: Sun Oct 11 20:50:44 2026 +1000
+
+    Render detailed RAICHO hulls through live damage-aware quads

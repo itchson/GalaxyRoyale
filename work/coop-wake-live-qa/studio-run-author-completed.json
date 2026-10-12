@@ -1,0 +1,30 @@
+{
+  "item": {
+    "id": "run-25b65cef",
+    "title": "Configured native Wake QA helper author · completed",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Configured native Wake QA helper author",
+    "state": "completed",
+    "observedAt": "2026-10-12T22:13:21.753Z",
+    "taskIds": [
+      "task-d0e4d592"
+    ],
+    "summary": "QA helper authoring completed on codex/coop-wake-live-qa from 8b0896d; exact source/evidence staged for immediate freeze commit. Actual 53 focused listener-free checks pass, six syntax checks/formatting/tsc pass. Four failed attempts retained. No listener/build/browser/RTC/native rerun or user-store write. Independent review, Root integration/staging and actual two-renderer live gates remain pending; criteria are unchanged.",
+    "evidence": [
+      {
+        "label": "Candidate source and liveness/contract handoff",
+        "kind": "note",
+        "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-live-qa/HANDOFF.md"
+      },
+      {
+        "label": "Raw focused checks and exact source/fixture pins",
+        "kind": "note",
+        "details": "work/coop-wake-live-qa/tests-frozen-inputs.log; wasm-consumers-frozen-inputs.log; source-pins.json; execution.json"
+      }
+    ],
+    "author": "Codex",
+    "source": "actual configured Wake QA author finish",
+    "createdAt": "2026-10-12T22:13:21.836Z"
+  },
+  "revision": 1113
+}

@@ -232,6 +232,7 @@ impl Reserved {
                         | "save-icon"
                         | "status-icon"
                         | "settings-icon"
+                        | "fullscreen-icon"
                         | "map-icon"
                         | "resume-icon"
                         | "restart-icon"
@@ -331,6 +332,7 @@ mod tests {
             "save-icon",
             "status-icon",
             "settings-icon",
+            "fullscreen-icon",
             "map-icon",
             "resume-icon",
             "restart-icon",
@@ -540,7 +542,7 @@ mod tests {
                             Vec2::new(-0.5, 0.5),
                             Vec2::new(0.5, 0.5),
                         ] {
-                            let p = batch.transforms[pixel.transform as usize]
+                            let p = batch.transforms[pixel.transform_slot()]
                                 .point(Vec2::from_array(pixel.local) + corner)
                                 - camera
                                 + Vec2::from_array(viewport) * 0.5;
@@ -770,6 +772,163 @@ mod tests {
             overlay.update(&input).is_none(),
             "sub180 safe area cannot report an invisible row"
         );
+    }
+
+    #[test]
+    fn right_status_and_minimap_use_the_same_full_screen_overlay_reservations() {
+        let game = game_core::Game::new(game_core::Profile::default());
+        let hud = game.hud();
+        let focus = game.render_focus(1.0);
+        for (viewport, insets, touch) in [
+            ([533.0, 300.0], [0.0; 4], false),
+            ([320.0, 180.0], [0.0; 4], true),
+            ([360.0, 204.0], [10.0, 22.0, 14.0, 18.0], false),
+        ] {
+            let scene = UiScene::default();
+            let input = OverlayInput {
+                hud: &hud,
+                focus,
+                camera: hud.camera,
+                viewport,
+                insets,
+                zoom: 1.0,
+                now_ms: 0,
+                scene: &scene,
+                touch,
+            };
+            let layout = FlightStatusLayout::new(&FlightStatusInput {
+                viewport,
+                insets,
+                header: None,
+                status_hits: [None; 2],
+                touch,
+                attached_vitals: true,
+                player: focus.player,
+                player_radius: focus.player_radius,
+                protected_core: None,
+                camera: hud.camera,
+                zoom: 1.0,
+            })
+            .unwrap();
+            let reserved = Reserved::from_input(&input, false);
+            let footer = layout.strip.unwrap();
+            assert!(footer[2] <= 180.0);
+            for local in [layout.strip, layout.navigation, layout.vitals]
+                .into_iter()
+                .flatten()
+            {
+                let screen = FlightStatusLayout::full_bounds(Some(local), insets).unwrap();
+                let rect = Rect::new(
+                    screen[0].into(),
+                    screen[1].into(),
+                    screen[2].into(),
+                    screen[3].into(),
+                );
+                assert!(reserved.rects[..reserved.len].contains(&rect));
+            }
+            if let Some(map) = layout.navigation {
+                assert_eq!(map[0] + map[2], footer[0] + footer[2]);
+            }
+        }
+    }
+
+    #[test]
+    fn new_left_toolbar_and_corner_status_keep_real_boss_health_clear() {
+        let mut game = game_core::Game::new(game_core::Profile::default());
+        game.diagnostic("boss-bastion-5");
+        let hud = game.hud();
+        let camera = Vec2::from_array(game.render_camera(0.5));
+        for (viewport, insets, hit, touch) in [
+            ([533.0, 300.0], [0.0; 4], 14.0, false),
+            ([320.0, 180.0], [0.0; 4], 28.0, false),
+            ([320.0, 180.0], [0.0; 4], 44.0, true),
+            ([350.0, 200.0], [7.0, 19.0, 13.0, 11.0], 28.0, true),
+        ] {
+            let mut scene = crate::pixel_ui::header_tests::left_scene(viewport, insets, hit);
+            scene.groups[0].nodes.push(UiNode {
+                kind: "fullscreen-icon".into(),
+                rect: [
+                    insets[3] + 12.0 + 4.0 * (hit + 3.0),
+                    insets[0] + 12.0,
+                    hit,
+                    hit,
+                ],
+                ..Default::default()
+            });
+            let mut focus = game.render_focus(0.5);
+            focus.player = camera;
+            focus.player_radius = 20.0;
+            focus.boss.as_mut().unwrap().core = camera - Vec2::Y * 70.0;
+            let input = OverlayInput {
+                hud: &hud,
+                focus,
+                camera: camera.to_array(),
+                viewport,
+                insets,
+                zoom: 1.6,
+                now_ms: 0,
+                scene: &scene,
+                touch,
+            };
+            let mut overlay = BossOverlay::default();
+            let panel = overlay
+                .update(&input)
+                .expect("declared compact corner preserves actual boss panel");
+            let reserved = Reserved::from_input(&input, overlay.minimal());
+            for icon in &scene.groups[0].nodes {
+                let r = icon.rect;
+                assert!(
+                    reserved.rects[..reserved.len].contains(&Rect::new(
+                        r[0].into(),
+                        r[1].into(),
+                        r[2].into(),
+                        r[3].into()
+                    )),
+                    "actual {} hit was not reserved",
+                    icon.kind
+                );
+            }
+            let full = Rect::new(
+                (panel[0] + insets[3]).into(),
+                (panel[1] + insets[0]).into(),
+                panel[2].into(),
+                panel[3].into(),
+            );
+            assert!(
+                reserved.rects[..reserved.len]
+                    .iter()
+                    .all(|r| !full.intersects(r.expanded(boss_layout::WIDGET_CLEARANCE)))
+            );
+            let l = FlightStatusLayout::new(&FlightStatusInput {
+                viewport,
+                insets,
+                header: flight_header(&scene, insets),
+                status_hits: [None; 2],
+                touch,
+                attached_vitals: !overlay.minimal(),
+                player: focus.player,
+                player_radius: focus.player_radius,
+                protected_core: focus.boss.map(|b| (b.core, b.core_radius)),
+                camera: hud.camera,
+                zoom: 1.6,
+            })
+            .unwrap();
+            for local in [l.strip, l.navigation, l.vitals].into_iter().flatten() {
+                let r = FlightStatusLayout::full_bounds(Some(local), insets).unwrap();
+                assert!(reserved.rects[..reserved.len].contains(&Rect::new(
+                    r[0].into(),
+                    r[1].into(),
+                    r[2].into(),
+                    r[3].into()
+                )));
+            }
+            eprintln!(
+                "boss corner viewport={viewport:?} touch={touch} headerhit={hit} minimal={} panel={panel:?} status={:?} map={:?}",
+                overlay.minimal(),
+                l.strip,
+                l.navigation
+            );
+        }
     }
 
     #[test]

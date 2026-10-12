@@ -1,0 +1,25 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 12 tests
+test ui_scene::icon_tests::facility_label_is_centered_below_hitbox_and_draws_only_cached_font_cells ... ok
+test ui_scene::icon_tests::restart_action_is_amber_and_preserves_bounded_semantic_label_geometry ... ok
+test ui_scene::icon_tests::icon_composes_a_reflected_sheared_parent_without_absolute_cell_expansion ... ok
+test ui_scene::icon_tests::save_nonfinite_state_is_static_saved_and_invalid_scene_geometry_is_closed ... ok
+test ui_scene::icon_tests::direct_64_cell_controls_are_cached_distinct_and_keep_save_state_color_semantics ... ok
+test ui_scene::icon_tests::menu_symbols_are_eight_distinct_detailed_cached_unlit_objects_without_text_placeholders ... ok
+test ui_scene::icon_tests::clipped_icons_charge_whole_authored_bodies_and_reject_each_insufficient_budget_atomically ... ok
+test ui_scene::icon_tests::current_native_controls_keep_64_cell_silhouette_landmarks_and_authored_material_depth ... ok
+test ui_scene::icon_tests::icon_hover_press_and_disabled_change_tone_without_changing_geometry_or_alpha ... ok
+test ui_scene::icon_tests::historical_32_cell_icon_routes_keep_their_authored_landmarks ... ok
+test ui_scene::icon_tests::measured_icons_center_and_keep_every_corner_inside_their_rect_even_far_from_origin ... ok
+test ui_scene::icon_tests::menu_icons_fit_44_physical_pixel_hitboxes_with_continuous_fractional_scaling ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 276 filtered out; finished in 0.07s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

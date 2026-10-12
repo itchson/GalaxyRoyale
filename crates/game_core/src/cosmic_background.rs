@@ -51,8 +51,14 @@ struct Atmosphere {
     density: f32,
     tint: [f32; 3],
 }
+#[cfg(test)]
+std::thread_local! {
+    static ATMOSPHERE_SAMPLES: std::cell::Cell<usize> = const { std::cell::Cell::new(0) };
+}
 impl Atmosphere {
     fn at(seed: u32, world: Vec2) -> Self {
+        #[cfg(test)]
+        ATMOSPHERE_SAMPLES.with(|count| count.set(count.get() + 1));
         let kind = regions::at(seed, world).kind as usize;
         Self {
             density: DENSITIES[kind],
@@ -132,48 +138,25 @@ struct Pair {
     low: PixelBody,
 }
 impl Pair {
-    fn new(body: PixelBody) -> Self {
-        let width = body.width / 2;
-        let height = body.height / 2;
-        let mut palette = Vec::new();
-        let rows: Vec<String> = (0..height)
-            .map(|y| {
-                (0..width)
-                    .map(|x| {
-                        let color = (0..4)
-                            .filter_map(|i| body.color_at(x * 2 + (i & 1), y * 2 + (i >> 1)))
-                            .max_by_key(|c| c.to_le_bytes()[3]);
-                        if let Some(color) = color {
-                            let index = palette
-                                .iter()
-                                .position(|&(_, c)| c == color)
-                                .unwrap_or_else(|| {
-                                    let index = palette.len();
-                                    palette.push((
-                                        char::from_u32(0xe000 + index as u32).unwrap(),
-                                        color,
-                                    ));
-                                    index
-                                });
-                            palette[index].0
-                        } else {
-                            ' '
-                        }
-                    })
-                    .collect()
-            })
-            .collect();
-        let low = PixelBody::from_ascii(
-            &rows.iter().map(String::as_str).collect::<Vec<_>>(),
-            &palette,
-        );
-        Self { full: body, low }
+    fn new(
+        width: usize,
+        height: usize,
+        sample: impl Fn(Vec2) -> Option<usize>,
+        colors: &[u32],
+    ) -> Self {
+        // Both densities sample the same physical source field. Reduced detail
+        // does not max-fill 2x2 blocks across the authored dark lanes.
+        Self {
+            full: template(width * 2, height * 2, 0.5, &sample, colors),
+            low: template(width, height, 1.0, &sample, colors),
+        }
     }
     fn body(&self, reduced: bool) -> &PixelBody {
         if reduced { &self.low } else { &self.full }
     }
 }
 struct Art {
+    galaxy_disk: Pair,
     galaxy_arms: Pair,
     galaxy_core: Pair,
     nebula: Pair,
@@ -181,154 +164,480 @@ struct Art {
     nova_shell: Pair,
     nova_core: Pair,
 }
-static ART: LazyLock<Art> = LazyLock::new(|| {
-    // These equations author occupancy once. No bitmap, runtime random fill or
-    // giant translucent rectangle is used: vacancies remain actual empty cells.
-    let galaxy_arms = template(
+
+// These cells overlap as radially filtered volumes. The spacing is authored
+// independently from each particle's footprint; it is never a raster minimum.
+const VEIL_SPACING: f32 = 3.0;
+const BILLOW_SPACING: f32 = 2.5;
+const VEIL_THRESHOLD: f32 = 0.06;
+const BILLOW_THRESHOLD: f32 = 0.27;
+struct GasArt {
+    veil: Pair,
+    billows: Pair,
+}
+
+fn noise(seed: u32, p: Vec2) -> f32 {
+    let grid = p.floor().as_ivec2();
+    let uv = p - p.floor();
+    let u = smooth(uv.x);
+    let v = smooth(uv.y);
+    let a = unit(hash3(seed, grid.x, grid.y, 0));
+    let b = unit(hash3(seed, grid.x + 1, grid.y, 0));
+    let c = unit(hash3(seed, grid.x, grid.y + 1, 0));
+    let d = unit(hash3(seed, grid.x + 1, grid.y + 1, 0));
+    (a + (b - a) * u) + ((c + (d - c) * u) - (a + (b - a) * u)) * v
+}
+
+// Uneven connected paths, not closed elliptical shells. Width changes along
+// each branch; domain warping and correlated detail break its smooth outline.
+const NEBULA_SPINE: [[f32; 3]; 6] = [
+    [-53.0, 8.0, 3.0],
+    [-34.0, 4.0, 10.0],
+    [-15.0, -4.0, 13.0],
+    [5.0, -5.0, 11.0],
+    [28.0, 10.0, 8.0],
+    [51.0, 18.0, 2.0],
+];
+const NEBULA_UPPER: [[f32; 3]; 4] = [
+    [-19.0, -3.0, 8.0],
+    [-10.0, -17.0, 7.0],
+    [5.0, -27.0, 4.0],
+    [22.0, -30.0, 1.0],
+];
+const NEBULA_LOWER: [[f32; 3]; 3] = [[-22.0, 1.0, 8.0], [-35.0, 17.0, 5.0], [-51.0, 27.0, 1.2]];
+const NEBULA_WISP: [[f32; 3]; 3] = [[13.0, 0.0, 5.0], [29.0, -11.0, 3.0], [48.0, -17.0, 0.8]];
+
+fn strand(p: Vec2, path: &[[f32; 3]], width_scale: f32) -> f32 {
+    path.windows(2).fold(0.0, |density, points| {
+        let a = Vec2::new(points[0][0], points[0][1]);
+        let b = Vec2::new(points[1][0], points[1][1]);
+        let delta = b - a;
+        let t = ((p - a).dot(delta) / delta.length_squared()).clamp(0.0, 1.0);
+        let width = (points[0][2] + (points[1][2] - points[0][2]) * t) * width_scale;
+        let radial = (p - a - delta * t).length_squared() / (width * width);
+        density.max(smooth((1.0 - radial).clamp(0.0, 1.0)))
+    })
+}
+
+/// Stable birth-space wisps and open dust clefts. Sampled once into both cached
+/// densities; these authored morphology fields are not a physical gas model.
+fn gas_density(p: Vec2) -> f32 {
+    let warp = Vec2::new(
+        noise(0x7665_696c, p / 19.0) - 0.5,
+        noise(0x6269_6c6c, p / 17.0) - 0.5,
+    ) * 5.0;
+    let q = p + warp;
+    let envelope = strand(q, &NEBULA_SPINE, 1.0)
+        .max(strand(q, &NEBULA_UPPER, 1.0) * 0.58)
+        .max(strand(q, &NEBULA_LOWER, 1.0) * 0.39)
+        .max(strand(q, &NEBULA_WISP, 1.0) * 0.48);
+    let turbulence = noise(0x6e65_6275, q / 13.0) * 0.42
+        + noise(0x6c61_6e65, q / 5.0) * 0.36
+        + noise(0x7269_6467, q / 2.1) * 0.22;
+    // A faint, wide veil joins the unequal knots without tracing every branch
+    // as a fat tubular limb. Its disturbed edge fades through the low palette.
+    let haze_warp = Vec2::new(
+        noise(0x6861_7a65, q / 9.0) - 0.5,
+        noise(0x6661_6465, q / 8.0) - 0.5,
+    ) * 11.0;
+    let haze_radius =
+        ((q + haze_warp - Vec2::new(-4.0, -2.0)) / Vec2::new(55.0, 32.0)).length_squared();
+    let haze = smooth((1.0 - haze_radius).clamp(0.0, 1.0)) * (0.32 + turbulence * 0.68);
+    // Open routes enter from the sky and narrow toward their internal ends.
+    // Unlike rotated ellipse subtraction they do not form repeated doughnuts.
+    let cleft = strand(
+        q,
+        &[
+            [-60.0, -11.0, 4.0],
+            [-33.0, -10.0, 3.0],
+            [-11.0, -11.0, 0.8],
+        ],
+        1.0,
+    )
+    .max(strand(
+        q,
+        &[[12.0, 37.0, 4.0], [7.0, 14.0, 2.6], [1.0, 0.0, 0.6]],
+        1.0,
+    ));
+    (haze * 0.43 + envelope * (0.10 + turbulence * 0.25)) * (1.0 - cleft * 0.90)
+}
+
+fn nebula_filament(p: Vec2) -> Option<usize> {
+    let q = p + Vec2::new(
+        noise(0x7769_7370, p / 8.0) - 0.5,
+        noise(0x7468_696e, p / 7.0) - 0.5,
+    ) * 2.1;
+    let ridge = strand(q, &NEBULA_SPINE, 0.09)
+        .max(strand(q, &NEBULA_UPPER, 0.11) * 0.85)
+        .max(strand(q, &NEBULA_LOWER, 0.12) * 0.66)
+        .max(strand(q, &NEBULA_WISP, 0.16) * 0.48);
+    let cluster = noise(0x6669_6e65, p / 2.8);
+    if ridge < 0.17 || cluster < 0.22 || gas_density(p) < 0.14 {
+        return None;
+    }
+    Some(((ridge * 0.70 + cluster * 0.30 - 0.18) / 0.80 * 7.0).clamp(0.0, 7.0) as usize)
+}
+
+fn nebula_thread(p: Vec2) -> Option<usize> {
+    let q = p + Vec2::new((p.y * 0.19).sin(), (p.x * 0.16).sin()) * 0.7;
+    let ridge = strand(
+        q,
+        &[
+            [-22.0, 5.0, 0.3],
+            [-9.0, 2.0, 0.8],
+            [1.0, -2.0, 1.0],
+            [17.0, -7.0, 0.25],
+        ],
+        1.0,
+    );
+    let cluster = noise(0x7468_7264, p / 2.6);
+    (ridge > 0.2 && cluster > 0.32)
+        .then(|| ((ridge * 0.67 + cluster * 0.33 - 0.23) / 0.73 * 5.0).clamp(0.0, 5.0) as usize)
+}
+
+fn gas_pair(width: usize, height: usize, spacing: f32, threshold: f32, colors: &[u32]) -> Pair {
+    let sample = |p: Vec2| {
+        let density = gas_density(p);
+        (density > threshold).then(|| {
+            // The upper-left illuminated ridge is part of the authored gas
+            // material. It is not a foreground light or a new simulation event.
+            let ridge =
+                noise(0x6c69_7465, p / 7.0) * 0.3 + (0.5 - p.y / 80.0).clamp(0.0, 1.0) * 0.18;
+            ((density * 0.72 + ridge) * (colors.len() - 1) as f32)
+                .clamp(0.0, (colors.len() - 1) as f32) as usize
+        })
+    };
+    Pair {
+        full: template(width, height, spacing, &sample, colors),
+        low: template(width / 2, height / 2, spacing * 2.0, &sample, colors),
+    }
+}
+
+static GAS_ART: LazyLock<GasArt> = LazyLock::new(|| GasArt {
+    veil: gas_pair(
+        40,
+        24,
+        VEIL_SPACING,
+        VEIL_THRESHOLD,
+        &[
+            rgba(27, 24, 35, 43),
+            rgba(35, 28, 44, 53),
+            rgba(45, 34, 55, 64),
+            rgba(57, 41, 65, 77),
+            rgba(69, 48, 77, 88),
+            rgba(82, 55, 88, 101),
+            rgba(96, 66, 99, 113),
+            rgba(113, 79, 110, 125),
+        ],
+    ),
+    billows: gas_pair(
+        48,
+        32,
+        BILLOW_SPACING,
+        BILLOW_THRESHOLD,
+        &[
+            rgba(39, 28, 44, 60),
+            rgba(49, 34, 51, 73),
+            rgba(62, 41, 61, 86),
+            rgba(77, 50, 69, 99),
+            rgba(92, 59, 77, 112),
+            rgba(107, 72, 86, 126),
+            rgba(123, 87, 98, 138),
+            rgba(141, 103, 111, 150),
+        ],
+    ),
+});
+
+// Smooth cache-only surface field. Fine cells form contiguous material clusters,
+// rather than hard hash-block boundaries or independent point noise.
+fn art_noise(seed: u32, p: Vec2) -> f32 {
+    let q = p / 3.0;
+    let cell = q.floor().as_ivec2();
+    let f = q - q.floor();
+    let x = smooth(f.x);
+    let y = smooth(f.y);
+    let n = |dx, dy| unit(hash3(seed, cell.x + dx, cell.y + dy, 7));
+    let a = n(0, 0) + (n(1, 0) - n(0, 0)) * x;
+    let b = n(0, 1) + (n(1, 1) - n(0, 1)) * x;
+    a + (b - a) * y
+}
+
+fn spiral_arm(p: Vec2) -> Option<usize> {
+    let r = p.length();
+    if !(5.0..43.0).contains(&r) {
+        return None;
+    }
+    let field = galactic_field(p);
+    // Small correlated knots populate the disk, biased toward its broad arms.
+    // There is no continuously traced arm edge or disconnected outer arc.
+    let knot = art_noise(0x7370_6972, p * 2.1);
+    let threshold = 0.90 - field.arm * 0.065 - field.density.min(0.7) * 0.065;
+    if field.density < 0.05 || field.transmission < 0.42 || knot < threshold {
+        return None;
+    }
+    Some(
+        ((knot - threshold) * 28.0 + field.arm * 2.0 + field.density * 3.0).clamp(0.0, 6.0)
+            as usize,
+    )
+}
+
+fn galactic_bulge(p: Vec2) -> Option<usize> {
+    let q = p - Vec2::new(0.4, -0.2);
+    let r = Vec2::new(q.x * 0.9, q.y * 1.15).length();
+    let light = (-(r / 4.2).powi(2)).exp() * (0.88 + art_noise(0x636f_7265, p) * 0.12);
+    (light > 0.18).then(|| ((light - 0.18) * 8.0).min(6.0) as usize)
+}
+
+fn remnant_filament(p: Vec2) -> Option<usize> {
+    let a = p.y.atan2(p.x);
+    if a > -0.18 && a < 0.32 {
+        return None;
+    }
+    // Unequal open shock fragments and interior ejecta knots. These are
+    // original cached artwork, not an expanding gas/supernova simulation.
+    // The dark routes between branches stay open instead of outlining a badge.
+    let q = p + Vec2::new(
+        art_noise(0x7368_6f63, p * 1.3) - 0.5,
+        art_noise(0x6b6e_6f74, p * 1.1) - 0.5,
+    ) * 1.5;
+    let upper = strand(
+        q,
+        &[
+            [-27.0, -10.0, 0.25],
+            [-20.0, -21.0, 1.35],
+            [-7.0, -25.0, 0.65],
+            [-3.0, -20.0, 1.1],
+            [-1.0, -21.0, 0.2],
+        ],
+        1.0,
+    );
+    let lower = strand(
+        q,
+        &[
+            [-23.0, 6.0, 0.25],
+            [-14.0, 15.0, 1.45],
+            [-7.0, 20.0, 0.7],
+            [3.0, 18.0, 1.2],
+            [7.0, 12.0, 0.2],
+        ],
+        1.0,
+    );
+    let spur = strand(
+        q,
+        &[
+            [7.0, -3.0, 0.2],
+            [12.0, -9.0, 0.8],
+            [22.0, -5.0, 1.0],
+            [26.0, -8.0, 0.2],
+        ],
+        1.0,
+    );
+    let interior = strand(
+        q,
+        &[
+            [-8.0, 3.0, 0.4],
+            [-2.0, 9.0, 1.45],
+            [4.0, 8.0, 0.65],
+            [10.0, 15.0, 0.3],
+        ],
+        1.0,
+    )
+    .max(strand(
+        q,
+        &[[-15.0, -8.0, 0.3], [-6.0, -9.0, 0.85], [-2.0, -4.0, 0.2]],
+        1.0,
+    ));
+    let density = upper.max(lower).max(spur).max(interior);
+    let cloud = art_noise(0x656a_6563, p);
+    // Filled uneven pockets accompany selected fragments rather than tracing
+    // every strand with an identical halo. Alpha bands are still hard native
+    // cells; no radial soft material, point light or new part is introduced.
+    let pocket = |center: Vec2, radius: Vec2| {
+        let distance = ((q - center) / radius).length();
+        smooth((1.0 - distance).clamp(0.0, 1.0))
+    };
+    let shoulders = pocket(Vec2::new(-18.0, -21.0), Vec2::new(6.0, 3.8))
+        .max(pocket(Vec2::new(-12.0, 15.0), Vec2::new(7.0, 4.0)))
+        .max(pocket(Vec2::new(20.0, -6.0), Vec2::new(5.2, 3.2)))
+        .max(pocket(Vec2::new(-3.0, 8.0), Vec2::new(5.0, 4.0)))
+        .max(pocket(Vec2::new(-9.0, -8.0), Vec2::new(4.5, 2.8)));
+    let grain = art_noise(0x6475_7374, p * 2.8);
+    let gas = shoulders * (0.68 + 0.32 * cloud) * (0.72 + 0.28 * grain);
+    if (density < 0.07 || cloud < 0.18) && gas < 0.065 {
+        None
+    } else if density > 0.35 && cloud > 0.60 {
+        // Brighter fragments occur inside a few correlated knots. Most of the
+        // branch and its outskirts stay subdued instead of drawing long wires.
+        Some((3.0 + (density * 0.5 + cloud * 0.5 - 0.5) * 7.0).clamp(3.0, 7.0) as usize)
+    } else {
+        Some(((gas * 2.4 + density * 0.6 + cloud * 0.3) * 3.0).clamp(0.0, 3.0) as usize)
+    }
+}
+
+fn remnant_source(p: Vec2) -> Option<usize> {
+    let r = (p - Vec2::new(-1.2, 0.5)).length();
+    let cloud = art_noise(0x7075_6c73, p);
+    if r < 0.65 {
+        Some(5)
+    } else if r < 1.0 {
+        Some(4)
+    } else if r < 1.4 {
+        Some(3)
+    } else if r < 1.9 {
+        Some(2)
+    } else if r < 3.8 && cloud > 0.57 {
+        Some(1)
+    } else if r < 4.7 && cloud > 0.70 {
+        Some(0)
+    } else {
+        None
+    }
+}
+
+const GALAXY_DISK_SPACING: f32 = 2.5;
+struct GalacticField {
+    density: f32,
+    arm: f32,
+    transmission: f32,
+}
+fn galactic_field(p: Vec2) -> GalacticField {
+    let r = p.length();
+    let cloud = noise(0x6469_736b, p / 8.0);
+    let phase = p.y.atan2(p.x) - 1.65 * ((r + 3.0) / 7.0).ln() + (cloud - 0.5) * 0.35;
+    let cross = phase.sin() * r;
+    let width = (5.5 + cloud * 2.5) * (1.0 - (r / 45.0).min(1.0) * 0.45);
+    let arm = smooth((1.0 - cross.abs() / width).clamp(0.0, 1.0));
+    // Dust winds off-center along the stellar arms. Its strength fades into
+    // the warm bulge instead of dividing the entire galaxy into two leaves.
+    let dust = (cross + (1.2 + cloud) * phase.cos()).abs();
+    let lane = 1.0 - smooth((dust / (0.75 + cloud * 0.65)).clamp(0.0, 1.0));
+    let lane_strength =
+        smooth(((r - 6.0) / 10.0).clamp(0.0, 1.0)) * smooth(((43.0 - r) / 10.0).clamp(0.0, 1.0));
+    let transmission = 1.0 - lane * lane_strength * 0.82;
+    let boundary = 43.0 + (noise(0x6564_6765, p / 11.0) - 0.5) * 3.0;
+    let edge = smooth(((boundary - r) / 15.0).clamp(0.0, 1.0));
+    let population = 0.22 + (-(r / 25.0).powi(2)).exp() * 0.50;
+    GalacticField {
+        density: edge * population * (0.68 + cloud * 0.32) * (0.70 + arm * 0.30) * transmission,
+        arm,
+        transmission,
+    }
+}
+fn galactic_disk_density(p: Vec2) -> f32 {
+    galactic_field(p).density
+}
+fn galactic_disk() -> Pair {
+    let sample = |p: Vec2| {
+        let density = galactic_disk_density(p);
+        (density > 0.05).then(|| (density * 8.0).min(5.0) as usize)
+    };
+    let colors = [
+        rgba(62, 59, 70, 14),
+        rgba(79, 73, 85, 21),
+        rgba(98, 88, 102, 28),
+        rgba(118, 104, 119, 35),
+        rgba(140, 122, 136, 43),
+        rgba(164, 145, 152, 51),
+    ];
+    Pair {
+        full: template(36, 36, GALAXY_DISK_SPACING, &sample, &colors),
+        low: template(18, 18, GALAXY_DISK_SPACING * 2.0, &sample, &colors),
+    }
+}
+
+static ART: LazyLock<Art> = LazyLock::new(|| Art {
+    galaxy_disk: galactic_disk(),
+    galaxy_arms: Pair::new(
         96,
         96,
-        |p| {
-            let r = p.length();
-            if !(5.0..44.0).contains(&r) {
-                return None;
-            }
-            let phase = p.y.atan2(p.x) - r * 0.092;
-            let ridge = (phase * 2.0).sin().abs();
-            let noise = unit(hash3(
-                0x7370_6972,
-                p.x.floor() as i32,
-                p.y.floor() as i32,
-                0,
-            ));
-            if ridge < 0.17 && noise > 0.16 {
-                Some(if ridge < 0.075 { 2 } else { 1 })
-            } else if ridge < 0.36 && noise > 0.79 {
-                Some(0)
-            } else {
-                None
-            }
-        },
+        spiral_arm,
         &[
-            rgba(69, 61, 86, 20),
-            rgba(115, 89, 135, 34),
-            rgba(166, 138, 172, 53),
+            rgba(57, 54, 63, 18),
+            rgba(73, 66, 80, 24),
+            rgba(87, 77, 96, 29),
+            rgba(103, 89, 110, 35),
+            rgba(120, 105, 124, 41),
+            rgba(143, 126, 145, 48),
+            rgba(167, 151, 165, 56),
         ],
-    );
-    let galaxy_core = template(
+    ),
+    galaxy_core: Pair::new(
         24,
         24,
-        |p| {
-            let r = (p.x * p.x + p.y * p.y * 1.1).sqrt();
-            if r < 4.0 {
-                Some(2)
-            } else if r < 7.0 {
-                Some(1)
-            } else if r < 10.0 && ((p.x + p.y) as i32).rem_euclid(3) != 0 {
-                Some(0)
-            } else {
-                None
-            }
-        },
+        galactic_bulge,
         &[
-            rgba(130, 112, 134, 26),
-            rgba(186, 167, 153, 46),
-            rgba(231, 213, 180, 90),
+            rgba(81, 65, 88, 14),
+            rgba(113, 87, 110, 23),
+            rgba(132, 105, 122, 29),
+            rgba(153, 127, 133, 39),
+            rgba(181, 157, 148, 50),
+            rgba(202, 182, 162, 64),
+            rgba(230, 211, 180, 87),
         ],
-    );
-    let nebula = template(
+    ),
+    nebula: Pair::new(
         80,
         48,
-        |p| {
-            let curve = (p.x * 0.11).sin() * 6.0 + (p.x * 0.032).cos() * 3.0;
-            let distance = (p.y - curve).abs();
-            let noise = unit(hash3(
-                0x746f_726e,
-                p.x.floor() as i32,
-                p.y.floor() as i32,
-                7,
-            ));
-            if p.x.abs() > 36.0 || distance > 8.0 || noise < 0.30 {
-                return None;
-            }
-            if distance < 1.5 && noise > 0.45 {
-                Some(2)
-            } else if distance < 4.0 {
-                Some(1)
-            } else if noise > 0.64 {
-                Some(0)
-            } else {
-                None
-            }
-        },
+        nebula_filament,
         &[
-            rgba(43, 37, 58, 30),
-            rgba(75, 57, 93, 58),
-            rgba(127, 85, 131, 96),
+            rgba(31, 28, 40, 14),
+            rgba(39, 32, 48, 19),
+            rgba(48, 39, 57, 25),
+            rgba(58, 44, 69, 32),
+            rgba(74, 52, 83, 43),
+            rgba(90, 60, 100, 55),
+            rgba(111, 74, 117, 69),
+            rgba(132, 88, 135, 83),
         ],
-    );
-    let nebula_thread = template(
+    ),
+    nebula_thread: Pair::new(
         48,
         24,
-        |p| {
-            let distance = (p.y - (p.x * 0.15).sin() * 3.0).abs();
-            if p.x.abs() < 21.0 && distance < 2.0 && ((p.x * 3.0 + p.y) as i32).rem_euclid(4) != 0 {
-                Some(usize::from(distance < 0.75))
-            } else {
-                None
-            }
-        },
-        &[rgba(48, 60, 71, 32), rgba(88, 111, 116, 58)],
-    );
-    let nova_shell = template(
+        nebula_thread,
+        &[
+            rgba(32, 36, 39, 12),
+            rgba(41, 45, 49, 17),
+            rgba(49, 55, 56, 23),
+            rgba(62, 69, 69, 29),
+            rgba(77, 85, 82, 37),
+            rgba(96, 106, 99, 47),
+        ],
+    ),
+    nova_shell: Pair::new(
         64,
         64,
-        |p| {
-            let radius = p.length();
-            let angle = p.y.atan2(p.x);
-            let edge = 21.0 + (angle * 5.0).sin() * 2.3 + (angle * 3.0).cos();
-            let noise = unit(hash3(
-                0x656a_6563,
-                p.x.floor() as i32,
-                p.y.floor() as i32,
-                17,
-            ));
-            if (radius - edge).abs() < 1.8 && noise > 0.26 {
-                Some(1)
-            } else if (radius - edge).abs() < 4.0 && noise > 0.86 {
-                Some(0)
-            } else {
-                None
-            }
-        },
-        &[rgba(94, 69, 93, 18), rgba(161, 112, 104, 35)],
-    );
-    let nova_core = template(
+        remnant_filament,
+        &[
+            rgba(49, 36, 45, 9),
+            rgba(64, 43, 53, 13),
+            rgba(79, 51, 62, 18),
+            rgba(95, 63, 69, 23),
+            rgba(110, 75, 77, 27),
+            rgba(128, 88, 86, 31),
+            rgba(144, 103, 94, 36),
+            rgba(164, 119, 104, 42),
+        ],
+    ),
+    nova_core: Pair::new(
         12,
         12,
-        |p| {
-            if p.x.abs() + p.y.abs() < 3.0 {
-                Some(1)
-            } else if (p.x.abs() < 0.6 || p.y.abs() < 0.6) && p.length() < 5.0 {
-                Some(0)
-            } else {
-                None
-            }
-        },
-        &[rgba(162, 131, 139, 45), rgba(230, 196, 165, 95)],
-    );
-    Art {
-        galaxy_arms: Pair::new(galaxy_arms),
-        galaxy_core: Pair::new(galaxy_core),
-        nebula: Pair::new(nebula),
-        nebula_thread: Pair::new(nebula_thread),
-        nova_shell: Pair::new(nova_shell),
-        nova_core: Pair::new(nova_core),
-    }
+        remnant_source,
+        &[
+            rgba(88, 64, 73, 20),
+            rgba(117, 86, 91, 29),
+            rgba(149, 112, 111, 40),
+            rgba(178, 140, 130, 54),
+            rgba(205, 172, 151, 69),
+            rgba(230, 197, 162, 93),
+        ],
+    ),
 });
+
 fn template(
     width: usize,
     height: usize,
-    sample: impl Fn(Vec2) -> Option<usize>,
+    cell_scale: f32,
+    sample: &impl Fn(Vec2) -> Option<usize>,
     colors: &[u32],
 ) -> PixelBody {
     let rows: Vec<String> = (0..height)
@@ -338,7 +647,7 @@ fn template(
                     let p = Vec2::new(
                         x as f32 + 0.5 - width as f32 * 0.5,
                         y as f32 + 0.5 - height as f32 * 0.5,
-                    );
+                    ) * cell_scale;
                     sample(p).map_or(' ', |i| (b'a' + i as u8) as char)
                 })
                 .collect()
@@ -378,6 +687,126 @@ fn parent(m: Motif, scene: &SceneInput) -> AffineTransform {
     }
     .affine()
 }
+
+#[derive(Clone, Copy)]
+struct CellStyle {
+    time: f32,
+    phase: f32,
+    cell_scale: f32,
+    tint: [f32; 3],
+    alpha: f32,
+    curl: f32,
+}
+
+fn curled_local(local: Vec2, style: CellStyle) -> Vec2 {
+    let physical = local * style.cell_scale;
+    // A bounded, continuous field moves fine clusters by less than one full
+    // source cell. Physical coordinates keep full/reduced motion coherent.
+    let offset = Vec2::new(
+        (physical.y * 0.13 + style.time * 0.07 + style.phase).sin(),
+        (physical.x * 0.11 - style.time * 0.05 + style.phase).cos(),
+    ) * style.curl;
+    local + offset / style.cell_scale
+}
+
+fn draw_part(
+    frame: &mut FrameBuilder,
+    body: &PixelBody,
+    transform: AffineTransform,
+    style: CellStyle,
+) {
+    frame.push_cells_affine_material(
+        transform,
+        PixelMaterial::default(),
+        body.cells().map(|(local, color)| {
+            let physical = local * style.cell_scale;
+            (
+                curled_local(local, style),
+                colored(
+                    color,
+                    style.tint,
+                    0.98 + 0.02 * (style.time * 0.09 + physical.x * 0.1 + style.phase).sin(),
+                    style.alpha,
+                ),
+            )
+        }),
+    );
+}
+
+fn gas_flow(physical: Vec2, time: f32, phase: f32, depth: usize) -> Vec2 {
+    let t = time * if depth == 0 { 0.045 } else { -0.065 };
+    let curl = Vec2::new(
+        (physical.y * 0.09 + t + phase).sin() + (physical.x * 0.055 - t * 0.7 + phase).cos() * 0.28,
+        (physical.x * 0.075 - t * 0.8 + phase).cos() + (physical.y * 0.12 + t * 0.6).sin() * 0.22,
+    );
+    curl * if depth == 0 { 1.15 } else { 0.72 }
+}
+
+fn draw_gas_part(
+    frame: &mut FrameBuilder,
+    body: &PixelBody,
+    parent: AffineTransform,
+    spacing: f32,
+    style: CellStyle,
+    depth: usize,
+) {
+    let footprint = spacing * if depth == 0 { 2.7 } else { 2.4 };
+    let pose = Transform {
+        position: if depth == 0 {
+            Vec2::ZERO
+        } else {
+            Vec2::new(1.5, -1.0)
+        },
+        rotation: (style.time * 0.025 + style.phase).sin()
+            * if depth == 0 { 0.018 } else { -0.012 },
+        scale: Vec2::splat(footprint),
+    };
+    frame.push_soft_cells_affine_material(
+        parent.compose(pose.affine()),
+        PixelMaterial {
+            light_response: 0.0,
+            emission: if depth == 0 { 0.04 } else { 0.09 },
+        },
+        body.cells().map(|(local, color)| {
+            let physical = local * spacing;
+            let breathing =
+                0.88 + 0.12 * (style.time * 0.075 + physical.x * 0.038 + style.phase).sin();
+            (
+                (physical + gas_flow(physical, style.time, style.phase, depth)) / footprint,
+                colored(color, style.tint, 0.98, style.alpha * breathing),
+            )
+        }),
+    );
+}
+
+fn motif_cost(kind: MotifKind, reduced: bool) -> usize {
+    let parts = match kind {
+        MotifKind::Galaxy => [&ART.galaxy_arms, &ART.galaxy_core],
+        MotifKind::Nebula => [&ART.nebula, &ART.nebula_thread],
+        MotifKind::Supernova => [&ART.nova_shell, &ART.nova_core],
+    };
+    let count: usize = parts.iter().map(|p| p.body(reduced).occupied_count()).sum();
+    count
+        + if kind == MotifKind::Galaxy {
+            ART.galaxy_disk.body(reduced).occupied_count()
+        } else {
+            0
+        }
+        + if kind == MotifKind::Nebula {
+            GAS_ART.veil.body(reduced).occupied_count()
+                + GAS_ART.billows.body(reduced).occupied_count()
+        } else {
+            0
+        }
+}
+
+fn motif_transforms(kind: MotifKind) -> usize {
+    match kind {
+        MotifKind::Galaxy => 3,
+        MotifKind::Nebula => 4,
+        MotifKind::Supernova => 2,
+    }
+}
 fn draw_motif(
     frame: &mut FrameBuilder,
     m: Motif,
@@ -396,34 +825,33 @@ fn draw_motif(
     };
     let phase = unit(m.hash) * TAU;
     let parent = parent(m, scene);
-    let double = if reduced { 2.0 } else { 1.0 };
+    let cell_scale = if reduced { 1.0 } else { 0.5 };
     let (a, b, first, second, alpha) = match m.kind {
         MotifKind::Galaxy => (
             &ART.galaxy_arms,
             &ART.galaxy_core,
             Transform {
-                rotation: time * 0.008,
-                scale: Vec2::new(double, double * 0.70),
+                scale: Vec2::new(cell_scale, cell_scale * 0.62),
                 ..Transform::default()
             },
             Transform {
-                scale: Vec2::splat(double),
+                scale: Vec2::new(cell_scale, cell_scale * 0.62),
                 ..Transform::default()
             },
-            0.93 + 0.07 * (time * 0.16 + phase).sin(),
+            0.95 + 0.05 * (time * 0.035 + phase).sin(),
         ),
         MotifKind::Nebula => (
             &ART.nebula,
             &ART.nebula_thread,
             Transform {
                 rotation: (time * 0.04 + phase).sin() * 0.035,
-                scale: Vec2::splat(double * 1.1),
+                scale: Vec2::splat(cell_scale * 1.1),
                 ..Transform::default()
             },
             Transform {
                 position: Vec2::new(7.0, -10.0 + (time * 0.08 + phase).sin() * 1.4),
                 rotation: -0.2,
-                scale: Vec2::splat(double),
+                scale: Vec2::splat(cell_scale),
             },
             0.86 + 0.14 * (time * 0.10 + phase).sin(),
         ),
@@ -433,42 +861,94 @@ fn draw_motif(
                 &ART.nova_shell,
                 &ART.nova_core,
                 Transform {
-                    rotation: time * 0.003,
-                    scale: Vec2::splat(double * (0.70 + pulse * 0.45)),
+                    scale: Vec2::splat(cell_scale * (0.99 + pulse * 0.02)),
                     ..Transform::default()
                 },
                 Transform {
-                    scale: Vec2::splat(double * (0.75 + pulse * 0.25)),
+                    scale: Vec2::splat(cell_scale * (0.99 + pulse * 0.02)),
                     ..Transform::default()
                 },
-                0.40 + 0.60 * pulse,
+                0.93 + 0.07 * pulse,
             )
         }
     };
     let a = a.body(reduced);
     let b = b.body(reduced);
-    let required = a.occupied_count() + b.occupied_count();
+    let required = motif_cost(m.kind, reduced);
     if required > *remaining {
         return 0;
     }
     let tint = Atmosphere::at(scene.seed, m.origin / MOTIF_PARALLAX).tint;
-    frame.push_body_affine_colored(a, parent.compose(first.affine()), |p, c| {
-        colored(
-            c,
-            tint,
-            0.98 + 0.02 * (time * 0.09 + p.x * 0.1 + phase).sin(),
-            alpha,
-        )
-    });
-    frame.push_body_affine_colored(b, parent.compose(second.affine()), |_, c| {
-        colored(c, tint, 1.0, alpha)
-    });
+    let style = CellStyle {
+        time,
+        phase,
+        cell_scale,
+        tint,
+        alpha,
+        curl: match m.kind {
+            MotifKind::Nebula => 0.14,
+            MotifKind::Galaxy => 0.0,
+            MotifKind::Supernova => 0.04,
+        },
+    };
+    if m.kind == MotifKind::Galaxy {
+        let spacing = GALAXY_DISK_SPACING * if reduced { 2.0 } else { 1.0 };
+        let footprint = spacing * 2.4;
+        let transform = parent.compose(
+            Transform {
+                scale: Vec2::new(footprint, footprint * 0.62),
+                ..Transform::default()
+            }
+            .affine(),
+        );
+        frame.push_soft_cells_affine_material(
+            transform,
+            PixelMaterial::default(),
+            ART.galaxy_disk
+                .body(reduced)
+                .cells()
+                .map(|(p, c)| (p * (spacing / footprint), colored(c, tint, 0.98, alpha))),
+        );
+    }
+    if m.kind == MotifKind::Nebula {
+        let density_scale = if reduced { 2.0 } else { 1.0 };
+        draw_gas_part(
+            frame,
+            GAS_ART.veil.body(reduced),
+            parent,
+            VEIL_SPACING * density_scale,
+            style,
+            0,
+        );
+        draw_gas_part(
+            frame,
+            GAS_ART.billows.body(reduced),
+            parent,
+            BILLOW_SPACING * density_scale,
+            style,
+            1,
+        );
+    }
+    draw_part(frame, a, parent.compose(first.affine()), style);
+    draw_part(
+        frame,
+        b,
+        parent.compose(second.affine()),
+        CellStyle {
+            curl: if m.kind == MotifKind::Galaxy {
+                0.0
+            } else {
+                0.07
+            },
+            ..style
+        },
+    );
     *remaining -= required;
     required
 }
 
-/// A seeded stellar neighborhood is born once in field space. Its nodes and
-/// connecting dotted asterism never depend on camera, quality or animation.
+/// A seeded stellar neighborhood is born once in field space. Its stars never
+/// depend on camera, quality or animation; it contains no navigation strokes.
 fn stellar_system(seed: u32, grid: [i32; 2]) -> Option<(Vec2, [Vec2; 7], u32)> {
     let h = hash3(seed ^ 0x7379_7374, grid[0], grid[1], 71);
     if !h.is_multiple_of(17) {
@@ -480,12 +960,35 @@ fn stellar_system(seed: u32, grid: [i32; 2]) -> Option<(Vec2, [Vec2; 7], u32)> {
     let angle = unit(mix(h ^ 137)) * TAU;
     let axis = Vec2::new(angle.cos(), angle.sin());
     let side = Vec2::new(-axis.y, axis.x);
-    let nodes = std::array::from_fn(|i| {
-        let q = mix(h ^ (i as u32 + 1).wrapping_mul(7919));
-        let x = (i as f32 - 3.0) * 20.0 + (unit(q) - 0.5) * 10.0;
-        let y = (unit(mix(q ^ 83)) - 0.5) * 55.0;
-        axis * x + side * y
-    });
+    // Compact clusters and loose asymmetric neighborhoods share no fixed
+    // axial bins. The largest rotated corner plus star extent stays inside
+    // the existing 90-unit culling envelope. All candidates are field-local.
+    let span = 52.0 + unit(mix(h ^ 213)) * 68.0;
+    let aspect = 0.64 + unit(mix(h ^ 197)) * 0.36;
+    let mut nodes = [Vec2::ZERO; 7];
+    for i in 0..nodes.len() {
+        let mut best = Vec2::ZERO;
+        let mut best_gap = -1.0;
+        // Prefer a clear point over an overlapping speck without an unbounded
+        // rejection loop or heap. On exhaustion retain the widest sampled gap.
+        for attempt in 0_u32..16 {
+            let q = mix(h ^ (i as u32 + 1).wrapping_mul(7919) ^ attempt.wrapping_mul(0x9e37_79b9));
+            let p = axis * ((unit(q) - 0.5) * span)
+                + side * ((unit(mix(q ^ 83)) - 0.5) * span * aspect);
+            let gap = nodes[..i]
+                .iter()
+                .map(|other| p.distance_squared(*other))
+                .fold(f32::INFINITY, f32::min);
+            if gap > best_gap {
+                best = p;
+                best_gap = gap;
+            }
+            if gap >= 8.0 * 8.0 {
+                break;
+            }
+        }
+        nodes[i] = best;
+    }
     Some((origin, nodes, h))
 }
 
@@ -501,46 +1004,17 @@ fn draw_system(
     if (relative.abs() - scene.viewport * 0.5).max_element() > 90.0 {
         return 0;
     }
-    let tint = Atmosphere::at(scene.seed, origin / SYSTEM_PARALLAX).tint;
     let time = if scene.reduced_motion {
         0.0
     } else {
         scene.time
     };
     let brightness = 0.94 + 0.06 * (time * 0.13 + unit(h) * TAU).sin();
-    let mut links = [None; 96];
-    let mut count = 0;
-    for edge in 0..6 {
-        let a = nodes[edge];
-        let b = nodes[edge + 1];
-        let steps = ((b - a).length() / 3.2).ceil() as usize;
-        for step in 1..steps {
-            if (scene.reduced && step % 2 == 1) || count == links.len() {
-                continue;
-            }
-            let p = a.lerp(b, step as f32 / steps as f32);
-            links[count] = Some((
-                p / 0.55,
-                rgba(tint[0] as u8, tint[1] as u8, tint[2] as u8, 38),
-            ));
-            count += 1;
-        }
-    }
-    // Whole asterism admission keeps seven real nodes with their visible links.
-    if remaining < count + nodes.len() {
+    // A physical neighborhood is seven stars, not chart strokes in the universe.
+    if remaining < nodes.len() {
         return 0;
     }
     let parent = origin + scene.camera * (1.0 - SYSTEM_PARALLAX);
-    frame.push_cells_affine_material(
-        Transform {
-            position: parent,
-            scale: Vec2::splat(0.55),
-            ..Transform::default()
-        }
-        .affine(),
-        PixelMaterial::default(),
-        links.into_iter().flatten(),
-    );
     frame.push_cells_affine_material(
         Transform {
             position: parent,
@@ -561,7 +1035,7 @@ fn draw_system(
             )
         }),
     );
-    count + nodes.len()
+    nodes.len()
 }
 
 /// Region-owned gas quota: no physics body or combat RNG, and every emitted
@@ -693,7 +1167,9 @@ fn star_cells(
     scene: &SceneInput,
 ) -> [Option<(Vec2, u32)>; STAR_CANDIDATES as usize] {
     let corner = Vec2::new(grid[0] as f32, grid[1] as f32) * STAR_TILE;
-    let blend = FieldBlend::new(seed, corner, STAR_TILE, factor);
+    // Empty edge tiles need no biome lookup. Keep one shared field once the
+    // first seeded candidate survives the quality and viewport guards.
+    let mut blend = None;
     let time = if scene.reduced_motion {
         0.0
     } else {
@@ -717,7 +1193,9 @@ fn star_cells(
             return None;
         }
         let birth = (corner + uv * STAR_TILE) / factor;
-        let atmosphere = blend.sample(uv, birth);
+        let atmosphere = blend
+            .get_or_insert_with(|| FieldBlend::new(seed, corner, STAR_TILE, factor))
+            .sample(uv, birth);
         if unit(mix(h ^ 131)) > atmosphere.density {
             return None;
         }
@@ -769,7 +1247,7 @@ pub(super) fn render(frame: &mut FrameBuilder, input: SceneInput) -> Stats {
                 if count > 0 {
                     stats.motif_quads += count;
                     stats.motifs += 1;
-                    stats.transforms += 2;
+                    stats.transforms += motif_transforms(m.kind);
                 }
             }
         }
@@ -787,7 +1265,7 @@ pub(super) fn render(frame: &mut FrameBuilder, input: SceneInput) -> Stats {
                 let count = draw_system(frame, &scene, origin, nodes, h, star_limit - stats.stars);
                 stats.stars += count;
                 stats.systems += usize::from(count > 0);
-                stats.transforms += usize::from(count > 0) * 2;
+                stats.transforms += usize::from(count > 0);
             }
         }
     }
@@ -848,7 +1326,7 @@ mod tests {
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| (p.local, p.color, b.transforms[p.transform as usize]))
+                    .map(|p| (p.local, p.color, b.transforms[p.transform_slot()]))
             })
             .collect()
     }
@@ -857,6 +1335,146 @@ mod tests {
         let stats = render(&mut frame, i);
         (frame.finish(), stats)
     }
+    #[test]
+    fn supernova_ejecta_has_interior_knots_and_multiple_open_sky_exits() {
+        for reduced in [false, true] {
+            let body = ART.nova_shell.body(reduced);
+            let scale = if reduced { 1.0 } else { 0.5 };
+            let mut angular = [false; 48];
+            let mut interior = 0;
+            for (p, _) in body.cells() {
+                let p = p * scale;
+                interior += usize::from((4.0..14.0).contains(&p.length()));
+                if p.length() >= 14.0 {
+                    let bin = (((p.y.atan2(p.x) + TAU).rem_euclid(TAU) / TAU) * 48.0) as usize;
+                    angular[bin.min(47)] = true;
+                }
+            }
+            // Count broad empty angular runs in the actual emitted silhouette,
+            // not path constants. A single cut in a continuous rim is insufficient.
+            let mut open_runs = 0;
+            for i in 0..48 {
+                if angular[(i + 47) % 48] && !angular[i] && !angular[(i + 1) % 48] {
+                    open_runs += 1;
+                }
+            }
+            eprintln!(
+                "Actual ejecta low{reduced}: {interior}/{} interior cells, {open_runs} broad sky exits",
+                body.occupied_count()
+            );
+            assert!(
+                interior * 100 >= body.occupied_count() * 15,
+                "remnant is dominated by its perimeter rather than interior ejecta"
+            );
+            assert!(
+                open_runs >= 3,
+                "remnant still reads as a rim with a single cut"
+            );
+        }
+    }
+
+    #[test]
+    fn supernova_has_broad_faint_density_beside_sparse_bright_filaments() {
+        for reduced in [false, true] {
+            let body = ART.nova_shell.body(reduced);
+            let radius = if reduced { 1 } else { 2 };
+            let mut broad_centers = 0;
+            let mut faint = 0;
+            let mut bright = 0;
+            for (index, _, color) in body.cells_indexed() {
+                let alpha = color.to_le_bytes()[3];
+                faint += usize::from(alpha <= 23);
+                bright += usize::from(alpha >= 31);
+                let x = index % body.width;
+                let y = index / body.width;
+                if x < radius || y < radius {
+                    continue;
+                }
+                // Actual occupied low-alpha areas at least two world units
+                // across, not a string with a few dim edge cells. Both source
+                // grids must preserve broad density while leaving sky open.
+                if (y - radius..=y + radius).all(|yy| {
+                    (x - radius..=x + radius).all(|xx| {
+                        body.color_at(xx, yy)
+                            .is_some_and(|c| c.to_le_bytes()[3] <= 23)
+                    })
+                }) {
+                    broad_centers += 1;
+                }
+            }
+            eprintln!(
+                "Actual remnant density low{reduced}: {broad_centers} broad faint centers, {faint} faint / {bright} bright / {} total",
+                body.occupied_count()
+            );
+            assert!(
+                broad_centers >= if reduced { 6 } else { 24 },
+                "ejecta is bare contours without broad faint shoulders"
+            );
+            assert!(faint * 100 >= body.occupied_count() * 35);
+            assert!(bright * 100 <= body.occupied_count() * 35);
+        }
+    }
+
+    #[test]
+    #[ignore = "explicit native remnant proof writer; requires owned absolute output"]
+    fn export_actual_seeded_remnant_packets() {
+        let output = std::path::PathBuf::from(
+            std::env::var_os("REMNANT_PROOF_DIR").expect("explicit owned output"),
+        );
+        assert!(output.is_absolute());
+        std::fs::create_dir_all(&output).unwrap();
+        let seed = 871_238_449;
+        let grid = [-3, 1];
+        let m = motif(seed, grid).unwrap();
+        assert!(matches!(m.kind, MotifKind::Supernova));
+        assert_eq!(m.hash, 1_888_154_543);
+        let camera = m.origin / MOTIF_PARALLAX;
+        let corners = [
+            Vec2::new(-0.5, -0.5),
+            Vec2::new(0.5, -0.5),
+            Vec2::new(0.5, 0.5),
+            Vec2::new(-0.5, 0.5),
+        ];
+        for reduced in [false, true] {
+            for time in [0.0, 18.0] {
+                let scene = SceneInput {
+                    seed,
+                    camera,
+                    reduced,
+                    time,
+                    ..input()
+                };
+                let mut frame = FrameBuilder::new();
+                let mut quota = 8_000;
+                let quads = draw_motif(&mut frame, m, &scene, &mut quota);
+                assert!(quads > 0);
+                assert_eq!(frame.frame().pixel_count, quads);
+                let views: Vec<_> = [0.6, 1.0, 1.6].into_iter().map(|zoom| {
+                    let view = CameraView::new(camera, Vec2::new(256.0, 180.0), zoom).unwrap();
+                    let cells: Vec<_> = frame.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
+                        let t = b.transforms[p.transform_slot()];
+                        serde_json::json!({"local": p.local, "transform": {"a": t.a, "b": t.b},
+                            "corners": corners.map(|c| view.world_to_screen(t.point(Vec2::from_array(p.local) + c)).to_array()),
+                            "rgba": p.color.to_le_bytes(), "material": [t.b[2], t.b[3]]})
+                    })).collect();
+                    serde_json::json!({"zoom": zoom, "cells": cells})
+                }).collect();
+                let packet = serde_json::json!({"seed": seed, "grid": grid, "hash": m.hash,
+                    "camera": camera.to_array(), "origin": m.origin.to_array(), "time": time,
+                    "reduced": reduced, "quads": quads, "transforms": motif_transforms(m.kind),
+                    "scope": "actual native FrameBuilder/CameraView, no GPU execution", "views": views});
+                std::fs::write(
+                    output.join(format!("remnant-low-{reduced}-time-{time}.json")),
+                    serde_json::to_vec(&packet).unwrap(),
+                )
+                .unwrap();
+                eprintln!(
+                    "Actual seeded remnant low{reduced} t{time}: {quads} cells / 2 transforms at {camera:?}"
+                );
+            }
+        }
+    }
+
     #[test]
     fn cosmic_seed_revisit_is_exact_and_changes_only_presentation() {
         let a = draw(input());
@@ -1026,7 +1644,7 @@ mod tests {
         for reduced in [false, true] {
             let a = ART.nebula.body(reduced);
             let b = ART.nebula_thread.body(reduced);
-            let expected = a.occupied_count() + b.occupied_count();
+            let expected = motif_cost(MotifKind::Nebula, reduced);
             for time in [0.0, 15.0, 47.0] {
                 let scene = SceneInput {
                     seed,
@@ -1040,21 +1658,28 @@ mod tests {
                 assert_eq!(draw_motif(&mut frame, m, &scene, &mut budget), expected);
                 assert_eq!(budget, 0);
                 assert_eq!(frame.frame().pixel_count, expected);
-                assert_eq!(frame.frame().batches[0].transforms.len(), 2);
+                assert_eq!(frame.frame().batches[0].transforms.len(), 4);
                 assert!(
                     frame.frame().batches[0]
                         .transforms
                         .iter()
-                        .all(|t| t.b[2..] == [0.0, 0.0])
+                        .all(|t| t.b[2] == 0.0
+                            && ((t.b[3] == 0.0 || t.b[3] == -1.0)
+                                || (t.b[3] + 1.04).abs() < 0.00001
+                                || (t.b[3] + 1.09).abs() < 0.00001))
                 );
-                let submitted: Vec<_> = frame.frame().batches[0].pixels.iter().collect();
+                let batch = &frame.frame().batches[0];
+                let submitted: Vec<_> = batch
+                    .pixels
+                    .iter()
+                    .filter(|p| batch.transforms[p.transform_slot()].b[3] == 0.0)
+                    .collect();
                 let source: Vec<_> = a.cells().chain(b.cells()).collect();
-                assert!(
-                    submitted
-                        .iter()
-                        .zip(source)
-                        .all(|(pixel, (local, _))| pixel.local == local.to_array())
-                );
+                let cell_scale = if reduced { 1.0 } else { 0.5 };
+                assert!(submitted.iter().zip(source).all(|(pixel, (local, _))| {
+                    (Vec2::from_array(pixel.local) - local).abs().max_element() * cell_scale
+                        <= 0.141
+                }));
                 let min_alpha = submitted
                     .iter()
                     .map(|p| p.color.to_le_bytes()[3])
@@ -1065,9 +1690,9 @@ mod tests {
                     .map(|p| p.color.to_le_bytes()[3])
                     .max()
                     .unwrap();
-                assert!(min_alpha >= 21 && (69..=96).contains(&max_alpha));
+                assert!(min_alpha >= 8 && (59..=83).contains(&max_alpha));
                 eprintln!(
-                    "Actual nebula reduced={reduced} time={time}: {expected} cells/2 transforms, alpha {min_alpha}..{max_alpha}"
+                    "Actual nebula reduced={reduced} time={time}: {expected} cells/4 transforms, hard filament alpha {min_alpha}..{max_alpha}"
                 );
                 let mut rejected = FrameBuilder::new();
                 let mut short = expected - 1;
@@ -1113,7 +1738,10 @@ mod tests {
                             .batches
                             .iter()
                             .flat_map(|b| &b.transforms)
-                            .all(|t| t.b[2..] == [0.0, 0.0])
+                            .all(|t| t.b[2] == 0.0
+                                && ((t.b[3] == 0.0 || t.b[3] == -1.0)
+                                    || (t.b[3] + 1.04).abs() < 0.00001
+                                    || (t.b[3] + 1.09).abs() < 0.00001))
                     );
                 }
             }
@@ -1134,11 +1762,11 @@ mod tests {
                 let view = CameraView::new(camera, Vec2::new(1200.0, 700.0), zoom).unwrap();
                 for b in &frame.batches {
                     for pixel in &b.pixels {
-                        let t = view.relative_transform(b.transforms[pixel.transform as usize]);
+                        let t = view.relative_transform(b.transforms[pixel.transform_slot()]);
                         let p = t.point(Vec2::from_array(pixel.local));
                         assert!(p.is_finite());
                         let width = t.point(Vec2::from_array(pixel.local) + Vec2::X) - p;
-                        assert!(width.length() > 0.4 && width.length() < 4.3);
+                        assert!(width.length() > 0.0 && width.length() < 4.3);
                     }
                 }
             }
@@ -1177,7 +1805,8 @@ mod tests {
     }
 
     #[test]
-    fn stellar_neighborhoods_keep_real_nodes_and_exact_seeded_links_under_quality_and_parallax() {
+    fn stellar_neighborhoods_keep_exact_seeded_stars_without_chart_strokes_under_quality_and_parallax()
+     {
         let seed = crate::Profile::default().seed;
         let (origin, nodes, h) = (-8..=8)
             .flat_map(|y| (-8..=8).filter_map(move |x| stellar_system(seed, [x, y])))
@@ -1193,7 +1822,7 @@ mod tests {
             };
             let mut frame = FrameBuilder::new();
             let required = draw_system(&mut frame, &scene, origin, nodes, h, 200);
-            assert!((7..=103).contains(&required));
+            assert_eq!(required, 7);
             assert_eq!(frame.frame().pixel_count, required);
             assert_eq!(
                 frame
@@ -1202,7 +1831,7 @@ mod tests {
                     .iter()
                     .map(|b| b.transforms.len())
                     .sum::<usize>(),
-                2
+                1
             );
             assert!(
                 frame
@@ -1311,7 +1940,7 @@ mod tests {
                     let view = CameraView::new(camera, Vec2::new(533.0, 300.0), zoom).unwrap();
                     for b in &frame.frame().batches {
                         for p in &b.pixels {
-                            let transform = b.transforms[p.transform as usize];
+                            let transform = b.transforms[p.transform_slot()];
                             if transform.b[3] >= 0.0 {
                                 continue;
                             }
@@ -1368,3 +1997,19 @@ mod tests {
         assert_eq!(frame.frame().pixel_count, 0);
     }
 }
+
+#[cfg(test)]
+#[path = "cosmic_detail_tests.rs"]
+mod detail_tests;
+
+#[cfg(test)]
+#[path = "deep_nebula_tests.rs"]
+mod deep_nebula_tests;
+
+#[cfg(test)]
+#[path = "cosmic_background_tests.rs"]
+mod cosmic_background_tests;
+
+#[cfg(test)]
+#[path = "stellar_neighborhood_tests.rs"]
+mod stellar_neighborhood_tests;

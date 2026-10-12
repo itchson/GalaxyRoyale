@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "provided",
+    "max_colors": 64,
+    "colors": [
+      0,
+      4292012526,
+      4288601581,
+      4286694889,
+      4281570535,
+      4289446591,
+      4292529953,
+      4286944683,
+      4286813004,
+      4281234660,
+      4280970427,
+      4286480272,
+      4285624970,
+      4285820280,
+      4285291885,
+      4285232684,
+      4285160244,
+      4282201051,
+      4281482621,
+      4284762975,
+      4282004574,
+      4284106314,
+      4283578181,
+      4283248195,
+      4282459455,
+      4283646248,
+      4284301324,
+      4282789166,
+      4283182863,
+      4283244592,
+      4281933866,
+      4282130716,
+      4282327305,
+      4281732068,
+      4282189770,
+      4282518181,
+      4281533095,
+      4282846835,
+      4282254198,
+      4282584657,
+      4282123602,
+      4282257723,
+      4282062119,
+      4281927741,
+      4281403433,
+      4281996567,
+      4280816662,
+      4281076246,
+      4280812564,
+      4281538055,
+      4281143558,
+      4281208325,
+      4280552966,
+      4281142022,
+      4281076481,
+      4280486661,
+      4280813574,
+      4280813569,
+      4280747016,
+      4280747009,
+      4280157956,
+      4280157696,
+      4279960070,
+      4279894528
+    ]
+  },
+  "sprites": [
+    {
+      "name": "bastion",
+      "source": "source.png",
+      "encoding": "indices",
+      "topology": "holes-allowed"
+    }
+  ],
+  "groups": [
+    {
+      "name": "bastion-native",
+      "parts": [
+        {
+          "name": "hull",
+          "sprite": "bastion",
+          "transform": {
+            "basis_x": [
+              1,
+              0
+            ],
+            "basis_y": [
+              0,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "bastion-game",
+      "parts": [
+        {
+          "name": "hull",
+          "sprite": "bastion",
+          "transform": {
+            "basis_x": [
+              0.7,
+              0
+            ],
+            "basis_y": [
+              0,
+              0.7
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "name": "bastion-review",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "group",
+          "name": "bastion-native",
+          "duration_ms": 500
+        },
+        {
+          "kind": "group",
+          "name": "bastion-game",
+          "duration_ms": 500
+        }
+      ]
+    }
+  ],
+  "budgets": {
+    "sprite_cells": 938,
+    "group_cells": 938,
+    "group_transforms": 1,
+    "extent": 64
+  },
+  "provenance": {
+    "source_type": "original-authored40-grid-pod-rims-and-mechanical-recess-clusters-on-frozen-mask",
+    "reference_commit": "4bbcd7b98b5c242e1c6f3c614bae4bf50f6949c9",
+    "baseline_sha256_lf": "16954d598e28356fb708396f0d2a05305fb85411265140d15aaf92234e84eab0",
+    "animation_policy": "Preserve exact baseline sites/indices4,6,33; all new material indices are non-pulsing"
+  }
+}

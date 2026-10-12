@@ -1,0 +1,40 @@
+{
+  "scope": "persisted-image specialist critique; supplied Root browser execution attribution; no new browser/test/source mutation",
+  "runtime_source": "f3a723081033a2cdd9bab15e37241fe334530716",
+  "root_head_at_read": "f3a723081033a2cdd9bab15e37241fe334530716",
+  "inputs": {
+    "artifacts/meishi-redesign-20261011/pan-final-webgpu-1280.png": {
+      "sha256": "e08ca8c14a2c3ec01aa0860cfa7f832dad34804f5487561beea21c8012398a1b",
+      "bytes": 63023
+    },
+    "artifacts/meishi-collectible-20261011/pan-webgpu-1280.png": {
+      "sha256": "33f8a13791f7b9629f926eab2a62e48d3b2a5f26aad54d4f4a9771d4c8330516",
+      "bytes": 56369
+    },
+    "artifacts/concepts/meishi-collectible-20261011/pan-collectible-reference.png": {
+      "sha256": "a419b2896140a32d9683a10d55eba453aa7c78c237d1e6763d2a85f199314243",
+      "bytes": 2908077
+    },
+    "crates/game_web/src/meishi_art.rs": {
+      "sha256": "6d6cd02244d0cb2cacdc971e1061eb1840045801a7a7e9b4e400f7ff36c09fd6",
+      "bytes": 41974,
+      "lf_normalized_sha256": "6a08d819914181792fe21f7b556e460cec81c1c11699dec8ef19efe37b5431f5"
+    },
+    "crates/game_web/src/ui_scene.rs": {
+      "sha256": "5bdaa75a60fb8b43da79a6fc227317914921834a7c4e7e92b8d62b769094b929",
+      "bytes": 127560,
+      "lf_normalized_sha256": "2c4877159cceb306b76e1b8fdc85f151e865c7441de35ee1c1f815a2ed30e519"
+    },
+    "apps/game/src/meishi.ts": {
+      "sha256": "1dd92f57cd41eca137dff8a4e8c900ca0fcc702b85590f9acf0a86abe76dcc9f",
+      "bytes": 9394,
+      "lf_normalized_sha256": "ab68cbf22ef32cae26679eaa3e76a3a760967dc13975ef900be1713640fd35d9"
+    },
+    "apps/game/src/meishi.css": {
+      "sha256": "3fd379c0baa554787cd88c35bf00a128e193d9f3a0e7378fb4025ebe7fce6cf2",
+      "bytes": 4688,
+      "lf_normalized_sha256": "3fd379c0baa554787cd88c35bf00a128e193d9f3a0e7378fb4025ebe7fce6cf2"
+    }
+  },
+  "review_sha256": "ede1ac4255ddb0d177650e76683bf37fd93ffbc15783b0040379f6c7b9818c69"
+}

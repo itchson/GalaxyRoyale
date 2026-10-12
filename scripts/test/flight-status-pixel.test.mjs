@@ -58,6 +58,9 @@ function fixture({
     getAttribute() {
       return null;
     }
+    matches() {
+      return false;
+    }
     contains(other) {
       return this === other;
     }

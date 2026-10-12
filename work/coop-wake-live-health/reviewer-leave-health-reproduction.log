@@ -1,0 +1,49 @@
+{
+  "scope": "exact frozen leave handler; failed current reply double, no browser/native/RTC execution",
+  "outcome": "resolved",
+  "checks": [
+    {
+      "name": "guest-leave-restored",
+      "passed": true
+    },
+    {
+      "name": "wake-owner-removal",
+      "passed": true
+    }
+  ],
+  "calls": [
+    {
+      "role": "guest",
+      "name": "leave"
+    }
+  ],
+  "guest_after": {
+    "mode": "solo",
+    "phase": "failed",
+    "failure_code": "wake_native_frame",
+    "created": 1,
+    "closed": 1,
+    "requests": 0,
+    "timers": 0,
+    "wake": {
+      "state": "inconclusive",
+      "local_view_ended": true,
+      "reason": "wake_native_frame"
+    }
+  }
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: A current inconclusive native failure must not qualify the newly requested Wake leave/removal gate even when earlier teardown facts are true.
+    at file:///C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/wake-live-helper-independent-review/leave-health-reproduction.mjs:38:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'resolved',
+  expected: 'resolved',
+  operator: 'notStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

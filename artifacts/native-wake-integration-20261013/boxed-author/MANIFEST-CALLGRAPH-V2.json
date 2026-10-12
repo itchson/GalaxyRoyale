@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "scope": "Evidence-only guest callgraph wording clarification; no source or test changes.",
+  "candidate": "c95c008d22c9b7351463aa1575bf02347659d999",
+  "preserved_original_pins": {
+    "HANDOFF.md": "f5f6a16f371b675e9d1b111c73c59ae90a9902f64b50ad811b5cc1728de6c0f8",
+    "MANIFEST.json": "40dc134686b75ae0787d1ce8bf021c137c3e05612150b1f8118352c685cf41b7",
+    "verification.json": "8ee9a993283847630f554291fad1741e0dbc56fef265da83eccc70446726fcde"
+  },
+  "original_manifest": "MANIFEST.json",
+  "new_evidence": [
+    {
+      "path": "ADDENDUM-GUEST-CALLGRAPH.md",
+      "bytes": 1974,
+      "sha256": "f9db1067f954a39ebf31611fcea28d907c19ebe707fa8de3a4c2c2c9cca4aede"
+    }
+  ]
+}

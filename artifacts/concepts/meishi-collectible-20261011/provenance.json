@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "created": "2026-10-11",
+  "tool": "Built-in image_gen",
+  "purpose": "Art-direction reference for collectible MEISHI native UI",
+  "image": "pan-collectible-reference.png",
+  "imageSha256": "a419b2896140a32d9683a10d55eba453aa7c78c237d1e6763d2a85f199314243",
+  "prompt": "PROMPT.txt",
+  "promptSha256": "482eb11dd602063ad0c39e54bd0dac4046626e5dd5f96030c9a8c9ef7f623d3d",
+  "usedInRuntime": false,
+  "adaptation": "Reference informs authored cached native pixel bodies, palette variants and responsive layout. It is not displayed as a texture or claimed to be an exact image-to-quad conversion.",
+  "canon": "Use graphite/platinum layered chassis, PAN green enamel and eight recessed slots. Generated microtext, slogans, numeric balances, face/craft variants and Japanese writing are illustrative, not game canon. Actual runtime data and existing licensed KIKAI portrait remain authoritative."
+}

@@ -1,0 +1,47 @@
+{
+  "scope": "frozen actual wakeRound with declared native-failure reply; no listener/native/RTC execution",
+  "outcome": "resolved",
+  "checks": [
+    {
+      "name": "wake-native-owners",
+      "passed": true
+    }
+  ],
+  "calls": [
+    {
+      "role": "host",
+      "name": "wake-drive"
+    },
+    {
+      "role": "guest",
+      "name": "wake-drive"
+    }
+  ],
+  "guest_after": {
+    "mode": "solo",
+    "phase": "failed",
+    "failure_code": "wake_native_frame",
+    "wake": {
+      "captured_host": true,
+      "captured_guest": true,
+      "native_render_frames": 10,
+      "state": "inconclusive",
+      "reason": "wake_native_frame"
+    }
+  }
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: A current native-frame failure during final verification must reject the Wake phase and invoke failed cleanup before recording success.
+    at file:///C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/wake-live-helper-independent-review/final-health-reproduction.mjs:34:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'resolved',
+  expected: 'resolved',
+  operator: 'notStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

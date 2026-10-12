@@ -1,0 +1,45 @@
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (45.4516ms)
+✔ AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes (17.1658ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (12.923ms)
+✖ reservations and active guests expire separately; heartbeat does not extend pending admission (13.5028ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (22.2596ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (28.7772ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (21.1962ms)
+✔ replacement ends only the previous session and failed replacement preserves it (13.1869ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (17.5289ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (17.9286ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (34.1072ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (15.3694ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (62.9426ms)
+✔ service stop resolves existing polls and closes every test listener (23.0865ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.5925ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 14
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 417.2779
+
+✖ failing tests:
+
+test at scripts\test\coop-signalling.test.mjs:118:1
+✖ reservations and active guests expire separately; heartbeat does not extend pending admission (13.5028ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'host_timeout'
+  - 'guest_timeout'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-signalling.test.mjs:130:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'host_timeout',
+    expected: 'guest_timeout',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

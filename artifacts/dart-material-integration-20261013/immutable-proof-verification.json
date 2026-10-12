@@ -1,0 +1,42 @@
+{
+  "actual_hash_named_proofs": 5,
+  "proofs": [
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\native-target\\debug\\deps\\libengine_core-895ac3e0abdb25ad.rlib",
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\proof-binaries\\c9e6bb03abdf0c971bb852e46682a83fc88e229affb622c8919ecccc3b971d54.rlib",
+      "bytes": 3916264,
+      "sha256": "c9e6bb03abdf0c971bb852e46682a83fc88e229affb622c8919ecccc3b971d54",
+      "scope": "Immutable byte snapshot only; compiler/source/run provenance is separate."
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\native-target\\debug\\deps\\asset_native_preview-7d1e496bbc929e7c.exe",
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\proof-binaries\\a6c51d68bf76e9374cf4323f2f6da46906011e96f3db831ce513e62ca325bfc7.exe",
+      "bytes": 1090048,
+      "sha256": "a6c51d68bf76e9374cf4323f2f6da46906011e96f3db831ce513e62ca325bfc7",
+      "scope": "Immutable byte snapshot only; compiler/source/run provenance is separate."
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\native-target\\debug\\asset-native-preview.exe",
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\proof-binaries\\1fe97f32801a4ffaa4d1cdbb40d1684b29105a7e553f082b92c7f8d0dc914e4d.exe",
+      "bytes": 873472,
+      "sha256": "1fe97f32801a4ffaa4d1cdbb40d1684b29105a7e553f082b92c7f8d0dc914e4d",
+      "scope": "Immutable byte snapshot only; compiler/source/run provenance is separate."
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\cargo-game-core\\release\\deps\\libengine_core-01d892b7672387e8.rlib",
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\proof-binaries\\d81199681a1b199dd42c5984888a1f2e07d5dec987c2551c324ca692d60e787b.rlib",
+      "bytes": 656104,
+      "sha256": "d81199681a1b199dd42c5984888a1f2e07d5dec987c2551c324ca692d60e787b",
+      "scope": "Immutable byte snapshot only; compiler/source/run provenance is separate."
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\cargo-game-core\\release\\deps\\game_core-2b707a8b4a4ebce6.exe",
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\enemy-art-quality-review\\proof-binaries\\0dfe83268ed1ed63e0c16336cb25d18f266243f0f12ac3884eacfd913b862f83.exe",
+      "bytes": 11686912,
+      "sha256": "0dfe83268ed1ed63e0c16336cb25d18f266243f0f12ac3884eacfd913b862f83",
+      "scope": "Immutable byte snapshot only; compiler/source/run provenance is separate."
+    }
+  ],
+  "tool_sha256": "7c784eb4638364da6b2ca6de31eb1fd36496b753eb75d9f4dc2e1087c65aced6",
+  "scope": "Bytes verified; compiler/source/run provenance remains separately recorded."
+}

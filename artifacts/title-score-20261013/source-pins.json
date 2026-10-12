@@ -1,0 +1,84 @@
+{
+  "captured_at_utc": "2026-10-12T16:10:37.623446+00:00",
+  "scope": "offline reference analysis/design; no build/listening/production edits",
+  "production_and_review_inputs": {
+    "apps/game/src/audio.ts": {
+      "bytes": 36343,
+      "sha256": "8b64895bd84c0fffd602e4084bfc0aff23c777b82515354fd5b8aca74ebead09"
+    },
+    "apps/game/src/title-theme.ts": {
+      "bytes": 5557,
+      "sha256": "3adb1e83c2ff2f65e1f6b8adc0d9382b1c95b8f40409bc07a5dd3d7b1d91f20d"
+    },
+    "apps/game/src/audio-state.ts": {
+      "bytes": 11292,
+      "sha256": "5ba4b0617231efe87572a79a2275fe16e24be0ed1d633a296de0a4d1b9cf3e76"
+    },
+    "scripts/qa/audio-review/config.mjs": {
+      "bytes": 2336,
+      "sha256": "e90f426c31929b0cec0a72b073b171689a8d8db7c8d8a8618cfcb4467c4a438b"
+    },
+    "scripts/qa/audio-review/prepare.mjs": {
+      "bytes": 4887,
+      "sha256": "a151bcd7c52ce40a894c31c8e4ce2192d4977d0da4c9b5a1b6fa32b1e906cbfb"
+    },
+    "scripts/qa/audio-review/review.js": {
+      "bytes": 15301,
+      "sha256": "4b5c790208ee76621beb54a15a34fdef69aa551d85f8db6b6c18e85bb58fbc64"
+    },
+    "scripts/qa/audio-review/metrics.js": {
+      "bytes": 4168,
+      "sha256": "9b956833ab2a6153f71662323a45967bb6e74ec512dd17b6e3d7431cdceea3c7"
+    }
+  },
+  "analysis_outputs": {
+    "analysis-run.log": {
+      "bytes": 9544,
+      "sha256": "8a4f6426c3a09f27e1a14b2212a56837e6098cc73163a63abdbc3776ead4a137"
+    },
+    "analyze_reference.py": {
+      "bytes": 9657,
+      "sha256": "5dfe6572a0e873309acc90f9015e8d98dd186d6adf1ef4a0cf7e457aea58a5a7"
+    },
+    "low-energy-spans.json": {
+      "bytes": 238,
+      "sha256": "4fdcad4d08c135300e3ef07d1586873af852f3cf94f14f915f6d6f713fe24926"
+    },
+    "measured-analysis.json": {
+      "bytes": 207025,
+      "sha256": "d9ede471c8c607e4bd0056f18175cb16f0527870db8286a0cc66a6b656656ed1"
+    },
+    "musical-report.md": {
+      "bytes": 16649,
+      "sha256": "61a1b636057a914ffcf1ce94a8af0fcf0d0215ac73c872c661e28048eba93c4a"
+    },
+    "onsets.csv": {
+      "bytes": 676529,
+      "sha256": "1f145af0ee26296125f513b7210ff6b56bd0237a31b4eb9940ca99b38e099145"
+    },
+    "reference-analysis-mono.wav": {
+      "bytes": 1882398,
+      "sha256": "c1095d741fabb279f33fdb0216d3a10521b30b129903daa99eb15bb8bd5a3d02"
+    },
+    "reference-analysis.png": {
+      "bytes": 2407700,
+      "sha256": "ca0e9ee8bc6f3dd22696c38a1d0408f4c7be1e7ff5c9bf105895caa1e7e438fd"
+    },
+    "refine_grid.py": {
+      "bytes": 2693,
+      "sha256": "85382cd265e4c9ead4eeb85d8fcbebb9159eb7719c5fb66a591c4cdf6021e426"
+    },
+    "refined-timing.json": {
+      "bytes": 6269,
+      "sha256": "0968291256798762e2b08aeaa26d6b82686c7dc618ea0f5642a6a2eed815ef63"
+    },
+    "refinement-run.log": {
+      "bytes": 6271,
+      "sha256": "b1eb1c73525908f8261fce936f571709c3e02209ad0c6c31ffc0af069e40089e"
+    },
+    "score-plan.json": {
+      "bytes": 3629,
+      "sha256": "f622bbded412c2421e40b141b6b587f56ddbe93a015ea98c248f8f9347cb8a65"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "build": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+  "art_source": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+  "current_head_at_review": "597f0720704656187056bf57c5d5c1d6bdcfcab3",
+  "cosmic_source_exact_to_native_packets": true,
+  "source_pins": [
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "0d4ef0c612d20d888ac92a4d6dce848005d3242092ff889464f04a6817b07068",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/game_core/src/stellar_neighborhood_tests.rs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "ef04db3538a447cbbd51479ac455c8c6c217ea84f9ecd81586ffbb68f8920333",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "b17d5861933a90bef535313ebfbdd0dd097a2763622fcfaf1d8fd754b745e6d4",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/game_core/src/shooting_star.rs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "549444b3c23dc05d072083de6c23b4ff88e706307c714b95869744f4aba74b59",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "b005d9be722c94ee85826faa3bfc480c644b0b8a09c49dd0df1da2a3c9127359",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "a126e38f40f8cd750f9a92483dc244d9fbcabfcd6685ac4e2a767227f3e9f5c6",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "8e18cbb217a62659d697f1705b941e09dbfee444fcdf7a9a1e29506c8a5ea976",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/game_web/src/present.wgsl",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "767e72b385823cfb10bee5ba055812ae40fd32f20130ea32271aa7e85a212de5",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "equal_current_head": "597f0720704656187056bf57c5d5c1d6bdcfcab3"
+    }
+  ],
+  "scope": "Source/external-image check only. Images are Root-owned actual captures; no reviewer browser/native/build execution."
+}

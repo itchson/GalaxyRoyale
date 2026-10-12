@@ -89,6 +89,40 @@ test("the ninth Royale emblem appears only for authoritative tournament victory"
     assert.deepEqual(hud, before);
   }
 });
+test("competitor identity and independent sponsor appear only after discovery without mutating rewards", () => {
+  const f = fixture();
+  const hud = completedSeason(false);
+  hud.tournament_unlocked = false;
+  hud.champions.forEach((c) => {
+    c.discovered = false;
+    c.patch = false;
+    c.blueprint = false;
+  });
+  Object.assign(hud.champions[1], {
+    name: "Korr-9",
+    ship: "TATE",
+    ability: "Guard Coil",
+    identity: {
+      kind: "doro",
+      corporation: "renko",
+      sub_corporation: "pan",
+      hex_id: "2323",
+      short_designation: "ORP#2323",
+    },
+    sponsor: "pan",
+  });
+  f.paint(hud);
+  assert.doesNotMatch(
+    f.text(),
+    /ORP#2323|PAN SPONSORED|Korr-9|Guard Coil|TATE/,
+  );
+  hud.champions[1].discovered = true;
+  const before = structuredClone(hud);
+  f.paint(hud);
+  assert.match(f.text(), /ORP#2323 \/ PAN SPONSORED/);
+  assert.match(f.text(), /TATE \/ Guard Coil/);
+  assert.deepEqual(hud, before);
+});
 
 function completedSeason(won) {
   return {
@@ -142,6 +176,27 @@ function completedSeason(won) {
   };
 }
 
+test("campaign exposes only genuinely discovered champions and their catalog details", () => {
+  const f = fixture();
+  const hud = completedSeason(false);
+  hud.tournament_unlocked = false;
+  hud.champions.forEach((champion) => {
+    champion.patch = false;
+    champion.blueprint = false;
+    champion.discovered = false;
+  });
+  f.paint(hud);
+  assert.equal(f.patches().length, 0);
+  assert.doesNotMatch(f.text(), /Ship 0|Fixture ability|Champion 0/);
+  assert.equal(f.button("SET COURSE"), undefined);
+  hud.champions[0].discovered = true;
+  f.paint(hud);
+  assert.equal(f.patches().length, 1);
+  assert.match(f.text(), /Ship 0/);
+  assert.ok(f.button("SET COURSE"));
+  assert.doesNotMatch(f.text(), /Ship 1|Champion 1/);
+});
+
 test("a completed losing season offers a new season without victory or credits claims", () => {
   const f = fixture();
   const hud = completedSeason(false);
@@ -190,4 +245,19 @@ test("only an authoritative winning season exposes credits and Sovereign victory
   assert.equal(credits.disabled, false);
   credits.click();
   assert.deepEqual(f.calls, [{ name: "credits", value: undefined }]);
+});
+
+test("discovered arena copy distinguishes a found hull, an earned blueprint and an owned craft", () => {
+  const f = fixture(),
+    hud = completedSeason(false);
+  hud.champions[0].crafted = true;
+  hud.champions[1].blueprint = false;
+  hud.champions[1].discovered = true;
+  const before = structuredClone(hud);
+  f.paint(hud);
+  assert.match(f.text(), /HULL OWNED \/ SELECT IN HULL COLLECTION/);
+  assert.match(f.text(), /HULL BLUEPRINT \/ CRAFT IN HULL COLLECTION/);
+  assert.match(f.text(), /ARENA FOUND \/ DEFEAT TO EARN HULL BLUEPRINT/);
+  assert.deepEqual(hud, before);
+  assert.deepEqual(f.calls, []);
 });

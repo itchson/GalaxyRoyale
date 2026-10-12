@@ -1,0 +1,8 @@
+14 changed helper/test/fixture Git blobs + raw author files match frozen pins and independent canonical snapshots.
+30 unchanged boundary/runtime/service/test/dependency raw + canonical baseline inputs verified.
+12 original87d native-fixture/export evidence canonical pins verified; no native rerun.
+36 author evidence raw pins verified, including failed attempts and actual53selected Node cases.
+Both configured Profile bytes and declared equipment match actual frozen native87d outputs exactly; R1/E1 omission remains unchanged, not earned.
+Author logged37selected cases(18new+10existingRENKO+9provenance) +16selected consumers=53 passes; these use explicit doubles/fake staging, not native/RTC.
+Both corrected independent exact-function VM probes actually ran and retained expected assertion failures(exit1); earlier import errors preserved separately and not counted as functional reproduction.
+No independent listener/native/browser/WASM/RTC/full-suite execution; source and exact-function qualification blockers require amendment.

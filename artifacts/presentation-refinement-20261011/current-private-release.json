@@ -1,0 +1,18 @@
+{
+  "id": "appgdep_6acb0caec09081918899dbed63351c23",
+  "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
+  "title": "Galaxy Royale",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_f2cd8254c1c08191a1f638a851a26d18",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
+  "has_mcp": false,
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-10-11T04:12:50.927293+00:00",
+  "commit_sha": "3e0de708f856d430cd845358a1c190d29363009d",
+  "browserAccess": "New authorized private IAB tab failed on initial navigation with net::ERR_FAILED. Closing its generated error document was rejected by Browser Use URL policy. No further access, security changes, alternate browser or policy bypass attempted. Private-host reload/update remains pending. Sites error-only worker logs for the last10 minutes returned no events.",
+  "cacheVersion": "galaxy-c40f91a071fafe05"
+}

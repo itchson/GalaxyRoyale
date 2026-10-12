@@ -1,0 +1,21 @@
+Original commit command output (the shell subsequently printed rev-parse/status,
+so its overall exit code did not represent the failed git commit):
+
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'mitch@ITCHSON_MAIN.(none)')
+
+Actual subsequent inspection: the three preceding commits use
+Codex <codex@openai.com>, and user.name/user.email are not configured.
+The retry uses those established values for this one command only; no Git
+configuration, shared Root checkout or source files are changed by the retry.

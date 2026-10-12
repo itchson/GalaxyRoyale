@@ -10,7 +10,7 @@ fn packets(frame: &RenderFrame) -> Vec<([f32; 2], u32, GpuTransform)> {
                 (
                     pixel.local,
                     pixel.color,
-                    batch.transforms[pixel.transform as usize],
+                    batch.transforms[pixel.transform_slot()],
                 )
             })
         })

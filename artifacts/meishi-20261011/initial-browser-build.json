@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "head": "e69e01579d70ea149649e83e4a1a17b7b732b614",
+  "branch": "codex/testing",
+  "sourceHash": "5165844a7f81686606f8221820abd40cca9f53509c3674b2312796c44da4d2bc",
+  "packageHash": "9c2393b9973278fa5073b78004986138bb5a6dd3ce65ba79c7a6b0853b05fbfb",
+  "builtAt": "2026-10-11T11:55:39.528Z",
+  "pid": 40576,
+  "port": 4173,
+  "startedAt": "2026-10-11T11:56:13.807Z"
+}

@@ -1,0 +1,13 @@
+{
+  "catalog_entries": 37,
+  "standalone_card": "Close only; collections/footer excluded",
+  "status_entry": "Live RAICHO pause page",
+  "scope": "Read-only current root source inspection, no execution/browser acceptance",
+  "root_sha256": {
+    "apps/game/src/main.ts": "1cbefefc73c09604287912c0169bcc491f56ee712d89ede1af84d3d736a6defc",
+    "apps/game/src/meishi.ts": "0f55e13f0821d413bc46628e368e110c5a79e335251c3d85fb6fc38d94d17ae7",
+    "apps/game/src/meishi.css": "9eac5b5c0b14f11c9c668f375f772aa1fac0c2f2c6d7df9b9fc5626b20d0e7e8",
+    "apps/game/src/pixel-ui.ts": "13c69832d68cddaaa4484409518f927abb2f97c52c9169b7889e75ebd4d52685",
+    "apps/game/index.html": "179e7ea5ce588262c72569134a4d3957d6fa0b39fa31518cc567a937245e1a00"
+  }
+}

@@ -13,6 +13,7 @@ use web_sys::HtmlCanvasElement;
 #[wasm_bindgen]
 pub struct Galaxy {
     game: Game,
+    guest_view: Option<crate::co_op_replica_bridge::GuestView>,
     renderer: renderer::Renderer,
     frame: FrameBuilder,
     ui_frame: FrameBuilder,
@@ -25,6 +26,7 @@ pub struct Galaxy {
     last_boss_panel: Option<[f32; 4]>,
     vitals_animation: pixel_ui::VitalsAnimation,
     reduced_motion: bool,
+    reduced_cosmetics: bool,
     ui_insets: [f32; 4],
     touch_ui: bool,
     ui_joystick: Option<[f32; 2]>,
@@ -89,7 +91,100 @@ fn to_js(value: &impl Serialize) -> Result<JsValue, JsValue> {
 pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
     let mut profile = Profile::default();
     match stage {
+        "training-pan-ready"
+        | "training-renko-ready"
+        | "training-hugo-ready"
+        | "training-pan-upgraded"
+        | "training-renko-upgraded"
+        | "training-hugo-upgraded" => {
+            let corporation = stage
+                .split('-')
+                .nth(1)
+                .ok_or_else(|| js("Invalid training fixture"))?;
+            profile = game_core::identity::create_profile(
+                "talo",
+                corporation,
+                "renko",
+                "0123456789abcdef",
+            )
+            .map_err(js)?;
+            // Authored canonical save inputs, not a claim of earned combat.
+            // The upgraded case executes the actual public dock transaction.
+            profile.onboarding = Some(game_core::identity::OnboardingProgress {
+                version: 2,
+                stage: 5,
+                flags: 31,
+                asteroids_destroyed: 10,
+                materials_collected: 10,
+                legacy_complete: false,
+            });
+            let index = match corporation {
+                "pan" => 0,
+                "renko" => 1,
+                _ => 2,
+            };
+            profile.campaign.stored_materials[0] = 10;
+            profile.campaign.stored_training_materials[index] = 10;
+        }
+        "training-cargo-reload" | "training-legacy-complete" | "training-legacy-incomplete" => {
+            profile =
+                game_core::identity::create_profile("talo", "hugo", "pan", "0123456789abcdef")
+                    .map_err(js)?;
+            profile.currency = [7, 8, 9];
+            profile.campaign.stored_materials[0] = 11;
+            if stage == "training-cargo-reload" {
+                profile.campaign.cargo_materials[0] = 12;
+                profile.campaign.cargo_training_materials = [4, 3, 5];
+                profile.campaign.stored_training_materials = [2, 3, 4];
+            } else {
+                profile.schema_version = 5;
+                profile.onboarding = Some(game_core::identity::OnboardingProgress {
+                    version: 1,
+                    stage: if stage == "training-legacy-complete" {
+                        6
+                    } else {
+                        5
+                    },
+                    flags: if stage == "training-legacy-complete" {
+                        127
+                    } else {
+                        31
+                    },
+                    ..Default::default()
+                });
+            }
+        }
+        "kikai-pan" | "kikai-renko" | "kikai-hugo" => {
+            let corporation = stage.trim_start_matches("kikai-");
+            profile = game_core::identity::create_profile(
+                "talo",
+                corporation,
+                "renko",
+                "0123456789abcdef",
+            )
+            .map_err(js)?;
+        }
         "fresh" | "champion" | "tiered-cargo" | "loss-summary" => {}
+        "components-ready" | "components-crafted" | "components-upgraded" | "components-legacy" => {
+            // Supplied save fixture for contract/UI review; never awarded by gameplay.
+            profile =
+                game_core::identity::create_profile("dora", "pan", "renko", "0123456789abcdef")
+                    .map_err(js)?;
+            profile.onboarding = None;
+            profile.currency = [30; 3];
+            profile.campaign.ship_xp[0] = 200;
+            profile.campaign.stored_materials = [10; 5];
+            for state in &mut profile.campaign.abilities[..3] {
+                state.blueprint = true;
+                state.rank = 2;
+            }
+            if stage == "components-legacy" {
+                let mut value = serde_json::to_value(&profile).map_err(js)?;
+                value["schema_version"] = serde_json::json!(6);
+                value["campaign"]["components"] = serde_json::json!("ignored legacy injection");
+                profile = serde_json::from_value(value).map_err(js)?;
+            }
+        }
         "generations" => {
             // Valid saved credit with both higher-tier queues and reserved base credit.
             let mut value = serde_json::to_value(&profile).map_err(js)?;
@@ -160,6 +255,31 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
         _ => return Err(js("Unknown checkpoint contract stage")),
     }
     let mut game = Game::new(profile);
+    if matches!(stage, "components-crafted" | "components-upgraded") {
+        for id in ["pulse-conductor", "aegis-lattice", "flux-bearing"] {
+            game.craft_component(id).map_err(js)?;
+        }
+        if stage == "components-upgraded" {
+            for id in ["pulse-lens", "guard-coil", "flux-drive"] {
+                game.upgrade_ability(id).map_err(js)?;
+            }
+            let before = serde_json::to_value(game.profile()).map_err(js)?;
+            if game.craft_component("invalid").is_ok()
+                || game.upgrade_ability("pulse-lens").is_ok()
+                || serde_json::to_value(game.profile()).map_err(js)? != before
+            {
+                return Err(js("Failed component transaction changed progression"));
+            }
+        }
+    }
+    if stage.starts_with("training-") && stage.ends_with("-upgraded") {
+        let key = match stage.split('-').nth(1) {
+            Some("pan") => "flux-drive",
+            Some("renko") => "pulse-lens",
+            _ => "guard-coil",
+        };
+        game.upgrade_ability(key).map_err(js)?;
+    }
     if stage == "champion" {
         game.diagnostic("champion-0");
     }
@@ -260,12 +380,45 @@ impl Galaxy {
             touch_ui: false,
             ui_joystick: None,
             ui_fire: false,
+            guest_view: None,
+            reduced_cosmetics: false,
             accumulator: 0.0,
             pending_destination: None,
             last_revision: revision,
             paused: false,
             shake: true,
         })
+    }
+    /// Local host controller only; authenticated peer mapping lives in the shell.
+    pub fn co_op_batch(&mut self, request: &str) -> String {
+        if self.guest_view.is_some() {
+            return "{\"v\":1,\"results\":[{\"ok\":false,\"error\":\"active_session\"}]}".into();
+        }
+        let before = self.game.co_op_session();
+        let output = crate::co_op_bridge::dispatch(&mut self.game, request);
+        if before != self.game.co_op_session() {
+            self.accumulator = 0.0;
+            self.pending_destination = None;
+            self.vitals_animation.reset();
+        }
+        output
+    }
+    /// Guest packets update a validated presentation cache, never the solo Game.
+    pub fn co_op_replica(&mut self, request: &str) -> String {
+        let before = self.guest_view.is_some();
+        let result = crate::co_op_replica_bridge::dispatch_at(
+            &mut self.guest_view,
+            &self.game,
+            request,
+            now() / 1000.0,
+        );
+        if before != self.guest_view.is_some() {
+            self.accumulator = 0.0;
+            self.pending_destination = None;
+            self.vitals_animation.reset();
+            self.boss_overlay.reset();
+        }
+        result
     }
     pub fn step(&mut self, milliseconds: f64, input: JsValue) -> Result<JsValue, JsValue> {
         let delta = if milliseconds.is_finite() {
@@ -284,12 +437,18 @@ impl Galaxy {
             self.pending_destination = Some(destination);
         }
         let start = now();
-        if !self.paused {
+        if !self.paused && self.guest_view.is_none() {
             self.accumulator += delta;
             let mut steps = 0;
             while self.accumulator >= 1.0 / 60.0 && steps < 5 {
                 input.destination = self.pending_destination.take();
-                self.game.tick(&input, 1.0 / 60.0);
+                if let Some(session) = self.game.co_op_session() {
+                    self.game
+                        .tick_co_op(session)
+                        .map_err(|error| js(format!("{error:?}")))?;
+                } else {
+                    self.game.tick(&input, 1.0 / 60.0);
+                }
                 self.accumulator -= 1.0 / 60.0;
                 steps += 1;
             }
@@ -298,15 +457,85 @@ impl Galaxy {
             }
         }
         let simulation_ms = now() - start;
-        let mut hud = self.game.hud();
+        if let Some(view) = &mut self.guest_view {
+            view.replica
+                .advance_presentation(now() / 1000.0)
+                .map_err(js)?;
+            view.age = (view.age + delta).min(1.0);
+            if let Some(scene) = view.replica.scene() {
+                let alpha = (view.age / scene.blend_seconds().max(1.0 / 240.0)).clamp(0.0, 1.0);
+                if let Some(focus) = scene.focus(view.peer, alpha) {
+                    view.camera = view.camera.lerp(focus.player, 1.0 - (-12.0 * delta).exp());
+                }
+            }
+        }
+        let mut hud = self.current_hud()?;
         let vitals = self
             .vitals_animation
             .advance(&hud, delta, self.reduced_motion);
         let render_start = now();
-        let alpha = self.accumulator * 60.0;
-        self.game.render_into(alpha, &mut self.frame);
+        let alpha = self.render_alpha();
+        let corporation = self
+            .game
+            .profile()
+            .identity
+            .as_ref()
+            .map(|id| id.corporation);
+        let reduced_motion = self.reduced_motion;
+        if let Some(scene) = self
+            .guest_view
+            .as_ref()
+            .and_then(|view| view.replica.scene())
+        {
+            let camera = Vec2::from_array(hud.camera);
+            let viewport = self
+                .camera_zoom
+                .world_extent(Vec2::from_array(self.renderer.viewport()));
+            scene
+                .render_into_with_home(
+                    &mut self.frame,
+                    game_core::co_op_replica::ViewInput {
+                        camera,
+                        viewport,
+                        alpha,
+                        reduced: self.reduced_cosmetics,
+                        reduced_motion,
+                    },
+                    |frame, parent, time| {
+                        crate::dock_art::append(
+                            frame,
+                            &crate::dock_art::DockInput {
+                                parent,
+                                corporation: scene.home_corporation(),
+                                time,
+                                reduced_motion,
+                            },
+                            &mut crate::dock_art::DockBudget::default(),
+                        )
+                        .is_some()
+                    },
+                )
+                .map_err(js)?;
+        } else {
+            self.game
+                .render_into_with_home(alpha, &mut self.frame, |frame, parent, time| {
+                    crate::dock_art::append(
+                        frame,
+                        &crate::dock_art::DockInput {
+                            parent,
+                            corporation,
+                            time,
+                            reduced_motion,
+                        },
+                        &mut crate::dock_art::DockBudget::default(),
+                    )
+                    .is_some()
+                });
+        }
         self.ui_frame.clear();
-        hud.camera = self.game.render_camera(alpha);
+        if self.guest_view.is_none() {
+            hud.camera = self.game.render_camera(alpha);
+        }
         let amount = if self.shake && !self.reduced_motion {
             hud.shake
         } else {
@@ -324,7 +553,7 @@ impl Galaxy {
             render_camera[1] + (top - bottom) * 0.5,
         ];
         if self.ui_mode == 1 || self.ui_scene.groups.is_empty() {
-            let focus = self.game.render_focus(alpha);
+            let focus = self.current_focus(alpha);
             let boss_panel = if self.ui_mode == 1 {
                 let panel = self.boss_overlay.update(&OverlayInput {
                     hud: &hud,
@@ -407,22 +636,44 @@ impl Galaxy {
         );
         let frame = self.frame.frame();
         let ui_frame = self.ui_frame.frame();
+        let light_sources = if let Some(scene) = self
+            .guest_view
+            .as_ref()
+            .and_then(|view| view.replica.scene())
+        {
+            scene.light_sources(game_core::co_op_replica::ViewInput {
+                camera: Vec2::from_array(hud.camera),
+                viewport: self
+                    .camera_zoom
+                    .world_extent(Vec2::from_array(self.renderer.viewport())),
+                alpha,
+                reduced: self.reduced_cosmetics,
+                reduced_motion,
+            })
+        } else {
+            self.game.light_sources(alpha)
+        };
         self.renderer.draw(
             frame,
             ui_frame,
             render_camera,
             self.camera_zoom.value(),
-            &self.game.light_sources(alpha),
+            &light_sources,
             hud.biome.kind,
         )?;
         let render_ms = now() - render_start;
-        let profile = if self.game.profile().revision != self.last_revision {
-            self.last_revision = self.game.profile().revision;
-            Some(self.game.profile().clone())
+        let profile =
+            if self.guest_view.is_none() && self.game.profile().revision != self.last_revision {
+                self.last_revision = self.game.profile().revision;
+                Some(self.game.profile().clone())
+            } else {
+                None
+            };
+        let events = if self.guest_view.is_none() {
+            self.game.take_events()
         } else {
-            None
+            Vec::new()
         };
-        let events = self.game.take_events();
         if events.iter().any(|event| event.kind == "death") {
             self.vitals_animation.reset();
         }
@@ -436,7 +687,7 @@ impl Galaxy {
         })
     }
     pub fn hud(&self) -> Result<JsValue, JsValue> {
-        to_js(&self.game.hud())
+        to_js(&self.current_hud()?)
     }
     /// Bounded discovered-beacon snapshot, requested only by the open map.
     pub fn universe_map(&self) -> Result<JsValue, JsValue> {
@@ -445,7 +696,41 @@ impl Galaxy {
     pub fn profile(&self) -> Result<JsValue, JsValue> {
         to_js(self.game.profile())
     }
+    /// Register only an untouched anonymous flight; never replace live progress.
+    pub fn register_droid(
+        &mut self,
+        kind: &str,
+        corporation: &str,
+        sub_corporation: &str,
+        hex_id: &str,
+    ) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
+        if !self.paused || !self.game.can_register_droid() {
+            return Err(JsValue::from_str(
+                "This flight already has a license or progression.",
+            ));
+        }
+        let profile =
+            game_core::identity::create_profile(kind, corporation, sub_corporation, hex_id)
+                .map_err(js)?;
+        self.game = Game::new(profile);
+        let extent = self.world_viewport();
+        self.game.set_viewport(extent[0], extent[1]);
+        self.accumulator = 0.0;
+        self.pending_destination = None;
+        self.ui_joystick = None;
+        self.ui_fire = false;
+        self.boss_overlay.reset();
+        self.vitals_animation.reset();
+        self.last_revision = self.game.profile().revision;
+        Ok(())
+    }
+    pub fn acknowledge_license(&mut self) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
+        self.game.acknowledge_license().map_err(js)
+    }
     pub fn purchase(&mut self, id: &str) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.purchase(id).map_err(js)
     }
     /// Query the real Haven facility hit area without moving or advancing play.
@@ -488,13 +773,17 @@ impl Galaxy {
         self.paused = value;
         self.accumulator = 0.0;
         self.pending_destination = None;
-        self.game.set_paused(value);
+        if self.guest_view.is_none() {
+            self.game.set_paused(value);
+        }
     }
     /// Cancel both a not-yet-stepped click and the live Game's persistent route.
     /// Existing drift and fixed-step accumulation continue under a live menu.
     pub fn cancel_course(&mut self) {
         self.pending_destination = None;
-        self.game.cancel_course();
+        if self.guest_view.is_none() {
+            self.game.cancel_course();
+        }
     }
     pub fn set_shake(&mut self, value: bool) {
         self.shake = value;
@@ -563,39 +852,58 @@ impl Galaxy {
         });
     }
     pub fn set_cosmetic_density(&mut self, value: bool) {
+        self.reduced_cosmetics = value;
         self.game.set_cosmetic_density(value);
     }
     pub fn interact_site(&mut self) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.interact_site().map_err(js)
     }
     pub fn start_champion(&mut self, index: usize) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.start_champion(index).map_err(js)
     }
     pub fn start_tournament(&mut self) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.start_tournament().map_err(js)
     }
     pub fn craft_ship(&mut self, index: usize) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.craft_ship(index).map_err(js)
     }
     /// Craft into the shared dock inventory; this does not change any loadout.
     pub fn craft_ability(&mut self, id: &str) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.craft_ability(id).map_err(js)
     }
+    pub fn craft_component(&mut self, id: &str) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
+        self.game.craft_component(id).map_err(js)
+    }
     pub fn upgrade_ability(&mut self, id: &str) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.upgrade_ability(id).map_err(js)
     }
     /// Slot 0 offense, 1 defense, 2 passive on the selected ship. A null or
     /// undefined ID clears that slot; all ownership/gates are enforced by Game.
     pub fn equip_ability(&mut self, slot: usize, id: Option<String>) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.equip_ability(slot, id.as_deref()).map_err(js)
     }
     pub fn switch_ship(&mut self, id: u8) -> Result<(), JsValue> {
+        self.require_solo_actions()?;
         self.game.switch_ship(id).map_err(js)
     }
     pub fn acknowledge_credits(&mut self) {
+        if self.guest_view.is_some() || self.game.co_op_session().is_some() {
+            return;
+        }
         self.game.acknowledge_credits();
     }
     pub fn return_to_home(&mut self) {
+        if self.guest_view.is_some() || self.game.co_op_session().is_some() {
+            return;
+        }
         self.boss_overlay.reset();
         self.last_boss_panel = None;
         self.game.reset_to_dock();
@@ -603,10 +911,16 @@ impl Galaxy {
     pub fn set_touch_ui(&mut self, value: bool) {
         self.touch_ui = value;
     }
-    pub fn diagnostic(&mut self, command: &str) {
-        self.boss_overlay.reset();
-        self.last_boss_panel = None;
-        self.game.diagnostic(command);
+    pub fn diagnostic(&mut self, command: &str) -> bool {
+        if self.guest_view.is_some() {
+            return false;
+        }
+        let accepted = self.game.diagnostic(command);
+        if accepted {
+            self.boss_overlay.reset();
+            self.last_boss_panel = None;
+        }
+        accepted
     }
     pub fn lose_device(&self) {
         self.renderer.lose_device();
@@ -631,12 +945,47 @@ impl Galaxy {
 }
 
 impl Galaxy {
+    fn render_alpha(&self) -> f32 {
+        self.guest_view
+            .as_ref()
+            .and_then(|view| {
+                view.replica.scene().map(|scene| {
+                    (view.age / scene.blend_seconds().max(1.0 / 240.0)).clamp(0.0, 1.0)
+                })
+            })
+            .unwrap_or(self.accumulator * 60.0)
+    }
+    fn require_solo_actions(&self) -> Result<(), JsValue> {
+        if self.guest_view.is_some() || self.game.co_op_session().is_some() {
+            return Err(js("Return to your universe before changing progression."));
+        }
+        Ok(())
+    }
+    fn current_hud(&self) -> Result<Hud, JsValue> {
+        let base = self.game.hud();
+        if let Some(view) = &self.guest_view
+            && let Some(scene) = view.replica.scene()
+        {
+            return scene.guest_hud(view.peer, view.camera, base).map_err(js);
+        }
+        Ok(base)
+    }
+    fn current_focus(&self, alpha: f32) -> game_core::RenderFocus {
+        self.guest_view
+            .as_ref()
+            .and_then(|view| {
+                view.replica
+                    .scene()
+                    .and_then(|scene| scene.focus(view.peer, alpha))
+            })
+            .unwrap_or_else(|| self.game.render_focus(alpha))
+    }
     fn current_flight_status_layout(&self) -> Option<pixel_ui::FlightStatusLayout> {
         if self.ui_mode != 1 {
             return None;
         }
-        let alpha = self.accumulator * 60.0;
-        let focus = self.game.render_focus(alpha);
+        let alpha = self.render_alpha();
+        let focus = self.current_focus(alpha);
         pixel_ui::FlightStatusLayout::new(&pixel_ui::FlightStatusInput {
             viewport: self.renderer.viewport(),
             insets: self.ui_insets,
@@ -647,7 +996,7 @@ impl Galaxy {
             player: focus.player,
             player_radius: focus.player_radius,
             protected_core: focus.boss.map(|b| (b.core, b.core_radius)),
-            camera: self.game.render_camera(alpha),
+            camera: self.current_hud().ok()?.camera,
             zoom: self.camera_zoom.value(),
         })
     }

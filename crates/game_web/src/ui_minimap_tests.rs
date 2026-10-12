@@ -62,7 +62,7 @@ fn world_relative_markers_preserve_cardinals_distance_and_circular_clamp() {
 }
 
 #[test]
-fn left_above_footer_minimap_avoids_actual_header_controls_and_allows_safe_insets() {
+fn top_right_minimap_avoids_measured_left_toolbar_controls_and_safe_insets() {
     for (viewport, insets, touch, hit) in [
         ([533.0, 300.0], [0.0; 4], false, 22.0),
         ([533.0, 300.0], [0.0; 4], true, 22.0),
@@ -75,14 +75,18 @@ fn left_above_footer_minimap_avoids_actual_header_controls_and_allows_safe_inset
             let mut i = input(viewport, touch);
             i.insets = insets;
             i.zoom = zoom;
-            let scene = header_tests::scene(viewport, insets, hit);
+            let scene = header_tests::left_scene(viewport, insets, hit);
             i.header = flight_header(&scene, insets);
             let layout = FlightStatusLayout::new(&i).unwrap();
             let map = layout
                 .navigation
-                .expect("supported fixture has room above footer and controls");
-            assert_eq!([map[0], map[2], map[3]], [6.0, 44.0, 44.0]);
-            assert!(map[1] >= 0.0 && map[1] + map[3] + 2.0 <= layout.strip.unwrap()[1]);
+                .expect("declared left-toolbar extents retain minimap");
+            let footer = layout.strip.unwrap();
+            assert_eq!([map[2], map[3]], [44.0, 44.0]);
+            assert_eq!(map[0] + map[2], footer[0] + footer[2]);
+            assert!(footer[2] <= 180.0);
+            assert_eq!(map[1], 6.0);
+            assert!(map[1] + map[3] + 4.0 <= layout.strip.unwrap()[1]);
             assert!(map[0] + map[2] <= layout.viewport[0]);
             assert!(i.header.is_none_or(|r| !hud_overlap(map, r, 2.0)));
             if touch {
@@ -100,6 +104,165 @@ fn left_above_footer_minimap_avoids_actual_header_controls_and_allows_safe_inset
 }
 
 #[test]
+fn status_moves_below_top_map_and_retains_exact_inset_context_exports() {
+    for (view, insets, touch) in [
+        ([533.0, 300.0], [0.0; 4], false),
+        ([320.0, 180.0], [0.0; 4], false),
+        ([533.0, 300.0], [0.0; 4], true),
+        ([360.0, 204.0], [10.0, 22.0, 14.0, 18.0], true),
+    ] {
+        let mut i = input(view, touch);
+        i.insets = insets;
+        let l = FlightStatusLayout::new(&i).unwrap();
+        let footer = l.strip.unwrap();
+        assert!(footer[2] <= 180.0);
+        let edge = l.viewport[0] - 6.0;
+        assert_eq!(footer[0] + footer[2], edge);
+        assert_eq!(footer, [l.viewport[0] - 186.0, 54.0, 180.0, 22.0]);
+        let context = l.context.unwrap();
+        assert_eq!(
+            context,
+            [footer[0] + 4.0, footer[1] + 12.0, footer[2] - 8.0, 5.0]
+        );
+        assert_eq!(
+            FlightStatusLayout::full_bounds(Some(context), insets),
+            Some([
+                context[0] + insets[3],
+                context[1] + insets[0],
+                context[2],
+                context[3]
+            ])
+        );
+        if let Some(map) = l.navigation {
+            assert_eq!(map[0] + map[2], footer[0] + footer[2]);
+            assert!(!hud_overlap(map, footer, 2.0));
+            assert_eq!(map, [l.viewport[0] - 50.0, 6.0, 44.0, 44.0]);
+        }
+        if touch {
+            assert!(
+                touch_hit_rects(l.viewport)
+                    .iter()
+                    .all(|hit| !hud_overlap(footer, *hit, 2.0))
+            );
+        }
+    }
+}
+
+#[test]
+fn compact_corner_layout_covers_declared_physical_ratios_and_measured_hits() {
+    // Declared geometry fixtures, not BCR/browser observations. In particular,
+    //1280×720/2.4 matches the prior observed logical533⅓×300 presentation.
+    for (physical, scale, physical_insets) in [
+        ([320.0, 180.0], 1.0, [0.0; 4]),
+        ([848.0, 390.0], 1.3, [0.0; 4]),
+        ([1280.0, 720.0], 2.4, [0.0; 4]),
+        ([848.0, 390.0], 1.0, [8.0, 16.0, 6.0, 12.0]),
+    ] {
+        let viewport = physical.map(|v| v / scale);
+        let insets = physical_insets.map(|v| v / scale);
+        for touch in [false, true] {
+            let hit = (if touch { 44.0_f32 } else { 28.0_f32 }).max(14.0 * scale) / scale;
+            let mut scene = header_tests::left_scene(viewport, insets, hit);
+            // Actual fifth toolbar semantic is accepted, not silently ignored.
+            scene.groups[0].nodes.push(crate::ui_scene::UiNode {
+                kind: "fullscreen-icon".into(),
+                rect: [
+                    insets[3] + 12.0 + 4.0 * (hit + 3.0),
+                    insets[0] + 12.0,
+                    hit,
+                    hit,
+                ],
+                ..Default::default()
+            });
+            for zoom in [0.6_f32, 1.0, 1.6] {
+                let mut i = input(viewport, touch);
+                i.insets = insets;
+                i.zoom = zoom;
+                i.header = flight_header(&scene, insets);
+                let l = FlightStatusLayout::new(&i).unwrap();
+                let map = l.navigation.expect("declared corner has a clear minimap");
+                let status = l.strip.unwrap();
+                assert_eq!(map, [l.viewport[0] - 50.0, 6.0, 44.0, 44.0]);
+                assert_eq!(status[0] + status[2], l.viewport[0] - 6.0);
+                assert!(status[1] >= 54.0 && status[3] == 22.0 && status[2] <= 180.0);
+                for r in [map, status] {
+                    assert!(!hud_overlap(r, i.header.unwrap(), 2.0));
+                    if touch {
+                        assert!(
+                            touch_hit_rects(l.viewport)
+                                .iter()
+                                .all(|hit| !hud_overlap(r, *hit, 2.0))
+                        );
+                    }
+                }
+                let full = FlightStatusLayout::full_bounds(Some(map), insets).unwrap();
+                assert_eq!(full[0], map[0] + insets[3]);
+                assert_eq!(full[1], map[1] + insets[0]);
+                for reduced in [false, true] {
+                    let mut frame = FrameBuilder::new();
+                    draw_flight_status(
+                        &mut frame,
+                        &fixture(),
+                        [0.0; 2],
+                        &l,
+                        None,
+                        17.0,
+                        reduced,
+                        false,
+                    );
+                    let origin = -Vec2::from_array(l.viewport) * 0.5;
+                    let bounds: [Option<[f32; 4]>; 3] = [l.navigation, l.strip, l.vitals];
+                    for b in &frame.frame().batches {
+                        for pixel in &b.pixels {
+                            if pixel.color >> 24 == 0 {
+                                continue;
+                            }
+                            let t = b.transforms[pixel.transform_slot()];
+                            for c in [
+                                Vec2::splat(-0.5),
+                                Vec2::splat(0.5),
+                                Vec2::new(-0.5, 0.5),
+                                Vec2::new(0.5, -0.5),
+                            ] {
+                                let p = t.point(Vec2::from_array(pixel.local) + c) - origin;
+                                assert!(bounds.iter().flatten().any(|r| p.x >= r[0] - 0.001
+                                    && p.y >= r[1] - 0.001
+                                    && p.x <= r[0] + r[2] + 0.001
+                                    && p.y <= r[1] + r[3] + 0.001));
+                            }
+                        }
+                    }
+                    eprintln!(
+                        "corner physical={physical:?} scale={scale} insets={insets:?} touch={touch} zoom={zoom} reduced={reduced}: map={map:?} status={status:?} cells={}",
+                        frame.frame().pixel_count
+                    );
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn measured_right_header_moves_group_and_blocked_core_keeps_essential_text() {
+    let mut i = input([533.0, 300.0], false);
+    i.header = Some([450.0, 12.0, 70.0, 28.0]);
+    let l = FlightStatusLayout::new(&i).unwrap();
+    assert_eq!(l.navigation.unwrap(), [483.0, 44.0, 44.0, 44.0]);
+    assert_eq!(l.strip.unwrap(), [347.0, 92.0, 180.0, 22.0]);
+    let view = CameraView::new(Vec2::ZERO, Vec2::from_array(i.viewport), 1.0).unwrap();
+    i.header = None;
+    i.protected_core = Some((view.screen_to_world(Vec2::new(505.0, 28.0)), 18.0));
+    let blocked = FlightStatusLayout::new(&i).unwrap();
+    assert!(blocked.navigation.is_none());
+    assert!(blocked.stats.is_some());
+    assert!(blocked.vitals.is_some());
+    let r = blocked.strip.unwrap();
+    let near =
+        Vec2::new(505.0, 28.0).clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
+    assert!(near.distance(Vec2::new(505.0, 28.0)) > 22.0);
+}
+
+#[test]
 fn overconstrained_map_fails_closed_without_hiding_footer_or_health() {
     let mut i = input([180.0, 140.0], true);
     let layout = FlightStatusLayout::new(&i).unwrap();
@@ -108,6 +271,12 @@ fn overconstrained_map_fails_closed_without_hiding_footer_or_health() {
     i = input([320.0, 180.0], true);
     let map = FlightStatusLayout::new(&i).unwrap().navigation.unwrap();
     i.status_hits[0] = Some(map);
+    i.status_hits[1] = Some([
+        map[0],
+        touch_hit_rects(i.viewport)[1][1] - 4.0 - MINIMAP_SIZE,
+        MINIMAP_SIZE,
+        MINIMAP_SIZE,
+    ]);
     assert!(FlightStatusLayout::new(&i).unwrap().navigation.is_none());
     i.status_hits = [None; 2];
     let view = CameraView::new(Vec2::ZERO, Vec2::from_array(i.viewport), 1.0).unwrap();
@@ -116,7 +285,14 @@ fn overconstrained_map_fails_closed_without_hiding_footer_or_health() {
         2.0,
     ));
     let blocked = FlightStatusLayout::new(&i).unwrap();
-    assert!(blocked.navigation.is_none());
+    if let Some(rescue) = blocked.navigation {
+        let core = Vec2::new(map[0] + 22.0, map[1] + 22.0);
+        let nearest = core.clamp(
+            Vec2::new(rescue[0], rescue[1]),
+            Vec2::new(rescue[0] + rescue[2], rescue[1] + rescue[3]),
+        );
+        assert!(core.distance(nearest) > 6.0);
+    }
     assert!(blocked.stats.is_some());
 }
 
@@ -154,7 +330,7 @@ fn actual_minimap_quads_are_bounded_distinct_unlit_and_zoom_independent() {
         let mut signature = Vec::new();
         for batch in &frame.frame().batches {
             for pixel in &batch.pixels {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 assert_eq!(t.b[2..], [0.0; 2]);
                 signature.push((pixel.local, pixel.color, t.a, t.b));
                 if pixel.color == MINIMAP_HOME {
@@ -250,7 +426,7 @@ fn only_player_child_rotates_and_presentation_shake_does_not_change_map_bearings
             .iter()
             .flat_map(|b| {
                 b.pixels.iter().map(|p| {
-                    let t = b.transforms[p.transform as usize];
+                    let t = b.transforms[p.transform_slot()];
                     (
                         p.color,
                         t.point(Vec2::from_array(p.local)) - origin,

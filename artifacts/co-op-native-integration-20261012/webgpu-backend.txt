@@ -1,0 +1,3 @@
+> renderer
+
+WEBGPU / 533 x 300 logical pixels / eight bounded lights

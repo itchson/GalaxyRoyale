@@ -1,0 +1,107 @@
+{
+  "before": {
+    "head": "d028f0d7a3c589b5896f536f08e76aa504cb2923",
+    "branch": "codex/testing",
+    "sourceHash": "14704cda80c1efd2d4724bbb8558148d4620f0deecdb7b24a4a3fb0c06d805da"
+  },
+  "after": {
+    "head": "d028f0d7a3c589b5896f536f08e76aa504cb2923",
+    "branch": "codex/testing",
+    "sourceHash": "14704cda80c1efd2d4724bbb8558148d4620f0deecdb7b24a4a3fb0c06d805da"
+  },
+  "unchanged": true,
+  "results": [
+    {
+      "name": "shell",
+      "command": "node",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "apps/studio/test/*.test.mjs",
+        "scripts/test/*.test.mjs",
+        "scripts/qa/audio-review/*.test.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "typecheck",
+      "command": "node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "rust",
+      "command": "cargo",
+      "args": [
+        "test",
+        "--workspace"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "clippy",
+      "command": "cargo",
+      "args": [
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "fmt",
+      "command": "cargo",
+      "args": [
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "wasm-clippy-webgpu",
+      "command": "cargo",
+      "args": [
+        "clippy",
+        "--locked",
+        "-p",
+        "game_web",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--no-default-features",
+        "--features",
+        "webgpu",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "wasm-clippy-webgl",
+      "command": "cargo",
+      "args": [
+        "clippy",
+        "--locked",
+        "-p",
+        "game_web",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--no-default-features",
+        "--features",
+        "webgl",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    }
+  ]
+}

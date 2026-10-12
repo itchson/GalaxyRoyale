@@ -1,0 +1,114 @@
+{
+  "recordedAt": "2026-10-12T17:57:41.435Z",
+  "scope": "Byte-exact frozen author evidence copied from original worker worktree; independent reviewer output copied from owned work directory. Source checkout and canonical Git distinctions remain in review-pins.json.",
+  "files": [
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-mix-refinement/execution-evidence.json",
+      "destination": "artifacts/title-score-20261013/mix-v2/specialist/execution-evidence.json",
+      "bytes": 2484,
+      "sha256": "2fb875c4a3d2de0d772d40a1118caf6a0334c8f152744094fd35261abb98cd7c"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-mix-refinement/focused-tests.log",
+      "destination": "artifacts/title-score-20261013/mix-v2/specialist/focused-tests.log",
+      "bytes": 7398,
+      "sha256": "f378bc99274422a65daab5ba80f40cdd5533c582b75f388612f5dafdfa194e3b"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-mix-refinement/handoff.md",
+      "destination": "artifacts/title-score-20261013/mix-v2/specialist/handoff.md",
+      "bytes": 4505,
+      "sha256": "d15ac7ed3426f4820e963719c8ce6fc9ba84dcc01de592a8048e37e8bf93532d"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-mix-refinement/source-pins.json",
+      "destination": "artifacts/title-score-20261013/mix-v2/specialist/source-pins.json",
+      "bytes": 1025,
+      "sha256": "f24d027e5062f569f9ddedef4cf497c68f2b5e35233ac8e4f280af4b5b0b33a6"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-mix-refinement/typecheck.log",
+      "destination": "artifacts/title-score-20261013/mix-v2/specialist/typecheck.log",
+      "bytes": 64,
+      "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-instrument-width/execution-evidence.json",
+      "destination": "artifacts/title-score-20261013/width-final/specialist/execution-evidence.json",
+      "bytes": 2957,
+      "sha256": "96ef84c1016960a85016516f4903bd3b062e8e81c4172bc3b874ef2fc290ce31"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-instrument-width/focused-tests.log",
+      "destination": "artifacts/title-score-20261013/width-final/specialist/focused-tests.log",
+      "bytes": 7842,
+      "sha256": "71cab8af5b0bbdc099e075733354c18e721ccfd86d396e73cfcb5b6f81b582b1"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-instrument-width/handoff.md",
+      "destination": "artifacts/title-score-20261013/width-final/specialist/handoff.md",
+      "bytes": 4880,
+      "sha256": "0682ce4930e7c74f30b83355d369adb819e6b71040d281e6f9872b42d9ded738"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-instrument-width/source-pins.json",
+      "destination": "artifacts/title-score-20261013/width-final/specialist/source-pins.json",
+      "bytes": 1025,
+      "sha256": "5fdd7ccfbd4db155ab1a63b909e0e98e5c2f06a630db5c52b46cbe5de6bdaea8"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-instrument-width/typecheck.log",
+      "destination": "artifacts/title-score-20261013/width-final/specialist/typecheck.log",
+      "bytes": 64,
+      "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+    },
+    {
+      "source": "work/title-width-independent-review/edge-review.log",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/edge-review.log",
+      "bytes": 1098,
+      "sha256": "af05daefd3ac3524cade2c46d869348ba81e5d4876df65a0c91de1fae127fc2c"
+    },
+    {
+      "source": "work/title-width-independent-review/edge-review.test.mjs",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/edge-review.test.mjs",
+      "bytes": 3936,
+      "sha256": "28add36e1e56e7bd712142701503a82d523702f420f2fc847440215c96e0ac8b"
+    },
+    {
+      "source": "work/title-width-independent-review/focused-tests.log",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/focused-tests.log",
+      "bytes": 7849,
+      "sha256": "62078192c77ed2011d9a56f28855efa5074c40df64c5b511984b800ca6ad01be"
+    },
+    {
+      "source": "work/title-width-independent-review/pin-review.log",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/pin-review.log",
+      "bytes": 6923,
+      "sha256": "fe0643aad0d3f5409b4cbb32e073b376edfb193cdfc4492a83e9a45a9f2168b2"
+    },
+    {
+      "source": "work/title-width-independent-review/pin-review.mjs",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/pin-review.mjs",
+      "bytes": 5464,
+      "sha256": "f57c00cc13945df84b0ef981f4eeabc80c8f6c3ffc9b114a4073e6b97862ef33"
+    },
+    {
+      "source": "work/title-width-independent-review/recorded-api-harness.mjs",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/recorded-api-harness.mjs",
+      "bytes": 6851,
+      "sha256": "c78031d1ab1fbd65596aeb28b2d3f878d08dc433ba4889a53e097bfc4f21a62b"
+    },
+    {
+      "source": "work/title-width-independent-review/review-pins.json",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/review-pins.json",
+      "bytes": 15561,
+      "sha256": "6ecee90d8226d3ef027805f98c6258f3e85055b216e620f4893a2e401840d00b"
+    },
+    {
+      "source": "work/title-width-independent-review/review.md",
+      "destination": "artifacts/title-score-20261013/width-final/independent-review/review.md",
+      "bytes": 7709,
+      "sha256": "802280ad0ec8302db1f361f5fc92dbf0728a59bd803353dacca232256b8762da"
+    }
+  ]
+}

@@ -13,7 +13,7 @@ test("all eight Wiki champion identities, hulls, categories, seed grids and base
   const rust = await source("crates/game_core/src/campaign.rs");
   const rows = [
     ...rust.matchAll(
-      /Champion \{\s*name: "([^"]+)",\s*species: "([^"]+)",\s*ship: "([^"]+)",\s*ability: "([^"]+)",\s*silhouette: "([^"]+)",\s*family: (\d),\s*category: (\d),\s*grid: \[(-?\d+), (-?\d+)\],\s*color: \[(\d+), (\d+), (\d+)\],\s*health: ([\d.]+)/g,
+      /Champion \{\s*name: "([^"]+)",\s*species: "([^"]+)",\s*legacy_species: "([^"]+)",\s*identity: RosterIdentity \{\s*kind: KikaiKind::(\w+),\s*corporation: Corporation::(\w+),\s*sub_corporation: Corporation::(\w+),\s*hex_id: "([^"]+)",\s*\},\s*sponsor: Corporation::(\w+),\s*ship: "([^"]+)",\s*legacy_model: "([^"]+)",\s*ability: "([^"]+)",\s*silhouette: "([^"]+)",\s*family: (\d),\s*category: (\d),\s*grid: \[(-?\d+), (-?\d+)\],\s*color: \[(\d+), (\d+), (\d+)\],\s*health: ([\d.]+)/g,
     ),
   ];
   assert.equal(rows.length, 8);
@@ -23,14 +23,29 @@ test("all eight Wiki champion identities, hulls, categories, seed grids and base
     assert.deepEqual(entry.data, {
       index,
       species: m[2],
-      ship: m[3],
-      ability: m[4],
-      silhouette: m[5],
-      family: Number(m[6]),
-      constructionCategory: Number(m[7]),
-      grid: [Number(m[8]), Number(m[9])],
-      color: [Number(m[10]), Number(m[11]), Number(m[12])],
-      baseHull: Number(m[13]),
+      legacySpecies: m[3],
+      identity: {
+        kind: m[4].toLowerCase(),
+        corporation: m[5].toLowerCase(),
+        sub_corporation: m[6].toLowerCase(),
+        hex_id: m[7],
+        short_designation:
+          { Dora: "A", Doro: "O", Talo: "T" }[m[4]] +
+          m[5][0] +
+          m[6][0] +
+          "#" +
+          m[7].toUpperCase(),
+      },
+      sponsor: m[8].toLowerCase(),
+      ship: m[9],
+      legacyModel: m[10],
+      ability: m[11],
+      silhouette: m[12],
+      family: Number(m[13]),
+      constructionCategory: Number(m[14]),
+      grid: [Number(m[15]), Number(m[16])],
+      color: [Number(m[17]), Number(m[18]), Number(m[19])],
+      baseHull: Number(m[20]),
     });
   });
 });
@@ -96,8 +111,16 @@ test("six biome labels/spawn mixes and seed/belt parameters agree with actual Ru
     data("world-seed").hubBiomeRadius,
     Number(/HUB_RADIUS: f32 = ([\d.]+)/.exec(rust)[1]),
   );
-  assert.match(rust, /inner: site.radius \+ 240\.0/);
-  assert.match(rust, /outer = site.radius \+ 520\.0/);
+  const numeric = (name) => Number(new RegExp(`${name}: f32 = ([\\d.]+)`).exec(rust)[1]);
+  assert.deepEqual(data("sanctuaries").beltOffsets, [numeric("BELT_INNER_OFFSET"), numeric("BELT_OUTER_OFFSET")]);
+  assert.match(rust, /inner: site.radius \+ BELT_INNER_OFFSET/);
+  assert.match(rust, /outer = site.radius \+ BELT_OUTER_OFFSET/);
+  assert.equal(data("world-seed").nodeClearance, numeric("NODE_CLEARANCE"));
+  assert.equal(data("world-seed").beltBodyPadding, numeric("BELT_BODY_PADDING"));
+  for (const [kind, variant] of [["courier", "Courier"], ["bounty", "Bounty"], ["champion_arena", "ChampionArena"], ["royale_arena", "RoyaleArena"]]) {
+    const match = new RegExp(`Self::${variant} => \\(([\\d.]+), ([\\d.]+)\\)`).exec(rust);
+    assert.deepEqual(data("world-seed").nodeRadiusRanges[kind], match.slice(1).map(Number));
+  }
   assert.match(rust, /recommended_level: \[1, 3, 5, 10, 12\]/);
 });
 test("boss generations, ship-level gates, save schema and pixel packing facts remain source-backed", async () => {
@@ -120,10 +143,13 @@ test("boss generations, ship-level gates, save schema and pixel packing facts re
   assert.deepEqual(data("ship-levels").rankGates, [1, 3, 5, 8, 12]);
   assert.match(campaign, /let mut remaining = 16/);
   const lib = await source("crates/game_core/src/lib.rs");
+  const components = await source("crates/game_core/src/components.rs");
+  assert.match(lib, /schema_version: components::SCHEMA_VERSION/);
   assert.equal(
     data("cargo").schemaVersion,
-    Number(/schema_version: (\d+),/.exec(lib)[1]),
+    Number(/SCHEMA_VERSION: u32 = (\d+);/.exec(components)[1]),
   );
+  assert.equal(data("ability-components").maxCount, Number(/MAX_COUNT: u32 = (\d+);/.exec(components)[1]));
   assert.equal(
     data("sanctuaries").havenSafeRadius,
     Number(/SAFE_RADIUS: f32 = ([\d.]+)/.exec(lib)[1]),

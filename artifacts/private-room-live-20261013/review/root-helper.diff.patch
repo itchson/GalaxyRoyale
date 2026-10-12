@@ -1,0 +1,339 @@
+diff --git a/scripts/qa/co-op-transport/client.js b/scripts/qa/co-op-transport/client.js
+index 413f584..f4cc35b 100644
+--- a/scripts/qa/co-op-transport/client.js
++++ b/scripts/qa/co-op-transport/client.js
+@@ -470,10 +470,11 @@ async function initialize(
+       update();
+     },
+   });
+-  await initStep("save_baseline", async () => {
+-    await store.save(galaxy.profile());
+-    await store.flush();
+-  });
++  if (!loaded)
++    await initStep("save_baseline", async () => {
++      await store.save(galaxy.profile());
++      await store.flush();
++    });
+   await initStep("read_baseline", async () => {
+     baseline = profileSha = await digest(galaxy.profile());
+     persistedSha = await digest(await store.open());
+@@ -611,6 +612,23 @@ async function command(name, args) {
+     return observations();
+   }
+   if (!controller || !galaxy) throw new Error("not_initialized");
++  if (name === "approval-state") {
++    const current = controller.state();
++    return {
++      awaiting: current.awaiting_approval,
++      pending: current.join_requests.length,
++      created: counters.created,
++      transport_ready: current.transport_ready,
++      admitted: current.admitted,
++    };
++  }
++  if (name === "approve-next") {
++    const requests = controller.state().join_requests;
++    if (role !== "host" || requests.length !== 1)
++      throw new Error("approval_not_pending");
++    await controller.approve(requests[0].id, true);
++    return observations();
++  }
+   if (name.startsWith("fifth-")) return fifthCommand(name, args);
+   if (name === "create") {
+     await controller.create();
+diff --git a/scripts/qa/co-op-transport/server.mjs b/scripts/qa/co-op-transport/server.mjs
+index 405ac23..50b12af 100644
+--- a/scripts/qa/co-op-transport/server.mjs
++++ b/scripts/qa/co-op-transport/server.mjs
+@@ -13,6 +13,8 @@ import {
+   fileLimit,
+   ownedSources,
+   verifyOwnedSource,
++  verifyServiceInputs,
++  serviceSources,
+ } from "./prepare.mjs";
+ 
+ const checkNames = new Set([
+@@ -89,6 +91,7 @@ export function validateReport(o) {
+   return o;
+ }
+ export const wasmCheckNames = new Set([
++  "host-approval-before-rtc",
+   "two-native-games",
+   "independent-save-origins",
+   "distinct-local-profiles",
+@@ -324,10 +327,20 @@ export async function start({
+       JSON.stringify(provenance.gitInputs) !==
+         JSON.stringify(manifest.git_inputs) ||
+       JSON.stringify(provenance.buildStamp) !==
+-        JSON.stringify(manifest.build_stamp)
++        JSON.stringify(manifest.build_stamp) ||
++      provenance.compiledSourceCommit !== manifest.compiled_source_commit ||
++      JSON.stringify(provenance.compiledGitInputs) !==
++        JSON.stringify(manifest.compiled_git_inputs)
+     )
+       throw new Error("Owned prepared provenance changed.");
+   }
++  await verifyServiceInputs(manifest.service_inputs);
++  if (
++    serviceSources.some(
++      (source) => manifest.inputs?.[source] !== manifest.service_inputs[source],
++    )
++  )
++    throw new Error("Prepared service provenance is incomplete.");
+   for (const [source, hash] of Object.entries(manifest.inputs)) {
+     const sourceRoot =
+       manifest.version === 3 && ownedSources.includes(source)
+diff --git a/scripts/qa/co-op-transport/wasm-review.js b/scripts/qa/co-op-transport/wasm-review.js
+index 19884d6..d3cf225 100644
+--- a/scripts/qa/co-op-transport/wasm-review.js
++++ b/scripts/qa/co-op-transport/wasm-review.js
+@@ -59,6 +59,9 @@ const actionFailureCodes = new Set([
+   "capture_rejected",
+   "clients_not_visible",
+   "page_not_visible",
++  "approval_timeout",
++  "approval_not_pending",
++  "approval_before_rtc_failed",
+ ]);
+ let driveActive = false,
+   driveVisibilityLost = false;
+@@ -277,13 +280,38 @@ async function verify() {
+   );
+ }
+ // Transport/admission values are derived in the child from the actual controller, not inferred by the parent.
++async function approvePendingJoin(baseline) {
++  const deadline = performance.now() + 15_000;
++  let host, guest;
++  while (true) {
++    [host, guest] = await Promise.all([
++      send("host", "approval-state"),
++      send("guest", "approval-state"),
++    ]);
++    if (host.pending === 1 && guest.awaiting === true) break;
++    if (performance.now() > deadline) throw new Error("approval_timeout");
++    await new Promise((resolve) => setTimeout(resolve, 100));
++  }
++  const isolated = [host, guest].every(
++    (value, index) =>
++      value.created === baseline[index] &&
++      value.transport_ready === 0 &&
++      value.admitted === 0,
++  );
++  check("host-approval-before-rtc", isolated);
++  if (!isolated) throw new Error("approval_before_rtc_failed");
++  await send("host", "approve-next");
++}
+ async function connected(rejoin) {
+   const commitsBefore = state.guest?.commits ?? 0;
+   const grant = await send("host", "create");
+   if (typeof grant.invite !== "string") throw new Error("invite_unavailable");
+   if (firstSession) sessionDistinct = firstSession !== grant.session;
+   else firstSession = grant.session;
++  await read();
++  const peersBefore = [state.host.created, state.guest.created];
+   await send("guest", "join", { invite: grant.invite });
++  await approvePendingJoin(peersBefore);
+   await until(
+     () =>
+       state.guest.phase === "connected" &&
+diff --git a/scripts/test/coop-transport-qa.test.mjs b/scripts/test/coop-transport-qa.test.mjs
+index 9133255..ab7b938 100644
+--- a/scripts/test/coop-transport-qa.test.mjs
++++ b/scripts/test/coop-transport-qa.test.mjs
+@@ -12,6 +12,33 @@ import {
+ } from "../qa/co-op-transport/prepare.mjs";
+ import { start, validateReport } from "../qa/co-op-transport/server.mjs";
+ 
++test("QA launch refuses omitted or disagreeing service pins before creating a listener", async (t) => {
++  const stage = await fs.mkdtemp(
++    path.join(root, "work", "co-op-service-pins-"),
++  );
++  assert.ok(
++    path.resolve(stage).startsWith(path.resolve(root, "work") + path.sep),
++  );
++  assert.ok(path.basename(stage).startsWith("co-op-service-pins-"));
++  t.after(() => fs.rm(stage, { recursive: true }));
++  const manifest = await prepare(stage);
++  for (const mutate of [
++    (value) => delete value.service_inputs,
++    (value) => delete value.inputs["apps/coop/server.mjs"],
++    (value) => {
++      value.inputs["apps/coop/store.mjs"] = "0".repeat(64);
++    },
++  ]) {
++    const changed = structuredClone(manifest);
++    mutate(changed);
++    await fs.writeFile(
++      path.join(stage, "manifest.json"),
++      JSON.stringify(changed),
++    );
++    await assert.rejects(start({ stage, port: 4199 }), /service/i);
++  }
++});
++
+ test("QA prepare pins actual source and bounded HTTP serves only allowlisted modules; captures are sanitized", async (t) => {
+   const stage = await fs.mkdtemp(
+     path.join(root, "work", "co-op-transport-qa-"),
+@@ -29,7 +56,7 @@ test("QA prepare pins actual source and bounded HTTP serves only allowlisted mod
+     await fs.rm(stage, { recursive: true });
+   });
+   const manifest = await prepare(stage);
+-  assert.equal(Object.keys(manifest.files).length, 5);
++  assert.equal(Object.keys(manifest.files).length, 6);
+   const source = await fs.readFile(
+     path.join(root, "apps/game/src/coop/transport.ts"),
+   );
+@@ -52,7 +79,7 @@ test("QA prepare pins actual source and bounded HTTP serves only allowlisted mod
+     404,
+   );
+   const config = await (await fetch(tool.origin + "/qa/config")).json();
+-  assert.equal(config.modules, 3);
++  assert.equal(config.modules, 4);
+   assert.equal(config.service, tool.service);
+   assert.equal(config.page_origin, tool.origin);
+   assert.notEqual(config.page_origin, config.service);
+diff --git a/scripts/test/coop-transport-wasm-qa.test.mjs b/scripts/test/coop-transport-wasm-qa.test.mjs
+index 4027579..592a41a 100644
+--- a/scripts/test/coop-transport-wasm-qa.test.mjs
++++ b/scripts/test/coop-transport-wasm-qa.test.mjs
+@@ -195,7 +195,10 @@ test("Actual initialization pauses fresh Galaxy before guarded license registrat
+     assert.equal(context.failureCode, null);
+     assert.equal(context.appliedPause, true);
+     assert.ok(calls.indexOf("pause") > calls.indexOf("create"));
+-    assert.ok(calls.indexOf("save") > calls.indexOf("pause"));
++    assert.equal(calls.includes("save"), !existing);
++    assert.equal(calls.includes("flush"), !existing);
++    assert.equal(stages.includes("save_baseline"), !existing);
++    if (!existing) assert.ok(calls.indexOf("save") > calls.indexOf("pause"));
+     assert.equal(calls.includes("register"), !existing);
+     if (!existing)
+       assert.ok(calls.indexOf("pause") < calls.indexOf("register"));
+@@ -354,6 +357,8 @@ test("Actual rejoin gate requires a new complete native commit, not a cumulative
+   const context = vm.createContext({
+     state,
+     config: {},
++    read: async () => {},
++    approvePendingJoin: async () => {},
+     firstSession: "old",
+     sessionDistinct: null,
+     send: async (role, name) =>
+@@ -385,6 +390,98 @@ test("Actual rejoin gate requires a new complete native commit, not a cumulative
+   ]);
+ });
+ 
++test("Actual approval QA rejects pre-approval RTC or admission and measures cumulative peer counts", async () => {
++  const source = await fs.readFile(
++    new URL("../qa/co-op-transport/wasm-review.js", import.meta.url),
++    "utf8",
++  );
++  for (const violation of [null, "created", "transport_ready", "admitted"]) {
++    const calls = [],
++      checks = [];
++    const context = vm.createContext({
++      performance,
++      send: async (role, name) => {
++        calls.push([role, name]);
++        if (name === "approve-next") return {};
++        const value = {
++          pending: role === "host" ? 1 : 0,
++          awaiting: role === "guest",
++          created: role === "host" ? 3 : 2,
++          transport_ready: 0,
++          admitted: 0,
++        };
++        if (violation && role === "guest") value[violation]++;
++        return value;
++      },
++      check: (name, passed) => {
++        checks.push([name, passed]);
++        if (!passed) throw Error("declared_check_failed");
++      },
++    });
++    vm.runInContext(functionSource(source, "approvePendingJoin"), context);
++    if (violation)
++      await assert.rejects(
++        context.approvePendingJoin([3, 2]),
++        /declared_check_failed/,
++      );
++    else await context.approvePendingJoin([3, 2]);
++    assert.deepEqual(checks, [
++      ["host-approval-before-rtc", violation === null],
++    ]);
++    assert.equal(
++      calls.some(([role, name]) => role === "host" && name === "approve-next"),
++      violation === null,
++    );
++  }
++});
++
++test("Actual client approval commands use current host request id without exposing credentials", async () => {
++  const source = await fs.readFile(
++    new URL("../qa/co-op-transport/client.js", import.meta.url),
++    "utf8",
++  );
++  const calls = [],
++    current = {
++      awaiting_approval: false,
++      join_requests: [{ id: "actual-request", bearer: "never exposed" }],
++      transport_ready: 0,
++      admitted: 0,
++    };
++  const context = vm.createContext({
++    role: "host",
++    controller: {
++      state: () => current,
++      approve: async (...args) => calls.push(args),
++    },
++    galaxy: {},
++    counters: { created: 4 },
++    observations: () => ({ phase: "hosting" }),
++  });
++  vm.runInContext(functionSource(source, "command"), context);
++  const pending = await context.command("approval-state", {});
++  assert.deepEqual(JSON.parse(JSON.stringify(pending)), {
++    awaiting: false,
++    pending: 1,
++    created: 4,
++    transport_ready: 0,
++    admitted: 0,
++  });
++  await context.command("approve-next", {});
++  assert.deepEqual(calls, [["actual-request", true]]);
++  context.role = "guest";
++  await assert.rejects(
++    context.command("approve-next", {}),
++    /approval_not_pending/,
++  );
++  assert.equal(calls.length, 1);
++  context.role = "host";
++  current.join_requests.push({ id: "second" });
++  await assert.rejects(
++    context.command("approve-next", {}),
++    /approval_not_pending/,
++  );
++});
++
+ test("Actual New session orchestration uses real controller idempotent leave after prior host end", async () => {
+   const source = await fs.readFile(
+     new URL("../qa/co-op-transport/wasm-review.js", import.meta.url),
+@@ -854,7 +951,7 @@ test("Owned preparation guards exact Git adapter content, whole normal source/pa
+     dist: path.join(fixture, "dist"),
+   };
+   const accepted = await verifyOwnedSource(options);
+-  assert.equal(accepted.blobs.size, 6);
++  assert.equal(accepted.blobs.size, 7);
+   stamp.extra = "must not enter captured provenance";
+   await saveStamp();
+   await assert.rejects(verifyOwnedSource(options), /record/);
+@@ -893,7 +990,8 @@ test("WASM allowlist fixes backend paths and cannot request unrelated files", ()
+     webgl2: `/wasm/webgl2-${"b".repeat(64)}/galaxy.js`,
+   };
+   const names = preparedNames({ version: 2, mode: "wasm", builds });
+-  assert.equal(names.length, 18);
++  assert.equal(names.length, 19);
++  assert.ok(names.includes("modules/room-code.js"));
+   assert.ok(names.includes("modules/storage.js"));
+   assert.ok(!names.some((n) => n.includes("main.js")));
+   for (const buildsBad of [

@@ -1,0 +1,458 @@
+{
+  "schema": 1,
+  "runtimeCommit": "a8ca67b3f37b7f86e7c431296d2259a8abf52275",
+  "baselineCommit": "4e014bff3a84b356c5254b4291560e38accef64d",
+  "uiAuthorCommit": "4d032e99bfdf1da056ba72516667c0f7745bd246",
+  "engineAuthorCommit": "61492ce2d3e360375c2a3eb047ca330fd4c937c4",
+  "sourceHashDomain": "committed Git LF blobs",
+  "evidenceHashDomain": "raw file bytes",
+  "sources": [
+    {
+      "path": "apps/game/src/style.css",
+      "bytes": 26177,
+      "sha256": "9aa74aa16d142c55114db357058fdb66143f5fe743cc0466669e0f4b28ef09f3"
+    },
+    {
+      "path": "crates/game_web/src/sports_ui.rs",
+      "bytes": 12231,
+      "sha256": "b059a0dbea9348d41e7c61facfbd33dd66f193911da05ea8661235239db2395e"
+    },
+    {
+      "path": "crates/game_web/src/sports_ui_tests.rs",
+      "bytes": 12090,
+      "sha256": "9da0c77e4dbc60d1b9f889e67581c5efbe4171b06459bfcacb93731d59e2a419"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 117981,
+      "sha256": "1dc700dc51b7697032c37f8e6472f2db90d6fa8f6a18cab826b4c98a8323efa7"
+    },
+    {
+      "path": "crates/game_web/src/ui_button_tests.rs",
+      "bytes": 15300,
+      "sha256": "9498ed455a0329bbfc8ac2169d8919f127101b0831fa2cc071897e4ce8bb65dc"
+    },
+    {
+      "path": "crates/game_web/src/ui_settings_skin_tests.rs",
+      "bytes": 4854,
+      "sha256": "ebc90f7189ccfb8564b6e6f7df462140cb77dddec14e57b8ed54cfd2a1fe84de"
+    },
+    {
+      "path": "crates/game_web/src/ui_kikai_integration_tests.rs",
+      "bytes": 40634,
+      "sha256": "66f7ca36821d3d28140a0c32e589ab5e100faf3ef305cfcceae7eda701a2ccb3"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "bytes": 61619,
+      "sha256": "8dffb3f180e8a415b0d734045dfea00113a0e1bae255236cc0121da473121eaa"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_detail_tests.rs",
+      "bytes": 18677,
+      "sha256": "5b771909b12096d4ba118b4fdc723a97e5c8312583505dbf09a4922cc4a4096d"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "bytes": 34209,
+      "sha256": "c3e2dca428eaf67a3343dfbb20ac8989280584074e1381c204289b357ac6bdf5"
+    },
+    {
+      "path": "crates/game_core/src/regions_lod_tests.rs",
+      "bytes": 14256,
+      "sha256": "a6283d19cd6135d1fcf2e64a4492bcb3ba42d8b282524ce9f150c9ae6d406944"
+    },
+    {
+      "path": "crates/game_core/src/region_immersion_tests.rs",
+      "bytes": 9437,
+      "sha256": "229a8843b4e505fb45734d6f82ec0755c688a8a77b4c1397ea303a72a956f128"
+    }
+  ],
+  "files": [
+    {
+      "path": "artifacts/space-sports-style-20261012/.gitattributes",
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md",
+      "bytes": 5675,
+      "sha256": "e59e890203ab1f78ae24233a12c9a500fa6a87a6d3bba6f5f222a747de5e8744"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/engine/manifest.json",
+      "bytes": 21337,
+      "sha256": "22db1f153312596c03a4578c9f904e75ab2e9e9b6e5045388de6b67e9070ae2f"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/engine/native-evidence.zip",
+      "bytes": 5939860,
+      "sha256": "fd884b4a900ac2621f275fac3e9961a9853ac5958bd3dac17963df321720a576"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/engine/native-software-contact-final.png",
+      "bytes": 158187,
+      "sha256": "f91a353a4d9e74336dc9e0cdf69b147c3dddee1ce8890ae99f260d2e1e9093f4"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/galaxy-before.jpg",
+      "bytes": 23687,
+      "sha256": "a1fbae1187f265934c8e3c4fbcd802ae83191fe2c8097d494902ebe507544399"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/galaxy-webgl2-after.jpg",
+      "bytes": 22812,
+      "sha256": "99b6357a52afd47b8740762a36816533509a8a639ca431e51d7ff6358d2d2846"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/galaxy-webgl2-low-zoom06.jpg",
+      "bytes": 23074,
+      "sha256": "4b6c22c4448c9f5df4422ebabab2414990c6451eb38d6e74475a1f6517cb0d5a"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/galaxy-webgl2-low-zoom16.jpg",
+      "bytes": 19346,
+      "sha256": "5a9743ef905975840795a00ccab13ab34777e54b8ad0f484a00d76726188a7c1"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/galaxy-webgpu-after.jpg",
+      "bytes": 23280,
+      "sha256": "a7e0f442ac34733bdd10d4e7441600b81c69df319d2b66df88a518af9fe1572b"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/planet-before.jpg",
+      "bytes": 23769,
+      "sha256": "0ba36c72e59b93e94619f4b0ece0df77102b88a0758e0a05ea79a888d843ab35"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/planet-webgl2-after.jpg",
+      "bytes": 19279,
+      "sha256": "e7a197fce342afcf390d7ab3106ddb064a0025a712da857eb58ee755c1b2f61d"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/planet-webgl2-full-zoom16-offset.jpg",
+      "bytes": 22812,
+      "sha256": "613ca268b1e4f3dc1e0bf24d37f3a721615e014e897d87417ab6ecf086bb8dc6"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/planet-webgpu-after.jpg",
+      "bytes": 19711,
+      "sha256": "948811e26347db8504384a9efe39e990a5a421b01b4bf556056c4eccebe72fa6"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/raicho-before.jpg",
+      "bytes": 60375,
+      "sha256": "8b4424ce078cb1142fbeed53d911cdd696dd8fd68cac64ad5965393fc932e5c3"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/raicho-ui-candidate.jpg",
+      "bytes": 51642,
+      "sha256": "e79b994034b847b4c7d9b58bc61f5664f3544ea8beaf22813ff818cbf02896f7"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/raicho-webgpu-after.jpg",
+      "bytes": 51739,
+      "sha256": "103bdf1962e9164999bc02f14cc6cb45b326bcda557853d1dcca0eee2ec53e57"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/README.md",
+      "bytes": 6959,
+      "sha256": "f0d4b9b6a392739e8622cdc510791d8caffa3c5c26887a79595e5fbd3836e00c"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/regional-remnant-before.jpg",
+      "bytes": 20326,
+      "sha256": "ecf67e15b099986e523d959450b865a7c2d202485f1681bd5a73b9becca0fa11"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/regional-remnant-webgl2-after.jpg",
+      "bytes": 19896,
+      "sha256": "f342640386b12ea1447f2219961cba6c4b15fa632da2d7e8383c7d34ac7eaa68"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/regional-remnant-webgpu-after.jpg",
+      "bytes": 20263,
+      "sha256": "8b0ba8b81070798ab123d36b22b55cdc7da4b82022cb54619e941ea61adf08de"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/regional-remnant-webgpu-low-zoom06.jpg",
+      "bytes": 16083,
+      "sha256": "3ecd44fea6b669a80821114efbb0a1de1ec9fa48cc81e725bb8eb78aedcb6345"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/regional-remnant-webgpu-low-zoom16.jpg",
+      "bytes": 15310,
+      "sha256": "42d5ce514cb9cb837d793ec91a78729a117607e3f0d32a0fecf064663919e32d"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/remnant-before.jpg",
+      "bytes": 33109,
+      "sha256": "2125dc8035642a0397b5f73dc8fddde7e3ac7128b48d5271f2386ff5a4625325"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/remnant-webgl2-after.jpg",
+      "bytes": 30001,
+      "sha256": "5f96bd3bb309edd40872978e797d71af939f289ae95ff137b26c2cd35a770046"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/remnant-webgpu-after.jpg",
+      "bytes": 30707,
+      "sha256": "2a0933994bebf38175dbcb76564185adccaf05455a1ece02d84c59ff10cde12b"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/background-candidate/BROWSER_IMAGES.md",
+      "bytes": 3868,
+      "sha256": "16bb5760b881e7914f39af511cc15e51299fa06bfc8db65a1ad12a8012023e26"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/background-candidate/check_sources.py",
+      "bytes": 3676,
+      "sha256": "1fb03a1d3e81fb43584e27ecf8f032c3d5411f49dee900cc8ac664041f36c2b9"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/background-candidate/frozen-hashes.json",
+      "bytes": 39009,
+      "sha256": "f165224df2aa5a5aef9d3a2d6f710e00a474f302e53629c368fc0e040abf08f5"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/background-candidate/packet-check.json",
+      "bytes": 8346,
+      "sha256": "2e53d128ec6f44c492ed7686a0d4c41c8a0ab61e77d8d7b21c2caac2cfb6969c"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md",
+      "bytes": 5990,
+      "sha256": "19d2bc8a32b023e2fc3850da3ab8e6c2ba792ce78b10ff86bcac6b14ed7c24bc"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/background-candidate/source-parity-check.json",
+      "bytes": 4580,
+      "sha256": "96f64b09010efe5f4d91e14b13cf9d774fbcfdbf096ea9a6480fdfa44e93fb4e"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/background-candidate/verify.py",
+      "bytes": 996,
+      "sha256": "dfa7f1addd72892ede534b47407bd2aca25bd17eb1aa564fd66be01713e1d247"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/frozen-hashes.json",
+      "bytes": 6212,
+      "sha256": "fec44e7fd89c93a296dad9db60e8da5b861830b8178a1b64824f6c12669b89b1"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/REVIEW.md",
+      "bytes": 8821,
+      "sha256": "e998273d435598ed3ad6f2d2f487bdba1c4bf2143823d9530b7a1bc2396fd955"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/source-audit.json",
+      "bytes": 4124,
+      "sha256": "adaddb26722575e7e9e07048aa699b6794db6b58a9012b4b2c1e4ef539c66942"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/SUPPLEMENTAL_BASELINES.md",
+      "bytes": 2278,
+      "sha256": "225409720f0ed0c8e73686dcc52a6a5fa95ec312fc46b7f275c92fd4bf6ce50d"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/supplemental-hashes.json",
+      "bytes": 1178,
+      "sha256": "526a26e346a2902c64ff9576370a028010f5a1da9a1be4dbad39b537b96993e6"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/ui-candidate/BROWSER_IMAGES.md",
+      "bytes": 1799,
+      "sha256": "a3561beafc5c0e4e6e1a198689cc1fd35caa897dad52942c5a2947395a442e2e"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/ui-candidate/browser-image-hashes.json",
+      "bytes": 2374,
+      "sha256": "637843a32ef3d58b1258231fbb8b78638415ce4d928f9d326f089f8a8331e89b"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/ui-candidate/frozen-hashes.json",
+      "bytes": 5965,
+      "sha256": "4df2e611ba5d7d480348245218ec8d21faaf3aedfff8c4e7de21db0036cd8298"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/ui-candidate/REVIEW.md",
+      "bytes": 4463,
+      "sha256": "8ae697405adeaced66ea022ebacba5ed1b6bc8946e72d441dfea22064e6a5299"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/ui-candidate/source-packet-check.json",
+      "bytes": 2918,
+      "sha256": "9f50db23dc19378d84452fb5aaeea57aa862b8581429dd3429ce9b5857d1b47a"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/review/verify.py",
+      "bytes": 1711,
+      "sha256": "801a77cfe5fe9269fd8c7fad2836d9fdccafbeed2be171a621f761d7579acaa1"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/save-ui-candidate.jpg",
+      "bytes": 41407,
+      "sha256": "95f471fead41fb8d9974315c488e2dd4f3fb18263bffbd8ae817742b569746b8"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-before.jpg",
+      "bytes": 68947,
+      "sha256": "9e94ac54b69087b44c176fbd26055fa77017d8a7a3a6186a751751afb558d7ef"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-compact-before.jpg",
+      "bytes": 34394,
+      "sha256": "b4e4fa52c1269fca7e72a15094b8f384d17b11bfbc4968636fbb828970812875"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-compact-ui-candidate.jpg",
+      "bytes": 28363,
+      "sha256": "7c236b21e67c5e26172c10f3e037965be609980bf2715d10cc44b48dc4106330"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-portrait-session-ui-candidate.jpg",
+      "bytes": 32471,
+      "sha256": "3b87022f1f445bb3d5bc262a79505d867567459b1af5322af0e19360d3c78950"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-portrait-ui-candidate.jpg",
+      "bytes": 26693,
+      "sha256": "990905c4c21d00b232391c707997f3f766c973ed1a99cd0f0986066fbaf177fd"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-session-ui-candidate.jpg",
+      "bytes": 26418,
+      "sha256": "2d82115bfde95d05084f70fc8f1f1481c4b8654868d07f87c231eb193b205ca3"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-session-webgpu-after.jpg",
+      "bytes": 26470,
+      "sha256": "e697604408f83c2b81495a99743b0e58d93be2cf9ccad516dc503c99b7bb08d5"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-ui-candidate.jpg",
+      "bytes": 45854,
+      "sha256": "641233f904986309683c4deef680a20f31eb2e1a95a9db09bfb6a4933aa742f3"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-webgl2-after.jpg",
+      "bytes": 45854,
+      "sha256": "9ffb7af5186c09b79936bd8655edcd9b1288eaeedaaec1a468f5a597251f319b"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg",
+      "bytes": 45931,
+      "sha256": "f4b22a20c3d978ed50ab264e3fe5197daec701bb66d6ebdc2d129f698a7ca533"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/space-sports-build.log",
+      "bytes": 1419,
+      "sha256": "4b5c127e87c4d994dcf0a334512a30693b56192c4ec0ac5a4cbc37d51ae314a4"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/space-sports-clippy.log",
+      "bytes": 265,
+      "sha256": "601d732cecd26dd91232ba9de2ba93c87e61cf21d2fc53acdaae915a899f235e"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/space-sports-native.log",
+      "bytes": 75463,
+      "sha256": "8bceae73a672f88f9d7913ef5cef2c2990fa6420b20d0178e7cd285ebb1f252a"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/space-sports-shell.log",
+      "bytes": 46914,
+      "sha256": "7691587b1da857357d64036a0d4f0e1d137a6fb5b7874ebf2675557c1b3c0181"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/space-sports-wiki.log",
+      "bytes": 2872,
+      "sha256": "824198abd36399a413270cf01d0a8e5a37f34b103d79d53eaa9f88bdfb210785"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/tested-build.json",
+      "bytes": 317,
+      "sha256": "184c118bbac9295840212c0481880c6ec82a35d0229b77875d953b009a0cc7d2"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/clippy-final.log",
+      "bytes": 184,
+      "sha256": "a18c7eea12517606ff67c8e2ea64b397aba86c4ba1348d3ee77cd7c2b23b9e0e"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/focused-native-final.log",
+      "bytes": 1544,
+      "sha256": "a5399a59c477205eb97e6c4d1b3f02003febcdb65e2ee413df9ab4c2963ae6e8"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md",
+      "bytes": 4219,
+      "sha256": "330b4d8335c2710d69e02199a9aafa0f701db197cb87c714ca65e2e903de0669"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/manifest.json",
+      "bytes": 3512,
+      "sha256": "47fe2f37fb8b51b7f94fa1555c78e089e2515f1ba663ba6180a829ac1a479d37"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/native-export.log",
+      "bytes": 697,
+      "sha256": "a2589ecb83adb016e8985cd55a3e91171c137a937a9bdcadfa259cd28c718379"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/native-software-menu.png",
+      "bytes": 103727,
+      "sha256": "34468b18c2dc529eaa4754f95edf68c40c6423d04932a0904c6d7ab5a6c24b7e"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/packets/menu.json",
+      "bytes": 2659978,
+      "sha256": "81af32896ecb26f0045ec0ed08262a8056b9bf7ffdefec0bdd7575a206cfce9a"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/render.py",
+      "bytes": 1166,
+      "sha256": "f1c59cab2ce15a056a58b59a48bb89358c635552b0d00404bcd9f2643eb6486f"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/semantic-controls.log",
+      "bytes": 1771,
+      "sha256": "955607f08f7e92b0b7a4c6c6af2b87aebbe53824a9200af07f3075e86063aeaf"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/title-composition.log",
+      "bytes": 651,
+      "sha256": "e979a679073da3ff26af91d96798be30c9c064bbcba554892bf9ac8411fc324c"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/web-library-committed.log",
+      "bytes": 28043,
+      "sha256": "632a8079f247903bd9cbcb5b274f51ffb56da6907e9d7a871b4bd771bfe83f68"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/ui/web-library-final.log",
+      "bytes": 28154,
+      "sha256": "29f6c98f04c34db53870bebf98b28299a499e964741f6b49f99ce2cbe02fd3fc"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/webgl2-profile-dom.txt",
+      "bytes": 1065,
+      "sha256": "f3e08d54533c5e45c3b46b116e95b3c0957e6105725483666dbd8fc4bc212ac9"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/webgpu-profile-dom.txt",
+      "bytes": 1065,
+      "sha256": "c4ef81f3b71274b5dc22e785923b1039560818965a1f5f99a80ede6cd9b56b8e"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/wisp-before.jpg",
+      "bytes": 25582,
+      "sha256": "415fb274785ae0c1a0644bd76009eb80c555a64401a1de29a9bafa65cf3a2321"
+    },
+    {
+      "path": "artifacts/space-sports-style-20261012/wisp-webgl2-after.jpg",
+      "bytes": 24922,
+      "sha256": "73bc0233b8b71c70cca2fcb5e50cdcc7008195bbe4b0806bd0c7ab73373ba3cb"
+    }
+  ]
+}

@@ -1,0 +1,640 @@
+$ node --experimental-transform-types --test apps/studio/test/*.test.mjs scripts/test/*.test.mjs scripts/qa/audio-review/*.test.mjs
+✔ phase update records metadata and activity only; restart and backup retain previous complete document (13.9841ms)
+✔ queued project metadata edits use the project revision, accept one and atomically reject stale second (5.7293ms)
+✔ invalid phase patches reject full-project rewrites without revision, disk, activity or notification mutation (7.9665ms)
+✔ HTTP PATCH project accepts revision-checked metadata and preserves origin/content-type barriers (106.8668ms)
+✔ CLI project update requires explicit file and routes to PATCH without direct store access (0.4972ms)
+✔ review attachments retain independent evidence after restart without aliasing caller data (15.1566ms)
+✔ invalid review attachments reject atomically and do not poison a later valid append (13.1057ms)
+✔ serialized writes reject stale revisions without losing accepted state; restart and backup preserve documents (9.0535ms)
+✔ completion needs actual criteria and evidence, including existing artifacts (7.651ms)
+✔ artifact allowlist rejects traversal, secrets, missing files and directory requests (6.2629ms)
+✔ canonical workspace aliases allow real artifacts without widening approved roots (6.271ms)
+✔ HTTP API returns stale-edit 409 and blocks foreign origins and non-JSON mutations (102.087ms)
+✔ dependency cycles are rejected and feedback is queued until explicitly acknowledged or resolved (20.1531ms)
+✔ run records persist as append-only observations without inferring task completion or agent presence (11.5481ms)
+✔ run observations validate state, identity, timestamp, task references and artifact evidence (11.938ms)
+✔ HTTP run endpoint appends observations and rejects edit attempts (44.4437ms)
+✔ review, decision and build records retain their source and explicit check coverage after restart (32.5438ms)
+✔ reviews preserve omitted and empty task references and existing append-only history (19.8675ms)
+✔ malformed review references reject atomically without revision, activity, backup or disk mutation (47.4895ms)
+✔ review reference limit accepts forty unique existing tasks and rejects forty-one (19.9102ms)
+✔ HTTP reviews reject null task IDs from a misread creation response and accept item.id references (256.0667ms)
+✔ all eight Wiki champion identities, hulls, categories, seed grids and base hulls match the authoritative Rust table (3.2564ms)
+✔ all seventeen ability IDs, effect categories and descriptions match stable Rust registry order (0.8649ms)
+✔ six biome labels/spawn mixes and seed/belt parameters agree with actual Rust generation (1.3911ms)
+✔ boss generations, ship-level gates, save schema and pixel packing facts remain source-backed (2.5951ms)
+✔ Wiki variant cell counts match actual runtime atlas occupancy and provenance; missions keep player-facing terminology (2.2388ms)
+✔ curated reader text retains UTF-8 symbols without legacy decoding artifacts (0.7525ms)
+✔ courier guidance includes the actual Haven delivery and source-beacon claim stages (1.1474ms)
+(node:17644) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual whole-workspace render preserves a focused backward range and middle caret across refreshes (2.8901ms)
+✔ actual Wiki input edits keep Unicode UTF-16 selection and focus after shared rerender (0.8815ms)
+✔ refresh does not steal focus from another control and missing/null selection is safe (0.9202ms)
+(node:40616) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gallery serves exact committed native/browser artifacts with distinct classifications and readable provenance (48.8527ms)
+✔ gallery captions preserve observed desktop/QA scope and do not turn a native raster into GPU acceptance (0.4462ms)
+✔ artifact namespace retains exact catalog allowlists and excludes arbitrary records, hidden paths and audio (10.4471ms)
+(node:4024) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual catalog categories, references and classified media all validate and resolve (939.5819ms)
+✔ server and actual UI search cover names, source facts, categories and verification boundaries (2.5726ms)
+✔ rendering escapes every prose/attribute surface and constructs only local allowlisted link shapes (0.3792ms)
+✔ catalog validates stable ids, related links, status and bounded structured content (0.3611ms)
+✔ source/media read paths reject traversal, secrets, unlisted and wrong-type content (12.2773ms)
+✔ catalog itself and listed ancestor links fail closed rather than reading redirected content (10.916ms)
+✔ HTTP Wiki routes return actual listed bytes, filtered catalog and controlled lookup errors (116.6708ms)
+✔ the four earlier declared algorithms are unchanged across every scheduler time (463.3741ms)
+✔ current score declares three home identities, exploration, real boss inputs and healed thrust release (2.2986ms)
+✔ new declared cues are bounded, chronological and end before the native release tail (0.3056ms)
+✔ missing native DSP rejects visibly before mutating adapter globals (6.1917ms)
+✔ pre-render injected unlock failure disposes callbacks and restores every adapter owner without samples (4.3614ms)
+✔ CLI constrains output to work/, ports and bounded autoquit without silently changing an occupied port (643.6575ms)
+✔ prepare compiles real tracked sources and exact historical Git bytes with locked TypeScript (164.5411ms)
+✔ server refuses an altered prepared module instead of reporting false source pins (5.1754ms)
+✔ static and capture allowlists cannot address source, arbitrary paths or malformed run IDs (0.599ms)
+✔ actual loopback HTTP serves pinned modules and preserves captures once, rejecting unrelated Origins and oversized input (67.2949ms)
+✔ occupied-port CLI fails clearly and leaves the existing server alive (82.5529ms)
+Isolated native DSP review http://127.0.0.1:61213/; output C:\Users\mitch\Documents\ChatGPT\galaxy-royale\work\audio-review-helper-test-xWGS8z; autoquit 1 seconds
+Closing isolated audio review server.
+Helper evidence output: C:\Users\mitch\Documents\ChatGPT\galaxy-royale\work\audio-review-helper-test-xWGS8z
+✔ autoquit closes only its actual local server and removes its process signal handlers (1007.1044ms)
+✔ PCM metrics count actual nonfinite and >1 values without silently clamping (1.647ms)
+✔ PCM windows include channels and preserve the requested time interval (0.2226ms)
+✔ Hann FFT distinguishes known low/high analytical tones (math-only fixture) (32.0375ms)
+✔ float32 WAV preserves exact interleaved PCM including values above unity (0.8682ms)
+(node:38576) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sanctuary exit selects authored Expanse exploration, then blends back home (7.1951ms)
+✔ six biome identities and eight champion motifs remain distinct and bounded (8.8924ms)
+✔ real aggro rises smoothly and sanctuary/recovery fades it without false distance (0.6534ms)
+✔ low hull alarm recedes on healing and engine requires actual live ports (3.7577ms)
+✔ nonfinite boundaries, no-op time and source input normalization are deterministic (1.5607ms)
+✔ three original corporate homes preserve old identities and fade through real sanctuary exit (5.8707ms)
+✔ boss arrangement requires a real hostile and aggro, with bounded smooth rise and decay (3.4473ms)
+(node:12516) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ charge is one dry voice, two distinct rising tones, and ends by 125 ms (6.851ms)
+✔ pulse is one dry voice with falling tones and original bandpass noise (1.4856ms)
+✔ 100 mixed cues retain the existing 16-voice effects cap and release stolen nodes (4.9892ms)
+✔ separate volume buses and master mute remain authoritative for new cues (1.3393ms)
+✔ suspend, interrupted recovery, repeat gesture and disposal preserve one context (1.7266ms)
+✔ suspend during asynchronous resume prevents late scheduling and audio debt (0.6407ms)
+✔ source state cannot create audio before gesture, after suspension, or disposal (2.2254ms)
+✔ continuous engine and hull alarm reuse one voice each inside the shared16 cap (7.4338ms)
+✔ adaptive score follows actual biome/champion states and stays within32 music voices (51.3222ms)
+✔ distinct ability and shield timbres use one dry bounded voice each (0.9657ms)
+✔ wake sound rate limiting never schedules delayed debt and diagnostics are observational (0.4985ms)
+✔ continuous effects honor independent mute buses, interruption and one-context recovery (0.4603ms)
+✔ an older failed resume cannot suspend a newer successful audio intent (0.4383ms)
+✔ healing during an OS interruption cannot revive a stale hull alarm (0.5862ms)
+✔ death finish retains only the real existing cue and suspends after its bounded tail (0.9642ms)
+✔ retry cancels a death timeout and a stale callback cannot suspend resumed music (1.0143ms)
+✔ hidden/full suspend and disposal cut death tails without creating a context (0.3979ms)
+✔ a late resume state event preserves only the bounded death tail and obeys hard suspend (0.896ms)
+✔ thrust uses a calm sine fifth with one shared lowpass and duck stage (0.7804ms)
+✔ throttle and speed retarget smooth continuous parameters without restarting the engine (0.6812ms)
+✔ only admitted important cues briefly duck propulsion without pumping music (2.4526ms)
+✔ low-hull priority and strongest cue holds fade away after actual healing (1.6281ms)
+✔ hidden stop, retry and death cleanup cannot carry a propulsion duck into the next life (1.0046ms)
+✔ real gain envelopes leave a quieter engine bed and finite bounded stacked mix (1.754ms)
+ℹ {"engineEnvelope":0.015503942221969217,"historicalEngineEnvelope":0.06993,"priorWarmEnvelope":0.03008,"historicalScalarChangeDb":-13.084427740029469,"priorWarmScalarChangeDb":-5.756713813616779,"maximumCue":{"kind":"upgrade","envelope":0.544},"stackedEffects":7.793003942221965,"defaultBusScalar":4.383564717499855}
+✔ combined adaptive score, alarm, propulsion and real cues retain finite bus gains and voice limits (96.5615ms)
+ℹ {"samples":960,"seconds":24,"maximumMusicVoices":14,"maximumSfxVoices":4,"musicEnvelope":0.4613339677177024,"effectsEnvelope":0.568554,"combinedEnvelope":0.450172040118094,"conservativeEchoEnvelope":0.47798327107464084,"scope":"recorded graph envelope sums; no DSP peak/RMS"}
+✔ all real buses reach one final bounded soft ceiling after compression (4.2699ms)
+✔ calm thrust pitch stays within a tiny musical bend while breathing reuses all sources (2.9631ms)
+✔ corporate home and quiet Iron exploration produce actual softer score nodes (6.447ms)
+✔ one shared filtered power-chord voice follows aggro and adds only the actual boss counter-note (28.3283ms)
+✔ the ninth Royale emblem appears only for authoritative tournament victory (4.3288ms)
+✔ competitor identity and independent sponsor appear only after discovery without mutating rewards (1.2139ms)
+✔ campaign exposes only genuinely discovered champions and their catalog details (0.9466ms)
+✔ a completed losing season offers a new season without victory or credits claims (1.2076ms)
+✔ a losing-season retry remains gated by location and an active encounter (1.7199ms)
+✔ only an authoritative winning season exposes credits and Sovereign victory text (1.0509ms)
+✔ discovered arena copy distinguishes a found hull, an earned blueprint and an owned craft (1.1556ms)
+✔ named T1 subsets sum to the true cargo and bank totals, never double counted (2.2375ms)
+✔ banking updates inventory while unchanged snapshots retain DOM and scroll (0.8778ms)
+✔ only active courier packets appear as mission items, with actual delivery state (1.1705ms)
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (80.8293ms)
+✔ AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes (71.2517ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (26.3164ms)
+✔ reservations and active guests expire separately; heartbeat does not extend pending admission (30.5256ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (36.1967ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (51.7385ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (29.4375ms)
+✔ replacement ends only the previous session and failed replacement preserves it (64.3362ms)
+✔ authenticated replacement shares create rates across new bearer credentials (20.4701ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (38.348ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (82.5723ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (52.4981ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (36.3179ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (79.1511ms)
+✔ service stop resolves existing polls and closes every test listener (29.8557ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.615ms)
+✔ byte quota and membership overflow preserve terminal notices instead of orphaning peers (8.9062ms)
+✔ ready and guest leave are once-only, free capacity and prune old credentials while host stays live (23.3607ms)
+✔ chunked request stream enforces the body bound without a Content-Length header (6.8351ms)
+✔ maintenance wakes an outstanding poll on host expiry with its retained end notice (255.4342ms)
+✔ drawer retains pause/capture until the closing transform finishes (6.6966ms)
+✔ closing can reopen without pause callback churn or stale timers (1.0864ms)
+✔ persisted and OS reduced motion both settle immediately (1.6131ms)
+✔ readiness and repeat guard toggles; disposal cancels unfinished opening (1.0696ms)
+✔ commands, history/draft and text-only output remain bounded (10.7204ms)
+✔ async commands cannot overlap and closing ignores submissions (8.7674ms)
+✔ champion dialogue uses independently manufactured detailed portraits and clears identity for the next guide (3.3531ms)
+✔ paged dialogue exposes navigation and voice controls without leaking modal focus (1.5108ms)
+✔ a late asynchronous action cannot duplicate a reward or overwrite a newer dialogue page (1.339ms)
+✔ presentation tokens change on refresh and close, without changing on reads (1.1772ms)
+✔ overflowing dialogue text joins keyboard focus while actions remain available (1.1645ms)
+✔ Escape opens the live RAICHO menu, cancels controls and course, and toggles closed (4.9591ms)
+✔ opening a dedicated page paints it once without building hidden collections (1.456ms)
+✔ a world facility hit opens exactly its dedicated page without changing progression (4.3571ms)
+✔ misses and home/launch/pause gates leave flight untouched (6.6119ms)
+✔ facility overlay handlers validate the authoritative hit before opening (3.9789ms)
+✔ closing a dedicated flight page resumes; closing title settings returns to title (12.8742ms)
+✔ pause settings and both backup actions select only their dedicated content (1.5091ms)
+✔ a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it (1.662ms)
+✔ Quit waits for a committed save and flush, then provides a normal-tab fallback (1.5096ms)
+✔ Quit write failure keeps the title available and does not close the browser (1.1552ms)
+✔ a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent (3.6797ms)
+✔ dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate (9.9966ms)
+✔ restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming (1.4745ms)
+✔ restart save failure leaves the menu/input safe and reports the actual failure (1.0563ms)
+✔ save indicator moves from pending to committed only after the adapter commits (0.9853ms)
+✔ overlapping saves do not show saved while any write is outstanding (1.1319ms)
+✔ write rejection exposes attention state and a successful retry clears it (1.227ms)
+✔ memory-only storage never reports a successful persistent save (0.8447ms)
+✔ a SaveConflict opens the live menu once without recursively scheduling rejected saves (1.2235ms)
+✔ dedicated map and settings icons replace the live page and map toggles back to flight (2.0746ms)
+✔ M uses the discovered map without a simulation pause or a repeat toggle (1.3574ms)
+✔ a delayed map course cannot consume a newer Settings intent (1.3095ms)
+✔ map navigation sets a real course after resume even when optional audio is unavailable (1.2654ms)
+✔ MEISHI is a standalone live card; returning to collections restores menu chrome (1.4396ms)
+✔ same Haven chooses above-footer labels at GPU2.4scale and below at GL2scale without moving hits (3.7119ms)
+✔ blocked text has no unsafe substitute and a blocked real hit is hidden (0.8621ms)
+✔ invalid world extents and live modal gates never publish interactive facility boxes (1.258ms)
+✔ actual exported minimap geometry reserves facility art and labels at UI scale (0.9639ms)
+✔ issued license reuses the selected native appearance without resetting live-menu focus or scroll (4.0792ms)
+✔ live status distinguishes earned shield recharge from a locked starter without mutating the loadout (3.0743ms)
+✔ status affinity follows Rust hull metadata rather than the pilot, sponsor or visible slot guesses (1.829ms)
+✔ status clears nullable legacy affinity and labels Sovereign's licensed fallback explicitly (1.639ms)
+✔ live status displays selected-ship XP, effective stats, slots and actual cargo tiers (1.5735ms)
+✔ compact default shows the short license and essentials while retaining full detail behind an accessible button (1.9052ms)
+✔ Details expansion and button focus persist through real live HUD paints, ship changes and nullable affinity (3.1286ms)
+✔ empty cargo has no risk warning and its zero-tier detail remains explicit without repetitive rows (1.4633ms)
+✔ named T1 inventory is shown inside existing totals and clears without recreating the menu (1.8658ms)
+✔ identical or sub-display-resolution live readings perform zero DOM writes (1.4807ms)
+✔ changed values update stable nodes while retaining scroll and action focus (1.6198ms)
+✔ ship switches use the new ship XP and exact shared icon mapping, including max-level caption (1.3287ms)
+✔ HUD names remain plain text and unavailable numbers are not fabricated (3.0613ms)
+✔ dedicated status actions and title Quit use supported native icons with accessible labels (1.3609ms)
+✔ clear native glyphs cannot create a context hit that covers the top-right map (2.2726ms)
+✔ actual native strip and text bounds scale together without rounding fractional quad geometry (1.2658ms)
+✔ clear glyph row cannot create a touch hit overlapping the real movement/fire pads (0.69ms)
+✔ 44px contextual hit remains centered in a touch gap and clamps only at real safe-area boundaries (1.1536ms)
+✔ native no-fit and nonfinite text geometry removes invisible contextual hit areas (1.6985ms)
+✔ compiled bridge emits exact single-line footer glyphs and a separate real44px contact hit once (5.5157ms)
+✔ five-cell micro footer preserves warnings and contact input at fractional display scales (6.2642ms)
+✔ compiled bridge forwards focused facility label placement without changing hit geometry (3.1062ms)
+✔ visible toast wins the native slot without leaving a concealed contact hit (0.9302ms)
+✔ unavailable or unsafe interactive context creates no invisible button geometry (3.6546ms)
+✔ menu recovery toast retains multiline DOM bounds instead of a flight-only font slot (0.8288ms)
+✔ footer style and interaction visibility changes invalidate actual bridge geometry (0.8518ms)
+✔ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (11.4273ms)
+✔ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.4793ms)
+✔ real Forge category survives successful repaint while a fresh open resets to overview (3.2064ms)
+✔ mutation success is not a committed-save claim while deferred persistence fails (1.8295ms)
+✔ Hangar page and construction/selection bindings pass full per-hull XP metadata (2.1429ms)
+✔ rejected ship construction or switching cannot save or report success (2.0252ms)
+✔ an unavailable audio context cannot reject a successful mutation/save flow (1.5099ms)
+✔ OS lease rejects a concurrent runtime and is reusable after idempotent close (34.1006ms)
+✔ OS releases the lease when its actual child process is killed (219.4659ms)
+✔ failed service closes its actual sibling before supervision completes (86.7682ms)
+✔ explicit stop waits for every owned child and reports a clean stop (44.6298ms)
+✔ actual Vite never-listened close is idempotent and releases its lease (39.274ms)
+✔ actual Vite restarts twice without releasing its cross-process reservation (139.1693ms)
+✔ rebundled Vite plugin owners keep the lease until their final explicit close (25.6439ms)
+✔ actual Vite preview close releases its lease (10.6926ms)
+✔ failed Vite preview listen releases the lease and preserves the occupied port owner (9.522ms)
+✔ real loss notice outlives transient toasts and clears only after restoration (9.0271ms)
+✔ failed reconstruction retains its actual reason across other notifications (1.0143ms)
+✔ pending preparation leaves Game readable and defers GPU resize to latest dimensions (1.8103ms)
+✔ resuming flight uses the latest authoritative audio state before scheduling (0.9042ms)
+✔ overlapping recovery requests prepare and install exactly once (1.0164ms)
+✔ settlement honors death, title, encounter, console, visibility and orientation interruptions (4.921ms)
+✔ graphics recovery restores a live menu without restoring flight controls (0.7975ms)
+✔ reconstruction rejection reports its cause, preserves Game and stops the RAF retry loop (0.7608ms)
+✔ a modal closed while preparation is pending restores the previously live world (0.8074ms)
+✔ failed reconstruction preserves an existing death report, title or other modal (3.2991ms)
+✔ an invalid install is a controlled failure without changing the live profile (0.7104ms)
+✔ Resume's awaited audio cannot re-enable input when recovery starts meanwhile (0.8514ms)
+✔ a real context loss gates drawing, resize and preparation until restored (3.0087ms)
+✔ a context lost during preparation disposes the uninstalled candidate (0.9973ms)
+✔ restoration during preparation discards stale resources and queues one fresh replacement (1.0647ms)
+✔ closing the last modal after failed reconstruction exposes the pause menu (3.5413ms)
+(node:39168) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ simultaneous joystick and fire use independent pointer channels (2.365ms)
+✔ blur resets every interrupted input, including mouse buttons (0.3838ms)
+✔ desktop destination maps from unshaken camera and is submitted once (0.3917ms)
+✔ stationary held left cursor continuously projects thrust while a released click retains its course (0.2545ms)
+✔ both mouse buttons keep forward thrust and cursor aim independent of button release order (0.1904ms)
+✔ interrupted capture cancels the Rust course but ordinary click release preserves it (0.2178ms)
+✔ disabled or cancelled control cannot continue firing (0.1416ms)
+✔ right mouse fires and Space is not a weapon shortcut (0.1986ms)
+✔ campaign navigation submits a real course once and respects interrupted controls (0.2074ms)
+✔ Haven can intercept even a short weapon press from mouse or touch without a lingering shot (0.2887ms)
+✔ right mouse aims at its cursor world point without submitting a navigation course (0.2035ms)
+✔ held stationary mouse aim follows the current unshaken camera and eased world viewport (0.2501ms)
+✔ mouse aim stays held while the one-shot left destination is consumed and then released independently (0.2317ms)
+✔ keyboard thrust and mobile fire retain their own directions while mouse aim is a separate channel (0.1904ms)
+✔ touch canvas releases cannot clear an independently held right-mouse aim (0.1098ms)
+✔ mouse release, cancellation, capture loss, reset and disable cannot resurrect stale aim (0.4449ms)
+✔ malformed or zero-size projections cannot send a nonfinite cursor target or destination (0.3582ms)
+✔ pressing right during a captured left drag triggers Haven interception exactly once (0.2042ms)
+✔ initial left facility press consumes the world point before movement capture and blocks its drag (0.2839ms)
+✔ declined facility press navigates normally and held left dragging never invokes interaction (0.1629ms)
+✔ canvas touch facility taps consume while empty-space touches preserve joystick controls (0.2157ms)
+✔ right aim and mobile fire do not invoke facilities and retain optional fire-start compatibility (1.4539ms)
+✔ facility callback disabling input cannot restore a course or consumed held gesture (0.3451ms)
+✔ invalid or disabled projection never invokes a facility callback (0.154ms)
+✔ release outside an uncaptured facility press admits the next initial click (0.2284ms)
+✔ creator exposes DORA/DORO/TALO and updates the actual license preview across 27 combinations (8.1203ms)
+✔ confirmation issues the previewed identity once and blocks edits/cancellation during the save (4.0604ms)
+✔ failed persistence locks the issued portrait and retries the same identity despite attempted choice changes (2.3074ms)
+(node:11292) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ delayed flight SaveConflict closes the guide before showing the live menu (65.2678ms)
+✔ delayed flight SaveConflict closes the guide before showing the live menu with its action pending (28.5278ms)
+✔ training contact presents supplied HUD text and corporation fields without issuing progress (42.1279ms)
+✔ a saved guide acknowledgement cannot close a newer contact (12.2258ms)
+✔ a saved guide acknowledgement respects Back while persistence is pending (13.3704ms)
+✔ an unchanged final guide page closes only after its acknowledgement persists (11.8338ms)
+✔ failed guide persistence keeps the page actionable without acknowledging twice (9.5001ms)
+✔ creator restores Launch if hidden prevents flight after persistence (6.2125ms)
+✔ creator restores Launch if portrait prevents flight after persistence (2.4871ms)
+✔ creator restores Launch if graphics-failed prevents flight after persistence (2.4353ms)
+✔ creator restores Launch if recovering prevents flight after persistence (2.3128ms)
+✔ creator restores Launch if context-lost prevents flight after persistence (2.7095ms)
+✔ healthy creator completion launches and opens the guide once (2.7986ms)
+✔ retrying failed creator persistence preserves the issued identity and one grant (2.7096ms)
+(node:41184) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema4 upgrades preserve actual progress without a license or starter grant (2.6088ms)
+✔ three valid licensed starters retain one real equipped item through normalization (2.5234ms)
+✔ identity and onboarding validation rejects malformed keys and impossible stages (2.5072ms)
+✔ licensed save reload and backup recovery preserve hash and exactly one starter (25.3402ms)
+✔ schema6 barrier waits for cached schema5 connection and rejects its subsequent writer (5.4429ms)
+✔ schema5 tutorial migration preserves the license and earned assets without invented training counts (4.0503ms)
+✔ named training materials are bounded Tier1 subsets and impossible mission checkpoints are rejected (2.1534ms)
+✔ named material and mission snapshots recover together without duplicating a starter upgrade (9.9739ms)
+✔ first-upgrade recipe shows the actual named banked subset and calls the ordinary native upgrade action (4.875ms)
+✔ Forge separates three automatic slots and six ship hardware actions (1.2161ms)
+✔ category editor has contextual Back and explicit craft versus equip (3.0556ms)
+✔ availability is authoritative even when visible balances look sufficient or insufficient (1.3312ms)
+✔ owned rank cap and replacement retain inventory and send exact category (1.3866ms)
+✔ actual HUD repaint preserves category, while ship change/reset returns overview (1.5776ms)
+✔ busy mutation and outside-dock clearing cannot dispatch; cargo stays in its separate page (1.1897ms)
+✔ Hangar shows each hull's XP, construction recipe and exact selection callback (1.2246ms)
+✔ all game-provided names and errors are plain text, including malicious markup (0.9866ms)
+✔ victory-only hull has no fake construction recipe and retains real LV1 reward XP (0.9409ms)
+✔ legacy stored hardware rank and active ship cap are shown separately without inventing power (0.9031ms)
+✔ Forge prioritizes slots and collection access without repeating cargo inventory (1.2866ms)
+✔ Forge excludes an undiscovered ability rather than showing its locked name (1.2649ms)
+✔ ability filters run after discovery and distinguish ownership from blueprint and compatibility (2.9266ms)
+✔ ability filters preserve focus and scroll across real HUD replacements without stealing outside focus (1.9702ms)
+✔ successful crafting exposes Equip and retains action focus without automatically equipping (1.278ms)
+✔ hull filters keep found, owned and earned blueprint states distinct and preserve real recipe gates (2.9181ms)
+✔ hull filter state persists through checkpoint repaint and does not retain a second inventory (1.2412ms)
+✔ collection costs and level requirements remain supplied by the HUD, including named recipes (1.0459ms)
+✔ in-place collection filters and categories retain the visible scroll position (1.4055ms)
+✔ canonical lore terms have distinct ASCII labels and functional English introductions (2.5961ms)
+✔ source readings preserve long vowels while canonical labels stay user ASCII (0.2461ms)
+✔ starter display models retain the exact manufacturer, hull and ability mapping (0.2461ms)
+✔ historical aliases are exact prefixed labels and never rename champion Bulwark (0.2291ms)
+✔ each lexical claim resolves to an identified checked government or publisher dictionary source (0.3431ms)
+✔ display wording preserves license/progression identifiers and sponsor independence (0.1584ms)
+✔ documentation agrees with data and distinguishes authoring tests from runtime acceptance (0.268ms)
+✔ actual map art emits semantic Home and site buttons once with fractional chart clipping (4.287ms)
+✔ selected map marker remains independent of transient hover and real heading value (1.2294ms)
+✔ map style-only pan and pixel-value heading changes invalidate without text mutation (1.1877ms)
+✔ new native header semantic kinds appear through the actual flight selector (0.9785ms)
+✔ a wholly off-chart site is omitted and a partial hitbox keeps the exact chart clip (0.9664ms)
+✔ map details and course controls are clipped to content before the saved-status footer (1.1234ms)
+✔ scrolled map artwork intersects both chart and content ancestors on both axes (1.1767ms)
+✔ card uses authoritative native profile and exactly eight anonymous empty patch slots (3.8276ms)
+✔ unchanged refresh preserves nodes, scroll, focus and writes nothing (1.6128ms)
+✔ patches are indexed rather than list ordered and only earned identities reach DOM (1.6913ms)
+✔ an unearned champion name is never read even when source includes private metadata (1.6007ms)
+✔ losing an earned flag clears visible art and its former name in the same stable slot (1.5321ms)
+✔ all eight earned flags use existing campaign-patch routes without a ninth slot (1.403ms)
+✔ corporate balances follow offense/defense/passive ledger order regardless of pilot manufacturer (2.126ms)
+✔ selected RAICHO and effective equipped ranks refresh without inherited-rank or XP fabrication (1.7514ms)
+✔ legacy and malformed identity do not relabel another portrait; invalid selected hull paints no art (1.7512ms)
+✔ nonfinite HUD numbers are displayed as unavailable, not positive progression (1.6296ms)
+✖ view source stays read-only and responsive CSS retains native logical patch/ship dimensions (3.5805ms)
+(node:39404) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ authored pages are bounded, grounded copies and require no service (1.472ms)
+✔ invalid facts, progress, characters and personalities are rejected (0.8528ms)
+✔ valid optional flavor only updates greeting and preserves canonical state (3.372ms)
+✔ a replaced greeting cancels replay of its old displayed text (1.1304ms)
+✔ close/reopen aborts stale generation even when provider ignores cancellation (4.4264ms)
+✔ generation timeout and malformed response retain immediate authored content (41.3392ms)
+✔ voice is opt-in, explicit and supports per-page replay/pause/resume/volume (1.0363ms)
+✔ stale synthesis never plays; timeout and invalid audio use optional platform fallback (34.6537ms)
+✔ validated audio is copied, bounded and has a matching supported header (1.3156ms)
+✔ invalid synthesis falls back without changing the displayed text request (6.2825ms)
+✔ browser adapter cancels platform speech and releases local audio URLs (0.9176ms)
+✔ live license portraits deliver all 27 independent appearance choices to native rendering (21.541ms)
+✔ missing, fractional or malformed profile tokens never invent a fallback identity (6.225ms)
+✔ short-window license body clips the full portrait geometry above the fixed footer (2.1413ms)
+✔ zoom slider pixel thumb follows the semantic range at both limits and default zoom (1.861ms)
+✔ fractional CSS campaign icons retain authored integer fit and measured centers (13.2344ms)
+✔ champion emblem earned state comes from saved progress rather than focus (2.0573ms)
+✔ volume and default HTML range bounds produce finite clamped pixel positions (4.3585ms)
+✔ native controls receive physical active state and cancellation without changing geometry (1.3587ms)
+✔ semantic actions carry persistent selection independently of focus and category colors (1.2652ms)
+✔ MEISHI collection selection remains visible after focus leaves the navigation (1.0726ms)
+✔ owned filters retain selected native style while category filters keep their semantic color (0.8717ms)
+✔ scroll clipping intersects panel on both axes and rejects wholly obscured actions (1.124ms)
+✔ console command preserves spaces and sends the actual codepoint caret, including selection-only edits (2.6043ms)
+✔ pause actions inherit their own scroll viewport rather than bleeding into the footer (0.7564ms)
+✔ settings transfer independently measured input and label rectangles through UI scaling (0.7053ms)
+✔ physical menu font caps preserve sub-unit native glyph scale on large viewports (1.7875ms)
+✔ facility pixel labels require hover or deliberate focus while controls keep their hit geometry (2.3876ms)
+✔ dialogue self-scroll moves full text through a fixed clip without touching actions (2.5688ms)
+✔ dialogue scrolling clamps invalid/overshoot metrics and leaves other paragraphs untouched (3.6995ms)
+✔ standalone MEISHI surface is one locally transformed native group (0.7831ms)
+✔ owned game listener detection excludes other projects, Studio and QA tools (2.1026ms)
+✔ build fingerprint catches cell source and packaged output edits; excluded generated inputs do not affect source (23.6404ms)
+✔ a complete pair addresses all four files and removes only stale generated outputs (76.2804ms)
+✔ each JS, binary and declaration byte independently participates in the content address (20.1266ms)
+✔ missing, corrupt, incomplete and traversal manifests fail closed with a build instruction (35.2638ms)
+✔ incomplete staging and unknown public files cannot destroy a prior complete pair (50.1429ms)
+﹣ the read-only loader rejects a linked manifest without changing external bytes (27.3353ms) # Windows file-symlink privilege is unavailable; directory-junction coverage remains active
+✔ the read-only loader rejects a manifest directory junction before parsing (27.4857ms)
+✔ linked managed targets are rejected before cleanup or publication (45.9243ms)
+✔ new worker navigation and assets read only their own complete release cache (2.5851ms)
+✔ legacy stable-path worker cannot return old bindings for a new content-addressed entry or binary (23.696ms)
+PWA: 10 game assets cached under galaxy-b4de46efc420f269
+✔ actual PWA generation lists exactly the current pairs and derives cache from all payload bytes (36.6547ms)
+(node:6496) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ already waiting update is offered immediately and never twice (1.3923ms)
+✔ installation begun before registration resolves is still watched (0.2504ms)
+✔ installed state before waiting assignment still offers the actual worker (0.1816ms)
+✔ first installation and failed workers do not offer an update (0.5444ms)
+✔ later updates are observed and disposal detaches pending listeners (0.2385ms)
+✔ PWA generation is deterministic, excludes its worker, and changes version when asset content or path changes (429.3662ms)
+✔ installed game assets and entry navigation work offline; unknown, API, studio, foreign and non-GET requests pass through (64.8629ms)
+✔ navigation and listed assets use their coherent installed cache with network only for missing entries (59.1808ms)
+✔ updates wait until an explicit dock activation request, then remove only obsolete game caches (54.6588ms)
+(node:5644) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema-five migration waits for a real old database connection and prevents old-version writers (12.3598ms)
+✔ an actual version-change event closes obsolete connections and rejects queued and imported writes (3.7697ms)
+✔ legacy migration banks scalar materials once and isolates old hardware and XP per hull (1.3475ms)
+✔ legacy saturation and unknown new-looking fields cannot poison the supported migration (0.4213ms)
+✔ schema four accepts learned uncrafted blueprints and rejects impossible equipment and mirrors (2.3155ms)
+✔ save normalization preserves live tiered cargo and clones all mutable inventory state (0.9059ms)
+✔ crafting and slot snapshots retain previous inventory and block stale-session material duplication (4.0857ms)
+✔ corrupt slot recovery retains banked assets, per-ship XP, and recorded death material loss (2.6617ms)
+(node:28680) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ profile boundary rejects malformed arrays, impossible signature ranks and unsupported versions (3.3339ms)
+✔ saving full snapshots never adds currency twice and ignores equal or older revisions (13.1041ms)
+✔ reload recovers a valid previous snapshot when current is corrupted (3.4622ms)
+✔ two corrupted snapshots produce a visible new-profile recovery state (1.1054ms)
+✔ import is ordered after pending saves, captures its input and prevents old-session saves overwriting it (4.8289ms)
+✔ invalid imports preserve current and previous; unavailable storage cannot report a persisted import (3.7711ms)
+✔ another open session cannot overwrite newer progression or duplicate currency (3.4737ms)
+✔ failed database writes leave the accepted snapshot intact and report the failure (1.7996ms)
+✔ v1 current and previous snapshots migrate to v5 without changing progression or awarding currency (6.3194ms)
+✔ legacy recovery and legacy import both retain revision, ranks and currency in v5 snapshots (4.508ms)
+✔ discoveries, quests and relics persist exactly across reload without replaying completion rewards (1.739ms)
+✔ v2 rejects malformed, oversized and duplicate site collections and quest bounds (1.1463ms)
+✔ settings migrate old values and round-trip motion and cosmetic density with safe validation (0.4601ms)
+✔ v2 expedition progression migrates to a blank campaign with no new reward or XP (1.8426ms)
+✔ campaign boundary rejects fabricated ownership, malformed league, cargo and run summaries (0.5798ms)
+✔ ship, campaign and run snapshots survive reload without replaying rewards or material costs (2.4103ms)
+✔ old boss aggregates migrate into generation one for every supported save format without rewards (1.0663ms)
+✔ generation boundary rejects malformed or impossible promoted counters and accepts saturated aggregates (0.5876ms)
+✔ same-schema legacy current and backup persist canonical generation matrices atomically with unchanged revisions (2.578ms)
+✔ generation counters, surplus base kills and pending reservations survive reload without duplicate advancement (2.0496ms)
+✔ another session cannot overwrite a newer boss defeat with stale counters even at a newer proposed revision (1.6774ms)
+✔ impossible generation current recovers its prior legacy snapshot and invalid imports cannot replace it (1.641ms)
+✔ map displays only supplied charted sites and real Haven/belt geometry (4.0576ms)
+✔ selection reveals authoritative quest/tier data and navigates to current coordinates without mutating them (1.4927ms)
+✔ unchanged refresh preserves nodes, selection, focus and scroll (0.822ms)
+✔ real map listeners pan and zoom geometry without changing any world destination (1.1045ms)
+✔ dense discovered maps bound real marker nodes and disclose omitted visible markers (2.6692ms)
+✔ unavailable site belts stay absent and invalid coordinates are not materialized (0.8698ms)
+(node:36084) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ binding never acquires a context and cancels loss before reporting it (7.9431ms)
+✔ only the restored event clears lost state and cancels stale readiness (0.8144ms)
+✔ dispose removes both handlers, cancels timers and is idempotent (15.1066ms)
+✔ replaced canvases have independent lifecycle state (0.4981ms)
+✔ probe reports missing context or extension without requesting loss (0.2695ms)
+✔ extension requests neither synthesize events nor prematurely restore lifecycle (1.104ms)
+✔ same loss callback cannot request restoration before dispatch completes (0.494ms)
+✔ probe does not claim to restore a natural loss it did not request (12.311ms)
+✔ disposed probes cannot call extensions (0.3489ms)
+✔ extension exceptions propagate and do not consume a restore request (16.7927ms)
+✔ a later requested loss starts a fresh restore cycle (30.8253ms)
+ℹ tests 414
+ℹ suites 0
+ℹ pass 412
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 2101.8393
+
+✖ failing tests:
+
+test at scripts\test\meishi.test.mjs:353:1
+✖ view source stays read-only and responsive CSS retains native logical patch/ship dimensions (3.5805ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /@media \(max-width: 900px\)/. Input:
+  
+  '/* One native UiGroup owns this card surface and its local art/text transforms. */\n' +
+    '.menu-card.meishi-surface {\n' +
+    '  width: min(740px, 100%);\n' +
+    '  height: auto;\n' +
+    '  max-height: 100%;\n' +
+    '  padding: 24px;\n' +
+    '  gap: 0;\n' +
+    '}\n' +
+    '.meishi-surface #meishi-content {\n' +
+    '  flex: 0 1 auto;\n' +
+    '  padding: 0;\n' +
+    '}\n' +
+    '.meishi-surface .menu-close {\n' +
+    '  top: 6px;\n' +
+    '  right: 6px;\n' +
+    '}\n' +
+    '.meishi-card {\n' +
+    '  display: grid;\n' +
+    '  grid-template-columns: repeat(2, minmax(0, 1fr));\n' +
+    '  gap: 12px;\n' +
+    '  min-width: 0;\n' +
+    '  max-width: 100%;\n' +
+    '  padding: 12px 0 0;\n' +
+    '  background: #080f18;\n' +
+    '}\n' +
+    '.meishi-heading {\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  gap: min(18px, calc(8px * var(--ui-scale, 1)));\n' +
+    '}\n' +
+    '.meishi-identity,\n' +
+    '.meishi-ship-summary,\n' +
+    '.meishi-equipped {\n' +
+    '  min-width: 0;\n' +
+    '  overflow-wrap: anywhere;\n' +
+    '}\n' +
+    '.meishi-portrait {\n' +
+    '  flex: 0 0 auto;\n' +
+    '  width: 96px;\n' +
+    '  height: 128px;\n' +
+    '}\n' +
+    '.meishi-card h3 {\n' +
+    '  font-size: var(--ui-text);\n' +
+    '  font-weight: normal;\n' +
+    '  line-height: 1.5;\n' +
+    '  color: var(--cyan);\n' +
+    '  margin: 0;\n' +
+    '}\n' +
+    '.meishi-card p {\n' +
+    '  font-size: min(12px, var(--ui-caption));\n' +
+    '  line-height: 1.5;\n' +
+    '  margin: 0;\n' +
+    '  overflow-wrap: anywhere;\n' +
+    '}\n' +
+    '.meishi-card .meishi-designation {\n' +
+    '  font-size: var(--ui-caption);\n' +
+    '  color: #edf4f5;\n' +
+    '  margin-top: 6px;\n' +
+    '}\n' +
+    '.meishi-card .meishi-manufacturer {\n' +
+    '  margin-top: 6px;\n' +
+    '  color: var(--muted);\n' +
+    '}\n' +
+    '.meishi-raicho {\n' +
+    '  display: grid;\n' +
+    '  grid-template-columns: auto minmax(0, 1fr);\n' +
+    '  align-items: center;\n' +
+    '  gap: 8px 12px;\n' +
+    '  margin-top: 0;\n' +
+    '  padding-right: 22px;\n' +
+    '}\n' +
+    '.meishi-ship-icon {\n' +
+    '  width: calc(32px * var(--ui-scale, 1));\n' +
+    '  height: calc(32px * var(--ui-scale, 1));\n' +
+    '}\n' +
+    '.meishi-equipped {\n' +
+    '  grid-column: 1 / -1;\n' +
+    '}\n' +
+    '.meishi-card .upgrade-category {\n' +
+    '  display: block;\n' +
+    '  margin: 0;\n' +
+    '}\n' +
+    '.meishi-card .upgrade-category p {\n' +
+    '  color: inherit;\n' +
+    '}\n' +
+    '.meishi-balances {\n' +
+    '  grid-column: 1 / -1;\n' +
+    '  display: grid;\n' +
+    '  grid-template-columns: repeat(3, minmax(0, 1fr));\n' +
+    '  gap: 8px;\n' +
+    '  margin-top: 0;\n' +
+    '  padding-top: 8px;\n' +
+    '  border-top: 1px solid #263d50;\n' +
+    '}\n' +
+    '.meishi-patches {\n' +
+    '  grid-column: 1 / -1;\n' +
+    '  margin-top: 0;\n' +
+    '  padding-top: 8px;\n' +
+    '  border-top: 1px solid #263d50;\n' +
+    '}\n' +
+    '.meishi-patch-grid {\n' +
+    '  display: grid;\n' +
+    '  grid-template-columns: repeat(8, minmax(0, 1fr));\n' +
+    '  gap: 8px 4px;\n' +
+    '  list-style: none;\n' +
+    '  padding: 0;\n' +
+    '  margin: 8px 0 0;\n' +
+    '}\n' +
+    '.meishi-patch-slot {\n' +
+    '  min-width: 0;\n' +
+    '  text-align: center;\n' +
+    '}\n' +
+    '.meishi-patch-icon,\n' +
+    '.meishi-card .meishi-patch-empty {\n' +
+    '  width: calc(24px * var(--ui-scale, 1));\n' +
+    '  height: calc(24px * var(--ui-scale, 1));\n' +
+    '  margin: 0 auto 4px;\n' +
+    '}\n' +
+    '.meishi-card .meishi-patch-empty {\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  justify-content: center;\n' +
+    '  color: var(--muted);\n' +
+    '}\n' +
+    '.meishi-card .meishi-patch-caption {\n' +
+    '  font-size: var(--ui-caption);\n' +
+    '}\n' +
+    '/* Preserve hidden native art and placeholder semantics despite flex rules. */\n' +
+    '.meishi-card [hidden] {\n' +
+    '  display: none;\n' +
+    '}\n' +
+    "/* Native quads paint the card's art/text; CSS remains the accessible fallback. */\n" +
+    'body.pixel-ready .meishi-card {\n' +
+    '  background: transparent;\n' +
+    '  border-color: transparent;\n' +
+    '}\n' +
+    '@media (max-width: 600px) {\n' +
+    '  .meishi-patch-grid {\n' +
+    '    grid-template-columns: repeat(4, minmax(0, 1fr));\n' +
+    '  }\n' +
+    '}\n' +
+    '@media (max-width: 480px) {\n' +
+    '  .meishi-card {\n' +
+    '    grid-template-columns: minmax(0, 1fr);\n' +
+    '  }\n' +
+    '  .meishi-portrait {\n' +
+    '    width: 72px;\n' +
+    '    height: 96px;\n' +
+    '  }\n' +
+    '  .meishi-balances {\n' +
+    '    grid-template-columns: minmax(0, 1fr);\n' +
+    '  }\n' +
+    '  .meishi-patch-grid {\n' +
+    '    grid-template-columns: repeat(2, minmax(0, 1fr));\n' +
+    '  }\n' +
+    '}\n' +
+    '@media (max-height: 500px) {\n' +
+    '  .meishi-portrait {\n' +
+    '    width: 72px;\n' +
+    '    height: 96px;\n' +
+    '  }\n' +
+    '}\n'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/meishi.test.mjs:364:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "/* One native UiGroup owns this card surface and its local art/text transforms. */\n.menu-card.meishi-surface {\n  width: min(740px, 100%);\n  height: auto;\n  max-height: 100%;\n  padding: 24px;\n  gap: 0;\n}\n.meishi-surface #meishi-content {\n  flex: 0 1 auto;\n  padding: 0;\n}\n.meishi-surface .menu-close {\n  top: 6px;\n  right: 6px;\n}\n.meishi-card {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 12px;\n  min-width: 0;\n  max-width: 100%;\n  padding: 12px 0 0;\n  background: #080f18;\n}\n.meishi-heading {\n  display: flex;\n  align-items: center;\n  gap: min(18px, calc(8px * var(--ui-scale, 1)));\n}\n.meishi-identity,\n.meishi-ship-summary,\n.meishi-equipped {\n  min-width: 0;\n  overflow-wrap: anywhere;\n}\n.meishi-portrait {\n  flex: 0 0 auto;\n  width: 96px;\n  height: 128px;\n}\n.meishi-card h3 {\n  font-size: var(--ui-text);\n  font-weight: normal;\n  line-height: 1.5;\n  color: var(--cyan);\n  margin: 0;\n}\n.meishi-card p {\n  font-size: min(12px, var(--ui-caption));\n  line-height: 1.5;\n  margin: 0;\n  overflow-wrap: anywhere;\n}\n.meishi-card .meishi-designation {\n  font-size: var(--ui-caption);\n  color: #edf4f5;\n  margin-top: 6px;\n}\n.meishi-card .meishi-manufacturer {\n  margin-top: 6px;\n  color: var(--muted);\n}\n.meishi-raicho {\n  display: grid;\n  grid-template-columns: auto minmax(0, 1fr);\n  align-items: center;\n  gap: 8px 12px;\n  margin-top: 0;\n  padding-right: 22px;\n}\n.meishi-ship-icon {\n  width: calc(32px * var(--ui-scale, 1));\n  height: calc(32px * var(--ui-scale, 1));\n}\n.meishi-equipped {\n  grid-column: 1 / -1;\n}\n.meishi-card .upgrade-category {\n  display: block;\n  margin: 0;\n}\n.meishi-card .upgrade-category p {\n  color: inherit;\n}\n.meishi-balances {\n  grid-column: 1 / -1;\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 8px;\n  margin-top: 0;\n  padding-top: 8px;\n  border-top: 1px solid #263d50;\n}\n.meishi-patches {\n  grid-column: 1 / -1;\n  margin-top: 0;\n  padding-top: 8px;\n  border-top: 1px solid #263d50;\n}\n.meishi-patch-grid {\n  display: grid;\n  grid-template-columns: repeat(8, minmax(0, 1fr));\n  gap: 8px 4px;\n  list-style: none;\n  padding: 0;\n  margin: 8px 0 0;\n}\n.meishi-patch-slot {\n  min-width: 0;\n  text-align: center;\n}\n.meishi-patch-icon,\n.meishi-card .meishi-patch-empty {\n  width: calc(24px * var(--ui-scale, 1));\n  height: calc(24px * var(--ui-scale, 1));\n  margin: 0 auto 4px;\n}\n.meishi-card .meishi-patch-empty {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--muted);\n}\n.meishi-card .meishi-patch-caption {\n  font-size: var(--ui-caption);\n}\n/* Preserve hidden native art and placeholder semantics despite flex rules. */\n.meishi-card [hidden] {\n  display: none;\n}\n/* Native quads paint the card's art/text; CSS remains the accessible fallback. */\nbody.pixel-ready .meishi-card {\n  background: transparent;\n  border-color: transparent;\n}\n@media (max-width: 600px) {\n  .meishi-patch-grid {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n@media (max-width: 480px) {\n  .meishi-card {\n    grid-template-columns: minmax(0, 1fr);\n  }\n  .meishi-portrait {\n    width: 72px;\n    height: 96px;\n  }\n  .meishi-balances {\n    grid-template-columns: minmax(0, 1fr);\n  }\n  .meishi-patch-grid {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media (max-height: 500px) {\n  .meishi-portrait {\n    width: 72px;\n    height: 96px;\n  }\n}\n",
+    expected: /@media \(max-width: 900px\)/,
+    operator: 'match',
+    diff: 'simple'
+  }
+[ELIFECYCLE] Test failed. See above for more details.

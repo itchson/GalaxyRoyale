@@ -1,0 +1,22 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.56s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 11 tests
+test co_op_replica::tests::wake_fx::export_actual_native_wake_contract_fixtures ... ignored, explicit bounded serializer export; requires GALAXY_WAKE_FIXTURES
+actual_native_edge_rear_anchor_x=1000014
+test co_op_replica::tests::wake_fx::native_edge_stamp_keeps_legal_rear_anchor_halo ... ok
+test co_op_replica::tests::wake_fx::frozen_page_is_non_draining_and_membership_invalidates_its_acquisition ... ok
+test co_op_replica::tests::wake_fx::raw_value_number_bounds_and_canonical_short_spellings_agree ... ok
+test co_op_replica::tests::wake_fx::changed_positions_on_newer_ticks_and_malformed_order_never_replace_cache ... ok
+test co_op_replica::tests::wake_fx::pending_missing_duplicate_bad_pages_do_not_move_visible_scene_or_cache ... ok
+actual_initial_wakes=8 actual_guest_quads=40 shared_solo_style=true guessed_guest_birth_lights=0
+test co_op_replica::tests::wake_fx::initial_real_samples_match_host_and_solo_style_without_replaying_lights ... ok
+actual_capacity_fixture_points=192 actual_quads=960 actual_value_page_bytes=16657
+test co_op_replica::tests::wake_fx::configured_maximum_point_state_stays_bounded_and_draws_at_most_960_quads ... ok
+test co_op_replica::tests::wake_fx::epoch_leave_empty_new_tick_and_position_mutation_have_atomic_lifecycle ... ok
+test co_op_replica::tests::wake_fx::same_tick_empty_baseline_cannot_gain_points_and_new_epoch_drops_old_owner ... ok
+test co_op_replica::tests::wake_fx::captured_same_tick_sets_are_immutable_and_deadlines_age_during_assembly ... ok
+
+test result: ok. 10 passed; 0 failed; 1 ignored; 0 measured; 543 filtered out; finished in 0.39s
+

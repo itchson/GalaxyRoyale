@@ -41,10 +41,30 @@ impl Game {
         }
     }
     pub(super) fn bank_cargo(&mut self) {
+        if !self.progression_enabled() {
+            return;
+        }
         let mut changed = false;
+        let mut matching_transferred = 0;
+        let matching = self
+            .profile
+            .identity
+            .as_ref()
+            .map(|id| training::material_for_corporation(id.corporation).index);
         for tier in 0..5 {
             let amount = self.profile.campaign.cargo_materials[tier];
             let banked = amount.min(u32::MAX - self.profile.campaign.stored_materials[tier]);
+            if tier == 0 {
+                let before = self.profile.campaign.cargo_training_materials;
+                training::transfer_labels(
+                    banked,
+                    &mut self.profile.campaign.cargo_training_materials,
+                    &mut self.profile.campaign.stored_training_materials,
+                );
+                matching_transferred = matching.map_or(0, |i| {
+                    before[i] - self.profile.campaign.cargo_training_materials[i]
+                });
+            }
             self.profile.campaign.stored_materials[tier] += banked;
             self.profile.campaign.cargo_materials[tier] -= banked;
             changed |= banked > 0;
@@ -52,8 +72,14 @@ impl Game {
         if changed {
             self.changed();
         }
+        if self.arena.is_none() && self.position().length() <= SAFE_RADIUS {
+            self.training_banked(matching_transferred);
+        }
     }
     pub(super) fn award_xp(&mut self, amount: u32) {
+        if !self.progression_enabled() {
+            return;
+        }
         let selected = self.profile.campaign.selected_ship as usize;
         let before = self.profile.campaign.ship_xp[selected];
         self.profile.campaign.ship_xp[selected] = before.saturating_add(amount);
@@ -70,6 +96,9 @@ impl Game {
         }
     }
     pub(super) fn credit_points(&mut self, category: usize, amount: u32) {
+        if !self.progression_enabled() {
+            return;
+        }
         let before = self.profile.currency[category];
         self.profile.currency[category] = before.saturating_add(amount);
         let gained = self.profile.currency[category] - before;
@@ -82,7 +111,7 @@ impl Game {
         }
     }
     pub(super) fn record_kill(&mut self, kind: Kind) {
-        if self.position().length() <= SAFE_RADIUS {
+        if !self.progression_enabled() || self.position().length() <= SAFE_RADIUS {
             return;
         }
         let run = self.run.get_or_insert_with(RunSummary::default);
@@ -93,6 +122,9 @@ impl Game {
         }
     }
     pub fn start_champion(&mut self, index: usize) -> Result<(), String> {
+        if !self.progression_enabled() {
+            return Err("Return to Haven to leave the isolated QA scene first.".into());
+        }
         if self.arena.is_some() {
             return Err("Finish or retreat from the current trial first.".into());
         }
@@ -108,6 +140,9 @@ impl Game {
     }
 
     pub fn start_tournament(&mut self) -> Result<(), String> {
+        if !self.progression_enabled() {
+            return Err("Return to Haven to leave the isolated QA scene first.".into());
+        }
         if self.arena.is_some() {
             return Err("A match is already in progress.".into());
         }
@@ -165,7 +200,7 @@ impl Game {
             return Err("Construction also requires 6 materials in Haven storage.".into());
         }
         self.profile.currency[champion.category] -= COST;
-        self.profile.campaign.stored_materials[0] -= 6;
+        self.consume_stored_materials([6, 0, 0, 0, 0]);
         self.profile.campaign.crafted[index] = true;
         self.changed();
         self.event("upgrade", self.position(), 1.0);
@@ -187,6 +222,9 @@ impl Game {
     }
 
     pub fn acknowledge_credits(&mut self) {
+        if !self.progression_enabled() {
+            return;
+        }
         if self.profile.campaign.victory_claimed && !self.profile.campaign.credits_seen {
             self.profile.campaign.credits_seen = true;
             self.changed();
@@ -251,7 +289,7 @@ impl Game {
             tournament,
             diagnostic,
             center,
-            radius: 340.0,
+            radius: site.radius,
             opponent,
         });
         self.move_player(center - Vec2::new(115.0, 0.0));
@@ -260,10 +298,9 @@ impl Game {
             actor.health = stats.hull;
             actor.max_health = stats.hull;
         }
-        let _ = self.world.insert_one(
-            self.player,
-            campaign::player_body(self.profile.campaign.selected_ship),
-        );
+        let _ = self
+            .world
+            .insert_one(self.player, identity::player_body(&self.profile));
         self.shield = stats.shield;
         self.invulnerability = 0.8;
         self.fire_timer = 0.0;
@@ -663,20 +700,43 @@ impl Game {
         let champions: Vec<_> = CHAMPIONS
             .iter()
             .enumerate()
-            .map(|(index, c)| ChampionHud {
-                index,
-                id: format!("champion-{index}"),
-                name: c.name.into(),
-                species: c.species.into(),
-                ship: c.ship.into(),
-                ability: c.ability.into(),
-                silhouette: c.silhouette.into(),
-                family: c.family,
-                category: c.category,
-                position: campaign::arena(self.profile.seed, index).unwrap().position,
-                patch: p.patches[index],
-                blueprint: p.blueprints[index],
-                crafted: p.crafted[index],
+            .map(|(index, c)| {
+                let site = campaign::arena(self.profile.seed, index).unwrap();
+                let discovered = p.patches[index]
+                    || p.blueprints[index]
+                    || p.crafted[index]
+                    || self.profile.discoveries.contains(&site.id);
+                ChampionHud {
+                    index,
+                    discovered,
+                    id: format!("champion-{index}"),
+                    name: if discovered {
+                        c.name
+                    } else {
+                        "Unknown champion"
+                    }
+                    .into(),
+                    species: if discovered { c.species } else { "" }.into(),
+                    identity: discovered.then(|| c.identity.hud()),
+                    sponsor: discovered.then_some(c.sponsor),
+                    display_model: if discovered { c.ship } else { "" }.into(),
+                    legacy_model: if discovered { c.legacy_model } else { "" }.into(),
+                    legacy_species: if discovered { c.legacy_species } else { "" }.into(),
+                    introduction: if discovered {
+                        c.introduction()
+                    } else {
+                        String::new()
+                    },
+                    ship: if discovered { c.ship } else { "" }.into(),
+                    ability: if discovered { c.ability } else { "" }.into(),
+                    silhouette: if discovered { c.silhouette } else { "" }.into(),
+                    family: c.family,
+                    category: c.category,
+                    position: site.position,
+                    patch: p.patches[index],
+                    blueprint: p.blueprints[index],
+                    crafted: p.crafted[index],
+                }
             })
             .collect();
         let arena = champions
@@ -697,7 +757,8 @@ impl Game {
                     "available"
                 }
                 .into(),
-                can_challenge: self.arena.is_none()
+                can_challenge: self.progression_enabled()
+                    && self.arena.is_none()
                     && !c.patch
                     && self.position().distance(Vec2::from_array(c.position)) <= 180.0,
             });
@@ -724,8 +785,22 @@ impl Game {
         ];
         let mut ships = vec![ShipHud {
             id: 0,
-            name: "Haven Scout".into(),
-            ability: "Standard pulse drive".into(),
+            name: self
+                .profile
+                .identity
+                .as_ref()
+                .map_or("Haven Scout", |id| id.corporation.starter_name())
+                .into(),
+            ability: self
+                .profile
+                .identity
+                .as_ref()
+                .map_or("Standard pulse drive", |id| {
+                    crate::abilities::get(id.corporation.ability())
+                        .unwrap()
+                        .description
+                })
+                .into(),
             owned: true,
             selected: p.selected_ship == 0,
             category: 0,
@@ -733,6 +808,15 @@ impl Game {
             ..ShipHud::default()
         }];
         for (i, c) in CHAMPIONS.iter().enumerate() {
+            if !p.blueprints[i]
+                && !p.crafted[i]
+                && !self
+                    .profile
+                    .discoveries
+                    .contains(&campaign::arena(self.profile.seed, i).unwrap().id)
+            {
+                continue;
+            }
             ships.push(ShipHud {
                 id: (i + 1) as u8,
                 name: c.ship.into(),
@@ -753,21 +837,29 @@ impl Game {
                 ..ShipHud::default()
             });
         }
-        ships.push(ShipHud {
-            id: 9,
-            name: "Royale Sovereign".into(),
-            ability: "Three equipped rank-5 royal bundles; enhanced chassis; independent ship XP"
-                .into(),
-            owned: p.victory_claimed,
-            selected: p.selected_ship == 9,
-            category: 0,
-            craftable: false,
-            ..ShipHud::default()
-        });
+        if p.victory_claimed {
+            ships.push(ShipHud {
+                id: 9,
+                name: "Royale Sovereign".into(),
+                ability:
+                    "Three equipped rank-5 royal bundles; enhanced chassis; independent ship XP"
+                        .into(),
+                owned: p.victory_claimed,
+                selected: p.selected_ship == 9,
+                category: 0,
+                craftable: false,
+                ..ShipHud::default()
+            });
+        }
         for ship in &mut ships {
             self.ship_hud_details(ship);
         }
-        let (standings, matches) = table(self.profile.seed, p);
+        let (mut standings, matches) = table(self.profile.seed, p);
+        for standing in &mut standings {
+            if standing.entrant < champions.len() && !champions[standing.entrant].discovered {
+                standing.name = "Unknown champion".into();
+            }
+        }
         let tournament_position = tournament_site(self.profile.seed).position;
         CampaignHud {
             champions,
@@ -880,6 +972,10 @@ impl Game {
 }
 
 #[cfg(test)]
+#[path = "champion_roster_tests.rs"]
+mod roster_tests;
+
+#[cfg(test)]
 mod tests {
     use super::*;
     fn challenge(game: &mut Game, index: usize) {
@@ -906,6 +1002,7 @@ mod tests {
         let arena = g.arena.unwrap();
         assert!(!g.safe());
         g.invulnerability = 0.0;
+        g.shield = 0.0; // Declared depleted shield; this probe verifies hull damage in an arena.
         let health = g.hud().hull;
         g.hurt_player(10.0, None);
         assert_eq!(g.hud().hull, health - 10.0);
@@ -1196,7 +1293,7 @@ mod tests {
         assert_eq!(g.ship_level(), 1);
         let stats = Stats::from_profile(&g.profile);
         assert!((stats.hull - 240.0).abs() < 0.001);
-        assert!((stats.shield - 100.0).abs() < 0.001);
+        assert!((stats.shield - 120.0).abs() < 0.001);
         assert!((stats.damage - 24.0).abs() < 0.001);
         assert!(g.hud().upgrades.iter().all(|u| u.rank == 5 && u.unlocked));
         assert_eq!(campaign::signature_rank(&g.profile, 6), 5);
@@ -1237,7 +1334,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(legacy);
-        assert_eq!(g.profile.schema_version, 4);
+        assert_eq!(g.profile.schema_version, components::SCHEMA_VERSION);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[..6], [5, 4, 3, 2, 1, 0]);
     }

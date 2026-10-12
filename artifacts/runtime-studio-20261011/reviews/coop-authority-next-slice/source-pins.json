@@ -1,0 +1,53 @@
+{
+  "inspection_head": "99424d9473679d3a2c4b0036e1d981325a82b42d",
+  "root_head": "9c6431df204f4ab094c0ef9bc7606bdec1125a90",
+  "unchanged_reviewed_sources_since_inspection": true,
+  "scope": "Read-only actual-source verification; no new execution or runtime acceptance",
+  "pins": [
+    {
+      "path": "work/coop-seams-bounded-review.md",
+      "sha256": "4d1d8c2953e65fefc41ad384c729ba202878106301490e06142fa61b86962633",
+      "bytes": 4923
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "sha256": "94e68fd488248c7b33eca873398d6bfb55652e7e56ddaf0c685616d8fcda848a",
+      "bytes": 195961
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "sha256": "901f3dedf5afa052a9e278ee0a8bee87862e0469d36694bfe33e7fd43189ea74",
+      "bytes": 53725
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "sha256": "02abf186a105b8bbbb6b180c7edad4d65c28a716e5a3fc692eb6601dbea0707d",
+      "bytes": 24849
+    },
+    {
+      "path": "crates/game_core/src/abilities.rs",
+      "sha256": "8f023ca505874d83f5764800ec09dd5cb5913e09fd74be0ab6423a7bd6eb6f4c",
+      "bytes": 15353
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "sha256": "a836e13fe1dd767d07eee37b976be30d65ee6adbafa6192cd812762ea73c0f23",
+      "bytes": 31409
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "e61a4a21ad9df5e2d59f1d4bc0ae547b8be42024e834f86c1eb7418fb29d579c",
+      "bytes": 78953
+    },
+    {
+      "path": "apps/game/src/storage.ts",
+      "sha256": "f5f28600db5b3e13dc19c1402f3a7c125f434b548ac60790e7ba70be75840200",
+      "bytes": 33930
+    }
+  ],
+  "report": {
+    "path": "REVIEW.md",
+    "sha256": "8a3e62ccc8426d90cc9676bc55b6aa80fac45c9498fba14e987e7f9d3cea38a2",
+    "bytes": 8928
+  }
+}

@@ -1,0 +1,22 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.57s
+     Running unittests src\lib.rs (target\debug\deps\game_web-c9f299337784de44.exe)
+
+running 2 tests
+
+thread 'dock_art::tests::actual_hub_gap_and_live_shadow_projection_survive_fractional_zoom_and_rebase' (34884) panicked at crates\game_web\src\dock_art_tests.rs:186:9:
+assertion `left == right` failed
+  left: [1, 2, 4, 1]
+ right: [1, 1, 4, 1]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test dock_art::tests::actual_hub_gap_and_live_shadow_projection_survive_fractional_zoom_and_rebase ... FAILED
+test dock_art::tests::actual_hub_gap_blocks_live_shadow_rays_without_adding_receiver_or_quad ... ok
+
+failures:
+
+failures:
+    dock_art::tests::actual_hub_gap_and_live_shadow_projection_survive_fractional_zoom_and_rebase
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 299 filtered out; finished in 0.71s
+
+error: test failed, to rerun pass `-p game_web --lib`

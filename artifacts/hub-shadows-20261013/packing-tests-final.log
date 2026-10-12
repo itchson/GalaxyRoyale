@@ -1,0 +1,15 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.07s
+     Running unittests src\lib.rs (target\debug\deps\game_web-c9f299337784de44.exe)
+
+running 2 tests
+test shadow_uniforms::tests::split_std140_layout_matches_portable_uniform_limits ... ok
+test shadow_uniforms::tests::light_selection_uses_actual_filtering_cap_and_camera_rebased_inverse ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 297 filtered out; finished in 0.00s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-d5d06e267cbae6bd.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

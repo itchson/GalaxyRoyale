@@ -1,0 +1,31 @@
+{
+  "source_commit": "60934969913ad1e49a3ce4b2b63af514d890518b",
+  "scope": "read-only source review, actual focused native tests and supplied persisted collection images; no browser/network/device acceptance",
+  "evidence": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 4838,
+      "sha256": "037f8f746f9c15254ca6c88e0a3dfe8739b8f0b7ff43d9e07f1909f853ea16e1"
+    },
+    {
+      "path": "source-pins.json",
+      "bytes": 3943,
+      "sha256": "ae813d885a075d6e11dfdcc761aad4246b666df71739b700c57629a061bd8f96"
+    },
+    {
+      "path": "focused-native.log",
+      "bytes": 2109,
+      "sha256": "76197588b85f0cc9db66decf0060029327d6565a0f589c643965e7dc4968d7fb"
+    },
+    {
+      "path": "COLLECTION_IMAGE_REVIEW.md",
+      "bytes": 1936,
+      "sha256": "b82f8e59a7a7cd1b479a6e185a3093462c0c494e713affbfd412e5d66078d844"
+    },
+    {
+      "path": "collection-image-pins.json",
+      "bytes": 970,
+      "sha256": "00e23e5b063b33201f05d7218ba094835f9022d6a3051798973d48d08d477c0a"
+    }
+  ]
+}

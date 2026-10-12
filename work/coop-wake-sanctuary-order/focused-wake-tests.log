@@ -1,0 +1,34 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.26s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 15 tests
+actual_legacy_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,null],"trained_starter":false,"relic_count":0}
+test co_op::wake_tests::safe_owner_and_safe_targets_age_trails_without_damage_or_birth ... ok
+test co_op::wake_tests::evolution_five_connects_short_samples_but_never_crosses_sanctuary_or_large_gap ... ok
+actual_coop_enemy_health=99.9; ordinary_ion_wake_expected=99.9
+test co_op::wake_tests::overlapping_trails_kill_once_in_slot_order_and_restore_enclosing_owner ... ok
+actual_guest_wake_destroyed_entity=0000000100000002; owner=00000000000000000000000000000002; epoch=2
+test co_op::wake_tests::distant_misses_and_remote_protected_geometry_hits_preserve_real_damage ... ok
+test co_op::wake_tests::admitted_ordinary_ion_wake_damages_real_enemy_during_fast_host_tick ... ok
+test co_op::wake_tests::guest_wake_real_destruction_has_membership_attribution_without_save_grants ... ok
+actual_wake_export_evolution_1={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0}
+actual_wake_export_evolution_2={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":2}
+actual_wake_export_evolution_3={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":3}
+test co_op::wake_tests::guest_owned_rank_obeys_actual_ship_xp_caps ... ok
+actual_wake_export_evolution_4={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":4}
+actual_wake_export_evolution_5={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":5}
+test co_op::wake_tests::wake_wire_exports_effect_claim_only_and_keeps_legacy_omission_bytes ... ok
+test co_op::wake_tests::threshold_and_ordinary_equipment_gate_do_not_activate_champion_wake ... ok
+test co_op::wake_tests::stale_input_stops_births_and_pause_keeps_effect_phase_unchanged ... ok
+actual_native_host_wake_samples=1; actual_rendered_wake_dots=5
+test co_op::wake_tests::admitted_live_wake_samples_have_real_host_pixel_quads ... ok
+test co_op::wake_tests::wake_targets_only_hostiles_and_preserves_boss_armor_and_pixel_bodies ... ok
+test co_op::wake_tests::death_leave_rejoin_and_session_end_drop_all_membership_trails ... ok
+actual_real_coop_ticks=300; pilots=8; samples<=192; lights<=32; events<=128; wake_projectiles=0
+test co_op::wake_tests::eight_real_pilot_ticks_keep_builds_independent_and_resources_bounded ... ok
+actual_solo_differential=25 builds; 360 active + 210 stationary fixed wake stages each
+test co_op::wake_tests::ordinary_rank_and_evolution_match_solo_damage_cadence_samples_and_expiry ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 541 filtered out; finished in 0.20s
+

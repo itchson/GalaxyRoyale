@@ -1,0 +1,76 @@
+{
+  "source_commit": "7d3673e3a2f051aeefac6540e443ef7fc5d0ad9c",
+  "domain": "Raw local evidence bytes; runtime source/reference pins have their explicitly separate domains.",
+  "files": [
+    {
+      "path": "build.log",
+      "bytes": 2938,
+      "sha256": "f4f2ca4129b848cd85e2967a984163717adaf911c6964d5633b83e6288e95c1f"
+    },
+    {
+      "path": "dock-runtime-benchmark.exe",
+      "bytes": 4302848,
+      "sha256": "8c5c43b68275cbca46d554499f047b370a69e8556ef24839369e7d4dc80cbd9a"
+    },
+    {
+      "path": "dock-runtime-benchmark.pdb",
+      "bytes": 1847296,
+      "sha256": "e5a3639a9f1da89072d2c307d173f7212535a9105520ce04f76ac788db70e5fa"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 3345,
+      "sha256": "6c435951a19a0b846448abc347b31d1b0c15ac6c056550afce6ea49e7f479932"
+    },
+    {
+      "path": "input-and-results-pins.json",
+      "bytes": 4420,
+      "sha256": "5fbef36be5a89b26cde23e41dad5d7d3f79196b86727b71aa3820dd4a38d272b"
+    },
+    {
+      "path": "platform.json",
+      "bytes": 943,
+      "sha256": "732cedac354de15ee9fa5a21b59ba6accca0d9eee932c78489705c23ae295d73"
+    },
+    {
+      "path": "probe-build-record.json",
+      "bytes": 628,
+      "sha256": "2bd2d4fe79930f1b8b387eecd9cac2efb0294a4c5673c53fb7849b7a6a8871a0"
+    },
+    {
+      "path": "probe.rs",
+      "bytes": 6789,
+      "sha256": "34832d60002089aec66f25dce5470b2b0de6e56cb6bf73e5ce65354c35212fbb"
+    },
+    {
+      "path": "summarize.py",
+      "bytes": 4720,
+      "sha256": "4e34fc0356a7c80bc9c8014787a06848522c771065f390e43115a6e70c6b7c53"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 11184,
+      "sha256": "cbb50836f733c1fc8721cacaf0fca59a515e0e18989c812d3d96a6aaca5b6a23"
+    },
+    {
+      "path": "table.md",
+      "bytes": 1100,
+      "sha256": "1c16eae2e67e5a25cd349ac30c3ac668d338f754216d28f0f349ce8b733a6d58"
+    },
+    {
+      "path": "trial-0.json",
+      "bytes": 11812,
+      "sha256": "0df7d46c99740c5050b0e8311afdbe59ae57224faa454da134e81bc38a0ad499"
+    },
+    {
+      "path": "trial-1.json",
+      "bytes": 11815,
+      "sha256": "ce94de842a7067f5605bdbfe7a08eef65bceb65245afdd86bdea5219dcc835da"
+    },
+    {
+      "path": "trial-2.json",
+      "bytes": 11817,
+      "sha256": "eb6e5b7ef7e480caac3da80b13ef31b8c714965f972b8af43e7d71057c7ee869"
+    }
+  ]
+}

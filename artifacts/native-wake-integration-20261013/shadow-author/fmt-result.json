@@ -1,0 +1,4 @@
+{
+  "exit_code": 0,
+  "command": "rustfmt --edition 2024 --check crates/game_web/src/dock_art_tests.rs"
+}

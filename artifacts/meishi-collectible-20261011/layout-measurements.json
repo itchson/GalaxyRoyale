@@ -1,0 +1,66 @@
+[
+  {
+    "viewport": [
+      480,
+      700
+    ],
+    "closeBottom": 59.80000019073486,
+    "contentTop": 66.80000305175781,
+    "controls": [
+      "Close MEISHI card"
+    ],
+    "height": 602,
+    "scrollHeight": 620,
+    "scrollWidth": 404,
+    "wells": 8,
+    "width": 404
+  },
+  {
+    "viewport": [
+      848,
+      390
+    ],
+    "closeBottom": 73.07500076293945,
+    "contentTop": 80.07500457763672,
+    "controls": [
+      "Close MEISHI card"
+    ],
+    "height": 272,
+    "scrollHeight": 272,
+    "scrollWidth": 770,
+    "wells": 8,
+    "width": 770
+  },
+  {
+    "viewport": [
+      601,
+      560
+    ],
+    "closeBottom": 132.375,
+    "contentTop": 139.375,
+    "controls": [
+      "Close MEISHI card"
+    ],
+    "height": 323,
+    "scrollHeight": 323,
+    "scrollWidth": 536,
+    "wells": 8,
+    "width": 536
+  },
+  {
+    "viewport": [
+      320,
+      568
+    ],
+    "closeBottom": 59.80000019073486,
+    "contentTop": 66.80000305175781,
+    "controls": [
+      "Close MEISHI card"
+    ],
+    "height": 470,
+    "scrollHeight": 624,
+    "scrollWidth": 256,
+    "wells": 8,
+    "width": 256
+  }
+]

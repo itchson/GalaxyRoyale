@@ -1,0 +1,208 @@
+{
+  "schema": 1,
+  "runtimeCommit": "f3a723081033a2cdd9bab15e37241fe334530716",
+  "generatedAt": "2026-10-11T14:21:20.554Z",
+  "scope": "Actual evidence; supplied QA profiles are not naturally earned progression. Historical source pins and software/native/GPU distinctions remain in individual reports.",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "art-review/collect-pins.py",
+      "bytes": 2135,
+      "sha256": "a800343afcefce6ea406eb38936fa425e6a50aaad89e5f840caec7497eafada6"
+    },
+    {
+      "path": "art-review/native-tests.log",
+      "bytes": 2059,
+      "sha256": "a0866a47b2de18521d4ab96a09cec38c378918fc24176993d47289f82a7a68a4"
+    },
+    {
+      "path": "art-review/pins.json",
+      "bytes": 5314,
+      "sha256": "16f12be62497a226e485a6a51c8323adf71c52c09c7950e9322f0e7e6761d130"
+    },
+    {
+      "path": "art-review/REVIEW.md",
+      "bytes": 4722,
+      "sha256": "fe182a1f96bdac53005db4d2a1bec536d8625a2595f8ab19ff2eb1304998df68"
+    },
+    {
+      "path": "art-review/shell-tests.log",
+      "bytes": 660,
+      "sha256": "65e93d0697f058160b9d4a9c417942a0b68f7014b0d3cc69d3f98da0bd8ffd0d"
+    },
+    {
+      "path": "component-upgrade-after-reload.txt",
+      "bytes": 2516,
+      "sha256": "ef6e3e36c1bd25704b46bea49ea91d9a767368a28f9f60c16e81cd437acd97b6"
+    },
+    {
+      "path": "components-browser-fixture.json",
+      "bytes": 5060,
+      "sha256": "16d8598cc8d9f0630d04b7459019a8988e1b130d290010bf1e90af4247580307"
+    },
+    {
+      "path": "cpu-benchmark/build.log",
+      "bytes": 2938,
+      "sha256": "f4f2ca4129b848cd85e2967a984163717adaf911c6964d5633b83e6288e95c1f"
+    },
+    {
+      "path": "cpu-benchmark/frozen-hashes.json",
+      "bytes": 2378,
+      "sha256": "99f4b9a0975ee9fb8823eaebd91039c95c8602e2fcdc494e1ec0831784e97c77"
+    },
+    {
+      "path": "cpu-benchmark/HANDOFF.md",
+      "bytes": 3345,
+      "sha256": "6c435951a19a0b846448abc347b31d1b0c15ac6c056550afce6ea49e7f479932"
+    },
+    {
+      "path": "cpu-benchmark/input-and-results-pins.json",
+      "bytes": 4420,
+      "sha256": "5fbef36be5a89b26cde23e41dad5d7d3f79196b86727b71aa3820dd4a38d272b"
+    },
+    {
+      "path": "cpu-benchmark/platform.json",
+      "bytes": 943,
+      "sha256": "732cedac354de15ee9fa5a21b59ba6accca0d9eee932c78489705c23ae295d73"
+    },
+    {
+      "path": "cpu-benchmark/probe-build-record.json",
+      "bytes": 628,
+      "sha256": "2bd2d4fe79930f1b8b387eecd9cac2efb0294a4c5673c53fb7849b7a6a8871a0"
+    },
+    {
+      "path": "cpu-benchmark/probe.rs",
+      "bytes": 6789,
+      "sha256": "34832d60002089aec66f25dce5470b2b0de6e56cb6bf73e5ce65354c35212fbb"
+    },
+    {
+      "path": "cpu-benchmark/summarize.py",
+      "bytes": 4720,
+      "sha256": "4e34fc0356a7c80bc9c8014787a06848522c771065f390e43115a6e70c6b7c53"
+    },
+    {
+      "path": "cpu-benchmark/summary.json",
+      "bytes": 11184,
+      "sha256": "cbb50836f733c1fc8721cacaf0fca59a515e0e18989c812d3d96a6aaca5b6a23"
+    },
+    {
+      "path": "cpu-benchmark/table.md",
+      "bytes": 1100,
+      "sha256": "1c16eae2e67e5a25cd349ac30c3ac668d338f754216d28f0f349ce8b733a6d58"
+    },
+    {
+      "path": "cpu-benchmark/trial-0.json",
+      "bytes": 11812,
+      "sha256": "0df7d46c99740c5050b0e8311afdbe59ae57224faa454da134e81bc38a0ad499"
+    },
+    {
+      "path": "cpu-benchmark/trial-1.json",
+      "bytes": 11815,
+      "sha256": "ce94de842a7067f5605bdbfe7a08eef65bceb65245afdd86bdea5219dcc835da"
+    },
+    {
+      "path": "cpu-benchmark/trial-2.json",
+      "bytes": 11817,
+      "sha256": "eb6e5b7ef7e480caac3da80b13ef31b8c714965f972b8af43e7d71057c7ee869"
+    },
+    {
+      "path": "dock-components-wasm-contract.log",
+      "bytes": 1121,
+      "sha256": "b1ee841b8c73f82ee3443db3129184f93afb03672054171d9d8bacfe1fab031e"
+    },
+    {
+      "path": "dock-pan-webgl2-1280.png",
+      "bytes": 46288,
+      "sha256": "fda9228a86584e38e97d4b6be0cbabea8d8a6e80adedd8bc22d47ce1695ee573"
+    },
+    {
+      "path": "dock-pan-webgpu-1280.png",
+      "bytes": 46801,
+      "sha256": "fc7af8749e190c25cafcf3a686baf82834d191212148126fd168e560395daac6"
+    },
+    {
+      "path": "engine-review/focused-storage-workshop-tests.log",
+      "bytes": 1323,
+      "sha256": "719ab13d180807fb63a8b4698e520134e820dde87ee0e157a59f56e62e3f03f7"
+    },
+    {
+      "path": "engine-review/frozen-hashes.json",
+      "bytes": 1179,
+      "sha256": "a443f81c0328b090930c04f00e5f535460ecce5306a1d98b7fb3ca29b91ea5e0"
+    },
+    {
+      "path": "engine-review/MEISHI_BUDGET_NOTE.md",
+      "bytes": 2973,
+      "sha256": "7e6bdb88c59ab48c60253595636b1e05f01927933f3c062371af90fc0296c225"
+    },
+    {
+      "path": "engine-review/meishi-budget-hashes.json",
+      "bytes": 437,
+      "sha256": "e7f581cf35ad6532d5a39b08379335e01c6485a911b5b2c592fd3b89c6c3f7c7"
+    },
+    {
+      "path": "engine-review/meishi-budget-source-pins.json",
+      "bytes": 1089,
+      "sha256": "9dd830b9b241ffc3914377bf6870926bcb8500ef27acd8ec80db6e3bcc8fa001"
+    },
+    {
+      "path": "engine-review/REVIEW.md",
+      "bytes": 3610,
+      "sha256": "bc3c1663e95852b117c6c1edffa79daa3f360bd655b9301821874c877d27b812"
+    },
+    {
+      "path": "engine-review/reviewed-root-diff.patch",
+      "bytes": 25167,
+      "sha256": "1cc4ef8c62631f789d629b52ff22b0ec4393b6efdc885a83f7a2e244548ae8d2"
+    },
+    {
+      "path": "engine-review/source-memory-and-work.json",
+      "bytes": 754,
+      "sha256": "50441424926afc23686fdee805c3d87761fe35311141185905a237220b8ba885"
+    },
+    {
+      "path": "engine-review/source-pins-after.json",
+      "bytes": 2508,
+      "sha256": "74f7cbe4ab3f73871a3c2dd841e49d162587e8834b11ea6d42aa1164f872a208"
+    },
+    {
+      "path": "engine-review/source-pins-before.json",
+      "bytes": 2564,
+      "sha256": "0f0dbae2a7f65dfbc7622776a7123ab9a0777e1ede879e3f46d041df56695711"
+    },
+    {
+      "path": "pulse-lens-reloaded-webgpu.png",
+      "bytes": 99131,
+      "sha256": "f358f7ab85a8ee50e77de4c7f6a2771ef301b978d5e84d5498e40a78e6e65c37"
+    },
+    {
+      "path": "pulse-lens-upgraded-webgpu.png",
+      "bytes": 100066,
+      "sha256": "10d56199ae4326c60f56f5948127858f4c200e6ca948b1c2550453c56e79b7bb"
+    },
+    {
+      "path": "qa-export-after-upgrade.json",
+      "bytes": 5057,
+      "sha256": "74af867c608d3f941f6ab3212066f91f6f0d15fd613aca452d327563f6ff6ff9"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3113,
+      "sha256": "704e9d89a738f9b57ebcc70327a3a9ced5406f862a798f773d7c855e2bb3f5a9"
+    },
+    {
+      "path": "workshop-crafted-webgpu.png",
+      "bytes": 108734,
+      "sha256": "7767139a9cd06f697d00a7c987141984a9843d905981a952339a4b39736840cd"
+    },
+    {
+      "path": "workshop-webgpu-investigate.png",
+      "bytes": 108538,
+      "sha256": "d805ce5e937cb9c472ab23a6be1146c08a6a3a3b9636509ddccedc2598e64bd0"
+    }
+  ]
+}

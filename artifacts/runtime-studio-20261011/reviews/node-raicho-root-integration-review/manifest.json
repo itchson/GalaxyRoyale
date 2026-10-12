@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "commits": {
+    "node": "091751fc212d27594b6dd4a60eb4d2b2b4e781b9",
+    "helper": "a50aab678c98466e8c54838e39ca5a40a9f2b1b7",
+    "hook": "8242c09650482a15019e8e1f0f96b35debed8d58",
+    "review_head": "77442770e4abd9d6e36e9691df65512e385f6aa2"
+  },
+  "scope": "Independent read-only integrated source and retained Root evidence review; no execution/build/browser/package verification",
+  "files": [
+    {
+      "path": "helper-commit.txt",
+      "bytes": 269,
+      "sha256": "3c62aa38407fd22a3f86abe792bea65c35a679be4e0a5c904c65c4208666dc8f",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "helper.patch",
+      "bytes": 31967,
+      "sha256": "f0aec201192505f9cd8c3b480e4fd655b1a253b26d5b21c737650f671c3430b4",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "hook-commit.txt",
+      "bytes": 274,
+      "sha256": "622a861d1a03f0183bde619d402f397af5aeea7b3a34dabd6c0d907186c9632d",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "hook.patch",
+      "bytes": 7347,
+      "sha256": "2e854778fc8f250c8884b771ebdbbc541f6c688fab5f5749db331ef122836087",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "node-commit.txt",
+      "bytes": 268,
+      "sha256": "4fa3fc2257f4028e178752d51a46bf097ec15c77bde2fe187b762b77532da572",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "node.patch",
+      "bytes": 30321,
+      "sha256": "e0c76b230cb1024c6ae72f21f62befe3f18e5b14e45241c5b4c5616b1a45ce21",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "nodes-fine-ui-clippy-native.log",
+      "bytes": 265,
+      "sha256": "777ce1bc2a3c717db573f9d723f139efd51643bcef277ae8e96ce353663af899",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "nodes-fine-ui-clippy-webgl.log",
+      "bytes": 168,
+      "sha256": "0f490d882043a1a5f4a631d26373f89313714296c26489db4a7893ace4ed24ab",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "nodes-fine-ui-clippy-webgpu.log",
+      "bytes": 265,
+      "sha256": "1fc9320cecd754a98ce7dc9d474516861c9da94bac6ba05f1abd64990ae61f81",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "nodes-fine-ui-native.log",
+      "bytes": 66191,
+      "sha256": "46a766a1c06647af82ef121265ead6d2b425734e8bddd739793c0f3210a1d626",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "raicho-game-hook.log",
+      "bytes": 587,
+      "sha256": "7f95095a9b9699effaa2ec9fbe65344d67e01ed7d2c06cc24293963d4c5bf387",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 4834,
+      "sha256": "a02e87b64680d2d58fccabbbc4b11c4eb235ebfdee13de3b39d991d70f8e2f51",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "review_head-commit.txt",
+      "bytes": 274,
+      "sha256": "f69d8d545635d03dcce540818b433e4f5b6886c0a6aa0f2f4eee7e36a1259873",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/assets/pixels/raicho-fine-detail/atlas.json",
+      "bytes": 230223,
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/assets/pixels/raicho-fine-detail/provenance.json",
+      "bytes": 4018,
+      "sha256": "708ca2395e455dcc0e50c773a81a655f8f555345f5eba44bbfcfcbea0cdeea4b",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/Cargo.lock",
+      "bytes": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/Cargo.toml",
+      "bytes": 447,
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/engine_core/Cargo.toml",
+      "bytes": 242,
+      "sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/engine_core/src/transform.rs",
+      "bytes": 5578,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/Cargo.toml",
+      "bytes": 285,
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/audio_runtime.rs",
+      "bytes": 19456,
+      "sha256": "77b46a8dc815347df8625262a099bdf7d9fd7c3a6ca3e5ce56b6171c3fa8c171",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52387,
+      "sha256": "c3caa928f345345b0ddad757ecd152b1b29d7904c40579d0e4d09aa77a5c2d11",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/champion_roster_tests.rs",
+      "bytes": 10813,
+      "sha256": "c1a895b1943a6b587ccd03f79fc4a8cc7ee340e1a2acff96f28e34cb420859db",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/identity.rs",
+      "bytes": 27493,
+      "sha256": "f967778a6061578c984a74cec9a7052d0ac6d90783e998bbfdd4273c378337c4",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/lib.rs",
+      "bytes": 195961,
+      "sha256": "94e68fd488248c7b33eca873398d6bfb55652e7e56ddaf0c685616d8fcda848a",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/player_presentation.rs",
+      "bytes": 7858,
+      "sha256": "81627fa126d52dcde90a84a979c597893790a64301d70454c780e76d069c432d",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/raicho_draw_tests.rs",
+      "bytes": 3601,
+      "sha256": "a09ed61d0cf4edad12221cd9c6caeb5772709171b61fdb2d101f0dc9d77b01d8",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/raicho_fine.rs",
+      "bytes": 13818,
+      "sha256": "2b0708400999c46a1c6091ae1eb6b2fd211e7c69fdc5f2e0a6f012f6c15d1552",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/raicho_fine_tests.rs",
+      "bytes": 16407,
+      "sha256": "fd3670de3e336e76b8090b1e20353e9af3d7627fc9715f954d71721575fd6252",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/region_node_tests.rs",
+      "bytes": 19463,
+      "sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/crates/game_core/src/regions.rs",
+      "bytes": 34292,
+      "sha256": "8eec4107e3d5cb5e5c039fae563d44f92e0394a50fed5f526a11bf5b824457bf",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source-checks.json",
+      "bytes": 7867,
+      "sha256": "d47797d19e8150612db9d903fef730cf9aa3038a24f7879fbdc333131ce563b7",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 930,
+      "sha256": "79b00e878b4d9a481233ad4253f4e13df78984e54cbc649a879274c412ce4a93",
+      "domain": "raw frozen bytes"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "status": "authored display vocabulary; runtime integration is owned separately",
+  "authority": "User canon defines the fiction; lexical sources establish Japanese readings and senses only.",
+  "display_policy": {
+    "script": "ASCII Latin letters",
+    "case": "uppercase canonical terms and model names",
+    "first_introduction": "Include a short functional English gloss.",
+    "long_vowels": "KESSHO and RAICHO intentionally omit macrons in game labels. Source readings remain documented.",
+    "alias_scope": "Historical display aliases are exact labels, not substring replacements or save identifiers."
+  },
+  "terms": [
+    {
+      "id": "kikai",
+      "display": "KIKAI",
+      "introduction": "KIKAI / technological species",
+      "japanese": {"written": "機械", "kana": "きかい", "romanization": "kikai"},
+      "lexical_sense": "machine",
+      "game_sense": "The technological species descended from biological humanity in Galaxy Royale.",
+      "fictional_extension": true,
+      "prior_vocabulary": ["technological species"],
+      "sources": ["daijisen-kikai"]
+    },
+    {
+      "id": "kessho",
+      "display": "KESSHO",
+      "introduction": "KESSHO / crystal",
+      "japanese": {"written": "結晶", "kana": "けっしょう", "romanization": "kesshō", "source_ascii": "Kessho"},
+      "lexical_sense": "crystal",
+      "game_sense": "Crystal vocabulary used for KIKAI crystal horns and named crystal resources; existing material tiers remain authoritative.",
+      "fictional_extension": false,
+      "prior_vocabulary": ["crystal", "crystals"],
+      "sources": ["ndl-kessho"]
+    },
+    {
+      "id": "raicho",
+      "display": "RAICHO",
+      "introduction": "RAICHO / flight craft",
+      "japanese": {"written": "雷鳥", "kana": "らいちょう", "romanization": "raichō"},
+      "lexical_sense": "rock ptarmigan; the Japanese name literally means thunder bird",
+      "game_sense": "The fictional flight craft piloted by KIKAI, named with thunder-bird inspiration.",
+      "fictional_extension": true,
+      "prior_vocabulary": ["ship", "jet", "spacecraft"],
+      "sources": ["jta-raicho"],
+      "usage_guard": "RAICHO is not the standard Japanese word for spacecraft and does not identify the game craft with a real-world mythological Thunderbird tradition."
+    }
+  ],
+  "starter_models": [
+    {
+      "corporation": "pan",
+      "display_name": "PAN HIKARI",
+      "model": "HIKARI",
+      "introduction": "PAN HIKARI / RAICHO flight craft",
+      "japanese": {"written": "光", "kana": "ひかり", "romanization": "hikari"},
+      "influence": "light",
+      "role": "Passive",
+      "starter_ability_id": "flux-drive",
+      "starter_hull_id": 0,
+      "historical_display_aliases": ["PAN Pathfinder", "PAN PATHFINDER"],
+      "sources": ["daijisen-hikari"]
+    },
+    {
+      "corporation": "renko",
+      "display_name": "RENKO HIBANA",
+      "model": "HIBANA",
+      "introduction": "RENKO HIBANA / RAICHO flight craft",
+      "japanese": {"written": "火花", "kana": "ひばな", "romanization": "hibana"},
+      "influence": "spark",
+      "role": "Offensive",
+      "starter_ability_id": "pulse-lens",
+      "starter_hull_id": 0,
+      "historical_display_aliases": ["RENKO Lancer", "RENKO LANCER"],
+      "sources": ["daijisen-hibana"]
+    },
+    {
+      "corporation": "hugo",
+      "display_name": "HUGO MAMORI",
+      "model": "MAMORI",
+      "introduction": "HUGO MAMORI / RAICHO flight craft",
+      "japanese": {"written": "守り", "kana": "まもり", "romanization": "mamori"},
+      "influence": "guarding and protection",
+      "role": "Defensive",
+      "starter_ability_id": "guard-coil",
+      "starter_hull_id": 0,
+      "historical_display_aliases": ["HUGO Bulwark", "HUGO BULWARK"],
+      "sources": ["daijisen-mamori"]
+    }
+  ],
+  "identity_rules": {
+    "main_manufacturer": "Hair color, main RAICHO manufacturer and the existing single starter ability.",
+    "sub_manufacturer": "Crystal horn color; no extra starter ability or combat bonus.",
+    "sponsor": "Arena sponsorship is independent of main/sub manufacturers, appearance, license and ability grants.",
+    "rename_scope": "Three corporation starter display models only. Champion and later hull names require a separate authored review.",
+    "protected_champion_display_names": ["Bulwark"],
+    "unchanged_identifiers": ["pan", "renko", "hugo", "dora", "doro", "talo", "hex_id", "selected_ship", "ship_xp", "loadouts", "pulse-lens", "guard-coil", "flux-drive"],
+    "save_migration_required": false
+  },
+  "sources": [
+    {
+      "id": "daijisen-kikai",
+      "title": "Digital Daijisen: 機械 (kikai)",
+      "publisher": "Shogakukan; dictionary entry hosted by Kotobank",
+      "url": "https://kotobank.jp/word/%E6%A9%9F%E6%A2%B0-49964",
+      "checked_on": "2026-10-11",
+      "supports": "Japanese machine sense and kikai reading, not the fictional species."
+    },
+    {
+      "id": "ndl-kessho",
+      "title": "Web NDL Authorities: 結晶",
+      "publisher": "National Diet Library, Japan",
+      "url": "https://id.ndl.go.jp/auth/ndlsh/00565650",
+      "checked_on": "2026-10-11",
+      "supports": "ケッショウ reading, Kessho ASCII transliteration and Crystals equivalent."
+    },
+    {
+      "id": "jta-raicho",
+      "title": "Rock Ptarmigans",
+      "publisher": "Japan Tourism Agency",
+      "url": "https://www.mlit.go.jp/tagengo-db/en/R3-00356.html",
+      "checked_on": "2026-10-11",
+      "supports": "Raichō names the rock ptarmigan and means thunder bird; no spacecraft sense."
+    },
+    {
+      "id": "daijisen-hikari",
+      "title": "Digital Daijisen: 光 (hikari)",
+      "publisher": "Shogakukan; dictionary entry hosted by Kotobank",
+      "url": "https://kotobank.jp/word/%E5%85%89-119206",
+      "checked_on": "2026-10-11",
+      "supports": "Hikari reading and light sense."
+    },
+    {
+      "id": "daijisen-hibana",
+      "title": "Digital Daijisen: 火花 (hibana)",
+      "publisher": "Shogakukan; dictionary entry hosted by Kotobank",
+      "url": "https://kotobank.jp/word/%E7%81%AB%E8%8A%B1-612158",
+      "checked_on": "2026-10-11",
+      "supports": "Hibana reading and spark sense."
+    },
+    {
+      "id": "daijisen-mamori",
+      "title": "Digital Daijisen: 守り (mamori)",
+      "publisher": "Shogakukan; dictionary entry hosted by Kotobank",
+      "url": "https://kotobank.jp/word/%E5%AE%88%E3%82%8A-635824",
+      "checked_on": "2026-10-11",
+      "supports": "Mamori reading and guarding/defense sense; the model uses this secular sense."
+    }
+  ]
+}

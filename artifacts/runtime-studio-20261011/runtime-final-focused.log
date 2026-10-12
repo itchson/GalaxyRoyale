@@ -1,0 +1,14 @@
+✔ OS lease rejects a concurrent runtime and is reusable after idempotent close (14.5678ms)
+✔ OS releases the lease when its actual child process is killed (59.2877ms)
+✔ failed service closes its actual sibling before supervision completes (39.5157ms)
+✔ explicit stop waits for every owned child and reports a clean stop (6.8544ms)
+✔ owned game listener detection excludes other projects, Studio and QA tools (0.7123ms)
+✔ build fingerprint catches cell source and packaged output edits; excluded generated inputs do not affect source (9.6109ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 172.9193

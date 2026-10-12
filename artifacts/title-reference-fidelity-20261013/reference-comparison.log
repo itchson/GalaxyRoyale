@@ -1,0 +1,37 @@
+{
+  "scope": "Actual decoded reference versus retained native V4 PCM, first42.68s. Bands normalized within30\u201316000Hz: independent of level. Different arrangement/phase means these are descriptive mix diagnostics, not perceptual or note-fidelity scores.",
+  "reference": {
+    "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\title-reference-fidelity-20261013\\reference-stereo.wav",
+    "sha256": "5c48d1528353c3ab1b6d3d9973f3c4e152091e97b48bc459a7d3436e66f78900",
+    "sample_rate": 48000,
+    "measured_seconds": 42.68,
+    "peak": 0.5953323245048523,
+    "rms": 0.09954070467486391,
+    "rms_dbfs": -20.039985781921956,
+    "stereo_correlation": 0.7285594533276216,
+    "normalized_mono_band_power": {
+      "30-180Hz": 0.39167976035581115,
+      "180-700Hz": 0.13119948150556196,
+      "700-2000Hz": 0.30433927812323575,
+      "2000-6000Hz": 0.12522706012873286,
+      "6000-16000Hz": 0.047554419886658345
+    }
+  },
+  "draft_v4": {
+    "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\title-fullness-v4\\captures\\qa-1791838846520-3f539dcd\\title-score.wav",
+    "sha256": "0915228f591604806700c16c695066d7c33b34cbbb7f0daf33d39daa5ef419c2",
+    "sample_rate": 48000,
+    "measured_seconds": 42.68,
+    "peak": 0.16148746013641357,
+    "rms": 0.025039604781589567,
+    "rms_dbfs": -32.02745060390417,
+    "stereo_correlation": 0.9867555027060794,
+    "normalized_mono_band_power": {
+      "30-180Hz": 0.5564119428055401,
+      "180-700Hz": 0.3066205850931255,
+      "700-2000Hz": 0.1294440399706919,
+      "2000-6000Hz": 0.007489980310244913,
+      "6000-16000Hz": 3.345182039764746e-05
+    }
+  }
+}

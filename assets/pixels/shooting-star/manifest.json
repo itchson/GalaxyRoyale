@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "provided",
+    "max_colors": 64,
+    "colors": [
+      0,
+      4281081875,
+      4282396957,
+      4283580969,
+      4284369966,
+      4285622365,
+      4286278723,
+      4286616471,
+      4287000900,
+      4288135903,
+      4288516195,
+      4290108404,
+      4290555251,
+      4290689166,
+      4291875509,
+      4292536025
+    ]
+  },
+  "sprites": [
+    {
+      "name": "nucleus",
+      "source": "source/nucleus.png",
+      "topology": "holes-allowed"
+    },
+    {
+      "name": "coma",
+      "source": "source/coma.png",
+      "topology": "holes-allowed"
+    }
+  ],
+  "provenance": {
+    "authoring": "Original explicit overhead nucleus facets, crater/grooves, heated rim and sparse coma mask",
+    "ai_generated": false,
+    "conversion": "Exact binary-alpha authored PNG; no resize, threshold, dithering or component removal",
+    "runtime": "Cached native PixelBody plus bounded analytic local tail; no Game/save/RNG authority"
+  }
+}

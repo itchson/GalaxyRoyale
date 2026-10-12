@@ -1,0 +1,100 @@
+{
+  "base": "d8ec6294976f54d26aab9ffaf5fc3dc251cb170a",
+  "branch": "codex/coop-wake-browser",
+  "handoff_sha256": "8d301e9f1964f4bbf4c8dffed9eac44eece7a406eaa98fb21baaeec4a962fb87",
+  "source_pins_sha256": "98014c2e5e8b663ee575e7063bc599c9a8085777ffe0186139f69e57ce3efa2d",
+  "scope": "Author source/Node/type checks only. Ephemeral HTTP test deviation retained distinctly; no normal build/browser/realRTC/physical acceptance.",
+  "final_checks": {
+    "typecheck_exit": 0,
+    "listener_free_tests_passed": 73,
+    "listener_free_tests_failed": 0,
+    "listener_free_tests_skipped": 0
+  },
+  "files": [
+    {
+      "path": "work/coop-wake-browser/check-results.json",
+      "bytes": 154,
+      "sha256": "1c5908ec204b72864efbc0299365ffbc9560b548ebae540041d50823b137bfd4"
+    },
+    {
+      "path": "work/coop-wake-browser/fixture-input-pins.json",
+      "bytes": 7083,
+      "sha256": "5794f30c6f7d17c0642ee6f1e9a1ceb1db5c73a231f46eef7a12a13a21ad0c55"
+    },
+    {
+      "path": "work/coop-wake-browser/fixture-output-pins.json",
+      "bytes": 5968,
+      "sha256": "eac2072e1b357948aa353607b47931a67b9698889f2538de1c36935377b21752"
+    },
+    {
+      "path": "work/coop-wake-browser/focused-first.log",
+      "bytes": 7800,
+      "sha256": "4ea9cfbb71c43e0ebdf8f459cd38294780182833f490cf40e4907550ec69558f"
+    },
+    {
+      "path": "work/coop-wake-browser/focused-second.log",
+      "bytes": 8998,
+      "sha256": "dd9c067da135b5ae67c7e8b45c948e12354c8addb12cf81747fdf8f07e8c0eb0"
+    },
+    {
+      "path": "work/coop-wake-browser/focused-third.log",
+      "bytes": 12173,
+      "sha256": "b6015e502c581dd91051a0d33779fdc63ea4d13fb2c3b046ec537763eea88c31"
+    },
+    {
+      "path": "work/coop-wake-browser/format-final-test.log",
+      "bytes": 44,
+      "sha256": "a9084fd5a44d9b6a60754b8272204a0bc72eb1314b5646f11ad0299d6429756a"
+    },
+    {
+      "path": "work/coop-wake-browser/format.log",
+      "bytes": 241,
+      "sha256": "f3cff8d7aca971afb84163e85895ee730fba621f32f3698c08f5800cd38cad47"
+    },
+    {
+      "path": "work/coop-wake-browser/HANDOFF.md",
+      "bytes": 9748,
+      "sha256": "8d301e9f1964f4bbf4c8dffed9eac44eece7a406eaa98fb21baaeec4a962fb87"
+    },
+    {
+      "path": "work/coop-wake-browser/listener-free-final.log",
+      "bytes": 8237,
+      "sha256": "3ca0e4ec8b01294519df54f42ee2b11b3bfc1bcf453aad5bce6c5087a59ddfe7"
+    },
+    {
+      "path": "work/coop-wake-browser/listener-free-pinned.log",
+      "bytes": 8338,
+      "sha256": "a28a511b31f83c7cc5383f1e5acfcb0f28d797e82bdeb66a5a55b9e54692451b"
+    },
+    {
+      "path": "work/coop-wake-browser/same-tick-fixture-original.mjs",
+      "bytes": 1415,
+      "sha256": "cacff217e8521a3ec30016d43ce693f114e5f273f2bac2370c886511538dc226"
+    },
+    {
+      "path": "work/coop-wake-browser/source-pins.json",
+      "bytes": 6235,
+      "sha256": "98014c2e5e8b663ee575e7063bc599c9a8085777ffe0186139f69e57ce3efa2d"
+    },
+    {
+      "path": "work/coop-wake-browser/studio-run.json",
+      "bytes": 1903,
+      "sha256": "e95159355f22453ad35bad2b60148a381116d5a22d0cadc035e5b91fa5673cb8"
+    },
+    {
+      "path": "work/coop-wake-browser/studio-task.json",
+      "bytes": 2726,
+      "sha256": "e7ec2b62772abd4ed5951612a5e0bd92f0c488c718ddc3933c161f6bc1b8f4ec"
+    },
+    {
+      "path": "work/coop-wake-browser/wire-baseline-failure.log",
+      "bytes": 6775,
+      "sha256": "f012ce9df2d20d3d79875a88cbeebcac13adfb76279d84c734b31f3bb94192c4"
+    },
+    {
+      "path": "work/coop-wake-browser/wire-first-implementation.log",
+      "bytes": 874,
+      "sha256": "5bfbebf531ddcba847cfe8372e4c5df2b36b084d42dca976aaf9c5b56365ae9c"
+    }
+  ]
+}

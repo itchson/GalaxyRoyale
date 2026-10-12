@@ -15,20 +15,20 @@
 .menu-card .forge-view p,
 .menu-card .ship-hangar-view p {
   margin: 0;
-  font-size: var(--ui-text);
+  font-size: var(--ui-caption);
   line-height: 1.35;
 }
 .loadout-summary,
 .ability-card,
+.component-card,
 .hardware-card,
 .ship-hangar-card {
   min-width: 0;
-  padding: calc(4px * var(--ui-scale, 1));
-  border: 1px solid #38556b;
-  background: #0a1423;
+  padding: calc(7px * var(--ui-scale, 1));
+  border: 1px solid #303c43;
+  background: #10181d;
 }
 .loadout-summary,
-.loadout-material-notes,
 .loadout-ship-summary,
 .loadout-card-content,
 .ability-list,
@@ -48,6 +48,38 @@
   gap: calc(5px * var(--ui-scale, 1));
   min-width: 0;
 }
+.collection-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(3px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.collection-filters button {
+  flex: 1 1 calc(72px * var(--ui-scale, 1));
+}
+.collection-filters button[data-selected="true"] {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.collection-summary,
+.collection-state {
+  color: #d4dce0;
+}
+.collection-heading {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.collection-symbol {
+  width: calc(16px * var(--ui-scale, 1));
+  height: calc(16px * var(--ui-scale, 1));
+  flex: 0 0 auto;
+}
+.collection-heading h3 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .loadout-slots {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -60,12 +92,18 @@
   gap: calc(6px * var(--ui-scale, 1));
   min-width: 0;
   padding: calc(4px * var(--ui-scale, 1));
-  border: 1px solid #38556b;
-  background: #0a1423;
+  border: 1px solid #303c43;
+  background: #10181d;
 }
 .loadout-slot .upgrade-category {
-  display: block;
   margin: 0 0 calc(3px * var(--ui-scale, 1));
+}
+.forge-view .upgrade-category {
+  display: grid;
+  grid-template-columns: calc(16px * var(--ui-scale, 1)) minmax(0, 1fr);
+  align-items: center;
+  justify-content: start;
+  gap: calc(5px * var(--ui-scale, 1));
 }
 .forge-view .upgrade-category p {
   color: inherit;
@@ -101,16 +139,37 @@
   color: var(--cyan);
 }
 .forge-view button[data-pixel-action="passive-button"] {
-  color: var(--amber);
+  color: #9fe18a;
 }
 .forge-view button[data-pixel-action]:disabled {
   color: #7891a5;
 }
 .ability-card,
+.component-card,
 .hardware-card {
   display: flex;
   flex-direction: column;
   gap: calc(3px * var(--ui-scale, 1));
+}
+.component-heading {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.component-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.component-card > button {
+  margin-top: auto;
+}
+.component-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
 }
 .ability-card[data-equipped="true"] {
   border-color: var(--cyan);
@@ -119,15 +178,20 @@
 .ship-hangar-view .loadout-recipe p {
   color: #b9cadd;
 }
+.loadout-recipe {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(3px * var(--ui-scale, 1));
+}
+.loadout-recipe > :only-child,
+.loadout-recipe > :nth-child(3) {
+  grid-column: 1 / -1;
+}
 .forge-view p.loadout-reason,
 .forge-view p.loadout-note,
 .ship-hangar-view p.loadout-reason,
 .ship-hangar-view p.loadout-note {
   color: #a2b0c9;
-}
-.forge-view p.loadout-loss,
-.ship-hangar-view p.loadout-loss {
-  color: var(--amber);
 }
 .ship-hangar-roster {
   display: grid;
@@ -154,6 +218,9 @@
   .ship-hangar-roster {
     grid-template-columns: minmax(0, 1fr);
   }
+  .loadout-recipe {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 @media (min-width: 600px) {
   .loadout-slots {
@@ -166,5 +233,21 @@
   }
   .loadout-slot > button {
     width: 100%;
+  }
+}
+
+.ability-summary,
+.ability-requirements {
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--ui-scale, 1));
+  min-width: 0;
+}
+@media (min-width: 800px) {
+  .ability-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: calc(10px * var(--ui-scale, 1));
+    align-items: start;
   }
 }

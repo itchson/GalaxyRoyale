@@ -1,0 +1,37 @@
+✔ actual negative child commands resolve the one current id, rotate only the host and require an exact boolean lock (18.714ms)
+✔ actual private room marks require a current committed epoch and retain no raw identities in observations (16.8487ms)
+✔ actual initialization wires private ownership counts to successful real bridge calls only (11.7921ms)
+✔ actual pending-only gate refuses RTC/native changes and never sends acceptance (15.0778ms)
+✔ actual terminal and approved continuity gates reject mismatched reasons, ownership changes and old commits (5.9221ms)
+✔ actual continuity requires a complete commit later than the post-policy reply floor, retaining original ownership marks (2.3872ms)
+✔ actual room observation rejects visibility loss during its awaited reply and preserves the hide-restore latch (11.437ms)
+✔ actual stopped native frame cannot complete a decline experiment from still-live controller state (12.8601ms)
+✔ actual room reads gate available child failure, initialization, disposal and lifetime signals only during the experiment (2.82ms)
+✔ actual preflight visibility latch rejects a hide-restore before any room mutation (5.4141ms)
+✔ actual room reply budget is finite and late replies cannot qualify after the action deadline (2.1383ms)
+✔ actual room command guards post-reply visibility while hidden terminal cleanup remains executable (9.0405ms)
+✔ actual replacement round tests approved continuity before guest leave and stale-code join, with one host create (4.894ms)
+✔ actual failed negative round retains its original failure, runs bounded cleanup and never records completion (3.1404ms)
+✔ actual round refuses insufficient native lifetime or a second completed case before any room mutation (3.1407ms)
+✔ actual lock round cancels pending and locked lookup before unlocked acceptance, then retains the approved guest across both policies (3.0133ms)
+✔ actual report allowlist admits bounded named room checks while excluding private command replies (9.7644ms)
+✔ actual create command and reply preserve controlled admission limits without exposing arbitrary reasons (27.2689ms)
+✔ actual successful create command retains its private grant shape (2.3847ms)
+✔ starter choice keeps defaults and refuses nonempty saves before optional RENKO registration (0.9901ms)
+✔ verifier counts admitted events, binds owner/epoch, proves fifth and tenth and refuses replay (0.9486ms)
+✔ ambiguous, saturated, missing, reused, mismatched and stale observations remain inconclusive (0.2559ms)
+✔ fifth damage alone cannot pass incorrect speed/direction or epoch ownership (0.2009ms)
+✔ actual client frame holds native immediately after one admitted event while continuing bounded publication (19.1514ms)
+✔ report validation is bounded, secret-free and refuses fake completion or inferred guest event counts (0.6094ms)
+✔ actual fresh-scenario initialize refuses a retained save before import, registration or save (13.3926ms)
+✔ actual guest acceptance waits for complete commit in the current session, not a matching staged or old frame (6.1793ms)
+✔ version four capture requires both complete observers for a passing cadence check and admits no extra telemetry (1.7467ms)
+✔ actual fifth orchestration preserves visibility gating through final save verification (4.742ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 384.6413

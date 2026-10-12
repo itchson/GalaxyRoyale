@@ -1,0 +1,30 @@
+{
+  "item": {
+    "id": "run-719810d2",
+    "title": "Configured Wake health amendment author · completed",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Configured Wake health amendment author",
+    "state": "completed",
+    "observedAt": "2026-10-12T22:47:37.895Z",
+    "taskIds": [
+      "task-d0e4d592"
+    ],
+    "summary": "Narrow amendment from immutable1f283 completed and staged for freeze: final current health/context/predicate guards for Wake phases and Guest leave, non-recording final save read and bounded failed cleanup. Actual64focused listener-free cases pass (11new+53inherited), syntax/format/tsc pass. Exact frozen reviewer functional red scripts both executed with expected assertion exit1; import setup failures excluded/retained. Earlier passed history,36oldraw evidence records and originalrefs preserved. No listener/build/native/browser/RTC. Independent follow-through/integration/live gates pending; criteria unchanged.",
+    "evidence": [
+      {
+        "label": "Concrete source correction and remaining gates",
+        "kind": "note",
+        "details": "work/coop-wake-live-health/HANDOFF.md"
+      },
+      {
+        "label": "Actual red/green source-function evidence",
+        "kind": "note",
+        "details": "work/coop-wake-live-health/baseline-final-health.log; baseline-leave-health.log; tests-final.log; consumers-final.log; source-pins.json"
+      }
+    ],
+    "author": "Codex",
+    "source": "actual configured Wake health amendment finish",
+    "createdAt": "2026-10-12T22:47:37.96Z"
+  },
+  "revision": 1122
+}

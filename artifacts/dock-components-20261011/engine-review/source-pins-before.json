@@ -1,0 +1,77 @@
+{
+  "root": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale",
+  "head": "d7217c6efdb8a5d186419ac2ded7877750203c87",
+  "stage": "pre-focused-checks",
+  "files": [
+    {
+      "path": "apps/game/src/storage.ts",
+      "bytes": 34850,
+      "sha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8"
+    },
+    {
+      "path": "apps/game/src/loadout.ts",
+      "bytes": 24387,
+      "sha256": "a2921ce897742ccb31a8065b2323b4b4274eca3e7b6c827f884ea1969e11128e"
+    },
+    {
+      "path": "apps/game/src/loadout.css",
+      "bytes": 4265,
+      "sha256": "cd4dc359316b3a8420596f35120136b2b106a11ba1d1da1e6f8660c956ebcdcd"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "bytes": 80955,
+      "sha256": "bdc02567a80d8d8cd34b0b26f3a282e35003b42301eec052ff12bdfe296fc353"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "bytes": 33261,
+      "sha256": "bb755aa755588d646eabd65cb9a39ecf8e7f8982db229480a9567916eef4c50f"
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "bytes": 9863,
+      "sha256": "9e92544a593b81b161f3c8f1d1dadd0b776bdd45fe94c335604c56366c75bbfd"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 202078,
+      "sha256": "099b0834a76215d388200c89ca923c762850cf15dae04180086facf062a8097b"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14135,
+      "sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "bytes": 27253,
+      "sha256": "9c9a8944e26eb5fac71ae99258a446512e92c5e567f7cb5eaf8b043f26c1c674"
+    },
+    {
+      "path": "scripts/test/component-storage.test.mjs",
+      "bytes": 4972,
+      "sha256": "da1a7a8f19eb416e32d76d7f5e0ea6a4c154df7613f4d137db19914f4820ba2a"
+    },
+    {
+      "path": "scripts/test/ship-storage.test.mjs",
+      "bytes": 12423,
+      "sha256": "37a208ce71d634f9652a79aa15973ee6124ab6036ce864fd90349576389dcfaf"
+    },
+    {
+      "path": "scripts/test/loadout.test.mjs",
+      "bytes": 26399,
+      "sha256": "202ee30771a28f1aa00b6c4e7a1c5231f26ea010680bfa52194a629e985babd9"
+    }
+  ]
+}

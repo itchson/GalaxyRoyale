@@ -1,0 +1,15 @@
+{
+  "observedAt": "2026-10-12T21:09:36.504Z",
+  "builtFrom": "e0f53b970263db88e2f4a61dfe21ac37e019de0f",
+  "origin": "http://title-fullness.localhost:4173",
+  "actions": [
+    "Normal WebGPU title ready",
+    "Create DORA/PAN/RENKO test MEISHI through normal UI",
+    "Close guide, render Haven and move across hub",
+    "Reload same origin with WebGL2, Continue and same test designation displayed",
+    "Close guide and render Haven through WebGL2"
+  ],
+  "normalGameInstances": 1,
+  "temporaryAudioAndCoopListeners": 0,
+  "scope": "Browser title/creation/save/resume/Haven rendering smoke only; no advanced rewards, RTC, shadow mask/lighting parity, visual timing, GPU recovery or physical performance acceptance."
+}

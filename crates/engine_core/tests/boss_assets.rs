@@ -150,7 +150,7 @@ fn all_asset_rigs_preserve_damage_holes_under_nested_nonuniform_sheared_groups()
             }
             for pixel in &batch.pixels {
                 let world =
-                    batch.transforms[pixel.transform as usize].point(Vec2::from_array(pixel.local));
+                    batch.transforms[pixel.transform_slot()].point(Vec2::from_array(pixel.local));
                 let local = parent.inverse_point(world);
                 let grid = local + Vec2::new(sprite.width as f32, sprite.height as f32) * 0.5;
                 let center = grid.floor() + Vec2::splat(0.5);

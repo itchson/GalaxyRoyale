@@ -1,0 +1,73 @@
+{
+  "card": {
+    "bottom": 447,
+    "height": 414,
+    "top": 33,
+    "width": 300
+  },
+  "children": [
+    {
+      "bottom": 125.65000343322754,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 110.8000030517578
+    },
+    {
+      "bottom": 175.3500099182129,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 145.65000915527344
+    },
+    {
+      "bottom": 199.20000648498535,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 184.3500061035156
+    },
+    {
+      "bottom": 248.1999969482422,
+      "id": "coop-invite-output",
+      "inside": true,
+      "tag": "INPUT",
+      "top": 204.1999969482422
+    },
+    {
+      "bottom": 297.1999969482422,
+      "id": "coop-copy",
+      "inside": true,
+      "tag": "BUTTON",
+      "top": 253.1999969482422
+    },
+    {
+      "bottom": 350.20001220703125,
+      "id": "coop-leave",
+      "inside": true,
+      "tag": "BUTTON",
+      "top": 306.20001220703125
+    },
+    {
+      "bottom": 350.20001220703125,
+      "id": "coop-end",
+      "inside": true,
+      "tag": "BUTTON",
+      "top": 306.20001220703125
+    },
+    {
+      "bottom": 413.60001373291016,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 354.20001220703125
+    }
+  ],
+  "content": {
+    "bottom": 415.40000915527344,
+    "height": 324,
+    "scrollHeight": 324,
+    "top": 91.8000030517578
+  },
+  "heading": "HOSTING"
+}

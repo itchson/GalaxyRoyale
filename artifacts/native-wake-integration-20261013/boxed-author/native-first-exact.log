@@ -1,0 +1,18 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 1 test
+
+thread 'co_op_tests::boxed_solo_world_restores_ecs_transients_and_deterministic_continuation_after_teardown' (12740) panicked at crates\game_core\src\co_op_tests.rs:929:9:
+assertion failed: !game.chunks.is_empty()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test co_op_tests::boxed_solo_world_restores_ecs_transients_and_deterministic_continuation_after_teardown ... FAILED
+
+failures:
+
+failures:
+    co_op_tests::boxed_solo_world_restores_ecs_transients_and_deterministic_continuation_after_teardown
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 528 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `-p game_core --lib`

@@ -1,0 +1,26 @@
+warning: in the working copy of 'scripts/qa/co-op-transport/prepare.mjs', LF will be replaced by CRLF the next time Git touches it
+{
+  "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "sources": {
+    "scripts/qa/co-op-transport/prepare.mjs": {
+      "owner": "This bounded amendment",
+      "bytes": 17064,
+      "sha256": "2f5242434ea82793a0789efc8bff9070e451791e065ead6846612e7a3204ad51",
+      "lfBytes": 17064,
+      "lfSha256": "2f5242434ea82793a0789efc8bff9070e451791e065ead6846612e7a3204ad51"
+    },
+    "scripts/test/coop-private-room-provenance-qa.test.mjs": {
+      "owner": "This bounded amendment",
+      "bytes": 12546,
+      "sha256": "d3503c3fb286e82ea647d24821ac7f15da45df08fa38a769754b36bc74fab3a0",
+      "lfBytes": 12546,
+      "lfSha256": "d3503c3fb286e82ea647d24821ac7f15da45df08fa38a769754b36bc74fab3a0"
+    }
+  },
+  "tests": [
+    9,
+    10,
+    1
+  ],
+  "originalFailedRegressionPreserved": true
+}

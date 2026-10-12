@@ -235,6 +235,42 @@ pub(crate) fn micro_text(
     }
 }
 
+/// Right-align the same bounded micro glyphs without changing their cell size.
+/// Long labels retain their leading characters within the supplied slot.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn micro_text_right(
+    frame: &mut FrameBuilder,
+    parent: AffineTransform,
+    mut rect: [f32; 4],
+    text: &str,
+    color: u32,
+    clip: Option<[f32; 4]>,
+    remaining: &mut usize,
+    work_remaining: &mut usize,
+) {
+    if rect.iter().any(|v| !v.is_finite()) || rect[2] < RoyaleMicro::WIDTH {
+        return;
+    }
+    let columns = (((rect[2] + 1.0) / RoyaleMicro::ADVANCE).floor() as usize).min(256);
+    let count = text.chars().take(columns).count();
+    if count == 0 {
+        return;
+    }
+    let width = count as f32 * RoyaleMicro::ADVANCE - 1.0;
+    rect[0] += rect[2] - width;
+    rect[2] = width;
+    micro_text(
+        frame,
+        parent,
+        rect,
+        text,
+        color,
+        clip,
+        remaining,
+        work_remaining,
+    );
+}
+
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct VitalsPresentation {
     pub fill: [f32; 2],
@@ -246,6 +282,7 @@ pub struct VitalsPresentation {
 #[derive(Default)]
 pub struct VitalsAnimation {
     ship: Option<u8>,
+    capacity: [f32; 2],
     last: [f32; 2],
     fill: [f32; 2],
     trail: [f32; 2],
@@ -260,11 +297,20 @@ impl VitalsAnimation {
             ratio(hud.hull, hud.max_hull),
             ratio(hud.shield, hud.max_shield),
         ];
+        let capacity = [hud.max_hull, hud.max_shield].map(|value| {
+            if value.is_finite() {
+                value.max(0.0)
+            } else {
+                0.0
+            }
+        });
         let fresh = self.ship != Some(hud.campaign.selected_ship)
+            || self.capacity != capacity
             || hud.hull <= 0.0
             || (hud.dock && actual[0] == 1.0 && (hud.max_shield <= 0.0 || actual[1] == 1.0));
         if fresh || reduced {
             self.ship = Some(hud.campaign.selected_ship);
+            self.capacity = capacity;
             self.last = actual;
             self.fill = actual;
             self.trail = actual;
@@ -307,6 +353,24 @@ impl Ui<'_> {
         let mut remaining = 2000;
         let mut work = 2000;
         micro_text(
+            self.frame,
+            Transform {
+                position: self.origin,
+                ..Transform::default()
+            }
+            .affine(),
+            rect,
+            text,
+            color,
+            None,
+            &mut remaining,
+            &mut work,
+        );
+    }
+    fn micro_text_right(&mut self, rect: [f32; 4], text: &str, color: u32) {
+        let mut remaining = 2000;
+        let mut work = 2000;
+        micro_text_right(
             self.frame,
             Transform {
                 position: self.origin,
@@ -502,7 +566,7 @@ pub(crate) fn flight_header(
             visited += 1;
             if !matches!(
                 node.kind.as_str(),
-                "save-icon" | "status-icon" | "map-icon" | "settings-icon"
+                "save-icon" | "status-icon" | "map-icon" | "settings-icon" | "fullscreen-icon"
             ) {
                 continue;
             }
@@ -562,7 +626,7 @@ pub struct FlightStatusLayout {
     pub stats: Option<[f32; 4]>,
     pub context: Option<[f32; 4]>,
     pub vitals: Option<[f32; 4]>,
-    /// North-up minimap, above the footer on the left. Reserved independently.
+    /// North-up minimap at the safe top-right, above the status text.
     pub navigation: Option<[f32; 4]>,
     pub viewport: [f32; 2],
 }
@@ -573,7 +637,7 @@ pub struct FlightStatusInput {
     pub header: Option<[f32; 4]>,
     pub status_hits: [Option<[f32; 4]>; 2],
     pub touch: bool,
-    /// Compact boss allocation uses the footer's H/S readout and omits the
+    /// Compact boss allocation uses the status H/S readout and omits the
     /// optional map when a protected core is present, freeing a boss anchor.
     pub attached_vitals: bool,
     pub player: Vec2,
@@ -619,28 +683,6 @@ impl FlightStatusLayout {
                 && (!input.touch || hits.iter().all(|h| !hud_overlap(r, *h, 2.0)))
         };
         let [width, height] = viewport;
-        let central_left = hits[0][0] + hits[0][2] + 4.0;
-        let central_width = hits[1][0] - 4.0 - central_left;
-        let central = [central_left, height - 28.0, central_width, 22.0];
-        let bottom_strip = [6.0, height - 28.0, width - 12.0, 22.0];
-        let above_pads = [6.0, hits[0][1].min(hits[1][1]) - 26.0, width - 12.0, 22.0];
-        let slim = [6.0, 0.0, width - 12.0, 10.0];
-        let strip = if input.touch {
-            [
-                (central_width >= 120.0).then_some(central),
-                Some(above_pads),
-                Some(slim),
-            ]
-        } else {
-            [Some(bottom_strip), Some(slim), None]
-        }
-        .into_iter()
-        .flatten()
-        .find(|r| clear(*r));
-        let stats = strip.map(|r| [r[0] + 4.0, r[1] + 2.0, r[2] - 8.0, 5.0]);
-        let context = strip
-            .filter(|r| r[3] >= 22.0)
-            .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 5.0]);
         let view = CameraView::new(
             Vec2::from_array(input.camera),
             Vec2::from_array(input.viewport),
@@ -658,29 +700,78 @@ impl FlightStatusLayout {
             let nearest = p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
             p.distance_squared(nearest) > radius * radius
         };
-        // Keep one honest, fixed-size map above the footer and (on touch) the
-        // actual joystick hit rectangle. No unsafe right-side rescue or overlap
-        // with a protected boss core; overconstrained tiny layouts omit the map.
-        let navigation = strip
-            .filter(|_| input.attached_vitals || core.is_none())
-            .and_then(|s| {
-                let y = (s[1] - 4.0 - MINIMAP_SIZE).min(if input.touch {
-                    hits[0][1] - 4.0 - MINIMAP_SIZE
-                } else {
-                    height
-                });
-                let r = [6.0, y, MINIMAP_SIZE, MINIMAP_SIZE];
-                (clear(r)
-                    && !hud_overlap(r, s, 2.0)
-                    && input
-                        .status_hits
-                        .iter()
-                        .flatten()
-                        .all(|hit| !hud_overlap(r, *hit, 2.0))
-                    && avoids_disc(r, center, radius + 4.0)
-                    && core.is_none_or(|(p, radius)| avoids_disc(r, p, radius)))
-                .then_some(r)
-            });
+        // Both rectangles share the right safe edge. The primary map starts at
+        // six logical units; a measured toolbar may require a lower group.
+        // Width fallback affects text capacity, never font or marker scale.
+        let right_edge = width - 6.0;
+        let text_widths = [(width - 12.0).min(180.0), 140.0, 100.0];
+        let map_y = [6.0, header.map_or(6.0, |r| (r[1] + r[3] + 4.0).max(6.0))];
+        let map_clear = |r| {
+            clear(r)
+                && input
+                    .status_hits
+                    .iter()
+                    .flatten()
+                    .all(|hit| !hud_overlap(r, *hit, 2.0))
+                && avoids_disc(r, center, radius + 4.0)
+                && core.is_none_or(|(p, radius)| avoids_disc(r, p, radius))
+        };
+        let paired = (input.attached_vitals || core.is_none())
+            .then(|| {
+                map_y.into_iter().find_map(|y| {
+                    let map = [right_edge - MINIMAP_SIZE, y, MINIMAP_SIZE, MINIMAP_SIZE];
+                    if !map_clear(map) {
+                        return None;
+                    }
+                    let below_map = y + MINIMAP_SIZE + 4.0;
+                    [
+                        below_map,
+                        header.map_or(below_map, |r| (r[1] + r[3] + 4.0).max(below_map)),
+                    ]
+                    .into_iter()
+                    .find_map(|text_y| {
+                        text_widths.into_iter().find_map(|w| {
+                            let s = [right_edge - w, text_y, w, 22.0];
+                            (clear(s) && core.is_none_or(|(p, radius)| avoids_disc(s, p, radius)))
+                                .then_some((map, s))
+                        })
+                    })
+                })
+            })
+            .flatten();
+        let navigation = paired.map(|(map, _)| map);
+        let strip = paired.map(|(_, s)| s).or_else(|| {
+            // Optional map omission never recreates the old bottom bubbles.
+            // Compact touch boss mode frees its actual rescue panel area by
+            // docking essential text above measured pads. A short top-right
+            // H/S row is the last fallback; neither paints a panel.
+            let essential_y = if input.touch && !input.attached_vitals && core.is_some() {
+                hits[0][1].min(hits[1][1]) - 26.0
+            } else {
+                54.0
+            };
+            [
+                essential_y,
+                54.0,
+                6.0,
+                header.map_or(6.0, |r| r[1] + r[3] + 4.0),
+                0.0,
+            ]
+            .into_iter()
+            .find_map(|y| {
+                [22.0, 10.0].into_iter().find_map(|h| {
+                    text_widths.into_iter().find_map(|w| {
+                        let s = [right_edge - w, y, w, h];
+                        (clear(s) && core.is_none_or(|(p, radius)| avoids_disc(s, p, radius)))
+                            .then_some(s)
+                    })
+                })
+            })
+        });
+        let stats = strip.map(|r| [r[0] + 4.0, r[1] + 2.0, r[2] - 8.0, 5.0]);
+        let context = strip
+            .filter(|r| r[3] >= 22.0)
+            .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 5.0]);
         // Never clamp an offscreen ship to a false marker at the viewport edge.
         let vitals = (input.attached_vitals
             && center.x >= 0.0
@@ -688,26 +779,26 @@ impl FlightStatusLayout {
             && center.x <= width
             && center.y <= height)
             .then(|| {
-                [
-                    [center.x - 22.0, center.y - radius - 14.0, 44.0, 9.0],
-                    [center.x - 22.0, center.y + radius + 5.0, 44.0, 9.0],
-                ]
-                .into_iter()
-                .find(|r| {
-                    clear(*r)
-                        && strip.is_none_or(|s| !hud_overlap(*r, s, 2.0))
-                        && navigation.is_none_or(|n| !hud_overlap(*r, n, 2.0))
-                        && input
-                            .status_hits
-                            .iter()
-                            .flatten()
-                            .all(|hit| !hud_overlap(*r, *hit, 2.0))
-                        && core.is_none_or(|(p, radius)| {
-                            let nearest =
-                                p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
-                            p.distance_squared(nearest) > radius * radius
-                        })
-                })
+                let r = [
+                    center.x - VITALS_SIZE[0] * 0.5,
+                    center.y + radius + VITALS_CLEARANCE,
+                    VITALS_SIZE[0],
+                    VITALS_SIZE[1],
+                ];
+                (clear(r)
+                    && strip.is_none_or(|s| !hud_overlap(r, s, 2.0))
+                    && navigation.is_none_or(|n| !hud_overlap(r, n, 2.0))
+                    && input
+                        .status_hits
+                        .iter()
+                        .flatten()
+                        .all(|hit| !hud_overlap(r, *hit, 2.0))
+                    && core.is_none_or(|(p, radius)| {
+                        let nearest =
+                            p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
+                        p.distance_squared(nearest) > radius * radius
+                    }))
+                .then_some(r)
             })
             .flatten();
         Some(Self {
@@ -905,7 +996,7 @@ pub(crate) fn draw_flight_status_animated(
     } else {
         0
     };
-    // The footer reserves geometry but paints only original micro glyphs.
+    // Status reserves geometry but paints only right-aligned micro glyphs.
     if let Some([x, y, w, _]) = layout.stats {
         let mut text = StatusText::new();
         if layout.vitals.is_none() {
@@ -941,7 +1032,7 @@ pub(crate) fn draw_flight_status_animated(
         if (text.len + points.len) as f32 * RoyaleMicro::ADVANCE - 1.0 <= w {
             let _ = text.write_str(points.as_str());
         }
-        ui.micro_text(
+        ui.micro_text_right(
             [x, y, w, 5.0],
             text.as_str(),
             if layout.vitals.is_none() && warning != 0 {
@@ -967,77 +1058,178 @@ pub(crate) fn draw_flight_status_animated(
             let _ = write!(text, "{} / THREAT {}", hud.biome.name, hud.danger);
             GOLD
         };
-        ui.micro_text([x, y, w, 5.0], text.as_str(), color);
+        ui.micro_text_right([x, y, w, 5.0], text.as_str(), color);
     }
     if let Some(rect) = layout.navigation {
         draw_navigation(&mut ui, hud, rect);
     }
-    if let Some([x, y, w, _]) = layout.vitals {
-        // A three-cell reticle and a shield rune, each cached as a local body.
-        static ICONS: LazyLock<[PixelBody; 2]> = LazyLock::new(|| {
-            [
-                PixelBody::from_ascii(&[".#.", "###", ".#."], &[('#', WHITE)]),
-                PixelBody::from_ascii(&["###", "#.#", ".#."], &[('#', WHITE)]),
-            ]
-        });
-        for (row, (_value, _maximum, color)) in [
-            (
-                hud.hull,
-                hud.max_hull,
-                if low_hull {
-                    warning_color(1, time, reduced_motion)
-                } else {
-                    MINT
-                },
-            ),
-            (
-                hud.shield,
-                hud.max_shield,
-                if shield_down {
-                    warning_color(2, time, reduced_motion)
-                } else {
-                    CYAN
-                },
-            ),
-        ]
-        .into_iter()
-        .enumerate()
-        {
-            let row_y = y + row as f32 * 5.0;
-            ui.frame.push_body_colored(
-                &ICONS[row],
+    if let Some(rect) = layout.vitals {
+        let colors = [
+            if low_hull {
+                warning_color(1, time, reduced_motion)
+            } else {
+                MINT
+            },
+            if shield_down {
+                warning_color(2, time, reduced_motion)
+            } else {
+                CYAN
+            },
+        ];
+        let parent = Transform {
+            position: ui.origin,
+            ..Transform::default()
+        }
+        .affine();
+        append_curved_vitals(
+            ui.frame,
+            parent,
+            rect,
+            presentation,
+            colors,
+            [hud.max_hull, hud.max_shield],
+        );
+    }
+    draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
+}
+
+/// Fixed UI envelope, independent of zoom; the shared layout reserves all cells.
+const VITALS_SIZE: [f32; 2] = [44.0, 12.0];
+const VITALS_CLEARANCE: f32 = 5.0;
+const SHIELD_CHUNK_CAPACITY: f32 = 10.0;
+// Current valid profiles top out at 182 HP. Nineteen marks bound extraction work.
+const SHIELD_MAX_CHUNKS: usize = 19;
+const HULL_CHUNK_CAPACITY: f32 = 20.0;
+// 100 base hull = five marks. Current fully upgraded Sovereign tops out at260.
+const HULL_MAX_CHUNKS: usize = 13;
+const VITAL_TRACK_MARKS: usize = 11;
+static VITAL_SEGMENT: LazyLock<PixelBody> =
+    LazyLock::new(|| PixelBody::from_ascii(&[".#.", "###", "###"], &[('#', WHITE)]));
+
+/// Hull marks represent20HP; shield marks represent10 capacity points,
+/// with the last capacity/charge slice kept fractional. Marks above 11 compress
+/// their whole horizontal field together, retaining gaps in the same envelope.
+fn append_curved_vitals(
+    frame: &mut FrameBuilder,
+    parent: AffineTransform,
+    rect: [f32; 4],
+    presentation: VitalsPresentation,
+    colors: [u32; 2],
+    capacities: [f32; 2],
+) {
+    if rect.iter().any(|v| !v.is_finite()) || rect[2] <= 0.0 || rect[3] <= 0.0 {
+        return;
+    }
+    let group = parent.compose(
+        Transform {
+            position: Vec2::new(rect[0], rect[1]),
+            scale: Vec2::new(rect[2] / VITALS_SIZE[0], rect[3] / VITALS_SIZE[1]),
+            ..Transform::default()
+        }
+        .affine(),
+    );
+    let fraction = |value: f32| {
+        if value.is_finite() {
+            value.clamp(0.0, 1.0)
+        } else {
+            0.0
+        }
+    };
+    let shade = |cell: Vec2, color| {
+        dim_color(
+            color,
+            if cell.y < -0.5 {
+                0.90
+            } else if cell.y > 0.5 {
+                0.72
+            } else {
+                1.0
+            },
+        )
+    };
+    for (row, &color) in colors.iter().enumerate() {
+        let (chunk, limit) = if row == 0 {
+            (HULL_CHUNK_CAPACITY, HULL_MAX_CHUNKS)
+        } else {
+            (SHIELD_CHUNK_CAPACITY, SHIELD_MAX_CHUNKS)
+        };
+        let units = if capacities[row].is_finite() && capacities[row] > 0.0 {
+            (capacities[row] / chunk).min(limit as f32)
+        } else {
+            0.0
+        };
+        let count = units.ceil() as usize;
+        if count == 0 {
+            continue;
+        }
+        let horizontal_scale = (VITAL_TRACK_MARKS as f32 / count as f32).min(1.0);
+        let span = (count as f32 * 4.0 - 1.0) * horizontal_scale;
+        let track = group.compose(
+            Transform {
+                position: Vec2::new((VITALS_SIZE[0] - span) * 0.5, row as f32 * 5.0),
+                scale: Vec2::new(horizontal_scale, 1.0),
+                ..Transform::default()
+            }
+            .affine(),
+        );
+        let fill = fraction(presentation.fill[row]);
+        let trail = fraction(presentation.trail[row]).max(fill);
+        for index in 0..count {
+            // Both tracks follow the same physical arc even when their
+            // capacity differs; growing either track cannot cross the other.
+            let x = (VITALS_SIZE[0] - span) * 0.5 + (index as f32 * 4.0 + 1.5) * horizontal_scale;
+            let slot = (x - 2.0) / 4.0;
+            let y = slot
+                .min(VITAL_TRACK_MARKS as f32 - 1.0 - slot)
+                .clamp(0.0, 4.0);
+            let segment = track.compose(
                 Transform {
-                    position: ui.origin + Vec2::new(x + 1.5, row_y + 1.5),
+                    position: Vec2::new(index as f32 * 4.0 + 1.5, y + 1.5),
                     ..Transform::default()
-                },
-                |_, _| color,
+                }
+                .affine(),
             );
-            let fill = presentation.fill[row].clamp(0.0, 1.0);
-            let trail = presentation.trail[row].clamp(fill, 1.0);
-            // Nine individual stepped cells, with a restrained inner highlight
-            // and a damage tail. No health state is quantized to the segments.
-            let track = (w - 8.0).max(0.0);
-            let cell = (track - 8.0) / 9.0;
-            for segment in 0..9 {
-                let sx = x + 7.0 + segment as f32 * (cell + 1.0);
-                ui.rect(sx, row_y + 1.0, cell, 2.0, 0x90_34261e);
-                let part = |value: f32| (value * 9.0 - segment as f32).clamp(0.0, 1.0) * cell;
-                ui.rect(
-                    sx,
-                    row_y + 1.0,
-                    part(trail),
-                    2.0,
+            let capacity = (units - index as f32).clamp(0.0, 1.0);
+            let part = |value: f32| (value * units - index as f32).clamp(0.0, capacity) * 3.0;
+            let fill_end = part(fill);
+            let trail_end = part(trail);
+            for (start, end, color) in [
+                (0.0, capacity * 3.0, 0x90_34261e),
+                (
+                    fill_end,
+                    trail_end,
                     if row == 0 { 0xa0_85d4ff } else { 0xa0_a48563 },
-                );
-                ui.rect(sx, row_y + 1.0, part(fill), 1.0, color);
-                ui.rect(sx, row_y + 2.0, part(fill), 1.0, dim_color(color, 0.72));
-                if part(fill) > 0.0 {
-                    ui.rect(sx, row_y, part(fill).min(1.0), 1.0, dim_color(color, 0.9));
+                ),
+                (0.0, fill_end, color),
+            ] {
+                if end <= start {
+                    continue;
+                }
+                if start == 0.0 && end == 3.0 {
+                    frame.push_body_affine_colored(&VITAL_SEGMENT, segment, |cell, _| {
+                        shade(cell, color)
+                    });
+                    continue;
+                }
+                for (cell, _) in VITAL_SEGMENT.cells() {
+                    let left = (cell.x - 0.5).max(start - 1.5);
+                    let right = (cell.x + 0.5).min(end - 1.5);
+                    if right <= left {
+                        continue;
+                    }
+                    let clipped = segment.compose(
+                        Transform {
+                            position: Vec2::new((left + right) * 0.5, cell.y),
+                            scale: Vec2::new(right - left, 1.0),
+                            ..Transform::default()
+                        }
+                        .affine(),
+                    );
+                    frame.push_body_affine_colored(&CELL, clipped, |_, _| shade(cell, color));
                 }
             }
         }
     }
-    draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
 }
 
 fn dim_color(color: u32, strength: f32) -> u32 {
@@ -1935,7 +2127,7 @@ mod tests {
                     let mut fire_glyph_cells = 0usize;
                     for batch in &frame.frame().batches {
                         for pixel in batch.pixels.iter().filter(|pixel| pixel.color >> 24 != 0) {
-                            let transform = batch.transforms[pixel.transform as usize];
+                            let transform = batch.transforms[pixel.transform_slot()];
                             let center = transform.point(Vec2::from_array(pixel.local)) - origin;
                             if transform.a[2] == 4.0 && transform.b[1] == 4.0 {
                                 assert_eq!(center, expected_knob);
@@ -2086,7 +2278,7 @@ mod tests {
                         assert!(frame.frame().pixel_count > 0);
                         for b in &frame.frame().batches {
                             for p in b.pixels.iter().filter(|p| p.color >> 24 != 0) {
-                                let t = b.transforms[p.transform as usize];
+                                let t = b.transforms[p.transform_slot()];
                                 for offset in [
                                     Vec2::new(-0.5, -0.5),
                                     Vec2::new(0.5, -0.5),
@@ -2124,7 +2316,7 @@ mod tests {
                             for b in &frame.frame().batches {
                                 for p in &b.pixels {
                                     for offset in [Vec2::new(-0.5, -0.5), Vec2::new(0.5, 0.5)] {
-                                        let point = b.transforms[p.transform as usize]
+                                        let point = b.transforms[p.transform_slot()]
                                             .point(Vec2::from_array(p.local) + offset)
                                             - origin;
                                         assert!(
@@ -2214,7 +2406,7 @@ mod tests {
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
                     result.push(
-                        batch.transforms[pixel.transform as usize]
+                        batch.transforms[pixel.transform_slot()]
                             .point(Vec2::from_array(pixel.local))
                             - camera,
                     );
@@ -2259,7 +2451,7 @@ mod tests {
                 .iter()
                 .flat_map(|batch| {
                     batch.pixels.iter().map(|pixel| {
-                        batch.transforms[pixel.transform as usize]
+                        batch.transforms[pixel.transform_slot()]
                             .point(Vec2::from_array(pixel.local))
                             + Vec2::new(320.0, 180.0)
                     })
@@ -2295,7 +2487,7 @@ mod tests {
         let mut status_backing = false;
         for batch in &frame.frame().batches {
             for pixel in &batch.pixels {
-                let transform = batch.transforms[pixel.transform as usize];
+                let transform = batch.transforms[pixel.transform_slot()];
                 let p = transform.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0);
                 if pixel.color == INK && transform.a[2] >= 170.0 && transform.b[1] >= 36.0 {
                     status_backing = p.y - transform.b[1] * 0.5 <= 312.0;
@@ -2336,7 +2528,7 @@ mod tests {
             let mut warning_cells = 0;
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let position = batch.transforms[pixel.transform as usize]
+                    let position = batch.transforms[pixel.transform_slot()]
                         .point(Vec2::from_array(pixel.local))
                         - origin;
                     if position.y >= 44.0 && position.y < 84.0 {
@@ -2383,7 +2575,7 @@ mod tests {
             let mut health_cells = 0;
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let t = batch.transforms[pixel.transform as usize];
+                    let t = batch.transforms[pixel.transform_slot()];
                     let p = t.point(Vec2::from_array(pixel.local)) + Vec2::new(200.0, 120.0);
                     if (68.0..108.0).contains(&p.y) {
                         assert!((12.0..12.0 + width).contains(&p.x));
@@ -2494,7 +2686,7 @@ mod tests {
         let mut hull = 0;
         for batch in &frame.frame().batches {
             for pixel in &batch.pixels {
-                let p = batch.transforms[pixel.transform as usize]
+                let p = batch.transforms[pixel.transform_slot()]
                     .point(Vec2::from_array(pixel.local))
                     + Vec2::new(200.0, 120.0);
                 assert!(
@@ -2516,7 +2708,7 @@ mod tests {
             draw_controls(&mut frame, [0.0; 2], [640.0, 360.0], Some(stick), true);
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let t = batch.transforms[pixel.transform as usize];
+                    let t = batch.transforms[pixel.transform_slot()];
                     if t.a[2] == 4.0 && t.b[1] == 4.0 {
                         return t.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0);
                     }
@@ -2537,3 +2729,11 @@ mod flight_status_tests;
 #[cfg(test)]
 #[path = "ui_minimap_tests.rs"]
 mod minimap_tests;
+
+#[cfg(test)]
+#[path = "ui_curved_vitals_tests.rs"]
+mod curved_vitals_tests;
+
+#[cfg(test)]
+#[path = "ui_shield_capacity_tests.rs"]
+mod shield_capacity_tests;

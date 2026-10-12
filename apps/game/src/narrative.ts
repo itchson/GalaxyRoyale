@@ -195,7 +195,7 @@ function snapshotContext(input: NarrativeContext): NarrativeContext {
   };
 }
 
-function splitPages(text: string): string[] {
+export function splitPages(text: string): string[] {
   const result: string[] = [];
   while (text.length > PAGE_LIMIT) {
     let end = text.lastIndexOf(" ", PAGE_LIMIT);

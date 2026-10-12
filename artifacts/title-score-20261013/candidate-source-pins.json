@@ -1,0 +1,61 @@
+{
+  "captured_at_utc": "2026-10-12T16:37:30.504398+00:00",
+  "meaning": "SHA256 of tested working-file bytes; Root integration may intentionally produce new source pins",
+  "base_commit": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+  "sources": {
+    "apps/game/src/audio.ts": {
+      "bytes": 44064,
+      "sha256": "9f5921aa82f88fea261049dfe9ac8d58abe3ed02b66bd5fe6b864760f51557a0"
+    },
+    "apps/game/src/audio-state.ts": {
+      "bytes": 10846,
+      "sha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea"
+    },
+    "apps/game/src/title-theme.ts": {
+      "bytes": 2787,
+      "sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069"
+    },
+    "apps/game/src/music-clock.ts": {
+      "bytes": 3973,
+      "sha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559"
+    },
+    "apps/game/src/music-score.ts": {
+      "bytes": 771,
+      "sha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703"
+    },
+    "apps/game/src/main.ts": {
+      "bytes": 90428,
+      "sha256": "04dc2ed27851a49b86df00aebfc449aaed5193c12dae6dbd49cf826633bf1b33"
+    },
+    "scripts/test/audio.test.mjs": {
+      "bytes": 53270,
+      "sha256": "b7a189bea3b2b34d568b99bf9906237413bae71c1e6fc51983fb36cf8f08c45d"
+    },
+    "scripts/test/title-theme.test.mjs": {
+      "bytes": 1959,
+      "sha256": "79422299379d7defcd7f3cbdf4e5b02950c562116b2142cd805a3fd9aee2fce4"
+    },
+    "scripts/test/music-clock.test.mjs": {
+      "bytes": 3747,
+      "sha256": "330db100684e85549f22156e2bfb156d4981d65d41ce76d9981cc1da0dec3503"
+    }
+  },
+  "evidence": {
+    "handoff.md": {
+      "bytes": 5564,
+      "sha256": "e544fdb298284169ced318f8e22b6fdd080ab6327e0895c1b9c412a4dc70e9e5"
+    },
+    "execution-evidence.json": {
+      "bytes": 1490,
+      "sha256": "d396e800eb60ff97633b286d387116dd39f76ed79ae4748e140bc6f8831407cf"
+    },
+    "focused-tests.log": {
+      "bytes": 6754,
+      "sha256": "b135e863430526eb84405293b6521de7906deff58352f8caaae4df8002a494df"
+    },
+    "typecheck.log": {
+      "bytes": 64,
+      "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+    }
+  }
+}

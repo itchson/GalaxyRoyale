@@ -1,0 +1,9 @@
+{
+  "passed": 3,
+  "results": [
+    "ability filter retains prior scroll/focus",
+    "same collection category retains scroll; Back resets overview",
+    "hull filters retain legal scroll and accept clamped shorter content"
+  ],
+  "scope": "Actual Root loadout.ts with declared fake DOM scroll bounds, no browser/render proof"
+}

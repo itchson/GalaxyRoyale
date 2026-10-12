@@ -1,0 +1,175 @@
+{
+  "type": "DORO",
+  "main_corporation": "PAN",
+  "sub_corporation": "RENKO",
+  "source_path": "assets/concepts/kikai/detail/doro-reference.png",
+  "source_sha256": "bc2528830a21bee7d20548587cc3099580d94524c480ebde232a0a6056ebfb73",
+  "pillow": "12.3.0",
+  "generation": {
+    "input": "assets/concepts/kikai/profiles/doro-reference.png",
+    "input_sha256": "5b31880502297c0e0dc5174779042b14db3ce8cf17f2ac1bbb1aec88dbd45d64",
+    "path": "assets/concepts/kikai/detail/doro-reference.png",
+    "sha256": "bc2528830a21bee7d20548587cc3099580d94524c480ebde232a0a6056ebfb73",
+    "prompt": "Use case: precise-object-edit. Asset type: Galaxy Royale KIKAI DORO licensed-character high-detail pixel-quad portrait reference. Edit target image: current DORO reference, an adult masculine technological person with short spiky emerald PAN hair, two tall faceted red RENKO crystal horns, golden iris eyes, pale ivory shoulder armor and exposed black mechanical neck. Preserve the current identity, face angle, hair silhouette, horn size/location, color roles and upper facial proportions. Change the torso armor to a visibly FLAT male mechanical chest: a broad flat graphite armored sternum plate with straight planar pectoral plate seams, flat beveled hard-surface geometry and a few restrained machined vents. ABSOLUTELY no breasts, breast cups, rounded bust lobes, under-breast arcs, plunging curvy chest seam, or feminine torso. Keep shoulder domes as shoulder armor only, separated from the flat chest. Add deliberate fine pixel clusters/material detail suitable for conversion to a192x256 native sprite: crisp square stepped pixel edges, controlled ivory/graphite/emerald/red/gold palette, sharp pixel shading, no blurry gradients or painterly/airbrushed surface. Composition: one centered head-and-upper-torso portrait, full horns and armor in frame, canvas portrait3:4, genuine transparent background, high-resolution raster source at least1080px tall, no text, no watermark, no shadow backdrop. Retain warm capable expression. The reference is a mechanical character, not a photograph. This is a torso correction plus finer authored pixel detail, not a new character."
+  },
+  "conversion": {
+    "source_dimensions": [
+      1086,
+      1448
+    ],
+    "crop": [
+      0,
+      0,
+      1086,
+      1448
+    ],
+    "alpha_threshold": 128,
+    "source_nonbinary_alpha_cells": 944214,
+    "source_hard_occupied_cells": 910749,
+    "tight_bbox": [
+      0,
+      25,
+      1086,
+      1448
+    ],
+    "output_dimensions": [
+      192,
+      256
+    ],
+    "fitted_dimensions": [
+      192,
+      252
+    ],
+    "center_offset": [
+      0,
+      2
+    ],
+    "nearest_resize": true,
+    "aspect_policy": "uniform fit; integer output rounding only",
+    "occupied_after_resize": 28524,
+    "quantize_colors": 55,
+    "dither": false,
+    "palette_eye_region_extra_weight": 20,
+    "source_gold_mask_cells": 64,
+    "authored_gold_tones": 4,
+    "changed_occupied_color_cells": 27346,
+    "component_policy": "all; no connected-component removal",
+    "source_is_old_96cell_pack": false
+  },
+  "guide": null,
+  "manual_authoring": {
+    "facial_patches": {
+      "eyes": [
+        [
+          59,
+          94,
+          91,
+          117
+        ],
+        [
+          99,
+          92,
+          132,
+          114
+        ]
+      ],
+      "iris": [
+        [
+          74,
+          103
+        ],
+        [
+          112,
+          101
+        ]
+      ],
+      "mouth": [
+        80,
+        125,
+        108,
+        143
+      ],
+      "lip": [
+        94,
+        132
+      ],
+      "hair_top": 92,
+      "hair_sides": [
+        61,
+        133,
+        123
+      ],
+      "fringe": [
+        73,
+        108,
+        119
+      ]
+    },
+    "fine_feature_line_width": 1,
+    "neutral_reference_iris_retained": true,
+    "expression_states": [
+      "neutral",
+      "focused",
+      "concerned",
+      "pleased",
+      "blink"
+    ],
+    "mouth_states": [
+      "rest",
+      "small",
+      "open",
+      "smile"
+    ],
+    "role_selection": "Explicit crystal regions and seeded saturated-facet masks; facial skin, eyebrows and neck protected",
+    "corporate_regions": {
+      "gems": [
+        [
+          [
+            47,
+            2,
+            68,
+            73
+          ],
+          [
+            49,
+            20
+          ]
+        ],
+        [
+          [
+            109,
+            2,
+            129,
+            75
+          ],
+          [
+            127,
+            4
+          ]
+        ]
+      ],
+      "eyebrows": [
+        [
+          59,
+          94,
+          91,
+          117
+        ],
+        [
+          99,
+          92,
+          132,
+          114
+        ]
+      ],
+      "neck": [
+        60,
+        145,
+        134,
+        256
+      ]
+    }
+  },
+  "exact_import": "asset-pack imports authored binary-alpha PNGs with provided palette; no resize or removed components",
+  "runtime_boundary": "Host selects cached layers and corporate colors; metadata alone does not animate"
+}

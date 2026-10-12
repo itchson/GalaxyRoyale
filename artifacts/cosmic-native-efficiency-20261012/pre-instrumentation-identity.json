@@ -1,0 +1,12 @@
+{
+  "root": {
+    "head": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+    "branch": "codex/testing",
+    "sourceHash": "dfbcd33501214c59dafcf3d4c766b84c20a47f7c79e4567cb05f5c66ab8be3ce"
+  },
+  "own": {
+    "head": "22a8906cd668e92db0180d725da87b0a2c8408d5",
+    "branch": "codex/cosmic-native-efficiency",
+    "sourceHash": "21e90c5262c573c7c2bf366fd517de79dc58cde61b8302d7e130c39797090d9a"
+  }
+}

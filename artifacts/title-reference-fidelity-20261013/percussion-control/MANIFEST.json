@@ -1,0 +1,216 @@
+{
+  "scope": "Frozen conservative source-driven percussion candidate/control; no song/percussion/ear/production acceptance",
+  "git_head": "b27bcf823f169f32313c0a424d209ea3ddcf6f9f",
+  "files": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\budget-and-tempo-probe.json",
+      "bytes": 2548,
+      "sha256": "eb264a2c68dba949e245eb0b5f196b76c1237c96f4af765fe1fff8c4601b6558"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\budget-tempo-first.log",
+      "bytes": 2548,
+      "sha256": "eb264a2c68dba949e245eb0b5f196b76c1237c96f4af765fe1fff8c4601b6558"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\budget_tempo_probe.py",
+      "bytes": 4149,
+      "sha256": "524ccaacd97317d9b99492bdc22e7e79df17963996479e8a13362e384820e93e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\candidate-features.json",
+      "bytes": 388916,
+      "sha256": "740cc8e3a1a21a1bbe6abf510552148fbc1bd563ff990af60a334da08c543eab"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\compare-and-checks-first.log",
+      "bytes": 7225,
+      "sha256": "aa7ad0f84d5ade9e38b911b07e6e68c6442f09c68a5143d3d1a6bfec3adb0de2"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\compare_verify.py",
+      "bytes": 4774,
+      "sha256": "216e6fe8915bfb326ce55550d527d4cb7ed1d9149fe59a0b01bf4b2c633c603e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\comparison-and-checks.json",
+      "bytes": 7225,
+      "sha256": "aa7ad0f84d5ade9e38b911b07e6e68c6442f09c68a5143d3d1a6bfec3adb0de2"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\feature-threshold-inspection.log",
+      "bytes": 485,
+      "sha256": "6841cc0d4e723d1a24636555e5dadba3e5b78abccc23314945685f69b6f70bc6"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\first8-spectrogram-comparison.png",
+      "bytes": 1139021,
+      "sha256": "bd2fd49290b16664b59b85fb7e812ad14e2afee4e6efffc1d73766fe608b4002"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\fixed443-with-percussion-first8.wav",
+      "bytes": 3072058,
+      "sha256": "7962f7ba81a23d610d1fe7cc4f93a6b8cff7d3ad1c340751ce9941bf127f37ec"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\fixed443-with-percussion.wav",
+      "bytes": 16389178,
+      "sha256": "ee7f7dc69813887bb480d922aa4ccf8ffd57b5d86f57906596eb289d4894bed2"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\HANDOFF.md",
+      "bytes": 7109,
+      "sha256": "a41fbfb175e14d1d5cffa1b48d36921167642eb02fcf6586443ee4265417a095"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\inspect-candidates-first.log",
+      "bytes": 534,
+      "sha256": "bc73d38fbb88ff6a767e02fc1aff96b06ae70f2dac3b2563dfb499301c2d3a1e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\inspect-candidates-retry.log",
+      "bytes": 3511,
+      "sha256": "7c1573f755af1dece887a960ea717a2f3b47ee24cf5d406d9cc047d9532aac05"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\inspect_candidates-first-failed.py",
+      "bytes": 3809,
+      "sha256": "4ac1a7bbd53d6d8e4772067f0f2e9a46f2ee41fec0069b1005330a0fb1d8d53c"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\inspect_candidates.py",
+      "bytes": 3855,
+      "sha256": "d1623eecc49c70264e1c394140b11e6df5f0d104905bf164c4328795de14490d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\low-band-gap-probe.json",
+      "bytes": 914,
+      "sha256": "c6a9786145b61fed2450bb11de16872b08c4f96544ba5334cb4a8d7399be595f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\low-gap-first.log",
+      "bytes": 914,
+      "sha256": "c6a9786145b61fed2450bb11de16872b08c4f96544ba5334cb4a8d7399be595f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\low_gap_probe.py",
+      "bytes": 2083,
+      "sha256": "416198fb9f4eb9d93043c269b383743da855aa158e5ce9c3b2da31266c03a9ec"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\percussion-event-patches.json",
+      "bytes": 619781,
+      "sha256": "42f739e6c5a5f8ac3b5a170c1d06c50128fb9614b0855d1839253b370ecfd9dd"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\percussion-layer-first8.wav",
+      "bytes": 3072058,
+      "sha256": "b58ccdf6644472fc44e32b039a906368f661768ba5df5f52c58a97cdcb167f0e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\percussion-layer.wav",
+      "bytes": 16389178,
+      "sha256": "d58e6b9124a75378b6e7a2c9772111ed72aa2e22173d23580393ae0d5c9aa9f2"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\plot-first.log",
+      "bytes": 100,
+      "sha256": "613f79a3015b0e6d0d2e6987e5379697c08cac3d548a4372aef6a18cd18f66d0"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\plot_comparison.py",
+      "bytes": 1810,
+      "sha256": "ad5206328d7698b2a16e93ca554f2b11c138cd1fc306654ab914cbf98cf12811"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\preservation-and-source-pins.json",
+      "bytes": 26242,
+      "sha256": "f08c7919479b24702845e5cf5a74c4b2c6df2b596400f90d5327eea1b9f8d116"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\render-first-report.json",
+      "bytes": 2761,
+      "sha256": "62ac0eb0f53d185b48e46376ca57e8a2a4a0a1ce8fe0e73b2a03d7272e91d1f5"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\render-first.log",
+      "bytes": 2761,
+      "sha256": "62ac0eb0f53d185b48e46376ca57e8a2a4a0a1ce8fe0e73b2a03d7272e91d1f5"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\render-repeat.log",
+      "bytes": 2761,
+      "sha256": "ac9a5227bee26b19dd059723fe0cf9a64f1f7c9f49c43c8dfe9c60462268e4b3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\render-report.json",
+      "bytes": 2761,
+      "sha256": "ac9a5227bee26b19dd059723fe0cf9a64f1f7c9f49c43c8dfe9c60462268e4b3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\render_percussion.py",
+      "bytes": 13658,
+      "sha256": "9edf9a0e6b25096b6c4dabeef6f2d62e87c285c1bff7222ea42862c08484e064"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\reproduce-first.log",
+      "bytes": 1363,
+      "sha256": "2085c0e332542066ba0299496eb0926bed5b2a58abef60084897bad3446ce6cb"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\reproduce_verify.py",
+      "bytes": 1476,
+      "sha256": "3a1abdb961e5d68fb0ec8de3d93aa93d4335b797cd3e0afc7bec8f158fa05f1c"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\reproduction-verification.json",
+      "bytes": 1363,
+      "sha256": "2085c0e332542066ba0299496eb0926bed5b2a58abef60084897bad3446ce6cb"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\seal_scope.py",
+      "bytes": 3446,
+      "sha256": "cc8724dddcb46fbe0ca35181972c7328ded27ba757fb30700c7c370adbbda5d0"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-completed-request.json",
+      "bytes": 1120,
+      "sha256": "550fd294c9848075442c29b1549f97a96eccca12b83894fc411b1fb200029237"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-completed-response.json",
+      "bytes": 1112,
+      "sha256": "5ed05d7ed124f700db15a9e1064a2709471c194a35daeac8dc741ff805f371e7"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-running-first-failure.txt",
+      "bytes": 216,
+      "sha256": "bc852625db854019147ef5ae4ff9479a0fc776f8cf35b79b5edb08249756fca5"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-running-first-request.json",
+      "bytes": 738,
+      "sha256": "a7206bfc6ef9120de009593203c634735515b5e0f0b0d3ea8740893bd7188057"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-running-request.json",
+      "bytes": 800,
+      "sha256": "1deb92afd907b70ebd4cfc1a66b6197a4fac8802fad9117fd46d9fa6e1ef1d03"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-running-response.json",
+      "bytes": 790,
+      "sha256": "5faa40f4f6547b9e2cad5ed1081aa57b922e6521607da7889d00f14525219a01"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-running-second-failure.txt",
+      "bytes": 171,
+      "sha256": "ef7d3c5434e0c885f6e55c6b607feac07113144d405f979af86f33c741db7adc"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\title-reference-percussion-prototype\\studio-running-second-request.json",
+      "bytes": 804,
+      "sha256": "6773912ce05599f4136cdf692001fe154b07b47b27bad8caaddd70550c844f5c"
+    }
+  ]
+}

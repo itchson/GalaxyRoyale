@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "candidate": "c95c008d22c9b7351463aa1575bf02347659d999",
+  "base": "af060d8377389bb0b73de0e09d8f6de58b4f4c3f",
+  "reference_root": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "scope": "Native test-only regression and source-backed ownership review; no runtime change or live browser proof.",
+  "source_semantics": "Canonical Git blob pins in source-pins.json; all evidence byte hashes are actual raw stored files.",
+  "evidence": [
+    {
+      "path": "clippy-final.log",
+      "bytes": 191,
+      "sha256": "18d79688abb7f3c6e105699b5530519f6eff22edbf06d6dc444fcfbddca01325"
+    },
+    {
+      "path": "clippy-native.log",
+      "bytes": 191,
+      "sha256": "67d3ad19bd5fea61cc5fad31fa1e0e095a08771b3fc5bedf8e0d7de4f4b17672"
+    },
+    {
+      "path": "co-op-final.log",
+      "bytes": 2892,
+      "sha256": "a7d2864a47f6134401bde0618fa518996fe7e97cdc0bb0d3a78d5793e37025d2"
+    },
+    {
+      "path": "co-op-regression.log",
+      "bytes": 2774,
+      "sha256": "060e285ced8e3ad2cab972a6c26398099b6b045ae9b2dc922da784e7b4071ac6"
+    },
+    {
+      "path": "diff-check.log",
+      "bytes": 129,
+      "sha256": "d166b19b0d1850e0afb824e4b40090e3f49722408c030d74b9e9966b8a4c99f0"
+    },
+    {
+      "path": "finalize-handoff.py",
+      "bytes": 1237,
+      "sha256": "c79dd286666de24bbc89e6f044a0430f0daf1b1d5bc03af06a3413815d17b2f1"
+    },
+    {
+      "path": "fmt-final.log",
+      "bytes": 47,
+      "sha256": "de3f2c86d9fc9d51a0eae680fe08aa38c9f75f2084e0557432f1dca9565516f0"
+    },
+    {
+      "path": "guest-bridge.log",
+      "bytes": 946,
+      "sha256": "170dc03b52b295613a7bead605e2aef2e0e548b1600d2644c1397f0bbe34312f"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 10489,
+      "sha256": "f5f6a16f371b675e9d1b111c73c59ae90a9902f64b50ad811b5cc1728de6c0f8"
+    },
+    {
+      "path": "native-final.log",
+      "bytes": 510,
+      "sha256": "94be77a1fe000c63f9b15d0e8dbcbb75cd3f465a14c90dc0b8b4328db723d58c"
+    },
+    {
+      "path": "native-first-exact.log",
+      "bytes": 884,
+      "sha256": "9f6f2c81ef1682c148c0b81b957100c87a18f3194986aec36fa44b07585c41f8"
+    },
+    {
+      "path": "native-first.log",
+      "bytes": 398,
+      "sha256": "bcf0fabf74f1d4102da430bf3173a40df0df4c70aff09ce958b5facb9f8427e0"
+    },
+    {
+      "path": "native-second.log",
+      "bytes": 1056,
+      "sha256": "84fb3969bff84f4a3540361bcc2752858bfb0a2a54e60ba92d6db76af9658fb1"
+    },
+    {
+      "path": "pin-source.py",
+      "bytes": 2583,
+      "sha256": "f69b9fe6b7fed667e4e13fc4fe0b8381abb9b797440a9c2cf9ff4d92993c01fd"
+    },
+    {
+      "path": "source/candidate/apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "source/candidate/apps/game/src/coop/wasm-ports.ts",
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    {
+      "path": "source/candidate/apps/game/src/main.ts",
+      "bytes": 87756,
+      "sha256": "f290cdfb5f86c1e3f1c0ed6b943de031eec4f07dedfd9a0883b7ebeac3d1f0ee"
+    },
+    {
+      "path": "source/candidate/crates/engine_core/src/frame.rs",
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4"
+    },
+    {
+      "path": "source/candidate/crates/engine_core/src/pixels.rs",
+      "bytes": 21861,
+      "sha256": "b0ecc9e662f598de055e43517163917c182dcb1bee5300b0170f3b54c42559a8"
+    },
+    {
+      "path": "source/candidate/crates/game_core/src/campaign.rs",
+      "bytes": 22135,
+      "sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65"
+    },
+    {
+      "path": "source/candidate/crates/game_core/src/co_op.rs",
+      "bytes": 50348,
+      "sha256": "a04675a4893555ce83de1455a680595307c8e9bf2abf98e4310ce18c89377911"
+    },
+    {
+      "path": "source/candidate/crates/game_core/src/co_op_control.rs",
+      "bytes": 3994,
+      "sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d"
+    },
+    {
+      "path": "source/candidate/crates/game_core/src/co_op_publish.rs",
+      "bytes": 7851,
+      "sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d"
+    },
+    {
+      "path": "source/candidate/crates/game_core/src/co_op_replica.rs",
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194"
+    },
+    {
+      "path": "source/candidate/crates/game_core/src/co_op_tests.rs",
+      "bytes": 44542,
+      "sha256": "9389101baba16e2783b0a4df953e25f7b1e2d4c96661eb9ffa80a0b67de39010"
+    },
+    {
+      "path": "source/candidate/crates/game_core/src/lib.rs",
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930"
+    },
+    {
+      "path": "source/candidate/crates/game_web/src/browser.rs",
+      "bytes": 39952,
+      "sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907"
+    },
+    {
+      "path": "source/candidate/crates/game_web/src/co_op_bridge.rs",
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    {
+      "path": "source/candidate/crates/game_web/src/co_op_replica_bridge.rs",
+      "bytes": 7981,
+      "sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192"
+    },
+    {
+      "path": "source/root-5e4/apps/game/src/main.ts",
+      "bytes": 87760,
+      "sha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2"
+    },
+    {
+      "path": "source/root-5e4/crates/game_core/src/co_op_tests.rs",
+      "bytes": 33125,
+      "sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a"
+    },
+    {
+      "path": "source-pins.json",
+      "bytes": 7284,
+      "sha256": "a1b910695c032834586a21fb5caeea430eb2ca53a0518c9ab2e5a1c914345a8f"
+    },
+    {
+      "path": "source-pins.log",
+      "bytes": 877,
+      "sha256": "966f29d874536f73e4631b965b83d3d107319ec2e583669b9b5303b2c0a6cd91"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 3678,
+      "sha256": "06c158de3ccd0eef3afe2501694967b38ea23cca1f45eb91367966ef29c2d56d"
+    },
+    {
+      "path": "write-handoff.py",
+      "bytes": 10318,
+      "sha256": "00d17c6bf44aef7cfe63e5924649e2386f19fe059a7ecd87b4ce308b95467251"
+    }
+  ]
+}

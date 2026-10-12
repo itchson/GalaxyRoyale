@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "commit": "af060d8377389bb0b73de0e09d8f6de58b4f4c3f",
+  "parent": "db15b91f3a1614ebd245fbab47787de737535882",
+  "root_reference": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "source_pin_semantics": "source bytes/SHA256 are exact canonical git cat-file blob bytes; working_checkout is raw filesystem bytes",
+  "source": [
+    {
+      "path": "crates/game_web/src/dock_art_tests.rs",
+      "git_blob": "15748d9ec1d298fef73691e7eec6ed45bf83a832",
+      "bytes": 25674,
+      "sha256": "b236fee2e1a03c401ecee101a66d3b0f28b664d1881fd65db946f5dfaae9802a",
+      "working_checkout": {
+        "bytes": 25674,
+        "sha256": "b236fee2e1a03c401ecee101a66d3b0f28b664d1881fd65db946f5dfaae9802a"
+      }
+    }
+  ],
+  "runtime_unchanged": [
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/engine_core/src/shadow.rs",
+      "bytes": 9438,
+      "sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14857,
+      "sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_core/src/hub_shadows.rs",
+      "bytes": 9642,
+      "sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "bytes": 9952,
+      "sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/shadow_uniforms.rs",
+      "bytes": 6127,
+      "sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "bytes": 8685,
+      "sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "bytes": 32057,
+      "sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "unchanged_from_parent_and_root": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "work/hub-shadow-next/clippy-frozen-qualified.log",
+      "bytes": 189,
+      "sha256": "560f6918a41a64f9b83dd614d38a4641b3e612e4855cda84d5043dcb185002e5"
+    },
+    {
+      "path": "work/hub-shadow-next/clippy-native-qualified.log",
+      "bytes": 189,
+      "sha256": "36b72d1b1016dd62c1ae57e230c11c306552be0fd1a48cdd6cbf6ff64c62119a"
+    },
+    {
+      "path": "work/hub-shadow-next/dock-tests-final.log",
+      "bytes": 1587,
+      "sha256": "8ad6ab96c83141efee818e84d187b33d8d585a5c85c5d90d96c6ed15f2e3d420"
+    },
+    {
+      "path": "work/hub-shadow-next/dock-tests-frozen.log",
+      "bytes": 1587,
+      "sha256": "51e3e9af8bc28474f4cdee38f2d8daf46c207467c5d8c116204efbe34225eb9c"
+    },
+    {
+      "path": "work/hub-shadow-next/fmt-frozen.json",
+      "bytes": 110,
+      "sha256": "f7ab1c5e79b63de979d3cccd377cb364cd6ae012a53362d0d551888c0026d645"
+    },
+    {
+      "path": "work/hub-shadow-next/fmt-result.json",
+      "bytes": 110,
+      "sha256": "f7ab1c5e79b63de979d3cccd377cb364cd6ae012a53362d0d551888c0026d645"
+    },
+    {
+      "path": "work/hub-shadow-next/gap-final.log",
+      "bytes": 810,
+      "sha256": "d0aee47aefef70e2d0ada5322a45c4096c1d19e885f159334b491c646bcea31c"
+    },
+    {
+      "path": "work/hub-shadow-next/gap-first.log",
+      "bytes": 1119,
+      "sha256": "61f84939ca76978c7cb6665a5390bca1be712fe0d96532eec64e9918043e3b15"
+    },
+    {
+      "path": "work/hub-shadow-next/gap-frozen.log",
+      "bytes": 810,
+      "sha256": "0e1c907aa69f796983db08fdb24298331ea6a0ec69b99e66c5a5303d7a5a59e2"
+    },
+    {
+      "path": "work/hub-shadow-next/runtime-source-equivalence.json",
+      "bytes": 2045,
+      "sha256": "ee7e1eaef18710a33836a64afdcddaa841983af444aafd8f8b99866cb8e3997f"
+    }
+  ],
+  "handoff": {
+    "path": "work/hub-shadow-next/HANDOFF.md",
+    "bytes": 3616,
+    "sha256": "fe3b51a22e74b2ab94edc546c1287bca0b3f1cc982c5f34f315aaae24e44b799"
+  },
+  "limitations": [
+    "test-only, no runtime defect reproduced",
+    "first failure was an incorrect test beacon-slot assumption",
+    "native geometry/packing, no GPU raster/appearance/performance acceptance",
+    "web native Clippy has explicit known base garage lint qualification"
+  ]
+}

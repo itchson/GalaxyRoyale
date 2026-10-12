@@ -1,0 +1,58 @@
+{
+  "before": {
+    "head": "8727e7e0295095e338cf907b623174807d14e736",
+    "branch": "codex/testing",
+    "sourceHash": "1b1af491964fb6e61ce6dfeac4f60bc0674ee5fc2b87b90746f97b2df1f484f5"
+  },
+  "after": {
+    "head": "8727e7e0295095e338cf907b623174807d14e736",
+    "branch": "codex/testing",
+    "sourceHash": "1b1af491964fb6e61ce6dfeac4f60bc0674ee5fc2b87b90746f97b2df1f484f5"
+  },
+  "unchanged": true,
+  "results": [
+    {
+      "name": "shell",
+      "command": "node",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "apps/studio/test/*.test.mjs",
+        "scripts/test/*.test.mjs",
+        "scripts/qa/audio-review/*.test.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "typecheck",
+      "command": "node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "rust",
+      "command": "cargo",
+      "args": [
+        "test",
+        "--workspace"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "clippy",
+      "command": "cargo",
+      "args": [
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 101
+    }
+  ]
+}

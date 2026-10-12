@@ -260,7 +260,7 @@ test("failed database writes leave the accepted snapshot intact and report the f
   assert.deepEqual((await snapshots())[0].currency, [10, 0, 0]);
 });
 
-test("v1 current and previous snapshots migrate to v4 without changing progression or awarding currency", async (t) => {
+test("v1 current and previous snapshots migrate to v5 without changing progression or awarding currency", async (t) => {
   await fixture(t);
   const current = legacyProfile(11, [99, 17, 4]);
   current.ranks[0] = 3;
@@ -274,7 +274,7 @@ test("v1 current and previous snapshots migrate to v4 without changing progressi
   const migrated = new SaveStore();
   t.after(() => migrated.db?.close());
   const loaded = await migrated.open();
-  assert.equal(loaded.schema_version, 4);
+  assert.equal(loaded.schema_version, 7);
   assert.equal(loaded.revision, 11);
   assert.deepEqual(loaded.currency, [99, 17, 4]);
   assert.deepEqual(loaded.ranks, current.ranks);
@@ -313,7 +313,7 @@ test("v1 current and previous snapshots migrate to v4 without changing progressi
   );
 });
 
-test("legacy recovery and legacy import both retain revision, ranks and currency in v4 snapshots", async (t) => {
+test("legacy recovery and legacy import both retain revision, ranks and currency in v5 snapshots", async (t) => {
   const store = await fixture(t);
   await store.save(profile(5, [50, 0, 0]));
   const legacy = legacyProfile(4, [40, 1, 2]);
@@ -330,7 +330,7 @@ test("legacy recovery and legacy import both retain revision, ranks and currency
   await recovery.replace(imported);
   imported.currency[0] = 900;
   const [current, previous] = await snapshots();
-  assert.equal(current.schema_version, 4);
+  assert.equal(current.schema_version, 7);
   assert.equal(current.revision, 2);
   assert.equal(current.ranks[1], 4);
   assert.deepEqual(current.currency, [12, 13, 14]);
@@ -483,13 +483,13 @@ test("v2 expedition progression migrates to a blank campaign with no new reward 
   const migrated = new SaveStore();
   t.after(() => migrated.db?.close());
   const loaded = await migrated.open();
-  assert.equal(loaded.schema_version, 4);
+  assert.equal(loaded.schema_version, 7);
   assert.equal(loaded.revision, 19);
   assert.deepEqual(loaded.currency, older.currency);
   assert.deepEqual(loaded.quests, older.quests);
   assert.deepEqual(loaded.campaign, currentEmptyCampaign());
   assert.deepEqual((await snapshots())[0], loaded);
-  assert.equal((await snapshots())[1].schema_version, 4);
+  assert.equal((await snapshots())[1].schema_version, 7);
 });
 
 test("campaign boundary rejects fabricated ownership, malformed league, cargo and run summaries", () => {

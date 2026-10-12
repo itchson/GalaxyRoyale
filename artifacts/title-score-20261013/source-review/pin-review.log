@@ -1,0 +1,154 @@
+{
+  "sources": [
+    {
+      "path": "apps/game/src/audio.ts",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "apps/game/src/audio-state.ts",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "apps/game/src/title-theme.ts",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "apps/game/src/music-clock.ts",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "apps/game/src/music-score.ts",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "rawMatchesFrozen": true,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "scripts/test/audio.test.mjs",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "scripts/test/title-theme.test.mjs",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "scripts/test/music-clock.test.mjs",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "scripts/test/audio-state.test.mjs",
+      "rawMatchesFrozen": null,
+      "lfMatchesFrozen": null,
+      "commitMatchesFrozen": null,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "work/title-score-engine/handoff.md",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "work/title-score-engine/execution-evidence.json",
+      "rawMatchesFrozen": true,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "work/title-score-engine/focused-tests.log",
+      "rawMatchesFrozen": true,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "work/title-score-engine/typecheck.log",
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    {
+      "path": "work/title-score-engine/source-pins.json",
+      "rawMatchesFrozen": null,
+      "lfMatchesFrozen": null,
+      "commitMatchesFrozen": null,
+      "workspaceMatchesCandidateLf": true
+    }
+  ],
+  "ownEvidence": {
+    "review.md": {
+      "bytes": 8531,
+      "sha256": "b918d685df259380b47a3fcea2b6537b5a2a17fed36898316997e1d8f81c3146"
+    },
+    "focused-tests.log": {
+      "bytes": 6753,
+      "sha256": "52da69858e080e138a751b52130764f5a6b111701c8ee39088cba7d91405876e"
+    },
+    "edge-review.log": {
+      "bytes": 633,
+      "sha256": "464bb208b9a6eb40eb163a7aaddf31b4f432bbf000abaf04fc19edbf8825a94d"
+    },
+    "edge-review-original-failure.log": {
+      "bytes": 2135,
+      "sha256": "bbbcb47800b33367f0ea34c94a07c663b8c890719c7cb6872387b958a4eed8f2"
+    },
+    "focused-tests-original.log": {
+      "bytes": 6755,
+      "sha256": "f3a0d83744d37144c2e8b36ad82f8427961868291ab9f2cf16d9e82652f0a7b8"
+    },
+    "review-pins-original.json": {
+      "bytes": 11482,
+      "sha256": "ea9cf1aeab96a052190b71f247387b73de5961ea720358298e2cff13d2a255ce"
+    },
+    "edge-review.test.mjs": {
+      "bytes": 1975,
+      "sha256": "54211951f6443403fa22365335d309939cb5a45aaa539fd3583fd411fd2ee671"
+    },
+    "recorded-api-harness.mjs": {
+      "bytes": 5097,
+      "sha256": "871f8f26aa9f770eddb43248872693a29a242f873c14af52cf26159c4abdae96"
+    },
+    "pin-review.mjs": {
+      "bytes": 4311,
+      "sha256": "01bfe63c3e7da264d56d29d01eab428dab8e2cd482b90a53ef116b28e799c09a"
+    }
+  },
+  "frozenTypecheckEquivalentTextMatches": [
+    {
+      "newlineMask": 2,
+      "bytes": 64,
+      "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+    }
+  ]
+}

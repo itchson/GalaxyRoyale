@@ -1,0 +1,17 @@
+[
+  {
+    "file": "edge-first-inspection.log",
+    "bytes": 36794,
+    "sha256": "148e21b69c5eb9e2a8927ca49312b0bd180d4471aa2f1c937385c8e968724e94"
+  },
+  {
+    "file": "presentation-second-test.log",
+    "bytes": 1940,
+    "sha256": "81a16f9b6db9533f88182809dc713d9f4203a181234a04828e21a37749fec480"
+  },
+  {
+    "file": "root-replica-source.rs",
+    "bytes": 52672,
+    "sha256": "7c4cb24642efbfafaf09891c10570a7b51bd3689c2bd1407726d9d1c7027e82b"
+  }
+]

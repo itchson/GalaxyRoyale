@@ -1,5 +1,6 @@
 //! Portable instanced pixel quads. No compute or storage buffers are required.
-use engine_core::{CameraView, GpuTransform, PixelInstance, RenderFrame, Vec2};
+use crate::shadow_uniforms::{OBJECT_TABLE_BYTES, SHADOW_DESCRIPTOR_BYTES, SHADOW_MASK_BYTES};
+use engine_core::{CameraView, GpuTransform, ObjectMeta, PixelInstance, RenderFrame, Vec2};
 use std::sync::{
     Arc,
     atomic::{AtomicBool, Ordering},
@@ -28,6 +29,11 @@ pub struct Renderer {
     globals: wgpu::Buffer,
     ui_globals: wgpu::Buffer,
     transforms: wgpu::Buffer,
+    objects: wgpu::Buffer,
+    shadow_descriptors: wgpu::Buffer,
+    shadow_masks: wgpu::Buffer,
+    mask_cache: Option<Box<[u32; engine_core::shadow::SHADOW_WORDS]>>,
+    objects_dirty: bool,
     instances: wgpu::Buffer,
     geometry_layout: wgpu::BindGroupLayout,
     geometry_bind: wgpu::BindGroup,
@@ -45,6 +51,7 @@ pub struct Renderer {
     instance_capacity: usize,
     pixel_scratch: Vec<PixelInstance>,
     transform_scratch: Vec<GpuTransform>,
+    object_scratch: Vec<ObjectMeta>,
     draws: Vec<Draw>,
     lost: Arc<AtomicBool>,
 }
@@ -94,6 +101,9 @@ fn geometry_bind(
     layout: &wgpu::BindGroupLayout,
     globals: &wgpu::Buffer,
     transforms: &wgpu::Buffer,
+    objects: &wgpu::Buffer,
+    shadow_descriptors: &wgpu::Buffer,
+    shadow_masks: &wgpu::Buffer,
 ) -> wgpu::BindGroup {
     device.create_bind_group(&wgpu::BindGroupDescriptor {
         label: Some("pixel frame bindings"),
@@ -110,6 +120,22 @@ fn geometry_bind(
                     offset: 0,
                     size: std::num::NonZeroU64::new(TRANSFORM_BYTES),
                 }),
+            },
+            wgpu::BindGroupEntry {
+                binding: 2,
+                resource: wgpu::BindingResource::Buffer(wgpu::BufferBinding {
+                    buffer: objects,
+                    offset: 0,
+                    size: std::num::NonZeroU64::new(OBJECT_TABLE_BYTES),
+                }),
+            },
+            wgpu::BindGroupEntry {
+                binding: 3,
+                resource: shadow_descriptors.as_entire_binding(),
+            },
+            wgpu::BindGroupEntry {
+                binding: 4,
+                resource: shadow_masks.as_entire_binding(),
             },
         ],
     })
@@ -212,6 +238,36 @@ impl Renderer {
                     },
                     count: None,
                 },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 2,
+                    visibility: wgpu::ShaderStages::VERTEX,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Uniform,
+                        has_dynamic_offset: true,
+                        min_binding_size: std::num::NonZeroU64::new(OBJECT_TABLE_BYTES),
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 3,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Uniform,
+                        has_dynamic_offset: false,
+                        min_binding_size: std::num::NonZeroU64::new(SHADOW_DESCRIPTOR_BYTES),
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 4,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Uniform,
+                        has_dynamic_offset: false,
+                        min_binding_size: std::num::NonZeroU64::new(SHADOW_MASK_BYTES),
+                    },
+                    count: None,
+                },
             ],
         });
         let globals = uniform(
@@ -225,8 +281,31 @@ impl Renderer {
             (crate::lighting::UNIFORM_FLOATS * 4) as u64,
         );
         let transforms = uniform(&device, "object transform tables", TRANSFORM_BYTES * 32);
-        let ui_geometry_bind = geometry_bind(&device, &geometry_layout, &ui_globals, &transforms);
-        let geometry_bind = geometry_bind(&device, &geometry_layout, &globals, &transforms);
+        let objects = uniform(&device, "parallel object metadata", OBJECT_TABLE_BYTES * 32);
+        let shadow_descriptors = uniform(
+            &device,
+            "bounded planar caster descriptors",
+            SHADOW_DESCRIPTOR_BYTES,
+        );
+        let shadow_masks = uniform(&device, "bounded planar occupancy masks", SHADOW_MASK_BYTES);
+        let ui_geometry_bind = geometry_bind(
+            &device,
+            &geometry_layout,
+            &ui_globals,
+            &transforms,
+            &objects,
+            &shadow_descriptors,
+            &shadow_masks,
+        );
+        let geometry_bind = geometry_bind(
+            &device,
+            &geometry_layout,
+            &globals,
+            &transforms,
+            &objects,
+            &shadow_descriptors,
+            &shadow_masks,
+        );
         let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("pixel quad shader"),
             source: wgpu::ShaderSource::Wgsl(include_str!("pixel.wgsl").into()),
@@ -272,7 +351,7 @@ impl Renderer {
             wgpu::TextureFormat::Rgba8UnormSrgb,
             "full-resolution world quads",
         );
-        let ui_pipeline = make_pipeline(wgpu::TextureFormat::Rgba8Unorm, "logical UI quads");
+        let ui_pipeline = make_pipeline(wgpu::TextureFormat::Rgba8Unorm, "physical UI quads");
         let present_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("presentation texture layout"),
             entries: &[
@@ -370,8 +449,11 @@ impl Renderer {
             [config.width, config.height],
             wgpu::TextureFormat::Rgba8UnormSrgb,
         );
-        let (ui_target, ui_target_view) =
-            render_target(&device, logical, wgpu::TextureFormat::Rgba8Unorm);
+        let (ui_target, ui_target_view) = render_target(
+            &device,
+            raster_layout.ui_raster(),
+            wgpu::TextureFormat::Rgba8Unorm,
+        );
         let present_globals = uniform(&device, "world and logical UI presentation extents", 16);
         let present_bind = present_bind(
             &device,
@@ -394,6 +476,11 @@ impl Renderer {
             globals,
             ui_globals,
             transforms,
+            objects,
+            shadow_descriptors,
+            shadow_masks,
+            mask_cache: None,
+            objects_dirty: false,
             instances,
             geometry_layout,
             geometry_bind,
@@ -411,6 +498,7 @@ impl Renderer {
             instance_capacity: 131072,
             pixel_scratch: Vec::with_capacity(131072),
             transform_scratch: Vec::with_capacity(4096),
+            object_scratch: Vec::with_capacity(4096),
             draws: Vec::with_capacity(32),
             lost,
         })
@@ -438,8 +526,11 @@ impl Renderer {
             [width, height],
             wgpu::TextureFormat::Rgba8UnormSrgb,
         );
-        (self.ui_target, self.ui_target_view) =
-            render_target(&self.device, self.logical, wgpu::TextureFormat::Rgba8Unorm);
+        (self.ui_target, self.ui_target_view) = render_target(
+            &self.device,
+            raster_layout.ui_raster(),
+            wgpu::TextureFormat::Rgba8Unorm,
+        );
         self.present_bind = present_bind(
             &self.device,
             &self.present_layout,
@@ -472,11 +563,14 @@ impl Renderer {
         .ok_or_else(|| js("Invalid camera projection"))?;
         self.pixel_scratch.clear();
         self.transform_scratch.clear();
+        self.object_scratch.clear();
+        let mut objects_active = false;
         self.draws.clear();
         // World and overlay retain separate pooled extractions, but share the
         // same GPU buffers, but separate attachments and ordered render passes.
-        // World raster uses the full backing resolution; UI remains nearest
-        // logical pixels, without inverse-zoom mutation of control transforms.
+        // UI stays in logical coordinates but rasterizes its small cells at the
+        // physical presentation extent. Nearest composition adds no blur, and
+        // control transforms do not depend on world zoom.
         for (frame, ui) in [(frame, false), (overlay, true)] {
             for batch in &frame.batches {
                 if batch.pixels.is_empty() {
@@ -498,6 +592,19 @@ impl Renderer {
                         b: [0.0; 4],
                     },
                 );
+                if !ui && let Some(objects) = &batch.objects {
+                    self.object_scratch.extend(
+                        objects
+                            .iter()
+                            .take(batch.transforms.len())
+                            .map(|meta| meta.sanitized()),
+                    );
+                    objects_active |= objects
+                        .iter()
+                        .any(|m| m.sanitized() != ObjectMeta::default());
+                }
+                self.object_scratch
+                    .resize((table + 1) * 128, ObjectMeta::default());
                 self.draws.push(Draw {
                     offset,
                     bytes: (batch.pixels.len() * 16) as u64,
@@ -519,19 +626,53 @@ impl Renderer {
                 "grown transform tables",
                 TRANSFORM_BYTES * self.table_capacity as u64,
             );
+            self.objects = uniform(
+                &self.device,
+                "grown object metadata",
+                OBJECT_TABLE_BYTES * self.table_capacity as u64,
+            );
+            self.objects_dirty = false;
             self.geometry_bind = geometry_bind(
                 &self.device,
                 &self.geometry_layout,
                 &self.globals,
                 &self.transforms,
+                &self.objects,
+                &self.shadow_descriptors,
+                &self.shadow_masks,
             );
             self.ui_geometry_bind = geometry_bind(
                 &self.device,
                 &self.geometry_layout,
                 &self.ui_globals,
                 &self.transforms,
+                &self.objects,
+                &self.shadow_descriptors,
+                &self.shadow_masks,
             );
         }
+        let shadow_uniforms =
+            crate::shadow_uniforms::uniforms(frame.shadows.as_deref(), camera, lights);
+        self.queue.write_buffer(
+            &self.shadow_descriptors,
+            0,
+            bytemuck::bytes_of(&shadow_uniforms),
+        );
+        if shadow_uniforms.header[0] > 0
+            && let Some(shadows) = frame.shadows.as_deref()
+            && self.mask_cache.as_deref() != Some(shadows.masks())
+        {
+            self.queue
+                .write_buffer(&self.shadow_masks, 0, bytemuck::cast_slice(shadows.masks()));
+            self.mask_cache
+                .get_or_insert_with(|| Box::new([0; engine_core::shadow::SHADOW_WORDS]))
+                .copy_from_slice(shadows.masks());
+        }
+        if (objects_active || self.objects_dirty) && !self.object_scratch.is_empty() {
+            self.queue
+                .write_buffer(&self.objects, 0, bytemuck::cast_slice(&self.object_scratch));
+        }
+        self.objects_dirty = objects_active;
         self.queue.write_buffer(
             &self.globals,
             0,
@@ -546,7 +687,15 @@ impl Renderer {
         self.queue.write_buffer(
             &self.ui_globals,
             0,
-            bytemuck::cast_slice(&crate::lighting::uniforms(self.viewport(), camera, &[])),
+            bytemuck::cast_slice(&crate::lighting::uniforms_with_raster(
+                self.viewport(),
+                camera,
+                &[],
+                [1.0, 1.0, 1.0, 0.0],
+                crate::lighting::RasterLayout::new([self.config.width, self.config.height])
+                    .ui_raster()
+                    .map(|size| size as f32),
+            )),
         );
         self.queue.write_buffer(
             &self.present_globals,
@@ -614,7 +763,7 @@ impl Renderer {
             })];
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some(if ui {
-                    "logical pixel UI"
+                    "physical pixel UI with logical projection"
                 } else {
                     "full-resolution pixel world"
                 }),
@@ -637,7 +786,10 @@ impl Renderer {
                     } else {
                         &self.geometry_bind
                     },
-                    &[draw.table * TRANSFORM_BYTES as u32],
+                    &[
+                        draw.table * TRANSFORM_BYTES as u32,
+                        draw.table * OBJECT_TABLE_BYTES as u32,
+                    ],
                 );
                 pass.set_vertex_buffer(
                     0,
@@ -657,7 +809,7 @@ impl Renderer {
                 },
             })];
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("full-resolution world and nearest UI composition"),
+                label: Some("full-resolution world and physical nearest UI composition"),
                 color_attachments: &attachments,
                 depth_stencil_attachment: None,
                 timestamp_writes: None,

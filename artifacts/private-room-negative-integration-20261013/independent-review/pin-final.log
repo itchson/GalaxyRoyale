@@ -1,0 +1,45 @@
+{
+  "scope": "Independent exact frozen source/evidence review; original two source-function failures preserved; no independent rerun, browser, native Game, RTC, build, stage or listener execution for v2",
+  "original_candidate": "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+  "final_candidate": "7c188d4198901ead15e4bffa2b0063b9c95f7674",
+  "parent_verified": true,
+  "changed_files": [
+    "scripts/qa/co-op-transport/wasm-review.js",
+    "scripts/test/coop-private-room-negative-qa.test.mjs"
+  ],
+  "final_raw_author_evidence_verified": 16,
+  "unchanged_original_source_and_consumer_inputs": [
+    "scripts/qa/co-op-transport/README.md",
+    "scripts/qa/co-op-transport/client.js",
+    "scripts/qa/co-op-transport/server.mjs",
+    "scripts/qa/co-op-transport/wasm-review.html",
+    "apps/game/src/coop/controller.ts",
+    "apps/game/src/coop/transport.ts",
+    "apps/game/src/coop/signaling.ts",
+    "apps/game/src/coop/wasm-ports.ts",
+    "scripts/qa/co-op-transport/prepare.mjs",
+    "scripts/test/coop-transport-wasm-qa.test.mjs",
+    "scripts/test/coop-transport-fifth-qa.test.mjs"
+  ],
+  "author_original_function_tests": 37,
+  "author_final_function_tests": 43,
+  "original_independent_source_function_failures": 2,
+  "author_preserved_regression_logs": [
+    "original-regression.log",
+    "visibility-original-regression.log",
+    "health-preflight-original-regression.log"
+  ],
+  "resolved_findings": [
+    "post-policy complete-commit floor",
+    "visibility loss through awaited commands/observations",
+    "available native-loop failure/init/lifetime qualification"
+  ],
+  "verdict": "No remaining source blocker for scoped integration and fresh live QA; actual browser/native/RTC acceptance remains pending",
+  "open_limits": [
+    "pagehide stopped edge is not directly observable from current child protocol",
+    "source-function tests use declared boundaries, not actual browser/RTC/native operations",
+    "normalized Profile and persisted digests do not prove full boxed-world preservation or zero migration writes",
+    "two loopback clients do not prove eight participants, Internet or TURN",
+    "policy sequencing does not prove every overlapping request/race"
+  ]
+}

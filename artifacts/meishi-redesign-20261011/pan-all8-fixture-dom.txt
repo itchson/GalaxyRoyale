@@ -1,0 +1,36 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "MEISHI CARD":
+  - button "Close MEISHI card" [active]: X
+  - group "MEISHI CARD":
+    - article "MEISHI CARD / pilot and current RAICHO":
+      - heading "MEISHI CARD" [level=3]
+      - paragraph: PAN DYNAMICS
+      - 'img "DORA profile: GREEN hair, RED crystals"'
+      - paragraph: APR#0123456789ABCDEF
+      - paragraph: DORA / PAN / RENKO
+      - region "Current RAICHO":
+        - heading "PAN HIKARI" [level=3]
+        - paragraph: LV 5
+      - region "Retained corporate point balances":
+        - paragraph: RENKO / 30
+        - paragraph: HUGO / 30
+        - paragraph: PAN / 30
+      - paragraph: ARENA PATCHES 8/8
+      - list "Eight arena patch slots":
+        - 'listitem "Arena patch 1: Lyra Voss, earned"':
+          - paragraph: "01"
+        - 'listitem "Arena patch 2: Korr-9, earned"':
+          - paragraph: "02"
+        - 'listitem "Arena patch 3: Sable Myrr, earned"':
+          - paragraph: "03"
+        - 'listitem "Arena patch 4: Xil of Aurora, earned"':
+          - paragraph: "04"
+        - 'listitem "Arena patch 5: Maera Quill, earned"':
+          - paragraph: "05"
+        - 'listitem "Arena patch 6: Orun Vale, earned"':
+          - paragraph: "06"
+        - 'listitem "Arena patch 7: Vexa Null, earned"':
+          - paragraph: "07"
+        - 'listitem "Arena patch 8: Atlas-0, earned"':
+          - paragraph: "08"

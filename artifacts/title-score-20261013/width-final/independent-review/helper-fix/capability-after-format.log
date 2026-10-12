@@ -1,0 +1,11 @@
+✔ actual renderer preserves absent native panner capability before an explicit no-PCM probe exit (191.9291ms)
+✔ exported offline adapter preserves real receivers, return identity and exact node/source registration (0.2712ms)
+✔ exported offline adapter retains absent and noncallable factory capabilities without phantom nodes (0.113ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 377.793

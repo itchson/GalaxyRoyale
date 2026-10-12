@@ -41,7 +41,7 @@ test("six biome identities and eight champion motifs remain distinct and bounded
     motifs.add(JSON.stringify(THEMES[6 + champion].motif));
   }
   assert.equal(motifs.size, 8);
-  assert.equal(THEMES.length, 15);
+  assert.equal(THEMES.length, 18);
   let mix = newMix();
   for (let i = 0; i < 1000; i++) {
     mix = advanceMix(
@@ -105,4 +105,74 @@ test("nonfinite boundaries, no-op time and source input normalization are determ
     settle(state({ area: "arena", champion: 3, combat: 0.7 })),
     settle(state({ area: "arena", champion: 3, combat: 0.7 })),
   );
+});
+
+test("three original corporate homes preserve old identities and fade through real sanctuary exit", () => {
+  const motifs = new Set();
+  for (const [corporation, index] of [
+    ["pan", 15],
+    ["renko", 16],
+    ["hugo", 17],
+  ]) {
+    const home = settle(state({ corporation }));
+    assert.equal(audibleThemes(home)[0][0], index);
+    assert.equal(home.combat, 0);
+    assert.equal(home.boss, 0);
+    motifs.add(JSON.stringify(THEMES[index].motif));
+    const first = advanceMix(
+      home,
+      state({ corporation, area: "belt" }),
+      1 / 60,
+    );
+    assert(first.themes[index] > 0.95);
+    assert(first.themes[14] > 0);
+    const outer = settle(
+      state({ corporation, area: "reach", biome: 2 }),
+      first,
+    );
+    assert.equal(audibleThemes(outer)[0][0], 2);
+    assert.equal(
+      audibleThemes(settle(state({ corporation }), outer))[0][0],
+      index,
+    );
+    assert.equal(cleanState(state({ corporation })).corporation, corporation);
+  }
+  assert.equal(motifs.size, 3);
+  for (const corporation of [null, undefined, "PAN", "invalid", 3])
+    assert.equal(audibleThemes(settle(state({ corporation })))[0][0], 0);
+  assert.equal(
+    cleanState(state({ corporation: "pan", sub_corporation: "hugo" }))
+      .sub_corporation,
+    undefined,
+  );
+  assert.equal(THEMES[6].name, "Lyra Voss / Needle dance");
+  assert.equal(THEMES[14].name, "Expanse / Scouting signal");
+});
+
+test("boss arrangement requires a real hostile and aggro, with bounded smooth rise and decay", () => {
+  for (const raw of [
+    state({ boss: true }),
+    state({ area: "reach", boss: true, combat: 1, hostiles: 0 }),
+    state({ area: "reach", boss: true, combat: 0, hostiles: 1 }),
+    state({ area: "haven", boss: true, combat: 1, hostiles: 1 }),
+    state({ area: "site", boss: true, combat: 1, hostiles: 1 }),
+  ])
+    assert.equal(settle(raw).boss, 0);
+  const active = state({ area: "reach", boss: true, combat: 0.8, hostiles: 1 });
+  const first = advanceMix(newMix(), active, 1 / 60);
+  assert(first.boss > 0 && first.boss < 0.05);
+  const full = settle(active);
+  assert(full.boss > 0.999);
+  const fading = advanceMix(
+    full,
+    state({ area: "reach", combat: 0.8, hostiles: 4 }),
+    1 / 60,
+  );
+  assert(fading.boss > 0.98 && fading.boss < full.boss);
+  assert(
+    settle(state({ area: "reach", combat: 0.8, hostiles: 4 }), fading, 900)
+      .boss < 0.0001,
+  );
+  for (const seconds of [0, -1, NaN, Infinity])
+    assert.deepEqual(advanceMix(full, active, seconds), full);
 });

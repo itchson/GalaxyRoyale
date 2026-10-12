@@ -1,0 +1,17 @@
+BASELINE_CONFIRMED never-listened Vite.close did not release lease
+✔ baseline actual Vite close before listen leaks the HTTP-event-only reservation (24.3777ms)
+BASELINE_CONFIRMED replacement configure runs before old.close
+✔ baseline actual Vite restart conflicts with its still-open old reservation (25.555ms)
+✔ repair actual Vite never-listened close is idempotent and releases lease (10.3504ms)
+✔ repair actual Vite performs two restarts and retains cross-process OS exclusion (37.7979ms)
+✔ repair independently imported plugin owners share until final explicit close (21.2789ms)
+✔ repair actual preview close releases reservation (9.5173ms)
+✔ repair failed preview HTTP listen releases lease without claiming the occupied owner (10.5394ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 372.4168

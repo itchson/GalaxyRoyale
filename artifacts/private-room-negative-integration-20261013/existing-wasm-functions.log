@@ -1,0 +1,28 @@
+(node:13448) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Actual initialization pauses fresh Galaxy before guarded license registration and marks each API stage (32.9641ms)
+✔ Actual initialization has a bounded total deadline, controlled failures and frees a late native create (4.7041ms)
+✔ Actual client frame code calls Galaxy.step only, pauses solo/guest, and resets a restored frame (3.4271ms)
+✔ Actual rejoin gate requires a new complete native commit, not a cumulative old commit (5.3086ms)
+✔ Actual approval QA rejects pre-approval RTC or admission and measures cumulative peer counts (11.4358ms)
+✔ Actual client approval commands use current host request id without exposing credentials (3.8142ms)
+✔ Actual approval observation refuses late pending replies and bounds each child timeout (2.462ms)
+✔ Actual child message route preserves controlled approval failure and sanitizes arbitrary errors (1.9682ms)
+✔ Actual New session orchestration uses real controller idempotent leave after prior host end (2.9941ms)
+✔ Actual Drive preflight rejects hidden, clipped, zero and nonfinite client bounds before any native command (5.5836ms)
+✔ Actual Drive latches mid-command visibility loss and never labels interrupted observations a native pass (7.348ms)
+✔ WASM report accepts finite observations, refuses capabilities/profile payloads and does not infer a native commit (0.8136ms)
+✔ Owned reports preserve the factory format and admit only finite, secret-free native metadata (0.437ms)
+✔ Actual localSpec reads the native export only in explicit owned mode and never forwards Profile (3.2595ms)
+✔ Actual commit observations reset session IDs and cannot mistake a staged owned header for a complete native commit (5.9588ms)
+✔ WASM allowlist fixes backend paths and cannot request unrelated files (0.3608ms)
+﹣ Actual supplied factory normal WASM stage serves two exact QA origins, real binaries and immutable secret-free captures (0.0283ms) # SKIP
+﹣ Actual supplied owned source-pinned normal WASM stage serves two exact QA origins, real binaries and immutable secret-free captures (0.0171ms) # SKIP
+ℹ tests 18
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 340.1156

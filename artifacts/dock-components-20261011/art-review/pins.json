@@ -1,0 +1,105 @@
+{
+  "scope": "Independent source/native transaction and shell VM review; no browser or balance acceptance",
+  "coreCommit": "373a1fd16ce02b7879cf95122087f555973d4558",
+  "componentArtCommit": "2d2bcabe18bf9eb4155419fad64f0d5341548ac3",
+  "rootHeadAtFinalRead": "d7217c6efdb8a5d186419ac2ded7877750203c87",
+  "core": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\crates\\game_core\\src\\components.rs",
+      "bytes": 9224,
+      "sha256": "c2a9cef6263bd9be289e991fa80dfcdfd85502f92b13536670dc2dff9e680471",
+      "canonicalLfSha256": "c2a9cef6263bd9be289e991fa80dfcdfd85502f92b13536670dc2dff9e680471",
+      "committedCanonicalMatch": true
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\crates\\game_core\\src\\component_tests.rs",
+      "bytes": 18126,
+      "sha256": "ada882c35adf64d7285a6fca966db2a456346e5df1cd1470771be1df99b712a6",
+      "canonicalLfSha256": "ada882c35adf64d7285a6fca966db2a456346e5df1cd1470771be1df99b712a6",
+      "committedCanonicalMatch": true
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\crates\\game_core\\src\\campaign.rs",
+      "bytes": 22135,
+      "sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "canonicalLfSha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "committedCanonicalMatch": true
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\crates\\game_core\\src\\ship_progression.rs",
+      "bytes": 24690,
+      "sha256": "8ea582f564b79903e64c746b8cb715301570ad4b44e051d2fd7a3258b48f8955",
+      "canonicalLfSha256": "8ea582f564b79903e64c746b8cb715301570ad4b44e051d2fd7a3258b48f8955",
+      "committedCanonicalMatch": true
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\crates\\game_core\\src\\lib.rs",
+      "bytes": 196322,
+      "sha256": "7c9425e544498fc2bb9193fac19c8058c0685215b48c10a721e2b0798b1a0370",
+      "canonicalLfSha256": "7c9425e544498fc2bb9193fac19c8058c0685215b48c10a721e2b0798b1a0370",
+      "committedCanonicalMatch": true
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\docs\\ABILITY_COMPONENTS.md",
+      "bytes": 4342,
+      "sha256": "d64b59375fa32ce71614a36a417c80bf2d77bfecdfa5a28766233b8f9662ea08",
+      "canonicalLfSha256": "d64b59375fa32ce71614a36a417c80bf2d77bfecdfa5a28766233b8f9662ea08",
+      "committedCanonicalMatch": true
+    }
+  ],
+  "shell": [
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\apps\\game\\src\\loadout.ts",
+      "bytes": 24387,
+      "sha256": "a2921ce897742ccb31a8065b2323b4b4274eca3e7b6c827f884ea1969e11128e",
+      "canonicalLfSha256": "a2921ce897742ccb31a8065b2323b4b4274eca3e7b6c827f884ea1969e11128e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\apps\\game\\src\\loadout.css",
+      "bytes": 4265,
+      "sha256": "cd4dc359316b3a8420596f35120136b2b106a11ba1d1da1e6f8660c956ebcdcd",
+      "canonicalLfSha256": "cd4dc359316b3a8420596f35120136b2b106a11ba1d1da1e6f8660c956ebcdcd"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\apps\\game\\src\\main.ts",
+      "bytes": 80955,
+      "sha256": "bdc02567a80d8d8cd34b0b26f3a282e35003b42301eec052ff12bdfe296fc353",
+      "canonicalLfSha256": "bdc02567a80d8d8cd34b0b26f3a282e35003b42301eec052ff12bdfe296fc353"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\scripts\\test\\loadout.test.mjs",
+      "bytes": 26399,
+      "sha256": "202ee30771a28f1aa00b6c4e7a1c5231f26ea010680bfa52194a629e985babd9",
+      "canonicalLfSha256": "202ee30771a28f1aa00b6c4e7a1c5231f26ea010680bfa52194a629e985babd9"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\scripts\\test\\forge-integration.test.mjs",
+      "bytes": 16517,
+      "sha256": "ca8fdf58d27458fc2ef35ec612cb48ce501a53953bc2ad1868e2aa481122f724",
+      "canonicalLfSha256": "ca8fdf58d27458fc2ef35ec612cb48ce501a53953bc2ad1868e2aa481122f724"
+    }
+  ],
+  "art": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\crates\\game_web\\src\\component_art.rs",
+      "bytes": 22462,
+      "sha256": "fbb14b14c4463999914ffeb3f013a1caa871c9b2e15c1040e0979b89f60f8df3",
+      "canonicalLfSha256": "fbb14b14c4463999914ffeb3f013a1caa871c9b2e15c1040e0979b89f60f8df3",
+      "committedCanonicalMatch": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\component-contract-review\\native-tests.log",
+      "bytes": 2059,
+      "sha256": "a0866a47b2de18521d4ab96a09cec38c378918fc24176993d47289f82a7a68a4",
+      "canonicalLfSha256": "2cfd3579128a6887bf55ed9fa33ce3109eb181a8595b2b8c37a7b4ecf434172b"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\component-contract-review\\shell-tests.log",
+      "bytes": 660,
+      "sha256": "65e93d0697f058160b9d4a9c417942a0b68f7014b0d3cc69d3f98da0bd8ffd0d",
+      "canonicalLfSha256": "2b1693b03994e7a25e044a5e90b5408d8bbcc0125cdb6ea1053370cbb92ed963"
+    }
+  ]
+}

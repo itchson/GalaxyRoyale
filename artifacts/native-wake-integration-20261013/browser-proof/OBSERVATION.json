@@ -1,0 +1,48 @@
+{
+  "scope": "Actual Root native normal-package startup/PWA update and sampled saved progression on both renderers; not new ability RTC/AV, full profile equality, shadow appearance or performance acceptance",
+  "identity": {
+    "head": "60e16acaba7ceda12afd02bf497f6aadd34da885",
+    "branch": "codex/testing",
+    "sourceHash": "1d1b0b5c01242290cce5c13c9a408a57cd5a7f7bf2911aec69ad82dd355b00df"
+  },
+  "receipt": {
+    "schemaVersion": 1,
+    "head": "60e16acaba7ceda12afd02bf497f6aadd34da885",
+    "branch": "codex/testing",
+    "sourceHash": "1d1b0b5c01242290cce5c13c9a408a57cd5a7f7bf2911aec69ad82dd355b00df",
+    "packageHash": "4a20017097bc3ae9702e0a3ef6b8ddd8ff4fdd4c66cd364dd66e483876446825",
+    "builtAt": "2026-10-12T19:09:50.356Z",
+    "compiledFromHead": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+    "carriedAt": "2026-10-12T19:18:50.008Z",
+    "carryReason": "Reviewed unshipped co-op QA provenance/approval/compatibility, docs, studio and actual loopback evidence only. Runtime and packaged output hashes rechecked unchanged; original compilation timestamp retained."
+  },
+  "flow": "Retained origin first served old F4 cache; actual Settings Apply update at Haven activated new index-DIlkClsC. Continued safely at Haven; observed points16/12/9,hull100,shield0,PAN HIKARI level3XP119/120,FluxDriveR1 on both backends. Returned safely to title.",
+  "files": [
+    {
+      "file": "current-webgl2-haven.png",
+      "bytes": 41350,
+      "sha256": "382fe756c8ccde0f2b6acdfeb1179efeb41dd7e9cff66c46d34c776bc10b3f6e"
+    },
+    {
+      "file": "current-webgl2-observation.json",
+      "bytes": 2849,
+      "sha256": "f66de8182692f74b1e33a3b3ee2c3664c7fbfb10fd0774f21ec8c939ddd24813"
+    },
+    {
+      "file": "current-webgpu-haven.png",
+      "bytes": 40065,
+      "sha256": "ed73b74f0db111de03a92afbe5e633b3560e25991f4bf96a36810c06868148a7"
+    },
+    {
+      "file": "current-webgpu-observation.json",
+      "bytes": 2726,
+      "sha256": "6ad5a4e29a62decab40d39f6dfa65c1ccbe2e07092ec04f3633aaf6b27206498"
+    },
+    {
+      "file": "current-webgpu-raicho.png",
+      "bytes": 44132,
+      "sha256": "a4d28fd096044edb8500235f1aec1de22bf95cc6fc28fc65138c8783155d8989"
+    }
+  ],
+  "limits": "WebGL2 HUD timing is a momentary desktop warm single-entity observation, not performance capture/soak. No diagnostic warp,die,stress,context-loss or imported profile used."
+}

@@ -1,0 +1,26 @@
+{
+  "observedAt": "2026-10-12T22:03:47.608Z",
+  "sourceCommit": "4bbcd7b98b5c242e1c6f3c614bae4bf50f6949c9",
+  "integratedCommit": "9af0b051848c65c62b1da1c0fa6be083a3735c70",
+  "build": {
+    "schemaVersion": 1,
+    "head": "9af0b051848c65c62b1da1c0fa6be083a3735c70",
+    "branch": "codex/testing",
+    "sourceHash": "56e59a90f8b5c292b8e1dc083c0edcdf6ef5a0bb1a9ed6df5a9b814227a8d2bf",
+    "packageHash": "4436fb7fa40e683955846938f98dfcad54fb6fa85a2f0fe1927c36f73a2f322a",
+    "builtAt": "2026-10-12T21:59:14.194Z"
+  },
+  "scope": "Single Dart color/material refinement:118 cells changed, exact426 occupancy mask,51 animated sites and64-entry palette retained; all non-Dart atlas bytes unchanged.",
+  "checks": {
+    "rootPipeline": "7 focused Python tests pass against exact frozen candidate in author checkout; source identical to cherry-picked Root.",
+    "rootNative": "6 actual asset-loader tests pass. Initial run used mutable default target; retained log. Repeated in a fresh per-scope target, final6pass proof copied immutable. Earlier Root939 proof is already separately preserved.",
+    "normalBuild": "Actual normal WebGPU and WebGL2 WASM compilation, TypeScript, game/PWA/Studio packaging completed.",
+    "browser": "Normal Apply update at Haven moved test origin script index-CBuzdfhV.js to index-Dyjv4Pxi.js. WebGPU and WebGL2 Continue both retained displayed APR#43BD345DB7D330CE/PAN HIKARI/Flux Drive and drew Haven. No store clearing or backup import."
+  },
+  "limits": [
+    "Native/software art and Root source approval; no moving Dart GPU/human visual acceptance.",
+    "Displayed identity/starter only; no full save digest comparison in this smoke.",
+    "Independent Spark source review still running when this record was written.",
+    "No eight-browser/TURN/physical performance claim."
+  ]
+}

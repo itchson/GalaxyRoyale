@@ -1,0 +1,125 @@
+{
+  "scope": "supplied303659 ring stills across backends; concrete upcoming PAN material visual criteria, no newshaderframe pass",
+  "pins": [
+    {
+      "path": "actual-Root-ring/after-a-webgpu.jpg",
+      "bytes": 19662,
+      "sha256": "62bf9b11084c51a6490ada8426bcbac7520aab51c0dc45c6329e07f4344abb84",
+      "kind": "actual-supplied-Root-ring",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\ring-orientation-20261012\\after-a-webgpu.jpg"
+    },
+    {
+      "path": "actual-Root-ring/after-b-webgpu.jpg",
+      "bytes": 20895,
+      "sha256": "451cd27052ab7577d6cf31b6cad4f9740c9c3480b5b5457becdd00fbe9ebe6cc",
+      "kind": "actual-supplied-Root-ring",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\ring-orientation-20261012\\after-b-webgpu.jpg"
+    },
+    {
+      "path": "actual-Root-ring/after-a-webgpu-stats.txt",
+      "bytes": 436,
+      "sha256": "300f278b34979296231bf70d8b13171493b891919979e66e5adc8cee06042882",
+      "kind": "actual-supplied-Root-ring",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\ring-orientation-20261012\\after-a-webgpu-stats.txt"
+    },
+    {
+      "path": "actual-Root-ring/after-build.json",
+      "bytes": 317,
+      "sha256": "e14a6099d544c70a1b25f643f9f7a7f2ecf441ccadc4bcf09c43be98ac17c137",
+      "kind": "actual-supplied-Root-ring",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\ring-orientation-20261012\\after-build.json"
+    },
+    {
+      "path": "actual-Root-ring/after-a-webgl2.jpg",
+      "bytes": 20000,
+      "sha256": "7ca4b3efa76f843ca0309c370fe987a963729c6c52ba3fcd3779882df87b38b6",
+      "kind": "actual-supplied-Root-ring",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\ring-orientation-20261012\\after-a-webgl2.jpg"
+    },
+    {
+      "path": "actual-Root-ring/after-b-webgl2.jpg",
+      "bytes": 21920,
+      "sha256": "bb28e402afa107c657505ebc8520e1bd5be473f11e6b148321b9835a51bdd1a4",
+      "kind": "actual-supplied-Root-ring",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\ring-orientation-20261012\\after-b-webgl2.jpg"
+    },
+    {
+      "path": "inputs/reference-demonstration.jpg",
+      "bytes": 100314,
+      "sha256": "cb3b801e0d6bc4f5a24bf4ff1711a3fc5cd36974cc32871c89bd692658a59bfa",
+      "kind": "actual-existing-input-or-authored-provenance",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\reference-demonstration.jpg"
+    },
+    {
+      "path": "inputs/semantic-proposal.json",
+      "bytes": 230089,
+      "sha256": "9c7ac008b3ba08cf0d4fcf40d7f36c7918bb7acfd81de4730eb2132a3c855662",
+      "kind": "actual-existing-input-or-authored-provenance",
+      "original_path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\pan-material-multiplier-final\\pan-material-proposal.json"
+    },
+    {
+      "path": "inputs/previous-packed-review.md",
+      "bytes": 6531,
+      "sha256": "e76797d1980df90ac99ee7c8144c1b383016474a103f48d75b8d756ae251fb73",
+      "kind": "actual-existing-input-or-authored-provenance",
+      "original_path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\pan-packed-material-review\\REVIEW.md"
+    },
+    {
+      "path": "inputs/previous-packed-manifest.json",
+      "bytes": 9264,
+      "sha256": "9e2bb6687ad8383ef44df79b12a381bf562a79c6cb8121373504242c2940343b",
+      "kind": "actual-existing-input-or-authored-provenance",
+      "original_path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\pan-packed-material-review\\manifest.json"
+    },
+    {
+      "path": "source-pins/assets/pixels/raicho-fine-detail/atlas.json",
+      "bytes": 230223,
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "kind": "committed-source",
+      "revision": "817f99ba95daea4a9cad299383425c75fe535ae8",
+      "git_path": "assets/pixels/raicho-fine-detail/atlas.json"
+    },
+    {
+      "path": "source-pins/assets/pixels/pan-surface/material.json",
+      "bytes": 33702,
+      "sha256": "903be7ec67fd236c9e2ec788a95da852779e22f05ad97dd2a066f1f9e77ea01c",
+      "kind": "committed-source",
+      "revision": "817f99ba95daea4a9cad299383425c75fe535ae8",
+      "git_path": "assets/pixels/pan-surface/material.json"
+    },
+    {
+      "path": "source-pins/crates/game_core/src/raicho_fine.rs",
+      "bytes": 13818,
+      "sha256": "2b0708400999c46a1c6091ae1eb6b2fd211e7c69fdc5f2e0a6f012f6c15d1552",
+      "kind": "committed-source",
+      "revision": "817f99ba95daea4a9cad299383425c75fe535ae8",
+      "git_path": "crates/game_core/src/raicho_fine.rs"
+    },
+    {
+      "path": "source-pins/crates/game_web/src/pixel.wgsl",
+      "bytes": 5824,
+      "sha256": "55643341b87629e739c11f1d339913fb31438ca31468f87a61dae277b13dd550",
+      "kind": "committed-source",
+      "revision": "817f99ba95daea4a9cad299383425c75fe535ae8",
+      "git_path": "crates/game_web/src/pixel.wgsl"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 6950,
+      "sha256": "f8fd1934a7f4f02418b6febfb77e26295328f3daa51b864ae0c20fd4d8f1e885",
+      "kind": "authored-review-or-verifier"
+    },
+    {
+      "path": "freeze.py",
+      "bytes": 2216,
+      "sha256": "fe205ae5cabd164b8112ced067a24334a3378656edcb746c49a9af6fcef6288f",
+      "kind": "authored-review-or-verifier"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 700,
+      "sha256": "47a2e1f5bca1939ceefa627ee1ae843cb502d6a1071980cc2beebd373c3aea35",
+      "kind": "authored-review-or-verifier"
+    }
+  ]
+}

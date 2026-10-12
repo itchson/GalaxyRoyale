@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "hashScope": "Canonical Git index bytes; eight capture filename hashes verified identical. Original source/raw manifests preserved independently.",
+  "testedSourceCommit": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+  "compiledRuntime": "d749bc6972dee2cc0eb63330bb729f427ce2e749",
+  "files": [
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/.gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/HANDOFF.md",
+      "bytes": 9020,
+      "sha256": "cc67e43827a6bbb5d89a7d4f376248829c5b878715e0d8916085abc39a4d3e4d"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/README.md",
+      "bytes": 1060,
+      "sha256": "3365c241845338ce3e026575703a4a1e926c88ef526f3833c6d998361d9a3300"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/check-observations.json",
+      "bytes": 1058,
+      "sha256": "7e8d882eea9c1de3913ec8d88bd58d19c21f69adfbe00ffecd08b6e8e49a882a"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-00.log",
+      "bytes": 423,
+      "sha256": "7e23570a94086892a74414e6336672e6328cf71fd43427583c42eb61d6d1342b"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-01.log",
+      "bytes": 423,
+      "sha256": "c4e2e873d4bc502dee6f22697f7cd86c54a8e9cec19393497e79c6cc8e1c0133"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-02.log",
+      "bytes": 423,
+      "sha256": "f4365d398021228b6b4c8c4d9fe0fe1f3286f61cc394d82a7b48d98e5496a03e"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-03.log",
+      "bytes": 423,
+      "sha256": "a1bee7a6854d9a729b1cba0dff6200a2cb81df92bbf81e5c5d4245aafb7858b4"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-04.log",
+      "bytes": 423,
+      "sha256": "5448d8cb54db6c4eded02e9f81d88a49007dd5e91ce5fd46aec83a402d37b23f"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-05.log",
+      "bytes": 423,
+      "sha256": "cc7649f0c7af3f0fbe45338c45465d2839e6a8c24cbd8aadc366df4abaf7d644"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-06.log",
+      "bytes": 423,
+      "sha256": "ba155613529768402c6652337a521fe0731d43df9af0356bdc2c5f977341e01e"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-07.log",
+      "bytes": 423,
+      "sha256": "d0e7ca4cf6272243cec019ce41ab9dddc21742c93761a576bf2e5df8df96b9de"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/cold-08.log",
+      "bytes": 423,
+      "sha256": "16fadbe6cf7200d1c9fd01134b962169b857f8aa885d860f2f77839e5a2450cc"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/freeze.py",
+      "bytes": 13528,
+      "sha256": "bea565db781407d78efc4082380d273dc31f4ef20a1890d3f49873b869b4ce92"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/machine-config.json",
+      "bytes": 768,
+      "sha256": "5f74281efe35a27e97b81fdc0fcce0c6268dc1c7488163c5dbc6853dd8e68b5a"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/manifest.json",
+      "bytes": 30609,
+      "sha256": "fde1882023da04a5a32cbf67ed2f8c88da9afaee2ab37bd152b0df03d2ccf1ab"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/measurements.json",
+      "bytes": 97943,
+      "sha256": "65e0ab5c2d8801c226e826ea27a63428ab85a4788d2ffa4a09fcbe2c18865745"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/observed-root-build.json",
+      "bytes": 324,
+      "sha256": "575bd922cc5c55f16de9d912c05ee7b2c561001a10ed2a0cd66335eef5f4addb"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/parser-first-cold.log",
+      "bytes": 423,
+      "sha256": "2860c53a1479dae682c0a3474849a7cceac115c9d172ddd8d9777184e20411cb"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/pre-instrumentation-identity.json",
+      "bytes": 397,
+      "sha256": "518214813b6e3c0b8b5db31677f18b7b0bb4ece95fab685bface1e7bdf5e6527"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/run_measurements.py",
+      "bytes": 2969,
+      "sha256": "57596f3a067131ea5d6f3b322152c73bf7332c18345a55055772e4418ba716e8"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/source-identity.json",
+      "bytes": 1098,
+      "sha256": "88177a197d44cdf9a1423471fe3f2b8bd8a964b8ffc1d44ba470ff9279ff0fda"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/verify.py",
+      "bytes": 3642,
+      "sha256": "d89d0f93dc70fd191aefff318e3a6c4119d3066e66ee425a0258862ab2345563"
+    },
+    {
+      "path": "artifacts/cosmic-native-efficiency-20261012/warm.log",
+      "bytes": 31472,
+      "sha256": "fa48ab84755c5860576bbe4051cb354ba8df42ea5206d7448ec16d8a90389b61"
+    },
+    {
+      "path": "artifacts/native-space-next-20261012/assignments.md",
+      "bytes": 1469,
+      "sha256": "8319b713d304f9e0761cbb59defed3492b2e882295dff18bbbe009d8089ffd5a"
+    },
+    {
+      "path": "artifacts/native-space-next-20261012/comet-capture-plan.md",
+      "bytes": 9941,
+      "sha256": "653241eec1428566ef81ca53c2ecad742ae1e018b2915f76c29f7fe318399d95"
+    },
+    {
+      "path": "artifacts/native-space-next-20261012/comet-frozen-observation.json",
+      "bytes": 1256,
+      "sha256": "ed3fa0509c5efac33a85a09db089412b65259c644060ef115f2e1bcaa102f8f9"
+    },
+    {
+      "path": "artifacts/native-space-next-20261012/comet-frozen-webgpu.jpg",
+      "bytes": 23396,
+      "sha256": "665a2ef55f5bc26a7b5f72188635b2c52763ef7af5a36fb514f4806d545e6d1c"
+    },
+    {
+      "path": "artifacts/native-space-next-20261012/comet-observation.md",
+      "bytes": 1156,
+      "sha256": "1fd4b1311ed8ae1ea84aba1210d3ba292da344c07774f83c4dc18bda0dcd94eb"
+    },
+    {
+      "path": "artifacts/native-space-next-20261012/comet-plan-manifest.json",
+      "bytes": 5112,
+      "sha256": "43f9cd65035c17ddec887e9342935556bd6d028fd779c7868f6a77188139a78d"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/.gitattributes",
+      "bytes": 19,
+      "sha256": "5c0ccd4346d40a9a257042b8a485544d843749688aee93ed1bcf52679a9a2441"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/README.md",
+      "bytes": 2235,
+      "sha256": "d60636221175c4582e511f04ff7cf69c7a1e6d88591e0b452ff212674f074653"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be.json",
+      "bytes": 8441,
+      "sha256": "5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48.json",
+      "bytes": 8171,
+      "sha256": "60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d.json",
+      "bytes": 7818,
+      "sha256": "952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f.json",
+      "bytes": 8305,
+      "sha256": "b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8.json",
+      "bytes": 8372,
+      "sha256": "bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c.json",
+      "bytes": 7534,
+      "sha256": "c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb.json",
+      "bytes": 7689,
+      "sha256": "eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/captures/7ab444d0ffebd2f4-ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184.json",
+      "bytes": 7226,
+      "sha256": "ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/disposed-webgl2.jpg",
+      "bytes": 100713,
+      "sha256": "28a1e5b75d94397dfaf4b808c097d9cd5682cd5bd0e2d668b2793df133ef5bf3"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/independent-audit.json",
+      "bytes": 40801,
+      "sha256": "ab1ce730032ffc55a1770bbda184cad3178d021b3575d13a7724ba8e371decc8"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/independent-manifest.json",
+      "bytes": 6198,
+      "sha256": "d0452a40e9e1ad11e0e4fb689df051dd59693887f1bbdb9be35600254dd41c43"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/independent-review.md",
+      "bytes": 6047,
+      "sha256": "e4fb154f2111b68cd7bbcd08cade4516365a880dc1f41962e64ccb3fc4aca88c"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/preparation.md",
+      "bytes": 3980,
+      "sha256": "782d7ddfce94f1482296cc2d37db3a5642d3b0bb71c16083dcbc1881894405c0"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/stage-manifest.json",
+      "bytes": 6923,
+      "sha256": "38773dab964c857d8fc303d48ce7b5bd03e0735fd9e37a305322e24104b2ec2f"
+    },
+    {
+      "path": "artifacts/owned-webgl2-20261012/verified-summary.json",
+      "bytes": 6850,
+      "sha256": "6a388fde579b61d03f38e43a0adac205499486e0f414be49b568d42783212d1a"
+    }
+  ]
+}

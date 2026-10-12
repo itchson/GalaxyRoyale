@@ -1,0 +1,306 @@
+✖ Escape opens the live RAICHO menu, cancels controls and course, and toggles closed (5.4037ms)
+✖ opening a dedicated page paints it once without building hidden collections (0.9425ms)
+✖ a world facility hit opens exactly its dedicated page without changing progression (1.1642ms)
+✖ the central Haven hub opens co-op without a facility hit or progression mutation (1.1766ms)
+✖ misses and home/launch/pause gates leave flight untouched (1.6379ms)
+✖ facility overlay handlers validate the authoritative hit before opening (2.0791ms)
+✖ closing a dedicated flight page resumes; closing title settings returns to title (1.9601ms)
+✖ pause settings and both backup actions select only their dedicated content (1.875ms)
+✔ a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it (0.8185ms)
+✔ Quit waits for a committed save and flush, then provides a normal-tab fallback (0.8668ms)
+✔ Quit write failure keeps the title available and does not close the browser (0.6538ms)
+✖ a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent (0.8889ms)
+✔ dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate (4.1342ms)
+✔ restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming (0.8677ms)
+✔ restart save failure leaves the menu/input safe and reports the actual failure (0.6659ms)
+✔ save indicator moves from pending to committed only after the adapter commits (1.007ms)
+✔ overlapping saves do not show saved while any write is outstanding (0.6682ms)
+✔ write rejection exposes attention state and a successful retry clears it (0.8685ms)
+✔ memory-only storage never reports a successful persistent save (0.6248ms)
+✔ a SaveConflict opens the live menu once without recursively scheduling rejected saves (0.8636ms)
+✖ dedicated map and settings icons replace the live page and map toggles back to flight (0.9316ms)
+✔ M uses the discovered map without a simulation pause or a repeat toggle (2.5751ms)
+✔ a delayed map course cannot consume a newer Settings intent (0.7986ms)
+✔ map navigation sets a real course after resume even when optional audio is unavailable (0.7337ms)
+✖ MEISHI is a standalone live card; returning to collections restores menu chrome (0.6945ms)
+✔ standalone card keyboard focus can reach its read-only scrolling region (0.6507ms)
+✖ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (3.0941ms)
+✖ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.004ms)
+✖ real Forge category survives successful repaint while a fresh open resets to overview (1.0731ms)
+✖ mutation success is not a committed-save claim while deferred persistence fails (0.9692ms)
+✖ Hangar page and construction/selection bindings pass full per-hull XP metadata (1.2356ms)
+✔ rejected ship construction or switching cannot save or report success (2.2777ms)
+✖ an unavailable audio context cannot reject a successful mutation/save flow (2.0431ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 16
+ℹ fail 17
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 354.7716
+
+✖ failing tests:
+
+test at scripts\test\dock-menu.test.mjs:404:1
+✖ Escape opens the live RAICHO menu, cancels controls and course, and toggles closed (5.4037ms)
+  AssertionError [ERR_ASSERTION]: Missing actual HTML id quest-content
+      at element (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:204:12)
+      at file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:49
+      at Array.filter (<anonymous>)
+      at Object.visiblePages (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:33)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:411:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:436:1
+✖ opening a dedicated page paints it once without building hidden collections (0.9425ms)
+  AssertionError [ERR_ASSERTION]: Missing actual HTML id quest-content
+      at element (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:204:12)
+      at file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:49
+      at Array.filter (<anonymous>)
+      at Object.visiblePages (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:33)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:439:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:455:1
+✖ a world facility hit opens exactly its dedicated page without changing progression (1.1642ms)
+  ReferenceError: resetForgeScene is not defined
+      at openMenu (evalmachine.<anonymous>:148:9)
+      at Object.interactDock (evalmachine.<anonymous>:170:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:473:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:490:1
+✖ the central Haven hub opens co-op without a facility hit or progression mutation (1.1766ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:494:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:507:1
+✖ misses and home/launch/pause gates leave flight untouched (1.6379ms)
+  ReferenceError: paintVault is not defined
+      at selectMenuTab (evalmachine.<anonymous>:241:9)
+      at pause (evalmachine.<anonymous>:92:5)
+      at openMenu (evalmachine.<anonymous>:150:9)
+      at Object.interactDock (evalmachine.<anonymous>:170:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:532:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+
+test at scripts\test\dock-menu.test.mjs:542:1
+✖ facility overlay handlers validate the authoritative hit before opening (2.0791ms)
+  TypeError: Cannot read properties of undefined (reading 'detail')
+      at evalmachine.<anonymous>:439:29
+      at Element.click (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:187:60)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:552:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:561:1
+✖ closing a dedicated flight page resumes; closing title settings returns to title (1.9601ms)
+  ReferenceError: paintVault is not defined
+      at selectMenuTab (evalmachine.<anonymous>:241:9)
+      at pause (evalmachine.<anonymous>:92:5)
+      at Object.openMenu (evalmachine.<anonymous>:150:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:574:7)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:607:1
+✖ pause settings and both backup actions select only their dedicated content (1.875ms)
+  AssertionError [ERR_ASSERTION]: Missing actual HTML id quest-content
+      at element (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:204:12)
+      at file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:49
+      at Array.filter (<anonymous>)
+      at Object.visiblePages (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:33)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:612:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:681:1
+✖ a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent (0.8889ms)
+  AssertionError [ERR_ASSERTION]: Missing actual HTML id quest-content
+      at element (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:204:12)
+      at file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:49
+      at Array.filter (<anonymous>)
+      at Object.visiblePages (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:33)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:699:26)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:903:1
+✖ dedicated map and settings icons replace the live page and map toggles back to flight (0.9316ms)
+  AssertionError [ERR_ASSERTION]: Missing actual HTML id quest-content
+      at element (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:204:12)
+      at file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:49
+      at Array.filter (<anonymous>)
+      at Object.visiblePages (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:33)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:908:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:980:1
+✖ MEISHI is a standalone live card; returning to collections restores menu chrome (0.6945ms)
+  AssertionError [ERR_ASSERTION]: Missing actual HTML id quest-content
+      at element (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:204:12)
+      at file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:49
+      at Array.filter (<anonymous>)
+      at Object.visiblePages (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:397:33)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/dock-menu.test.mjs:984:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\forge-integration.test.mjs:395:1
+✖ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (3.0941ms)
+  ReferenceError: paintForgeScene is not defined
+      at Object.paintUpgrades (evalmachine.<anonymous>:72:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/forge-integration.test.mjs:418:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+
+test at scripts\test\forge-integration.test.mjs:434:1
+✖ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.004ms)
+  ReferenceError: paintForgeScene is not defined
+      at Object.paintUpgrades (evalmachine.<anonymous>:72:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/forge-integration.test.mjs:442:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+
+test at scripts\test\forge-integration.test.mjs:448:1
+✖ real Forge category survives successful repaint while a fresh open resets to overview (1.0731ms)
+  ReferenceError: resetForgeScene is not defined
+      at Object.openMenu (evalmachine.<anonymous>:165:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/forge-integration.test.mjs:452:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\forge-integration.test.mjs:480:1
+✖ mutation success is not a committed-save claim while deferred persistence fails (0.9692ms)
+  ReferenceError: paintForgeScene is not defined
+      at Object.paintUpgrades (evalmachine.<anonymous>:72:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/forge-integration.test.mjs:487:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\forge-integration.test.mjs:503:1
+✖ Hangar page and construction/selection bindings pass full per-hull XP metadata (1.2356ms)
+  ReferenceError: refreshHangar is not defined
+      at Object.selectMenuTab (evalmachine.<anonymous>:259:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/forge-integration.test.mjs:505:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\forge-integration.test.mjs:554:1
+✖ an unavailable audio context cannot reject a successful mutation/save flow (2.0431ms)
+  ReferenceError: paintForgeScene is not defined
+      at Object.paintUpgrades (evalmachine.<anonymous>:72:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/forge-integration.test.mjs:559:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)

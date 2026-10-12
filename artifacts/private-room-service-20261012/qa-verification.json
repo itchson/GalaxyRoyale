@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-12T13:34:19.691Z",
+  "source_commit": "eeccc79d630b4d17533ae53f41b8c7dbb835b8fb",
+  "parent_commit": "a7d45d84760d55a66535a6a98d3f5e2ba81fe7b7",
+  "source_base": "d2acfd2d9faaec2810d67d62f212066e7f1b5b81",
+  "manifest": {
+    "bytes": 2197,
+    "sha256": "e2c44d2339bdf85488a53d8d2ee25012020f93aa166756e1816194270eaab67a"
+  },
+  "source_pins": [
+    {
+      "path": "apps/coop/store.mjs",
+      "bytes": 23947,
+      "sha256": "5d13df9bbcda769f1a35aeda6a4314902125bb7840b80f4123bc53af30339444"
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "bytes": 12064,
+      "sha256": "032d2988360bd8d066cd28cf010a0e1f49eb4a391c4fdc294525d0285e1790e5"
+    },
+    {
+      "path": "apps/coop/README.md",
+      "bytes": 12722,
+      "sha256": "ccae29aa7ac75fbbf8f9fa005ecf9331dc1c0f06f077a9fdeb05e48e0c7845fd"
+    },
+    {
+      "path": "scripts/test/coop-signalling.test.mjs",
+      "bytes": 29416,
+      "sha256": "0f45fb11572b8d7398035e345fa246a2dbd7c24991684b1c37ce5b53a984fabf"
+    },
+    {
+      "path": "scripts/test/coop-private-rooms.test.mjs",
+      "bytes": 20532,
+      "sha256": "329c1e0fe5fde67d6cfd17f451496d86904ef9a7f9a0933a764430be4aca0b05"
+    }
+  ],
+  "evidence_pins": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 8266,
+      "sha256": "2a0d9a1f528da1e44146a277d9629299ca74a2edb770114420a210099c40f3d5"
+    },
+    {
+      "path": "format-check.log",
+      "bytes": 68,
+      "sha256": "f20510a9da4717c51c4cffee6d0dd88d6c9a723d0a83711d01216f5b48961283"
+    },
+    {
+      "path": "freeze.mjs",
+      "bytes": 1858,
+      "sha256": "018fc1054c7426b82da5f8e2baf02315666c5f3cf88722caf03724812b0dbfd1"
+    },
+    {
+      "path": "service-final.log",
+      "bytes": 3462,
+      "sha256": "f854bee92a238d3c1977886bc1093990c8a74dcc9e1fa00a3954f00e0c91cb51"
+    }
+  ],
+  "preserved_prior_pins": [
+    {
+      "path": "work/short-room-service/HANDOFF.md",
+      "bytes": 6945,
+      "sha256": "20208da95e73b68cec6202624a5a175cf90fdce91e526265eb9e6d3725d80e76"
+    },
+    {
+      "path": "work/short-room-service/manifest.json",
+      "bytes": 2064,
+      "sha256": "0af43d8ee227b522d6a3688daa4d686e25583e75acd59036c339cc6ef8ff30c6"
+    }
+  ],
+  "actual_saved_test_summary": {
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0
+  },
+  "source_test_names": [
+    {
+      "path": "scripts/test/coop-signalling.test.mjs",
+      "count": 20,
+      "names": [
+        "HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests",
+        "short room lookup codes reject malformed, expiry and service restart changes",
+        "concurrent HTTP admission reserves only host plus seven, including all pending guests",
+        "reservations and active guests expire separately; heartbeat does not extend pending admission",
+        "guest cannot end, replace, forge metadata, address strangers or bypass offer roles",
+        "host end publishes every final long-poll notice atomically, even with guests pending",
+        "host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials",
+        "replacement ends only the previous session and failed replacement preserves it",
+        "authenticated replacement shares create rates across new bearer credentials",
+        "event replay and acknowledgment enforce queue capacity without silently dropping signals",
+        "body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads",
+        "unauthenticated failures consume bounded admission rates; session and client quotas are finite",
+        "per-sender and per-session signaling rates refuse excess without adding events",
+        "one bounded long poll per participant, abort cleanup and finite timeout",
+        "service stop resolves existing polls and closes every test listener",
+        "pure queued transport is cloned and retained departed credentials stay bounded",
+        "byte quota and membership overflow preserve terminal notices instead of orphaning peers",
+        "ready and guest leave are once-only, free capacity and prune old credentials while host stays live",
+        "chunked request stream enforces the body bound without a Content-Length header",
+        "maintenance wakes an outstanding poll on host expiry with its retained end notice"
+      ]
+    },
+    {
+      "path": "scripts/test/coop-private-rooms.test.mjs",
+      "count": 12,
+      "names": [
+        "eight-hex parser has exact ASCII paste rules and raw input bound",
+        "real HTTP pending guests cannot negotiate or become ready until atomic host approval",
+        "decline and absolute approval/negotiation deadlines deliver terminal outcomes and free seats",
+        "same-room code rotation and locking preserve approved peers while retiring every unapproved request",
+        "room codes and guest credentials cannot administer; exact bodies and admin attempts are bounded before parsing",
+        "crypto allocation checks active and retired collisions with finite attempts and no partial rotation or create",
+        "host queue preflight refuses approval, rotation and lock without revoking half a request",
+        "rotation quota and room expiry are finite; retired reservations release only after room retention",
+        "current code remains valid beyond former ten-minute invite timer while host lives, then ends with room",
+        "unchanged unlocked policy preserves request birth revision; every new request uses the rotated policy",
+        "aggregate cancellation preflight preserves both pending requests and approved peers on failure",
+        "admin schema, cross-room and resolved IDs reject without policy or admission changes"
+      ]
+    }
+  ],
+  "unchanged_native_boundary_pins": [
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "bytes": 50348,
+      "sha256": "a04675a4893555ce83de1455a680595307c8e9bf2abf98e4310ce18c89377911"
+    },
+    {
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "bytes": 33125,
+      "sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "bytes": 39952,
+      "sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "bytes": 7981,
+      "sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192"
+    }
+  ],
+  "lifetime_fixture": {
+    "layer": "actual HTTP requests with controlled service clock",
+    "successful_host_heartbeats": 31,
+    "clock_advance_per_heartbeat_ms": 20000,
+    "total_injected_ms": 620000,
+    "wall_clock_soak": false,
+    "independent_invite_timer_removed": true
+  },
+  "scope": "Independent exact Git/raw-evidence pins, source/log test-name comparison, lifetime source review and unchanged native boundary checks. No service/listener, browser, build or test rerun by QA."
+}

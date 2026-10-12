@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "date": "2026-10-11",
+  "tool": "image_gen.imagegen",
+  "model": null,
+  "model_note": "The built-in tool did not return a model identifier. No independent licensing guarantee is inferred.",
+  "reference": "assets/concepts/kikai/dora-reference-expression-sheet.png",
+  "reference_sha256": "b558e6572e9d065319ff7957fcdc7faadb1bc38f6ae7cdc39d3d826cc5f83742",
+  "reference_use": "Style reference only; existing DORA guide/source is unchanged.",
+  "transparent_background": true,
+  "portraits": {
+    "doro": {
+      "path": "assets/concepts/kikai/profiles/doro-reference.png",
+      "sha256": "5b31880502297c0e0dc5174779042b14db3ce8cf17f2ac1bbb1aec88dbd45d64",
+      "generated_artifact": "exec-503d699f-931f-434c-bc8d-cecaecdc79e1.png",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: style-transfer. Image 1 is the approved DORA pixel-art STYLE reference only; preserve the existing reference file unchanged. Create ONE distinct DORO adult masculine KIKAI android license portrait, not a recolored female and not a sheet. True detailed hand-crafted retro pixel-art color clusters, crisp cells and restrained shading at the same quality as the supplied reference. Upper-chest bust centered in a tall 3:4 composition, looking forward with slight three-quarter depth. Masculine facial geometry: broader angular jaw, pronounced but friendly brows, wider neck, short emerald PAN hair with a genuinely SHORT SPIKY crown and cropped sides; NO long side locks. Two red RENKO faceted crystal antenna horns, gold eyes, pale ivory mechanical shoulder armor, black articulated synthetic neck with tiny metal/gold connectors. All head, horns and both shoulders fully inside canvas with transparent padding. Friendly neutral expression with closed mouth, facial features clearly visible for later authored blink/speech animation. Same emerald/red/ivory/black/gold material language as reference, no extra accessories, weapons, labels, logos, UI, watermark or background. A genuinely transparent background. This is a single new character design, not DORA with only her haircut changed."
+    },
+    "talo": {
+      "path": "assets/concepts/kikai/profiles/talo-reference.png",
+      "sha256": "ee4081bc98b3748efa12f1e0070b379cd3be476b2d010ad0945f1ff8eaa41964",
+      "generated_artifact": "exec-8e0d6983-8644-455a-a52d-e5a3848e216c.png",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: style-transfer. Image 1 is the approved DORA pixel-art STYLE reference only, not an edit target. Create ONE new TALO adult gender-neutral KIKAI android license portrait with genuinely distinct facial and hair geometry, not DORA with a recolor, not the masculine spiky design, and not a character sheet. Detailed hand-crafted retro pixel-art clusters and crisp mechanical shading at the supplied reference's quality. Upper-chest bust centered in tall 3:4 composition, facing nearly forward with subtle three-quarter depth. Balanced neutral facial proportions: softly angular compact jaw, moderate brows, calm friendly gold eyes, visible broad forehead, no makeup or pronounced eyelashes. Very SHORT EMERALD PAN CREW CUT: clipped close around the head with a low level crown and clearly visible clean tapered temples. NO long bangs, no sweeping fringe, no tall spikes, no long side hair. Two RED RENKO faceted crystal antenna horns, ivory pale mechanical shoulder armor, black articulated synthetic neck with fine metal/gold connectors. Match the reference's emerald/red/ivory/black/gold material palette, coherent small highlights, skin and metal recesses. Neutral closed-mouth expression; eyes/mouth clearly exposed for later authored blink/speech patches. Entire head, horns and shoulders visible inside transparent padding. Truly transparent background; no text, labels, logos, UI, extra accessories, weapons, glow haze or watermark. Preserve original DORA reference unchanged."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "run_id": "c8f1fcc98b0036fe",
+  "checks": [
+    {
+      "name": "operation-failed",
+      "passed": false,
+      "counts": {}
+    }
+  ],
+  "created": 1,
+  "closed": 1,
+  "secure_context": true,
+  "rtc_available": true,
+  "source_inputs": {
+    "apps/game/src/coop/wire.ts": "9f65b0c9afcbd93d04a31b501be49758bd9077db4825b688dc53e403b76d66e1",
+    "apps/game/src/coop/signaling.ts": "5eeb24771bd3859168acb900981d7b2233bb4fdaa6fbd34132a5fbf2d6cfdb26",
+    "apps/game/src/coop/transport.ts": "859a5392fc8c86f31d0329b451b4f5a83d7dd2ab84cb0e2fccaa5d2b2fcd8367",
+    "scripts/qa/co-op-transport/review.html": "8041dbbba388a09cb13cc52dfa49c977e3edeaf5d7e0e92d3fd5eb34377ed184",
+    "scripts/qa/co-op-transport/review.js": "52e8f3e16b5490bef5c16cb0f21e8520a904115644cf79049195ad0cedeb55c2"
+  },
+  "captured_at": "2026-10-11T16:35:04.119Z",
+  "scope": "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT"
+}

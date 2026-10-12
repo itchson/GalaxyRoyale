@@ -1,0 +1,127 @@
+{
+  "scope": "Independent frozen QA source/evidence review only; no new native, HTTP, browser, RTC, listener or build execution",
+  "candidate": "ec15de3abdbbf0a64c3f9f035636e65364469483",
+  "parent": "ba70e20106ac719e36ed67bea221af23a9ca6019",
+  "changed_files": [
+    "scripts/qa/co-op-transport/README.md",
+    "scripts/qa/co-op-transport/client.js",
+    "scripts/qa/co-op-transport/server.mjs",
+    "scripts/qa/co-op-transport/wasm-review.js",
+    "scripts/test/coop-private-room-negative-qa.test.mjs"
+  ],
+  "canonical_sources": [
+    {
+      "path": "scripts/qa/co-op-transport/README.md",
+      "git_blob": "56c987bbc0ad4782a4335a1b27054b9ec71aacea",
+      "bytes": 15566,
+      "sha256": "bc352fa0a8cbed0c0865641b93a142ba60964e1b5f8fbeafd2181c8bd99f38b4",
+      "snapshot": "source/scripts/qa/co-op-transport/README.md"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/client.js",
+      "git_blob": "b8e569763f1a302dc64ac79bb1ace933c4408ab5",
+      "bytes": 26657,
+      "sha256": "39b3c8efe7bdc34ff8244b7909e51ea418409d564b167c68e2901eb8b889a00c",
+      "snapshot": "source/scripts/qa/co-op-transport/client.js"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/server.mjs",
+      "git_blob": "867155a7c17ff2a2a4659521517100d7a56e34fb",
+      "bytes": 18089,
+      "sha256": "fdf24291aed1df0cc5fbc6a627657315216de70bd3f01bf96c8d8c74a4caa5bd",
+      "snapshot": "source/scripts/qa/co-op-transport/server.mjs"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/wasm-review.js",
+      "git_blob": "acae446dc245c63f75751924ad6d14722aed1af6",
+      "bytes": 25332,
+      "sha256": "0ce3a0331d522ecf17bc41125ddd95929c13bab39f623806eec01ca8826fabbc",
+      "snapshot": "source/scripts/qa/co-op-transport/wasm-review.js"
+    },
+    {
+      "path": "scripts/test/coop-private-room-negative-qa.test.mjs",
+      "git_blob": "3aa0eedea3054d8440141d1cd769f1375d444253",
+      "bytes": 32274,
+      "sha256": "d178b7ea51250602f3ecabd6f0f694f6441a8b16896007fee89b2cf92ff4fe2b",
+      "snapshot": "source/scripts/test/coop-private-room-negative-qa.test.mjs"
+    },
+    {
+      "path": "apps/game/src/coop/signaling.ts",
+      "git_blob": "498053c18d75892a6b42795b36f57097a455b7dc",
+      "bytes": 6716,
+      "sha256": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433",
+      "snapshot": "source/apps/game/src/coop/signaling.ts"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "snapshot": "source/apps/game/src/coop/controller.ts"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/fifth-shot.js",
+      "git_blob": "5fdb55d6020752a4f961dc9c54e12e0de32b1e7c",
+      "bytes": 7003,
+      "sha256": "e7a587855f908ef1f5b760b0cb90b87c48f73587cc3785347aacf09cf9c94a26",
+      "snapshot": "source/scripts/qa/co-op-transport/fifth-shot.js"
+    }
+  ],
+  "raw_evidence": [
+    {
+      "path": "baseline.mjs",
+      "bytes": 1698,
+      "sha256": "ad3891b7131a2f42b559d991bf02f1af807d194565cdbee72810d6857724a2c3"
+    },
+    {
+      "path": "existing-final.log",
+      "bytes": 2403,
+      "sha256": "79c984a7772701a22a404436d25f40c4d424e565ececd3550cc7e0cf89572222"
+    },
+    {
+      "path": "focused-final.log",
+      "bytes": 3493,
+      "sha256": "83902303481332a563b1fea11008da0cb3d4f16dcd62785e9f64c9a6c2061b44"
+    },
+    {
+      "path": "focused-tests.log",
+      "bytes": 2371,
+      "sha256": "5af9bb3aa5e09c780c8cdfc2d477a072d877b923bfb1fb8b6bee85e96e00bee2"
+    },
+    {
+      "path": "format.log",
+      "bytes": 193,
+      "sha256": "64333370d9e7b122eb2f03c870aa4fe09476329f15f825d8dd05bf03d239e75d"
+    },
+    {
+      "path": "original-client.js",
+      "bytes": 26189,
+      "sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    {
+      "path": "original-regression.log",
+      "bytes": 703,
+      "sha256": "c3b73d4cc59e87b5482d4a39e9769c80f8c76dc436c190e8f0b2e6abaa288e1c"
+    },
+    {
+      "path": "record.mjs",
+      "bytes": 7961,
+      "sha256": "b310762c9461d753862092a11f9284bc82965b6c1f05b8bd9dfc3f48623fc96e"
+    }
+  ],
+  "recorded_checks": {
+    "negative": 19,
+    "fifth": 10,
+    "existing_wasm": 16,
+    "actual_pass_total": 45,
+    "http_excluded": 2
+  },
+  "original_declared_refusal_failure_preserved": true,
+  "historical_live_captures_unchanged": 21,
+  "safe_reply_enums": [
+    "signaling_limit",
+    "room_create_failed"
+  ],
+  "production_game_service_native_unchanged": true,
+  "verdict": "No source blocker for scoped QA integration; fresh prepared/live refusal gate remains separate and old failed live cause remains unproven"
+}

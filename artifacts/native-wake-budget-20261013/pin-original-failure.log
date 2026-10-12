@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\work\coop-wake-native-budget\verify-snapshot.py", line 16, in <module>
+    assert git_blobs[member.filename] == blob, member.filename
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Cargo.lock

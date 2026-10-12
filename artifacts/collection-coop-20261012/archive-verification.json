@@ -1,0 +1,35 @@
+{
+  "scope": "Archive evidence-file hashes and sizes; source/dependency arrays are not claimed reverified by this pass. Historical failed logs remain historical.",
+  "archives": [
+    {
+      "folder": "engine",
+      "archive_bytes": 69209,
+      "archive_sha256": "f2b8bde65aacb6ac93b4588cafb19b1660e127ad0f01af1af930f70ba6fe87ac",
+      "unique_evidence_pins_verified": 17
+    },
+    {
+      "folder": "transport",
+      "archive_bytes": 108583,
+      "archive_sha256": "39f20a15028b09260eec436289f52fc753b6d35fd2686afc2cbfb4f51fc743ee",
+      "unique_evidence_pins_verified": 39
+    },
+    {
+      "folder": "ui",
+      "archive_bytes": 262691,
+      "archive_sha256": "944677f41686e11789b5bbb5381154896ea4d6ea40a9c9af0586a19729f99026",
+      "unique_evidence_pins_verified": 8
+    },
+    {
+      "folder": "authority-review",
+      "archive_bytes": 15988,
+      "archive_sha256": "d27f5cc70d3e92bc7a53b35780f913dbe079152f0957db17a244c11dfd730626",
+      "unique_evidence_pins_verified": 9
+    },
+    {
+      "folder": "transport-review",
+      "archive_bytes": 36523,
+      "archive_sha256": "c1ce2cec969b8bd4a75ae844846b0b5dde5c3a4181bb75b6884978c1d5971a76",
+      "unique_evidence_pins_verified": 19
+    }
+  ]
+}

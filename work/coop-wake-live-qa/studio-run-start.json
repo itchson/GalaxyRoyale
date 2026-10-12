@@ -1,0 +1,25 @@
+{
+  "item": {
+    "id": "run-dfabcd22",
+    "title": "Configured native Wake QA helper author · running",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Configured native Wake QA helper author",
+    "state": "running",
+    "observedAt": "2026-10-12T21:21:42.7Z",
+    "taskIds": [
+      "task-d0e4d592"
+    ],
+    "summary": "Authoring explicit configured-ion-wake-r1-e1 helper on codex/coop-wake-live-qa from8b0896d; frozen87d/f1 refs preserved. Scope QA transport helpers/tests and pinned native fixture copies only. Fresh-origin preflight and strict version5 configured reports, real native capture/commit observations and bounded controls/expiry/retreat/cleanup. No runtime edits/listener/normalbuild/browser/RTC execution.",
+    "evidence": [
+      {
+        "label": "Actual assignment and branch ownership",
+        "kind": "note",
+        "details": "Root authorized FIRST fixture87d and independently accepted it, then assigned this separate helper from8b0896d7ccd2c4dece1dc7a0d2cae6c4986505ab. Source changes restricted to scripts/qa/co-op-transport and matching scripts/test; evidence work/coop-wake-live-qa. Live gates remain pending."
+      }
+    ],
+    "author": "Codex audio_score",
+    "source": "actual bounded QA-helper authoring assignment",
+    "createdAt": "2026-10-12T21:21:42.753Z"
+  },
+  "revision": 1084
+}

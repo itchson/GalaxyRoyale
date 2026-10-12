@@ -1,0 +1,143 @@
+{
+  "frozenAt": "2026-10-12T19:40:13.916Z",
+  "node": "v24.18.0",
+  "checkout": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale",
+  "branch": "codex/private-room-negative-qa-v2",
+  "base": "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+  "head": "7c188d4198901ead15e4bffa2b0063b9c95f7674",
+  "originalBranchPreserved": true,
+  "trackedClean": true,
+  "productionUnchanged": true,
+  "sources": {
+    "scripts/qa/co-op-transport/wasm-review.js": {
+      "workingBytes": 25287,
+      "workingSha256": "7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf",
+      "lfBytes": 25287,
+      "lfSha256": "7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf",
+      "canonicalGitBytes": 25287,
+      "canonicalGitSha256": "7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf"
+    },
+    "scripts/test/coop-private-room-negative-qa.test.mjs": {
+      "workingBytes": 29417,
+      "workingSha256": "583594adb4cd133c6137db70a76f080ae3f391f7278fada90b1c7a711713758d",
+      "lfBytes": 29417,
+      "lfSha256": "583594adb4cd133c6137db70a76f080ae3f391f7278fada90b1c7a711713758d",
+      "canonicalGitBytes": 29417,
+      "canonicalGitSha256": "583594adb4cd133c6137db70a76f080ae3f391f7278fada90b1c7a711713758d"
+    },
+    "scripts/qa/co-op-transport/client.js": {
+      "workingBytes": 26189,
+      "workingSha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825",
+      "lfBytes": 26189,
+      "lfSha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825",
+      "canonicalGitBytes": 26189,
+      "canonicalGitSha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    "apps/game/src/coop/controller.ts": {
+      "workingBytes": 33592,
+      "workingSha256": "2f886539fa1532f136a9d23d3ec817abbd497183e972435db92afc7894926f6a",
+      "lfBytes": 32533,
+      "lfSha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "canonicalGitBytes": 32533,
+      "canonicalGitSha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    }
+  },
+  "evidence": {
+    "HANDOFF.md": {
+      "bytes": 5095,
+      "sha256": "f5562635f1b31c2ccca5a9049d943ba46cc3c02036fcdab483b68fa32e3bbf60"
+    },
+    "original-parent.js": {
+      "bytes": 23940,
+      "sha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7"
+    },
+    "original-regression.log": {
+      "bytes": 1439,
+      "sha256": "cff3c37c740e52d0da9ae2b5a787a3398fff34b834820079b53fcf99e9f57c72"
+    },
+    "pre-visibility-parent.js": {
+      "bytes": 24228,
+      "sha256": "b8e88988349fb77daf2ae0bf61fc5eb92020e10b35c28ad86953dff613685525"
+    },
+    "visibility-original-regression.log": {
+      "bytes": 1047,
+      "sha256": "0ec037f5d98eceae2f35ac53c0b4a4e9e7a210ce4a700fdd4c273ce3f3daaea1"
+    },
+    "pre-health-parent.js": {
+      "bytes": 24556,
+      "sha256": "8b2a8cd3a42f36c7b690f509881ea9cc0969d88f71965c343d6e75f9f809540d"
+    },
+    "health-preflight-original-regression.log": {
+      "bytes": 3602,
+      "sha256": "fc305fbf6e64d0b637c29a59921bc5a48f47013d354ba3737bc1486ec008f24e"
+    },
+    "focused-tests.log": {
+      "bytes": 2169,
+      "sha256": "a9a234729ed17be716bb77e1663149db7aef94eb2a42e84c8563402d300ae4fd"
+    },
+    "existing-wasm-functions.log": {
+      "bytes": 2105,
+      "sha256": "48357f33c80e678be2e192e44fd7979581be82e87e01de3fa5ecd3b6b98a1372"
+    },
+    "existing-fifth-functions.log": {
+      "bytes": 1246,
+      "sha256": "ccab6be0adc6dc16529e6e29a8b77a96f9a9fc74c3369eda9a2c71c1e03430bd"
+    },
+    "format.log": {
+      "bytes": 106,
+      "sha256": "c6e71421bfd57ca7befe682aab1a19b98f1a248077c6190b8a70c331c5f8b0a4"
+    },
+    "syntax-check.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diff-check.log": {
+      "bytes": 280,
+      "sha256": "b9b8b880827bc3c3161710f964169b236923556a082861b1f14b6cf9df9a9ea9"
+    },
+    "commit.log": {
+      "bytes": 169,
+      "sha256": "3db62c6ecb9388a4ba1732de7b14b2c72d48d5002188cc0623ee97df42df4194"
+    },
+    "candidate.diff.patch": {
+      "bytes": 18551,
+      "sha256": "be09d5158702d9816d8c4fb3073c19cd46a62199384e8c8e8bf1db0e26adbda1"
+    },
+    "pin-evidence.mjs": {
+      "bytes": 4479,
+      "sha256": "b4ac8686ed809a7cd8cb042c496f484bfc48c02580e9a7d88b8b2b1a9868ae72"
+    }
+  },
+  "commands": [
+    {
+      "command": "node --experimental-transform-types --test scripts/test/coop-private-room-negative-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "log": "focused-tests.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test --test-name-pattern='^Actual initialization|^Actual client frame|^Actual rejoin|^Actual approval|^Actual client approval|^Actual child message|^Actual New session|^Actual Drive|^Actual localSpec|^Actual commit|^WASM report|^Owned reports|^WASM allowlist' scripts/test/coop-transport-wasm-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "log": "existing-wasm-functions.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test scripts/test/coop-transport-fifth-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 10,
+      "pass": 10,
+      "fail": 0,
+      "log": "existing-fifth-functions.log"
+    }
+  ],
+  "originalFailures": [
+    "original-regression.log",
+    "visibility-original-regression.log",
+    "health-preflight-original-regression.log"
+  ],
+  "scope": "Author QA source-function checks only; no build/stage/listener/browser/native/RTC/live acceptance. Raw stopped/pagehide liveness not directly observable from current protocol."
+}

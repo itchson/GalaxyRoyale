@@ -1,0 +1,248 @@
+{
+  "scope": "Actual installed separation dependencies and retained input/output bytes; source audio/model stay outside shipped game and repository assets.",
+  "packages": [
+    {
+      "name": "demucs",
+      "version": "4.1.0",
+      "metadata": [
+        {
+          "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/dependencies/demucs-4.1.0.dist-info/METADATA",
+          "bytes": 20099,
+          "sha256": "98aaa68de4a2f4246ea8dcbc2669fe0f16b0c4696bd73d94ac9ed040c192de6c"
+        },
+        {
+          "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/dependencies/demucs-4.1.0.dist-info/RECORD",
+          "bytes": 4497,
+          "sha256": "a3198b5efe28ad7780e5e46990f098242cc2adc1423ceb80a3b49a9a7d81e4b2"
+        }
+      ]
+    },
+    {
+      "name": "julius",
+      "version": "0.2.7",
+      "metadata": [
+        {
+          "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/dependencies/julius-0.2.7.dist-info/METADATA",
+          "bytes": 7698,
+          "sha256": "69721a51a21083ce7e3c5ec6a75ea0bdd09ad995c52c97d93be965e593f077df"
+        },
+        {
+          "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/dependencies/julius-0.2.7.dist-info/RECORD",
+          "bytes": 1307,
+          "sha256": "d8852414890be67d519cc8200c0413f1c80e47b4cce305053ba453eb702b55cd"
+        }
+      ]
+    },
+    {
+      "name": "lameenc",
+      "version": "1.8.1",
+      "metadata": [
+        {
+          "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/dependencies/lameenc-1.8.1.dist-info/METADATA",
+          "bytes": 10105,
+          "sha256": "ce2c4d1f06cee2f4b044a27d1fa706a32c0f7040cc662bb54b80064fd9369612"
+        },
+        {
+          "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/dependencies/lameenc-1.8.1.dist-info/RECORD",
+          "bytes": 647,
+          "sha256": "b2bd53219617aa58740cb07713c4f9093c670843d3ed27c1ada664f29e72b8c7"
+        }
+      ]
+    },
+    {
+      "name": "sphn",
+      "version": "0.2.1",
+      "metadata": []
+    },
+    {
+      "name": "einops",
+      "version": "0.8.2",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/einops-0.8.2.dist-info/METADATA",
+          "bytes": 13724,
+          "sha256": "0bd65db043688a44f4a29608c1cba521c932f7ff76f238bbd869441e15012653"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/einops-0.8.2.dist-info/RECORD",
+          "bytes": 2645,
+          "sha256": "f5ab2503eead94b7dbb3c722415260439feee273c0b91019e1f0788f041400bc"
+        }
+      ]
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "1.25.1",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/huggingface_hub-1.25.1.dist-info/METADATA",
+          "bytes": 16311,
+          "sha256": "68431dae677a036a777a5a2fe4ebc3083837b3edbf10a51240e5486d73e29fbb"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/huggingface_hub-1.25.1.dist-info/RECORD",
+          "bytes": 19095,
+          "sha256": "d50235b89cf088e27cbfc513b692964c4e43fd5c8d9d44e026e29ba15b436474"
+        }
+      ]
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.1",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/numpy-2.5.1.dist-info/METADATA",
+          "bytes": 6584,
+          "sha256": "6ae45122ee97050e48849438320430d05f01814f72e66e69cbeed027d2c6a1e8"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/numpy-2.5.1.dist-info/RECORD",
+          "bytes": 88011,
+          "sha256": "a2c806da4e689cf7f18ff2c80bca484c5e4ccaf4b4937e63a31b796a1168f134"
+        }
+      ]
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/pyyaml-6.0.3.dist-info/METADATA",
+          "bytes": 2410,
+          "sha256": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/pyyaml-6.0.3.dist-info/RECORD",
+          "bytes": 1958,
+          "sha256": "6fef717920e6590ce79f8f922755690f9d1f3199508e9d79baeb382ea4813c9c"
+        }
+      ]
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/safetensors-0.8.0.dist-info/METADATA",
+          "bytes": 4249,
+          "sha256": "597731d1baf7a94219753fa0a74abd1a8a18562d50d98b2e25d91e11e3224d36"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/safetensors-0.8.0.dist-info/RECORD",
+          "bytes": 1419,
+          "sha256": "5104da9df47c2cfd517218e0450554a9045addf1f97b31cc83fda17f1e556625"
+        }
+      ]
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.0",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/scipy-1.18.0.dist-info/METADATA",
+          "bytes": 61110,
+          "sha256": "763cde904cd382a6194247f5aeac2bc03475759e676147608d5bc65c22a006a6"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/scipy-1.18.0.dist-info/RECORD",
+          "bytes": 147151,
+          "sha256": "0153cf7f2fbb1398aaff83ba9a390584a724d2c767619e122f542378582833cf"
+        }
+      ]
+    },
+    {
+      "name": "torch",
+      "version": "2.13.0+cu130",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/torch-2.13.0+cu130.dist-info/METADATA",
+          "bytes": 39472,
+          "sha256": "c70f358c762d072ea6b9275b08e1af444abc989448dcf6b721f9049313c8e87b"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/torch-2.13.0+cu130.dist-info/RECORD",
+          "bytes": 1281736,
+          "sha256": "b619d776703ed91ebf6eba7ec920bb908ff65af718386396a2af0f56a63d2314"
+        }
+      ]
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.0",
+      "metadata": [
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/tqdm-4.70.0.dist-info/METADATA",
+          "bytes": 57344,
+          "sha256": "0d95b85b90428f8776afc4a92b17c5094f78ee98d150b3255acbcdf4e9d57941"
+        },
+        {
+          "path": "C:/AI/ComfyUI/.venv/Lib/site-packages/tqdm-4.70.0.dist-info/RECORD",
+          "bytes": 3162,
+          "sha256": "f84b4499ff9504a521482c89b4e5fbbb5899aed1a1814e619810e66ac5fbac34"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/demucs-pypi.json",
+      "bytes": 35508,
+      "sha256": "99218a392ee1f7397a0370174adb805a51d3d0a94c13d23f3f55252bc9881fee"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/freeze-inputs.py",
+      "bytes": 1653,
+      "sha256": "f2d41cea4d37e6a71c80760dd38e1345def3b2ab03c3e18138a311551165f7e3"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/install.log",
+      "bytes": 337,
+      "sha256": "effaa705c651d9e93597ae5bfac92f0b9a3b0485160285ac804e604f95c9a0ba"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/model-repository.json",
+      "bytes": 691,
+      "sha256": "f681b3606665a5555deb0b0fd70a5e833af190b48268b0cc7de78c060b13a205"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/separate.py",
+      "bytes": 4644,
+      "sha256": "4181500ea815e11cc95f15bda035df9d3e233369fca45e4d8519a5301ce2f0eb"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/separation.json",
+      "bytes": 3595,
+      "sha256": "1e3d7b024a9866d09e692d05d8432ccfe928931b8dfa2474e6a59c8c2c91f774"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/separation.log",
+      "bytes": 5902,
+      "sha256": "a84a3d9ff6f58a096cc92627f75f2877e1a8c9f7daaa3f6c005d6b022d012bd4"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/studio-tasks.json",
+      "bytes": 63,
+      "sha256": "6c39d3f35a89af80f4babd2f692f1c15359e14c1f23cc307b00c2ce51214825a"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/bass.wav",
+      "bytes": 15057562,
+      "sha256": "4825370eb427c391f78f1045383fedc7a2e352283138b2c1af45bdb9c791a64e"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/drums.wav",
+      "bytes": 15057562,
+      "sha256": "6afdb901f533fdbd8cfc41035567971a93f01a6bc933b0bb16fcc239677c52dc"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/other.wav",
+      "bytes": 15057562,
+      "sha256": "326750972e062081b2b567c659b9bdfdb58e91d98ed5eb6bf402148236b63dce"
+    },
+    {
+      "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/vocals.wav",
+      "bytes": 15057562,
+      "sha256": "e3763c29788e7584fb437e0541be9387623e5c479807f51637380845b12fa5fa"
+    }
+  ]
+}

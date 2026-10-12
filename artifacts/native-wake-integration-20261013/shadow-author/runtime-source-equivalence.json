@@ -1,0 +1,57 @@
+{
+  "candidate": "af060d8377389bb0b73de0e09d8f6de58b4f4c3f",
+  "parent": "db15b91f3a1614ebd245fbab47787de737535882",
+  "root_reference": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "runtime_source": [
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/engine_core/src/shadow.rs",
+      "bytes": 9438,
+      "sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14857,
+      "sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_core/src/hub_shadows.rs",
+      "bytes": 9642,
+      "sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "bytes": 9952,
+      "sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/shadow_uniforms.rs",
+      "bytes": 6127,
+      "sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "bytes": 8685,
+      "sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "unchanged_from_parent_and_root": true
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "bytes": 32057,
+      "sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "unchanged_from_parent_and_root": true
+    }
+  ],
+  "root_test_base_matches_parent": true,
+  "tracked_clean": true
+}

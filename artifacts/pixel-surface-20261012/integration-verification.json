@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-12T11:26:02.204Z",
+  "head": "1eca1c510325788624851a86527c2810b5e42df7",
+  "stamp": {
+    "schemaVersion": 1,
+    "head": "1eca1c510325788624851a86527c2810b5e42df7",
+    "branch": "codex/testing",
+    "sourceHash": "c45af761b1398e1ceb623bb75e199ec95c0940b4a8027885ea636731c4eb7044",
+    "packageHash": "7b51f7932a1c319a4846af3a0324508bb163c372a1d7d8d7532ea49ae8da3c60",
+    "builtAt": "2026-10-12T11:10:56.560Z"
+  },
+  "native_suites": [
+    {
+      "passed": 49,
+      "failed": 0,
+      "ignored": 1
+    },
+    {
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 504,
+      "failed": 0,
+      "ignored": 11
+    },
+    {
+      "passed": 289,
+      "failed": 0,
+      "ignored": 2
+    },
+    {
+      "passed": 31,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "native_totals": {
+    "passed": 876,
+    "ignored": 14,
+    "failed": 0
+  },
+  "shell_totals": {
+    "tests": 567,
+    "passed": 564,
+    "skipped": 3,
+    "failed": 0
+  },
+  "headless_wasm_save_cases": {
+    "webgpu": 25,
+    "webgl2": 25,
+    "total": 50,
+    "storage": "fake-indexeddb"
+  },
+  "backend_artifacts": [
+    {
+      "backend": "webgpu",
+      "url": "/wasm/webgpu-aaa4fd11b861ae7f4769203761a881c2c67842ca9965129088dc016404b9b44a/galaxy.js",
+      "content_hash": "aaa4fd11b861ae7f4769203761a881c2c67842ca9965129088dc016404b9b44a",
+      "files": [
+        {
+          "name": "galaxy.d.ts",
+          "bytes": 11579,
+          "sha256": "2c9bc5f8b35faec1fa1ec226f69bfc59bd9b37cec6214b2be7bf09a90213168d"
+        },
+        {
+          "name": "galaxy.js",
+          "bytes": 87114,
+          "sha256": "0ea75b1e9e9a462efe5233f5bf7511cc6762428c353e15134a2176d30ca9d726"
+        },
+        {
+          "name": "galaxy_bg.wasm",
+          "bytes": 10461652,
+          "sha256": "f04d55860ce7e5754a6a2c167b20064f17ad31b5bd8dd4023aab76f05150a425"
+        },
+        {
+          "name": "galaxy_bg.wasm.d.ts",
+          "bytes": 6028,
+          "sha256": "5f7a3cf1294f656692cb9abc40cc1c736ba97312a0aeba3d778d0efaab83b271"
+        }
+      ]
+    },
+    {
+      "backend": "webgl2",
+      "url": "/wasm/webgl2-f12d5be5b1f0721dfdc65602e746cdba19cb134545c97337ff1a613c400dd2a7/galaxy.js",
+      "content_hash": "f12d5be5b1f0721dfdc65602e746cdba19cb134545c97337ff1a613c400dd2a7",
+      "files": [
+        {
+          "name": "galaxy.d.ts",
+          "bytes": 10313,
+          "sha256": "d9b5339d8c05c8a8533d29ad1833e78b867d14b37721a5b4d8eb498fdba9cad6"
+        },
+        {
+          "name": "galaxy.js",
+          "bytes": 90888,
+          "sha256": "2cb406325d38cf3807d6e38c2ba038f921315fe7b4b2407f9ac94f90f9852116"
+        },
+        {
+          "name": "galaxy_bg.wasm",
+          "bytes": 14069367,
+          "sha256": "38e0c85abc4c2c577214d037944403edce9cf31e34b758f2fbbcc02fc27e6f40"
+        },
+        {
+          "name": "galaxy_bg.wasm.d.ts",
+          "bytes": 4762,
+          "sha256": "214b9061cb4b792edfe12f10fd966526b4d190d7fe74f537aebaaabea33f9653"
+        }
+      ]
+    }
+  ],
+  "evidence_pins": [
+    {
+      "path": "artifacts/pixel-surface-20261012/build-stamp.json",
+      "bytes": 317,
+      "sha256": "32166edd6752a01cd2d1546ac5f021b3083b152b167f25a818cbad995bd1d7a3"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/build.log",
+      "bytes": 1579,
+      "sha256": "8aacc3dfcea562acaf1f6adc35d14c9710f1034e7660b4abbfdf037a84dccdc0"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/workspace.log",
+      "bytes": 94688,
+      "sha256": "8ab84b31f00800f26a5ddd22956a4c1f1bdfb6dee0e426b18bb16f31fda8d1e1"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/shell-tests.log",
+      "bytes": 61832,
+      "sha256": "c219507c67bdb8c428544650485e3a97d66cb81c1324a509f9439667bd45a5da"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/clippy.log",
+      "bytes": 366,
+      "sha256": "8036ee91b82e5c43c65b51b5ea38185fccea466991547e73b4b4e6da887e0564"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/clippy-wasm.log",
+      "bytes": 666,
+      "sha256": "b64ecc5b38dd87a9637aece8e5336ad17c24c14249e12a299f688bd65e3f560d"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/fmt.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/wasm-contract.log",
+      "bytes": 1269,
+      "sha256": "a3e4855bbf7aa3165477e75f64310a110d87dcb4a4b3dbfd1c509e62b25e1730"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgpu-a.jpg",
+      "bytes": 14835,
+      "sha256": "7f26227d16c50aa0a5157f6690382b4a3f05656528ff059bfb2717356bbb678b"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgpu-b.jpg",
+      "bytes": 14801,
+      "sha256": "ad915b280b72c7237db66faac86b91a6adecfbd929a7b922f232dd4bf71ddfc8"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgpu-turn.jpg",
+      "bytes": 14829,
+      "sha256": "193b832f76f5d08e889dad624b54649fc7348aab415d11cbdd0a0e4fc0a8f608"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgl2-a.jpg",
+      "bytes": 14666,
+      "sha256": "4dd082c92ecca57ceb17da680dd0553bf57614750d06e301b1dd74b179ead623"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgl2-turn.jpg",
+      "bytes": 14553,
+      "sha256": "34bbc1c7cf152ed994808d0ce9afc10a65da2883c99ec7fd4af4858ac4ba2aea"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgpu-stats.txt",
+      "bytes": 309,
+      "sha256": "40404ee3dbea2cd1d777d9fc2570bef85c93338bfdf90c62c27f03c16b745771"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgpu-controller-stats.txt",
+      "bytes": 555,
+      "sha256": "5580f039f76f67c6383fc82c436b8f9348da05ccc93d165a43bbcb34c8ab7e45"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgl2-stats.txt",
+      "bytes": 552,
+      "sha256": "a05f23a14607e2935cb836d86786410f24b85dae58b940b1884bf94d7144d789"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgpu-profile.txt",
+      "bytes": 1006,
+      "sha256": "40a332566d6fa83c6bef8469cc42bad0eafa824790fb830982fae65a25a6406b"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgl2-profile.txt",
+      "bytes": 1003,
+      "sha256": "6b64c0eb96ee33eb8ad59e59533c4b05a0ac2807058e00af9f15928c77bc6bee"
+    }
+  ],
+  "profile_payloads_equal": true,
+  "profile_payload": "SCHEMA 7 / revision 111 / seed 871238449CURRENCY 9 / 5 / 6BOSS GENERATIONS 0,0,0,0,0 / 0,0,0,0,0 / 0,0,0,0,0DISCOVERIES 0 / missions 0 / relics 0PATCHES 0/8 / RAICHO 0 / Royale PENDINGRAICHO XP 81 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0MATERIAL CARGO 0 / 0 / 0 / 0 / 0 / STASH 16 / 0 / 0 / 0 / 0NAMED T1 CARGO 0 / 0 / 0 / STASH 5 / 3 / 4TRAINING v2 / STAGE 3 / ASTEROIDS 10/10 / MATERIALS 4/10SLOTS EMPTY / EMPTY / 2Progress stays on this device.",
+  "stats": {
+    "webgpu-stats.txt": [
+      {
+        "backend": "WEBGPU",
+        "reported_fps": 1,
+        "reported_p95_ms": 4.3,
+        "quads": 8985,
+        "entities": 1,
+        "particles": 0,
+        "position": [
+          450,
+          0
+        ]
+      }
+    ],
+    "webgpu-controller-stats.txt": [
+      {
+        "backend": "WEBGPU",
+        "reported_fps": 1,
+        "reported_p95_ms": 4.3,
+        "quads": 8985,
+        "entities": 1,
+        "particles": 0,
+        "position": [
+          450,
+          0
+        ]
+      },
+      {
+        "backend": "WEBGPU",
+        "reported_fps": 1,
+        "reported_p95_ms": 1000,
+        "quads": 8992,
+        "entities": 1,
+        "particles": 0,
+        "position": [
+          542.6,
+          0
+        ]
+      }
+    ],
+    "webgl2-stats.txt": [
+      {
+        "backend": "WEBGL2",
+        "reported_fps": 1,
+        "reported_p95_ms": 0,
+        "quads": 0,
+        "entities": 1,
+        "particles": 0,
+        "position": [
+          450,
+          0
+        ]
+      },
+      {
+        "backend": "WEBGL2",
+        "reported_fps": 1,
+        "reported_p95_ms": 1004.2,
+        "quads": 8992,
+        "entities": 1,
+        "particles": 0,
+        "position": [
+          542.6,
+          0
+        ]
+      }
+    ]
+  },
+  "scope": "Independent read-only source/package/backend hashing, saved-log/profile/stat checks and screenshot existence. Reviewer separately viewed four saved images. No listener, browser operation, test/build rerun, directional-normal comparison or performance acceptance."
+}

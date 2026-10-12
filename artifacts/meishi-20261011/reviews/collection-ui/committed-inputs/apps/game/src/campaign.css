@@ -1,0 +1,183 @@
+.campaign-roster,
+.hangar-roster {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(8px * var(--ui-scale, 1));
+}
+.campaign-card,
+.save-card {
+  min-width: 0;
+  padding: calc(8px * var(--ui-scale, 1));
+  border: 1px solid #38556b;
+  background: #0a1423;
+}
+.campaign-card {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(8px * var(--ui-scale, 1));
+}
+.campaign-card > div:last-child {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.campaign-card h3,
+.campaign-league h3,
+.ending-credits h3,
+.save-card h3 {
+  font-size: var(--ui-text);
+  line-height: 1.25;
+  font-weight: normal;
+  margin: 0 0 calc(4px * var(--ui-scale, 1));
+  overflow-wrap: anywhere;
+}
+.campaign-card p {
+  overflow-wrap: anywhere;
+}
+.campaign-card .campaign-collection-state {
+  color: #b9cadd;
+}
+.campaign-controls,
+.save-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(5px * var(--ui-scale, 1));
+  margin-top: calc(6px * var(--ui-scale, 1));
+}
+.campaign-controls > *,
+.save-actions > * {
+  flex: 1 1 calc(92px * var(--ui-scale, 1));
+  min-width: 0;
+  min-height: var(--ui-hit);
+  padding: calc(5px * var(--ui-scale, 1));
+  font-size: var(--ui-text);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.campaign-league > button,
+.ending-credits button {
+  min-height: var(--ui-hit);
+  max-width: 100%;
+  padding: calc(5px * var(--ui-scale, 1));
+  font-size: var(--ui-text);
+}
+.campaign-icon {
+  flex: 0 0 auto;
+  background: #122237;
+}
+.campaign-patch {
+  width: calc(24px * var(--ui-scale, 1));
+  height: calc(24px * var(--ui-scale, 1));
+}
+.campaign-ship {
+  width: calc(32px * var(--ui-scale, 1));
+  height: calc(32px * var(--ui-scale, 1));
+}
+.campaign-league {
+  margin-top: calc(12px * var(--ui-scale, 1));
+  padding: calc(8px * var(--ui-scale, 1));
+  border: 1px solid #38556b;
+  background: #0a1423;
+}
+.standings {
+  margin: calc(8px * var(--ui-scale, 1)) 0;
+}
+.standings p {
+  margin-bottom: calc(4px * var(--ui-scale, 1));
+}
+.ending-credits {
+  text-align: center;
+  padding: calc(10px * var(--ui-scale, 1));
+  animation: ending-arrival 600ms steps(8, end) both;
+}
+.ending-credits .campaign-icon {
+  margin: 0 auto calc(8px * var(--ui-scale, 1));
+}
+.ending-credits p {
+  line-height: 1.5;
+}
+@keyframes ending-arrival {
+  from {
+    transform: translateY(calc(8px * var(--ui-scale, 1)));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+body.reduced-motion .ending-credits {
+  animation: none;
+}
+.narrow-ui .campaign-roster,
+.narrow-ui .hangar-roster {
+  grid-template-columns: minmax(0, 1fr);
+}
+.death-card {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--ui-scale, 1));
+  width: min(calc(450px * var(--ui-scale, 1)), 100%);
+  max-height: 100%;
+  min-height: 0;
+  padding: var(--ui-pad);
+  border: 1px solid #af6881;
+  background: #080d1c;
+}
+.death-card > :not(#run-summary) {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.death-card .eyebrow {
+  color: #ffa3bd;
+}
+.death-card h2 {
+  font-size: var(--ui-heading);
+}
+.death-card p {
+  font-size: var(--ui-text);
+  line-height: 1.35;
+  margin: 0 0 calc(4px * var(--ui-scale, 1));
+}
+#run-summary {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.death-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(6px * var(--ui-scale, 1));
+}
+.death-actions button {
+  min-width: 0;
+  min-height: var(--ui-hit);
+  padding: calc(5px * var(--ui-scale, 1));
+  font-size: var(--ui-text);
+}
+#quick-menu {
+  position: fixed;
+  top: calc(
+    var(--ui-hit) + 18px * var(--ui-scale, 1) + env(safe-area-inset-top)
+  );
+  right: calc(12px * var(--ui-scale, 1) + env(safe-area-inset-right));
+  display: flex;
+  flex-direction: column;
+  gap: calc(5px * var(--ui-scale, 1));
+  pointer-events: auto;
+  max-width: calc(100vw - 24px);
+}
+#quick-menu button {
+  min-height: var(--ui-hit);
+  font-size: var(--ui-text);
+  padding: calc(5px * var(--ui-scale, 1));
+}
+body.pixel-ready .death-card,
+body.pixel-ready #quick-menu button {
+  opacity: 0;
+}
+@media (max-width: 560px) {
+  .campaign-roster,
+  .hangar-roster {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

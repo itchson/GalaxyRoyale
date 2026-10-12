@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "testedNormalRevision": "1b754da4e09fb2b8e6bbe123d8ac834750a97d99",
+  "hashScope": "Canonical Git index blob bytes; raw specialist hashes remain in their handoffs.",
+  "files": [
+    {
+      "path": "artifacts/league-coop-native-20261012/README.md",
+      "bytes": 4797,
+      "sha256": "802ba4ebdf01a2a6730271b1e5697a118bf54fbdd8961ac6027b91a9f1ce72c5"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/active-card-848.json",
+      "bytes": 919,
+      "sha256": "13ce91d0b239ebb72bcfae8e87441bf5627e1bc2185fc41fcaf0fac81df327b5"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/assignments.txt",
+      "bytes": 344,
+      "sha256": "92fdfe40e1092539af3010e146f6dd01af75e352d04e80c01596fc2d86a4ab1a"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/build-final.log",
+      "bytes": 1319,
+      "sha256": "4721f04003f8f4cf004e14b09ca2a2bb1ba3678f711d4accde083f1b36c8f5df"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/build-release.log",
+      "bytes": 1416,
+      "sha256": "13fcb9a98c36307ae75654b6bbf62076e1c12376861cbabb42514bc57da19859"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/build.log",
+      "bytes": 1416,
+      "sha256": "20a35540660b9156939148884d2df63dfaf925a422378dd4181d30f5dc1c0d12"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/95d6f45c84179f49-3cb5ebe425bc19c0e57b860494a92098c7789fedcad1bfabd4c9133ea23f4104.json",
+      "bytes": 5680,
+      "sha256": "3cb5ebe425bc19c0e57b860494a92098c7789fedcad1bfabd4c9133ea23f4104"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/95d6f45c84179f49-700e25355c2a7dc48236913cb86d8d624d6c4f1e703c18199b5eebc2f0d91b97.json",
+      "bytes": 6546,
+      "sha256": "700e25355c2a7dc48236913cb86d8d624d6c4f1e703c18199b5eebc2f0d91b97"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/95d6f45c84179f49-73057df58dbf79c4b2ef8036a28eaa1bc852cd6a12ca4ad015fddd6706d11d21.json",
+      "bytes": 6338,
+      "sha256": "73057df58dbf79c4b2ef8036a28eaa1bc852cd6a12ca4ad015fddd6706d11d21"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/95d6f45c84179f49-88c6c8c79ae2643c87b46ced8d66b1f2fa02496cbfb5b9c14e9b57bc8bd24b03.json",
+      "bytes": 6477,
+      "sha256": "88c6c8c79ae2643c87b46ced8d66b1f2fa02496cbfb5b9c14e9b57bc8bd24b03"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/95d6f45c84179f49-9f71e40afe88c1ab308b6aa2411540a1d7d2bdc4b3b5017626f74304c0c623fa.json",
+      "bytes": 5917,
+      "sha256": "9f71e40afe88c1ab308b6aa2411540a1d7d2bdc4b3b5017626f74304c0c623fa"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/95d6f45c84179f49-e38e37cc866f19621465a3c8de5e78f821a4a770b932b593230e8af1cdb34d06.json",
+      "bytes": 6055,
+      "sha256": "e38e37cc866f19621465a3c8de5e78f821a4a770b932b593230e8af1cdb34d06"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/deb1cc150573cc68-002d5369b54277f2a04aaaa464dc266e48918449d15ca40f92b7963ddd3c47a7.json",
+      "bytes": 6618,
+      "sha256": "002d5369b54277f2a04aaaa464dc266e48918449d15ca40f92b7963ddd3c47a7"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/deb1cc150573cc68-1e7e08c1e2d673f10d204da49c5d9368011e53b723014c13cf143ac023064d34.json",
+      "bytes": 6484,
+      "sha256": "1e7e08c1e2d673f10d204da49c5d9368011e53b723014c13cf143ac023064d34"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/deb1cc150573cc68-318895dc9c33853c7f2026b77ae824c32c95befbb0f9c77f3540eb73db5520b5.json",
+      "bytes": 6070,
+      "sha256": "318895dc9c33853c7f2026b77ae824c32c95befbb0f9c77f3540eb73db5520b5"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/deb1cc150573cc68-405fdb692c952956f9a73327c9f0454bed04cfca01ad7412e93ca0f010eebad3.json",
+      "bytes": 5680,
+      "sha256": "405fdb692c952956f9a73327c9f0454bed04cfca01ad7412e93ca0f010eebad3"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/deb1cc150573cc68-4dd98c82b14cf11605eec70ebc500776d48f2cf5a1d93ea738933dedd66e8061.json",
+      "bytes": 6687,
+      "sha256": "4dd98c82b14cf11605eec70ebc500776d48f2cf5a1d93ea738933dedd66e8061"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/deb1cc150573cc68-9e736746cb4b27935156c174a2a53fd3a93ab652ba8bd72dc550b365989f28af.json",
+      "bytes": 6201,
+      "sha256": "9e736746cb4b27935156c174a2a53fd3a93ab652ba8bd72dc550b365989f28af"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/captures/deb1cc150573cc68-ba6ef8040844ba2e9261527e505f2a39fcdd78c12dce8667f0ac0f8a82aa0b04.json",
+      "bytes": 5916,
+      "sha256": "ba6ef8040844ba2e9261527e505f2a39fcdd78c12dce8667f0ac0f8a82aa0b04"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/clippy-release.log",
+      "bytes": 262,
+      "sha256": "5d0ec361939294fc1e1fd9d52596ae6195876826d05b71ba8ec0f178f0ede3b9"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/clippy-wasm-release.log",
+      "bytes": 262,
+      "sha256": "c75b32e4587d78e4dba3236dfd5766071c063540be689c9bc844db2741f3b5f1"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/clippy.log",
+      "bytes": 262,
+      "sha256": "28de2107f33e0a344005d80ba0165b12ecd02a31955df3e79d6ee3bc021c8912"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/echo-plan.md",
+      "bytes": 9789,
+      "sha256": "cafbed090342646be1fd12c272747ac99eae170eac6163997fa46d1bbfa58512"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/factory-both-review.md",
+      "bytes": 3850,
+      "sha256": "c36a9a24b762fadfd6ae34b71e67865dfe977096666a0a3a9bb2d6c0330ae154"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/final-card-active-848.json",
+      "bytes": 1370,
+      "sha256": "138826fc06bc432d16d521fc3a443b40e27601263cbe6d2a407c2d3390a135d3"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/final-card-hosting-848.json",
+      "bytes": 1412,
+      "sha256": "0b97c2fdd9a9230f874055994ae23ae7c24060ac4b9170d93c3413b11a8c31c5"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/final-card-idle-848.json",
+      "bytes": 1043,
+      "sha256": "94ad2055e9d1251e602262e160263b552ab5f0a0df308968535778ab7f31cf97"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/icon-handoff.md",
+      "bytes": 4185,
+      "sha256": "e4ab02442ada318159be36603ed10f5d3bd9d56536196ce7383c15109f88994a"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/icon-tests.log",
+      "bytes": 113,
+      "sha256": "8e5fe56b67d98c7620efc15a51a4d2c77fbb2fa159c4daca01fe4a8e9a1f2ebc"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/narrow-panel-review.md",
+      "bytes": 2161,
+      "sha256": "7b0057144aa3f91d1f4bd29aa9b326bcf0c9edd1124aced85d7f716afd023b07"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/native-full.log",
+      "bytes": 84526,
+      "sha256": "7c9f50407a0bfb05493a8fec2f8261bbacae2cbe71206dfd7bc3ce3ab5f54da2"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/native-icons.log",
+      "bytes": 1815,
+      "sha256": "972bf857a0dc9a0fb0291ec36e1219301fa24f54d9c91a22c8accc4d9602deb8"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/native-release.log",
+      "bytes": 84968,
+      "sha256": "18d8fb8940864b710fed80ff89c010a2ddcd292e3e8ccf4ee0c7c701485e274e"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/nebula-webgl2-final.jpg",
+      "bytes": 24886,
+      "sha256": "f9faddedf2bef94c66627f47a990b33c54c1c22cee7713cf3d62812115fb7933"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/4c2502a537ae4bcf-0b5ee02649fc1d3b6ef3768c6ab8f9fa6a4293992d8584a48b00f76c3dc2ac83.json",
+      "bytes": 8173,
+      "sha256": "0b5ee02649fc1d3b6ef3768c6ab8f9fa6a4293992d8584a48b00f76c3dc2ac83"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/4c2502a537ae4bcf-23ad65f9d7f319089a5c8326eb2a3178c1cb3532918872883f49b53684227ed2.json",
+      "bytes": 8378,
+      "sha256": "23ad65f9d7f319089a5c8326eb2a3178c1cb3532918872883f49b53684227ed2"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/4c2502a537ae4bcf-3a298d22c054e32561e85e9f9055f369a5dd97cf1d54fe548be6e58cd546b82a.json",
+      "bytes": 7689,
+      "sha256": "3a298d22c054e32561e85e9f9055f369a5dd97cf1d54fe548be6e58cd546b82a"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/4c2502a537ae4bcf-683bf667459528ca0375a071dedbd652e362113980e4cf34b935e823b7cfc943.json",
+      "bytes": 8309,
+      "sha256": "683bf667459528ca0375a071dedbd652e362113980e4cf34b935e823b7cfc943"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/4c2502a537ae4bcf-72a62608929013ea847ed1c4feb62300204add65bfec6d6471bb8f764e1d8e27.json",
+      "bytes": 7533,
+      "sha256": "72a62608929013ea847ed1c4feb62300204add65bfec6d6471bb8f764e1d8e27"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/4c2502a537ae4bcf-a977bac3c888dba811738d8325dc7a2b0c9a59ba6879e5b9fe3cc4a1572cb896.json",
+      "bytes": 7820,
+      "sha256": "a977bac3c888dba811738d8325dc7a2b0c9a59ba6879e5b9fe3cc4a1572cb896"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/4c2502a537ae4bcf-f5789927862b8fdd81875a6fe073e602cd430a94d4f99f4c3936456d39e8e0f5.json",
+      "bytes": 7226,
+      "sha256": "f5789927862b8fdd81875a6fe073e602cd430a94d4f99f4c3936456d39e8e0f5"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/99ade30b39ca8e23-43f61ef9da108154ff74839a742f159943b64138fddc4b02f76859b1d4322cb6.json",
+      "bytes": 7527,
+      "sha256": "43f61ef9da108154ff74839a742f159943b64138fddc4b02f76859b1d4322cb6"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/99ade30b39ca8e23-5f881a455efd85af44c1f728750e79c2de4e34c724e04c021b4554a315eb69dc.json",
+      "bytes": 7679,
+      "sha256": "5f881a455efd85af44c1f728750e79c2de4e34c724e04c021b4554a315eb69dc"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/99ade30b39ca8e23-81a8f49f8d1107d99517c79c57d7a72c3a94b807a34eb94b4db8699139320285.json",
+      "bytes": 7226,
+      "sha256": "81a8f49f8d1107d99517c79c57d7a72c3a94b807a34eb94b4db8699139320285"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-captures/99ade30b39ca8e23-827a583cabd2891f5579dc76f029b6c4a93d269d0ee62b58b7994267b03a8b5e.json",
+      "bytes": 7596,
+      "sha256": "827a583cabd2891f5579dc76f029b6c4a93d269d0ee62b58b7994267b03a8b5e"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-offscreen-failure-disposed.jpg",
+      "bytes": 94183,
+      "sha256": "65e080ffbac15ab9b114087056c786b0a6dae5dd91faf89a94ea870d7616f540"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-qa-handoff.md",
+      "bytes": 4012,
+      "sha256": "11d5d3f2056af3fd9d1eb20f695e5450bb0059ad84fde9921cde80136447af83"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-webgpu-flight.jpg",
+      "bytes": 99175,
+      "sha256": "b6b313374d2f059e83c958197ba15362ac50abb6d8f7dd9eebfcf2c5c81336ff"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/owned-webgpu-review.md",
+      "bytes": 4402,
+      "sha256": "f345f9c4681a78c03b8b192ac69d99614305cd16378c6441c68bffb66c7a3e7f"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/panel-ended-webgl2-848-final.jpg",
+      "bytes": 31195,
+      "sha256": "94813db1cc33189abc6c0e7cf0e716c62bdedca9ad5d4bf2814bb4cc56e4c70a"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/panel-host-ended-webgl2-848-final.jpg",
+      "bytes": 30481,
+      "sha256": "246828df88fbcaa08b9834dd7095027132f38c04a74fb3edee27414a729076ec"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/panel-webgl2-848-final.jpg",
+      "bytes": 24932,
+      "sha256": "02b7b6afc30fca831d55a5f7bf4efbb7f29e47aad47dbb2e3eb64d0ece3721e2"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/panel-webgl2-848-fixed.jpg",
+      "bytes": 23465,
+      "sha256": "fe0b032d448df0b5c100dcb3b29fa6d6fe2b278de45d097a8ca24cef58ed330e"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/panel-webgl2-848.jpg",
+      "bytes": 17683,
+      "sha256": "db5412eb329f7db8498d1ab055cf2dfc036db9546b7158ed0fbe11a47a9e8b43"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/passive-handoff.md",
+      "bytes": 4216,
+      "sha256": "8e91a11158f2be460f35a6814a12d43b7c8f6c219d643440966a2a47daf244b5"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/passive-tests.log",
+      "bytes": 608,
+      "sha256": "3201c9f1f2545479425078eb725c56f1e3cac2d07c17988c4d8d945eb9daf68d"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/planet-webgl2-final.jpg",
+      "bytes": 19548,
+      "sha256": "4b9d03b4c6b541a806bf416fadc25b5f6d070ccda4d80a05464b6eaca3bfeb87"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/planet-webgpu-final.jpg",
+      "bytes": 19634,
+      "sha256": "d088f9d2ec2b9f443a11469b75f6ea09b906bcadb1b6749ed16c647638e84438"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/pulse-handoff.md",
+      "bytes": 3752,
+      "sha256": "38e27de4dd55e2a3829a624bbedd998abab202f6a5dc50d013fe2cf7c7097983"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/raicho-modal-webgpu-1280-final.jpg",
+      "bytes": 50906,
+      "sha256": "c1ea30cd47a3380298c71b0b4c229e544e2a25a094bbd5d88a9964a41d509538"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/ring-handoff.md",
+      "bytes": 4666,
+      "sha256": "28472f4d37079adbf333fc3e9b5d01e48a18c75e2ac5c1655a000b5f229b3467"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/ring-software-comparison.png",
+      "bytes": 99981,
+      "sha256": "218cf054f1ea0baa5036aaa546a8de054290a0b0a6d7bef1be81c2e50a225aa4"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/rtc-rejoin-webgpu.jpg",
+      "bytes": 77342,
+      "sha256": "704739ebd9f0397707fa222a9cf31f6b52536da64ce86859de6826cb18f086ee"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/rtc-webgl2-flight.jpg",
+      "bytes": 75424,
+      "sha256": "639169c5614d3cf6256ff12bf98a576f34030258f71fd6e0c65b8ecbacebdfd4"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/shell-owned-helper.log",
+      "bytes": 58609,
+      "sha256": "5f1bfcdaa1b45433ff501acc89c31771ce863bc909162ee7b0394e4764d4165d"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/shell-release.log",
+      "bytes": 58847,
+      "sha256": "1d0d9bb1bd20574e4b5921f6582b7b55671c9cee1fa7b9a604413ae8114ca72a"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/shell.log",
+      "bytes": 57992,
+      "sha256": "0eb6557c0971c6f35d55a3c885b6d3ec177088aa1131910159658d44f74b9ef5"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/tested-build.json",
+      "bytes": 317,
+      "sha256": "b34fc3aa4e14e5107f45847dc07626c80c7aad53eea77657fc87143273f8fea4"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/toolbar-webgl2-1280-final.jpg",
+      "bytes": 77297,
+      "sha256": "510dea645df9dd1de3280684ff525ede9c51caa4850a799667aafe3aaca1c388"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/toolbar-webgl2-848.jpg",
+      "bytes": 20350,
+      "sha256": "9bbae8cfe8d16eba8bac10f9d5919a91a870aad89daead2f8d692986b20a2086"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/typecheck.log",
+      "bytes": 15,
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/visual-final-review.md",
+      "bytes": 6369,
+      "sha256": "19cfbd7cec8b0ab1cddb5174a28f7109f3ecf2aa0b64eb915c91fb33d465b35f"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/visual-review-pins.json",
+      "bytes": 2994,
+      "sha256": "2bb79843dd55830b0cd1786cd7704d53b88cc8706a36c2b9bb72bf37a3df5f6b"
+    },
+    {
+      "path": "artifacts/league-coop-native-20261012/warp-invite-review.md",
+      "bytes": 4879,
+      "sha256": "f8d6887697e23b01de120bbf89e4e8332faa30ca3808ad5b0e2c4039356809d0"
+    }
+  ]
+}

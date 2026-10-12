@@ -1,0 +1,12 @@
+Using CPython 3.12.10 interpreter at: C:\AI\ComfyUI\.venv\Scripts\python.exe
+Resolved 4 packages in 45ms
+Downloading sphn (1.5MiB)
+ Downloaded sphn
+   Building julius==0.2.7
+      Built julius==0.2.7
+Prepared 4 packages in 1.25s
+Installed 4 packages in 19ms
+ + demucs==4.1.0
+ + julius==0.2.7
+ + lameenc==1.8.1
+ + sphn==0.2.1

@@ -1,0 +1,34 @@
+{
+  "before": {
+    "head": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e"
+  },
+  "after": {
+    "head": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e"
+  },
+  "unchanged": true,
+  "results": [
+    {
+      "name": "shell",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "apps/studio/test/*.test.mjs",
+        "scripts/test/*.test.mjs",
+        "scripts/qa/audio-review/*.test.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "typecheck",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0
+    }
+  ]
+}

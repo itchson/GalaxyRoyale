@@ -1,0 +1,46 @@
+{
+  "atlas_sha256": "1e529a4ae853005aa4b7881befabb4dc715c265141b8d230622107de5aad3b7b",
+  "atlas_bytes": 24301912,
+  "scope": "independent raw-cell validation, not native/GPU/anatomy certification",
+  "profiles": {
+    "dora": {
+      "palette_entries": 63,
+      "body": 32764,
+      "eyes": 1416,
+      "mouth": 414,
+      "composed": 34594,
+      "hair": 14556,
+      "horn": 1139,
+      "signal": 740,
+      "three_layer_transforms": 3,
+      "all20_pose_occupancies_identical": true,
+      "torso_role_cells_y180_plus": 0
+    },
+    "doro": {
+      "palette_entries": 61,
+      "body": 26558,
+      "eyes": 1462,
+      "mouth": 504,
+      "composed": 28524,
+      "hair": 6015,
+      "horn": 1219,
+      "signal": 622,
+      "three_layer_transforms": 3,
+      "all20_pose_occupancies_identical": true,
+      "torso_role_cells_y180_plus": 0
+    },
+    "talo": {
+      "palette_entries": 60,
+      "body": 22518,
+      "eyes": 1240,
+      "mouth": 504,
+      "composed": 24262,
+      "hair": 3814,
+      "horn": 1567,
+      "signal": 664,
+      "three_layer_transforms": 3,
+      "all20_pose_occupancies_identical": true,
+      "torso_role_cells_y180_plus": 0
+    }
+  }
+}

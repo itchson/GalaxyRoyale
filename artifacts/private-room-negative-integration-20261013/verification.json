@@ -1,0 +1,567 @@
+{
+  "head": "4adecf04b48f73e345d5cad9ee4c54c5d8536598",
+  "scope": "QA helper source integration and actual Root function checks, not live native RTC execution",
+  "authorCommits": [
+    "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+    "7c188d4198901ead15e4bffa2b0063b9c95f7674"
+  ],
+  "integratedCommits": [
+    "b510d7f",
+    "4adecf0"
+  ],
+  "tests": {
+    "focused": 17,
+    "existingWasmFunctions": 16,
+    "existingFifth": 10,
+    "excludedHttp": 2,
+    "failures": 0
+  },
+  "limits": "Actual visible native two-client decline/replacement/lock runs remain pending; pagehide/liveness, eight clients, TURN, shipped menu UX and performance are separate gates.",
+  "pins": [
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/baseline-inputs/apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/baseline-inputs/apps/game/src/coop/signaling.ts",
+      "bytes": 6716,
+      "sha256": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/baseline-inputs/apps/game/src/coop/transport.ts",
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/baseline-inputs/apps/game/src/coop/wasm-ports.ts",
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/baseline-inputs/scripts/qa/co-op-transport/prepare.mjs",
+      "bytes": 17064,
+      "sha256": "2f5242434ea82793a0789efc8bff9070e451791e065ead6846612e7a3204ad51"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/baseline-inputs/scripts/test/coop-transport-fifth-qa.test.mjs",
+      "bytes": 14649,
+      "sha256": "2814ae9ac3fa68dd41627dccbf7c196ba5cc7930da51c2209d3d238f51d81cd1"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/baseline-inputs/scripts/test/coop-transport-wasm-qa.test.mjs",
+      "bytes": 41891,
+      "sha256": "925c879fc4229a5ba851f347453a17a802a6237e79061b3da8482d2ba2028f16"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/final-verification.json",
+      "bytes": 4031,
+      "sha256": "0beb946dbe1dad0215ea9db8fc4f81c7695fa78705c612efabe5a9be05bb74b8"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/MANIFEST.json",
+      "bytes": 11981,
+      "sha256": "e7a34bb267717444d8eff90c8a79b0556ea2bbe7483693d4a968ad0a15ce049a"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/candidate.diff.patch",
+      "bytes": 42432,
+      "sha256": "91c7eec25fc2c0f11fcb094dd4fb7c7c3aa674d87d80421a99477d391263af64"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/commit.log",
+      "bytes": 220,
+      "sha256": "4fafee0e2408ce47d5afdd62050a493d8dfecc900c8c891e07320894d7a05d33"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/diff-check.log",
+      "bytes": 663,
+      "sha256": "362e27099d393832cb18f4992dd74e3aaf7af049a690b6f9a86a62ae37c3c790"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/existing-fifth-functions.log",
+      "bytes": 1249,
+      "sha256": "a5814df089a26b99fa27834fbc2c80592cb27599d95a07ce8c091a663fe988ae"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/existing-wasm-functions.log",
+      "bytes": 2103,
+      "sha256": "4007a9ef4886a8848c6abf04f20e6999dd41513a6829d76c2fdcf3f0c85e5d30"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/final-format.log",
+      "bytes": 118,
+      "sha256": "2c5fb1312c537208e861d994311252d26f5732ea22426c848266e32ff8081e5d"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/format.log",
+      "bytes": 298,
+      "sha256": "191dbd64503307253bf634f81b782d5a5ee377a3e464ce605c7387d734166c06"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/frozen-plan.md",
+      "bytes": 7114,
+      "sha256": "b91155ba7319780717f8b72e27c518f7a545099c97e54f97e760e9b8d6c56370"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/HANDOFF.md",
+      "bytes": 6158,
+      "sha256": "a9cf4d3a849ec1b2c5de7c616b1d80a56da71d75daec9f733645e844a97a859e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/negative-tests-expanded.log",
+      "bytes": 1324,
+      "sha256": "e3fbf8371c7566479daef9b7fd5d9bac5e50be100f74abfd956b351e13f5a89c"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/negative-tests-final.log",
+      "bytes": 1441,
+      "sha256": "8a1cf69972a8a64bbc41374ef42b089b263b05dba7eb8b900a89e88a7b66c7d6"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/negative-tests-original.log",
+      "bytes": 1067,
+      "sha256": "e6bbe6ca5656c40e8e5c0fa020f95236937bdc1100a9f498bdd334f6b2012e08"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/original-commit-failure.log",
+      "bytes": 771,
+      "sha256": "af03e05e697f9fe74a27c545760be0d4b09c5a7e9ef7e537adc6b27f98038b87"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/pin-evidence.mjs",
+      "bytes": 3921,
+      "sha256": "572af0624c59c4466b34cc91d16707249933c16ea3c4b54f74a06310e24b7636"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/source-pins.json",
+      "bytes": 6812,
+      "sha256": "aec143bb2825d570fae4d5f5c5e0b432aa4bff44e156c991a2214da76d491d71"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/studio-run-input.json",
+      "bytes": 965,
+      "sha256": "684d49100cc5e4edeb7c024234f3f8b824f59c23bad218a8a9efd70312486c3e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/studio-run-result.json",
+      "bytes": 1129,
+      "sha256": "46ea7f91764c9437bc573435eebfaaae71328f7fb7a5549b46b533a80d2eb829"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/studio-start-input.json",
+      "bytes": 254,
+      "sha256": "cff9751aa6a196adf6f14ee9264b2173de3b21268667bdf79b2b49af80be64e9"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/studio-start-result.json",
+      "bytes": 1671,
+      "sha256": "3aac5fdb4ca50cd7db3a4398e32e477d8427c791009005a279a1392ee7d421d0"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-evidence/syntax-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-gate-reproduction.log",
+      "bytes": 1866,
+      "sha256": "20babd14c82baad4b3da4a731df783565ed2a4804f4588f4d09b615d1bcd5ef2"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-gate-reproduction.mjs",
+      "bytes": 2203,
+      "sha256": "b7d17bba3c2dd9417e06c5c836aa7177612152298bcbd18d1e4b5081cfcf517f"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-source/scripts/qa/co-op-transport/client.js",
+      "bytes": 26189,
+      "sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-source/scripts/qa/co-op-transport/README.md",
+      "bytes": 14692,
+      "sha256": "51c0be92863b3f12b6059120e577eaf0af2ca9fc78790fda54cc23d19684bf9f"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-source/scripts/qa/co-op-transport/server.mjs",
+      "bytes": 18044,
+      "sha256": "3834be8d41892914150eb8ea657a724a68b8e98cc937b212dd5b42bb38466b2f"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-source/scripts/qa/co-op-transport/wasm-review.html",
+      "bytes": 4945,
+      "sha256": "193dd816c8489022190f7185ce99aa3b96fda3698b5a422c4eb1d00201c997b1"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-source/scripts/qa/co-op-transport/wasm-review.js",
+      "bytes": 23940,
+      "sha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-source/scripts/test/coop-private-room-negative-qa.test.mjs",
+      "bytes": 19081,
+      "sha256": "2729c2be2c6563b19895f6ebbc51e6898ff7a12206da2845b723de125739bc44"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/original-verification.json",
+      "bytes": 5066,
+      "sha256": "4d3220a450e8d89060c8ddc69a1e02c5e8233a7fb8cae686ba7a32c5c89f4697"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/pin-final.log",
+      "bytes": 2236,
+      "sha256": "d9b216216311194547ff96873c6472c15bfadc3deac0db4f24131edea13a8b9c"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/pin-final.py",
+      "bytes": 4313,
+      "sha256": "68fbe258e86b76a996213c140e940276b6c1dbfe8df07ea3359ba614b1b1dd06"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/pin-original.log",
+      "bytes": 600,
+      "sha256": "7336489e620450d66b830400a4ca20309c5cd1185d532b270431484e17c29cc7"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/pin-original.py",
+      "bytes": 3260,
+      "sha256": "f84920dc9e0dd259624255f650f5a660f636fa21e37ec505f0ee8786a63a856e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/REVIEW.md",
+      "bytes": 6709,
+      "sha256": "af909dd6b5b8509580cf418e6e3850db22582557a9f12677bec8eabda3f3d27e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/candidate.diff.patch",
+      "bytes": 18551,
+      "sha256": "be09d5158702d9816d8c4fb3073c19cd46a62199384e8c8e8bf1db0e26adbda1"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/commit.log",
+      "bytes": 169,
+      "sha256": "3db62c6ecb9388a4ba1732de7b14b2c72d48d5002188cc0623ee97df42df4194"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/diff-check.log",
+      "bytes": 280,
+      "sha256": "b9b8b880827bc3c3161710f964169b236923556a082861b1f14b6cf9df9a9ea9"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/existing-fifth-functions.log",
+      "bytes": 1246,
+      "sha256": "ccab6be0adc6dc16529e6e29a8b77a96f9a9fc74c3369eda9a2c71c1e03430bd"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/existing-wasm-functions.log",
+      "bytes": 2105,
+      "sha256": "48357f33c80e678be2e192e44fd7979581be82e87e01de3fa5ecd3b6b98a1372"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/focused-tests.log",
+      "bytes": 2169,
+      "sha256": "a9a234729ed17be716bb77e1663149db7aef94eb2a42e84c8563402d300ae4fd"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/format.log",
+      "bytes": 106,
+      "sha256": "c6e71421bfd57ca7befe682aab1a19b98f1a248077c6190b8a70c331c5f8b0a4"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/HANDOFF.md",
+      "bytes": 5095,
+      "sha256": "f5562635f1b31c2ccca5a9049d943ba46cc3c02036fcdab483b68fa32e3bbf60"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/health-preflight-original-regression.log",
+      "bytes": 3602,
+      "sha256": "fc305fbf6e64d0b637c29a59921bc5a48f47013d354ba3737bc1486ec008f24e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/original-parent.js",
+      "bytes": 23940,
+      "sha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/original-regression.log",
+      "bytes": 1439,
+      "sha256": "cff3c37c740e52d0da9ae2b5a787a3398fff34b834820079b53fcf99e9f57c72"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/pin-evidence.mjs",
+      "bytes": 4479,
+      "sha256": "b4ac8686ed809a7cd8cb042c496f484bfc48c02580e9a7d88b8b2b1a9868ae72"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/pre-health-parent.js",
+      "bytes": 24556,
+      "sha256": "8b2a8cd3a42f36c7b690f509881ea9cc0969d88f71965c343d6e75f9f809540d"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/pre-visibility-parent.js",
+      "bytes": 24228,
+      "sha256": "b8e88988349fb77daf2ae0bf61fc5eb92020e10b35c28ad86953dff613685525"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/source-pins.json",
+      "bytes": 5701,
+      "sha256": "ae692512cbd2a687acd730afcdd7899c84175e012122a00f64e44a586f284a94"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/syntax-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-evidence/visibility-original-regression.log",
+      "bytes": 1047,
+      "sha256": "0ec037f5d98eceae2f35ac53c0b4a4e9e7a210ce4a700fdd4c273ce3f3daaea1"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-source/apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-source/scripts/qa/co-op-transport/client.js",
+      "bytes": 26189,
+      "sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-source/scripts/qa/co-op-transport/wasm-review.js",
+      "bytes": 25287,
+      "sha256": "7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/independent-review/v2-source/scripts/test/coop-private-room-negative-qa.test.mjs",
+      "bytes": 29417,
+      "sha256": "583594adb4cd133c6137db70a76f080ae3f391f7278fada90b1c7a711713758d"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/candidate.diff.patch",
+      "bytes": 42432,
+      "sha256": "91c7eec25fc2c0f11fcb094dd4fb7c7c3aa674d87d80421a99477d391263af64"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/commit.log",
+      "bytes": 220,
+      "sha256": "4fafee0e2408ce47d5afdd62050a493d8dfecc900c8c891e07320894d7a05d33"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/diff-check.log",
+      "bytes": 663,
+      "sha256": "362e27099d393832cb18f4992dd74e3aaf7af049a690b6f9a86a62ae37c3c790"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/existing-fifth-functions.log",
+      "bytes": 1249,
+      "sha256": "a5814df089a26b99fa27834fbc2c80592cb27599d95a07ce8c091a663fe988ae"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/existing-wasm-functions.log",
+      "bytes": 2103,
+      "sha256": "4007a9ef4886a8848c6abf04f20e6999dd41513a6829d76c2fdcf3f0c85e5d30"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/final-format.log",
+      "bytes": 118,
+      "sha256": "2c5fb1312c537208e861d994311252d26f5732ea22426c848266e32ff8081e5d"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/format.log",
+      "bytes": 298,
+      "sha256": "191dbd64503307253bf634f81b782d5a5ee377a3e464ce605c7387d734166c06"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/frozen-plan.md",
+      "bytes": 7114,
+      "sha256": "b91155ba7319780717f8b72e27c518f7a545099c97e54f97e760e9b8d6c56370"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/HANDOFF.md",
+      "bytes": 6158,
+      "sha256": "a9cf4d3a849ec1b2c5de7c616b1d80a56da71d75daec9f733645e844a97a859e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/negative-tests-expanded.log",
+      "bytes": 1324,
+      "sha256": "e3fbf8371c7566479daef9b7fd5d9bac5e50be100f74abfd956b351e13f5a89c"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/negative-tests-final.log",
+      "bytes": 1441,
+      "sha256": "8a1cf69972a8a64bbc41374ef42b089b263b05dba7eb8b900a89e88a7b66c7d6"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/negative-tests-original.log",
+      "bytes": 1067,
+      "sha256": "e6bbe6ca5656c40e8e5c0fa020f95236937bdc1100a9f498bdd334f6b2012e08"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/original-commit-failure.log",
+      "bytes": 771,
+      "sha256": "af03e05e697f9fe74a27c545760be0d4b09c5a7e9ef7e537adc6b27f98038b87"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/pin-evidence.log",
+      "bytes": 342,
+      "sha256": "f70e7bc08dffe0aa69b33a3b1170c8f6276e93987f1d3679c03d2e7b4b105d9f"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/pin-evidence.mjs",
+      "bytes": 3921,
+      "sha256": "572af0624c59c4466b34cc91d16707249933c16ea3c4b54f74a06310e24b7636"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/source-pins.json",
+      "bytes": 6812,
+      "sha256": "aec143bb2825d570fae4d5f5c5e0b432aa4bff44e156c991a2214da76d491d71"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-completed-input.json",
+      "bytes": 1009,
+      "sha256": "a8aa33afffeac8664c10924862422c41aedb5ea1526fe2966a4349c4e6252d64"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-completed-result.json",
+      "bytes": 1171,
+      "sha256": "f64cf922bb6e405ff39f2c025ef2d0ce54da498f9cf95c154da46a0749e36c91"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-handoff-pins.json",
+      "bytes": 790,
+      "sha256": "4acedabdf252f95ec57eee6866c8cb1bc60b646981359190c79ecbc6cfc1a5ba"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-review-input.json",
+      "bytes": 1051,
+      "sha256": "796001f87297a1672b25b3acd18f97b6c3a600ade72b9d15f80c3ec1b49425d9"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-review-result.json",
+      "bytes": 2260,
+      "sha256": "dfd8224494ae43244b008e97b2f0532cd3856a470c84a06c1d1a0144e1535103"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-run-input.json",
+      "bytes": 965,
+      "sha256": "684d49100cc5e4edeb7c024234f3f8b824f59c23bad218a8a9efd70312486c3e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-run-result.json",
+      "bytes": 1129,
+      "sha256": "46ea7f91764c9437bc573435eebfaaae71328f7fb7a5549b46b533a80d2eb829"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-start-input.json",
+      "bytes": 254,
+      "sha256": "cff9751aa6a196adf6f14ee9264b2173de3b21268667bdf79b2b49af80be64e9"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/studio-start-result.json",
+      "bytes": 1671,
+      "sha256": "3aac5fdb4ca50cd7db3a4398e32e477d8427c791009005a279a1392ee7d421d0"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/syntax-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/candidate.diff.patch",
+      "bytes": 18551,
+      "sha256": "be09d5158702d9816d8c4fb3073c19cd46a62199384e8c8e8bf1db0e26adbda1"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/commit.log",
+      "bytes": 169,
+      "sha256": "3db62c6ecb9388a4ba1732de7b14b2c72d48d5002188cc0623ee97df42df4194"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/diff-check.log",
+      "bytes": 280,
+      "sha256": "b9b8b880827bc3c3161710f964169b236923556a082861b1f14b6cf9df9a9ea9"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/existing-fifth-functions.log",
+      "bytes": 1246,
+      "sha256": "ccab6be0adc6dc16529e6e29a8b77a96f9a9fc74c3369eda9a2c71c1e03430bd"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/existing-wasm-functions.log",
+      "bytes": 2105,
+      "sha256": "48357f33c80e678be2e192e44fd7979581be82e87e01de3fa5ecd3b6b98a1372"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/focused-tests.log",
+      "bytes": 2169,
+      "sha256": "a9a234729ed17be716bb77e1663149db7aef94eb2a42e84c8563402d300ae4fd"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/format.log",
+      "bytes": 106,
+      "sha256": "c6e71421bfd57ca7befe682aab1a19b98f1a248077c6190b8a70c331c5f8b0a4"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/HANDOFF.md",
+      "bytes": 5095,
+      "sha256": "f5562635f1b31c2ccca5a9049d943ba46cc3c02036fcdab483b68fa32e3bbf60"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/health-preflight-original-regression.log",
+      "bytes": 3602,
+      "sha256": "fc305fbf6e64d0b637c29a59921bc5a48f47013d354ba3737bc1486ec008f24e"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/original-parent.js",
+      "bytes": 23940,
+      "sha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/original-regression.log",
+      "bytes": 1439,
+      "sha256": "cff3c37c740e52d0da9ae2b5a787a3398fff34b834820079b53fcf99e9f57c72"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/pin-evidence.mjs",
+      "bytes": 4479,
+      "sha256": "b4ac8686ed809a7cd8cb042c496f484bfc48c02580e9a7d88b8b2b1a9868ae72"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/pre-health-parent.js",
+      "bytes": 24556,
+      "sha256": "8b2a8cd3a42f36c7b690f509881ea9cc0969d88f71965c343d6e75f9f809540d"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/pre-visibility-parent.js",
+      "bytes": 24228,
+      "sha256": "b8e88988349fb77daf2ae0bf61fc5eb92020e10b35c28ad86953dff613685525"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/source-pins.json",
+      "bytes": 5701,
+      "sha256": "ae692512cbd2a687acd730afcdd7899c84175e012122a00f64e44a586f284a94"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/studio-completed-input.json",
+      "bytes": 1158,
+      "sha256": "b78abd45981e05ad1d633b0f5edcc5df78ad433f674e4f07874e55eab8b7a460"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/studio-completed-result.json",
+      "bytes": 1323,
+      "sha256": "b2f9a8eba4895fa90b819a4b775e692a2bb96fd9e0a65b15dc22b267e0a6f6d9"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/syntax-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/private-room-negative-integration-20261013/author/v2-continuity/visibility-original-regression.log",
+      "bytes": 1047,
+      "sha256": "0ec037f5d98eceae2f35ac53c0b4a4e9e7a210ce4a700fdd4c273ce3f3daaea1"
+    }
+  ]
+}

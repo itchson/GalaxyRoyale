@@ -1,0 +1,7 @@
+commit a50aab678c98466e8c54838e39ca5a40a9f2b1b7
+Author:     Codex <codex@openai.com>
+AuthorDate: Sun Oct 11 20:42:49 2026 +1000
+Commit:     Codex <codex@openai.com>
+CommitDate: Sun Oct 11 20:44:20 2026 +1000
+
+    Add cached damage-masked RAICHO fine overlay extraction

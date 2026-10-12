@@ -1,0 +1,31 @@
+   Compiling engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_web)
+error: captured variable cannot escape `FnMut` closure body
+   --> crates\game_web\src\dock_art_tests.rs:129:65
+    |
+128 |   ...   let mut blocked = 0;
+    |             ----------- variable defined here
+129 |   ...   let pixels=frame.frame().batches.iter().flat_map(|batch|batch.pixels.iter().map(|p| {
+    |  ______________________________________________________________-^
+    | |                                                              |
+    | |                                                              inferred to be a `FnMut` closure
+130 | | ...       let t=batch.transforms[p.transform_slot()];let meta=batch.objects.as_ref().unwrap()[p.transform_slot()];
+131 | | ...       let center=t.point(Vec2::from_array(p.local));
+132 | | ...       let occluded=meta.flags==engine_core::shadow::SHADOW_RECEIVER && s.blocks_ray(center,meta.height,Vec2::from_array(key.p...
+133 | | ...       if occluded {blocked+=1;}
+    | |                        ------- variable captured here
+134 | | ...       serde_json::json!({"center":center.to_array(),"basis_x":&t.a[2..4],"basis_y":&t.b[..2],"rgba":p.color,
+135 | | ...           "receiver":meta.flags==engine_core::shadow::SHADOW_RECEIVER,"blocked_center":occluded,"material":&t.b[2..4]})
+136 | | ...   })).collect::<Vec<_>>();
+    | |________^ returns a closure that contains a reference to a captured variable, which then escapes the closure body
+    |
+    = note: `FnMut` closures only have access to their captured variables while they are executing...
+    = note: ...therefore, they cannot allow references to captured variables to escape
+help: consider adding 'move' keyword before the nested closure
+    |
+129 |         let pixels=frame.frame().batches.iter().flat_map(|batch|batch.pixels.iter().map(move |p| {
+    |                                                                                         ++++
+
+error: could not compile `game_web` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

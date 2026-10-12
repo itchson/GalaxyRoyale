@@ -99,7 +99,7 @@ fn valid_parent(parent: AffineTransform) -> bool {
 }
 fn inside(point: Vec2, clip: Option<[f32; 4]>) -> bool {
     clip.is_none_or(|r| {
-        point.x >= r[0] && point.x < r[0] + r[2] && point.y >= r[1] && point.y < r[1] + r[3]
+        point.x >= r[0] && point.x <= r[0] + r[2] && point.y >= r[1] && point.y <= r[1] + r[3]
     })
 }
 fn shade(input: &PatchInput, cell: Vec2, base: u32, eligible: bool) -> (u32, bool) {
@@ -137,7 +137,7 @@ fn shade(input: &PatchInput, cell: Vec2, base: u32, eligible: bool) -> (u32, boo
     )
 }
 
-/// Uses the existing Painter pixel/work budgets and integer body fit. Clipped
+/// Uses the existing Painter pixel/work budgets and continuous body fit. Clipped
 /// cells remain real submitted quads and are charged even when their alpha=0.
 pub fn extract(
     frame: &mut FrameBuilder,
@@ -154,10 +154,8 @@ pub fn extract(
     }
     let art = &ART[input.index];
     let count = art.body.occupied_count();
-    let scale = (input.rect[2] / SIZE as f32)
-        .min(input.rect[3] / SIZE as f32)
-        .floor();
-    if scale < 1.0 || count > *remaining || count > *work_remaining {
+    let scale = (input.rect[2] / SIZE as f32).min(input.rect[3] / SIZE as f32);
+    if !scale.is_finite() || scale <= 0.0 || count > *remaining || count > *work_remaining {
         return Stats::default();
     }
     let local = Transform {
@@ -174,7 +172,15 @@ pub fn extract(
         &art.body,
         input.parent.compose(local.affine()),
         |cell, base| {
-            if !inside(local.point(cell), input.clip) {
+            if ![
+                Vec2::splat(-0.5),
+                Vec2::new(0.5, -0.5),
+                Vec2::new(-0.5, 0.5),
+                Vec2::splat(0.5),
+            ]
+            .into_iter()
+            .all(|corner| inside(local.point(cell + corner), input.clip))
+            {
                 return 0;
             }
             visible_cells += 1;
@@ -258,13 +264,13 @@ mod tests {
         assert_eq!(expected.iter().sum::<usize>(), 2359);
     }
     #[test]
-    fn actual_24_32_48_rects_use_integer_fit_and_unlit_nested_body_packets() {
-        for size in [24.0, 32.0, 48.0] {
+    fn fractional_and_24_32_48_rects_retain_all_cells_with_continuous_unlit_fit() {
+        for size in [0.125, 22.5, 24.0, 32.0, 48.0] {
             for index in 0..COUNT {
                 let mut i = input(index);
                 i.rect = [7.0, 9.0, size, size];
                 let (frame, stats) = draw(&i);
-                assert_eq!(stats.scale, (size / 24.0).floor());
+                assert_eq!(stats.scale, size / 24.0);
                 assert_eq!(stats.quads, frame.frame().pixel_count);
                 assert_eq!(stats.visible_cells, stats.quads);
                 assert_eq!(frame.frame().batches[0].transforms.len(), 1);
@@ -273,14 +279,21 @@ mod tests {
                         assert_eq!(t.b[2..], [0.0, 0.0]);
                     }
                     for pixel in &batch.pixels {
-                        let p = batch.transforms[pixel.transform as usize]
-                            .point(Vec2::from_array(pixel.local));
-                        assert!(
-                            p.x >= i.rect[0]
-                                && p.x < i.rect[0] + size
-                                && p.y >= i.rect[1]
-                                && p.y < i.rect[1] + size
-                        );
+                        for corner in [
+                            Vec2::splat(-0.5),
+                            Vec2::new(0.5, -0.5),
+                            Vec2::new(-0.5, 0.5),
+                            Vec2::splat(0.5),
+                        ] {
+                            let p = batch.transforms[pixel.transform_slot()]
+                                .point(Vec2::from_array(pixel.local) + corner);
+                            assert!(
+                                p.x >= i.rect[0] - 0.00001
+                                    && p.x <= i.rect[0] + size + 0.00001
+                                    && p.y >= i.rect[1] - 0.00001
+                                    && p.y <= i.rect[1] + size + 0.00001
+                            );
+                        }
                     }
                 }
             }
@@ -337,18 +350,31 @@ mod tests {
         }
     }
     #[test]
-    fn partial_scroll_clip_never_saves_submitted_quads_or_leaks_opaque_centers() {
+    fn fractional_scroll_clip_charges_all_cells_and_contains_all_opaque_corners() {
         for index in 0..COUNT {
             let mut i = input(index);
-            i.clip = Some([7.0, 9.0, 12.0, 24.0]);
+            i.rect = [7.125, 9.375, 22.5, 22.5];
+            i.clip = Some([7.125, 9.375, 11.1, 22.5]);
             let (frame, stats) = draw(&i);
             assert!(stats.visible_cells > 0 && stats.visible_cells < stats.quads);
             assert_eq!(stats.quads, ART[index].body.occupied_count());
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let p = batch.transforms[pixel.transform as usize]
-                        .point(Vec2::from_array(pixel.local));
-                    assert_eq!(pixel.color >> 24 != 0, inside(p, i.clip));
+                    let contained = [
+                        Vec2::splat(-0.5),
+                        Vec2::new(0.5, -0.5),
+                        Vec2::new(-0.5, 0.5),
+                        Vec2::splat(0.5),
+                    ]
+                    .into_iter()
+                    .all(|corner| {
+                        inside(
+                            batch.transforms[pixel.transform_slot()]
+                                .point(Vec2::from_array(pixel.local) + corner),
+                            i.clip,
+                        )
+                    });
+                    assert_eq!(pixel.color >> 24 != 0, contained);
                 }
             }
         }
@@ -371,7 +397,7 @@ mod tests {
             let mut i = i;
             match variant {
                 0 => i.index = 9,
-                1 => i.rect[2] = 23.0,
+                1 => i.rect[2] = 0.0,
                 2 => i.rect[0] = f32::NAN,
                 3 => i.clip = Some([0.0, 0.0, 0.0, 20.0]),
                 4 => i.parent.basis_x = Vec2::ZERO,

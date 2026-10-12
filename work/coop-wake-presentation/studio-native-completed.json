@@ -1,0 +1,25 @@
+{
+  "item": {
+    "id": "run-a3e714cd",
+    "title": "Native Ion Wake presentation · completed",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Native Ion Wake presentation",
+    "state": "completed",
+    "observedAt": "2026-10-12T19:45:16.165Z",
+    "taskIds": [
+      "task-8508cfc5"
+    ],
+    "summary": "Bounded native implementation and evidence complete for independent review: actual host/solo/guest five-dot extraction, full active-sample page and atomic replica commit, canonical numbers/lifecycle. Workspace928passed/19ignored and strictClippy passed. Independent review and matching Root JS/build/RTC/AV remain open. Recorded separate existing whole-edge asteroid rejection; no existing bounds widened.",
+    "evidence": [
+      {
+        "label": "Actual isolated native candidate and remaining product gates",
+        "kind": "note",
+        "details": "Native author pass complete in C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-presentation/HANDOFF.md. Source pins0ce2ff57; handoffa6b7aaf5. Actual workspace928pass/19ignored; strictall-targetClippy pass; 192point/960quad capacity and exact18401B page/49452B maximum publication wrapper. Independent source review, Root strictJS/controller/ports, normaldualbuild and realRTC/AV remain open; whole-world-edge asteroid rejection recorded separately. Native implementation does not accept those product gates."
+      }
+    ],
+    "author": "Codex audio_score",
+    "source": "Actual native source/test author handoff; not product/RTC acceptance",
+    "createdAt": "2026-10-12T19:45:16.172Z"
+  },
+  "revision": 1041
+}

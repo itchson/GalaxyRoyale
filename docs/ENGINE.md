@@ -10,7 +10,7 @@ Each PixelInstance is 16 bytes; each affine GpuTransform is 32 bytes, including 
 
 Exact affine composition preserves nonuniform parent scale, child rotation and shear. RoyaleMono caches original 5×7 letter bodies in text/letter/group transforms. Generated UI art and authored 24×32 comms portraits use the same quad extraction. The console is an opaque black drawer with one bottom rail. Low-resolution rendering uses integer nearest-neighbor presentation; rotating pixels can cover changing logical display cells, without blur filtering.
 
-A 272-byte uniform supplies eight bounded camera-relative radial lights from recent effects, nearby bullets, engine thrust and a station beacon. Each cell receives one color; UI/background defaults remain unlit. This does not implement shadows, normal maps or volumetric scattering.
+A 304-byte uniform supplies eight bounded camera-relative radial lights from recent effects, nearby bullets, engine thrust and a station beacon, plus raster parameters. Each cell receives one color; UI/background defaults remain unlit. Optional packed per-cell normals and luminance masks share the existing instance layout and shader; see [PIXEL_SURFACES.md](PIXEL_SURFACES.md) for coordinates, authored material and verification boundaries. Shadows and volumetric scattering remain future work.
 
 ## Simulation and destruction
 
@@ -21,6 +21,10 @@ Fixed 60 Hz simulation interpolates extraction, caps catch-up, smooths the camer
 ## Streamed universe
 
 512-unit asteroid chunks retain at most 25 chunk records. Transient rock damage resets after unload. A seeded 4,200-unit jittered region network provides six biome palettes/family weights, sanctuary discoveries, courier/family-bounty events and once-only persistent relic rewards.
+
+Node placement resolves independently from biome anchors. Courier radii are160–220, bounty180–260, champion340–420 and Royale400–480 world units. Complete birth envelopes reserve radius+520 for belts and32 for actual asteroid bodies, separated by at least256 units. Cell-contained reservations and explicit rounding margin prove clearance without query-order-dependent rejection; Haven's1400-unit corridor stays clear and all nine mandatory campaign nodes resolve. Combat arena walls use the same canonical radius as protection. Active3×3 materialization remains bounded; asteroid drift after impacts is not constrained to its birth envelope.
+
+Licensed factory RAICHO hulls retain their48×48 destructible collision bodies and add a cached96×96 sparse detail layer at relative scale0.5. Removed collision cells suppress every corresponding fine quad. Metal shading, explicit signal lamps and real damage/critical tints preserve authored detail. A local3,000-cell/two-transform preflight admits the whole pair or draws the baseline body; it is not a new global FrameBuilder limit.
 
 Cached 96×96 planets use small relative transforms, craters, veins, storms and rings. Fine gas wisps curl/fade analytically by seed/time. Regional cosmetic budgets are 6,000 cells full or 3,000 reduced. Star layers have independent parallax; density does not change gameplay limits.
 

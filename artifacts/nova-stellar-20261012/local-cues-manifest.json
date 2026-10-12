@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+  "base": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+  "source": [
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_core/src/co_op.rs",
+      "git_size": 48785,
+      "git_sha256": "9abdb9b5c4e541e28f784e4630dd7439e9f1c301f28f0c8e3e9082e9b1330d29",
+      "working": true,
+      "raw_size": 48785,
+      "raw_sha256": "9abdb9b5c4e541e28f784e4630dd7439e9f1c301f28f0c8e3e9082e9b1330d29"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "git_size": 33125,
+      "git_sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a",
+      "working": true,
+      "raw_size": 33125,
+      "raw_sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_core/src/co_op_local_cue_tests.rs",
+      "git_size": 5428,
+      "git_sha256": "ed6018b5f3bafb6cd426eac2c3d610576988730a276ba3f7eb08119cb4832984",
+      "working": true,
+      "raw_size": 5428,
+      "raw_sha256": "ed6018b5f3bafb6cd426eac2c3d610576988730a276ba3f7eb08119cb4832984"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_core/src/lib.rs",
+      "git_size": 195203,
+      "git_sha256": "610fcc5eb36165e3fcecfe138419c62b1f3e42fd32c59cad8e7d63a90d380393",
+      "working": true,
+      "raw_size": 200386,
+      "raw_sha256": "0fe613299ed2e720c43d0799fe6e95205f91979f740f5d7d3881e926bba15983"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "git_size": 7851,
+      "git_sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+      "working": true,
+      "raw_size": 8078,
+      "raw_sha256": "6c21184ed46db90ce992a74fc2699f1356210d474aa77f152c837a983de2a676"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "git_size": 44941,
+      "git_sha256": "6c083cca3e89d78f3970f5f69cf4d865115a5abaaf50a5cb2edda4ba2ea076ff",
+      "working": true,
+      "raw_size": 44941,
+      "raw_sha256": "6c083cca3e89d78f3970f5f69cf4d865115a5abaaf50a5cb2edda4ba2ea076ff"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "git_size": 8348,
+      "git_sha256": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666",
+      "working": true,
+      "raw_size": 8348,
+      "raw_sha256": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "crates/game_web/src/browser.rs",
+      "git_size": 39690,
+      "git_sha256": "99670ca781c1df5c21059c45bb5fe40ff7da540bb57862ac08c78e3e44e78156",
+      "working": true,
+      "raw_size": 40689,
+      "raw_sha256": "ee2f680c6200ad37df54c6938f2ca224a5b54da28da1b16d40a88d6d097239ff"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "apps/game/src/main.ts",
+      "git_size": 88855,
+      "git_sha256": "f6138b2922a9563d031420c602995d45b49ca423d09ca808c3c4d39fde8f30bc",
+      "working": true,
+      "raw_size": 91537,
+      "raw_sha256": "fa388baae1f77c9f41bae8e1452e61806486631a7dc8aa76b51352f4fa37d91e"
+    },
+    {
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "path": "apps/game/src/audio.ts",
+      "git_size": 36343,
+      "git_sha256": "8b64895bd84c0fffd602e4084bfc0aff23c777b82515354fd5b8aca74ebead09",
+      "working": true,
+      "raw_size": 37494,
+      "raw_sha256": "3e581b18138b5aff73bd265050b6f5bc24f91ac35650fd3af350044a8c73cd01"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/co_op.rs",
+      "git_size": 48100,
+      "git_sha256": "9daf1e934e4363a4069c40e8a0ced1e3b30f624d1d58fcad3c5f10d428a41a58",
+      "working": false
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "git_size": 33066,
+      "git_sha256": "64e901fd286d51ef8868c7e13c261e28d3ca254fa3dadfcc3afd43fa77aaf806",
+      "working": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 3810,
+      "sha256": "0734be4e65e7d737c4929e05eef5d4ac53651ce389f67a7e80c6f9b8429f4489"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 1221,
+      "sha256": "66e9473224132b87afa3818deace7ecfc893672d86169eea6c47582bc737ce96"
+    },
+    {
+      "path": "baseline-failure.log",
+      "bytes": 2062,
+      "sha256": "e92be3ba37030aa5603850ab39e3e6f7bcc41262326f9618554650e189a65390"
+    },
+    {
+      "path": "focused-candidate.log",
+      "bytes": 851,
+      "sha256": "d08ab11dbf58c2cbd4fb5a5a9d02c1b8cf8179669abf093e7c25c4681951718a"
+    },
+    {
+      "path": "focused-final.log",
+      "bytes": 832,
+      "sha256": "94a98af9227d6f49ef870f50b555b5646be5bbe8934eae9c8cd94086595011d7"
+    },
+    {
+      "path": "co-op-final.log",
+      "bytes": 12015,
+      "sha256": "cbbdbe550d72e86aa5fd493c9e49d256ce2c865590f8c855623d2ded1cd97217"
+    },
+    {
+      "path": "clippy-final.log",
+      "bytes": 191,
+      "sha256": "e12a31a861eeafe686a4fdc626ea4574853038a26423fb1da4b8c1f052efcdf0"
+    },
+    {
+      "path": "check-observations.json",
+      "bytes": 283,
+      "sha256": "38f2752c90e04a8aa69ccb7c6dab7e89ed238073eac6e3216ff428f22cf2f3bb"
+    },
+    {
+      "path": "source-diff.patch",
+      "bytes": 8074,
+      "sha256": "3fccadaa8437d87e9275241dd4fdd18f0f9a3e8aca9b5de2e30427c17eadf85d"
+    }
+  ]
+}

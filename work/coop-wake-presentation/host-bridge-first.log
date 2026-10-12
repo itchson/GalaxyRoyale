@@ -1,0 +1,21 @@
+   Compiling engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_web)
+warning: unused import: `Profile`
+ --> crates\game_web\src\co_op_bridge_wake_tests.rs:3:17
+  |
+3 | use game_core::{Profile, co_op::PROTOCOL};
+  |                 ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `game_web` (lib test) generated 1 warning (run `cargo fix --lib -p game_web --tests` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 16.76s
+     Running unittests src\lib.rs (target\debug\deps\game_web-c9f299337784de44.exe)
+
+running 1 test
+actual_host_bridge_wake_points=17 actual_value_bytes=2014
+test co_op_bridge::wake_tests::actual_host_wake_operation_is_frozen_non_draining_and_has_strict_shape ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 302 filtered out; finished in 0.79s
+

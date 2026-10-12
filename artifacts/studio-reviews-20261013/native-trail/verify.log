@@ -1,0 +1,64 @@
+{
+  "commit": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "base": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "scope": "Independent frozen source, raw provenance and structured fixture/IEEE-f32 inspection only; no native/Node/browser/RTC rerun, listener, build or performance execution",
+  "verified_author_raw_files": 52,
+  "verified_fixtures": 22,
+  "fixture_compact_bytes": {
+    "actual-host-batch-response": 4089,
+    "actual-host-header": 898,
+    "actual-host-page": 2014,
+    "empty-header": 9658,
+    "empty-page": 82,
+    "expired-header": 5999,
+    "expired-page": 84,
+    "initial-header": 6027,
+    "initial-page": 765,
+    "legacy-header": 6004,
+    "maximum-header": 49351,
+    "maximum-native-stage": 49389,
+    "maximum-native-wake": 18452,
+    "maximum-page": 18401,
+    "maximum-transport-body": 18495,
+    "maximum-transport-publication": 49452,
+    "raw-life-round-down": 756,
+    "raw-life-short-valid": 750,
+    "raw-life-underflow": 752,
+    "scalar-stress-native-wake": 21805,
+    "scalar-stress-page": 21745,
+    "scalar-stress-transport-body": 21839
+  },
+  "configured_counts": {
+    "pilots": 8,
+    "owner_bearing_shots": 180,
+    "nova_records": 32,
+    "wake_points": 192,
+    "per_member_points": 24
+  },
+  "raw_float_fixture_behavior_verified": true,
+  "author_recorded_workspace": {
+    "passed": 928,
+    "failed": 0,
+    "ignored": 19,
+    "result_lines": 8
+  },
+  "actual_whole_edge_limit_preserved": {
+    "rows": 99,
+    "out_of_bound_asteroids": 17,
+    "first": {
+      "id": "000000010000004b",
+      "kind": "asteroid",
+      "position": [
+        1000036.94,
+        -229.91548
+      ],
+      "previous": [
+        1000036.94,
+        -229.80978
+      ]
+    },
+    "recorded_error": "invalid_entity",
+    "isolated_final_halo_fixture": true
+  },
+  "verdict": "No remaining source blocker for bounded native trail integration and matching browser implementation; actual browser/RTC/visual/performance and whole-edge replication gates remain open"
+}

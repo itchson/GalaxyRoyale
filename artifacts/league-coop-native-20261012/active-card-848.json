@@ -1,0 +1,55 @@
+{
+  "card": {
+    "height": 412,
+    "width": 300,
+    "x": 274,
+    "y": 34
+  },
+  "content": {
+    "clientHeight": 322,
+    "height": 321.6000061035156,
+    "scrollHeight": 322
+  },
+  "visible": [
+    {
+      "fullyVisible": true,
+      "height": 14.850000381469728,
+      "kind": "P"
+    },
+    {
+      "fullyVisible": true,
+      "height": 29.700000762939453,
+      "kind": "P"
+    },
+    {
+      "fullyVisible": true,
+      "height": 14.850000381469728,
+      "kind": "P"
+    },
+    {
+      "fullyVisible": true,
+      "height": 44,
+      "kind": "INPUT"
+    },
+    {
+      "fullyVisible": true,
+      "height": 44,
+      "kind": "BUTTON"
+    },
+    {
+      "fullyVisible": true,
+      "height": 44,
+      "kind": "BUTTON"
+    },
+    {
+      "fullyVisible": true,
+      "height": 44,
+      "kind": "BUTTON"
+    },
+    {
+      "fullyVisible": false,
+      "height": 59.400001525878906,
+      "kind": "P"
+    }
+  ]
+}

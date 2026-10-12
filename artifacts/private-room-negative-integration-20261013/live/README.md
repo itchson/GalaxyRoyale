@@ -1,0 +1,9 @@
+# Actual private-room negative cases
+
+Root executed Initialize → one room case → Dispose → page reload with both full native client frames foreground at 1280×1000. The exact e97c29c helper/service preparation used normal runtime compiled332ddd5; no runtime source changed, fake native reply or profile import was used. Six successful final captures cover Decline, Replace and Lock on WebGPU and WebGL2. Seven attempts produced21immutable reports and7screenshots; the first lock failure is retained, with successful terminal disposal.
+
+Decline admitted no guest and created no peer. Replacement kept the approved guest receiving strictly later complete native commits, then rejected the previous code and canceled a pending request on a second replacement. Lock canceled pending admission and refused locked lookup; unlock admitted a guest, then lock/unlock retained that approved peer with later commits. Every successful final report has equal created/closed peer counts, zero requests/timers, solo/disposed clients and unchanged normalized local/persisted Profile digests. These are actual two-client loopback observations, not eight-client or Internet acceptance.
+
+The first WebGPU lock attempt failed before peer creation, consistent with the unchanged two-host-starts-per-minute caller limit. Its sanitized generic failure does not prove the exact service error. Root retained it, allowed the natural admission window to pass, then executed a fresh successful lock case. No service limits were weakened or counters reset. Temporary clients were disposed and closed and the finite owned test listener stopped before restoring the one normal preview.
+
+Current native ability/trail presentation, eight-player full rooms, forced TURN, failed ICE, pagehide/background, exact boxed-world restoration, zero legacy migration writes, physical-device timing and shipped menu interaction remain separate gates.

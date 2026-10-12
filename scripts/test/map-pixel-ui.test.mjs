@@ -60,6 +60,9 @@ function fixture(scale = 1.375, flight = false, nested = {}) {
     getAttribute() {
       return null;
     }
+    matches() {
+      return false;
+    }
     contains(other) {
       return other === this;
     }

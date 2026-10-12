@@ -1,0 +1,16 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.19s
+     Running unittests src\lib.rs (target\debug\deps\game_web-c9f299337784de44.exe)
+
+running 2 tests
+test dock_art::tests::actual_hub_gap_and_live_shadow_projection_survive_fractional_zoom_and_rebase ... ok
+test dock_art::tests::actual_hub_gap_blocks_live_shadow_rays_without_adding_receiver_or_quad ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 299 filtered out; finished in 0.77s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-d5d06e267cbae6bd.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

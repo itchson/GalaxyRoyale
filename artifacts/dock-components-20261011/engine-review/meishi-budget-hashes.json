@@ -1,0 +1,15 @@
+{
+  "domain": "Raw local supplemental evidence; original review freeze unchanged",
+  "files": [
+    {
+      "path": "MEISHI_BUDGET_NOTE.md",
+      "bytes": 2973,
+      "sha256": "7e6bdb88c59ab48c60253595636b1e05f01927933f3c062371af90fc0296c225"
+    },
+    {
+      "path": "meishi-budget-source-pins.json",
+      "bytes": 1089,
+      "sha256": "9dd830b9b241ffc3914377bf6870926bcb8500ef27acd8ec80db6e3bcc8fa001"
+    }
+  ]
+}

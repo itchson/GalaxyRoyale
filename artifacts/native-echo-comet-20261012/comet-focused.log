@@ -1,0 +1,20 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.10s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 12 tests
+test shooting_star::tests::seeded_cycle_origin_heading_and_speed_match_original_exactly ... ok
+test shooting_star::tests::batches_cross_128_without_changing_material_or_group_accounting ... ok
+test shooting_star::tests::faded_zero_alpha_cells_still_consume_the_atomic_submitted_budget ... ok
+test shooting_star::tests::relative_tail_is_bounded_emissive_and_fractional_head_keeps_all_cells ... ok
+test shooting_star::tests::reduced_density_removes_a_stable_tail_half_and_preserves_every_head_packet ... ok
+test shooting_star::tests::exact_shared_budget_preflight_has_no_partial_head_or_orphan_tail ... ok
+test shooting_star::tests::cached_overhead_head_has_facet_crater_rim_detail_and_no_new_lod ... ok
+test shooting_star::tests::reduced_motion_freezes_head_coma_particles_and_colors ... ok
+test shooting_star::tests::seeded_cycle_reset_is_invisible_and_keeps_fade_submissions_bounded ... ok
+test shooting_star::tests::camera_parallax_is_encoded_once_and_zoom_only_changes_projection ... ok
+test shooting_star::tests::visible_tail_stays_continuous_across_absolute_clock_wrap ... ok
+test shooting_star::tests::invalid_distant_and_wrap_cases_add_nothing_or_stay_finite ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 442 filtered out; finished in 0.00s
+

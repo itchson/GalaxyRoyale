@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "purpose": "isolated native OfflineAudioContext review; not shipped",
+  "typescript": "5.9.3",
+  "lockfile_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+  "baseline_shared_state": "Historical AudioEngine uses the current shared state mixer, matching the declared engine-only comparison; this is not a historical score snapshot.",
+  "inputs": {
+    "apps/game/src/title-theme.ts": {
+      "bytes": 2917,
+      "sha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135",
+      "module": "title-theme.js",
+      "module_sha256": "0e41b37685d7dfb445216cd1068f1851b2f933c1a5b7d7790543896e154277d3"
+    },
+    "apps/game/src/audio.ts": {
+      "bytes": 51881,
+      "sha256": "96160ba46e050f3bc334adac9f874f6f318724af04388aa9345e850a103c4156",
+      "module": "audio.js",
+      "module_sha256": "f46aab8158ceced1114729f9a0ec8d885bdacf72cd1ea109eec7a7795d1e38d0"
+    },
+    "apps/game/src/audio-state.ts": {
+      "bytes": 11471,
+      "sha256": "c3c9a3c5b34b1001e4d1dd1de531e70dbcd945826b31022e0619187d0ec1b76f",
+      "module": "audio-state.js",
+      "module_sha256": "c96642a0315e70dad18d051913918249985af60ef37b429f41253043edfec6e0"
+    },
+    "git:3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d:apps/game/src/audio.ts": {
+      "bytes": 28517,
+      "sha256": "6e06ef04f40367ab8519adfd445258b0c284d6b1c7ac3d955ea212962c629f64",
+      "module": "baseline-audio.js",
+      "module_sha256": "05fdaae0e6f4d87f331a14741ffa240c9c2a4dce304c212ca716f88432e698fb"
+    },
+    "apps/game/src/music-clock.ts": {
+      "bytes": 4084,
+      "sha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9",
+      "module": "music-clock.js",
+      "module_sha256": "5b9705a20048df7d1221e4b2feca5ca8f675f3248c30d4743b9f8af9242ed9de"
+    },
+    "apps/game/src/music-score.ts": {
+      "bytes": 807,
+      "sha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683",
+      "module": "music-score.js",
+      "module_sha256": "d7d7c522230bdc474e489d1b8ae5d98c4f2140e6b8e4922aa0e1b8466c9bb75b"
+    }
+  },
+  "helpers": {
+    "config.mjs": "f328b49cd098f8fce6dc80290eeda111cf2eba098b3e8c2f633537546aa046a0",
+    "prepare.mjs": "6854857ecb400fcf65b251559a27acab34184f90921bd6e518dbe80905ae062c",
+    "server.mjs": "901c97ac46a2153442648255d51765e0f033d1dd66da00349b8fe1756623cceb",
+    "review.js": "85149988415a1e2a6f93284171c7b34555e13e22a6ba4b1e3337db18ceb523f7",
+    "metrics.js": "6b6b69a100fd6bbe02e756dc7c4beb62d46e7108dd2f95023892498e2604506b",
+    "index.html": "f84adde93d6e5dcc37ac580871723114ea3f7c4c51cdcc659a136d53119c3ee7"
+  }
+}

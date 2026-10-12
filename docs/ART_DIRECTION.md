@@ -1,5 +1,29 @@
 # Galaxy Royale art direction
 
+## Current league and deep-space direction
+
+The approved futuristic sports-league logo is the shared interface reference:
+compact beveled metal, intentional cut corners, restrained illuminated accents
+and crisp high-detail cell clusters. Toolbar icons, card trim and menu controls
+should share those materials without repeating a heavy frame around every item.
+Preserve the small flight HUD and clear action hierarchy.
+
+Deep-space forms have a different silhouette language: irregular gas density,
+unequal open dust lanes, asymmetric stellar ejecta and curved planetary shading.
+Avoid decorative badges, closed outline rings and repeated geometric cavities
+that make natural objects look like interface symbols. Keep their luminance
+subordinate to RAICHO, threats and projectiles. Fine source cells retain their
+fractional world transforms, independent parallax and bounded animation; reduced
+detail preserves the recognizable form rather than filling its dark lanes.
+
+Acceptance requires source-matched native contracts and actual browser views at
+recorded seed, camera, zoom and renderer. Software packet previews are useful
+authoring evidence, but do not certify GPU lighting or motion. The October 12
+WebGL2 inspection reproduced a thin ring-like cosmic remnant at seed 871238449,
+camera [-35332.8203, 22642.1445], zoom 1.6. Its open-ejecta refinement is tracked
+separately from the completed comet clock correction; all-seed and physical
+performance approval remain pending.
+
 The direction reference in `artifacts/concepts/galaxy-royale-direction.png` was generated with the session image tool. Runtime ships, asteroids and dock use the separately generated sprite sheet, converted into editable local pixel cells in `assets/pixels/atlas.json`. Rust expands those indexed cells into PixelBodies, with individual quad rendering, object transforms, localized damage and cell animation.
 
 The visual palette uses near-black navy, an ivory and cyan player hull, cyan dock guidance, magenta Dart threats, amber Bastion armor and jade Coil bodies. Offensive points are coral, defensive cyan and passive gold. Different silhouettes and bright enemy shots give encounters readable roles against the subdued space background. North-facing source ships align with movement through the actor heading plus a quarter-turn transform.
@@ -72,3 +96,11 @@ The actual design review with gameplay agreed on telegraph, attack and recovery 
 The deepest Coil composition is 5,633 head cells plus nineteen 400-cell modules: 13,233 quads and 45 transforms, fitting one 128-transform batch before other scene objects. This is a per-boss budget; total gameplay cost also includes other enemies, bullets, particles, background, lights and UI. Whole-atlas native tests verify normalized silhouette differences, every role's occupied cells, local core bounds, damage holes, exact positions under nested nonuniform shear, dimensions 1 and 128, and the 16-part engine ceiling.
 
 Reproduce the art with `python assets/pixels/boss-source.py` and proofs with `cargo test -p engine_core` and `cargo run --release -p engine_core --example boss_rig_proof`. The measured development-workstation report is `assets/pixels/boss-native-proof.json`: 500 warmed samples per scene. The deepest Coil's native CPU extraction measured about 0.205 ms median and 0.209 ms p95 in that run. Those figures exclude simulation, GPU work, browser/WASM overhead and physical phones. The contact sheet has been visually reviewed as development evidence; integrated browser and device acceptance remain separate.
+
+## Approved Kikai detail benchmark
+
+The user approved the generated DORA expression reference in `assets/concepts/kikai/dora-reference-expression-sheet.png` as the project's desired detail and quality. Use coherent color clusters, fine mechanical planes, readable silhouettes and restrained localized highlights, with independently authored animation parts. `KIKAI_ART.md` declares the reference-to-cell conversion and actual 96×128 native portrait proof. Preserve those occupied cells at fractional scale instead of silently replacing them with a coarse silhouette. Final raster coverage still depends on viewport resolution.
+
+PAN uses green, RENKO red and HUGO blue for main-manufacturer hair, home accents and starter hull/jet themes. Crystal horns identify the independent sub-manufacturer. APR-1337 is PAN with RENKO horns: green long hair and red crystals. Arena sponsor branding is independent of a competitor's manufacturers. Corporation colors do not replace the offensive/defensive/passive loot readability rules.
+
+Global asset refinement is recorded under task-ef6ed92a; the native portrait does not imply every historical asset has already reached this benchmark. Detailed shooting-star head and coherent bounded emissive particles are task-72663b49. Inspect actual runtime size, parallax, both zoom limits and low-density presentation before accepting each asset.

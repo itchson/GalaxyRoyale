@@ -2,18 +2,41 @@
 pub mod abilities;
 mod audio_runtime;
 pub use audio_runtime::AudioHud;
+mod asteroid_art;
+#[cfg(test)]
+mod asteroid_diversity_tests;
 mod asteroid_zones;
 mod biome_enemies;
 mod boss_assets;
 pub mod bosses;
 pub mod campaign;
+mod chunk_streaming;
+pub mod co_op;
+mod co_op_control;
+mod co_op_fx;
+mod co_op_loadout;
+pub mod co_op_publish;
+pub mod co_op_replica;
+#[cfg(test)]
+mod co_op_tests;
+pub mod co_op_wake_fx;
+mod co_op_world_bounds;
+#[cfg(test)]
+mod component_tests;
+pub mod components;
 mod dock_facilities;
 mod isotope_scar;
 mod navigation;
 pub use navigation::{NavigationHud, NavigationTarget};
+mod material_scene;
 mod pixel_assets;
+mod player_presentation;
 mod radiation_enemies;
+#[cfg(test)]
+mod raicho_draw_tests;
+mod raicho_fine;
 mod segmented;
+mod shooting_star;
 pub mod universe_map;
 pub use campaign::RunSummary;
 mod campaign_runtime;
@@ -26,13 +49,20 @@ mod diagnostic_death_tests;
 mod diagnostic_warp_tests;
 #[cfg(test)]
 mod held_thrust_tests;
+mod hub_shadows;
+pub mod identity;
 #[cfg(test)]
 mod live_overlay_tests;
 #[cfg(test)]
 mod particle_tests;
+mod shield_progression;
+pub use shield_progression::{RaichoAffinityHud, RaichoAffinitySource};
 mod ship_progression;
 #[cfg(test)]
 mod ship_progression_tests;
+#[cfg(test)]
+mod starter_ability_tests;
+mod training;
 #[cfg(test)]
 mod weapon_cadence_tests;
 use bosses::BossEncounter;
@@ -62,8 +92,7 @@ const ACTOR_MATERIAL: PixelMaterial = PixelMaterial {
 /// Practical global-f32 extent until chunk-local simulation is implemented.
 const WORLD_LIMIT: f32 = 1_000_000.0;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
-#[serde(default)]
+#[derive(Clone, Debug, Serialize)]
 pub struct Profile {
     pub schema_version: u32,
     pub revision: u64,
@@ -80,12 +109,14 @@ pub struct Profile {
     pub quests: Vec<QuestProgress>,
     pub relics: Vec<String>,
     pub campaign: campaign::CampaignProgress,
+    pub identity: Option<identity::KikaiIdentity>,
+    pub onboarding: Option<identity::OnboardingProgress>,
 }
 
 impl Default for Profile {
     fn default() -> Self {
         Self {
-            schema_version: 4,
+            schema_version: components::SCHEMA_VERSION,
             revision: 0,
             seed: 0x4752_4f59,
             currency: [0; 3],
@@ -100,6 +131,8 @@ impl Default for Profile {
             quests: Vec::new(),
             relics: Vec::new(),
             campaign: campaign::CampaignProgress::default(),
+            identity: None,
+            onboarding: None,
         }
     }
 }
@@ -165,13 +198,18 @@ pub struct Hud {
     pub stored_materials: u32,
     pub material_cargo: [u32; 5],
     pub material_stash: [u32; 5],
+    pub material_training_cargo: [u32; 3],
+    pub material_training_stash: [u32; 3],
     pub material_loss: [u32; 5],
     pub material_loss_reason: String,
     pub abilities: Vec<ship_progression::AbilityHud>,
+    pub components: Vec<components::ComponentHud>,
     pub loadout: [Option<ship_progression::EquippedAbilityHud>; 3],
     pub ship_stats: ShipStatsHud,
     pub audio: AudioHud,
     pub navigation: NavigationHud,
+    pub identity: Option<identity::IdentityHud>,
+    pub onboarding: Option<identity::OnboardingHud>,
 }
 
 /// Current effective chassis, XP, hardware and equipped starter statistics.
@@ -185,6 +223,8 @@ pub struct ShipStatsHud {
     pub fire_rate: f32,
     pub hull_regen: f32,
     pub shield_regen: f32,
+    pub shield_recharge_unlocked: bool,
+    pub affinity: Option<RaichoAffinityHud>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -334,6 +374,7 @@ struct Bullet {
 struct Loot {
     category: usize,
     material_tier: u8,
+    training_material: Option<u8>,
     amount: u32,
     life: f32,
 }
@@ -341,6 +382,7 @@ struct Loot {
 struct AsteroidBirth {
     source: AsteroidSource,
     material_tier: u8,
+    variety: u8,
     orbit: Option<asteroid_zones::Orbit>,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -355,6 +397,7 @@ impl AsteroidBirth {
             return Self {
                 source: AsteroidSource::HavenBelt,
                 material_tier: 1,
+                variety: 0,
                 orbit: Some(asteroid_zones::Orbit::at(seed, position, Vec2::ZERO)),
             };
         }
@@ -368,6 +411,7 @@ impl AsteroidBirth {
                 return Self {
                     source: AsteroidSource::SiteBelt(site.grid),
                     material_tier: belt.material_tier,
+                    variety: 0,
                     orbit: Some(asteroid_zones::Orbit::at(
                         seed,
                         position,
@@ -379,6 +423,7 @@ impl AsteroidBirth {
         Self {
             source: AsteroidSource::Outer,
             material_tier: danger(position).clamp(1, 5) as u8,
+            variety: 0,
             orbit: None,
         }
     }
@@ -390,6 +435,7 @@ enum ParticleStyle {
     Exhaust,
     Trail,
 }
+const DEBRIS_DRAG: f32 = 1.6;
 struct Particle {
     position: Vec2,
     origin: Vec2,
@@ -410,6 +456,7 @@ struct StressObject;
 struct Stats {
     hull: f32,
     shield: f32,
+    shield_regeneration: f32,
     speed: f32,
     acceleration: f32,
     damage: f32,
@@ -429,11 +476,8 @@ impl Stats {
         let ranks = ship_progression::hardware_ranks(p);
         let mut stats = Self {
             hull: 100.0 + 15.0 * ranks[2] as f32 + p.relics.len().min(20) as f32,
-            shield: if ranks[3] == 0 {
-                0.0
-            } else {
-                20.0 + 10.0 * (ranks[3] - 1) as f32
-            },
+            shield: shield_progression::capacity(p),
+            shield_regeneration: shield_progression::recharge_rate(p),
             speed: if scout { 100.0 } else { 180.0 }
                 * experience_drive
                 * (1.0 + 0.04 * ranks[5] as f32),
@@ -456,7 +500,6 @@ impl Stats {
             6 => stats.hull += 10.0,
             9 => {
                 stats.hull += 65.0;
-                stats.shield += 40.0;
                 stats.speed *= 1.15;
                 stats.damage *= 1.25;
                 stats.fire_rate *= 1.2;
@@ -465,13 +508,11 @@ impl Stats {
             _ => {}
         }
         stats.damage *= 1.0 + 0.1 * ship_progression::equipped_rank(p, 0) as f32;
-        let guard = ship_progression::equipped_rank(p, 1);
-        if guard > 0 {
-            stats.shield += 20.0 + 8.0 * guard.saturating_sub(1) as f32;
-        }
         let flux = 1.0 + 0.04 * ship_progression::equipped_rank(p, 2) as f32;
-        stats.speed *= flux;
-        stats.acceleration *= flux;
+        let drive = flux * shield_progression::drive_multiplier(p);
+        stats.speed *= drive;
+        stats.acceleration *= drive;
+        stats.damage *= shield_progression::weapon_multiplier(p);
         stats
     }
 }
@@ -489,7 +530,7 @@ const UPGRADES: [(&str, &str, usize, &str); 9] = [
         "shield",
         "Aegis Capacitors",
         1,
-        "20 shield at rank 1, then +10; recharges after 4s",
+        "+10 shield per rank; rank 1 unlocks recharge after 4s; rank and RAICHO level improve its rate",
     ),
     (
         "regeneration",
@@ -525,6 +566,9 @@ const UPGRADES: [(&str, &str, usize, &str); 9] = [
 
 pub struct Game {
     world: World,
+    co_op: Option<co_op::Session>,
+    publication: Option<co_op_publish::Publication>,
+    publication_generation: u32,
     player: Entity,
     profile: Profile,
     camera: Vec2,
@@ -554,6 +598,8 @@ pub struct Game {
     trail_timer: f32,
     events: Vec<GameEvent>,
     chunks: HashMap<(i32, i32), Vec<Entity>>,
+    // Only unfinished co-op candidates; bounded by retained interest chunks.
+    co_op_chunk_progress: HashMap<(i32, i32), u8>,
     wake: Vec<(Vec2, f32)>,
     dock_body: PixelBody,
     viewport: Vec2,
@@ -566,6 +612,9 @@ pub struct Game {
     arena: Option<ArenaEncounter>,
     run: Option<RunSummary>,
     boss_qa_scene: bool,
+    // Transient progression isolation; unlike boss_qa_scene, this never selects AI.
+    diagnostic_scene: bool,
+    material_scene: bool,
     material_loss: [u32; 5],
     material_loss_reason: String,
 }
@@ -573,7 +622,10 @@ pub struct Game {
 impl Game {
     pub fn new(mut profile: Profile) -> Self {
         let legacy = profile.schema_version < 4;
-        let migrated = profile.schema_version != 4;
+        let migrated = profile.schema_version != components::SCHEMA_VERSION;
+        if profile.schema_version < components::SCHEMA_VERSION {
+            profile.campaign.components = [0; components::COUNT];
+        }
         if legacy {
             for rank in &mut profile.ranks {
                 *rank = (*rank).min(5);
@@ -589,6 +641,7 @@ impl Game {
         if profile.seed == 0 {
             profile.seed = 0x4752_4f59;
         }
+        let identity_changed = identity::sanitize(&mut profile);
         let archive_changed = sanitize_archive(&mut profile);
         let bosses_changed = bosses::sanitize_progress(&mut profile);
         let mut campaign_changed = profile.campaign.sanitize();
@@ -603,13 +656,23 @@ impl Game {
             campaign_changed = true;
         }
         let (material_loss, inventory_changed) = ship_progression::initialize(&mut profile, legacy);
-        profile.schema_version = 4;
-        if archive_changed || campaign_changed || bosses_changed || inventory_changed || migrated {
+        let before_training = profile.onboarding.clone();
+        training::sanitize_progress(&mut profile);
+        let training_changed = before_training != profile.onboarding;
+        profile.schema_version = components::SCHEMA_VERSION;
+        if archive_changed
+            || campaign_changed
+            || bosses_changed
+            || inventory_changed
+            || migrated
+            || identity_changed
+            || training_changed
+        {
             profile.revision = profile.revision.saturating_add(1);
         }
         let stats = Stats::from_profile(&profile);
         let mut world = World::new();
-        let ship = campaign::player_body(profile.campaign.selected_ship);
+        let ship = identity::player_body(&profile);
         let player_scale = campaign::player_scale(profile.campaign.selected_ship);
         let player = world.spawn((
             Motion::new(Vec2::ZERO, Vec2::ZERO, -FRAC_PI_2),
@@ -632,6 +695,9 @@ impl Game {
         let nearby_sites = regions::sites_near(profile.seed, Vec2::ZERO);
         let mut game = Self {
             world,
+            co_op: None,
+            publication: None,
+            publication_generation: 0,
             player,
             profile,
             camera: Vec2::ZERO,
@@ -661,6 +727,7 @@ impl Game {
             trail_timer: 0.0,
             events: Vec::new(),
             chunks: HashMap::new(),
+            co_op_chunk_progress: HashMap::new(),
             wake: Vec::new(),
             dock_body: dock_body(),
             viewport: Vec2::new(800.0, 360.0),
@@ -673,6 +740,8 @@ impl Game {
             arena: None,
             run: None,
             boss_qa_scene: false,
+            diagnostic_scene: false,
+            material_scene: false,
             material_loss,
             material_loss_reason: if ship_progression::total(material_loss) > 0 {
                 "reload".into()
@@ -687,7 +756,9 @@ impl Game {
     }
 
     pub fn profile(&self) -> &Profile {
-        &self.profile
+        self.co_op
+            .as_ref()
+            .map_or(&self.profile, |session| session.solo.profile())
     }
     /// Initial pointer presses may open a Haven service without issuing a course.
     /// IDs: 0 upgrades, 1 hangar, 2 journal, 3 campaign.
@@ -704,6 +775,7 @@ impl Game {
     /// A live UI overlay cancels click navigation without freezing the universe
     /// or removing the ship's existing momentum and normal thrust decay.
     pub fn cancel_course(&mut self) {
+        self.cancel_co_op_course();
         self.destination = None;
     }
 
@@ -721,6 +793,9 @@ impl Game {
     /// The renderer uses the same world-space interpolation as actor extraction.
     /// Up to four recent effects, two nearest projectiles, engine and beacon.
     pub fn light_sources(&self, alpha: f32) -> Vec<LightSource> {
+        if self.material_scene {
+            return self.material_scene_lights(alpha);
+        }
         let alpha = if alpha.is_finite() {
             alpha.clamp(0.0, 1.0)
         } else {
@@ -794,7 +869,7 @@ impl Game {
                 sources.push(LightSource {
                     position: (sum / count as f32).to_array(),
                     radius: 64.0,
-                    color: [0.2, 0.78, 1.0],
+                    color: identity::exhaust_light(&self.profile),
                     intensity: 0.15 + self.throttle.clamp(0.0, 1.0) * 0.75,
                 });
             }
@@ -811,12 +886,7 @@ impl Game {
                     .total_cmp(&b.distance_squared(camera))
             });
         if let Some(position) = beacon {
-            sources.push(LightSource {
-                position: position.to_array(),
-                radius: 120.0,
-                color: [0.2, 0.85, 0.92],
-                intensity: 0.48 + (self.cosmetic_time() * 1.2).sin() * 0.08,
-            });
+            sources.push(hub_shadows::beacon_light(position, self.cosmetic_time()));
         }
         sources.truncate(8);
         sources
@@ -921,6 +991,14 @@ impl Game {
         }
     }
 
+    fn progression_enabled(&self) -> bool {
+        self.co_op.is_none()
+            && !self.diagnostic_scene
+            && !self.boss_qa_scene
+            && !self.stress_mode
+            && !self.arena.is_some_and(|a| a.diagnostic)
+    }
+
     fn changed(&mut self) {
         self.profile.revision = self.profile.revision.saturating_add(1);
     }
@@ -937,8 +1015,10 @@ impl Game {
                 0.55 + intensity * 0.5,
                 0.18,
             ),
-            "shield" | "ability-nova" => {
-                self.transient_light(position, 95.0, [0.22, 0.56, 1.0], 1.1, 0.32)
+            "shield" => self.transient_light(position, 95.0, [0.22, 0.56, 1.0], 1.1, 0.32),
+            "ability-nova" => {
+                let (light, life) = co_op_fx::lights(position)[1].clone();
+                self.transient_light(position, light.radius, light.color, light.intensity, life);
             }
             "explosion" | "death" => self.transient_light(
                 position,
@@ -1009,10 +1089,12 @@ impl Game {
     }
 
     fn update_exploration(&mut self) {
-        if self.boss_qa_scene {
+        // Canonical sanctuary geometry still follows live fixture movement;
+        // only persistent exploration/mission facts are suppressed.
+        self.refresh_sites();
+        if !self.progression_enabled() {
             return;
         }
-        self.refresh_sites();
         let mut changed = false;
         if let Some(id) = self.current_site().map(|site| site.id.clone())
             && self.profile.discoveries.len() < MAX_ARCHIVE
@@ -1021,6 +1103,23 @@ impl Game {
             self.profile.discoveries.push(id);
             changed = true;
             self.event("discovery", self.position(), 0.65);
+        }
+        // Champion contacts use the same real 320-unit approach as their HUD.
+        // Store the canonical site ID, so visiting does not create extra save keys.
+        for champion in &campaign::CHAMPIONS {
+            if let Some(site) = self
+                .nearby_sites
+                .iter()
+                .find(|site| site.grid == champion.grid)
+                && Vec2::from_array(site.position).distance_squared(self.position())
+                    <= 320.0 * 320.0
+                && self.profile.discoveries.len() < MAX_ARCHIVE
+                && !self.profile.discoveries.contains(&site.id)
+            {
+                self.profile.discoveries.push(site.id.clone());
+                changed = true;
+                self.event("discovery", self.position(), 0.65);
+            }
         }
         if self.position().length_squared() <= DOCK_RADIUS * DOCK_RADIUS {
             for quest in &mut self.profile.quests {
@@ -1037,7 +1136,7 @@ impl Game {
 
     /// Accept an offered mission or claim its once-only reward at the source.
     pub fn interact_site(&mut self) -> Result<(), String> {
-        if self.boss_qa_scene {
+        if !self.progression_enabled() {
             return Err("Site rewards are disabled in isolated QA scenes.".into());
         }
         self.update_exploration();
@@ -1109,7 +1208,7 @@ impl Game {
     }
 
     pub fn tick(&mut self, input: &InputFrame, dt: f32) {
-        if self.paused || !dt.is_finite() || dt <= 0.0 {
+        if self.co_op.is_some() || self.paused || !dt.is_finite() || dt <= 0.0 {
             return;
         }
         // A forced QA death must resolve before regeneration, dock repair or
@@ -1119,6 +1218,10 @@ impl Game {
         }
         let dt = dt.min(1.0 / 20.0);
         self.time += dt;
+        if self.material_scene {
+            self.tick_material_scene(input, dt);
+            return;
+        }
         for light in &mut self.transient_lights {
             light.life -= dt;
         }
@@ -1146,7 +1249,7 @@ impl Game {
         self.update_exploration();
         let safe = self.safe();
         let haven = position.length_squared() <= SAFE_RADIUS * SAFE_RADIUS;
-        if !self.diagnostic_boss_active() {
+        if self.progression_enabled() {
             self.track_run(dt);
         }
         if safe {
@@ -1165,7 +1268,7 @@ impl Game {
             actor.health = (actor.health + stats.regeneration * dt).min(stats.hull);
         }
         if self.since_damage >= 4.0 {
-            self.shield = (self.shield + stats.shield * 0.15 * dt).min(stats.shield);
+            self.shield = (self.shield + stats.shield_regeneration * dt).min(stats.shield);
         }
         if input.fire && !safe && self.fire_timer <= 0.0 {
             self.fire(stats);
@@ -1199,6 +1302,9 @@ impl Game {
         self.enforce_asteroid_shields(false);
         self.confine_player();
         self.update_pickups(position, dt);
+        if self.position().length_squared() > SAFE_RADIUS * SAFE_RADIUS {
+            self.onboarding_fact(identity::DEPARTED);
+        }
         if self.position().length_squared() <= SAFE_RADIUS * SAFE_RADIUS
             && self
                 .world
@@ -1215,6 +1321,7 @@ impl Game {
         }
         self.camera += (self.position() - self.camera) * (1.0 - (-5.0 * dt).exp());
         self.respawn_if_dead();
+        self.confine_world_geometry();
     }
 
     /// Preserve the same event, checkpoint and repair path for both an already
@@ -1238,102 +1345,14 @@ impl Game {
 
     fn control(&mut self, input: &InputFrame, dt: f32) {
         let stats = Stats::from_profile(&self.profile);
-        if let Some(point) = input.destination
-            && point
-                .iter()
-                .all(|v| v.is_finite() && v.abs() <= WORLD_LIMIT)
-        {
-            self.destination = Some(Vec2::from_array(point));
-        }
-        let mut motion = *self.world.get::<&Motion>(self.player).unwrap();
-        let aim = input
-            .aim
-            .filter(|point| {
-                input.fire
-                    && point
-                        .iter()
-                        .all(|v| v.is_finite() && v.abs() <= WORLD_LIMIT)
-            })
-            .map(|point| Vec2::from_array(point) - motion.position)
-            .filter(|delta| delta.length_squared() > 16.0);
-        let mut desired = Vec2::ZERO;
-        let joystick = input
-            .joystick
-            .map(Vec2::from_array)
-            .filter(|stick| stick.is_finite() && stick.abs().max_element() <= 4.0);
-        let held_thrust = input
-            .thrust
-            .filter(|point| {
-                point
-                    .iter()
-                    .all(|v| v.is_finite() && v.abs() <= WORLD_LIMIT)
-            })
-            .map(Vec2::from_array);
-        if let Some(vector) = joystick {
-            let stick = vector.clamp_length_max(1.0);
-            self.destination = None;
-            let power = ((stick.length() - 0.08) / 0.92).clamp(0.0, 1.0);
-            self.throttle += (power - self.throttle) * (1.0 - (-20.0 * dt).exp());
-            if power > 0.0 && aim.is_none() {
-                motion.heading = turn_toward(motion.heading, stick.y.atan2(stick.x), 4.0 * PI * dt);
-            }
-            let direction = if aim.is_some() {
-                // Desktop steering and cursor facing are independent while
-                // aiming. Mobile heading-fire retains the original controller.
-                if power > 0.0 {
-                    stick.normalize_or_zero()
-                } else {
-                    motion.velocity.normalize_or_zero()
-                }
-            } else {
-                forward(motion.heading)
-            };
-            desired = direction * stats.speed * self.throttle;
-        } else if let Some(target) = held_thrust {
-            self.destination = Some(target);
-            let delta = target - motion.position;
-            self.throttle = 1.0;
-            if aim.is_none() && delta.length_squared() > 16.0 {
-                motion.heading = turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
-            }
-            desired = forward(motion.heading) * stats.speed;
-        } else if let Some(target) = self.destination {
-            let delta = target - motion.position;
-            let distance = delta.length();
-            if distance < 4.0 && motion.velocity.length() < 15.0 {
-                self.destination = None;
-                self.throttle = 0.0;
-            } else if distance > 0.01 {
-                if aim.is_none() {
-                    motion.heading =
-                        turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
-                }
-                let speed = (2.0 * stats.acceleration * (distance - 2.0).max(0.0))
-                    .sqrt()
-                    .min(stats.speed);
-                desired = delta / distance * speed;
-                self.throttle = speed / stats.speed;
-            }
-        } else {
-            self.throttle = (self.throttle - dt / 0.15).max(0.0);
-            let direction = if aim.is_some() {
-                motion.velocity.normalize_or_zero()
-            } else {
-                forward(motion.heading)
-            };
-            desired = direction * stats.speed * self.throttle;
-        }
-        if let Some(delta) = aim {
-            motion.heading = turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
-            if joystick.is_none() && held_thrust.is_some() {
-                desired = forward(motion.heading) * stats.speed;
-            }
-        }
-        motion.velocity += (desired - motion.velocity).clamp_length_max(stats.acceleration * dt);
-        motion.velocity = motion.velocity.clamp_length_max(stats.speed);
-        if desired.length_squared() < 0.01 {
-            motion.velocity *= (-3.0 * dt).exp();
-        }
+        let motion = co_op_control::control_motion(
+            *self.world.get::<&Motion>(self.player).unwrap(),
+            &mut self.throttle,
+            &mut self.destination,
+            input,
+            stats,
+            dt,
+        );
         *self.world.get::<&mut Motion>(self.player).unwrap() = motion;
         self.exhaust_timer -= dt;
         if self.throttle > 0.05 && self.exhaust_timer <= 0.0 {
@@ -1346,7 +1365,7 @@ impl Game {
                     transform.point(port),
                     -direction * (30.0 + 75.0 * self.throttle) + motion.velocity * 0.3,
                     0.28 + 0.14 * self.throttle,
-                    rgba(90, 230, 255, 230),
+                    identity::exhaust_color(&self.profile, 230),
                     1.3 + self.throttle * 0.6,
                     ParticleStyle::Exhaust,
                 );
@@ -1386,11 +1405,25 @@ impl Game {
         // Carry active-fire overshoot into the next period instead of rounding
         // every purchased cadence down to a fixed whole number of ticks.
         self.fire_timer += 1.0 / stats.fire_rate;
-        self.shot_count += 1;
-        self.ship_signature(motion, stats);
-        if primary_fired {
-            self.event("shot", motion.position, 0.6);
+        if !primary_fired {
+            return; // Capacity refusal neither counts a shot nor banks a bonus.
         }
+        self.shot_count += 1;
+        if ship_progression::equipped_rank(&self.profile, 0) > 0
+            && self.shot_count.is_multiple_of(5)
+        {
+            // Pulse Lens is the basic offense slot, separate from boss Echo.
+            // The shared projectile cap may refuse this bolt; it never replays.
+            self.spawn_bullet(
+                motion.position + dir * 21.0,
+                dir * 500.0 + motion.velocity * 0.25,
+                stats.damage * 1.5,
+                true,
+                1,
+            );
+        }
+        self.ship_signature(motion, stats);
+        self.event("shot", motion.position, 0.6);
         self.styled_particle(
             motion.position + dir * 21.0,
             dir * 10.0,
@@ -1452,12 +1485,23 @@ impl Game {
         player: bool,
         hits: u8,
     ) {
+        self.spawn_bullet_entity(position, velocity, damage, player, hits);
+    }
+
+    fn spawn_bullet_entity(
+        &mut self,
+        position: Vec2,
+        velocity: Vec2,
+        damage: f32,
+        player: bool,
+        hits: u8,
+    ) -> Option<Entity> {
         if self.world.query::<(Entity, &Bullet)>().iter().count()
             >= if self.stress_mode { 300 } else { MAX_BULLETS }
         {
-            return;
+            return None;
         }
-        self.world.spawn((
+        Some(self.world.spawn((
             Motion::new(position, velocity, velocity.y.atan2(velocity.x)),
             Bullet {
                 player,
@@ -1466,100 +1510,7 @@ impl Game {
                 remaining_hits: hits,
                 previous_hit: None,
             },
-        ));
-    }
-
-    fn update_chunks(&mut self, position: Vec2) {
-        let center = (
-            (position.x / CHUNK).floor() as i32,
-            (position.y / CHUNK).floor() as i32,
-        );
-        let stale: Vec<_> = self
-            .chunks
-            .keys()
-            .copied()
-            .filter(|(x, y)| (x - center.0).abs() > 2 || (y - center.1).abs() > 2)
-            .collect();
-        for key in stale {
-            if let Some(entities) = self.chunks.remove(&key) {
-                for entity in entities {
-                    let _ = self.world.despawn(entity);
-                }
-            }
-        }
-        for dy in -1..=1 {
-            for dx in -1..=1 {
-                let key = (center.0 + dx, center.1 + dy);
-                if self.chunks.contains_key(&key) {
-                    continue;
-                }
-                let mut spawned = Vec::new();
-                for index in 0..12 {
-                    let hash = hash3(self.profile.seed, key.0, key.1, index);
-                    let p = Vec2::new(
-                        key.0 as f32 * CHUNK + unit(hash) * CHUNK,
-                        key.1 as f32 * CHUNK + unit(mix(hash)) * CHUNK,
-                    );
-                    let radius = p.length();
-                    if radius < SAFE_RADIUS + 100.0
-                        || self
-                            .arena
-                            .as_ref()
-                            .is_some_and(|arena| p.distance(arena.center) < arena.radius + 70.0)
-                        || regions::protected(self.profile.seed, p).is_some()
-                    {
-                        continue;
-                    }
-                    let birth = AsteroidBirth::at(self.profile.seed, p);
-                    if birth.source == AsteroidSource::Outer && index > 2 {
-                        continue;
-                    }
-                    let count = self
-                        .world
-                        .query::<(Entity, &Actor)>()
-                        .iter()
-                        .filter(|(_, a)| a.kind == Kind::Asteroid)
-                        .count();
-                    if count >= 112 {
-                        break;
-                    }
-                    let scale = 0.55 + unit(mix(hash ^ 43)) * 0.45;
-                    let body = asteroid_body(hash);
-                    let body_radius = pixel_assets::radius(&body, scale);
-                    if regions::sites_near(self.profile.seed, p)
-                        .iter()
-                        .any(|site| {
-                            p.distance(Vec2::from_array(site.position))
-                                < site.radius + body_radius + 2.0
-                        })
-                    {
-                        continue;
-                    }
-                    let heading = unit(mix(hash ^ 71)) * TAU;
-                    let velocity = if let Some(orbit) = birth.orbit {
-                        orbit.tangent(p) * orbit.speed
-                    } else {
-                        forward(heading) * (3.0 + unit(mix(hash ^ 123)) * 9.0)
-                    };
-                    let hp = 20.0 + scale * 30.0;
-                    let entity = self.world.spawn((
-                        Motion::new(p, velocity, heading),
-                        Actor {
-                            kind: Kind::Asteroid,
-                            health: hp,
-                            max_health: hp,
-                            radius: body_radius,
-                            scale,
-                            damage: 8.0,
-                        },
-                        body,
-                        birth,
-                    ));
-                    spawned.push(entity);
-                }
-                self.chunks.insert(key, spawned);
-            }
-        }
+        )))
     }
 
     fn update_spawns(&mut self, position: Vec2, dt: f32) {
@@ -1593,11 +1544,14 @@ impl Game {
             let distance = self.viewport.length() * 0.5 + 60.0 + self.random() * 100.0;
             if let Some(spawn) = self.spawn_location(position, distance) {
                 let entity = self.spawn_enemy(family, false, spawn, tier);
-                self.maybe_riveter(entity, regions::at(self.profile.seed, spawn));
-                self.maybe_mote(entity, regions::at(self.profile.seed, spawn));
+                if self.co_op.is_none() {
+                    self.maybe_riveter(entity, regions::at(self.profile.seed, spawn));
+                    self.maybe_mote(entity, regions::at(self.profile.seed, spawn));
+                }
             }
         }
-        if self.active_boss.is_none()
+        if self.co_op.is_none()
+            && self.active_boss.is_none()
             && self.boss_timer <= 0.0
             && let Some((family, generation)) = self.next_boss()
             && let Some(spawn) = self.spawn_location(position, self.viewport.length() * 0.5 + 45.0)
@@ -1688,6 +1642,9 @@ impl Game {
     }
 
     fn update_enemies(&mut self, player: Vec2, dt: f32) {
+        let participants = self
+            .co_op_positions()
+            .map(|p| p.map(|p| (p, self.safe_zone_at(p))));
         let sanctuary = self.safe_zone_at(player);
         let safe = sanctuary.is_some();
         let refuge_center = sanctuary.map(|zone| zone.0).unwrap_or(Vec2::ZERO);
@@ -1711,6 +1668,28 @@ impl Game {
             if champion.is_some() || boss.is_some() || riveter.is_some() || mote.is_some() {
                 continue;
             }
+            let target = participants
+                .iter()
+                .flatten()
+                .filter(|(_, refuge)| refuge.is_none())
+                .min_by(|(a, _), (b, _)| {
+                    a.distance_squared(motion.position)
+                        .total_cmp(&b.distance_squared(motion.position))
+                })
+                .or_else(|| {
+                    participants.iter().flatten().min_by(|(a, _), (b, _)| {
+                        a.distance_squared(motion.position)
+                            .total_cmp(&b.distance_squared(motion.position))
+                    })
+                });
+            let (player, safe, refuge_center) =
+                target.map_or((player, safe, refuge_center), |(p, refuge)| {
+                    (
+                        *p,
+                        refuge.is_some(),
+                        refuge.map_or(Vec2::ZERO, |zone| zone.0),
+                    )
+                });
             brain.age += dt;
             brain.shot_timer -= dt;
             let delta = player - motion.position;
@@ -1978,7 +1957,13 @@ impl Game {
                 }
             }
             if let Some((_, target, local, is_segment, hit_position)) = nearest {
-                if target == self.player {
+                if let Some(session) = &mut self.co_op {
+                    session.hit_owner =
+                        self.world.get::<&co_op::ShotOwner>(entity).ok().map(|o| *o);
+                }
+                if self.co_op.is_some() && self.world.get::<&co_op::Pilot>(target).is_ok() {
+                    self.hurt_co_op_pilot(target, bullet.damage, Some(local));
+                } else if target == self.player {
                     self.hurt_player(bullet.damage, Some(local));
                 } else if is_segment {
                     self.damage_segment(target, bullet.damage, local);
@@ -1989,6 +1974,9 @@ impl Game {
                         local,
                         motion.velocity.normalize_or_zero() * bullet.damage * 1.2,
                     );
+                }
+                if let Some(session) = &mut self.co_op {
+                    session.hit_owner = None;
                 }
                 bullet.remaining_hits = bullet.remaining_hits.saturating_sub(1);
                 bullet.previous_hit = Some(target);
@@ -2009,40 +1997,44 @@ impl Game {
                 }
             }
         }
-        for (entity, m, a) in &actors {
-            if *entity == self.player || !self.world.contains(*entity) {
-                continue;
-            }
-            let delta = player - m.position;
-            let min_distance = a.radius + player_radius;
-            if delta.length_squared() < min_distance * min_distance && !self.safe() {
-                let direction = if delta.length_squared() > 0.01 {
-                    delta.normalize()
-                } else {
-                    Vec2::X
-                };
-                if let Ok(mut p) = self.world.get::<&mut Motion>(self.player) {
-                    p.position = m.position + direction * min_distance;
-                    p.velocity += direction * 45.0;
+        if self.co_op.is_some() {
+            self.co_op_contacts(&actors, &segments);
+        } else {
+            for (entity, m, a) in &actors {
+                if *entity == self.player || !self.world.contains(*entity) {
+                    continue;
                 }
-                if let Ok(mut other) = self.world.get::<&mut Motion>(*entity) {
-                    other.velocity -= direction * 25.0;
+                let delta = player - m.position;
+                let min_distance = a.radius + player_radius;
+                if delta.length_squared() < min_distance * min_distance && !self.safe() {
+                    let direction = if delta.length_squared() > 0.01 {
+                        delta.normalize()
+                    } else {
+                        Vec2::X
+                    };
+                    if let Ok(mut p) = self.world.get::<&mut Motion>(self.player) {
+                        p.position = m.position + direction * min_distance;
+                        p.velocity += direction * 45.0;
+                    }
+                    if let Ok(mut other) = self.world.get::<&mut Motion>(*entity) {
+                        other.velocity -= direction * 25.0;
+                    }
+                    self.hurt_player(a.damage, None);
                 }
-                self.hurt_player(a.damage, None);
             }
-        }
-        for (entity, m, owner, _scale, segment_radius) in segments {
-            if !self.world.contains(entity) {
-                continue;
-            }
-            let boss = self
-                .world
-                .get::<&Brain>(owner)
-                .map(|b| b.boss)
-                .unwrap_or(false);
-            let radius = segment_radius + player_radius;
-            if (player - m.position).length_squared() < radius * radius {
-                self.hurt_player(if boss { 13.0 } else { 7.0 }, None);
+            for (entity, m, owner, _scale, segment_radius) in segments {
+                if !self.world.contains(entity) {
+                    continue;
+                }
+                let boss = self
+                    .world
+                    .get::<&Brain>(owner)
+                    .map(|b| b.boss)
+                    .unwrap_or(false);
+                let radius = segment_radius + player_radius;
+                if (player - m.position).length_squared() < radius * radius {
+                    self.hurt_player(if boss { 13.0 } else { 7.0 }, None);
+                }
             }
         }
         // Light object-level asteroid impulses, rather than a physics body per cell.
@@ -2211,6 +2203,7 @@ impl Game {
         let position = self.position();
         self.invulnerability = 0.45;
         self.since_damage = 0.0;
+        let damage = damage * shield_progression::incoming_damage_multiplier(&self.profile);
         let absorbed = self.shield.min(damage);
         self.shield -= absorbed;
         let hull_damage = damage - absorbed;
@@ -2256,14 +2249,6 @@ impl Game {
         let impact_rank = ship_progression::equipped_rank(&self.profile, 11);
         if (nova_rank > 0 || impact_rank > 0) && self.repulsor_timer <= 0.0 {
             let evolution = bosses::evolution(&self.profile, 1);
-            let reach = if evolution >= 4 {
-                120.0
-            } else if evolution >= 2 {
-                90.0
-            } else {
-                70.0
-            };
-            self.transient_light(position, 165.0, [0.16, 0.65, 1.0], 1.5, 0.45);
             self.repulsor_timer = if impact_rank > 0 {
                 7.5 * (1.0 - 0.06 * impact_rank.saturating_sub(1) as f32)
             } else {
@@ -2272,57 +2257,7 @@ impl Game {
             if evolution >= 4 {
                 self.repulsor_timer *= 0.85;
             }
-            if evolution >= 3 {
-                let mut reflected = 0;
-                let mut cleared = Vec::new();
-                for (entity, (motion, bullet)) in self
-                    .world
-                    .query_mut::<(Entity, (&mut Motion, &mut Bullet))>()
-                {
-                    if !bullet.player && motion.position.distance(position) < reach {
-                        if evolution >= 5 && reflected < 16 {
-                            bullet.player = true;
-                            bullet.remaining_hits = 2;
-                            bullet.previous_hit = None;
-                            bullet.life = 1.5;
-                            motion.velocity = -motion.velocity;
-                            motion.heading = motion.velocity.y.atan2(motion.velocity.x);
-                            reflected += 1;
-                        } else {
-                            cleared.push(entity);
-                        }
-                    }
-                }
-                for entity in cleared {
-                    let _ = self.world.despawn(entity);
-                }
-            }
-            let targets: Vec<_> = self
-                .world
-                .query::<(Entity, (&Motion, &Actor))>()
-                .iter()
-                .filter(|(_, (m, a))| {
-                    a.kind != Kind::Player
-                        && (m.position - position).length() < reach
-                        && self.safe_zone_at(m.position).is_none()
-                })
-                .map(|(e, (m, _))| (e, *m))
-                .collect();
-            for (e, m) in targets {
-                let direction = (m.position - position).normalize_or_zero();
-                self.damage_actor(e, 12.0, Vec2::ZERO, direction * 110.0);
-            }
-            for i in 0..36 {
-                let d = forward(i as f32 * TAU / 36.0);
-                self.particle(
-                    position + d * 8.0,
-                    d * 150.0,
-                    0.4,
-                    rgba(147, 193, 255, 255),
-                    2.0,
-                );
-            }
-            self.event("ability-nova", position, 1.0);
+            self.emit_repulsor_nova(position, evolution, None);
         }
     }
 
@@ -2330,6 +2265,7 @@ impl Game {
         if !self.world.contains(entity) {
             return;
         }
+        self.record_co_op_destruction(entity, kind);
         let ordinary = self.world.get::<&BossEncounter>(entity).ok().map(|b| *b);
         if self.boss_qa_scene || ordinary.is_some_and(|b| b.diagnostic) {
             self.burst(position, 80, rgba(255, 180, 128, 255), 100.0);
@@ -2349,6 +2285,13 @@ impl Game {
             self.finish_arena(true, true);
             return;
         }
+        if !self.progression_enabled() {
+            self.burst(position, 80, rgba(255, 180, 128, 255), 100.0);
+            self.event("explosion", position, 1.0);
+            self.shake = self.shake.max(5.0);
+            self.remove_enemy(entity, true);
+            return;
+        }
         self.record_kill(kind);
         if let Kind::Enemy(family) | Kind::Boss(family) = kind {
             for quest in &mut self.profile.quests {
@@ -2366,13 +2309,22 @@ impl Game {
                     .unwrap_or(AsteroidBirth {
                         source: AsteroidSource::Outer,
                         material_tier: danger(position).clamp(1, 5) as u8,
+                        variety: 0,
                         orbit: None,
                     });
                 if birth.source != AsteroidSource::HavenBelt {
                     self.award_xp(2);
                 }
+                self.training_asteroid_defeated();
                 if self.random() < 0.25 {
-                    self.spawn_material_loot(position, birth.material_tier, 1);
+                    let named = (birth.material_tier == 1)
+                        .then(|| training::material_for_variety(birth.variety))
+                        .flatten();
+                    if named.is_some() {
+                        self.spawn_tiered_loot(position, 3, birth.material_tier, named, 1);
+                    } else {
+                        self.spawn_material_loot(position, birth.material_tier, 1);
+                    }
                 }
                 if self.random() < 0.25 {
                     let category = (self.random() * 3.0) as usize;
@@ -2473,18 +2425,21 @@ impl Game {
     }
 
     fn spawn_loot(&mut self, position: Vec2, category: usize, amount: u32) {
-        self.spawn_tiered_loot(position, category, 1, amount);
+        self.spawn_tiered_loot(position, category, 1, None, amount);
     }
     fn spawn_material_loot(&mut self, position: Vec2, tier: u8, amount: u32) {
-        self.spawn_tiered_loot(position, 3, tier.clamp(1, 5), amount);
+        self.spawn_tiered_loot(position, 3, tier.clamp(1, 5), None, amount);
     }
     fn spawn_tiered_loot(
         &mut self,
         position: Vec2,
         category: usize,
         material_tier: u8,
+        training_material: Option<u8>,
         amount: u32,
     ) {
+        let training_material =
+            training_material.filter(|i| category == 3 && material_tier == 1 && *i < 3);
         let count = self.world.query::<(Entity, &Loot)>().iter().count();
         if count >= 96 {
             // Preserve earned drops under load by merging into the nearest matching pickup.
@@ -2492,7 +2447,11 @@ impl Game {
                 .world
                 .query::<(Entity, (&Motion, &Loot))>()
                 .iter()
-                .filter(|(_, (_, l))| l.category == category && l.material_tier == material_tier)
+                .filter(|(_, (_, l))| {
+                    l.category == category
+                        && l.material_tier == material_tier
+                        && l.training_material == training_material
+                })
                 .min_by(|(_, (a, _)), (_, (b, _))| {
                     (a.position - position)
                         .length_squared()
@@ -2512,6 +2471,7 @@ impl Game {
             Loot {
                 category,
                 material_tier,
+                training_material,
                 amount,
                 life: 120.0,
             },
@@ -2531,6 +2491,7 @@ impl Game {
                     entity,
                     loot.category,
                     loot.material_tier,
+                    loot.training_material,
                     loot.amount,
                     motion.position,
                 ));
@@ -2543,7 +2504,11 @@ impl Game {
                 remove.push(entity);
             }
         }
-        for (entity, category, material_tier, amount, position) in collect {
+        for (entity, category, material_tier, training_material, amount, position) in collect {
+            if !self.progression_enabled() {
+                let _ = self.world.despawn(entity);
+                continue;
+            }
             if category == 3 {
                 let available = 16u32.saturating_sub(ship_progression::total(
                     self.profile.campaign.cargo_materials,
@@ -2556,6 +2521,12 @@ impl Game {
                     loot.amount -= gained;
                 }
                 self.profile.campaign.cargo_materials[material_tier as usize - 1] += gained;
+                if material_tier == 1
+                    && let Some(index) = training_material.filter(|i| *i < 3)
+                {
+                    self.profile.campaign.cargo_training_materials[index as usize] += gained;
+                    self.training_collected(index, gained);
+                }
                 if self.position().length() > SAFE_RADIUS {
                     let run = self.run.get_or_insert_with(RunSummary::default);
                     run.materials_gained = run.materials_gained.saturating_add(gained);
@@ -2575,6 +2546,9 @@ impl Game {
             }
             if self.world.despawn(entity).is_ok() {
                 self.credit_points(category, amount);
+                if amount > 0 {
+                    self.discover_basic(category);
+                }
                 self.event("pickup", position, category as f32 / 2.0);
                 self.burst(position, 8, currency_color(category), 28.0);
             }
@@ -2743,8 +2717,13 @@ impl Game {
                     let [r, g, b, _] = c.to_le_bytes();
                     p.distance_squared(target) <= 36.0
                         && p.y > body.height as f32 * 0.1
-                        && b as f32 > r as f32 * 1.05
-                        && g as f32 > r as f32 * 1.05
+                        && if self.profile.campaign.selected_ship == 0
+                            && self.profile.identity.is_some()
+                        {
+                            *c == identity::EMITTER
+                        } else {
+                            b as f32 > r as f32 * 1.05 && g as f32 > r as f32 * 1.05
+                        }
                 })
                 .min_by(|a, b| {
                     a.0.distance_squared(target)
@@ -2837,7 +2816,7 @@ impl Game {
                         }
                 };
                 let drag: f32 = if p.style == ParticleStyle::Debris {
-                    1.6
+                    DEBRIS_DRAG
                 } else {
                     3.8
                 };
@@ -2956,7 +2935,7 @@ impl Game {
             actor.health = stats.hull;
             actor.max_health = stats.hull;
         }
-        let body = campaign::player_body(self.profile.campaign.selected_ship);
+        let body = identity::player_body(&self.profile);
         let scale = campaign::player_scale(self.profile.campaign.selected_ship);
         if let Ok(mut actor) = self.world.get::<&mut Actor>(self.player) {
             actor.scale = scale;
@@ -2986,8 +2965,12 @@ impl Game {
     }
 
     pub fn reset_to_dock(&mut self) {
+        if self.restore_co_op() {
+            return;
+        }
         self.discard_cargo("abandonment");
         self.boss_qa_scene = false;
+        self.material_scene = false;
         self.finish_arena(false, false);
         self.transient_lights.clear();
         self.stress_mode = false;
@@ -3032,6 +3015,9 @@ impl Game {
         self.wake.clear();
         self.update_exploration();
         self.enter_dock();
+        // Keep QA isolation through teleport/cleanup. The next real flight is
+        // normal; merely crossing Haven during a fixture does not end isolation.
+        self.diagnostic_scene = false;
     }
 
     pub fn purchase(&mut self, id: &str) -> Result<(), String> {
@@ -3043,7 +3029,9 @@ impl Game {
         let next = self.profile.campaign.loadouts[ship].hardware[index] + 1;
         let category = UPGRADES[index].2;
         self.profile.currency[category] -= COST;
-        self.profile.campaign.stored_materials[next as usize - 1] -= 1;
+        let mut materials = [0; 5];
+        materials[next as usize - 1] = 1;
+        self.consume_stored_materials(materials);
         self.profile.campaign.loadouts[ship].hardware[index] = next;
         self.progression_changed();
         let stats = Stats::from_profile(&self.profile);
@@ -3213,9 +3201,12 @@ impl Game {
             stored_materials: ship_progression::total(self.profile.campaign.stored_materials),
             material_cargo: self.profile.campaign.cargo_materials,
             material_stash: self.profile.campaign.stored_materials,
+            material_training_cargo: self.profile.campaign.cargo_training_materials,
+            material_training_stash: self.profile.campaign.stored_training_materials,
             material_loss: self.material_loss,
             material_loss_reason: self.material_loss_reason.clone(),
             abilities: self.ability_hud(),
+            components: self.component_hud(),
             loadout: self.loadout_hud(),
             ship_stats: ShipStatsHud {
                 speed: motion.velocity.length(),
@@ -3224,10 +3215,14 @@ impl Game {
                 primary_damage: stats.damage,
                 fire_rate: stats.fire_rate,
                 hull_regen: stats.regeneration,
-                shield_regen: stats.shield * 0.15,
+                shield_regen: stats.shield_regeneration,
+                shield_recharge_unlocked: stats.shield_regeneration > 0.0,
+                affinity: shield_progression::hud(&self.profile),
             },
             audio: self.audio_hud(),
             navigation: self.navigation_hud(),
+            identity: identity::hud(&self.profile),
+            onboarding: identity::onboarding_hud(self),
         }
     }
 
@@ -3288,13 +3283,34 @@ impl Game {
 
     /// Extraction into caller-owned storage avoids reallocating frame batches.
     pub fn render_into(&self, alpha: f32, frame: &mut FrameBuilder) {
+        self.render_into_with_home(alpha, frame, |_, _, _| false);
+    }
+
+    /// A presentation adapter may replace only the visible home artwork.
+    /// Rejection preserves the portable body; all facility/gameplay draw order
+    /// and simulation state remain identical to ordinary extraction.
+    pub fn render_into_with_home(
+        &self,
+        alpha: f32,
+        frame: &mut FrameBuilder,
+        mut draw_home: impl FnMut(&mut FrameBuilder, Transform, f32) -> bool,
+    ) {
         let alpha = alpha.clamp(0.0, 1.0);
         frame.clear();
+        self.extract_hub_shadow(alpha, frame);
         let lights = [
             pixel_assets::color(6),
             pixel_assets::color(4),
             pixel_assets::color(33),
         ];
+        let maximum_player_hull = Stats::from_profile(&self.profile).hull;
+        // Spawn/dock grace exceeds the hit window; don't replay the previous
+        // ship's damage tint on the freshly repaired/replaced body.
+        let recent_player_damage = if self.invulnerability > 0.45 {
+            0.45
+        } else {
+            self.since_damage
+        };
         self.render_background(frame, Vec2::from_array(self.render_camera(alpha)));
         regions::background_with_density(
             frame,
@@ -3312,12 +3328,20 @@ impl Game {
             rotation: 0.0,
             scale: Vec2::splat(DOCK_SCALE),
         };
-        if self.visible(Vec2::ZERO, 100.0) {
+        if self.visible(Vec2::ZERO, 100.0) && !draw_home(frame, station, self.cosmetic_time()) {
+            frame.clear_planar_shadow();
             frame.push_body_colored_material(
                 &self.dock_body,
                 station,
                 ACTOR_MATERIAL,
-                |cell, color| animate_station_cell(cell, color, self.cosmetic_time(), lights),
+                |cell, color| {
+                    animate_station_cell(
+                        cell,
+                        identity::dock_color(&self.profile, color),
+                        self.cosmetic_time(),
+                        lights.map(|c| identity::dock_color(&self.profile, c)),
+                    )
+                },
             );
         }
         for i in 0..96 {
@@ -3326,12 +3350,17 @@ impl Game {
             }
             let angle = i as f32 * TAU / 96.0;
             let pulse = (self.cosmetic_time() * 1.8 + i as f32 * 0.18).sin() * 0.5 + 0.5;
-            let color = rgba(
-                45,
-                110 + (pulse * 30.0) as u8,
-                145 + (pulse * 40.0) as u8,
-                if i % 4 == 0 { 165 } else { 70 },
-            );
+            let color = if let Some(corp) = identity::main_corporation(&self.profile) {
+                let [r, g, b] = corp.color();
+                rgba(r, g, b, if i % 4 == 0 { 165 } else { 70 })
+            } else {
+                rgba(
+                    45,
+                    110 + (pulse * 30.0) as u8,
+                    145 + (pulse * 40.0) as u8,
+                    if i % 4 == 0 { 165 } else { 70 },
+                )
+            };
             frame.push_pixel(
                 forward(angle) * SAFE_RADIUS,
                 if i % 4 == 0 { 2.0 } else { 1.0 },
@@ -3343,21 +3372,41 @@ impl Game {
             Vec2::from_array(self.render_camera(alpha)),
             self.viewport,
             self.cosmetic_time(),
+            identity::main_corporation(&self.profile),
         );
-        for (position, life) in &self.wake {
-            if !self.visible(*position, 12.0) {
-                continue;
-            }
-            for n in 0..5 {
-                let offset = forward(n as f32 * TAU / 5.0 + self.cosmetic_time()) * 6.0;
-                frame.push_pixel(
-                    *position + offset,
-                    2.0,
-                    rgba(132, 255, 202, (*life / 2.0 * 155.0) as u8),
-                );
-            }
+        identity::render_crest(
+            frame,
+            &self.profile,
+            Vec2::from_array(self.render_camera(alpha)),
+            self.viewport,
+            self.cosmetic_time(),
+        );
+        co_op_wake_fx::append(
+            frame,
+            self.wake.iter().copied(),
+            self.cosmetic_time(),
+            |p, r| self.visible(p, r),
+        );
+        if let Some(session) = &self.co_op {
+            let points = self.co_op_wake_points();
+            let phase = if self.reduced_motion {
+                0.0
+            } else {
+                session.tick as f32 / 60.0
+            };
+            co_op_wake_fx::append(
+                frame,
+                points.iter().map(|p| {
+                    (
+                        Vec2::new(p.position[0] as f32, p.position[1] as f32),
+                        p.life as f32,
+                    )
+                }),
+                phase,
+                |p, r| self.visible(p, r),
+            );
         }
-        for (_, (motion, actor, body, boss, riveter, mote)) in self
+        for (entity, (motion, actor, body, boss, riveter, mote)) in self
             .world
             .query::<(
                 Entity,
@@ -3383,14 +3432,6 @@ impl Game {
             if !self.visible(m.position, actor.radius + cue_extent) {
                 continue;
             }
-            if actor.kind == Kind::Player
-                && self.invulnerability > 0.0
-                && !self.reduced_motion
-                && !self.stress_mode
-                && ((self.cosmetic_time() * 18.0).floor() as u32).is_multiple_of(2)
-            {
-                continue;
-            }
             if let Some(boss) = boss
                 && let Kind::Boss(family) = actor.kind
             {
@@ -3405,15 +3446,89 @@ impl Game {
                 self.draw_riveter(frame, body, m, *actor, *riveter);
                 continue;
             }
-            frame.push_body_colored_material(
-                body,
-                actor_transform(m, *actor),
-                ACTOR_MATERIAL,
-                |cell, color| animate_actor_cell(cell, color, self.cosmetic_time(), lights),
+            let pilot = self.world.get::<&co_op::Pilot>(entity).ok();
+            let player_hull = pilot.as_ref().map_or(maximum_player_hull, |p| p.stats.hull);
+            let damage_time = pilot.as_ref().map_or(recent_player_damage, |p| {
+                if p.invulnerability > 0.45 {
+                    0.45
+                } else {
+                    p.since_damage
+                }
+            });
+            let corporation = pilot.as_ref().map_or_else(
+                || self.profile.identity.as_ref().map(|id| id.corporation),
+                |p| p.spec.identity.as_ref().map(|id| id.corporation),
+            );
+            let selected_ship = pilot
+                .as_ref()
+                .map_or(self.profile.campaign.selected_ship, |p| p.selected_ship);
+            let shield = pilot.as_ref().map_or(self.shield, |p| p.shield);
+            let player_tint = |color| {
+                player_presentation::tint(
+                    color,
+                    actor.health,
+                    player_hull,
+                    damage_time,
+                    self.cosmetic_time(),
+                    self.reduced_motion,
+                )
+            };
+            let coarse_color = |cell, color| {
+                let color = animate_actor_cell(cell, color, self.cosmetic_time(), lights);
+                if actor.kind == Kind::Player {
+                    player_tint(color)
+                } else {
+                    color
+                }
+            };
+            let elevated = entity == self.player
+                && frame
+                    .frame()
+                    .shadows
+                    .as_ref()
+                    .is_some_and(|s| s.caster.is_some());
+            frame.with_object_meta(
+                engine_core::ObjectMeta {
+                    height: if elevated {
+                        hub_shadows::RAICHO_HEIGHT
+                    } else {
+                        0.0
+                    },
+                    flags: 0,
+                },
+                |frame| {
+                    let fine_drawn = actor.kind == Kind::Player
+                        && selected_ship == 0
+                        && corporation.is_some_and(|corporation| {
+                            raicho_fine::append(
+                                frame,
+                                body,
+                                corporation,
+                                raicho_fine::DrawInput {
+                                    parent: actor_transform(m, *actor).affine(),
+                                    material: ACTOR_MATERIAL,
+                                    time: self.cosmetic_time(),
+                                    reduced_motion: self.reduced_motion,
+                                },
+                                &mut raicho_fine::Budget::default(),
+                                coarse_color,
+                                |_, color| player_tint(color),
+                            )
+                            .is_ok()
+                        });
+                    if !fine_drawn {
+                        frame.push_body_colored_material(
+                            body,
+                            actor_transform(m, *actor),
+                            ACTOR_MATERIAL,
+                            coarse_color,
+                        );
+                    }
+                },
             );
             if actor.kind == Kind::Player {
                 let glow = (self.cosmetic_time() * 24.0).sin() * 0.5 + 0.5;
-                if self.throttle > 0.03 {
+                if entity == self.player && self.throttle > 0.03 {
                     let transform = actor_transform(m, *actor);
                     for port in self.exhaust_ports().into_iter().flatten() {
                         frame.push_soft_cells_affine_material(
@@ -3432,10 +3547,8 @@ impl Game {
                             (0..3).map(|i| {
                                 (
                                     Vec2::new(0.0, i as f32 * 0.8),
-                                    rgba(
-                                        120,
-                                        225,
-                                        255,
+                                    identity::jet_glow_color(
+                                        &self.profile,
                                         ((0.65 + glow * 0.35) * 230.0 * self.throttle
                                             / (1.0 + i as f32 * 0.5))
                                             as u8,
@@ -3445,13 +3558,13 @@ impl Game {
                         );
                     }
                 }
-                if self.shield > 0.0 {
+                if shield > 0.0 {
                     for i in 0..24 {
                         let angle = i as f32 * TAU / 24.0 + self.cosmetic_time() * 0.3;
                         frame.push_pixel(
                             m.position + forward(angle) * (actor.radius + 3.0),
                             1.0,
-                            rgba(92, 181, 255, if self.since_damage < 0.3 { 210 } else { 65 }),
+                            rgba(92, 181, 255, if damage_time < 0.3 { 210 } else { 65 }),
                         );
                     }
                 }
@@ -3518,7 +3631,11 @@ impl Game {
                 continue;
             }
             if loot.category == 3 {
-                ship_progression::draw_material(frame, p, loot.material_tier);
+                if let Some(index) = loot.training_material {
+                    training::draw_material(frame, p, index);
+                } else {
+                    ship_progression::draw_material(frame, p, loot.material_tier);
+                }
                 continue;
             }
             let color = currency_color(loot.category);
@@ -3623,8 +3740,32 @@ impl Game {
         );
     }
 
-    /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
-    pub fn diagnostic(&mut self, command: &str) {
+    /// Explicit deterministic QA scenes. Their ticks never earn progression;
+    /// home/reset ends this transient isolation. Unknown commands are no-ops.
+    pub fn diagnostic(&mut self, command: &str) -> bool {
+        if self.co_op.is_some() {
+            return false;
+        }
+        if matches!(command, "dock" | "home") {
+            self.reset_to_dock();
+            return true;
+        }
+        let previous = self.diagnostic_scene;
+        // Cover reset's immediate exploration/banking before a scene teleports.
+        // Invalid commands restore only this transient bit and mutate no run.
+        self.diagnostic_scene = true;
+        let accepted = self.diagnostic_inner(command);
+        self.diagnostic_scene = if accepted { true } else { previous };
+        if accepted && command != "material" {
+            self.material_scene = false;
+        }
+        accepted
+    }
+
+    fn diagnostic_inner(&mut self, command: &str) -> bool {
+        if command == "material" {
+            return self.begin_material_scene();
+        }
         if let Some(destination) = command.strip_prefix("warp ") {
             let mut coordinates = destination.split_whitespace();
             let x = coordinates
@@ -3638,28 +3779,34 @@ impl Game {
                 if position.is_finite() && position.abs().max_element() <= WORLD_LIMIT {
                     self.reset_to_dock();
                     self.boss_qa_scene = true;
+                    self.diagnostic_scene = true;
                     self.move_player(position);
                     self.update_chunks(position);
+                    return true;
                 }
             }
-            return;
+            return false;
         }
         if self.mote_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         if self.biome_enemy_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         if self.boss_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         if self.campaign_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         match command {
-            "dock" | "home" => self.reset_to_dock(),
             "site" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 let site = regions::sites_near(self.profile.seed, Vec2::ZERO)
                     .into_iter()
                     .min_by(|a, b| {
@@ -3674,22 +3821,26 @@ impl Game {
             }
             "belt" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(950.0, 0.0));
                 self.update_chunks(self.position());
             }
             "die" => {
+                self.diagnostic_scene = true;
                 if let Ok(mut a) = self.world.get::<&mut Actor>(self.player) {
                     a.health = 0.0;
                 }
             }
             "damage" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(900.0, 0.0));
                 self.invulnerability = 0.0;
                 self.hurt_player(32.0, Some(Vec2::new(-3.0, 2.0)));
             }
             "combat" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(1600.0, 0.0));
                 for family in 0..3 {
                     for n in 0..3 {
@@ -3705,6 +3856,7 @@ impl Game {
             }
             "stress" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(2400.0, 0.0));
                 self.stress_mode = true;
                 self.invulnerability = 120.0;
@@ -3733,8 +3885,8 @@ impl Game {
                             kind: Kind::Asteroid,
                             health: 100_000.0,
                             max_health: 100_000.0,
-                            radius: pixel_assets::radius(&body, 1.0),
-                            scale: 1.0,
+                            radius: pixel_assets::radius(&body, asteroid_art::CELL_SCALE),
+                            scale: asteroid_art::CELL_SCALE,
                             damage: 8.0,
                         },
                         body,
@@ -3742,8 +3894,9 @@ impl Game {
                     ));
                 }
             }
-            _ => {}
+            _ => return false,
         }
+        true
     }
     fn move_player(&mut self, position: Vec2) {
         if let Ok(mut m) = self.world.get::<&mut Motion>(self.player) {
@@ -4376,8 +4529,11 @@ mod tests {
         let rewards = reloaded.profile.currency;
         assert!(reloaded.interact_site().is_err());
         assert_eq!(reloaded.profile.currency, rewards);
-        // The same retained-cargo rule applies to a real death return.
-        g.diagnostic("die");
+        // The retained courier packet survives an actual ordinary lethal hit.
+        // Public QA death is intentionally unable to complete delivery progress.
+        g.move_player(Vec2::from_array(site.position) + Vec2::X * (site.radius + 100.0));
+        g.invulnerability = 0.0;
+        g.hurt_player(1000.0, None);
         g.tick(&InputFrame::default(), 1.0 / 60.0);
         assert_eq!(g.position(), Vec2::ZERO);
         assert_eq!(g.profile.quests[0].progress, 1);
@@ -4430,8 +4586,11 @@ mod tests {
     #[test]
     fn site_sanctuary_blocks_combat_without_granting_haven_services() {
         let mut g = Game::new(Profile::default());
-        g.diagnostic("site");
-        let site = g.current_site().unwrap().clone();
+        // Authored normal-flight placement; public scene setup no longer earns
+        // the discovery this ordinary sanctuary regression expects.
+        let site = regions::sites_near(g.profile.seed, Vec2::ZERO).remove(0);
+        g.move_player(Vec2::from_array(site.position));
+        g.update_exploration();
         let center = Vec2::from_array(site.position);
         assert!(g.hud().safe && !g.hud().dock);
         g.world.get::<&mut Actor>(g.player).unwrap().health = 60.0;
@@ -4529,7 +4688,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(old);
-        assert_eq!(g.profile.schema_version, 4);
+        assert_eq!(g.profile.schema_version, components::SCHEMA_VERSION);
         assert_eq!(g.profile.revision, 10);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[2], 3);
@@ -4608,7 +4767,7 @@ mod tests {
                     batch
                         .pixels
                         .iter()
-                        .filter(|pixel| batch.transforms[pixel.transform as usize] == transform)
+                        .filter(|pixel| batch.transforms[pixel.transform_slot()] == transform)
                         .count()
                 })
                 .sum::<usize>()
@@ -4859,6 +5018,7 @@ mod tests {
     fn dock_repair_restores_generated_ship_cells_after_real_damage() {
         let mut g = Game::new(Profile::default());
         g.move_player(Vec2::new(1800.0, 0.0));
+        g.shield = 0.0; // Declared depleted shield; this probe verifies body-cell repair.
         g.hurt_player(20.0, Some(Vec2::ZERO));
         assert!(
             g.world

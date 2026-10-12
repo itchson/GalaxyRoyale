@@ -1,0 +1,141 @@
+{
+  "capturedAt": "2026-10-12T18:43:31.294Z",
+  "node": "v24.18.0",
+  "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "sources": {
+    "scripts/qa/co-op-transport/client.js": {
+      "scope": "Root changes independently reviewed",
+      "workingBytes": 22613,
+      "workingSha256": "6c47a2ff38cc70936201f778d20cbb24be20a23e2b01268152c2dadda3620893",
+      "workingLfBytes": 22613,
+      "workingLfSha256": "6c47a2ff38cc70936201f778d20cbb24be20a23e2b01268152c2dadda3620893",
+      "canonicalHeadBytes": 22020,
+      "canonicalHeadSha256": "edad12d0a1ae6a916bfd792a9f5934959dba1bbb0c7dc4a8285ac8f0e7a87e94"
+    },
+    "scripts/qa/co-op-transport/wasm-review.js": {
+      "scope": "Root changes independently reviewed",
+      "workingBytes": 15250,
+      "workingSha256": "f8cfce59e7581c6f41d12b51146944739be77d0e0a22310bdb25b71925c9e1c7",
+      "workingLfBytes": 15250,
+      "workingLfSha256": "f8cfce59e7581c6f41d12b51146944739be77d0e0a22310bdb25b71925c9e1c7",
+      "canonicalHeadBytes": 14265,
+      "canonicalHeadSha256": "3cd6b1153f75e7b648e55ce549d9b3bd4da70c92ad00d427e537e006686fe422"
+    },
+    "scripts/qa/co-op-transport/server.mjs": {
+      "scope": "Root changes independently reviewed",
+      "workingBytes": 17748,
+      "workingSha256": "e38555f2615fd9689460699cf3df300cc2d5f7853d9c32493b610b281faa1229",
+      "workingLfBytes": 17748,
+      "workingLfSha256": "e38555f2615fd9689460699cf3df300cc2d5f7853d9c32493b610b281faa1229",
+      "canonicalHeadBytes": 17245,
+      "canonicalHeadSha256": "de91999b6593237194ebcb29807324ca7179f0f14bf2f72ac2c65ab41fcfe702"
+    },
+    "scripts/test/coop-transport-qa.test.mjs": {
+      "scope": "Root changes independently reviewed",
+      "workingBytes": 6276,
+      "workingSha256": "e6809359124d3690e21b9a8c5361f002a36aa9531a9cc7a1ffe2c5809a408231",
+      "workingLfBytes": 6276,
+      "workingLfSha256": "e6809359124d3690e21b9a8c5361f002a36aa9531a9cc7a1ffe2c5809a408231",
+      "canonicalHeadBytes": 5358,
+      "canonicalHeadSha256": "041c184f1bd6a50606ab42acc29025b2f87e3b677e2b2f398f197824f9a6a1dd"
+    },
+    "scripts/test/coop-transport-wasm-qa.test.mjs": {
+      "scope": "Root changes independently reviewed",
+      "workingBytes": 39210,
+      "workingSha256": "0716aec32f92117658c90cdd6034be9d8a2ba12370874f01871a6deb5ae75211",
+      "workingLfBytes": 39210,
+      "workingLfSha256": "0716aec32f92117658c90cdd6034be9d8a2ba12370874f01871a6deb5ae75211",
+      "canonicalHeadBytes": 36024,
+      "canonicalHeadSha256": "364fb3a312e9cff2ef6d3a5ac2158c0809d5cd0329b76aeba0be768c6c85f88f"
+    },
+    "apps/game/src/coop/controller.ts": {
+      "scope": "Read-only production contract",
+      "workingBytes": 33592,
+      "workingSha256": "2f886539fa1532f136a9d23d3ec817abbd497183e972435db92afc7894926f6a",
+      "workingLfBytes": 32533,
+      "workingLfSha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "canonicalHeadBytes": 32533,
+      "canonicalHeadSha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    "apps/game/src/coop/transport.ts": {
+      "scope": "Read-only production contract",
+      "workingBytes": 37858,
+      "workingSha256": "702d058d8529a754c943ccc79f2e9a785d9d8e10422aa41a270f89f030195101",
+      "workingLfBytes": 36712,
+      "workingLfSha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+      "canonicalHeadBytes": 36712,
+      "canonicalHeadSha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    "apps/game/src/storage.ts": {
+      "scope": "Read-only production contract",
+      "workingBytes": 34850,
+      "workingSha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8",
+      "workingLfBytes": 34850,
+      "workingLfSha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8",
+      "canonicalHeadBytes": 34850,
+      "canonicalHeadSha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8"
+    },
+    "apps/coop/server.mjs": {
+      "scope": "Read-only production contract",
+      "workingBytes": 12445,
+      "workingSha256": "4a135b5d97d2599354975a18e6017daf49eeceb99fbef192860d96ccd076b478",
+      "workingLfBytes": 12064,
+      "workingLfSha256": "032d2988360bd8d066cd28cf010a0e1f49eb4a391c4fdc294525d0285e1790e5",
+      "canonicalHeadBytes": 12064,
+      "canonicalHeadSha256": "032d2988360bd8d066cd28cf010a0e1f49eb4a391c4fdc294525d0285e1790e5"
+    },
+    "apps/coop/store.mjs": {
+      "scope": "Read-only production contract",
+      "workingBytes": 24690,
+      "workingSha256": "551d7dc521122a06251a1cc57293e954d8e5678a35bc8dfc7c54946086c377f4",
+      "workingLfBytes": 23947,
+      "workingLfSha256": "5d13df9bbcda769f1a35aeda6a4314902125bb7840b80f4123bc53af30339444",
+      "canonicalHeadBytes": 23947,
+      "canonicalHeadSha256": "5d13df9bbcda769f1a35aeda6a4314902125bb7840b80f4123bc53af30339444"
+    }
+  },
+  "evidence": {
+    "REVIEW.md": {
+      "bytes": 6401,
+      "sha256": "a623cbbd662ae5dfe74805a99b0843dcf0fce3548763d807fb0929d0b74cfdb5"
+    },
+    "focused-functions.log": {
+      "bytes": 855,
+      "sha256": "dc87aee5eba94e5bd9be96476ac1fb2c9a6be2f6b9bff451ed16bef38baeb7a4"
+    },
+    "source-function-edges.mjs": {
+      "bytes": 4858,
+      "sha256": "a79cae203b1c611d85fa538060436a8e3b18a4c7976267503ceef7e89eadd498"
+    },
+    "source-function-edges.log": {
+      "bytes": 368,
+      "sha256": "d4654c113d28aa763dc1d8b6e7dfb131bd00d74936190014b5b4fb25883263b2"
+    },
+    "root-helper.diff.patch": {
+      "bytes": 13079,
+      "sha256": "e3456953c2198ecb0b56472d91fefd013d4c9549e2c0b2896d3d297ef19381a4"
+    },
+    "pin-review.mjs": {
+      "bytes": 2962,
+      "sha256": "377eab3d470447604261730b07e71f009952c79522d236ec237b67e0d7c0194f"
+    }
+  },
+  "commands": [
+    {
+      "command": "node --experimental-transform-types --test --test-name-pattern='^Actual initialization|^Actual rejoin gate|^Actual approval QA|^Actual client approval commands' scripts/test/coop-transport-wasm-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 5,
+      "pass": 5,
+      "log": "focused-functions.log"
+    },
+    {
+      "command": "node --test work/private-room-live-plan/root-helper-review/source-function-edges.mjs",
+      "exitCode": 0,
+      "tests": 2,
+      "pass": 2,
+      "log": "source-function-edges.log"
+    }
+  ],
+  "authorPatchIndependentAcceptance": false,
+  "scope": "Independent Root helper source/function review only; no listener/browser/build/stage/native/RTC/save mutation or live pass."
+}

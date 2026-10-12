@@ -1,0 +1,17 @@
+✔ historical transport manifests keep their frozen files and current manifests require their pinned room-code module (0.9577ms)
+✔ historical factory and owned WASM manifests preserve eighteen or nineteen files while current stages serve the pinned extra module (0.4235ms)
+✔ room-code admission uses an own prepared-file marker and never admits arbitrary module or inherited fields (0.0967ms)
+✔ actual owned verification accepts original and fully validated record-only carry schemas (1423.8538ms)
+✔ carry provenance fails closed on unknown, partial, malformed or temporally inconsistent fields (352.4961ms)
+✔ carry cannot claim an unrelated Git revision or altered compiled runtime even with restamped live hashes (856.8528ms)
+✔ current live adapter, package and checkout mismatches remain rejected (874.7874ms)
+✔ actual QA service source pins detect server/store change and reject unknown pin fields (249.731ms)
+✔ actual transport-only preparation closes room-code JS imports and pins the Root service used by QA (123.4553ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4057.6783

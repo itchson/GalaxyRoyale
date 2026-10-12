@@ -1,0 +1,10 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\work\nebula-render-refinement\native-before\crates\game_core)
+    Finished `release` profile [optimized] target(s) in 18.05s
+     Running unittests src\lib.rs (work/nebula-render-refinement/cargo-before\release\deps\game_core-2b707a8b4a4ebce6.exe)
+
+running 1 test
+Actual empty candidate tile: 4 biome queries; 72 actual cosmic frame packet digests recorded.
+test cosmic_background::nebula_budget_probe::actual_star_field_query_probe ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 565 filtered out; finished in 0.01s
+

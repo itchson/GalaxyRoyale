@@ -1,0 +1,83 @@
+{
+  "captured_at_utc": "2026-10-12T17:28:22.180365+00:00",
+  "base_commit": "d028f0d7a3c589b5896f536f08e76aa504cb2923",
+  "branch": "codex/title-instrument-width",
+  "node": "v24.18.0",
+  "typescript": "5.9.3",
+  "changed_production": "apps/game/src/audio.ts",
+  "changed_test": "scripts/test/audio.test.mjs",
+  "unchanged_baseline_modules": {
+    "apps/game/src/main.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2"
+    },
+    "apps/game/src/audio-state.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea"
+    },
+    "apps/game/src/title-theme.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069"
+    },
+    "apps/game/src/music-clock.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559"
+    },
+    "apps/game/src/music-score.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703"
+    }
+  },
+  "commands": [
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "exit_code": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test scripts/test/music-clock.test.mjs scripts/test/title-theme.test.mjs scripts/test/audio-state.test.mjs scripts/test/audio.test.mjs",
+      "exit_code": 0,
+      "tests": 58,
+      "pass": 58,
+      "fail": 0,
+      "log": "focused-tests.log"
+    }
+  ],
+  "bounded_patch_sources": {
+    "lead": 3,
+    "pad": 8,
+    "bass": 3,
+    "arp": 1,
+    "bubble": 1,
+    "authored_compound_backbeat": 9
+  },
+  "recorded_api_stress": {
+    "seconds": 30,
+    "maximum_music_voices": 21,
+    "maximum_future_music_voices": 12,
+    "maximum_owned_music_sources": 71,
+    "maximum_owned_music_nodes": 210,
+    "lookahead_seconds": 0.18
+  },
+  "root_helper_requirement": "Bind/register createStereoPanner in scripts/qa/audio-review/review.js creation-method Set before real native render.",
+  "prior_v2_native_metrics_as_supplied_by_root": {
+    "fresh_render_this_pass": false,
+    "clip_seconds": 48,
+    "master": 0.75,
+    "music": 0.4,
+    "peak": 0.156361,
+    "rms": 0.027731,
+    "clean_native_fixtures": 7
+  },
+  "acceptance": {
+    "typecheck_and_focused_api_tests": "passed",
+    "fresh_native_stereo_dsp_render": "open",
+    "mono_downmix_review": "open",
+    "instrument_width_listening": "open",
+    "physical_output_device_listening": "open",
+    "perceived_song_match": "open",
+    "exact_transcription": "provisional",
+    "full_build": "not_run"
+  },
+  "scope": "Title-only layered synth/color/width candidate. Actual API/envelope/resource checks; no fresh native PCM or ear acceptance."
+}

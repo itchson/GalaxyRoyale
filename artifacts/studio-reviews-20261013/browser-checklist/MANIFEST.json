@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "root_commit": "e97c29ca262e83dfc46c3a3d4faa10703fa0f64c",
+  "native_commit": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "scope": "Work-owned exact patch/fixture checklist and actual frozen wire/JSON source inspection only; no runtime edits, native/browser/RTC/build/listener execution",
+  "source_semantics": "source snapshots and native fixtures preserve exact Git bytes; source-pins lists Git blob and SHA256. Existing frozen PLAN and independent native review remain unchanged.",
+  "files": [
+    {
+      "path": "CHECKLIST.md",
+      "bytes": 11588,
+      "sha256": "bef0eab5c70b8737f226801e73b8a21a3dbee4b7ee56cdabefd0241ddcc47aca"
+    },
+    {
+      "path": "fixtures/actual-host-batch-response.json",
+      "bytes": 4090,
+      "sha256": "da0613a2050513e5b03ffd9b4ea0fe56431cde6635ef3dde8e2ac49177a1fa6c"
+    },
+    {
+      "path": "fixtures/actual-host-header.json",
+      "bytes": 899,
+      "sha256": "5a19d5d9a87e55fb735f1746629d0c36c7cdb8741a4408aad537e59ce9005f29"
+    },
+    {
+      "path": "fixtures/actual-host-page.json",
+      "bytes": 2015,
+      "sha256": "462da0d0a8a656384c2a0b3515a24a1f2dea6cc7370738c14411a9d7ac54a9ab"
+    },
+    {
+      "path": "fixtures/empty-header.json",
+      "bytes": 9659,
+      "sha256": "0fff7df0b557884f03359de1a87faeda7168b4f23a666f8fe1ce776ba4c3d04e"
+    },
+    {
+      "path": "fixtures/empty-page.json",
+      "bytes": 83,
+      "sha256": "c94c11a29c727daf0276e299f4e75463783c1c70a337b3ad2d59e02668871222"
+    },
+    {
+      "path": "fixtures/expired-header.json",
+      "bytes": 6000,
+      "sha256": "5908c863f21e3238a5cc4990cbadf438b4234ddbf57812c0d34c4e4339d7cbec"
+    },
+    {
+      "path": "fixtures/expired-page.json",
+      "bytes": 85,
+      "sha256": "e6e530dd295b581e2e610e7c5d0dc19e63b13a1653c90cc27e2c65c1fd61f8f1"
+    },
+    {
+      "path": "fixtures/initial-header.json",
+      "bytes": 6028,
+      "sha256": "a56df9e6b4e237fe5f4cbee0ae2faaa66268ad951b54df4e55a1535a20aaea21"
+    },
+    {
+      "path": "fixtures/initial-page.json",
+      "bytes": 766,
+      "sha256": "40beddf272c2465e7d20b97d5bb216b247ff0b8130ce8800dc947d7d7e1b7cc2"
+    },
+    {
+      "path": "fixtures/legacy-header.json",
+      "bytes": 6005,
+      "sha256": "311efbbd04af510c3760ea719b3aff7c6d1c95023f497fbf3f8b85339026ceca"
+    },
+    {
+      "path": "fixtures/maximum-header.json",
+      "bytes": 49352,
+      "sha256": "5b36143d683936ef920d63889ffee2969de80d6519489f079bb65cd922da551f"
+    },
+    {
+      "path": "fixtures/maximum-native-stage.json",
+      "bytes": 49390,
+      "sha256": "c78e688f22bb0f4731bf1fb9715b38ddcffcc7ff660e6ec1a54daf71908fe92e"
+    },
+    {
+      "path": "fixtures/maximum-native-wake.json",
+      "bytes": 18453,
+      "sha256": "d5448ee4cdd3dc5985eab45152116064e4978610a5644906d5b8b63f72069070"
+    },
+    {
+      "path": "fixtures/maximum-page.json",
+      "bytes": 18402,
+      "sha256": "edd9fa8b1d5035d88ab217794b9c63a3878282ef2ec09435ede4aedde53f2cdf"
+    },
+    {
+      "path": "fixtures/maximum-transport-body.json",
+      "bytes": 18496,
+      "sha256": "42bb5f9824b7d66f4c1649ca35b4d177e37acbfc68fd892d01ae231304346f01"
+    },
+    {
+      "path": "fixtures/maximum-transport-publication.json",
+      "bytes": 49453,
+      "sha256": "c52e51e1da64f50a1cba2611414b0011fb8acdad61caa98b483ccb26c61544c2"
+    },
+    {
+      "path": "fixtures/raw-life-round-down.json",
+      "bytes": 757,
+      "sha256": "25002ace3193cf45bf6300249edc29ef5d94bcd77c6cf2a9268e00e250eae93b"
+    },
+    {
+      "path": "fixtures/raw-life-short-valid.json",
+      "bytes": 751,
+      "sha256": "9e15ff029e0bb40a47d97c4561ff783c8736c3f82c2eda1f1dd5aaecb4958ddd"
+    },
+    {
+      "path": "fixtures/raw-life-underflow.json",
+      "bytes": 753,
+      "sha256": "8eb0712d749dee23251ee07cb8ca46151422b165a73fb927fd1b7bf891e4ecf3"
+    },
+    {
+      "path": "fixtures/scalar-stress-native-wake.json",
+      "bytes": 21806,
+      "sha256": "c7d4c57bba97d409677409d60fee425c4e0e5db2e7f4dba320289efb4ce8f968"
+    },
+    {
+      "path": "fixtures/scalar-stress-page.json",
+      "bytes": 21746,
+      "sha256": "ab2453caea4bd7a35b574b8bc07c6df40c595e5e2ebd54b51febcc0fa1e0e86f"
+    },
+    {
+      "path": "fixtures/scalar-stress-transport-body.json",
+      "bytes": 21840,
+      "sha256": "88b846c7c7a93af84b86b5f815f4b049b61e2ef98040d0b2bbaafe61f16eedbb"
+    },
+    {
+      "path": "inspect-fixture-routes.mjs",
+      "bytes": 3780,
+      "sha256": "338ba304b68b4a2ad5b15d55e71d5ca05d28108960a5b07f601636056afaacb7"
+    },
+    {
+      "path": "pin-inputs.log",
+      "bytes": 77,
+      "sha256": "957e49c3ff0ddc866bacd7b222d2730ad3a3ffad3f5168b363cc8ba0ecbf78f9"
+    },
+    {
+      "path": "pin-inputs.py",
+      "bytes": 2189,
+      "sha256": "b817b9c4d782fec3951679bd9f9921b49a3ed19b9983670335f6489917be7418"
+    },
+    {
+      "path": "route-inspection.json",
+      "bytes": 4020,
+      "sha256": "217ce471378cf3559b7522fae9848811fdd60a01c1d3cef565a1d34e19959c90"
+    },
+    {
+      "path": "route-inspection.log",
+      "bytes": 4020,
+      "sha256": "217ce471378cf3559b7522fae9848811fdd60a01c1d3cef565a1d34e19959c90"
+    },
+    {
+      "path": "source/apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "source/apps/game/src/coop/transport.ts",
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    {
+      "path": "source/apps/game/src/coop/wasm-ports.ts",
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    {
+      "path": "source/apps/game/src/coop/wire.ts",
+      "bytes": 19750,
+      "sha256": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e"
+    },
+    {
+      "path": "source/scripts/test/coop-controller.test.mjs",
+      "bytes": 36697,
+      "sha256": "f8cc86dab7520b2de05ecaefd40f1770f3f703de5d0f9b00b9004c261254af30"
+    },
+    {
+      "path": "source/scripts/test/coop-wasm-ports.test.mjs",
+      "bytes": 20620,
+      "sha256": "b87ce3ab503c546dff67450b4758cdd3e796e575376c36c9599926d6bc1cdacf"
+    },
+    {
+      "path": "source-pins.json",
+      "bytes": 9107,
+      "sha256": "a59fe95180d5e410bebccc2df7872b5bbd03a91d835da1cace01b6e5690f88a2"
+    }
+  ]
+}

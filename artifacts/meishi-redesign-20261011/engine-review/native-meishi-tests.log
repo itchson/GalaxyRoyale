@@ -1,0 +1,48 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.98s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 12 tests
+MEISHI plates [942, 942]; portrait_corner 270; seals [382, 320, 390]; sockets [632, 632, 632, 632, 632, 632, 632, 632]
+test ui_scene::meishi_art::tests::cached_meishi_source_counts_and_anonymous_socket_floor_are_bounded ... ok
+test ui_scene::meishi_art::tests::authored_crystal_bevel_keeper_and_negative_space_landmarks_are_real_cells ... ok
+test ui_scene::meishi_art::tests::meishi_socket_has_opaque_anonymous_floor_and_rejects_unknown_tokens ... ok
+test ui_scene::meishi_art::tests::fractional_fit_retains_source_cells_and_real_clip_uses_all_four_corners ... ok
+test ui_scene::meishi_art::tests::all_fittings_preflight_both_quotas_and_invalid_affines_atomically ... ok
+test ui_scene::tests::meishi_fittings_preflight_each_shared_quota_and_freeze_reduced_color ... ok
+test ui_scene::tests::meishi_short_quota_suppresses_paired_earned_patch_without_affecting_campaign ... ok
+test ui_scene::meishi_art::tests::reduced_motion_freezes_foil_and_animation_never_changes_geometry_or_metal ... ok
+test ui_scene::tests::meishi_fittings_keep_metal_neutral_corporate_enamel_and_whole_clipped_cells ... ok
+REFINED MEISHI kind0/corp0: decoration 12949, complete 52546, transforms 125 /60000
+MEISHI collectible type0/corp0: 53016 /60000 complete cells
+REFINED MEISHI kind0/corp1: decoration 12887, complete 52510, transforms 125 /60000
+MEISHI collectible type0/corp1: 52980 /60000 complete cells
+REFINED MEISHI kind0/corp2: decoration 12957, complete 52932, transforms 125 /60000
+MEISHI kind0/corp0: profile34594 + hull662 + eight patches2056 + chrome/text16333 = 53645 /60000
+MEISHI collectible type0/corp2: 53402 /60000 complete cells
+REFINED MEISHI kind1/corp0: decoration 12949, complete 46476, transforms 125 /60000
+MEISHI collectible type1/corp0: 46946 /60000 complete cells
+MEISHI kind0/corp1: profile34594 + hull688 + eight patches2056 + chrome/text16333 = 53671 /60000
+REFINED MEISHI kind1/corp1: decoration 12887, complete 46440, transforms 125 /60000
+MEISHI collectible type1/corp1: 46910 /60000 complete cells
+MEISHI kind0/corp2: profile34594 + hull1040 + eight patches2056 + chrome/text16333 = 54023 /60000
+REFINED MEISHI kind1/corp2: decoration 12957, complete 46862, transforms 125 /60000
+MEISHI collectible type1/corp2: 47332 /60000 complete cells
+REFINED MEISHI kind2/corp0: decoration 12949, complete 42214, transforms 125 /60000
+MEISHI collectible type2/corp0: 42684 /60000 complete cells
+MEISHI kind1/corp0: profile28524 + hull662 + eight patches2056 + chrome/text16333 = 47575 /60000
+REFINED MEISHI kind2/corp1: decoration 12887, complete 42178, transforms 125 /60000
+MEISHI collectible type2/corp1: 42648 /60000 complete cells
+MEISHI kind1/corp1: profile28524 + hull688 + eight patches2056 + chrome/text16333 = 47601 /60000
+REFINED MEISHI kind2/corp2: decoration 12957, complete 42600, transforms 125 /60000
+test ui_scene::meishi_art::tests::redesigned_close_only_card_retains_every_component_for_nine_profiles ... ok
+MEISHI collectible type2/corp2: 43070 /60000 complete cells
+test ui_scene::tests::meishi_collectible_all_earned_card_admits_every_component_for_nine_profiles ... ok
+MEISHI kind1/corp2: profile28524 + hull1040 + eight patches2056 + chrome/text16333 = 47953 /60000
+MEISHI kind2/corp0: profile24262 + hull662 + eight patches2056 + chrome/text16333 = 43313 /60000
+MEISHI kind2/corp1: profile24262 + hull688 + eight patches2056 + chrome/text16333 = 43339 /60000
+MEISHI kind2/corp2: profile24262 + hull1040 + eight patches2056 + chrome/text16333 = 43691 /60000
+test ui_scene::kikai_integration_tests::meishi_card_all_profile_types_factory_hulls_and_eight_earned_patches_fit_60k ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 229 filtered out; finished in 1.57s
+

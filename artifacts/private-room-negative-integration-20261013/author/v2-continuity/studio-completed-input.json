@@ -1,0 +1,21 @@
+{
+  "author": "/root/audio_review",
+  "source": "Actual narrow author amendment and frozen source-function evidence",
+  "record": {
+    "state": "completed",
+    "observedAt": "2026-10-12T19:50:08.425Z",
+    "taskIds": [
+      "task-71611b9e"
+    ],
+    "evidence": [
+      {
+        "kind": "note",
+        "details": "Isolated work/private-room-negative-implementation/v2-continuity contains frozen exact sources/diff/logs. Parent canonicalSHA256 7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf. Original1b14branch untouched. No listener/browser/native/RTC negative pass; pagehide raw-stopped observation remains qualified.",
+        "label": "Actual v2 author evidence and limits"
+      }
+    ],
+    "agentId": "/root/audio_review",
+    "agentLabel": "Private room negative QA v2 amendment",
+    "summary": "Frozen7c188d4 adds post-policy complete-commit floor, continuous experiment visibility and actual existing child failure signals.17focused+16WASM+10Fifth source-function checks pass; original false passes preserved. Independent reviewer accepted scoped source integration; live acceptance remains open."
+  }
+}

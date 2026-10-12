@@ -1,0 +1,45 @@
+{
+  "item": {
+    "id": "task-d82150b9",
+    "title": "Strict browser publication and replica routing for native Ion Wake samples",
+    "description": "Separate branch from frozen d8/111. Own only wire/controller/wasm-ports, focused tests and22exact native fixtures. Strict raw+f32/32KiB page and65KiB frame limits; one frozen page, cells-only cache skipping, complete replica routing before commit/ACK. Root owns matching integration/build/RTC, engine_fx independent review. Author consumer implementation/typecheck/final73listener-free checks now pass; separate source freeze ready for independent review. Original native refs preserved. An accidental ephemeral HTTP transport test run is recorded explicitly, not presented as a listener-free or RTC check.",
+    "department": "Browser protocol / native presentation",
+    "owner": "/root/audio_score",
+    "status": "active",
+    "priority": "high",
+    "dependencies": [
+      "task-8508cfc5"
+    ],
+    "acceptanceCriteria": [
+      {
+        "text": "Frozen strict browser candidate and meaningful22native-fixture/malformed/completion/teardown tests.",
+        "met": true
+      },
+      {
+        "text": "Independent review plus coherent Root native/browser integration and matching normal bundles.",
+        "met": false
+      },
+      {
+        "text": "Actual current native host/guest trail lifecycle, visible rendering and bounded cleanup; eight/TURN separate.",
+        "met": false
+      }
+    ],
+    "evidence": [
+      {
+        "label": "Exact frozen browser checklist verified against native DTOs",
+        "kind": "artifact",
+        "path": "artifacts/studio-reviews-20261013/browser-checklist/CHECKLIST.md"
+      },
+      {
+        "label": "Actual scoped browser consumer pass and retained execution deviation",
+        "kind": "note",
+        "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-browser/HANDOFF.md SHA8d301e9f1964f4bbf4c8dffed9eac44eece7a406eaa98fb21baaeec4a962fb87. Final listener-free73 focused Node tests and tsc passed; exact22 native111a fixtures pinned. Raw page span/numeric/roster checks, cells-only cache skips, required complete Wake before commit/ACK and replica_wake routing. Red baseline and fixture-token failure retained. Accidental111-case transport run opened ephemeral HTTP listeners, closed via existing teardown and exited0; explicitly separate from final checks. No normal build/new browser/realRTC/native changes; independent review/integration/live gates open."
+      }
+    ],
+    "blocker": "",
+    "revision": 2,
+    "createdAt": "2026-10-12T20:11:47.154Z",
+    "updatedAt": "2026-10-12T20:23:02.352Z"
+  },
+  "revision": 1059
+}

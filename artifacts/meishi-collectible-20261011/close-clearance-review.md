@@ -1,0 +1,7 @@
+# Close-clearance source addendum
+
+Reviewed Root `bdecb3d126246c3aeb3b5c2f53085527bf9de32c` after the immutable final review at `ddd82b1`. Root reported an actual scrolled RENKO 320-wide issuer bounding box intersecting the Close hit region; this is browser evidence supplied by Root, not an independently observed screenshot here. It supersedes any earlier static assumption that text would stay clear of Close.
+
+The exact follow-up changes only the normal and short-landscape MEISHI surface top padding to `calc(var(--ui-hit) + 14px)`. Close stays at top 7px with the same semantic hit size. The scroll region therefore begins at least seven CSS pixels below the Close hit bottom under the existing layout; the bridge clips card children to the actual measured `#meishi-content` box. This directly addresses scrolled text, rather than only its initial glyph position. Portrait fit, earning, native counts, source ordering, accessibility labels, save/progression and the three reviewed native files are unchanged.
+
+No new source blocker found in this two-hunk follow-up. No test, build or browser was rerun by this reviewer. The earlier 33/33 focused checks apply to their exact prior snapshots; final small-viewport usable height, Close interaction and readable scrolling after the added top reservation remain Root's rebuilt normal-browser gate. Earlier report/pins remain unchanged. `close-clearance-hashes.json` pins this addendum, the five relevant Git inputs and native-equality checks.

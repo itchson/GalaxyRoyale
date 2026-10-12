@@ -1,0 +1,77 @@
+.vault-scene {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  font-size: var(--ui-text);
+  line-height: 1.4;
+}
+.vault-scene section {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.vault-scene h3,
+.vault-scene p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.vault-scene h3 {
+  font-size: var(--ui-caption);
+  font-weight: normal;
+}
+@media (min-width: 640px) {
+  .vault-scene {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(10px * var(--ui-scale, 1)) calc(16px * var(--ui-scale, 1));
+    align-items: start;
+  }
+}
+.vault-ledger {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: calc(3px * var(--ui-scale, 1)) 14px;
+  align-items: center;
+}
+.vault-ledger > :nth-child(2n) {
+  text-align: right;
+}
+.vault-risk-total {
+  color: var(--amber);
+}
+.vault-risk-rows {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: calc(2px * var(--ui-scale, 1)) 12px;
+}
+.vault-risk-rows > :nth-child(2n) {
+  text-align: right;
+  color: var(--amber);
+}
+.vault-component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.vault-component {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.vault-component-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+.vault-component-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.vault-empty {
+  color: #7891a5;
+}

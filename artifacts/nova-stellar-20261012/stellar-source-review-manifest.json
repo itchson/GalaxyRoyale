@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "source_commit": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+  "domain": "raw file bytes; committed Git blobs are LF bytes",
+  "source": [
+    {
+      "commit": "36e08b75cf287bb43adf684008cb725c3d9eb2a0",
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "bytes": 71306,
+      "sha256": "a7e2a670a388ee1f6d86dbf1d5c218b97ca56aaf7df70e98a697613135daab9b"
+    },
+    {
+      "commit": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "bytes": 72401,
+      "sha256": "0d4ef0c612d20d888ac92a4d6dce848005d3242092ff889464f04a6817b07068"
+    },
+    {
+      "commit": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+      "path": "crates/game_core/src/stellar_neighborhood_tests.rs",
+      "bytes": 8407,
+      "sha256": "ef04db3538a447cbbd51479ac455c8c6c217ea84f9ecd81586ffbb68f8920333"
+    },
+    {
+      "commit": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 197547,
+      "sha256": "0984b4a786162f5c3a43a9706b40712df4369b32f8cb06ae9d3d0bab038f3d0c"
+    },
+    {
+      "commit": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "commit": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+      "path": "crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    }
+  ],
+  "files": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\HANDOFF.md",
+      "bytes": 7647,
+      "sha256": "5e22d43707e391234382c07aa1e6749e34029ac2584425bfc49bc698e260432e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\manifest.json",
+      "bytes": 34989,
+      "sha256": "31b2b99e9e796d175d7d6aafdfd642e76fdb2139935ffac173ac737502e2a3fb"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\source-boundary.json",
+      "bytes": 1113,
+      "sha256": "9c48acff21fd67141153a727f010758d7cad236787d70ee0bc7776cca8582959"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\focused.log",
+      "bytes": 1121,
+      "sha256": "b6e7d3d1237c3dc28037ecbb769b7d81c23317e6c562b7622cbef2d21510553f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\cosmic-final.log",
+      "bytes": 8964,
+      "sha256": "485c992409be7e6273da6f800db7d44f934cbbf13e1315ac4f7241c099067d03"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\clippy-final.log",
+      "bytes": 186,
+      "sha256": "5dfd5031039121acbc30613b59a58368089afda8006a670db7649773575c64ba"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\packet-audit.json",
+      "bytes": 3912,
+      "sha256": "2816bce4e74b4a228220fa77862996ebc55e684950322ee5a300006fdb1b111a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\render_contact.py",
+      "bytes": 4645,
+      "sha256": "322bd3b58b128d9d36732ce1e9589832d4c8ce6d28fd8e8ff1e4bb6367c63d14"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\native-software-contact.png",
+      "bytes": 31911,
+      "sha256": "0d63d1f203d315b3ddef70281587bc1f61c7d02881d612e65eeabf2aba418b95"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-0-reduced-false.json",
+      "bytes": 5328,
+      "sha256": "7a4a8fc649b3f1d29d062d29670bfe1ea65070bc26494b421993187b1f3fea3d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-0-reduced-true.json",
+      "bytes": 5327,
+      "sha256": "15c135e3d578bd5cdaf82b0c042c74ec7e0d188f91c3bf12e12e0d7bb4bd87eb"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-1-reduced-false.json",
+      "bytes": 5314,
+      "sha256": "63a5c8a4aa5d8845cee89c491daff7d5a59c6d414b64750e295548352838283e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-1-reduced-true.json",
+      "bytes": 5313,
+      "sha256": "bcadfd6f65a8851ca225e78c85d7558820a132782dec968d98ec5a04b98282eb"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-2-reduced-false.json",
+      "bytes": 5314,
+      "sha256": "03ea0a661409df3dcde40e8544464a89c3135d7b520b1f4d50d9d11ee7e1a5d7"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-2-reduced-true.json",
+      "bytes": 5313,
+      "sha256": "6770d9908d2c64d8899ca105f3d3012c1436dd93d28dbe2840d23b428f145bc8"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-3-reduced-false.json",
+      "bytes": 5329,
+      "sha256": "173e43adf267b8ee65846e8b1bca930798d92d602231cf14ebdf2836b8206ac4"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-3-reduced-true.json",
+      "bytes": 5328,
+      "sha256": "d46fdc462e9d8a17a4b9cf70c9bfb898a832467aa292bd5e0f55c3b233c74b5d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-4-reduced-false.json",
+      "bytes": 5316,
+      "sha256": "5e53c58dff120ed8c6fca2740ca03efcadd6f11b26b98c2f0649c8908d33dedd"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-4-reduced-true.json",
+      "bytes": 5315,
+      "sha256": "99116ebcf6ff4a0c6b11759282b44db00bfc828dbd00a7ae2a025cede265f3b6"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-5-reduced-false.json",
+      "bytes": 5337,
+      "sha256": "d80a66f46f2114d2711a4b049a86fd9cfbc2566b41b451722793a6f1633e360a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\before\\system-5-reduced-true.json",
+      "bytes": 5336,
+      "sha256": "c1c061ea81c12ea9d6db3e3c4cfc7e085b24caa6af5035ecca749b34d5bbc0d0"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-0-reduced-false.json",
+      "bytes": 5322,
+      "sha256": "0b7300a83520f0ef133a6117085f2100a161bdd4e795c4010106912fb8820cd9"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-0-reduced-true.json",
+      "bytes": 5321,
+      "sha256": "13f9f950d517d152843b0469f654e85beb4677ea384934f57ec557c042992840"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-1-reduced-false.json",
+      "bytes": 5345,
+      "sha256": "43e1d0ab72003816f98024248dba577322f6298fe7f3a6b7a82f86cc6c0c03e1"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-1-reduced-true.json",
+      "bytes": 5344,
+      "sha256": "9ec848a335f2f105bd22440e05dc1bc74924b4b2a57a6560b52547cc63e76562"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-2-reduced-false.json",
+      "bytes": 5329,
+      "sha256": "1dcfe0db45a70b720a361af8e947847637e9b08e8d558a1657e2c5902d2bdef3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-2-reduced-true.json",
+      "bytes": 5328,
+      "sha256": "bf73843c3d21afc0d0260538db5a24720956f627cb8a36818de79a1f750f7043"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-3-reduced-false.json",
+      "bytes": 5327,
+      "sha256": "5e9769079e571bedba8ab043b847a4c1d0b40f4c76909c97fe8ea9b874953416"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-3-reduced-true.json",
+      "bytes": 5326,
+      "sha256": "1368c2b74641cdbe61427e2c9264058e3de2e6479fece645a1c00972a6177b40"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-4-reduced-false.json",
+      "bytes": 5339,
+      "sha256": "491934d0e2c662c363177c5a38393432bc6a35c8f8268f5054bf21dc32b5a403"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-4-reduced-true.json",
+      "bytes": 5338,
+      "sha256": "4902d23bfa6c0631981ecfe441ea66ebc5fa978e02b81d8e01c54568d2a459b8"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-5-reduced-false.json",
+      "bytes": 5330,
+      "sha256": "96cc25f1daa6d25076cb1f59d006c2953a2e8e814205f1a4195e1c91cc581792"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-5-reduced-true.json",
+      "bytes": 5329,
+      "sha256": "1373fc65e6525f21fcb758ed18bc7821ede1e12afbef20bb15b9ec990d05ccf6"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-neighborhood-independent-review\\REVIEW.md",
+      "bytes": 3848,
+      "sha256": "c350d4167491c40110071d1cd5aba9f9e8b90afdb66324fafc5e2f20de904b1c"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-neighborhood-independent-review\\audit.py",
+      "bytes": 6634,
+      "sha256": "4ac9a3d8b974e95ef5af335c33d414ecbbe7da6e5147a35a29b1e97c14e294cd"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-neighborhood-independent-review\\inspection.json",
+      "bytes": 11031,
+      "sha256": "46b36e1b8bc5c1018d6534831bf3804c5ab508cb0399587d6bb6e3740e25d140"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-neighborhood-independent-review\\source-diff.patch",
+      "bytes": 11658,
+      "sha256": "b00db8d5a19096e11f68061963a58cf5f5231362c346c1b001fc12801ff2639c"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-neighborhood-independent-review\\verify.py",
+      "bytes": 774,
+      "sha256": "c248cadb17ad481e6c83851c63cf3d711b8c4dffc3f2d5922a29387fc8b10cf5"
+    }
+  ]
+}

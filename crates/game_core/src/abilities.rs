@@ -107,7 +107,7 @@ pub const ABILITIES: [AbilityDef; COUNT] = [
         0,
         Blueprint::Starter,
         Effect::PulseLens,
-        "Primary shots deal +10% damage per effective rank.",
+        "Primary shots deal +10% damage per effective rank; every fifth fired shot adds a bolt dealing 150% of primary damage.",
     ),
     def(
         "guard-coil",
@@ -115,7 +115,7 @@ pub const ABILITIES: [AbilityDef; COUNT] = [
         1,
         Blueprint::Starter,
         Effect::GuardCoil,
-        "Adds 20 shield at rank 1, then +8 per effective rank; uses normal shield recharge.",
+        "Grants 30 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage.",
     ),
     def(
         "flux-drive",

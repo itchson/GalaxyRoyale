@@ -1,0 +1,13 @@
+scripts/qa/co-op-transport/client.js 80ms
+scripts/qa/co-op-transport/prepare.mjs 28ms
+scripts/qa/co-op-transport/server.mjs 18ms
+scripts/qa/co-op-transport/wasm-review.js 31ms
+scripts/qa/co-op-transport/wake-observation.js 15ms
+[error] scripts/test/coop-wake-live-qa.test.mjs: SyntaxError: Unexpected token, expected "," (687:8)
+[error]   685 |       return JSON.stringify({ v: 1, results: [{ ok: true, value: op.op === "acquire" ? afterLeave :
+[error]   686 |         op.op === "wake_page" ? page(afterLeave, [{ slot: 0, epoch: 1, born_tick: 10, position: [380, 0], life: 1.9 }]) : null }] });
+[error] > 687 |     } });
+[error]       |        ^
+[error]   688 |   await value.context.initialize("webgpu", "a".repeat(16), WAKE_SCENARIO);
+[error]   689 |   observationBindings(value.context);
+[error]   690 |   vm.runInContext(functionSource(clientSource, "observeWakeRemoval"), value.context);

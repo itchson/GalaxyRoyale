@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "base": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "original_design_sha256": "fd85ae1c87bcf7e44697bd2481aadccd6c924c0fe9b1349aa7e6ae455ca313b3",
+  "original_source_pins_sha256": "a65652f61c13ae635d13490ba4310f46d6cdf39769add81ff017718c61bc8a9b",
+  "addendum": {
+    "path": "ADDENDUM-v2.md",
+    "bytes": 8287,
+    "sha256": "76790eca3f4560c5081c2154776c33e95b20c5e08b6c513e04a7fc937e148280"
+  },
+  "scope": "Independent-design-review refinements only; no source edits or native/browser execution",
+  "captured_at_utc": "2026-10-12T19:11:26.4364759Z"
+}

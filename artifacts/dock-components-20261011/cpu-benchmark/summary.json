@@ -1,0 +1,431 @@
+{
+  "source_commit": "7d3673e3a2f051aeefac6540e443ef7fc5d0ad9c",
+  "trials": 3,
+  "fixture_pairs_per_trial": 12,
+  "warmup_per_path": 60,
+  "iterations_per_path": 600,
+  "timed_frames": 43200,
+  "percentile_domain": "nearest-rank per 600-frame trial; table uses median of the three trial quantiles, not a pooled percentile",
+  "cold_callback_ms": [
+    27.0349,
+    25.5093,
+    26.7173
+  ],
+  "cold_game_render_ms": [
+    27.336,
+    25.8091,
+    27.0154
+  ],
+  "cold_domain": "first dock parse/cache expansion and first larger pooled frame; Game construction and other art cache warmup excluded",
+  "scope": "native optimized CPU extraction only; no browser/WASM/GPU/RSS or device acceptance",
+  "cases": [
+    {
+      "corporation": "pan",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 0.6000000238418579,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10068,
+          "transforms": 102
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1485,
+          "p95": 0.156,
+          "p99": 0.1794
+        },
+        "worst_trial_p95_ms": 0.2342,
+        "worst_trial_p99_ms": 0.2444
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37163,
+          "transforms": 117
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6771,
+          "p95": 0.7232,
+          "p99": 0.897
+        },
+        "worst_trial_p95_ms": 0.7938,
+        "worst_trial_p99_ms": 1.0624
+      },
+      "median_trial_p50_added_ms": 0.5286000000000001
+    },
+    {
+      "corporation": "pan",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 1.600000023841858,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9497,
+          "transforms": 33
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1021,
+          "p95": 0.107,
+          "p99": 0.1288
+        },
+        "worst_trial_p95_ms": 0.1611,
+        "worst_trial_p99_ms": 0.1664
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36592,
+          "transforms": 48
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6119,
+          "p95": 0.6671,
+          "p99": 0.8463
+        },
+        "worst_trial_p95_ms": 0.6799,
+        "worst_trial_p99_ms": 0.9947
+      },
+      "median_trial_p50_added_ms": 0.5098
+    },
+    {
+      "corporation": "pan",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 0.6000000238418579,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9840,
+          "transforms": 91
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1321,
+          "p95": 0.1366,
+          "p99": 0.1676
+        },
+        "worst_trial_p95_ms": 0.1517,
+        "worst_trial_p99_ms": 0.176
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36935,
+          "transforms": 106
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6435,
+          "p95": 0.702,
+          "p99": 0.8151
+        },
+        "worst_trial_p95_ms": 0.7668,
+        "worst_trial_p99_ms": 1.1331
+      },
+      "median_trial_p50_added_ms": 0.5114
+    },
+    {
+      "corporation": "pan",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 1.600000023841858,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9484,
+          "transforms": 24
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.097,
+          "p95": 0.1003,
+          "p99": 0.1024
+        },
+        "worst_trial_p95_ms": 0.1024,
+        "worst_trial_p99_ms": 0.1331
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36579,
+          "transforms": 39
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6131,
+          "p95": 0.6509,
+          "p99": 0.6992
+        },
+        "worst_trial_p95_ms": 1.0392,
+        "worst_trial_p99_ms": 1.0814
+      },
+      "median_trial_p50_added_ms": 0.5161
+    },
+    {
+      "corporation": "renko",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 0.6000000238418579,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10068,
+          "transforms": 102
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1497,
+          "p95": 0.1573,
+          "p99": 0.2196
+        },
+        "worst_trial_p95_ms": 0.3097,
+        "worst_trial_p99_ms": 0.3531
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37163,
+          "transforms": 117
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6786,
+          "p95": 0.7454,
+          "p99": 0.9224
+        },
+        "worst_trial_p95_ms": 1.2406,
+        "worst_trial_p99_ms": 1.2909
+      },
+      "median_trial_p50_added_ms": 0.5288999999999999
+    },
+    {
+      "corporation": "renko",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 1.600000023841858,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9497,
+          "transforms": 33
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1017,
+          "p95": 0.1084,
+          "p99": 0.1512
+        },
+        "worst_trial_p95_ms": 0.1883,
+        "worst_trial_p99_ms": 0.2206
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36592,
+          "transforms": 48
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6191,
+          "p95": 0.6373,
+          "p99": 0.6557
+        },
+        "worst_trial_p95_ms": 0.6699,
+        "worst_trial_p99_ms": 0.7302
+      },
+      "median_trial_p50_added_ms": 0.5174
+    },
+    {
+      "corporation": "renko",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 0.6000000238418579,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9840,
+          "transforms": 91
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1309,
+          "p95": 0.1346,
+          "p99": 0.1647
+        },
+        "worst_trial_p95_ms": 0.2356,
+        "worst_trial_p99_ms": 0.2846
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36935,
+          "transforms": 106
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6367,
+          "p95": 0.6637,
+          "p99": 0.7372
+        },
+        "worst_trial_p95_ms": 0.6905,
+        "worst_trial_p99_ms": 0.7622
+      },
+      "median_trial_p50_added_ms": 0.5058
+    },
+    {
+      "corporation": "renko",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 1.600000023841858,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9484,
+          "transforms": 24
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.0972,
+          "p95": 0.1024,
+          "p99": 0.1187
+        },
+        "worst_trial_p95_ms": 0.1075,
+        "worst_trial_p99_ms": 0.1424
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36579,
+          "transforms": 39
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6015,
+          "p95": 0.6216,
+          "p99": 0.6453
+        },
+        "worst_trial_p95_ms": 0.6592,
+        "worst_trial_p99_ms": 0.8864
+      },
+      "median_trial_p50_added_ms": 0.5043000000000001
+    },
+    {
+      "corporation": "hugo",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 0.6000000238418579,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 11020,
+          "transforms": 102
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1588,
+          "p95": 0.1629,
+          "p99": 0.1821
+        },
+        "worst_trial_p95_ms": 0.166,
+        "worst_trial_p99_ms": 0.1853
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 38115,
+          "transforms": 117
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6827,
+          "p95": 0.7457,
+          "p99": 1.2114
+        },
+        "worst_trial_p95_ms": 0.8323,
+        "worst_trial_p99_ms": 1.2535
+      },
+      "median_trial_p50_added_ms": 0.5239
+    },
+    {
+      "corporation": "hugo",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 1.600000023841858,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10449,
+          "transforms": 33
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1126,
+          "p95": 0.1161,
+          "p99": 0.1194
+        },
+        "worst_trial_p95_ms": 0.2017,
+        "worst_trial_p99_ms": 0.2262
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37544,
+          "transforms": 48
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6188,
+          "p95": 0.6349,
+          "p99": 0.6889
+        },
+        "worst_trial_p95_ms": 1.0677,
+        "worst_trial_p99_ms": 1.1098
+      },
+      "median_trial_p50_added_ms": 0.5062
+    },
+    {
+      "corporation": "hugo",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 0.6000000238418579,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10792,
+          "transforms": 91
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1433,
+          "p95": 0.1525,
+          "p99": 0.1999
+        },
+        "worst_trial_p95_ms": 0.2857,
+        "worst_trial_p99_ms": 0.3469
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37887,
+          "transforms": 106
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6502,
+          "p95": 0.6962,
+          "p99": 1.1166
+        },
+        "worst_trial_p95_ms": 1.2618,
+        "worst_trial_p99_ms": 1.332
+      },
+      "median_trial_p50_added_ms": 0.5069
+    },
+    {
+      "corporation": "hugo",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 1.600000023841858,
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10436,
+          "transforms": 24
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.1087,
+          "p95": 0.1396,
+          "p99": 0.1787
+        },
+        "worst_trial_p95_ms": 0.1971,
+        "worst_trial_p99_ms": 0.2184
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37531,
+          "transforms": 39
+        },
+        "median_trial_quantile_ms": {
+          "p50": 0.6281,
+          "p95": 0.7679,
+          "p99": 1.1678
+        },
+        "worst_trial_p95_ms": 0.8878,
+        "worst_trial_p99_ms": 1.3064
+      },
+      "median_trial_p50_added_ms": 0.5194
+    }
+  ]
+}

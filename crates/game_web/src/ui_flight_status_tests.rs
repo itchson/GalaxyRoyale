@@ -30,7 +30,7 @@ fn bounds_check(frame: &FrameBuilder, origin: Vec2, layout: FlightStatusLayout) 
             if pixel.color >> 24 == 0 {
                 continue;
             }
-            let transform = batch.transforms[pixel.transform as usize];
+            let transform = batch.transforms[pixel.transform_slot()];
             assert_eq!(transform.b[2..], [0.0, 0.0], "UI remains unlit");
             for corner in [
                 Vec2::splat(-0.5),
@@ -65,7 +65,7 @@ fn packet(frame: &FrameBuilder) -> Vec<PackedCell> {
         .iter()
         .flat_map(|batch| {
             batch.pixels.iter().map(|pixel| {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 (pixel.local, pixel.color, t.a, t.b)
             })
         })
@@ -93,7 +93,7 @@ fn micro_footer_and_minimap_stay_inside_their_shared_reservations() {
     assert!(frame.frame().pixel_count > 0);
     for batch in &frame.frame().batches {
         for p in &batch.pixels {
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             let center =
                 t.point(Vec2::from_array(p.local)) + Vec2::from_array(layout.viewport) * 0.5;
             if let Some(strip) = layout.strip
@@ -149,7 +149,7 @@ fn micro_text_clips_whole_cells_and_charges_actual_occupied_objects() {
             if p.color >> 24 == 0 {
                 continue;
             }
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             for corner in [
                 Vec2::splat(-0.5),
                 Vec2::splat(0.5),
@@ -185,6 +185,134 @@ fn micro_text_clips_whole_cells_and_charges_actual_occupied_objects() {
         before,
         "five-height glyphs do not escape shorter slot"
     );
+}
+
+#[test]
+fn right_aligned_micro_cells_keep_exact_size_clip_and_both_budgets() {
+    let parent = Transform {
+        position: Vec2::new(170.25, -82.5),
+        rotation: 0.3,
+        scale: Vec2::new(1.7, 0.9),
+    }
+    .affine()
+    .compose(
+        Transform {
+            rotation: -0.2,
+            ..Transform::default()
+        }
+        .affine(),
+    );
+    for (rect, text, expected_chars) in [
+        ([7.25, 13.5, 172.0, 5.0], "ABC", 3),
+        ([7.25, 13.5, 6.0, 5.0], "ABCD", 1),
+    ] {
+        let mut frame = FrameBuilder::new();
+        let mut quota = 200;
+        let mut work = 200;
+        micro_text_right(
+            &mut frame, parent, rect, text, WHITE, None, &mut quota, &mut work,
+        );
+        let expected: usize = text
+            .chars()
+            .take(expected_chars)
+            .map(|c| RoyaleMicro::body(c).occupied_count())
+            .sum();
+        assert_eq!(frame.frame().pixel_count, expected);
+        assert_eq!(200 - quota, expected);
+        assert_eq!(quota, work);
+        let mut max_x = f32::NEG_INFINITY;
+        for batch in &frame.frame().batches {
+            for cell in &batch.pixels {
+                assert_ne!(cell.color >> 24, 0);
+                let t = batch.transforms[cell.transform_slot()];
+                for corner in [
+                    Vec2::splat(-0.5),
+                    Vec2::splat(0.5),
+                    Vec2::new(-0.5, 0.5),
+                    Vec2::new(0.5, -0.5),
+                ] {
+                    let p = parent
+                        .try_inverse_point(t.point(Vec2::from_array(cell.local) + corner))
+                        .unwrap();
+                    assert!(p.x >= rect[0] - 0.001 && p.x <= rect[0] + rect[2] + 0.001);
+                    assert!(p.y >= rect[1] - 0.001 && p.y <= rect[1] + rect[3] + 0.001);
+                    max_x = max_x.max(p.x);
+                }
+            }
+        }
+        assert!((max_x - rect[0] - rect[2]).abs() < 0.001);
+        let before = packet(&frame);
+        let previous_quota = quota;
+        micro_text_right(
+            &mut frame,
+            parent,
+            [0.0, 0.0, f32::NAN, 5.0],
+            "ABC",
+            WHITE,
+            None,
+            &mut quota,
+            &mut work,
+        );
+        assert_eq!(packet(&frame), before);
+        assert_eq!(quota, previous_quota);
+    }
+    let mut frame = FrameBuilder::new();
+    let mut quota = 200;
+    let mut work = 200;
+    let clip = [14.0, 0.0, 3.0, 5.0];
+    micro_text_right(
+        &mut frame,
+        AffineTransform::default(),
+        [0.0, 0.0, 20.0, 5.0],
+        "ABC",
+        CYAN,
+        Some(clip),
+        &mut quota,
+        &mut work,
+    );
+    assert_eq!(frame.frame().pixel_count, 200 - quota);
+    assert_eq!(quota, work);
+    assert!(
+        frame
+            .frame()
+            .batches
+            .iter()
+            .flat_map(|b| &b.pixels)
+            .any(|p| p.color >> 24 == 0)
+    );
+    for b in &frame.frame().batches {
+        for p in &b.pixels {
+            if p.color >> 24 == 0 {
+                continue;
+            }
+            let t = b.transforms[p.transform_slot()];
+            for corner in [
+                Vec2::splat(-0.5),
+                Vec2::splat(0.5),
+                Vec2::new(-0.5, 0.5),
+                Vec2::new(0.5, -0.5),
+            ] {
+                let point = t.point(Vec2::from_array(p.local) + corner);
+                assert!(point.x >= clip[0] && point.x <= clip[0] + clip[2]);
+                assert!(point.y >= 0.0 && point.y <= 5.0);
+            }
+        }
+    }
+    let mut none = FrameBuilder::new();
+    let mut insufficient = RoyaleMicro::body('A').occupied_count() - 1;
+    let mut enough = 200;
+    micro_text_right(
+        &mut none,
+        AffineTransform::default(),
+        [0.0, 0.0, 20.0, 5.0],
+        "A",
+        WHITE,
+        None,
+        &mut insufficient,
+        &mut enough,
+    );
+    assert_eq!(none.frame().pixel_count, 0);
+    assert_eq!(enough, 200);
 }
 
 #[test]
@@ -247,7 +375,10 @@ fn shaped_segment_cells_keep_fractional_health_and_static_reduced_motion() {
             },
         );
         bounds_check(frame, -Vec2::from_array(layout.viewport) * 0.5, layout);
-        assert!(frame.frame().pixel_count < 120);
+        assert!(
+            frame.frame().pixel_count <= 314,
+            "bounded occupied arc layers"
+        );
     }
     assert_ne!(
         packet(&low),
@@ -258,8 +389,8 @@ fn shaped_segment_cells_keep_fractional_health_and_static_reduced_motion() {
     i.insets = [8.0, 12.0, 9.0, 15.0];
     i.zoom = 1.6;
     let layout = FlightStatusLayout::new(&i).unwrap();
-    assert_eq!([rect[2], rect[3]], [44.0, 9.0]);
-    assert_eq!(layout.vitals.unwrap()[2..], [44.0, 9.0]);
+    assert_eq!([rect[2], rect[3]], VITALS_SIZE);
+    assert_eq!(layout.vitals.unwrap()[2..], VITALS_SIZE);
 }
 
 #[test]
@@ -311,7 +442,9 @@ fn compact_navigation_keeps_room_for_essential_fallback_and_context_cells() {
             assert!(!hud_overlap(stats, navigation, 0.0));
             assert_eq!([navigation[2], navigation[3]], [44.0, 44.0]);
             assert!(
-                navigation[0] == 6.0 && navigation[1] + navigation[3] < layout.strip.unwrap()[1]
+                navigation[0] + navigation[2]
+                    == layout.strip.unwrap()[0] + layout.strip.unwrap()[2]
+                    && navigation[1] + navigation[3] < layout.strip.unwrap()[1]
             );
         }
         assert!(stats[2] >= "H100 S100 L1 C0/16".len() as f32 * RoyaleMicro::ADVANCE - 1.0);
@@ -348,7 +481,7 @@ fn footer_and_attached_bars_share_bounds_at_supported_extents_and_insets() {
             }
             if let Some(vitals) = layout.vitals {
                 assert!(!hud_overlap(vitals, strip, 0.0));
-                assert_eq!([vitals[2], vitals[3]], [44.0, 9.0]);
+                assert_eq!([vitals[2], vitals[3]], VITALS_SIZE);
             }
             let [top, right, bottom, left] = insets;
             let render_camera = [2.0 + (left - right) * 0.5, -1.0 + (top - bottom) * 0.5];
@@ -400,8 +533,8 @@ fn current_unshaken_projection_scales_offset_and_radius_but_not_bar_geometry() {
             let view = CameraView::new(world_camera, Vec2::from_array(i.viewport), zoom).unwrap();
             let p = view.world_to_screen(i.player) - Vec2::new(5.0, 9.0);
             assert!((rect[0] + 22.0 - p.x).abs() < 0.001);
-            assert!((rect[1] + 20.0 * zoom + 14.0 - p.y).abs() < 0.001);
-            assert_eq!([rect[2], rect[3]], [44.0, 9.0]);
+            assert!((rect[1] - 20.0 * zoom - VITALS_CLEARANCE - p.y).abs() < 0.001);
+            assert_eq!([rect[2], rect[3]], VITALS_SIZE);
             // Footer exports have no moving-world/zoom dependency.
             let mut stationary = input(i.viewport, false);
             stationary.insets = i.insets;
@@ -436,17 +569,17 @@ fn offscreen_ship_never_becomes_a_clamped_edge_marker_and_invalid_projection_fai
 fn attached_tracks_avoid_a_real_core_and_compact_boss_priority_retains_footer_health() {
     let mut i = input([533.0, 300.0], false);
     let original = FlightStatusLayout::new(&i).unwrap();
-    let top = original.vitals.unwrap();
+    let below = original.vitals.unwrap();
     // World coordinates are projected through the same actual CameraView.
     let view = CameraView::new(Vec2::ZERO, Vec2::from_array(i.viewport), 1.0).unwrap();
     i.protected_core = Some((
-        view.screen_to_world(Vec2::new(top[0] + 22.0, top[1] + 4.5)),
+        view.screen_to_world(Vec2::new(below[0] + 22.0, below[1] + 6.0)),
         8.0,
     ));
     let protected = FlightStatusLayout::new(&i).unwrap();
     assert!(
-        protected.vitals.unwrap()[1] > 150.0,
-        "choose below ship instead of hiding its core"
+        protected.vitals.is_none(),
+        "a blocked below-ship arc falls back to truthful footer health"
     );
     i.attached_vitals = false;
     let compact = FlightStatusLayout::new(&i).unwrap();
@@ -456,6 +589,28 @@ fn attached_tracks_avoid_a_real_core_and_compact_boss_priority_retains_footer_he
     draw_flight_status(&mut f, &hud(), [0.0; 2], &compact, None, 0.0, true, false);
     bounds_check(&f, -Vec2::from_array(compact.viewport) * 0.5, compact);
     assert!(f.frame().pixel_count > 0);
+}
+
+#[test]
+fn compact_touch_boss_preserves_essential_text_above_actual_pad_rescue_area() {
+    let mut i = input([240.0, 180.0], true);
+    i.insets = [0.0, 20.0, 0.0, 20.0];
+    i.zoom = 1.6;
+    i.attached_vitals = false;
+    i.protected_core = Some((Vec2::new(0.0, -70.0), 5.0));
+    let l = FlightStatusLayout::new(&i).unwrap();
+    assert!(l.navigation.is_none() && l.vitals.is_none());
+    let pads = touch_hit_rects(l.viewport);
+    let strip = l.strip.unwrap();
+    assert_eq!(
+        strip,
+        [14.0, pads[0][1].min(pads[1][1]) - 26.0, 180.0, 22.0]
+    );
+    assert!(pads.iter().all(|p| !hud_overlap(strip, *p, 2.0)));
+    let mut frame = FrameBuilder::new();
+    draw_flight_status(&mut frame, &hud(), [0.0; 2], &l, None, 0.0, true, false);
+    bounds_check(&frame, -Vec2::from_array(l.viewport) * 0.5, l);
+    assert!(frame.frame().pixel_count > 0);
 }
 
 #[test]
@@ -476,7 +631,7 @@ fn real_contact_hit_is_separate_from_font_slot_and_forces_truthful_footer_fallba
     };
     i.status_hits = flight_status_hits(&scene, [0.0; 4]);
     let layout = FlightStatusLayout::new(&i).unwrap();
-    assert_eq!(layout.context, Some([106.0, 164.0, 122.0, 5.0]));
+    assert_eq!(layout.context, Some([138.0, 72.0, 172.0, 5.0]));
     assert!(
         layout.vitals.is_none(),
         "actual44px hit blocks below-ship track"
@@ -567,7 +722,7 @@ fn semantic_status_line_clips_whole_glyph_cells_and_preserves_ui_budget_and_unli
         assert!(f.frame().pixel_count > 0 && f.frame().pixel_count < 500);
         for b in &f.frame().batches {
             for p in &b.pixels {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 assert_eq!(t.b[2..], [0.0, 0.0]);
                 if p.color >> 24 == 0 {
                     continue;

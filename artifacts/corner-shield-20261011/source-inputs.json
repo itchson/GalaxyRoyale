@@ -1,0 +1,60 @@
+{
+  "head": "f69d6cbe8d58d182da6e45460b42b963655c5fbc",
+  "inputs": [
+    {
+      "path": "crates/game_core/src/shield_progression.rs",
+      "bytes": 3660,
+      "sha256": "2f66cac983c18cb98da24826d21e573e3ab90adc15d460037f85e466086302bc"
+    },
+    {
+      "path": "crates/game_core/src/shield_progression_tests.rs",
+      "bytes": 25500,
+      "sha256": "9654eda7d99e8bf18b121992c2a6ede65c3609c72026bdfdb4fb81c60a2f29f4"
+    },
+    {
+      "path": "crates/game_web/src/flight_icons.rs",
+      "bytes": 10702,
+      "sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 82871,
+      "sha256": "30feb18eda281b3d58af1b7167ccc6ac21637f2f41651e80e6ce0f1459df644d"
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "bytes": 365,
+      "sha256": "577f265eaa8a2a4997084ff868efafd34d42dc52b55ae3528402d4699f2ae32f"
+    },
+    {
+      "path": "apps/game/src/flight-menu.ts",
+      "bytes": 7794,
+      "sha256": "9b193b4f5a764b6fb075106049bc66b61cf837067e224280ce826ed389578100"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "bytes": 18584,
+      "sha256": "a1bb0d8631092131d0c43574405a27fd704fbc10ef90fb22e747d3aa98026e0b"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "bytes": 24971,
+      "sha256": "c0ffefdcf8b2dcfc8adf53d809f8dd39eae45cd77da768c20a11c3d3737e972d"
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "bytes": 8963,
+      "sha256": "0ce3bb27a56a34ef385db5c5a66f0e6a619573310874639a75e57708d701f807"
+    },
+    {
+      "path": "apps/game/src/dialogue.ts",
+      "bytes": 9634,
+      "sha256": "e1bc434dd96f1769485d4924de8fbe336cbfe2a02da5543713aff424fee14177"
+    },
+    {
+      "path": "assets/ui/flight-icons/atlas.json",
+      "bytes": 99595,
+      "sha256": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73"
+    }
+  ]
+}

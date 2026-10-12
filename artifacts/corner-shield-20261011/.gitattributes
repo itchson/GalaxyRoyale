@@ -1,0 +1,2 @@
+# Evidence hashes include the actual captured bytes, including log line endings.
+* -text

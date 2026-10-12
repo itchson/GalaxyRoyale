@@ -1,0 +1,1450 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "abilities-filter-fixed-webgpu-848.png",
+      "bytes": 35765,
+      "sha256": "4fe5fa2bb8fb5f12876bd82b869aa21ec8ce44dfc261499c30792923be5b3c02"
+    },
+    {
+      "path": "abilities-webgpu-848.png",
+      "bytes": 39534,
+      "sha256": "128b43a2564bd690d8ff2fd36e5ae5fac210a067095e2bf3c6d28e13bee78afe"
+    },
+    {
+      "path": "card-webgl2-1280.png",
+      "bytes": 71723,
+      "sha256": "518f2f3f4a7904a9a10f452bd273394b09841938c60446f3cd4e374ac493dddd"
+    },
+    {
+      "path": "card-webgl2-848-patches.png",
+      "bytes": 34450,
+      "sha256": "c8b6db0c209421c87dbf74b098c57dec900e8ada7860b0d7b2c08dae01d837c4"
+    },
+    {
+      "path": "card-webgl2-848.png",
+      "bytes": 41431,
+      "sha256": "9e42a8c162d50277edeadfbd02c4a67dc7c0711029b38d9d4b72b70b5a6c9ff0"
+    },
+    {
+      "path": "card-webgpu-848.png",
+      "bytes": 40971,
+      "sha256": "755654107329cd89340b8273181708c4a3c65536cf1aeaa4c78b20e0ab5c734b"
+    },
+    {
+      "path": "cargo-webgpu-848.png",
+      "bytes": 31892,
+      "sha256": "cb62109f1a9059c33eeb0ce9ed035dc54c2f5f09065b5e9592509232f81d437e"
+    },
+    {
+      "path": "initial-browser-build.json",
+      "bytes": 392,
+      "sha256": "9b6f5c4e29c57a21da44a5f2b000c7b6504c5ae3f5660f6d646838634beb9092"
+    },
+    {
+      "path": "layout-browser-build.json",
+      "bytes": 392,
+      "sha256": "8fbd1add5e1da3a30066c22573f486e2f93f8a4d2b6fbba5921b1d830332ea45"
+    },
+    {
+      "path": "meishi-browser-fix-shell-corrected.log",
+      "bytes": 44458,
+      "sha256": "3077f9588d5dfae7627a2cb1a90f95cca804c455b71567e7e7b13b43c4df6250"
+    },
+    {
+      "path": "meishi-browser-fix-shell.log",
+      "bytes": 69381,
+      "sha256": "0a8b1845a6f768c1c97dde98b54314b17efeafdad3547fde2c94072564e4e7a4"
+    },
+    {
+      "path": "meishi-browser-fix-types.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "meishi-cargo-tests.log",
+      "bytes": 400,
+      "sha256": "8bc738029fe400e04458e1dbe83ecddad84919e85e56ff02aece25dcef2fd49f"
+    },
+    {
+      "path": "meishi-compact-final-shell.log",
+      "bytes": 44480,
+      "sha256": "926890bdec7c93ddea3053640e91269e12631ebe253238e8c2679aad8b0456df"
+    },
+    {
+      "path": "meishi-compact-final-types.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "meishi-final-build.log",
+      "bytes": 1348,
+      "sha256": "1691c6c8771b57833698f4c6ca2eb2a38b6a66dddddb8bef2802be7d6ea4d450"
+    },
+    {
+      "path": "meishi-final-shell.log",
+      "bytes": 44446,
+      "sha256": "07d889f2ecf9d68f2d0326be91b1430b754dbbd0aaa424054d922505c1f44527"
+    },
+    {
+      "path": "meishi-final-types.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "meishi-game-build.log",
+      "bytes": 1444,
+      "sha256": "c83926aaef1a9a99b0261e0040332daf9795289f8443f513d4512f0f3dc7fb12"
+    },
+    {
+      "path": "meishi-layout-build.log",
+      "bytes": 1347,
+      "sha256": "bfe3a6a1ec17ee8f6d2dcf518e17b15c96e5c9983aa14770d60d99c691d8ffab"
+    },
+    {
+      "path": "meishi-preview-error.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "meishi-preview.log",
+      "bytes": 75,
+      "sha256": "000ccf3e9d6053a598d6c3bf96664cc76306ce4fa90a3ae7b7d0e3fff514364a"
+    },
+    {
+      "path": "meishi-root-clippy.log",
+      "bytes": 265,
+      "sha256": "ffd76cfc9cfd5a16b4dab6fe2682f3b825dbfe229f2d3d5d7ca1fc7632aee395"
+    },
+    {
+      "path": "meishi-root-focused.log",
+      "bytes": 7319,
+      "sha256": "8af51edbef03fc1e9d982818a1d21cd2bb8177eefccabf8c3868f6fa1d4e3316"
+    },
+    {
+      "path": "meishi-root-native.log",
+      "bytes": 66189,
+      "sha256": "8bf16798483a2d6da104ed307b071879de5fc341abc5137219bcd717f9b67625"
+    },
+    {
+      "path": "meishi-root-shell-corrected.log",
+      "bytes": 43591,
+      "sha256": "3237edc9d3b783820982c1f0015376de91e5fa02b6cde8d2315306c59f3e59b8"
+    },
+    {
+      "path": "meishi-root-shell-first.log",
+      "bytes": 44903,
+      "sha256": "1062add15f1f9e96ed8b8d22ef3ba599fba53dbdf2788a1a44e2a5ed7c8c34eb"
+    },
+    {
+      "path": "meishi-root-types.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "meishi-standalone-build.log",
+      "bytes": 1348,
+      "sha256": "328829be4c236c5c29d18657f7a47a3672cca8f2a21b232e8701315200268494"
+    },
+    {
+      "path": "meishi-standalone-clippy.log",
+      "bytes": 168,
+      "sha256": "84e613a057635089b6e8885a3fbc153b2fdcd21ecb05c82b21d9bda16f390c01"
+    },
+    {
+      "path": "meishi-standalone-final-build.log",
+      "bytes": 1347,
+      "sha256": "0ea465f6a72cb3d9ac87d09245e832a7cbea6d644722de4dc285d9a5f146798e"
+    },
+    {
+      "path": "meishi-standalone-final-shell.log",
+      "bytes": 44824,
+      "sha256": "f6ffe34eca344cabb7d9e799fa207eac51353123d9b8a96297dc260a8f7147a3"
+    },
+    {
+      "path": "meishi-standalone-final-types.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "meishi-standalone-native-all.log",
+      "bytes": 23060,
+      "sha256": "ad44a372e8ebe0d510dd7843787a8d53e9c4c49d492ce872ea7f56323c0e0119"
+    },
+    {
+      "path": "meishi-standalone-native.log",
+      "bytes": 569,
+      "sha256": "42fa99886845b4ccfe863449ae80cd307ef733411b131095c337e99a3903b7f2"
+    },
+    {
+      "path": "meishi-standalone-shell-corrected.log",
+      "bytes": 44722,
+      "sha256": "aaebcdd44ee9eef217a486db16785768080a99eb1767f6eb7abeeefefebbcb4c"
+    },
+    {
+      "path": "meishi-standalone-shell.log",
+      "bytes": 54416,
+      "sha256": "ddf89cedcb80d779cca14d20dcea5b4d6355d8c64a067418280468de7f151fba"
+    },
+    {
+      "path": "meishi-standalone-types.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "meishi-wasm-contract.log",
+      "bytes": 1121,
+      "sha256": "0e5b870e3fa98be0eb459d17e4fc33c10e9ceb4f88a873ae9e7eb9af1eaa489c"
+    },
+    {
+      "path": "negative-card-single-column-1280.png",
+      "bytes": 76907,
+      "sha256": "148acc45ea3230cfdbb95042602c30b9a0327e5c3cd5eac985ff1baa1b8d6def"
+    },
+    {
+      "path": "pan-dock256-root-tests.log",
+      "bytes": 116,
+      "sha256": "d09bbbaac0853f69f76c6239cfef410b416fba1f7bf9ad525987408f92b1ae08"
+    },
+    {
+      "path": "pan-dock256-root-verification.log",
+      "bytes": 295,
+      "sha256": "daa389f031a5d8d640815127e32dbf7e9cb75ec4ddc07654783ae37dbb4c8217"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5420,
+      "sha256": "08a6170d0c259b9e0c0fbd161fec167599bf89cd7a9d51dcd0c68c80906e7818"
+    },
+    {
+      "path": "renderer-webgl2.txt",
+      "bytes": 789,
+      "sha256": "0c4668ea083ebc1f71b5b2bfbc4f17bfa3bd7f894d4dec8cdd3a827646393e85"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/apps/game/src/campaign.css",
+      "bytes": 4111,
+      "sha256": "f7eca31f4e95b2d64f6d2539fe2f0c88ffe796fa022b5b0274d82bc7059b156f"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/apps/game/src/campaign.ts",
+      "bytes": 9313,
+      "sha256": "fdb9ebf0a1c27bd3aa1c81f43c4cbd0ce8ef3b4fed5a073833dafec774b0fb45"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/apps/game/src/loadout.css",
+      "bytes": 4044,
+      "sha256": "f56d16881f58bf46be1876df461842089e50e70cdcaa95bf8bffa5ba4134457a"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/apps/game/src/loadout.ts",
+      "bytes": 20866,
+      "sha256": "42e6f3ada02c6114d24c6fb6829636971a7aaf866cb17585a7ad8bbdea633c1d"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/apps/game/src/main.ts",
+      "bytes": 78953,
+      "sha256": "e61a4a21ad9df5e2d59f1d4bc0ae547b8be42024e834f86c1eb7418fb29d579c"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/apps/game/src/pixel-ui.ts",
+      "bytes": 18601,
+      "sha256": "42243d4735427de719369828a5204c9f35c3091ff0e6cd6cf999c5e256fc8277"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/crates/game_core/src/abilities.rs",
+      "bytes": 14884,
+      "sha256": "394d8dcd566d4bbcf2a9d2dea7320512248dfc16b83fa3ee98d767849ba47509"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/crates/game_core/src/campaign.rs",
+      "bytes": 21828,
+      "sha256": "faff4f8e2fdcd4ee134981a241c0baa7cd842c3a4a865a8bb3587018e85499e6"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/crates/game_core/src/ship_progression.rs",
+      "bytes": 24196,
+      "sha256": "257ce372b5ceba84dcc7dd4211a0fb995031057e8f9f00effffd1435ccb45f2a"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/package.json",
+      "bytes": 1085,
+      "sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/pnpm-lock.yaml",
+      "bytes": 21972,
+      "sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/scripts/test/campaign.test.mjs",
+      "bytes": 7931,
+      "sha256": "41a14d1244b1d2d257330fe7c22965f141532a94cb8d507f1786c8e2547d1db3"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/scripts/test/forge-integration.test.mjs",
+      "bytes": 16270,
+      "sha256": "b4a1a113161b205739bba703404569dfca88ce2329bca70a380c184907b29794"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/scripts/test/loadout.test.mjs",
+      "bytes": 22537,
+      "sha256": "4bda76f0541c4cc33dfab16c2ff06570e93ed896b87b03f1f43b82aedcb87b85"
+    },
+    {
+      "path": "reviews/collection-ui/committed-inputs/tsconfig.json",
+      "bytes": 291,
+      "sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db"
+    },
+    {
+      "path": "reviews/collection-ui/first-focused-fail.log",
+      "bytes": 18689,
+      "sha256": "78473b27ac26fd8667b25e0ac2e35601238332d4642284c858909971724002fc"
+    },
+    {
+      "path": "reviews/collection-ui/focused-tests.log",
+      "bytes": 3430,
+      "sha256": "cddc847ee8f4bfcdf4d5d78ff9ac21353b2f045ff6c045c184fccb0887a4c74a"
+    },
+    {
+      "path": "reviews/collection-ui/freeze.mjs",
+      "bytes": 2386,
+      "sha256": "0e2abfeb5eb74ebbb2263ccf4f24a7bbc302b0bde979e6ad356a9a7878f766c3"
+    },
+    {
+      "path": "reviews/collection-ui/frozen-hashes.json",
+      "bytes": 6309,
+      "sha256": "83e8e8f44a2dbd28fee92c8a055d77547fd1940cafd9af658def973e74c786c0"
+    },
+    {
+      "path": "reviews/collection-ui/full-shell-tests.log",
+      "bytes": 43950,
+      "sha256": "4fb40d2ee8c8b55d98cac9e352cfa99b62aa97cc3fdbc427fb21ec69803fecd3"
+    },
+    {
+      "path": "reviews/collection-ui/HANDOFF.md",
+      "bytes": 5426,
+      "sha256": "dfec9daeeafa1781d4e71b192d85b8b0100df172881129bfd4eb3f83fc83495a"
+    },
+    {
+      "path": "reviews/collection-ui/new-filter-fixture-fail.log",
+      "bytes": 4596,
+      "sha256": "7e2f1121b8367d987fbf778856e2cf8b64f50351da57d5f0210ebf82d550a279"
+    },
+    {
+      "path": "reviews/collection-ui/typecheck.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "reviews/meishi-card/freeze.py",
+      "bytes": 2003,
+      "sha256": "9d10f92b4f1d716a6841b8a34252fa5cc7513e5f60403a44c3ac8f20ce5f19d8"
+    },
+    {
+      "path": "reviews/meishi-card/HANDOFF.md",
+      "bytes": 4448,
+      "sha256": "0328dc904f25458f4dc2bd98cea399c0870f04be2d84860c2b07723acf7d3c88"
+    },
+    {
+      "path": "reviews/meishi-card/manifest.json",
+      "bytes": 6199,
+      "sha256": "2ace8ee3acc5572b88abfc38e4819515c9b64cff3d74491a8bbd419ef7c63f2b"
+    },
+    {
+      "path": "reviews/meishi-card/platform.json",
+      "bytes": 215,
+      "sha256": "54ec4caba1614fbf444e319042cc7b9e4bf8075e66c8f1595376f5691d0e6a16"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/campaign.ts",
+      "bytes": 8963,
+      "sha256": "0ce3bb27a56a34ef385db5c5a66f0e6a619573310874639a75e57708d701f807"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/kikai-portrait.ts",
+      "bytes": 1319,
+      "sha256": "a2c1d7f69623871a7db5a529e3600724d8478492411abffe848b338f5f823071"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/kikai.ts",
+      "bytes": 10634,
+      "sha256": "2e84e9d2166d1855bd23d18bb4c7eb106a9d5b75f7958f6c52cfd36f506bc098"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/loadout.ts",
+      "bytes": 16683,
+      "sha256": "6595eec15bbfd796404f8477860b21f35672fc83437df91583c32cde82d0c312"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/meishi.css",
+      "bytes": 2934,
+      "sha256": "954d4fe132613542e4587973be2504d350ece92334cc0f3be0313352ed8743a3"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/meishi.ts",
+      "bytes": 8629,
+      "sha256": "30f97de61cc309a46a84fc5779b84ae0072353590bd9f9d77f609d695274c34a"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/pixel-ui.ts",
+      "bytes": 18601,
+      "sha256": "42243d4735427de719369828a5204c9f35c3091ff0e6cd6cf999c5e256fc8277"
+    },
+    {
+      "path": "reviews/meishi-card/source/apps/game/src/style.css",
+      "bytes": 25557,
+      "sha256": "68785d0a5481ef60fed9315d2b5abe68af736ea1999873678eb5bf73ff08ebcc"
+    },
+    {
+      "path": "reviews/meishi-card/source/crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52387,
+      "sha256": "c3caa928f345345b0ddad757ecd152b1b29d7904c40579d0e4d09aa77a5c2d11"
+    },
+    {
+      "path": "reviews/meishi-card/source/crates/game_core/src/identity.rs",
+      "bytes": 27493,
+      "sha256": "f967778a6061578c984a74cec9a7052d0ac6d90783e998bbfdd4273c378337c4"
+    },
+    {
+      "path": "reviews/meishi-card/source/crates/game_web/src/kikai_art.rs",
+      "bytes": 35916,
+      "sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a"
+    },
+    {
+      "path": "reviews/meishi-card/source/crates/game_web/src/ui_scene.rs",
+      "bytes": 86663,
+      "sha256": "fc6bc5e5a4c0da198dc8383fd3f8bc467650452fdafd255c0d4367ea518fda4a"
+    },
+    {
+      "path": "reviews/meishi-card/source/package.json",
+      "bytes": 1085,
+      "sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b"
+    },
+    {
+      "path": "reviews/meishi-card/source/scripts/test/meishi.test.mjs",
+      "bytes": 11690,
+      "sha256": "f63393ca96ea92c60afdcd5b22be01012e4000b16cf35724b575f679bec93b82"
+    },
+    {
+      "path": "reviews/meishi-card/source/tsconfig.json",
+      "bytes": 291,
+      "sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db"
+    },
+    {
+      "path": "reviews/meishi-card/tests.log",
+      "bytes": 1239,
+      "sha256": "872381f026e54eef22064529c8499f9d379885642153d595300fb5dbc343846f"
+    },
+    {
+      "path": "reviews/meishi-card/typecheck.log",
+      "bytes": 52,
+      "sha256": "52ddba30851547f80094631eacb58c88f09a2c03f5366096441dea07007deeed"
+    },
+    {
+      "path": "reviews/meishi-card/verify.py",
+      "bytes": 762,
+      "sha256": "d543d7add46568e8847f3e0e4f2c893f0c371d2fd69cab4552d49381c2d30307"
+    },
+    {
+      "path": "reviews/meishi-card-docs/catalog-validation.log",
+      "bytes": 248,
+      "sha256": "886bde59bec0fa76c1f44a358fec210c7e446e10f906600672a912d352ca3bfd"
+    },
+    {
+      "path": "reviews/meishi-card-docs/HANDOFF.md",
+      "bytes": 2166,
+      "sha256": "11af1cddc063e4717431995dafa5cc7b8466cf950c5e770a3aaa001f029fb84c"
+    },
+    {
+      "path": "reviews/meishi-card-docs/wiki-facts.log",
+      "bytes": 899,
+      "sha256": "bf2546858833c73af4a0a83807a9e8042f11f96d319cafe4f6ab2e81ced2069a"
+    },
+    {
+      "path": "reviews/meishi-card-separation/catalog-source-check.log",
+      "bytes": 753,
+      "sha256": "17c3ff1613324ba3dab986be54a0b462bc15103ed9077f2f1f86f3fd5f8fa3d0"
+    },
+    {
+      "path": "reviews/meishi-card-separation/HANDOFF.md",
+      "bytes": 1800,
+      "sha256": "098b37d5f6ee2f32405e8e6029526734d5f1d2b2020cbe701925b4640743afde"
+    },
+    {
+      "path": "reviews/meishi-card-separation/wiki-facts.log",
+      "bytes": 900,
+      "sha256": "58b6acecad284a6d86a8497958423bfbaa4eb73237fcfc29b1f4b495bfc9e0b6"
+    },
+    {
+      "path": "reviews/meishi-integration-review/committed-inputs.json",
+      "bytes": 3017,
+      "sha256": "8ea28a94adfbb9580800f00ef946545e83cf987ef62ad68a825fae1937c1dd84"
+    },
+    {
+      "path": "reviews/meishi-integration-review/freeze.py",
+      "bytes": 632,
+      "sha256": "336f7bc3cd6af9e1c33d073ae2e02dd2737887a52cfea6b8b4a558a35bc93d97"
+    },
+    {
+      "path": "reviews/meishi-integration-review/initial-manifest.json",
+      "bytes": 3845,
+      "sha256": "f4a3a5fc516a81c83317c8e6d051b109a0850db91496f451af54b8b6a0811ff3"
+    },
+    {
+      "path": "reviews/meishi-integration-review/manifest.json",
+      "bytes": 4323,
+      "sha256": "4a3327f4c6307929fdbbe6bf7b07c3ad90b97afe732b339ff578ffbc54e49f4d"
+    },
+    {
+      "path": "reviews/meishi-integration-review/REVIEW.md",
+      "bytes": 4685,
+      "sha256": "524779a303dd230f238be0a855d5aacaaf6dbb032166f642ae2c47fc6eca1e95"
+    },
+    {
+      "path": "reviews/meishi-integration-review/SCOPE_ADDENDUM.md",
+      "bytes": 997,
+      "sha256": "e1e2b3b44710455a98a6c31acfa6760f49b99319a94c59d55bb7371f4ebbfb8f"
+    },
+    {
+      "path": "reviews/meishi-integration-review/snapshot.py",
+      "bytes": 1663,
+      "sha256": "caa8a34280583ca032f66199236ae70b8b738f17334bc337102ad0b9863690b5"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/index.html",
+      "bytes": 16689,
+      "sha256": "78f0bda050081d016c36d9a93cf886b5ad1720e978c5ad60047488d393ad2c91"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/campaign.ts",
+      "bytes": 8963,
+      "sha256": "0ce3bb27a56a34ef385db5c5a66f0e6a619573310874639a75e57708d701f807"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/cargo.css",
+      "bytes": 554,
+      "sha256": "bacb85d417e1e0c3a34bf0de18418499a142d115956997041f490c658e20b2d6"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/cargo.ts",
+      "bytes": 3546,
+      "sha256": "e36f172ecccf8052ca7ef8ba7ba73fd916bafff1e434856c15910ec3b083e048"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/flight-menu.ts",
+      "bytes": 10073,
+      "sha256": "626cf84867e9e50194fab29280f62ed1cf0af556fc42220b66815c477b190369"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/kikai-portrait.ts",
+      "bytes": 1319,
+      "sha256": "a2c1d7f69623871a7db5a529e3600724d8478492411abffe848b338f5f823071"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/loadout.ts",
+      "bytes": 16683,
+      "sha256": "6595eec15bbfd796404f8477860b21f35672fc83437df91583c32cde82d0c312"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/main.ts",
+      "bytes": 80146,
+      "sha256": "b9284b8d638e91df6e3a5b60e03481361ba5bad76ca99845685d460ba599a180"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/meishi.css",
+      "bytes": 3072,
+      "sha256": "dffc08cf1c314d2fac1721fac55357946925e77ae5c893e83a9724b0291ce98d"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/meishi.ts",
+      "bytes": 8895,
+      "sha256": "bae4fe9ad80fbe638342e2150dd7e1abe65b9e0c299d31c78ac55ba575d7bf6d"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/pixel-ui.ts",
+      "bytes": 18732,
+      "sha256": "c9b1351cc2faef5d937beacb6b9e1fb00de37647f3e7a99bbec2b65833f9650c"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/apps/game/src/style.css",
+      "bytes": 26043,
+      "sha256": "d2dd0e9062f623cf01e93cd1b52bbdd5a19e5ff276624cc3c2f121a475b1a8e9"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/crates/game_core/src/campaign_runtime.rs",
+      "bytes": 53725,
+      "sha256": "901f3dedf5afa052a9e278ee0a8bee87862e0469d36694bfe33e7fd43189ea74"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/crates/game_core/src/lib.rs",
+      "bytes": 195961,
+      "sha256": "94e68fd488248c7b33eca873398d6bfb55652e7e56ddaf0c685616d8fcda848a"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/crates/game_core/src/ship_progression.rs",
+      "bytes": 24849,
+      "sha256": "02abf186a105b8bbbb6b180c7edad4d65c28a716e5a3fc692eb6601dbea0707d"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/crates/game_web/src/kikai_art.rs",
+      "bytes": 36953,
+      "sha256": "0d0d7fe7e7ae2b453b28a9b48fb301b66f3ee1272e66ab33a0898c3f7e83cbb0"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source/crates/game_web/src/ui_scene.rs",
+      "bytes": 89086,
+      "sha256": "36d20de4165c9c69ed0aaa465367b2794c7e79af1aab784d478587c77ab49861"
+    },
+    {
+      "path": "reviews/meishi-integration-review/source-pins.json",
+      "bytes": 3020,
+      "sha256": "8cadf29db2ea677d6c63e97022481894b1de5b4cab52ff4da6e852a27de0e561"
+    },
+    {
+      "path": "reviews/meishi-integration-review/verify.py",
+      "bytes": 784,
+      "sha256": "99126d22acf33e2b1da42ae3f55ebf15d9d09364e02a307009413b66dbec6a25"
+    },
+    {
+      "path": "reviews/meishi-native-admission/before-settings-test.log",
+      "bytes": 1611,
+      "sha256": "cde384dc88858d1dd4db0d1238743933800247dd9fe8c870f2ba79ab5587293c"
+    },
+    {
+      "path": "reviews/meishi-native-admission/first-compile-error.log",
+      "bytes": 1883,
+      "sha256": "51716cc3718b72303b4a5bbfcc956262beb5caf484ad80557fd857c6cf3aab42"
+    },
+    {
+      "path": "reviews/meishi-native-admission/HANDOFF.md",
+      "bytes": 1936,
+      "sha256": "c7f4435ba747bfd1528101293f2df6c3966c0dada5919f58c2a7d776bb017a21"
+    },
+    {
+      "path": "reviews/meishi-native-admission/manifest.json",
+      "bytes": 3112,
+      "sha256": "1c3a818f1c7de3dc6390871319e45d19f2e37cafab53daea04c7787a30bf7fba"
+    },
+    {
+      "path": "reviews/meishi-native-admission/native-test.log",
+      "bytes": 1611,
+      "sha256": "859c836ed2e52a1da63096a47dd01f01c12dfb50778439d501160c5fb4c34eca"
+    },
+    {
+      "path": "reviews/meishi-native-surface/HANDOFF.md",
+      "bytes": 1640,
+      "sha256": "dfec9bb35be70538d4fbf1ec827eb41e433475d2dc96809d7d7c1da3d10da2b7"
+    },
+    {
+      "path": "reviews/meishi-native-surface/manifest.json",
+      "bytes": 729,
+      "sha256": "f87cd8ed06e262b93150415d9181691e5f0ec7545db15d821583ee34a7d3c2b7"
+    },
+    {
+      "path": "reviews/meishi-native-surface/native-tests.log",
+      "bytes": 797,
+      "sha256": "f3a8e460ae82386dc422d587b13e595c344af1647dd0cf19d8e1195e0e3271aa"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/index.html",
+      "bytes": 16848,
+      "sha256": "754e397fb7596904b014d0b3189793e2fcad4e9d8e75b068f4cb144ecd160e3a"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/campaign.ts",
+      "bytes": 9313,
+      "sha256": "fdb9ebf0a1c27bd3aa1c81f43c4cbd0ce8ef3b4fed5a073833dafec774b0fb45"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/loadout.css",
+      "bytes": 4044,
+      "sha256": "f56d16881f58bf46be1876df461842089e50e70cdcaa95bf8bffa5ba4134457a"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/loadout.ts",
+      "bytes": 21077,
+      "sha256": "f4011e1072d8d8656acea2c96c41c26b4f059b2c2731a7a9d853bc150e0c637d"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/main.ts",
+      "bytes": 80781,
+      "sha256": "3d5e09edea39cb5f39ab4e6fd5748655913821766b07bd292ee65f4f49bd75cc"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/meishi.css",
+      "bytes": 3353,
+      "sha256": "9eac5b5c0b14f11c9c668f375f772aa1fac0c2f2c6d7df9b9fc5626b20d0e7e8"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/meishi.ts",
+      "bytes": 8717,
+      "sha256": "0f55e13f0821d413bc46628e368e110c5a79e335251c3d85fb6fc38d94d17ae7"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/pixel-ui.ts",
+      "bytes": 18991,
+      "sha256": "13c69832d68cddaaa4484409518f927abb2f97c52c9169b7889e75ebd4d52685"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/apps/game/src/style.css",
+      "bytes": 25936,
+      "sha256": "702872f7d275ae811496cc19ad78be2f839c4b2e4ec5708337501bae2c9aebc8"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/scripts/test/dock-menu.test.mjs",
+      "bytes": 29643,
+      "sha256": "29cee93d442d621066d3c4fe6495970f4fa77c4c262ddfb9a55519eff797084a"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/scripts/test/flight-menu.test.mjs",
+      "bytes": 18118,
+      "sha256": "9f3a90103f3b553112972aa15e777b08e74a75eed85daf647847e76864292634"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/scripts/test/loadout.test.mjs",
+      "bytes": 23361,
+      "sha256": "c8e5cfa56c135bbb79698803765f077225c0f668c1a7b5e18877e4c6dcdb2f44"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/scripts/test/meishi.test.mjs",
+      "bytes": 11681,
+      "sha256": "8cf1576a2417d93fbfd07ed99310687f38cfc7cbf2c8cf65ed3389cc70b43f28"
+    },
+    {
+      "path": "reviews/meishi-route-review/committed-inputs/scripts/test/pixel-ui.test.mjs",
+      "bytes": 22796,
+      "sha256": "68379d602c2cb002cea72aa157dd76ae22c1441a2fa285b7b8a67d1e9440d97d"
+    },
+    {
+      "path": "reviews/meishi-route-review/freeze.mjs",
+      "bytes": 3075,
+      "sha256": "a86a2bec5436f1bbe3f95826338c71fa4390fabbfc24771167ed4c82eb39260c"
+    },
+    {
+      "path": "reviews/meishi-route-review/inputs/apps/game/src/loadout.ts",
+      "bytes": 21071,
+      "sha256": "eabed32a0eba64b95c85e517ff6c731f2e29eb7ed5f7c90b28c86718e4e24ad1"
+    },
+    {
+      "path": "reviews/meishi-route-review/REVIEW.md",
+      "bytes": 5155,
+      "sha256": "8e00daf2283372ffa748ffbe79a5489ec72708e7e299d6f6cf8786a5ac58d730"
+    },
+    {
+      "path": "reviews/meishi-route-review/scroll-probe-prepare.mjs",
+      "bytes": 3203,
+      "sha256": "b3ae2889fc92f4bf73cf67b666c651044afeb0461232587493165a6c704f3c9d"
+    },
+    {
+      "path": "reviews/meishi-route-review/scroll-probe.log",
+      "bytes": 338,
+      "sha256": "933bd453ded90f634119a2a9ec8aec5013d1a65a3be6137ac40f6312b8d42003"
+    },
+    {
+      "path": "reviews/meishi-route-review/scroll-probe.mjs",
+      "bytes": 6981,
+      "sha256": "0ebf2a6cbb77332372a533bdd6107e4ca7957264427a248aeb43d8221e9de134"
+    },
+    {
+      "path": "reviews/meishi-route-review/source-hashes.json",
+      "bytes": 6620,
+      "sha256": "ad424a46094ff7b74e69fb1337dfed040e091ef47951acff326b556f4a92a900"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/manifest.json",
+      "bytes": 4007,
+      "sha256": "b0609babeba4b26950fbdd54c4046fd4eb496e578bbe95506a6e89018788f000"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/REVIEW.md",
+      "bytes": 3172,
+      "sha256": "73c07c91a3ccc9a9fdb830e863a8cfa8f2b8071217970ba8f6f7c013f54f436e"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/apps/game/index.html",
+      "bytes": 16848,
+      "sha256": "754e397fb7596904b014d0b3189793e2fcad4e9d8e75b068f4cb144ecd160e3a"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/apps/game/src/input.ts",
+      "bytes": 9834,
+      "sha256": "5c9d32bf7800fc04bc32bf271cffbd2257b658bcb3eebfe43bacfbc914d45b51"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/apps/game/src/main.ts",
+      "bytes": 80781,
+      "sha256": "3d5e09edea39cb5f39ab4e6fd5748655913821766b07bd292ee65f4f49bd75cc"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/apps/game/src/meishi.css",
+      "bytes": 3353,
+      "sha256": "9eac5b5c0b14f11c9c668f375f772aa1fac0c2f2c6d7df9b9fc5626b20d0e7e8"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/apps/game/src/meishi.ts",
+      "bytes": 8717,
+      "sha256": "0f55e13f0821d413bc46628e368e110c5a79e335251c3d85fb6fc38d94d17ae7"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/apps/game/src/pixel-ui.ts",
+      "bytes": 18991,
+      "sha256": "13c69832d68cddaaa4484409518f927abb2f97c52c9169b7889e75ebd4d52685"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/apps/game/src/style.css",
+      "bytes": 25936,
+      "sha256": "702872f7d275ae811496cc19ad78be2f839c4b2e4ec5708337501bae2c9aebc8"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/crates/game_web/src/browser.rs",
+      "bytes": 31409,
+      "sha256": "a836e13fe1dd767d07eee37b976be30d65ee6adbafa6192cd812762ea73c0f23"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/crates/game_web/src/ui_scene.rs",
+      "bytes": 97507,
+      "sha256": "17ee61f8814c3a930c429f39335613d96a73e7e0925f2da39243181e2767373e"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/scripts/test/dock-menu.test.mjs",
+      "bytes": 29643,
+      "sha256": "29cee93d442d621066d3c4fe6495970f4fa77c4c262ddfb9a55519eff797084a"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/scripts/test/meishi.test.mjs",
+      "bytes": 11681,
+      "sha256": "8cf1576a2417d93fbfd07ed99310687f38cfc7cbf2c8cf65ed3389cc70b43f28"
+    },
+    {
+      "path": "reviews/meishi-standalone-review/sources/scripts/test/pixel-ui.test.mjs",
+      "bytes": 22796,
+      "sha256": "68379d602c2cb002cea72aa157dd76ae22c1441a2fa285b7b8a67d1e9440d97d"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/archive.json",
+      "bytes": 1031,
+      "sha256": "3d1645e6d3d40ab4b9c9ade2e685c5d372a733bafb1a7e9220e71cef0c1e48b6"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/authoring-states.png",
+      "bytes": 3761057,
+      "sha256": "1334b7471aad3dd378b627ee70d5e7a625a42e4a9fd587c236edc69ca817e535"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/conversion-losses.json",
+      "bytes": 1355,
+      "sha256": "2370916bfe1922418281535a5742d7e978fffeaf4d060b306718b7c04782a17a"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/full-state-0.png",
+      "bytes": 262488,
+      "sha256": "acf853686fb77bbe184d8d5853bb576688b4661f86e87ecb5ea32a0796cd1003"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/full-state-1.png",
+      "bytes": 262488,
+      "sha256": "6c48442898ca64505c484c9f336cb9d37b18497724bb21226d7277212f729f7a"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/full-state-2.png",
+      "bytes": 262488,
+      "sha256": "8dcdfbee42f0db2042b12405dec8fc89574b345351d64dcafb9c967a3705598f"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/manifest.json",
+      "bytes": 154002,
+      "sha256": "497b06d52c24544e104abb9a6898c67c12e39e2d718231e3525d752a2120b5f9"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/native-audit.json",
+      "bytes": 1503,
+      "sha256": "4e6e8e445dc0027954b2daa35b36f684d68e50cd627fbe191c19b1d33aab03d2"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/native-extraction.json.gz",
+      "bytes": 838202,
+      "sha256": "13fb92a6c46bbea357936a98370da76ac25d0a476588990aeb4890e1abe43f94"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/native-preview.png",
+      "bytes": 149087,
+      "sha256": "77fc314215a6bd054b08428c535b37c05c0e5df290cf4fa89efb08acab75f5aa"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "07175ae38b91099c828e06c55446c66a91f49e0f18ecfc57e550ad785b235cf4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "07175ae38b91099c828e06c55446c66a91f49e0f18ecfc57e550ad785b235cf4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "07175ae38b91099c828e06c55446c66a91f49e0f18ecfc57e550ad785b235cf4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-body-0.png",
+      "bytes": 65737,
+      "sha256": "fe58363e7cdb0c11c82a59cd2773f7b0ebc153188d09b61606e1818fd39f8491"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-body-1.png",
+      "bytes": 65737,
+      "sha256": "66406f29380a1a12f35e225daccad9f106012ac7f556575c9c52989a35292da5"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-body-2.png",
+      "bytes": 65737,
+      "sha256": "1a9825e346905cdfd73ecf7652b2817f418bad2585d2cf13afa4ec70381291a5"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-deck-0.png",
+      "bytes": 65737,
+      "sha256": "2c100eb203fd47350bf8bc15be19c3c40c1aed81d9595a07ffff1d150f8df620"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-deck-1.png",
+      "bytes": 65737,
+      "sha256": "2c100eb203fd47350bf8bc15be19c3c40c1aed81d9595a07ffff1d150f8df620"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-deck-2.png",
+      "bytes": 65737,
+      "sha256": "2c100eb203fd47350bf8bc15be19c3c40c1aed81d9595a07ffff1d150f8df620"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-screens-0.png",
+      "bytes": 65737,
+      "sha256": "d6062e98ceb54061b04c4c4c8bb447159434e334d410f47be37822f60b2e49d4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-screens-1.png",
+      "bytes": 65737,
+      "sha256": "d6062e98ceb54061b04c4c4c8bb447159434e334d410f47be37822f60b2e49d4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-screens-2.png",
+      "bytes": 65737,
+      "sha256": "d6062e98ceb54061b04c4c4c8bb447159434e334d410f47be37822f60b2e49d4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-signals-0.png",
+      "bytes": 65737,
+      "sha256": "65160715240df5fb7ff345d1fba41d17fac00dfad5369308d7f59ae397397ead"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-signals-1.png",
+      "bytes": 65737,
+      "sha256": "7c739d7a047ed45cf5bbba747854180aebfb0cdb1a84d2e2452770ad0ef1c669"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/ne-signals-2.png",
+      "bytes": 65737,
+      "sha256": "e10c781180eb7a9443c3823d792e81182a69e502c3726792f98c29caa41262dd"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "29290243b765cfdd53735a6c7112f9c3886f0e70f558a04298289649b3c5c130"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "29290243b765cfdd53735a6c7112f9c3886f0e70f558a04298289649b3c5c130"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "29290243b765cfdd53735a6c7112f9c3886f0e70f558a04298289649b3c5c130"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-body-0.png",
+      "bytes": 65737,
+      "sha256": "2a574d5a3763284301c2f1972c94e484aa251719f2d84c23ee23c0ef138555dd"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-body-1.png",
+      "bytes": 65737,
+      "sha256": "781b1561633872a17aeb1d18647c50bd0c7970d91df99179a0a7d3274647f814"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-body-2.png",
+      "bytes": 65737,
+      "sha256": "10672ff36fb89d60e5356290c7a6483ce9f954a3fd553dc7cb2946f9b7150c8c"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-deck-0.png",
+      "bytes": 65737,
+      "sha256": "561757992e8aa0f24da6834d17b85807022d4df9481a29ae25cf10a3fae574a5"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-deck-1.png",
+      "bytes": 65737,
+      "sha256": "561757992e8aa0f24da6834d17b85807022d4df9481a29ae25cf10a3fae574a5"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-deck-2.png",
+      "bytes": 65737,
+      "sha256": "561757992e8aa0f24da6834d17b85807022d4df9481a29ae25cf10a3fae574a5"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-screens-0.png",
+      "bytes": 65737,
+      "sha256": "9579e2122e12e03434dce4dfb087b4cec9048431c5ef9e55fd08747035354d1e"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-screens-1.png",
+      "bytes": 65737,
+      "sha256": "9579e2122e12e03434dce4dfb087b4cec9048431c5ef9e55fd08747035354d1e"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-screens-2.png",
+      "bytes": 65737,
+      "sha256": "9579e2122e12e03434dce4dfb087b4cec9048431c5ef9e55fd08747035354d1e"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-signals-0.png",
+      "bytes": 65737,
+      "sha256": "775f66c6ddb051e55f47c18ef9bb2cc1f13a6216b094d914018ea9b984b7f5ad"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-signals-1.png",
+      "bytes": 65737,
+      "sha256": "501414ffbe4110e65cb14dc858dc89c21c1a9bad1e954c90182649ba28ff10e0"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/nw-signals-2.png",
+      "bytes": 65737,
+      "sha256": "34e7ebd28d316f5566a27326697c1bf7c5897214b9362fef9fe40968cc048bee"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/pack.json",
+      "bytes": 2302820,
+      "sha256": "36031366f135b12b290f59e3f2c382e56774f9663e5fdb5241584051ad24832b"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/README.md",
+      "bytes": 6469,
+      "sha256": "ea354911fb66fb58fcf54223b491da8fbd2ff3bbb6fa04db0a367212572c3096"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/rig-extraction.json.gz",
+      "bytes": 875741,
+      "sha256": "ffc135d2b9f327444a6a80f6cf271cd406af9867160824891a180c27f13baa82"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "9c1800306390634203a77c5ab3abbea6ee25e650288df15bafc705bd9f660245"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "9c1800306390634203a77c5ab3abbea6ee25e650288df15bafc705bd9f660245"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "9c1800306390634203a77c5ab3abbea6ee25e650288df15bafc705bd9f660245"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-body-0.png",
+      "bytes": 65737,
+      "sha256": "95ddc32d8869aa972e73b03e54ad00006d82356f072b802a22f14b3e1536b2d2"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-body-1.png",
+      "bytes": 65737,
+      "sha256": "d33e0f4f54183a67a2cb761b65d8e65e5275ced66d6c77a08e7741186537b591"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-body-2.png",
+      "bytes": 65737,
+      "sha256": "e2b020253ba7e6bf94f78c50d4c22c401f569246ec493b1bbd8dd228c9947926"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-deck-0.png",
+      "bytes": 65737,
+      "sha256": "7523770e05c1fa2ba77987ae97b03807a23fd7ce7ae7f8397079ffe3e1d24dc6"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-deck-1.png",
+      "bytes": 65737,
+      "sha256": "7523770e05c1fa2ba77987ae97b03807a23fd7ce7ae7f8397079ffe3e1d24dc6"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-deck-2.png",
+      "bytes": 65737,
+      "sha256": "7523770e05c1fa2ba77987ae97b03807a23fd7ce7ae7f8397079ffe3e1d24dc6"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-screens-0.png",
+      "bytes": 65737,
+      "sha256": "7bcea35c19f3da0ada37d83eaced123849f23ce81f50f76c6dae4b1e29d1c261"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-screens-1.png",
+      "bytes": 65737,
+      "sha256": "7bcea35c19f3da0ada37d83eaced123849f23ce81f50f76c6dae4b1e29d1c261"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-screens-2.png",
+      "bytes": 65737,
+      "sha256": "7bcea35c19f3da0ada37d83eaced123849f23ce81f50f76c6dae4b1e29d1c261"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-signals-0.png",
+      "bytes": 65737,
+      "sha256": "cbf2e811e9bff59403d6bd573d0fe9b7a0563bc58d6aa6a2879bc0ea7d72f74a"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-signals-1.png",
+      "bytes": 65737,
+      "sha256": "9ed8196c276148bb16892c0f67c374f5a631ad9d5fd380b1d8044342d05b8177"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/se-signals-2.png",
+      "bytes": 65737,
+      "sha256": "b5fdc83a69da153ca046ad05d53c6648a1e1b3e3d8a18a07dea0d95bb34839a2"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "7a26e30c3b6d51aa70f196598102a7c881518d665947c3fa00d6ca06f5b78cb6"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "7a26e30c3b6d51aa70f196598102a7c881518d665947c3fa00d6ca06f5b78cb6"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "7a26e30c3b6d51aa70f196598102a7c881518d665947c3fa00d6ca06f5b78cb6"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-body-0.png",
+      "bytes": 65737,
+      "sha256": "cc07d2245c0e21ddf4a0c034411d02c4ceb8fec9aaf3c8dc735cddbd3226a928"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-body-1.png",
+      "bytes": 65737,
+      "sha256": "79f32c1d4ca3be11c3645dbb9c257fdb5a0ee84766e5a9dd060bd59bfbfe8136"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-body-2.png",
+      "bytes": 65737,
+      "sha256": "fbb9c7403dfce24da3da9fd4ec9f2975a6ca6f4c431ab0e51f11598510612f10"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-deck-0.png",
+      "bytes": 65737,
+      "sha256": "cd2d2f2911b426774d45778cf1d915bb7d19cd05d977c3b587151e4493acc71d"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-deck-1.png",
+      "bytes": 65737,
+      "sha256": "cd2d2f2911b426774d45778cf1d915bb7d19cd05d977c3b587151e4493acc71d"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-deck-2.png",
+      "bytes": 65737,
+      "sha256": "cd2d2f2911b426774d45778cf1d915bb7d19cd05d977c3b587151e4493acc71d"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-screens-0.png",
+      "bytes": 65737,
+      "sha256": "8aa527c30959df47acead5716a3c7da91762ef017165d990463aeacb4d56344d"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-screens-1.png",
+      "bytes": 65737,
+      "sha256": "8aa527c30959df47acead5716a3c7da91762ef017165d990463aeacb4d56344d"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-screens-2.png",
+      "bytes": 65737,
+      "sha256": "8aa527c30959df47acead5716a3c7da91762ef017165d990463aeacb4d56344d"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-signals-0.png",
+      "bytes": 65737,
+      "sha256": "a9715e0a32a29dce400ec2c2c0939addb535fb78dbbfe5e81104859608f8193e"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-signals-1.png",
+      "bytes": 65737,
+      "sha256": "c9dfbcb6c8d0584771c3477db414a86ad15626cbe029050097eaa67852a950e3"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/sw-signals-2.png",
+      "bytes": 65737,
+      "sha256": "1bfbbf10279c1c1ee4f9cd58c18853533900230d283b4347c253010423b40810"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/validation.json",
+      "bytes": 30397,
+      "sha256": "c8b6ee428fa0343a1a44faa9711748605e151eba58a1658c7b34e3726a65ddc1"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/zoom-extraction.json.gz",
+      "bytes": 1044450,
+      "sha256": "cf7cf7af629a4c4a71fdf165a61d5b2c74892ffc5c1e653640290697a393329b"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/native256/zoom-preview.png",
+      "bytes": 296463,
+      "sha256": "19f24d866a37243d98466b4ca267d96ef642343558a2ea3ffbcd16138d0dab19"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/assets/pipeline/pan-coop-dock/source.png",
+      "bytes": 1572973,
+      "sha256": "eab5fa7c3b604451fdb5fadff75c2138d614aa8d8bbcedd31402527c59380918"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14135,
+      "sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/crates/engine_core/src/transform.rs",
+      "bytes": 5578,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/asset-pack.py",
+      "bytes": 28688,
+      "sha256": "dc1673175eadf56042d273e6d816d93eb36ce9517c7dd75e85d39f276bca1e35"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/archive_256.py",
+      "bytes": 2572,
+      "sha256": "9ac31be1fefaa53f77cb72c45aee0c5ffc74d866b612cf35b6b9b265c8d17430"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/convert_256.py",
+      "bytes": 7352,
+      "sha256": "a27f9d0d2ec88369b6f122afae0979cd5de6fb8b5d111d4566c9d6dd1419e3b3"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/convert.py",
+      "bytes": 14697,
+      "sha256": "00116cc547c27646bb47ac05a6e85d02a8cd0c8f3b40bc539a6ec70bd468dfa0"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/native256/Cargo.lock",
+      "bytes": 3510,
+      "sha256": "f28ce54918cd3c2f1c0bc93e3278d7bc1b41de4c1bd17e518f303e24f0689cc4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/native256/Cargo.toml",
+      "bytes": 245,
+      "sha256": "9c51cd04c7d65696936a7c767a9a46a85111a48c4005ea31ea2c238bb72457b8"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/native256/src/main.rs",
+      "bytes": 14212,
+      "sha256": "e85adb1c9428de112a57393199c5be43c91ca856e655cab6215c3e94cd64c72e"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/test_256.py",
+      "bytes": 6971,
+      "sha256": "2ec9432b1aa28d39d463f6b268f64b0208bb8a8355dcf3efc625e8cd68e3365e"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/committed-inputs/scripts/qa/pan-coop-dock/verify_256.py",
+      "bytes": 4785,
+      "sha256": "a86d1cf39b0b494a0641fce080a4382f00ab45b4be36b17ec356c13ba24f80cb"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/freeze.mjs",
+      "bytes": 2894,
+      "sha256": "135aad603210737c257289f575f65385f3be54f8fd856c0fa60bbed0564617c4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/frozen-hashes.json",
+      "bytes": 19933,
+      "sha256": "06ba7bf8490336fe6f79918ca1d3128d9ec5d5c32dd6c2c5e7b4d3c072626ffe"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/inspect.mjs",
+      "bytes": 5348,
+      "sha256": "e474bd9c4b0a6059c3b65fdafa0ed7520b618e5d278c3eb4d06ec785da797491"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/inspection.log",
+      "bytes": 590,
+      "sha256": "a32045fe7ad744d414a6923fb01f2e5eb8aab8a342a91924e78feee56121ec07"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/packet-inspection.json",
+      "bytes": 904,
+      "sha256": "81f0fbe0a75bd1fa3038385a58ad5648ec0df3f633f218d3c02c39e1cc792177"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/peer-logs/body-run.log",
+      "bytes": 316,
+      "sha256": "6beb36e27de85e0eb77e23efd2548a9a7aa25d414f7671dee15dbad81e7d7192"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/peer-logs/clippy.log",
+      "bytes": 220,
+      "sha256": "1e78023c301595755be1dd67f8c97e64774bd99d4c762776521c7eaa257104ef"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/peer-logs/native-tests.log",
+      "bytes": 871,
+      "sha256": "9d3f53f8c55461b2d1f16240add934830dbb5dfa82489f60a40701c65c78afc4"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/peer-logs/python-tests-archive-fixture-error.log",
+      "bytes": 1117,
+      "sha256": "f7983a717e1a28cb5ef56d0b2622574455893577a3fb3eb5efef8b361331e6d0"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/peer-logs/python-tests.log",
+      "bytes": 115,
+      "sha256": "93060052da67996a9b9c2d73973cc7eb533c893401b6518d5d4062594418a26c"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/peer-logs/rig-run.log",
+      "bytes": 429,
+      "sha256": "a1b5df2c2898e0ec1dd174e6a4e506283117f1311b4e8b945b1bd7e7bb68d0ad"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/peer-logs/verify.log",
+      "bytes": 295,
+      "sha256": "daa389f031a5d8d640815127e32dbf7e9cb75ec4ddc07654783ae37dbb4c8217"
+    },
+    {
+      "path": "reviews/pan-coop-dock-review/REVIEW.md",
+      "bytes": 4060,
+      "sha256": "bdd6335f7941032147d0e86f88facc3279407a980f4e4aa54adc95ed792464ea"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/body-run.log",
+      "bytes": 316,
+      "sha256": "6beb36e27de85e0eb77e23efd2548a9a7aa25d414f7671dee15dbad81e7d7192"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/clippy.log",
+      "bytes": 220,
+      "sha256": "1e78023c301595755be1dd67f8c97e64774bd99d4c762776521c7eaa257104ef"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/HANDOFF.md",
+      "bytes": 4053,
+      "sha256": "882b1042f78baaa9d3418123df84740026c5d1135e59e927c04b5e48e0a67502"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/native-tests.log",
+      "bytes": 871,
+      "sha256": "9d3f53f8c55461b2d1f16240add934830dbb5dfa82489f60a40701c65c78afc4"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/python-tests-archive-fixture-error.log",
+      "bytes": 1117,
+      "sha256": "f7983a717e1a28cb5ef56d0b2622574455893577a3fb3eb5efef8b361331e6d0"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/python-tests.log",
+      "bytes": 115,
+      "sha256": "93060052da67996a9b9c2d73973cc7eb533c893401b6518d5d4062594418a26c"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/raw/native-extraction.json",
+      "bytes": 7061124,
+      "sha256": "2ed5197658bec6735cd6a6f10fb9c47cd82bc5291fe8caf22c925050d7dcbd6e"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/raw/rig-extraction.json",
+      "bytes": 11751773,
+      "sha256": "501fdf1baf59bf2efbffc25663456f55f15351b7df463c9de45b81c21ed3e5ab"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/raw/zoom-extraction.json",
+      "bytes": 16825724,
+      "sha256": "6b5ce3be710629bbdb47e22c3331075866993917f06bc8c3d6eeb1219e15cc1f"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/rig-run.log",
+      "bytes": 429,
+      "sha256": "a1b5df2c2898e0ec1dd174e6a4e506283117f1311b4e8b945b1bd7e7bb68d0ad"
+    },
+    {
+      "path": "reviews/pan-coop-dock256/verify.log",
+      "bytes": 295,
+      "sha256": "daa389f031a5d8d640815127e32dbf7e9cb75ec4ddc07654783ae37dbb4c8217"
+    },
+    {
+      "path": "settings-webgl2-848.png",
+      "bytes": 28841,
+      "sha256": "67d9435e1bf1aa52be3b872fe6034feeb580abe8b4e137e6106c152c1493e338"
+    },
+    {
+      "path": "standalone-keyboard-640.png",
+      "bytes": 24839,
+      "sha256": "1dc1b77348acc91922291b583a94325c8c3389e4af410c6181375333ff153efc"
+    },
+    {
+      "path": "standalone-renderer-webgl2.txt",
+      "bytes": 790,
+      "sha256": "dfb9bc58b764d123d0c271cd5b45840db912e45dcf67e10045145ca840cdfa3d"
+    },
+    {
+      "path": "standalone-renderer-webgpu.txt",
+      "bytes": 789,
+      "sha256": "cedcc9ef0b7be5729e8f8d3379b2ac79fe1312d7e7a48c46004183ab138fcb14"
+    },
+    {
+      "path": "standalone-tested-build.json",
+      "bytes": 392,
+      "sha256": "4ff67eaa6375670a22a456ebad1016f1f8f2a187eee99bf236e3b3fab38d9290"
+    },
+    {
+      "path": "standalone-webgl2-1280.png",
+      "bytes": 40623,
+      "sha256": "ad0a86b5b85b569465873ba34dbd1bd57df46ceb431d6acf71786d57569f378f"
+    },
+    {
+      "path": "standalone-webgl2-848.png",
+      "bytes": 28575,
+      "sha256": "d202d61c67f208964749cf109577f4f2595659d15be688808a1d6d6d59c347d6"
+    },
+    {
+      "path": "standalone-webgpu-1280.png",
+      "bytes": 44248,
+      "sha256": "9c9477815d337fbd663e2dfb7e19f8fbf86cfac834a9544d60771cbbe8b4a427"
+    },
+    {
+      "path": "standalone-webgpu-848.png",
+      "bytes": 28661,
+      "sha256": "2796fae1919d1cdb788837db3653e3249e1b664cc22da17da6ea4a4e6a001fed"
+    }
+  ]
+}

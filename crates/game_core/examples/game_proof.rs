@@ -71,7 +71,7 @@ fn run(name: &str, diagnostic: Option<&str>) {
             b.transforms.len() <= 128
                 && b.pixels
                     .iter()
-                    .all(|p| (p.transform as usize) < b.transforms.len())
+                    .all(|p| (p.transform_slot()) < b.transforms.len())
         }));
         black_box(game.take_events());
     }

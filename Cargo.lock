@@ -173,6 +173,7 @@ dependencies = [
  "engine_core",
  "game_core",
  "glam",
+ "naga",
  "serde",
  "serde-wasm-bindgen",
  "serde_json",

@@ -1,0 +1,31 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.59s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 7 tests
+MEISHI plates [942, 942]; portrait_corner 270; seals [382, 320, 390]; sockets [632, 632, 632, 632, 632, 632, 632, 632]
+test ui_scene::meishi_art::tests::cached_meishi_source_counts_and_anonymous_socket_floor_are_bounded ... ok
+test ui_scene::meishi_art::tests::authored_crystal_bevel_keeper_and_negative_space_landmarks_are_real_cells ... ok
+test ui_scene::meishi_art::tests::meishi_socket_has_opaque_anonymous_floor_and_rejects_unknown_tokens ... ok
+test ui_scene::meishi_art::tests::all_fittings_preflight_both_quotas_and_invalid_affines_atomically ... ok
+test ui_scene::meishi_art::tests::fractional_fit_retains_source_cells_and_real_clip_uses_all_four_corners ... ok
+test ui_scene::meishi_art::tests::reduced_motion_freezes_foil_and_animation_never_changes_geometry_or_metal ... ok
+REFINED MEISHI kind0/corp0: decoration 12949, complete 52546, transforms 125 /60000
+REFINED MEISHI kind0/corp1: decoration 12887, complete 52510, transforms 125 /60000
+REFINED MEISHI kind0/corp2: decoration 12957, complete 52932, transforms 125 /60000
+REFINED MEISHI kind1/corp0: decoration 12949, complete 46476, transforms 125 /60000
+REFINED MEISHI kind1/corp1: decoration 12887, complete 46440, transforms 125 /60000
+REFINED MEISHI kind1/corp2: decoration 12957, complete 46862, transforms 125 /60000
+REFINED MEISHI kind2/corp0: decoration 12949, complete 42214, transforms 125 /60000
+REFINED MEISHI kind2/corp1: decoration 12887, complete 42178, transforms 125 /60000
+REFINED MEISHI kind2/corp2: decoration 12957, complete 42600, transforms 125 /60000
+test ui_scene::meishi_art::tests::redesigned_close_only_card_retains_every_component_for_nine_profiles ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 227 filtered out; finished in 3.99s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

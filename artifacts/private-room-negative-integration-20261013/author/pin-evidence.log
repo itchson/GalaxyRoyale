@@ -1,0 +1,13 @@
+{
+  "base": "fbb8b1c640f0e11d495cf00c11bf557500701674",
+  "head": "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+  "branch": "codex/private-room-negative-qa",
+  "changedFiles": 6,
+  "trackedClean": true,
+  "tests": [
+    11,
+    16,
+    10
+  ],
+  "reportSha256": "a9cf4d3a849ec1b2c5de7c616b1d80a56da71d75daec9f733645e844a97a859e"
+}

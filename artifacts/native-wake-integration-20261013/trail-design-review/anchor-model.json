@@ -1,0 +1,11 @@
+{
+  "scope": "Independent IEEE-754/source-equation model only; not actual native tick or proposed exporter execution",
+  "source_equation": "origin - forward(heading) * 14",
+  "source_pilot_maximum": 1000000.0,
+  "inward_forward_x": -1.0,
+  "anchor_x": 1000014.0,
+  "old_proposed_point_bound": 1000000,
+  "old_bound_accepts": false,
+  "new_narrow_point_bound": 1000014,
+  "narrow_bound_accepts": true
+}

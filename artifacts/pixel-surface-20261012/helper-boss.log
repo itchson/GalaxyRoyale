@@ -1,0 +1,22 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+    Checking foldhash v0.2.0
+   Compiling serde_json v1.0.151
+    Checking spin v0.12.3
+    Checking memchr v2.8.3
+    Checking itoa v1.0.18
+    Checking hashbrown v0.17.1
+    Checking hecs v0.11.2
+   Compiling syn v3.0.7
+    Checking glam v0.30.10
+   Compiling serde_derive v1.0.229
+   Compiling bytemuck_derive v1.12.1
+    Checking bytemuck v1.25.2
+    Checking engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+    Checking game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Checking boss_live_qa v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\scripts\qa\boss-live)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.43s

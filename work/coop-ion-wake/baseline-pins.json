@@ -1,0 +1,10 @@
+{
+  "base_commit": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "captured_at_utc": "2026-10-12T18:15:24.919467+00:00",
+  "canonical_git_blob_sha256": {
+    "crates/game_core/src/co_op.rs": "a04675a4893555ce83de1455a680595307c8e9bf2abf98e4310ce18c89377911",
+    "crates/game_core/src/co_op_loadout.rs": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666",
+    "crates/game_core/src/lib.rs": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+    "crates/game_core/src/ship_progression.rs": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458"
+  }
+}

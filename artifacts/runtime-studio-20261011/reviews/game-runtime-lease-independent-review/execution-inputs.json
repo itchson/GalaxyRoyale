@@ -1,0 +1,23 @@
+{
+  "permanent_test_commit": "d4ca915eaf79428fb612b2d0169366b6da7ecaf6",
+  "permanent_test_path": "scripts/test/game-runtime-vite.test.mjs",
+  "permanent_test_sha256": "c2818c93c0fc5eee6d253a0bac1ee5c9bdd9d84d9206c76684757968ca01e63b",
+  "node": "v24.18.0",
+  "platform": "Windows11",
+  "installed_vite": [
+    {
+      "execution": "investigation",
+      "version": "7.3.7",
+      "chunk_bytes": 1342444,
+      "chunk_sha256": "2e71344450b7c25a7fe0848d5ee474fb7342614d900ab9168588986150cbb9f9",
+      "chunk_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\node_modules\\vite\\dist\\node\\chunks\\config.js"
+    },
+    {
+      "execution": "permanent",
+      "version": "7.3.7",
+      "chunk_bytes": 1342444,
+      "chunk_sha256": "2e71344450b7c25a7fe0848d5ee474fb7342614d900ab9168588986150cbb9f9",
+      "chunk_path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\node_modules\\vite\\dist\\node\\chunks\\config.js"
+    }
+  ]
+}

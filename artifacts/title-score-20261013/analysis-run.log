@@ -1,0 +1,126 @@
+{
+  "analysis": {
+    "python": "3.12.10",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.1",
+    "script_sha256": "5dfe6572a0e873309acc90f9015e8d98dd186d6adf1ef4a0cf7e457aea58a5a7",
+    "wav_sha256": "c1095d741fabb279f33fdb0216d3a10521b30b129903daa99eb15bb8bd5a3d02",
+    "sample_rate": 22050,
+    "samples": 941094,
+    "decoded_duration": 42.68,
+    "harmonic_fft": 8192,
+    "harmonic_hop": 256,
+    "onset_fft": 1024,
+    "onset_hop": 128,
+    "peak": 0.585113525390625,
+    "rms": 0.09130792135496978,
+    "direct_listening": false,
+    "transcription_accepted": false,
+    "warning": "All key/chord/note/timbre statements are machine-analysis candidates. No listening or perceived-match proof."
+  },
+  "combined_tempo": [
+    {
+      "bpm": 169.442,
+      "autocorrelation": 0.51007,
+      "lag_frames": 61
+    },
+    {
+      "bpm": 84.721,
+      "autocorrelation": 0.44982,
+      "lag_frames": 122
+    },
+    {
+      "bpm": 112.347,
+      "autocorrelation": 0.44642,
+      "lag_frames": 92
+    },
+    {
+      "bpm": 67.555,
+      "autocorrelation": 0.41863,
+      "lag_frames": 153
+    },
+    {
+      "bpm": 56.481,
+      "autocorrelation": 0.38604,
+      "lag_frames": 183
+    },
+    {
+      "bpm": 96.598,
+      "autocorrelation": 0.20302,
+      "lag_frames": 107
+    },
+    {
+      "bpm": 61.523,
+      "autocorrelation": 0.17783,
+      "lag_frames": 168
+    },
+    {
+      "bpm": 135.999,
+      "autocorrelation": 0.16744,
+      "lag_frames": 76
+    }
+  ],
+  "global_chroma": {
+    "C": 0.0679,
+    "C#": 0.0553,
+    "D": 0.0844,
+    "D#": 0.0654,
+    "E": 0.0938,
+    "F": 0.0547,
+    "F#": 0.1022,
+    "G": 0.0945,
+    "G#": 0.0685,
+    "A": 0.0973,
+    "A#": 0.0725,
+    "B": 0.1435
+  },
+  "key_candidates": [
+    {
+      "key": "B minor",
+      "profile_correlation": 0.8135
+    },
+    {
+      "key": "B major",
+      "profile_correlation": 0.5929
+    },
+    {
+      "key": "E minor",
+      "profile_correlation": 0.5859
+    },
+    {
+      "key": "E major",
+      "profile_correlation": 0.5023
+    },
+    {
+      "key": "G major",
+      "profile_correlation": 0.4969
+    },
+    {
+      "key": "D major",
+      "profile_correlation": 0.49
+    }
+  ]
+}
+Two-second leading chord / bass / upper candidates:
+0.0 -21.55 [{'chord': 'E sus2', 'chroma_share': 0.3776}, {'chord': 'B sus4', 'chroma_share': 0.3776}] [{'midi': 59, 'note': 'B3', 'salience': 4.09}, {'midi': 36, 'note': 'C2', 'salience': 2.229}] [{'midi': 83, 'note': 'B5', 'salience': 9.329}, {'midi': 95, 'note': 'B6', 'salience': 6.603}, {'midi': 71, 'note': 'B4', 'salience': 6.6}]
+2.0 -21.53 [{'chord': 'B minor', 'chroma_share': 0.3627}, {'chord': 'D major', 'chroma_share': 0.3575}] [{'midi': 59, 'note': 'B3', 'salience': 4.188}, {'midi': 47, 'note': 'B2', 'salience': 3.97}] [{'midi': 86, 'note': 'D6', 'salience': 9.364}, {'midi': 74, 'note': 'D5', 'salience': 7.653}, {'midi': 81, 'note': 'A5', 'salience': 7.245}]
+4.0 -22.25 [{'chord': 'G major', 'chroma_share': 0.3577}, {'chord': 'E minor', 'chroma_share': 0.3573}] [{'midi': 59, 'note': 'B3', 'salience': 6.974}, {'midi': 57, 'note': 'A3', 'salience': 5.356}] [{'midi': 83, 'note': 'B5', 'salience': 12.441}, {'midi': 71, 'note': 'B4', 'salience': 11.626}, {'midi': 86, 'note': 'D6', 'salience': 10.498}]
+6.0 -20.94 [{'chord': 'E minor', 'chroma_share': 0.3664}, {'chord': 'G major', 'chroma_share': 0.3535}] [{'midi': 55, 'note': 'G3', 'salience': 5.728}, {'midi': 59, 'note': 'B3', 'salience': 4.722}] [{'midi': 83, 'note': 'B5', 'salience': 12.159}, {'midi': 76, 'note': 'E5', 'salience': 10.655}, {'midi': 71, 'note': 'B4', 'salience': 10.138}]
+8.0 -20.85 [{'chord': 'E sus4', 'chroma_share': 0.3592}, {'chord': 'A sus2', 'chroma_share': 0.3592}] [{'midi': 59, 'note': 'B3', 'salience': 8.071}, {'midi': 47, 'note': 'B2', 'salience': 5.406}] [{'midi': 86, 'note': 'D6', 'salience': 10.908}, {'midi': 88, 'note': 'E6', 'salience': 9.416}, {'midi': 74, 'note': 'D5', 'salience': 9.339}]
+10.0 -21.29 [{'chord': 'D# major', 'chroma_share': 0.3864}, {'chord': 'D# sus4', 'chroma_share': 0.3757}] [{'midi': 44, 'note': 'G#2', 'salience': 8.372}, {'midi': 56, 'note': 'G#3', 'salience': 7.663}] [{'midi': 75, 'note': 'D#5', 'salience': 12.791}, {'midi': 70, 'note': 'A#4', 'salience': 11.474}, {'midi': 82, 'note': 'A#5', 'salience': 10.947}]
+12.0 -21.35 [{'chord': 'E sus2', 'chroma_share': 0.4205}, {'chord': 'B sus4', 'chroma_share': 0.4205}] [{'midi': 59, 'note': 'B3', 'salience': 6.985}, {'midi': 47, 'note': 'B2', 'salience': 6.005}] [{'midi': 71, 'note': 'B4', 'salience': 13.794}, {'midi': 83, 'note': 'B5', 'salience': 13.021}, {'midi': 78, 'note': 'F#5', 'salience': 11.526}]
+14.0 -20.3 [{'chord': 'B minor', 'chroma_share': 0.3118}, {'chord': 'G major', 'chroma_share': 0.3026}] [{'midi': 36, 'note': 'C2', 'salience': 4.767}, {'midi': 55, 'note': 'G3', 'salience': 4.593}] [{'midi': 78, 'note': 'F#5', 'salience': 7.326}, {'midi': 83, 'note': 'B5', 'salience': 7.297}, {'midi': 90, 'note': 'F#6', 'salience': 6.86}]
+16.0 -20.49 [{'chord': 'D sus4', 'chroma_share': 0.35}, {'chord': 'G sus2', 'chroma_share': 0.35}] [{'midi': 50, 'note': 'D3', 'salience': 6.236}, {'midi': 38, 'note': 'D2', 'salience': 4.45}] [{'midi': 79, 'note': 'G5', 'salience': 9.42}, {'midi': 86, 'note': 'D6', 'salience': 8.284}, {'midi': 81, 'note': 'A5', 'salience': 8.273}]
+18.0 -20.52 [{'chord': 'G major', 'chroma_share': 0.3866}, {'chord': 'B minor', 'chroma_share': 0.3651}] [{'midi': 55, 'note': 'G3', 'salience': 7.999}, {'midi': 43, 'note': 'G2', 'salience': 6.741}] [{'midi': 71, 'note': 'B4', 'salience': 11.28}, {'midi': 67, 'note': 'G4', 'salience': 11.278}, {'midi': 86, 'note': 'D6', 'salience': 11.09}]
+20.0 -20.38 [{'chord': 'E sus4', 'chroma_share': 0.3329}, {'chord': 'A sus2', 'chroma_share': 0.3329}] [{'midi': 45, 'note': 'A2', 'salience': 6.415}, {'midi': 52, 'note': 'E3', 'salience': 5.249}] [{'midi': 83, 'note': 'B5', 'salience': 8.578}, {'midi': 76, 'note': 'E5', 'salience': 8.148}, {'midi': 79, 'note': 'G5', 'salience': 7.905}]
+22.0 -20.32 [{'chord': 'B major', 'chroma_share': 0.3376}, {'chord': 'E sus2', 'chroma_share': 0.3174}] [{'midi': 59, 'note': 'B3', 'salience': 5.807}, {'midi': 51, 'note': 'D#3', 'salience': 5.643}] [{'midi': 71, 'note': 'B4', 'salience': 8.573}, {'midi': 83, 'note': 'B5', 'salience': 8.284}, {'midi': 78, 'note': 'F#5', 'salience': 8.171}]
+24.0 -20.41 [{'chord': 'G major', 'chroma_share': 0.3247}, {'chord': 'D sus4', 'chroma_share': 0.306}] [{'midi': 55, 'note': 'G3', 'salience': 4.778}, {'midi': 50, 'note': 'D3', 'salience': 3.758}] [{'midi': 83, 'note': 'B5', 'salience': 8.33}, {'midi': 74, 'note': 'D5', 'salience': 7.912}, {'midi': 79, 'note': 'G5', 'salience': 7.401}]
+26.0 -20.19 [{'chord': 'B minor', 'chroma_share': 0.3822}, {'chord': 'G major', 'chroma_share': 0.3809}] [{'midi': 55, 'note': 'G3', 'salience': 6.098}, {'midi': 48, 'note': 'C3', 'salience': 5.171}] [{'midi': 83, 'note': 'B5', 'salience': 12.709}, {'midi': 71, 'note': 'B4', 'salience': 11.532}, {'midi': 86, 'note': 'D6', 'salience': 9.818}]
+28.0 -20.18 [{'chord': 'B major', 'chroma_share': 0.384}, {'chord': 'E sus4', 'chroma_share': 0.3381}] [{'midi': 47, 'note': 'B2', 'salience': 7.755}, {'midi': 59, 'note': 'B3', 'salience': 7.431}] [{'midi': 83, 'note': 'B5', 'salience': 11.377}, {'midi': 78, 'note': 'F#5', 'salience': 10.187}, {'midi': 71, 'note': 'B4', 'salience': 9.822}]
+30.0 -20.52 [{'chord': 'E sus4', 'chroma_share': 0.3707}, {'chord': 'A sus2', 'chroma_share': 0.3707}] [{'midi': 59, 'note': 'B3', 'salience': 5.822}, {'midi': 52, 'note': 'E3', 'salience': 5.7}] [{'midi': 83, 'note': 'B5', 'salience': 10.371}, {'midi': 71, 'note': 'B4', 'salience': 9.712}, {'midi': 76, 'note': 'E5', 'salience': 8.635}]
+32.0 -21.35 [{'chord': 'B minor', 'chroma_share': 0.3752}, {'chord': 'E sus2', 'chroma_share': 0.3581}] [{'midi': 59, 'note': 'B3', 'salience': 4.357}, {'midi': 47, 'note': 'B2', 'salience': 2.804}] [{'midi': 83, 'note': 'B5', 'salience': 11.107}, {'midi': 71, 'note': 'B4', 'salience': 10.168}, {'midi': 90, 'note': 'F#6', 'salience': 8.986}]
+34.0 -20.54 [{'chord': 'E sus2', 'chroma_share': 0.3915}, {'chord': 'B sus4', 'chroma_share': 0.3915}] [{'midi': 52, 'note': 'E3', 'salience': 7.213}, {'midi': 40, 'note': 'E2', 'salience': 6.318}] [{'midi': 76, 'note': 'E5', 'salience': 10.155}, {'midi': 71, 'note': 'B4', 'salience': 9.484}, {'midi': 83, 'note': 'B5', 'salience': 8.684}]
+36.0 -20.16 [{'chord': 'E minor', 'chroma_share': 0.4176}, {'chord': 'E sus2', 'chroma_share': 0.4028}] [{'midi': 48, 'note': 'C3', 'salience': 3.734}, {'midi': 55, 'note': 'G3', 'salience': 3.459}] [{'midi': 76, 'note': 'E5', 'salience': 10.945}, {'midi': 95, 'note': 'B6', 'salience': 8.207}, {'midi': 88, 'note': 'E6', 'salience': 8.016}]
+38.0 -19.92 [{'chord': 'G major', 'chroma_share': 0.3896}, {'chord': 'E minor', 'chroma_share': 0.37}] [{'midi': 55, 'note': 'G3', 'salience': 7.123}, {'midi': 52, 'note': 'E3', 'salience': 6.028}] [{'midi': 79, 'note': 'G5', 'salience': 11.801}, {'midi': 83, 'note': 'B5', 'salience': 11.472}, {'midi': 71, 'note': 'B4', 'salience': 11.043}]
+40.0 -21.31 [{'chord': 'E sus2', 'chroma_share': 0.4395}, {'chord': 'B sus4', 'chroma_share': 0.4395}] [{'midi': 52, 'note': 'E3', 'salience': 3.383}, {'midi': 45, 'note': 'A2', 'salience': 2.486}] [{'midi': 76, 'note': 'E5', 'salience': 10.626}, {'midi': 83, 'note': 'B5', 'salience': 10.553}, {'midi': 88, 'note': 'E6', 'salience': 9.271}]

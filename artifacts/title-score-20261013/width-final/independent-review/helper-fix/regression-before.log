@@ -1,0 +1,42 @@
+✖ actual renderer preserves absent native panner capability before an explicit no-PCM probe exit (183.8218ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 368.5451
+
+✖ failing tests:
+
+test at scripts\qa\audio-review\fixtures.test.mjs:254:1
+✖ actual renderer preserves absent native panner capability before an explicit no-PCM probe exit (183.8218ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /declared no-PCM capability probe/. Input:
+  
+  'AssertionError [ERR_ASSERTION]: the production feature guard must enter its mono route\n' +
+    '+ actual - expected\n' +
+    '\n' +
+    "+ 'function'\n" +
+    "- 'undefined'\n"
+  
+      at async TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/qa/audio-review/fixtures.test.mjs:283:3)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AssertionError [ERR_ASSERTION]: the production feature guard must enter its mono route
+    + actual - expected
+    
+    + 'function'
+    - 'undefined'
+    
+        at CapabilityProbeEngine.unlock (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/qa/audio-review/fixtures.test.mjs:274:14)
+        at Object.renderFixture (evalmachine.<anonymous>:253:18)
+        at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/qa/audio-review/fixtures.test.mjs:284:9)
+        at async Test.run (node:internal/test_runner/test:1332:7)
+        at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3),
+    expected: /declared no-PCM capability probe/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

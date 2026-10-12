@@ -1,0 +1,75 @@
+{
+  "scope": "Actual OfflineAudioContext generated known harmonics versus analytic local-phase basis. No source song, game simulation, listening or fidelity acceptance.",
+  "observedAt": "2026-10-12T23:03:51.804Z",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "sampleRate": 48000,
+  "cases": [
+    {
+      "frequencyHz": 55,
+      "channel": 0,
+      "samples": 48000,
+      "errorRms": 0.0000014429301641666217,
+      "maxError": 0.000005355955000535539,
+      "peak": 0.25807827711105347,
+      "nonfinite": 0,
+      "pass": true
+    },
+    {
+      "frequencyHz": 55,
+      "channel": 1,
+      "samples": 48000,
+      "errorRms": 0.0000017767768308892617,
+      "maxError": 0.000006668657315953008,
+      "peak": 0.30338454246520996,
+      "nonfinite": 0,
+      "pass": true
+    },
+    {
+      "frequencyHz": 440,
+      "channel": 0,
+      "samples": 48000,
+      "errorRms": 0.000012606860018921025,
+      "maxError": 0.00004257428729217971,
+      "peak": 0.2580782473087311,
+      "nonfinite": 0,
+      "pass": true
+    },
+    {
+      "frequencyHz": 440,
+      "channel": 1,
+      "samples": 48000,
+      "errorRms": 0.000015047110539110764,
+      "maxError": 0.00005142061975937917,
+      "peak": 0.30338430404663086,
+      "nonfinite": 0,
+      "pass": true
+    },
+    {
+      "frequencyHz": 1760,
+      "channel": 0,
+      "samples": 48000,
+      "errorRms": 0.00005124723012545167,
+      "maxError": 0.00017076310009159212,
+      "peak": 0.25806355476379395,
+      "nonfinite": 0,
+      "pass": true
+    },
+    {
+      "frequencyHz": 1760,
+      "channel": 1,
+      "samples": 48000,
+      "errorRms": 0.00006111554698636043,
+      "maxError": 0.000207126578021119,
+      "peak": 0.3033708930015564,
+      "nonfinite": 0,
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "inputs": {
+    "scope": "Own source-adapter native check only; no game instance",
+    "sourceSha256": "8a59285d67d6738297a45c36602d5a204fcbb931c7632317268b7a5368328fae",
+    "helperSha256": "f726da827fd0dd3fe6e8769f0e1333645e60d97f018e46b4fb03347e6874ad0b",
+    "typescript": "5.9.3"
+  }
+}

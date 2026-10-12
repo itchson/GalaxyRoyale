@@ -1,0 +1,17 @@
+> STATS
+
+WEBGPU / 240 FPS / p95 0.00 ms
+
+0 quads / 1 entities / 0 particles
+
+POSITION 0.0, 0.0
+
+Haven Expanse / Dock protected / danger 0
+
+HULL 100/100 / SHIELD 0
+
+ZOOM 1.00 / WORLD 640 x 360 / UI 640 x 360
+
+SHIP LV 1 / XP 0 / CARGO 0/16
+
+LAST BOSS UI NONE

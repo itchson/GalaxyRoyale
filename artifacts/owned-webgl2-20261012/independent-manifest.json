@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "scope": "independent actual saved-artifact and pinned instrumentation review; Root operated browser",
+  "source_commit": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+  "stage_manifest_sha256": "38773dab964c857d8fc303d48ce7b5bd03e0735fd9e37a305322e24104b2ec2f",
+  "inputs": [
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184.json",
+      "bytes": 7226,
+      "sha256": "ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c.json",
+      "bytes": 7534,
+      "sha256": "c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb.json",
+      "bytes": 7689,
+      "sha256": "eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d.json",
+      "bytes": 7818,
+      "sha256": "952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48.json",
+      "bytes": 8171,
+      "sha256": "60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f.json",
+      "bytes": 8305,
+      "sha256": "b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8.json",
+      "bytes": 8372,
+      "sha256": "bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be.json",
+      "bytes": 8441,
+      "sha256": "5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\stage-manifest.json",
+      "copy": "inputs\\stage-manifest.json",
+      "bytes": 6923,
+      "sha256": "38773dab964c857d8fc303d48ce7b5bd03e0735fd9e37a305322e24104b2ec2f"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\preparation.md",
+      "copy": "inputs\\preparation.md",
+      "bytes": 3980,
+      "sha256": "782d7ddfce94f1482296cc2d37db3a5642d3b0bb71c16083dcbc1881894405c0"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\disposed-webgl2.jpg",
+      "copy": "inputs\\disposed-webgl2.jpg",
+      "bytes": 100713,
+      "sha256": "28a1e5b75d94397dfaf4b808c097d9cd5682cd5bd0e2d668b2793df133ef5bf3"
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\co-op-wasm-qa\\owned-v2\\stage-6964645\\client.js",
+      "copy": "inputs\\stage-source\\client.js",
+      "bytes": 16687,
+      "sha256": "d088839368496080e724360030f387da306bcbd619f1dd9dcd1d18e1261637a1"
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\co-op-wasm-qa\\owned-v2\\stage-6964645\\wasm-review.js",
+      "copy": "inputs\\stage-source\\wasm-review.js",
+      "bytes": 12157,
+      "sha256": "5c45baf64c1aa481b283fb8709acf406a6a94e94eb99fbf517d848f28026179b"
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\co-op-wasm-qa\\owned-v2\\preparation-6964645\\verification.json",
+      "copy": "inputs\\preparation-verification.json",
+      "bytes": 6609,
+      "sha256": "b3d89d730ab80cd44db26a1732175dfa6d2adce4ce6f1c87e9a27a3824159bf3"
+    }
+  ],
+  "outputs": {
+    "audit.json": {
+      "sha256": "ab1ce730032ffc55a1770bbda184cad3178d021b3575d13a7724ba8e371decc8",
+      "bytes": 40801
+    },
+    "REVIEW.md": {
+      "sha256": "e4fb154f2111b68cd7bbcd08cade4516365a880dc1f41962e64ccb3fc4aca88c",
+      "bytes": 6047
+    }
+  },
+  "actions": {
+    "read_artifacts": true,
+    "viewed_disposed_frame": true,
+    "read_pinned_instrumentation": true,
+    "browser": false,
+    "listener": false,
+    "runtime_edits": false,
+    "build": false,
+    "new_tests": false
+  }
+}

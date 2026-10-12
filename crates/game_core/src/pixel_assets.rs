@@ -20,7 +20,6 @@ struct Sprite {
 
 struct Assets {
     bodies: HashMap<String, PixelBody>,
-    asteroids: [PixelBody; 16],
     palette: Vec<u32>,
 }
 
@@ -44,172 +43,11 @@ static ASSETS: LazyLock<Assets> = LazyLock::new(|| {
             (name.clone(), body)
         })
         .collect();
-    let asteroid = atlas.sprites.get("asteroid").expect("asteroid artwork");
-    // Four mineral families, each with four cached deterministic surface fields.
-    // The silhouettes are fixed: recoloring cannot alter orbit/collision radii.
-    let asteroids = std::array::from_fn(|index| {
-        let style = index & 3;
-        let geology = index >> 2;
-        if style == 0 {
-            let body = expand(asteroid, &atlas.palette);
-            if geology == 0 {
-                body
-            } else {
-                map_colors(&body, |x, y, original| {
-                    let grain =
-                        crate::mix((x as u32 * 73) ^ (y as u32 * 193) ^ (geology as u32 * 991));
-                    let [r, g, b, a] = original.to_le_bytes();
-                    let band = ((x + y * (geology + 1)) / 7) % 4;
-                    let factor = if band == 0 {
-                        0.82
-                    } else if grain.is_multiple_of(29) {
-                        1.13
-                    } else {
-                        1.0
-                    };
-                    u32::from_le_bytes([
-                        (r as f32 * factor).min(255.0) as u8,
-                        (g as f32 * factor).min(255.0) as u8,
-                        (b as f32 * factor).min(255.0) as u8,
-                        a,
-                    ])
-                })
-            }
-        } else {
-            procedural_asteroid(style, geology)
-        }
-    });
     Assets {
         bodies,
-        asteroids,
         palette: atlas.palette,
     }
 });
-
-/// Intact material is solid. Cracks, pits and ice cleavages are opaque shades;
-/// only actual damage may turn an interior cell into a collision hole.
-fn procedural_asteroid(style: usize, geology: usize) -> PixelBody {
-    let palettes = [
-        [[0, 0, 0]; 8],
-        [
-            [20, 31, 41],
-            [35, 48, 59],
-            [51, 69, 79],
-            [72, 94, 104],
-            [98, 125, 132],
-            [133, 158, 161],
-            [176, 194, 183],
-            [221, 228, 205],
-        ],
-        [
-            [17, 36, 54],
-            [26, 57, 79],
-            [39, 81, 105],
-            [56, 110, 133],
-            [81, 144, 164],
-            [118, 180, 190],
-            [165, 213, 214],
-            [215, 238, 224],
-        ],
-        [
-            [30, 22, 35],
-            [47, 35, 51],
-            [67, 51, 67],
-            [87, 70, 80],
-            [112, 90, 94],
-            [143, 115, 106],
-            [175, 143, 118],
-            [203, 174, 136],
-        ],
-    ];
-    let colors: Vec<_> = palettes[style]
-        .iter()
-        .enumerate()
-        .map(|(i, c)| {
-            (
-                (b'a' + i as u8) as char,
-                u32::from_le_bytes([c[0], c[1], c[2], 255]),
-            )
-        })
-        .collect();
-    let mut rows = Vec::with_capacity(40);
-    for y in 0..40usize {
-        let mut row = String::with_capacity(40);
-        for x in 0..40usize {
-            let p = engine_core::Vec2::new(x as f32 - 19.5, y as f32 - 19.5);
-            if !rock_mask(style, p.x, p.y) {
-                row.push(' ');
-                continue;
-            }
-            let grain = crate::mix(
-                (x as u32 * 73) ^ (y as u32 * 193) ^ (style as u32 * 991) ^ (geology as u32 * 1777),
-            );
-            let mut shade = if p.x * 0.6 + p.y * 0.8 < -5.0 {
-                5
-            } else if p.x + p.y > 12.0 {
-                2
-            } else {
-                3
-            };
-            // Directional faceted strata avoid random bright speckle/noisy holes.
-            if ((x + y * (style + 1) + geology * 3) / 7).is_multiple_of(4) {
-                shade += 1;
-            }
-            if grain.is_multiple_of(37) {
-                shade = (shade + 1).min(6);
-            }
-            let edge = [(-1.0, 0.0), (1.0, 0.0), (0.0, -1.0), (0.0, 1.0)]
-                .iter()
-                .any(|&(dx, dy)| !rock_mask(style, p.x + dx, p.y + dy));
-            if edge {
-                shade = if p.x + p.y < 0.0 { 6 } else { 1 };
-            }
-            let shift = geology as f32 * 1.4;
-            for (cx, cy, r) in [
-                (-7.0 + shift, -5.0, 3.5),
-                (6.0, 4.0 - shift, 4.0),
-                (4.0, -10.0, 2.2),
-                (-5.0, 10.0, 2.5),
-            ] {
-                let dx = p.x - cx;
-                let dy = p.y - cy;
-                let d = dx * dx + dy * dy;
-                if d < r * r {
-                    // Opaque crater floor and a light-facing inner lip.
-                    shade = if d > (r - 1.0) * (r - 1.0) && dx + dy < 0.0 {
-                        5
-                    } else if d < r * r * 0.45 {
-                        0
-                    } else {
-                        1
-                    };
-                } else if d < (r + 0.8) * (r + 0.8) && dx + dy > 0.0 {
-                    shade = 4;
-                }
-            }
-            let seam = match style {
-                1 => (p.y * 0.35 + p.x - 4.0 + shift).abs() < 0.65 && p.y.abs() < 10.0,
-                2 => (p.x - (1.5 + p.y * 0.12 - shift)).abs() < 0.75 && p.y > -9.0 && p.y < 11.0,
-                _ => (p.y + p.x * 0.45 + 3.0 - shift).abs() < 0.65 && p.x.abs() < 12.0,
-            };
-            if seam && !edge {
-                shade = 0;
-            }
-            row.push((b'a' + shade) as char);
-        }
-        rows.push(row);
-    }
-    let borrowed: Vec<_> = rows.iter().map(String::as_str).collect();
-    PixelBody::from_ascii(&borrowed, &colors)
-}
-
-fn rock_mask(style: usize, x: f32, y: f32) -> bool {
-    match style {
-        1 => x.abs() < 17.5 && y.abs() < 14.5 && x.abs() + y.abs() * 0.8 < 26.0,
-        2 => x.abs() * 0.72 + y.abs() < 18.8 && x.abs() < 15.0,
-        _ => x * x / 280.0 + y * y / 250.0 < 1.0,
-    }
-}
 
 /// Initializer-only palette mapping; it preserves every occupied cell exactly.
 fn map_colors(body: &PixelBody, mut map: impl FnMut(usize, usize, u32) -> u32) -> PixelBody {
@@ -333,9 +171,14 @@ pub(super) fn body(name: &str) -> PixelBody {
 }
 
 pub(super) fn asteroid(seed: u32) -> PixelBody {
-    let style = (seed as usize >> 5) & 3;
-    let geology = (seed as usize >> 11) & 3;
-    ASSETS.asteroids[style + geology * 4].clone()
+    asteroid_instance(seed, 1)
+}
+pub(super) fn asteroid_instance(seed: u32, material_tier: u8) -> PixelBody {
+    crate::asteroid_art::body(seed, material_tier)
+}
+/// The immutable variety/drop selector remains unchanged by instance detailing.
+pub(super) fn asteroid_variety(seed: u32) -> u8 {
+    crate::asteroid_art::variety(seed)
 }
 
 pub(super) fn color(index: usize) -> u32 {
@@ -408,72 +251,38 @@ mod tests {
     }
 
     #[test]
-    fn sixteen_solid_surface_fields_preserve_family_radii_and_clone_isolation() {
-        let types: Vec<_> = (0..4).map(|style| asteroid(style * 32)).collect();
-        for (i, body) in types.iter().enumerate() {
-            assert_eq!((body.width, body.height), (40, 40));
-            assert!((500..=1600).contains(&body.occupied_count()));
-            assert!(body.cells().all(|(_, color)| color >> 24 == 255));
-            for scale in [0.55, 1.0] {
-                let r = radius(body, scale);
+    fn seeded_solid_bodies_keep_real_radius_and_independent_damage() {
+        for family in 0..4 {
+            let mut signatures = std::collections::HashSet::new();
+            for instance in 0..12 {
+                let seed = (crate::mix(instance * 1777) & !96) | (family * 32);
+                let body = asteroid(seed);
+                assert_eq!((body.width, body.height), (64, 64));
+                assert!((700..=crate::asteroid_art::MAX_CELLS).contains(&body.occupied_count()));
+                assert!(body.cells().all(|(_, color)| color >> 24 == 255));
+                assert_solid_connected(&body);
+                let intact = body.cells().collect::<Vec<_>>();
+                let signature: Vec<_> = body.cells_indexed().map(|(i, _, c)| (i, c)).collect();
+                assert!(signatures.insert(signature), "same-family instances repeat");
+                let mut damaged = body.clone();
+                let cell = damaged.cells().next().unwrap().0;
+                assert!(!damaged.damage(cell, 2.0).is_empty());
+                assert_eq!(asteroid(seed).cells().collect::<Vec<_>>(), intact);
+                let scale = crate::asteroid_art::CELL_SCALE * crate::asteroid_art::MAX_SIZE;
+                let r = radius(&body, scale);
+                assert!(r < crate::regions::BELT_BODY_PADDING);
                 for (p, _) in body.cells() {
-                    for offset in [
+                    for corner in [
                         Vec2::new(-0.5, -0.5),
                         Vec2::new(-0.5, 0.5),
                         Vec2::new(0.5, -0.5),
                         Vec2::new(0.5, 0.5),
                     ] {
-                        assert!((p + offset).length() * scale <= r + 0.00001);
+                        assert!((p + corner).length() * scale <= r + 0.00001);
                     }
                 }
             }
-            let pristine = body.cells().collect::<Vec<_>>();
-            let mut damaged = asteroid(i as u32 * 32);
-            let cell = damaged.cells().next().unwrap().0;
-            assert!(!damaged.damage(cell, 2.0).is_empty());
-            assert!(damaged.occupied_count() < pristine.len());
-            assert_eq!(
-                asteroid(i as u32 * 32).cells().collect::<Vec<_>>(),
-                pristine
-            );
-            for other in types.iter().skip(i + 1) {
-                assert_ne!(
-                    body.cells().map(|(p, _)| p).collect::<Vec<_>>(),
-                    other.cells().map(|(p, _)| p).collect::<Vec<_>>()
-                );
-            }
-            let positions: Vec<_> = body.cells().map(|(p, _)| p).collect();
-            let mut colors = std::collections::HashSet::new();
-            for geology in 0..4 {
-                let variant = asteroid(i as u32 * 32 + geology * 2048);
-                assert_eq!(
-                    variant.cells().map(|(p, _)| p).collect::<Vec<_>>(),
-                    positions
-                );
-                assert_eq!(radius(&variant, 0.55), radius(body, 0.55));
-                assert_eq!(
-                    variant.cells().collect::<Vec<_>>(),
-                    asteroid(i as u32 * 32 + geology * 2048)
-                        .cells()
-                        .collect::<Vec<_>>()
-                );
-                assert!(colors.insert(variant.cells().map(|(_, c)| c).collect::<Vec<_>>()));
-                assert_solid_connected(&variant);
-            }
         }
-        assert!(types[2].is_occupied(21, 20)); // Opaque ice cleavage.
-        assert!(types[3].is_occupied(26, 24)); // Opaque crater floor.
-        assert!(types[1].is_occupied(26, 24));
-        assert!(
-            types[3]
-                .hit_segment(Vec2::new(5.5, 3.5), Vec2::new(6.5, 4.5))
-                .is_some()
-        );
-        assert!(
-            types[1]
-                .hit_segment(Vec2::new(5.5, 3.5), Vec2::new(6.5, 4.5))
-                .is_some()
-        );
     }
 
     fn assert_solid_connected(body: &PixelBody) {
@@ -542,48 +351,6 @@ mod tests {
                 .is_some()
         );
         assert!(asteroid(96).hit_segment(start, end).is_some());
-    }
-
-    #[test]
-    fn filled_interiors_keep_the_previously_published_outer_collision_radii() {
-        for style in 1..=3 {
-            let mut previous_radius = 0.0f32;
-            for y in 0..40 {
-                for x in 0..40 {
-                    let p = Vec2::new(x as f32 - 19.5, y as f32 - 19.5);
-                    // Published pre-change material mask. Interior fissures/craters
-                    // were absent, but the occupied outer perimeter was the same.
-                    let old = match style {
-                        1 => {
-                            p.x.abs() < 17.5
-                                && p.y.abs() < 14.5
-                                && p.x.abs() + p.y.abs() * 0.8 < 26.0
-                        }
-                        2 => {
-                            p.x.abs() * 0.72 + p.y.abs() < 18.8
-                                && p.x.abs() < 15.0
-                                && !(p.x > 1.0 && p.x < 3.0 && p.y > -8.0 && p.y < 11.0)
-                        }
-                        _ => {
-                            p.x * p.x / 280.0 + p.y * p.y / 250.0 < 1.0
-                                && ![
-                                    (-7.0, -5.0, 3.5),
-                                    (6.0, 4.0, 4.0),
-                                    (4.0, -10.0, 2.2),
-                                    (-5.0, 10.0, 2.5),
-                                ]
-                                .iter()
-                                .any(|&(cx, cy, r)| (p.x - cx).powi(2) + (p.y - cy).powi(2) < r * r)
-                        }
-                    };
-                    if old {
-                        previous_radius =
-                            previous_radius.max(p.length() + std::f32::consts::FRAC_1_SQRT_2);
-                    }
-                }
-            }
-            assert_eq!(radius(&asteroid(style * 32), 1.0), previous_radius);
-        }
     }
 
     #[test]

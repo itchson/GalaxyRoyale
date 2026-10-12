@@ -1,0 +1,28 @@
+{
+  "sourceCommit": "73d7268",
+  "actualCapture": "qa-1791838846520-3f539dcd",
+  "scope": "native OfflineAudioContext PCM, declared fixtures; no human/mobile/gameplay acceptance",
+  "cleanCases": 7,
+  "title": {
+    "samples": 4608000,
+    "peak": 0.16148746013641357,
+    "rms": 0.025030782039565717,
+    "peak_dbfs": -15.837223919289237,
+    "rms_dbfs": -32.03051162935984,
+    "over_unity": 0,
+    "nonfinite": 0
+  },
+  "maximumVoices": {
+    "music": 7,
+    "effects": 0,
+    "continuous": 0
+  },
+  "cleanup": {
+    "music": 0,
+    "sfx": 0,
+    "continuous": 0,
+    "scheduler_callbacks": 0
+  },
+  "changes": "Title-only moving filter envelope, warmer sustained chord layers, kick transient/body and snare tonal body. Existing score, buses and transition clock retained.",
+  "limits": "Human listening, original-song timbre fidelity, realtime/mobile performance remain pending. MP3 is only an audition of synthesized PCM, never a runtime asset."
+}

@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+  "parent": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+  "source": [
+    {
+      "path": "scripts/test/dock-menu.test.mjs",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 36195,
+      "sha256": "d877760ddf64244919cad051bf571e5ae1dee534a9a111bed41a70418ae0b83e"
+    },
+    {
+      "path": "scripts/test/forge-integration.test.mjs",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 24390,
+      "sha256": "48daa8f64837b503a6301fd335fb2894add90dbd3045d4714348ef7e445633a2"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "apps/game/index.html",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 17658,
+      "sha256": "8f0ba61b1998ea35934a3f3fea3cdc0280c9b2cc0c7a59ebc441a6dfb540fad3"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 87756,
+      "sha256": "f290cdfb5f86c1e3f1c0ed6b943de031eec4f07dedfd9a0883b7ebeac3d1f0ee"
+    },
+    {
+      "path": "apps/game/src/input.ts",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 9826,
+      "sha256": "31c612f114cda1705220d817c6d77ca2a011e6abfae2d7b63e567a973efa75cd"
+    },
+    {
+      "path": "apps/game/src/loadout.ts",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 27283,
+      "sha256": "732107f60600d59036e828dadd500c213124b771010202411979e20c682eb894"
+    },
+    {
+      "path": "apps/game/src/forge-scene.ts",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 2350,
+      "sha256": "d0708ab30e352592904f1665a58cc49667d98f1f0646806bb1fe3700632c2b79"
+    },
+    {
+      "path": "apps/game/src/hangar-scene.ts",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 10244,
+      "sha256": "92f9e93120522a08dc6a136b0b38a0813f8461724911ae1d6930728583d59684"
+    },
+    {
+      "path": "apps/game/src/flight-menu.ts",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 8001,
+      "sha256": "f6a65fcc8cbda9697626bcea52caac4e44ea21e9b874bb6677e6a0b7764784e8"
+    },
+    {
+      "path": "crates/game_core/src/dock_facilities.rs",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 5382,
+      "sha256": "9f7e7cc1e5ed68ff980b85d0f4a74c7a38f849b86b8da6c0c3f0be936468b1e2"
+    },
+    {
+      "path": "package.json",
+      "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+      "bytes": 1085,
+      "sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b"
+    }
+  ],
+  "raw": [
+    {
+      "path": "work/haven-fixture-review/baseline-targeted.log",
+      "bytes": 19903,
+      "sha256": "a3cab0235066a88d21c51f45b6bc491d27c7f4eb497ca9cefaf5b61419d4760f"
+    },
+    {
+      "path": "work/haven-fixture-review/migrated-first.log",
+      "bytes": 15067,
+      "sha256": "8080292af518b25b63dbc1415f8f281b8bbc7587c30c7a4391c423139b2cbb4e"
+    },
+    {
+      "path": "work/haven-fixture-review/migrated-second.log",
+      "bytes": 9490,
+      "sha256": "69c2a096cefd0d4a4fd7e308ee17183630a5cb93e1c810dc7a8885ea6856445f"
+    },
+    {
+      "path": "work/haven-fixture-review/committed-targeted.log",
+      "bytes": 9492,
+      "sha256": "5694ec4e1b5b1756f3e633762a14d6a4de31d69d51aabe5b42ee2862e3dbe4a5"
+    },
+    {
+      "path": "work/haven-fixture-review/format.log",
+      "bytes": 84,
+      "sha256": "f7888d5f9fec510b6b564f82c21da915a023546cf8822be40c2ffdff4df092c1"
+    },
+    {
+      "path": "work/haven-fixture-review/format-check.log",
+      "bytes": 68,
+      "sha256": "f20510a9da4717c51c4cffee6d0dd88d6c9a723d0a83711d01216f5b48961283"
+    },
+    {
+      "path": "work/haven-fixture-review/diff-check.log",
+      "bytes": 258,
+      "sha256": "4595e367e88fb9b16a5eca197ea1fe9244389ee813b5f804063604eedb8ac666"
+    },
+    {
+      "path": "work/haven-fixture-review/commit.log",
+      "bytes": 154,
+      "sha256": "0285570f0b5989f10f817aa4160b92537efc8ae387aef6fdfb0c3d2944ba9c2c"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "work/haven-fixture-review/HANDOFF.md",
+      "bytes": 3790,
+      "sha256": "ece8e172aa54c57dfe35076f21fd5a6f70ad17760652671788d9571a7ce20ca1"
+    },
+    {
+      "path": "work/haven-fixture-review/verify.mjs",
+      "bytes": 5277,
+      "sha256": "a7ac74bee26b8ff0c7605137c26f5a40cf897dc8cc45c8fa993f2776261188ca"
+    },
+    {
+      "path": "work/haven-fixture-review/verification.json",
+      "bytes": 804,
+      "sha256": "97adc7f5188d728b2c6c430532d76602bf593156602623fc9eae6cce148e4a85"
+    }
+  ]
+}

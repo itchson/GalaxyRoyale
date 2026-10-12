@@ -80,8 +80,14 @@ fn persistent_selection_survives_hover_of_another_tab() {
     let b = &both.batches[0];
     assert_eq!(&b.transforms[..a.transforms.len()], &a.transforms);
     assert_eq!(&b.pixels[..a.pixels.len()], &a.pixels);
-    assert_eq!(a.transforms[6].a[2], 94.0, "single selected bar width");
-    assert_eq!(a.transforms[6].b[1], 2.0);
+    assert_eq!(
+        a.transforms
+            .iter()
+            .filter(|t| t.a[2] == 94.0 && t.b[1] == 2.0)
+            .count(),
+        1,
+        "one independent selected bar keeps its exact original bounds"
+    );
     let mut hovered_selected = node("nav-tab", [0.0, 0.0, 100.0, 24.0], "SETTINGS");
     hovered_selected.selected = true;
     hovered_selected.active = true;
@@ -209,7 +215,7 @@ fn labels_fit_inner_bounds_at_narrow_fractional_and_large_font_extents() {
                         let mut checked = 0;
                         for batch in &frame.batches {
                             for p in batch.pixels.iter().filter(|p| p.color == label_color) {
-                                let t = batch.transforms[p.transform as usize];
+                                let t = batch.transforms[p.transform_slot()];
                                 // Neutral atlas pixels never use WHITE exactly; these are cached glyphs.
                                 for c in corners(Vec2::from_array(p.local)) {
                                     let screen = local_screen(t, c, [0.0; 2]);
@@ -252,7 +258,7 @@ fn too_short_semantic_rects_keep_frames_without_crossing_glyphs() {
                 assert_ne!(p.color, BUTTON_TEXT);
                 for c in corners(Vec2::from_array(p.local)) {
                     assert!(in_rect(
-                        local_screen(b.transforms[p.transform as usize], c, [0.0; 2]),
+                        local_screen(b.transforms[p.transform_slot()], c, [0.0; 2]),
                         r
                     ));
                 }
@@ -275,7 +281,7 @@ fn legacy_settings_text_stays_inside_the_padded_nonoverlapping_regions() {
                 let mut glyphs = 0;
                 for b in &frame.batches {
                     for p in b.pixels.iter().filter(|p| p.color == BUTTON_TEXT) {
-                        let t = b.transforms[p.transform as usize];
+                        let t = b.transforms[p.transform_slot()];
                         if t.a[2] != t.b[1] || t.a[2] > 4.0 {
                             continue;
                         } // slider knob
@@ -306,7 +312,7 @@ fn horizontal_and_vertical_clips_apply_to_frames_and_label_centers() {
         for b in &frame.batches {
             for p in b.pixels.iter().filter(|p| p.color >> 24 != 0) {
                 let position = local_screen(
-                    b.transforms[p.transform as usize],
+                    b.transforms[p.transform_slot()],
                     Vec2::from_array(p.local),
                     [0.0; 2],
                 );
@@ -331,7 +337,7 @@ fn logo_intro_settle_never_leaves_a_tightly_fitted_mobile_rect() {
                 for p in &b.pixels {
                     for c in corners(Vec2::from_array(p.local)) {
                         assert!(in_rect(
-                            local_screen(b.transforms[p.transform as usize], c, [0.0; 2]),
+                            local_screen(b.transforms[p.transform_slot()], c, [0.0; 2]),
                             r
                         ));
                     }
@@ -369,7 +375,7 @@ fn semantic_scene_caps_and_pool_reuse_preserve_real_transform_indices() {
         b.transforms.len() <= 128
             && b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
     }));
     builder.clear();
     draw(&mut builder, &small, [0.0; 2], VIEW, 0.0, true);
@@ -410,12 +416,12 @@ fn semantic_groups_keep_screen_position_when_camera_moves() {
         assert_eq!(a.pixels, b.pixels);
         for (ap, bp) in a.pixels.iter().zip(&b.pixels) {
             let pa = local_screen(
-                a.transforms[ap.transform as usize],
+                a.transforms[ap.transform_slot()],
                 Vec2::from_array(ap.local),
                 [0.0; 2],
             );
             let pb = local_screen(
-                b.transforms[bp.transform as usize],
+                b.transforms[bp.transform_slot()],
                 Vec2::from_array(bp.local),
                 camera,
             );

@@ -1,0 +1,13 @@
+Browser tab: 3, Title: "Galaxy Royale", URL: "http://runtime-check.localhost:4173/?qa=1&renderer=webgl2".
+0 AXWebArea Galaxy Royale, URL: runtime-check.localhost:4173/?qa=1&renderer=webgl2
+	1 image Description: Galaxy Royale game universe, ID: universe
+	2 container GALAXY ROYALE // CONSOLE, ID: debug-console
+		3 heading GALAXY ROYALE // CONSOLE, Value: 2, ID: console-title
+			4 text GALAXY ROYALE // CONSOLE
+		5 text HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE
+		6 container Description: Console output, ID: console-output
+			8 text > renderer
+			9 text WEBGL2 / 640 x 360 logical pixels / eight bounded lights
+		7 text field (settable) Description: Console command, ID: console-input
+
+The focused UI element is 7 text field (settable) Description: Console command, ID: console-input

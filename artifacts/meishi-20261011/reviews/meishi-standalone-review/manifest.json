@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "root_commit": "69db89ccf5895390807383fcdd37c3413ba2dc68",
+  "inputs": [
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "3d5e09edea39cb5f39ab4e6fd5748655913821766b07bd292ee65f4f49bd75cc",
+      "size": 80781,
+      "git_blob_sha256": "3d5e09edea39cb5f39ab4e6fd5748655913821766b07bd292ee65f4f49bd75cc",
+      "git_blob_size": 80781,
+      "lf_equivalent": true
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "sha256": "13c69832d68cddaaa4484409518f927abb2f97c52c9169b7889e75ebd4d52685",
+      "size": 18991,
+      "git_blob_sha256": "13c69832d68cddaaa4484409518f927abb2f97c52c9169b7889e75ebd4d52685",
+      "git_blob_size": 18991,
+      "lf_equivalent": true
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "sha256": "702872f7d275ae811496cc19ad78be2f839c4b2e4ec5708337501bae2c9aebc8",
+      "size": 25936,
+      "git_blob_sha256": "702872f7d275ae811496cc19ad78be2f839c4b2e4ec5708337501bae2c9aebc8",
+      "git_blob_size": 25936,
+      "lf_equivalent": true
+    },
+    {
+      "path": "apps/game/src/meishi.ts",
+      "sha256": "0f55e13f0821d413bc46628e368e110c5a79e335251c3d85fb6fc38d94d17ae7",
+      "size": 8717,
+      "git_blob_sha256": "0f55e13f0821d413bc46628e368e110c5a79e335251c3d85fb6fc38d94d17ae7",
+      "git_blob_size": 8717,
+      "lf_equivalent": true
+    },
+    {
+      "path": "apps/game/src/meishi.css",
+      "sha256": "9eac5b5c0b14f11c9c668f375f772aa1fac0c2f2c6d7df9b9fc5626b20d0e7e8",
+      "size": 3353,
+      "git_blob_sha256": "9eac5b5c0b14f11c9c668f375f772aa1fac0c2f2c6d7df9b9fc5626b20d0e7e8",
+      "git_blob_size": 3353,
+      "lf_equivalent": true
+    },
+    {
+      "path": "apps/game/index.html",
+      "sha256": "754e397fb7596904b014d0b3189793e2fcad4e9d8e75b068f4cb144ecd160e3a",
+      "size": 16848,
+      "git_blob_sha256": "754e397fb7596904b014d0b3189793e2fcad4e9d8e75b068f4cb144ecd160e3a",
+      "git_blob_size": 16848,
+      "lf_equivalent": true
+    },
+    {
+      "path": "apps/game/src/input.ts",
+      "sha256": "5c9d32bf7800fc04bc32bf271cffbd2257b658bcb3eebfe43bacfbc914d45b51",
+      "size": 9834,
+      "git_blob_sha256": "5c9d32bf7800fc04bc32bf271cffbd2257b658bcb3eebfe43bacfbc914d45b51",
+      "git_blob_size": 9834,
+      "lf_equivalent": true
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "sha256": "17ee61f8814c3a930c429f39335613d96a73e7e0925f2da39243181e2767373e",
+      "size": 97507,
+      "git_blob_sha256": "777c837dd6edd6bf30fc4dca3006a34fe22de2b8da99f400111d49b77d2c592b",
+      "git_blob_size": 94897,
+      "lf_equivalent": true
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "sha256": "a836e13fe1dd767d07eee37b976be30d65ee6adbafa6192cd812762ea73c0f23",
+      "size": 31409,
+      "git_blob_sha256": "bf05e3d86bdc6a6a061934f838b747b3a58b26bf3e648260227bfa95692c4b10",
+      "git_blob_size": 30637,
+      "lf_equivalent": true
+    },
+    {
+      "path": "scripts/test/pixel-ui.test.mjs",
+      "sha256": "68379d602c2cb002cea72aa157dd76ae22c1441a2fa285b7b8a67d1e9440d97d",
+      "size": 22796,
+      "git_blob_sha256": "68379d602c2cb002cea72aa157dd76ae22c1441a2fa285b7b8a67d1e9440d97d",
+      "git_blob_size": 22796,
+      "lf_equivalent": true
+    },
+    {
+      "path": "scripts/test/dock-menu.test.mjs",
+      "sha256": "29cee93d442d621066d3c4fe6495970f4fa77c4c262ddfb9a55519eff797084a",
+      "size": 29643,
+      "git_blob_sha256": "29cee93d442d621066d3c4fe6495970f4fa77c4c262ddfb9a55519eff797084a",
+      "git_blob_size": 29643,
+      "lf_equivalent": true
+    },
+    {
+      "path": "scripts/test/meishi.test.mjs",
+      "sha256": "8cf1576a2417d93fbfd07ed99310687f38cfc7cbf2c8cf65ed3389cc70b43f28",
+      "size": 11681,
+      "git_blob_sha256": "8cf1576a2417d93fbfd07ed99310687f38cfc7cbf2c8cf65ed3389cc70b43f28",
+      "git_blob_size": 11681,
+      "lf_equivalent": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "REVIEW.md",
+      "sha256": "73c07c91a3ccc9a9fdb830e863a8cfa8f2b8071217970ba8f6f7c013f54f436e",
+      "size": 3172
+    }
+  ]
+}

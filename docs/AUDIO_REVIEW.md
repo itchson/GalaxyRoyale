@@ -6,7 +6,7 @@ From the repository root, with Node and the existing locked dependencies:
 
 ```sh
 pnpm install --frozen-lockfile
-node --test scripts/qa/audio-review/metrics.test.mjs scripts/qa/audio-review/helper.test.mjs
+node --test scripts/qa/audio-review/*.test.mjs
 node scripts/qa/audio-review/prepare.mjs
 node scripts/qa/audio-review/server.mjs --port 4188 --autoquit-seconds 1800
 ```
@@ -33,12 +33,15 @@ The output must be inside this checkout's `work/`. Stop its server before prepar
 
 ## Declared fixtures and measurements
 
-Four sequential stereo, 48 kHz native renders exercise the real sequencer and voice limits:
+Five sequential stereo, 48 kHz native renders exercise the real sequencer and voice limits. The state/event algorithms of the first four fixtures are preserved:
 
 1. Six seconds of historical engine at master/effects `.75`, music `0`, speed/throttle `1` for four seconds followed by two seconds release.
 2. The current warm engine with exactly the same settings and state.
 3. Eleven seconds of eight sequential champion themes, combat `.8`, hull `.08`, throttle `.9`, speed `.7`, settings `.75/.4/.75` and 34 declared authored cue calls.
 4. Five seconds at maximum buses with score/engine/alarm and 16 explosion calls at one second, 16 death calls at two seconds and 16 upgrade calls at three seconds. The actual cap/stealing applies. These are deliberate stress calls, not natural gameplay or the death-screen lifecycle.
+5. Separately named **current-score**, 24 seconds at `.75/.4/.75`: PAN home0–3s, RENKO home3–6s, HUGO home6–9s, quiet Expanse9–12s, active Iron combat12–16s, Radial boss with one hostile/combat1/hull`.08`16–20s, then healed PAN home20–24s with thrust/speed0. Eighteen chronological authored cue calls accompany the phases, ending at21.2s. The last phase releases propulsion/alarm and recedes combat/boss while home music continues. This is a declared cross-corporation DSP comparison, not a natural single-pilot playthrough or a change to any saved identity. It adds one float WAV of9,216,044 bytes, below the unchanged12MiB capture cap.
+
+The new fixture's report includes the supplied phase states, per-phase raw PCM metrics and sampled actual engine mix/theme diagnostics. State/event transitions happen at the next native quantum-rounded scheduler checkpoint; requested boundaries are recorded separately from those actual times. Its current-source PCM, voice/cleanup result and human listening are **pending until an actual visible run**. Earlier archived metrics do not validate a new score.
 
 The isolated page temporarily substitutes a constructor that delegates every graph/node operation, destination, time and sample rate to a real native `OfflineAudioContext`. It exposes running state and no-op engine lifecycle methods only to allow offline scheduling. Captured 25 ms scheduler callbacks advance after **actual native suspend points**, using quantum-rounded native time; rendering resumes through the native context. Overrides restore in `finally`. This adapter cannot prove realtime/mobile suspend or recovery behavior and never accesses the game's QA API.
 
@@ -52,4 +55,4 @@ The next actual run (`qa-1791686562452-e304e589`) used current audio source SHA2
 
 This tracked helper preserves that rendering algorithm and declared fixtures, with reproducible Git baseline preparation, stricter serving/pinning, clearer metric naming and bounded cleanup. The recorded result belongs to the source and original run above; it is not a claim that the newly tracked page has been clicked again or that future source changes automatically pass. Run it again when changing the mix.
 
-Helper Node tests validate real source compilation/hash checks, HTTP path/Origin/size/immutable-write behavior, occupied-port and autoquit cleanup, and metric math/float export. Analytical tone fixtures are explicitly math tests, not browser DSP evidence. Recorded graph tests in `scripts/test/audio.test.mjs` cover bounded voices and lifecycle separately. Human listening, natural combat mix, speaker/headphone comfort, realtime/device performance, mobile recovery and physical-device acceptance remain pending.
+Helper Node tests validate real source compilation/hash checks, HTTP path/Origin/size/immutable-write behavior, occupied-port and autoquit cleanup, and metric math/float export. Fixture tests execute actual page state/event declarations against the committed earlier four algorithms, validate the new timeline with the real mixer, and inject pre-render failures solely to check adapter-owner restoration; no PCM is invented. Analytical tone fixtures are explicitly math tests, not browser DSP evidence. Recorded graph tests in `scripts/test/audio.test.mjs` cover bounded voices and lifecycle separately. Human listening, natural combat mix, speaker/headphone comfort, realtime/device performance, mobile recovery and physical-device acceptance remain pending.

@@ -1,0 +1,24 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 17 tests
+test component_tests::finite_catalog_category_costs_and_requirements_are_exact ... ok
+test component_tests::existing_components_prevent_reissuing_a_pristine_license ... ok
+test component_tests::actual_craft_spends_banked_stock_only_and_never_double_spends_named_t1 ... ok
+test component_tests::first_craft_and_rank2_upgrade_remain_component_free ... ok
+test component_tests::recipes_are_hidden_until_real_category_inventory_or_blueprint_discovery ... ok
+test component_tests::advanced_upgrade_failure_and_success_debit_points_exact_tier_and_parts_atomically ... ok
+test component_tests::all_ordinary_advanced_ranks_consume_their_matching_part_and_keep_slot_capacity ... ok
+test component_tests::all_profile_fields_roundtrip_with_live_cargo_but_reload_discards_only_cargo ... ok
+test component_tests::final_stack_unit_is_admitted_once_and_repeat_capacity_failures_cost_nothing ... ok
+test component_tests::component_failures_are_atomic_for_unknown_discovery_level_materials_location_and_full_stack ... ok
+test component_tests::actual_hud_serializer_exposes_bounded_recipe_eligibility_and_owned_part_requirements ... ok
+test component_tests::components_survive_real_death_abandonment_and_reload_without_becoming_cargo ... ok
+test component_tests::actual_corporate_training_first_upgrade_keeps_its_named_recipe_and_level1_exception ... ok
+test component_tests::schema7_import_requires_exact_bounded_counts_and_never_accepts_corrupt_stacks ... ok
+test component_tests::schema6_migration_ignores_forged_stacks_and_preserves_every_prior_asset ... ok
+test component_tests::public_diagnostic_warp_cannot_craft_or_spend_parts_and_reset_restores_real_dock_actions ... ok
+test component_tests::level_compatibility_points_and_rank_tier_failures_never_consume_parts ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 352 filtered out; finished in 0.02s
+

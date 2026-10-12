@@ -1,0 +1,48 @@
+{
+  "runtime_reported_by_root": "d62dec5",
+  "native_commit": "4d032e99bfdf1da056ba72516667c0f7745bd246",
+  "backend_reported_by_root": "WebGL2",
+  "scope": "Independent saved-image inspection; browser operated by Root",
+  "pins": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\background-style-review\\ui-candidate\\BROWSER_IMAGES.md",
+      "bytes": 1799,
+      "sha256": "a3561beafc5c0e4e6e1a198689cc1fd35caa897dad52942c5a2947395a442e2e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\settings-ui-candidate.jpg",
+      "bytes": 45854,
+      "sha256": "641233f904986309683c4deef680a20f31eb2e1a95a9db09bfb6a4933aa742f3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\settings-compact-ui-candidate.jpg",
+      "bytes": 28363,
+      "sha256": "7c236b21e67c5e26172c10f3e037965be609980bf2715d10cc44b48dc4106330"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\settings-session-ui-candidate.jpg",
+      "bytes": 26418,
+      "sha256": "2d82115bfde95d05084f70fc8f1f1481c4b8654868d07f87c231eb193b205ca3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\settings-portrait-ui-candidate.jpg",
+      "bytes": 26693,
+      "sha256": "990905c4c21d00b232391c707997f3f766c973ed1a99cd0f0986066fbaf177fd"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\settings-portrait-session-ui-candidate.jpg",
+      "bytes": 32471,
+      "sha256": "3b87022f1f445bb3d5bc262a79505d867567459b1af5322af0e19360d3c78950"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\raicho-ui-candidate.jpg",
+      "bytes": 51642,
+      "sha256": "e79b994034b847b4c7d9b58bc61f5664f3544ea8beaf22813ff818cbf02896f7"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\save-ui-candidate.jpg",
+      "bytes": 41407,
+      "sha256": "95f471fead41fb8d9974315c488e2dd4f3fb18263bffbd8ae817742b569746b8"
+    }
+  ]
+}

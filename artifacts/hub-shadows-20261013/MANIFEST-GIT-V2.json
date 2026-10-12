@@ -1,0 +1,375 @@
+{
+  "version": 2,
+  "commit": "db15b91f3a1614ebd245fbab47787de737535882",
+  "parent": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+  "source_pin_semantics": "source bytes/sha256 = exact git cat-file blob bytes at commit:path; working_checkout = raw original checkout bytes; git_blob = canonical Git object identity",
+  "raw_pin_semantics": "inputs/evidence/handoff/preserved_manifest/amendment = exact raw filesystem bytes",
+  "source": [
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "git_blob": "d49a1d4d18dffa46b8eb979426bf8c56ca01d406",
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "working_checkout": {
+        "bytes": 30850,
+        "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4"
+      }
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "git_blob": "c4f63ca4ecede5c9da6b030e244c706e1d12c89f",
+      "bytes": 891,
+      "sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869",
+      "working_checkout": {
+        "bytes": 891,
+        "sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869"
+      }
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "git_blob": "da66cdef5ec16265dc1ecdba276d646899ffd54b",
+      "bytes": 14857,
+      "sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "working_checkout": {
+        "bytes": 14857,
+        "sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76"
+      }
+    },
+    {
+      "path": "crates/engine_core/src/shadow.rs",
+      "git_blob": "4204f9b149a7bf5c73e8e1d32b240f4c8811831c",
+      "bytes": 9438,
+      "sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "working_checkout": {
+        "bytes": 9438,
+        "sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e"
+      }
+    },
+    {
+      "path": "crates/game_core/src/hub_shadows.rs",
+      "git_blob": "ce5b13ee004d630c6348c6eade9faa8551e341fc",
+      "bytes": 9642,
+      "sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "working_checkout": {
+        "bytes": 9642,
+        "sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086"
+      }
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "git_blob": "4b43e47418bcc880ebd7df5f52277ebaf14d0a72",
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "working_checkout": {
+        "bytes": 196705,
+        "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930"
+      }
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "git_blob": "01be4a3ed82ee10b21d58741d8b5adb8c7164878",
+      "bytes": 9952,
+      "sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "working_checkout": {
+        "bytes": 9952,
+        "sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf"
+      }
+    },
+    {
+      "path": "crates/game_web/src/dock_art_tests.rs",
+      "git_blob": "e7bffd86881954cbc609deefe552746773a9ca07",
+      "bytes": 16491,
+      "sha256": "c1f8d7b90f71d29ac44ad16cc1ebc584d676dca5b082d712852bd3ae3e932864",
+      "working_checkout": {
+        "bytes": 16491,
+        "sha256": "c1f8d7b90f71d29ac44ad16cc1ebc584d676dca5b082d712852bd3ae3e932864"
+      }
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "git_blob": "0c7b68df72c95058b1cfdfc50498c0cb7b4ee9db",
+      "bytes": 495,
+      "sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570",
+      "working_checkout": {
+        "bytes": 495,
+        "sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570"
+      }
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "git_blob": "1e5964cfb51131da8be977eafa869421378cdb23",
+      "bytes": 12924,
+      "sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1",
+      "working_checkout": {
+        "bytes": 12924,
+        "sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1"
+      }
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "git_blob": "cefe34ae4e8f6f687476031270bfd3932735c2ed",
+      "bytes": 8685,
+      "sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "working_checkout": {
+        "bytes": 8850,
+        "sha256": "60a4e97870f8401cdb479e3a12ac57baf5e98b975aeef9139b7a30a6742580e8"
+      }
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "git_blob": "c72a12b8c900b1a5cfcabd62b6bdf16da7a27ca1",
+      "bytes": 32057,
+      "sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "working_checkout": {
+        "bytes": 32057,
+        "sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4"
+      }
+    },
+    {
+      "path": "crates/game_web/src/shadow_uniforms.rs",
+      "git_blob": "caacd76754cbd3f8e3e9075d5e15d9698bdf49ee",
+      "bytes": 6127,
+      "sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "working_checkout": {
+        "bytes": 6127,
+        "sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/pack.json",
+      "bytes": 2302820,
+      "sha256": "36031366f135b12b290f59e3f2c382e56774f9663e5fdb5241584051ad24832b"
+    },
+    {
+      "path": "crates/game_web/src/garage_art.rs",
+      "bytes": 8211,
+      "sha256": "3411bffddb4bffe3645b6f08a3af6eff71f226e1b19dce634df2f6d52de0911b"
+    },
+    {
+      "path": "crates/game_web/src/ui_kikai_integration_tests.rs",
+      "bytes": 41863,
+      "sha256": "73dcaa028f2243ce8d1317777e4e73bec551bb26e06a1dbdef2398b05f59c54b"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 130862,
+      "sha256": "084233eec44bc3c2da48bbb77938819bda4433d9ca308615db117b9f0b1de05f"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "work/hub-shadow-prototype/clippy-native-first.log",
+      "bytes": 2313,
+      "sha256": "a9f5ccee93b3423bd6365026e902d33aa66a460c20da5c6ed49f0c841a293a08"
+    },
+    {
+      "path": "work/hub-shadow-prototype/clippy-portable-final.log",
+      "bytes": 313,
+      "sha256": "3f60acfb765df6eba2c7f67b7704dd8877fe9e2166921925dde3313cadc89c6d"
+    },
+    {
+      "path": "work/hub-shadow-prototype/clippy-wasm-webgl-first.log",
+      "bytes": 2489,
+      "sha256": "5638301ce629bb4968032d3942a3cccadc18357d39a6bb373526ee492b5e1fee"
+    },
+    {
+      "path": "work/hub-shadow-prototype/clippy-web-native-baseline-exception.log",
+      "bytes": 1104,
+      "sha256": "69eaecfbf2781512693d064b2eabd5b79fdc306f081a05780384dc67d5ec937b"
+    },
+    {
+      "path": "work/hub-shadow-prototype/clippy-web-native-final-qualified.log",
+      "bytes": 189,
+      "sha256": "80aa764d0c94dad9d6fc74622fb1a4cbd62b1815ce25f882cb2d9a1d0b78ed67"
+    },
+    {
+      "path": "work/hub-shadow-prototype/clippy-webgl-final-qualified.log",
+      "bytes": 429,
+      "sha256": "dd6fd4ef614ff279308e9582b5efd5a0182455d5bfec723f5bc4e8096a4bfc04"
+    },
+    {
+      "path": "work/hub-shadow-prototype/clippy-webgpu-final-qualified.log",
+      "bytes": 189,
+      "sha256": "458c0090c30a69312f4cd3d0859fa50a5b7c39c54a5c76ca462a0945a5fe77bd"
+    },
+    {
+      "path": "work/hub-shadow-prototype/deck-export-committed.log",
+      "bytes": 1200,
+      "sha256": "f0a2f02e7d637055ad74631322362d1d0727f62cc59f5f954e713240b72480b8"
+    },
+    {
+      "path": "work/hub-shadow-prototype/deck-export-final.log",
+      "bytes": 1316,
+      "sha256": "05315ec595cb72560bb06e66cd99a792e6afd8e38eaeb2470870b71bd162dfc2"
+    },
+    {
+      "path": "work/hub-shadow-prototype/deck-export.log",
+      "bytes": 2381,
+      "sha256": "f26fe38be0444a4c30a2db79e8d1a6bb7f2e0d0ee933a5f8b80ed99ce6742981"
+    },
+    {
+      "path": "work/hub-shadow-prototype/dock-receiver.log",
+      "bytes": 641,
+      "sha256": "9b56e313c15bce62f591b826f0434f59ec3fac50e8fe3da632a56ec071b4b1b7"
+    },
+    {
+      "path": "work/hub-shadow-prototype/dock-tests-final.log",
+      "bytes": 1494,
+      "sha256": "3108d7d21418e99419ad924bcb0eecc5ea4380875c860218c4242759a36d4d92"
+    },
+    {
+      "path": "work/hub-shadow-prototype/fmt-result.json",
+      "bytes": 125,
+      "sha256": "4129c50d3e70a1a201c1fbf4017b2fffdc779f43d6cdcbabfec4e4939c35be24"
+    },
+    {
+      "path": "work/hub-shadow-prototype/game-shadow-final.log",
+      "bytes": 889,
+      "sha256": "589ae4cc27cb5143222619617e5d50b4c12331fc40cc6ad1a3736478f0572183"
+    },
+    {
+      "path": "work/hub-shadow-prototype/game-shadow.log",
+      "bytes": 508,
+      "sha256": "6ec7702c2fe264e5e1cf38ac29164e7daccc6dc409870a43e23f933a83f8dee7"
+    },
+    {
+      "path": "work/hub-shadow-prototype/lighting-tests-final.log",
+      "bytes": 1309,
+      "sha256": "dfe13664d3dec4d2c503216abad3acf35a865ee35fe7d09f6f91a88c90e07439"
+    },
+    {
+      "path": "work/hub-shadow-prototype/meta.log",
+      "bytes": 701,
+      "sha256": "41b62170b5bd24ff5bc7f474cec700739212cb3bda96edb9422578b72b42214f"
+    },
+    {
+      "path": "work/hub-shadow-prototype/naga-first.log",
+      "bytes": 928,
+      "sha256": "8ab404ffc2efa43ab4aedd3dc43ce89be6b242895b4e9febfd2abb8b291ad1c3"
+    },
+    {
+      "path": "work/hub-shadow-prototype/naga-glsl.log",
+      "bytes": 2044,
+      "sha256": "aaf6f2a95d88afda3877055ee0437cb4cc4579e9966b954b1a2f588005e1bc97"
+    },
+    {
+      "path": "work/hub-shadow-prototype/naga-portable/Cargo.lock",
+      "bytes": 7162,
+      "sha256": "ce7d1005d8d08ded258b2531c43feca414492032e56ab0c886eb1a67c5dd7ce4"
+    },
+    {
+      "path": "work/hub-shadow-prototype/naga-portable/Cargo.toml",
+      "bytes": 178,
+      "sha256": "a0dcb3db0c566901241ba862d1b53f9c8be361ac19940a82b480a023eb4d60d2"
+    },
+    {
+      "path": "work/hub-shadow-prototype/naga-portable/fs_main.glsl",
+      "bytes": 10665,
+      "sha256": "7bad97d6a25711ce3912178ad8d2a37f4cea06a59a7bceaf57e7c291ab60d324"
+    },
+    {
+      "path": "work/hub-shadow-prototype/naga-portable/src/main.rs",
+      "bytes": 1469,
+      "sha256": "dfbc968b4f5f2f623f6a3a4c6a7b39ddef2ff4debb145601c7ddfbdaa808ed45"
+    },
+    {
+      "path": "work/hub-shadow-prototype/naga-portable/vs_main.glsl",
+      "bytes": 6417,
+      "sha256": "b9df4656f7a9a35de0e26be926ac7ab78b5a7c8919e2c86ca227e49c08903745"
+    },
+    {
+      "path": "work/hub-shadow-prototype/native-all-first.log",
+      "bytes": 99114,
+      "sha256": "5eadfca9e94fe658050cea835f8307dbce8b8fc977550fd33c7ade38303a7bba"
+    },
+    {
+      "path": "work/hub-shadow-prototype/native-deck-packets.json",
+      "bytes": 28797771,
+      "sha256": "ad8ef27f533ef39ed077f9671e1d9f794ceb6c934d1067318ffc0951c0ccb013"
+    },
+    {
+      "path": "work/hub-shadow-prototype/native-export-committed.log",
+      "bytes": 345,
+      "sha256": "69229c9d8b7c744fb5b72630206e30d39cd6186802d1357cfdb09f274f0519e1"
+    },
+    {
+      "path": "work/hub-shadow-prototype/native-export.log",
+      "bytes": 345,
+      "sha256": "5f014f630033d930f9aba0f1b40cf3cd12d978539af528937bd79a68719b8e8a"
+    },
+    {
+      "path": "work/hub-shadow-prototype/native-fields.json",
+      "bytes": 121826,
+      "sha256": "2860b5f76fe5a33842ff7b7d5564e4ecb8f7b31481b27731851315b13becbe04"
+    },
+    {
+      "path": "work/hub-shadow-prototype/native-portable-final.log",
+      "bytes": 62399,
+      "sha256": "3c2826483b81332bf11eca8813764fb802691712720a92ce8f135af4f79694f5"
+    },
+    {
+      "path": "work/hub-shadow-prototype/native-software-ray-contact.png",
+      "bytes": 265962,
+      "sha256": "74e293253bb093bbdab487fd0ee361153a8dce40f0a838c2687f71ca163e50cb"
+    },
+    {
+      "path": "work/hub-shadow-prototype/packing-tests-final.log",
+      "bytes": 681,
+      "sha256": "a18282428fc436301326e6747431ecfab639dad515c1b292943e8ec842898538"
+    },
+    {
+      "path": "work/hub-shadow-prototype/software-proof.log",
+      "bytes": 121,
+      "sha256": "a1721624259ccd34193a36512dda5f30c183535cbe7e12bb049de61a923a4bc0"
+    },
+    {
+      "path": "work/hub-shadow-prototype/software-proof.py",
+      "bytes": 3193,
+      "sha256": "4078ae03dcb4376d822441442a635e619bf29e0e24bae642967011794cf67f29"
+    },
+    {
+      "path": "work/hub-shadow-prototype/verify-canonical-pins.py",
+      "bytes": 3339,
+      "sha256": "404a4e0fa2363eb585e0afb1ff4aa529eb7df80c36bfe7b52ebcab6ae840dff2"
+    },
+    {
+      "path": "work/hub-shadow-prototype/CANONICAL-GIT-VERIFY.json",
+      "bytes": 13106,
+      "sha256": "b3dfb392bdbae90a8fe8f16f78e9068ab7b2246ad6fafca46e427e5244441256"
+    },
+    {
+      "path": "work/hub-shadow-prototype/canonical-git-verify.log",
+      "bytes": 933,
+      "sha256": "d772992018d92527e43d1d0387ac176f3be85e6ea952a01e0ac66a4a38dcf483"
+    },
+    {
+      "path": "work/hub-shadow-prototype/AMENDMENT-GIT-PINS.md",
+      "bytes": 2483,
+      "sha256": "5b254281beae49d9f3e31504123c03ae8132bb9bfdf54c0ed6a39e89bd97976f"
+    }
+  ],
+  "handoff": {
+    "path": "work/hub-shadow-prototype/HANDOFF.md",
+    "bytes": 8314,
+    "sha256": "8b065e405cf1c24d6b23f0f00136c728e373153386426163eaa0413326fbacfc"
+  },
+  "preserved_manifest": {
+    "path": "work/hub-shadow-prototype/MANIFEST.json",
+    "bytes": 10777,
+    "sha256": "626cdf5ea5e9c443495b464632ab9771827c6a8ce795e7ebfaeef83ce94353d8"
+  },
+  "amendment": {
+    "path": "work/hub-shadow-prototype/AMENDMENT-GIT-PINS.md",
+    "bytes": 2483,
+    "sha256": "5b254281beae49d9f3e31504123c03ae8132bb9bfdf54c0ed6a39e89bd97976f"
+  },
+  "numeric_fixture_semantics": "native f32 pose/light/descriptor values compare after binary32 rounding with finite/range checks; cells/index/RGBA/masks/integer headers compare exactly; no new GPU numeric parity claim",
+  "limitations": [
+    "no GPU/browser/performance acceptance",
+    "base9 UI fixture failures",
+    "basegarage Clippy exception for web checks",
+    "one local solo caster/one main beacon only"
+  ]
+}

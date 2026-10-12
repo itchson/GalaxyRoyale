@@ -12,7 +12,7 @@ export async function treeHash(root,paths,exclude=()=>false){
  }
  for(const path of [...paths].sort())await visit(resolve(root,path));return hash.digest('hex');
 }
-const runtimePaths=['Cargo.toml','Cargo.lock','rust-toolchain.toml','package.json','pnpm-lock.yaml','tsconfig.json','crates','assets','apps/game','scripts/build.mjs','scripts/build-wasm.mjs','scripts/pwa.mjs','scripts/wasm-artifacts.mjs','scripts/preview-build.mjs'];
+const runtimePaths=['Cargo.toml','Cargo.lock','rust-toolchain.toml','package.json','pnpm-lock.yaml','tsconfig.json','crates','assets','apps/game','scripts/build.mjs','scripts/build-wasm.mjs','scripts/pwa.mjs','scripts/wasm-artifacts.mjs','scripts/preview-build.mjs','scripts/game-runtime-lease.mjs'];
 const excluded=name=>/^apps\/game\/(?:dist|node_modules|public\/wasm)(?:\/|$)/.test(name);
 const git=(root,...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
 export async function buildIdentity(root){return {head:git(root,'rev-parse','HEAD'),branch:git(root,'branch','--show-current'),sourceHash:await treeHash(root,runtimePaths,excluded)};}

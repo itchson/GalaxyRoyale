@@ -1,0 +1,30 @@
+{
+  "item": {
+    "id": "run-218667a4",
+    "title": "Configured Wake final-health correction author · running",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Configured Wake final-health correction author",
+    "state": "running",
+    "observedAt": "2026-10-12T22:39:34.588Z",
+    "taskIds": [
+      "task-d0e4d592"
+    ],
+    "summary": "Separate codex/coop-wake-live-health branch from immutable1f283. Independent review found two new-pass qualification blockers during final verification and Guest leave. Exact corrected reviewer scripts/source were byte-pinned and actually executed locally: both print resolved/passing frozen checks before expected assertion exit1. Earlier import failures are retained setup failures, not functional evidence. Narrow source correction and10 new regression cases now pass with18 existing helper cases; remaining selected consumers/provenance checks and freeze pending. No listener/normal build/native/browser/RTC run; criteria remain unchanged.",
+    "evidence": [
+      {
+        "label": "Independent required amendment",
+        "kind": "note",
+        "details": "work/coop-wake-live-health/reviewer-REVIEW.md; reviewer-seals.json"
+      },
+      {
+        "label": "Actual frozen red baseline and current focused checks",
+        "kind": "note",
+        "details": "work/coop-wake-live-health/baseline-final-health.log; baseline-leave-health.log; baseline-exits.json; tests-first.log"
+      }
+    ],
+    "author": "Codex",
+    "source": "actual configured Wake helper amendment",
+    "createdAt": "2026-10-12T22:39:34.661Z"
+  },
+  "revision": 1120
+}

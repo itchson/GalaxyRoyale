@@ -1,0 +1,23 @@
+test_actual_material_landmarks_are_structures_not_noise (__main__.RaichoFine.test_actual_material_landmarks_are_structures_not_noise) ... ok
+test_all_committed_outputs_and_png_bytes_regenerate_exactly (__main__.RaichoFine.test_all_committed_outputs_and_png_bytes_regenerate_exactly) ... ok
+test_code_fingerprints_ignore_checkout_line_endings_only (__main__.RaichoFine.test_code_fingerprints_ignore_checkout_line_endings_only) ... ok
+test_corporate_roles_cannot_tint_glass_or_neutral_metal (__main__.RaichoFine.test_corporate_roles_cannot_tint_glass_or_neutral_metal) ... ok
+test_damage_mapping_masks_entire_fine_assembly_for_removed_coarse_cell (__main__.RaichoFine.test_damage_mapping_masks_entire_fine_assembly_for_removed_coarse_cell) ... ok
+test_each_source_cell_matches_palette_index_and_hard_alpha (__main__.RaichoFine.test_each_source_cell_matches_palette_index_and_hard_alpha) ... ok
+test_exact_budgets_charge_full_bodies_and_each_repeated_instance (__main__.RaichoFine.test_exact_budgets_charge_full_bodies_and_each_repeated_instance) ... ok
+test_exact_indexed_png_roundtrip_preserves_palette_and_every_cell (__main__.RaichoFine.test_exact_indexed_png_roundtrip_preserves_palette_and_every_cell) ... ok
+test_full_and_overlay_surfaces_stay_inside_old_collision_cells (__main__.RaichoFine.test_full_and_overlay_surfaces_stay_inside_old_collision_cells) ... ok
+test_intact_bodies_are_connected_and_only_renko_has_authored_apertures (__main__.RaichoFine.test_intact_bodies_are_connected_and_only_renko_has_authored_apertures) ... ok
+test_palette_signal_mask_and_overlay_corruption_fail_closed (__main__.RaichoFine.test_palette_signal_mask_and_overlay_corruption_fail_closed) ... ok
+test_png_import_has_no_resize_quantization_alpha_or_component_loss (__main__.RaichoFine.test_png_import_has_no_resize_quantization_alpha_or_component_loss) ... ok
+test_reference_integer_geometry_matches_reviewed_f32_fields (__main__.RaichoFine.test_reference_integer_geometry_matches_reviewed_f32_fields) ... ok
+test_relative_half_cells_and_full_affine_corners_preserve_mapping (__main__.RaichoFine.test_relative_half_cells_and_full_affine_corners_preserve_mapping) ... ok
+test_removed_solid_cell_and_added_external_cell_fail_closed (__main__.RaichoFine.test_removed_solid_cell_and_added_external_cell_fail_closed) ... ok
+test_software_samples_have_distinct_silhouettes_without_native_claims (__main__.RaichoFine.test_software_samples_have_distinct_silhouettes_without_native_claims) ... ok
+test_three_silhouettes_and_fine_color_clusters_are_distinct (__main__.RaichoFine.test_three_silhouettes_and_fine_color_clusters_are_distinct) ... ok
+test_valid_occupied_role_reassignment_and_missing_overlay_signal_reject (__main__.RaichoFine.test_valid_occupied_role_reassignment_and_missing_overlay_signal_reject) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 2.584s
+
+OK

@@ -1,0 +1,662 @@
+diff --git a/apps/game/src/loadout.css b/apps/game/src/loadout.css
+index cce8a75..25a6a5e 100644
+--- a/apps/game/src/loadout.css
++++ b/apps/game/src/loadout.css
+@@ -20,6 +20,7 @@
+ }
+ .loadout-summary,
+ .ability-card,
++.component-card,
+ .hardware-card,
+ .ship-hangar-card {
+   min-width: 0;
+@@ -123,11 +124,23 @@
+   color: #7891a5;
+ }
+ .ability-card,
++.component-card,
+ .hardware-card {
+   display: flex;
+   flex-direction: column;
+   gap: calc(3px * var(--ui-scale, 1));
+ }
++.component-heading {
++  display: flex;
++  align-items: center;
++  gap: calc(6px * var(--ui-scale, 1));
++  min-width: 0;
++}
++.component-icon {
++  width: 48px;
++  height: 48px;
++  flex: 0 0 auto;
++}
+ .ability-card[data-equipped="true"] {
+   border-color: var(--cyan);
+ }
+diff --git a/apps/game/src/loadout.ts b/apps/game/src/loadout.ts
+index 664e27c..2646231 100644
+--- a/apps/game/src/loadout.ts
++++ b/apps/game/src/loadout.ts
+@@ -31,6 +31,25 @@ export interface AbilityHud extends EquippedAbilityHud {
+     name: string;
+     amount: number;
+   } | null;
++  required_component: {
++    id: string;
++    name: string;
++    amount: number;
++    owned: number;
++  } | null;
++}
++export interface ComponentHud {
++  id: string;
++  index: number;
++  name: string;
++  category: number;
++  description: string;
++  count: number;
++  max_count: number;
++  required_level: number;
++  materials: number[];
++  can_craft: boolean;
++  craft_reason: string;
+ }
+ export interface HardwareHud {
+   id: string;
+@@ -86,12 +105,14 @@ export interface ForgeHud extends ShipHangarHud {
+   ship_next_xp: number;
+   rank_cap: number;
+   abilities: AbilityHud[];
++  components: ComponentHud[];
+   loadout: (EquippedAbilityHud | null)[];
+   upgrades: HardwareHud[];
+ }
+ export interface ForgeActions {
+   purchase: (id: string) => void;
+   craftAbility: (id: string) => void;
++  craftComponent: (id: string) => void;
+   upgradeAbility: (id: string) => void;
+   equipAbility: (category: number, id: string | null) => void;
+   busy?: boolean;
+@@ -108,6 +129,7 @@ interface ForgeView {
+   category: number | null;
+   ship: number;
+   collection: boolean;
++  workshop: boolean;
+   filter: AbilityFilter;
+ }
+ type HullFilter = "all" | "owned" | "blueprint";
+@@ -189,6 +211,7 @@ function recipe(
+   materialCost: number,
+   hud: ShipHangarHud,
+   named?: AbilityHud["required_training_material"],
++  component?: AbilityHud["required_component"],
+ ): HTMLElement {
+   const box = section("loadout-recipe");
+   if (named) {
+@@ -217,6 +240,13 @@ function recipe(
+       `T${materialTier} MATERIALS ${materialCost} / BANKED ${hud.material_stash[materialTier - 1] ?? 0}`,
+     ),
+   );
++  if (component)
++    box.append(
++      text(
++        "p",
++        `${component.name.toUpperCase()} ${component.amount} / BANKED ${component.owned}`,
++      ),
++    );
+   return box;
+ }
+ function restore(
+@@ -262,6 +292,7 @@ export function paintForge(
+           category: null,
+           ship: hud.campaign.selected_ship,
+           collection: false,
++          workshop: false,
+           filter: "all",
+         };
+   views.set(target, view);
+@@ -290,13 +321,89 @@ export function paintForge(
+     collection = category !== null,
+   ) => {
+     const previousScroll =
+-      view.collection === collection ? target.scrollTop : 0;
++      !view.workshop && view.collection === collection ? target.scrollTop : 0;
+     view.category = category;
+     view.collection = collection;
++    view.workshop = false;
+     paintForge(target, hud, actions);
+     restore(target, nextFocus, previousScroll);
+   };
+-  if (view.collection) {
++  const workshopButton = () =>
++    button("CRAFT COMPONENTS", "browse-components", () => {
++      view.workshop = true;
++      paintForge(target, hud, actions);
++      restore(target, "components-back", 0);
++    });
++  if (view.workshop) {
++    const heading = section("loadout-editor-heading");
++    heading.append(
++      button("BACK TO LOADOUT", "components-back", () =>
++        navigate(null, "browse-components"),
++      ),
++      text("h3", "COMPONENT WORKSHOP"),
++    );
++    root.append(
++      heading,
++      shipSummary,
++      text(
++        "p",
++        "Crafted parts stay at Haven. Use them for advanced ability upgrades.",
++        "loadout-note",
++      ),
++    );
++    for (const component of hud.components) {
++      const card = section("component-card");
++      const header = section("component-heading");
++      const icon = section("component-icon");
++      icon.dataset.pixelKind = "craft-component";
++      icon.dataset.pixelValue = String(component.index);
++      icon.setAttribute("aria-hidden", "true");
++      const label = section("loadout-card-content");
++      label.append(
++        text("h3", component.name),
++        text(
++          "p",
++          `${["RENKO", "HUGO", "PAN"][component.category]} / ${categories[component.category]}`,
++        ),
++      );
++      header.append(icon, label);
++      card.append(
++        header,
++        text("p", component.description),
++        text(
++          "p",
++          `BANKED ${component.count}/${component.max_count} / REQUIRES RAICHO LV ${component.required_level}`,
++        ),
++      );
++      const costs = section("loadout-recipe");
++      component.materials.forEach((amount, tier) => {
++        if (amount > 0)
++          costs.append(
++            text(
++              "p",
++              `T${tier + 1} MATERIALS ${amount} / BANKED ${hud.material_stash[tier] ?? 0}`,
++            ),
++          );
++      });
++      card.append(costs);
++      if (component.craft_reason)
++        card.append(text("p", component.craft_reason, "loadout-reason"));
++      card.append(
++        button(
++          "CRAFT ONE",
++          `component-${component.id}`,
++          () => actions.craftComponent(component.id),
++          !component.can_craft || actions.busy,
++          component.category,
++        ),
++      );
++      root.append(card);
++    }
++    if (!hud.components.length)
++      root.append(
++        text("p", "No component recipes discovered.", "loadout-note"),
++      );
++  } else if (view.collection) {
+     const editorHeading = section("loadout-editor-heading");
+     const back = button("BACK TO LOADOUT", "back", () =>
+       navigate(
+@@ -307,6 +414,7 @@ export function paintForge(
+     back.classList.add("loadout-back");
+     editorHeading.append(back, text("h3", "ABILITY COLLECTION"));
+     root.append(editorHeading, shipSummary);
++    if (hud.components.length) root.append(workshopButton());
+     root.append(
+       text(
+         "p",
+@@ -459,6 +567,7 @@ export function paintForge(
+               ability.material_cost,
+               hud,
+               ability.required_training_material,
++              ability.required_component,
+             ),
+           );
+           if (ability.upgrade_reason)
+@@ -510,6 +619,7 @@ export function paintForge(
+         navigate(null, "back", true),
+       ),
+     );
++    if (hud.components.length) root.append(workshopButton());
+     if (!hud.dock)
+       root.append(
+         text(
+diff --git a/apps/game/src/main.ts b/apps/game/src/main.ts
+index 9e2c6e9..c21971c 100644
+--- a/apps/game/src/main.ts
++++ b/apps/game/src/main.ts
+@@ -132,6 +132,7 @@ interface GalaxyRuntime {
+   profile(): Profile;
+   purchase(id: string): void;
+   craft_ability(id: string): void;
++  craft_component(id: string): void;
+   upgrade_ability(id: string): void;
+   equip_ability(slot: number, id: string | null): void;
+   resize(width: number, height: number): void;
+@@ -1193,6 +1194,11 @@ function paintUpgrades(_dock: boolean): void {
+         () => galaxy.craft_ability(id),
+         "ABILITY CRAFTED / choose EQUIP to install it",
+       ),
++    craftComponent: (id) =>
++      forgeMutation(
++        () => galaxy.craft_component(id),
++        "COMPONENT STORED AT HAVEN",
++      ),
+     upgradeAbility: (id) =>
+       forgeMutation(() => galaxy.upgrade_ability(id), "ABILITY UPGRADED"),
+     equipAbility: (slot, id) =>
+diff --git a/apps/game/src/storage.ts b/apps/game/src/storage.ts
+index d071070..9af0451 100644
+--- a/apps/game/src/storage.ts
++++ b/apps/game/src/storage.ts
+@@ -34,6 +34,8 @@ export interface CampaignProgress {
+   /** Named subsets of Tier 1, never additional cargo or resources. */
+   cargo_training_materials: number[];
+   stored_training_materials: number[];
++  /** Dock-stored crafted components, in offensive/defensive/passive order. */
++  components: number[];
+   abilities: AbilityState[];
+   loadouts: ShipLoadout[];
+   last_run: RunSummary | null;
+@@ -53,6 +55,7 @@ interface PreviousCampaign extends Omit<
+   | "stored_materials"
+   | "cargo_training_materials"
+   | "stored_training_materials"
++  | "components"
+   | "abilities"
+   | "loadouts"
+   | "last_run"
+@@ -98,6 +101,7 @@ export const emptyCampaign = (): CampaignProgress => ({
+   stored_materials: Array(5).fill(0),
+   cargo_training_materials: Array(3).fill(0),
+   stored_training_materials: Array(3).fill(0),
++  components: Array(3).fill(0),
+   abilities: Array.from({ length: 17 }, (_, i) => ({
+     blueprint: i < 3,
+     rank: 0,
+@@ -149,15 +153,22 @@ export interface OnboardingProgress {
+   legacy_complete: boolean;
+ }
+ export interface Profile extends ExplorationProfile {
+-  schema_version: 6;
++  schema_version: 7;
+   identity: KikaiIdentity | null;
+   onboarding: OnboardingProgress | null;
+   boss_generations: number[][];
+   campaign: CampaignProgress;
+ }
++export interface TrainingProfile extends Omit<
++  Profile,
++  "schema_version" | "campaign"
++> {
++  schema_version: 6;
++  campaign: Omit<CampaignProgress, "components">;
++}
+ type PriorInventory = Omit<
+   CampaignProgress,
+-  "cargo_training_materials" | "stored_training_materials"
++  "cargo_training_materials" | "stored_training_materials" | "components"
+ >;
+ export interface LicenseProfile extends ExplorationProfile {
+   schema_version: 5;
+@@ -183,6 +194,7 @@ export interface LegacyProfile extends ProfileBase {
+ }
+ export type SupportedProfile =
+   | Profile
++  | TrainingProfile
+   | LicenseProfile
+   | EquipmentProfile
+   | CampaignProfile
+@@ -272,7 +284,8 @@ export function validProfile(value: unknown): value is SupportedProfile {
+       p.schema_version === 3 ||
+       p.schema_version === 4 ||
+       p.schema_version === 5 ||
+-      p.schema_version === 6) &&
++      p.schema_version === 6 ||
++      p.schema_version === 7) &&
+     integer(p.revision, Number.MAX_SAFE_INTEGER) &&
+     integer(p.seed) &&
+     p.seed !== 0 &&
+@@ -324,7 +337,7 @@ export function validProfile(value: unknown): value is SupportedProfile {
+       while (stage < 6 && (flags & required[stage]) === required[stage])
+         stage++;
+       if (onboarding.stage !== stage) return false;
+-      if (p.schema_version === 6) {
++      if ((p.schema_version as number) >= 6) {
+         if (
+           onboarding.version !== 2 ||
+           !integer(onboarding.asteroids_destroyed, 10) ||
+@@ -395,6 +408,13 @@ export function validProfile(value: unknown): value is SupportedProfile {
+   )
+     return false;
+   const c = p.campaign as Record<string, unknown>;
++  if (
++    p.schema_version === 7 &&
++    (!Array.isArray(c.components) ||
++      c.components.length !== 3 ||
++      !Array.from(c.components).every((n) => integer(n, 99)))
++  )
++    return false;
+   const flags = (key: string) =>
+     Array.isArray(c[key]) &&
+     c[key].length === 8 &&
+@@ -438,7 +458,7 @@ export function validProfile(value: unknown): value is SupportedProfile {
+       c.loadouts.length !== 10
+     )
+       return false;
+-    if (p.schema_version === 6) {
++    if ((p.schema_version as number) >= 6) {
+       const named = (value: unknown, total: number): value is number[] =>
+         Array.isArray(value) &&
+         value.length === 3 &&
+@@ -580,14 +600,17 @@ export function normalizeProfile(value: unknown): Profile | null {
+   if (!validProfile(value)) return null;
+   const campaign = migrateCampaign(value);
+   return {
+-    schema_version: 6,
++    schema_version: 7,
+     identity:
+-      (value.schema_version === 5 || value.schema_version === 6) &&
++      (value.schema_version === 5 ||
++        value.schema_version === 6 ||
++        value.schema_version === 7) &&
+       value.identity
+         ? { ...value.identity }
+         : null,
+     onboarding:
+-      value.schema_version === 6 && value.onboarding
++      (value.schema_version === 6 || value.schema_version === 7) &&
++      value.onboarding
+         ? { ...value.onboarding }
+         : value.schema_version === 5 && value.onboarding
+           ? {
+@@ -652,7 +675,8 @@ function migrateCampaign(value: SupportedProfile): CampaignProgress {
+     value.schema_version === 3 ||
+     value.schema_version === 4 ||
+     value.schema_version === 5 ||
+-    value.schema_version === 6
++    value.schema_version === 6 ||
++    value.schema_version === 7
+   ) {
+     const previous = value.campaign;
+     // Copy only schema-owned fields: an older backup may contain unrelated keys.
+@@ -679,7 +703,8 @@ function migrateCampaign(value: SupportedProfile): CampaignProgress {
+           materials_lost:
+             value.schema_version === 4 ||
+             value.schema_version === 5 ||
+-            value.schema_version === 6
++            value.schema_version === 6 ||
++            value.schema_version === 7
+               ? [...value.campaign.last_run!.materials_lost]
+               : Array(5).fill(0),
+         }
+@@ -688,11 +713,12 @@ function migrateCampaign(value: SupportedProfile): CampaignProgress {
+   if (
+     value.schema_version === 4 ||
+     value.schema_version === 5 ||
+-    value.schema_version === 6
++    value.schema_version === 6 ||
++    value.schema_version === 7
+   ) {
+     campaign.cargo_materials = [...value.campaign.cargo_materials];
+     campaign.stored_materials = [...value.campaign.stored_materials];
+-    if (value.schema_version === 6) {
++    if (value.schema_version === 6 || value.schema_version === 7) {
+       campaign.cargo_training_materials = [
+         ...value.campaign.cargo_training_materials,
+       ];
+@@ -700,6 +726,8 @@ function migrateCampaign(value: SupportedProfile): CampaignProgress {
+         ...value.campaign.stored_training_materials,
+       ];
+     }
++    if (value.schema_version === 7)
++      campaign.components = [...value.campaign.components];
+     campaign.abilities = value.campaign.abilities.map(
+       ({ blueprint, rank }) => ({ blueprint, rank }),
+     );
+@@ -793,9 +821,9 @@ export class SaveStore {
+     this.message = "Progress stays on this device.";
+     let loaded: Profile | null = null;
+     try {
+-      // A database version barrier prevents cached schema-five writers from
++      // A database version barrier prevents cached schema-six writers from
+       // treating the new format as corrupt and overwriting it with an old run.
+-      const r = indexedDB.open("galaxy-royale", 4);
++      const r = indexedDB.open("galaxy-royale", 5);
+       r.onblocked = () => {
+         this.message =
+           "Close other Galaxy Royale tabs to upgrade your save safely.";
+diff --git a/crates/game_web/src/browser.rs b/crates/game_web/src/browser.rs
+index 0e65dd1..b1bfa61 100644
+--- a/crates/game_web/src/browser.rs
++++ b/crates/game_web/src/browser.rs
+@@ -163,6 +163,26 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
+             .map_err(js)?;
+         }
+         "fresh" | "champion" | "tiered-cargo" | "loss-summary" => {}
++        "components-ready" | "components-crafted" | "components-upgraded" | "components-legacy" => {
++            // Supplied save fixture for contract/UI review; never awarded by gameplay.
++            profile =
++                game_core::identity::create_profile("dora", "pan", "renko", "0123456789abcdef")
++                    .map_err(js)?;
++            profile.onboarding = None;
++            profile.currency = [30; 3];
++            profile.campaign.ship_xp[0] = 200;
++            profile.campaign.stored_materials = [10; 5];
++            for state in &mut profile.campaign.abilities[..3] {
++                state.blueprint = true;
++                state.rank = 2;
++            }
++            if stage == "components-legacy" {
++                let mut value = serde_json::to_value(&profile).map_err(js)?;
++                value["schema_version"] = serde_json::json!(6);
++                value["campaign"]["components"] = serde_json::json!("ignored legacy injection");
++                profile = serde_json::from_value(value).map_err(js)?;
++            }
++        }
+         "generations" => {
+             // Valid saved credit with both higher-tier queues and reserved base credit.
+             let mut value = serde_json::to_value(&profile).map_err(js)?;
+@@ -233,6 +253,23 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
+         _ => return Err(js("Unknown checkpoint contract stage")),
+     }
+     let mut game = Game::new(profile);
++    if matches!(stage, "components-crafted" | "components-upgraded") {
++        for id in ["pulse-conductor", "aegis-lattice", "flux-bearing"] {
++            game.craft_component(id).map_err(js)?;
++        }
++        if stage == "components-upgraded" {
++            for id in ["pulse-lens", "guard-coil", "flux-drive"] {
++                game.upgrade_ability(id).map_err(js)?;
++            }
++            let before = serde_json::to_value(game.profile()).map_err(js)?;
++            if game.craft_component("invalid").is_ok()
++                || game.upgrade_ability("pulse-lens").is_ok()
++                || serde_json::to_value(game.profile()).map_err(js)? != before
++            {
++                return Err(js("Failed component transaction changed progression"));
++            }
++        }
++    }
+     if stage.starts_with("training-") && stage.ends_with("-upgraded") {
+         let key = match stage.split('-').nth(1) {
+             Some("pan") => "flux-drive",
+@@ -385,7 +422,27 @@ impl Galaxy {
+             .advance(&hud, delta, self.reduced_motion);
+         let render_start = now();
+         let alpha = self.accumulator * 60.0;
+-        self.game.render_into(alpha, &mut self.frame);
++        let corporation = self
++            .game
++            .profile()
++            .identity
++            .as_ref()
++            .map(|id| id.corporation);
++        let reduced_motion = self.reduced_motion;
++        self.game
++            .render_into_with_home(alpha, &mut self.frame, |frame, parent, time| {
++                crate::dock_art::append(
++                    frame,
++                    &crate::dock_art::DockInput {
++                        parent,
++                        corporation,
++                        time,
++                        reduced_motion,
++                    },
++                    &mut crate::dock_art::DockBudget::default(),
++                )
++                .is_some()
++            });
+         self.ui_frame.clear();
+         hud.camera = self.game.render_camera(alpha);
+         let amount = if self.shake && !self.reduced_motion {
+@@ -693,6 +750,9 @@ impl Galaxy {
+     pub fn craft_ability(&mut self, id: &str) -> Result<(), JsValue> {
+         self.game.craft_ability(id).map_err(js)
+     }
++    pub fn craft_component(&mut self, id: &str) -> Result<(), JsValue> {
++        self.game.craft_component(id).map_err(js)
++    }
+     pub fn upgrade_ability(&mut self, id: &str) -> Result<(), JsValue> {
+         self.game.upgrade_ability(id).map_err(js)
+     }
+diff --git a/scripts/test/loadout.test.mjs b/scripts/test/loadout.test.mjs
+index 48ed8e0..cf91643 100644
+--- a/scripts/test/loadout.test.mjs
++++ b/scripts/test/loadout.test.mjs
+@@ -73,6 +73,7 @@ function fixture() {
+   const actions = {
+     purchase: (id) => calls.push(["purchase", id]),
+     craftAbility: (id) => calls.push(["craft", id]),
++    craftComponent: (id) => calls.push(["component", id]),
+     upgradeAbility: (id) => calls.push(["upgrade", id]),
+     equipAbility: (slot, id) => calls.push(["equip", slot, id]),
+   };
+@@ -161,6 +162,7 @@ function hud() {
+     ship_next_xp: 120,
+     rank_cap: 2,
+     abilities: [ability(0, 0), ability(1, 1), ability(2, 2)],
++    components: [],
+     loadout: [null, null, null],
+     upgrades: Array.from({ length: 6 }, (_, index) => ({
+       id: `hardware-${index}`,
+@@ -222,6 +224,85 @@ test("first-upgrade recipe shows the actual named banked subset and calls the or
+   assert.deepEqual(f.calls, [["upgrade", "ability-0"]]);
+ });
+ 
++test("component workshop reveals only discovered recipes and delegates exact authoritative actions", () => {
++  const f = fixture(),
++    data = hud();
++  f.exports.paintForge(f.target, data, f.actions);
++  assert.equal(f.find("browse-components"), undefined);
++  data.components = [
++    {
++      id: "pulse-conductor",
++      index: 0,
++      name: "Pulse Conductor",
++      category: 0,
++      description: "Stabilizes advanced offensive abilities.",
++      count: 2,
++      max_count: 99,
++      required_level: 3,
++      materials: [2, 1, 0, 0, 0],
++      can_craft: false,
++      craft_reason: "Return to Haven.",
++    },
++  ];
++  f.exports.paintForge(f.target, data, f.actions);
++  f.find("browse-components").events.click();
++  assert.equal(f.target.scrollTop, 0);
++  assert.equal(f.document.activeElement, f.find("components-back"));
++  assert.match(allText(f.target), /BANKED 2\/99/);
++  assert.match(allText(f.target), /T1 MATERIALS 2 \/ BANKED 10/);
++  assert.match(allText(f.target), /T2 MATERIALS 1 \/ BANKED 2/);
++  assert.doesNotMatch(allText(f.target), /Aegis Lattice|Flux Bearing|POINTS/);
++  assert.equal(
++    flatten(f.target).filter((n) => n.dataset.pixelKind === "craft-component")
++      .length,
++    1,
++  );
++  f.find("component-pulse-conductor").events.click();
++  assert.deepEqual(f.calls, []);
++  data.components[0].can_craft = true;
++  data.components[0].craft_reason = "";
++  f.exports.paintForge(f.target, data, f.actions);
++  f.find("component-pulse-conductor").focus();
++  f.target.scrollTop = 21;
++  f.find("component-pulse-conductor").events.click();
++  assert.deepEqual(f.calls, [["component", "pulse-conductor"]]);
++  data.components[0].count = 3;
++  f.exports.paintForge(f.target, data, f.actions);
++  assert.equal(f.document.activeElement, f.find("component-pulse-conductor"));
++  assert.equal(f.target.scrollTop, 21);
++  assert.match(allText(f.target), /BANKED 3\/99/);
++  f.exports.paintForge(f.target, data, { ...f.actions, busy: true });
++  assert.equal(f.find("component-pulse-conductor").disabled, true);
++  f.find("components-back").events.click();
++  assert.equal(f.document.activeElement, f.find("browse-components"));
++});
++
++test("advanced ability recipes include banked crafted components without changing starter training", () => {
++  const f = fixture(),
++    data = hud();
++  Object.assign(data.abilities[0], {
++    owned: true,
++    rank: 2,
++    point_cost: 10,
++    material_tier: 3,
++    material_cost: 2,
++    required_component: {
++      id: "pulse-conductor",
++      name: "Pulse Conductor",
++      amount: 1,
++      owned: 0,
++    },
++    can_upgrade: false,
++    upgrade_reason: "Craft 1 Pulse Conductor.",
++  });
++  f.exports.paintForge(f.target, data, f.actions);
++  f.find("manage-0").events.click();
++  assert.match(allText(f.target), /RENKO POINTS 10 \/ HAVE 3/);
++  assert.match(allText(f.target), /T3 MATERIALS 2 \/ BANKED 0/);
++  assert.match(allText(f.target), /PULSE CONDUCTOR 1 \/ BANKED 0/);
++  assert.equal(f.find("upgrade-ability-0").disabled, true);
++});
++
+ test("Forge separates three automatic slots and six ship hardware actions", () => {
+   const f = fixture();
+   f.exports.paintForge(f.target, hud(), f.actions);
+diff --git a/scripts/test/ship-storage.test.mjs b/scripts/test/ship-storage.test.mjs
+index fb09530..a38dad5 100644
+--- a/scripts/test/ship-storage.test.mjs
++++ b/scripts/test/ship-storage.test.mjs
+@@ -104,7 +104,7 @@ test("schema-five migration waits for a real old database connection and prevent
+   old.close();
+   const loaded = await loading;
+   assert.deepEqual(loaded, normalizeProfile(baseline));
+-  assert.equal(store.db.version, 4);
++  assert.equal(store.db.version, 5);
+   assert.deepEqual(loaded.campaign.stored_materials, [16, 0, 0, 0, 0]);
+   await assert.rejects(request(indexedDB.open("galaxy-royale", 1)), /version/i);
+   assert.deepEqual(
+@@ -129,7 +129,7 @@ test("an actual version-change event closes obsolete connections and rejects que
+     queued,
+     (error) => error instanceof SaveConflict,
+   );
+-  const next = await request(indexedDB.open("galaxy-royale", 5));
++  const next = await request(indexedDB.open("galaxy-royale", 6));
+   t.after(() => next.close());
+   release();
+   await rejection;

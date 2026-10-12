@@ -1,0 +1,13 @@
+# Deterministic leave-notice fixture review
+
+Read-only source review of exact Root `ab71442b9540c3f33c61a418d445323a1b9ccc1e`. Only scripts/test/coop-transport.test.mjs changes. No scoped blocker found; no tests, native/browser calls, listener, build or stage were run for this review.
+
+The old fixture waited for local ended status, host peer removal and zero tracked pending requests, then immediately asserted every ManualClock task was zero. Runtime #finish calls #terminal synchronously before awaiting its best-effort service notice. #terminal clears tracked controllers/timers, closes peer callbacks/PCs and clears membership/capabilities. #finish then owns a separate direct-clock 1,500 ms abort timer outside the diagnostic sets, cleared in its finally. Consequently local ended/diagnostics-zero is earlier than notice acknowledgement; the old immediate all-clock-zero assertion could depend on HTTP scheduling.
+
+The repair holds the actual /v1/leave response after the injected fetcher has received it. The service can already remove membership and inform the host, but guest #finish cannot finish acknowledgement yet. This makes the intermediate boundary explicit: existing ended reason, host peer removal and pendingRequests assertions remain; diagnostics.timers must be zero, while exactly one ManualClock task remains for the separately bounded notice. Releasing the response then requires eventual all-clock-zero, preserving the original complete cleanup intent. It is not a runtime assertion relaxation or a runtime change.
+
+The release function is established before join and invoked in finally as well as on success, so earlier assertion failures cannot strand the held response. The unchanged fixture after-hook still disposes every transport, stops the ephemeral HTTP service and checks no listener/polls/store subscribers, peers/tracked timers/requests or unclosed PCs remain. Stale heartbeat/poll completions observe the incremented lifecycle epoch and cannot schedule new owned work.
+
+This fixture covers deterministic successful acknowledgement after local negotiation-timeout teardown. Its intentionally held fetch wrapper does not exercise the lost-response abort path merely because runtime's notice has a 1,500 ms timer. Neither this source review nor the configured RTC model establishes native Game/browser/network gameplay or globally zero outstanding work at the instant local ended becomes visible. Root's reported full-suite results remain Root-owned execution evidence.
+
+manifest.json pins the exact changed test, runtime transport/signaling and fixture service sources. Fresh 19-file owned-stage preparation remains held until Root supplies the finalized coherent build HEAD/stamp.

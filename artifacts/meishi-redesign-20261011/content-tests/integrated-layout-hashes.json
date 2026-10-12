@@ -1,0 +1,227 @@
+{
+  "root_source_commit": "6826be00b035754eb8006f2509f2c934270d4eeb",
+  "source_pins": [
+    {
+      "path": "apps/game/src/meishi.ts",
+      "sha256": "ab68cbf22ef32cae26679eaa3e76a3a760967dc13975ef900be1713640fd35d9",
+      "bytes": 9125,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "apps/game/src/meishi.css",
+      "sha256": "3fd379c0baa554787cd88c35bf00a128e193d9f3a0e7378fb4025ebe7fce6cf2",
+      "bytes": 4688,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "bdc02567a80d8d8cd34b0b26f3a282e35003b42301eec052ff12bdfe296fc353",
+      "bytes": 80955,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "apps/game/index.html",
+      "sha256": "754e397fb7596904b014d0b3189793e2fcad4e9d8e75b068f4cb144ecd160e3a",
+      "bytes": 16848,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "sha256": "702872f7d275ae811496cc19ad78be2f839c4b2e4ec5708337501bae2c9aebc8",
+      "bytes": 25936,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "apps/game/src/flight-menu.ts",
+      "sha256": "626cf84867e9e50194fab29280f62ed1cf0af556fc42220b66815c477b190369",
+      "bytes": 10073,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "scripts/test/meishi.test.mjs",
+      "sha256": "7cbb31bf56838a674e5a71f2125c001ed789b04c2059799e686df05ffefdf34c",
+      "bytes": 15103,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/meishi_art.rs",
+      "sha256": "6903fc7ee6bf8b5624176ccff85239804e4e238249457eaddcc5d4f6af32dbaf",
+      "bytes": 19475,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "sha256": "b612e2b9bf27567c19a88983e06c00e648416ee64ff9e562304f3afd51ffe1c8",
+      "bytes": 107768,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/champion_patches.rs",
+      "sha256": "d9d2ec2738d195513cc36408867806349725601a68fb019c566e9b5ec3fbeaff",
+      "bytes": 16612,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a",
+      "bytes": 35916,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "sha256": "6205442703302a8ef80b9d10376358a56e169a41bf7b76401e6c7ad9defa6d62",
+      "bytes": 9556,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "sha256": "bb755aa755588d646eabd65cb9a39ecf8e7f8982db229480a9567916eef4c50f",
+      "bytes": 33261,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/flight_icons.rs",
+      "sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503",
+      "bytes": 10702,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_web/src/component_art.rs",
+      "sha256": "fbb14b14c4463999914ffeb3f013a1caa871c9b2e15c1040e0979b89f60f8df3",
+      "bytes": 22462,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "sha256": "0dd205a8adc2feeb04dfb8697c450793317883ffda5b8673f5f50022c334080b",
+      "bytes": 27548,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/dock_facilities.rs",
+      "sha256": "12eb9a70ee44e6431565e13f760a901b3c88206403b68078073a4fc4a980ac61",
+      "bytes": 17507,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "sha256": "05f78c74354b4c80f14757aba659a66cc981fba2c0eecc02fb6b33bda8e7f9c8",
+      "bytes": 53304,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/pack.json",
+      "sha256": "36031366f135b12b290f59e3f2c382e56774f9663e5fdb5241584051ad24832b",
+      "bytes": 2302820,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "assets/ui/kikai/detail/atlas.json",
+      "sha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+      "bytes": 3247005,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "assets/pixels/raicho-fine-detail/atlas.json",
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "bytes": 230223,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "assets/ui/flight-icons/atlas.json",
+      "sha256": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73",
+      "bytes": 99595,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "sha256": "df52ae62b1598bee2cd29cff071b5e0409b16d4f95b0fc604d8f8a08f20e7393",
+      "bytes": 196861,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine.rs",
+      "sha256": "2b0708400999c46a1c6091ae1eb6b2fd211e7c69fdc5f2e0a6f012f6c15d1552",
+      "bytes": 13818,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine_tests.rs",
+      "sha256": "fd3670de3e336e76b8090b1e20353e9af3d7627fc9715f954d71721575fd6252",
+      "bytes": 16407,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/raicho_draw_tests.rs",
+      "sha256": "a09ed61d0cf4edad12221cd9c6caeb5772709171b61fdb2d101f0dc9d77b01d8",
+      "bytes": 3601,
+      "domain": "committed Git bytes"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "sha256": "8eec4107e3d5cb5e5c039fae563d44f92e0394a50fed5f526a11bf5b824457bf",
+      "bytes": 34292,
+      "domain": "committed Git bytes"
+    }
+  ],
+  "evidence_pins": [
+    {
+      "file": "INTEGRATED_LAYOUT_REVIEW.md",
+      "sha256": "3fff16f82d502c66477c98b24221f2c6e40b5ac2fee47679510cd64cbe5a5b08",
+      "bytes": 3833
+    },
+    {
+      "file": "ASSET_ROLLOUT.md",
+      "sha256": "174e8233b53269df0490ee4ba5979c6aa20f9be1cce105dce103d6810e688e07",
+      "bytes": 5784
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\meishi-redesign-20261011\\layout-before-fittings.png",
+      "sha256": "da6291bff74e4e950673ec09bfdf64241ba5a6ce0651b99010a588eac08d0156",
+      "bytes": 60588,
+      "scope": "Root actual pre-fittings screenshot independently viewed; not final artwork"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\meishi-redesign-20261011\\layout-landscape-before-fittings.png",
+      "sha256": "4e461765865dec3da68d97eb162b9b5c8a83d873a9f0b8544ca12bdf1b536d16",
+      "bytes": 36354,
+      "scope": "Root actual pre-fittings screenshot independently viewed; not final artwork"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\meishi-redesign-20261011\\layout-narrow-before-fittings.png",
+      "sha256": "c9d609fc23a2c89010f6e779801efd76d9fa5f40d90e4ad6d95814322196df8d",
+      "bytes": 39958,
+      "scope": "Root actual pre-fittings screenshot independently viewed; not final artwork"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\runtime-studio-20261011\\README.md",
+      "sha256": "1abd8d1c731a2759d62445936c8aaa5dccca421b143904f402d6644d6991e332",
+      "bytes": 3756,
+      "scope": "Root retained historical integration/capture report read; execution and images not independently repeated in this correction"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\runtime-studio-20261011\\reviews\\node-raicho-root-integration-review\\REVIEW.md",
+      "sha256": "a02e87b64680d2d58fccabbbc4b11c4eb235ebfdee13de3b39d991d70f8e2f51",
+      "bytes": 4834,
+      "scope": "Root retained historical integration/capture report read; execution and images not independently repeated in this correction"
+    }
+  ],
+  "scope": "read-only source audit and supplied screenshot inspection; no new test/build/browser execution",
+  "report_correction": {
+    "scope": "Workshop native route spelling only: component-icon corrected to craft-component; source and other evidence unchanged.",
+    "supersedes_report_sha256": "0ba334bbd110772ad319518db6af326d4b945da42133efef40dcc1f062c192e4",
+    "supersedes_manifest_sha256": "fb85e4793809e55be2254fdee367bef3099afe312eda7df5809e01828346f352"
+  },
+  "raicho_report_correction": {
+    "scope": "Corrects false source-only classification: licensed hull0 sparse 96-grid overlay is integrated at the pinned source commit. All inventory runtime adapters re-audited; no runtime mutation or new test/build/browser execution.",
+    "supersedes_report_sha256": "ec76895ba616b9cb7d7550bdd672529b0668772edf5ac11c16100ed65917dbd3",
+    "supersedes_manifest_sha256": "c5ff7cdfe0989674b68fc34d76b8e881db4c3e0d0d8615d3ac9a67a4c69aa33d",
+    "added_committed_inputs": [
+      "crates/game_core/src/lib.rs",
+      "crates/game_core/src/raicho_fine.rs",
+      "crates/game_core/src/raicho_fine_tests.rs",
+      "crates/game_core/src/raicho_draw_tests.rs",
+      "crates/game_core/src/regions.rs"
+    ]
+  }
+}

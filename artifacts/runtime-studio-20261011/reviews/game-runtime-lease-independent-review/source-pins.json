@@ -1,0 +1,78 @@
+{
+  "commits": {
+    "baseline": "5aa920a77978ff970ea635d7a8801a2739fb4d5e",
+    "repair": "3d52739fb22e3fc83a01e82e314830bd394ae200"
+  },
+  "inputs": [
+    {
+      "version": "baseline",
+      "commit": "5aa920a77978ff970ea635d7a8801a2739fb4d5e",
+      "path": "scripts/game-runtime-lease.mjs",
+      "bytes": 1620,
+      "sha256": "06dda924d24a9fdde1d25fd032ef3dac0afdc18af524a4936b0396025d726d66"
+    },
+    {
+      "version": "baseline",
+      "commit": "5aa920a77978ff970ea635d7a8801a2739fb4d5e",
+      "path": "scripts/game-runtime-lease.d.mts",
+      "bytes": 219,
+      "sha256": "51cecfef36b11bd57293f85e0fbc6ec005c29847521f4c76729571ec9395b5c5"
+    },
+    {
+      "version": "baseline",
+      "commit": "5aa920a77978ff970ea635d7a8801a2739fb4d5e",
+      "path": "scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5"
+    },
+    {
+      "version": "baseline",
+      "commit": "5aa920a77978ff970ea635d7a8801a2739fb4d5e",
+      "path": "apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe"
+    },
+    {
+      "version": "baseline",
+      "commit": "5aa920a77978ff970ea635d7a8801a2739fb4d5e",
+      "path": "scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9"
+    },
+    {
+      "version": "repair",
+      "commit": "3d52739fb22e3fc83a01e82e314830bd394ae200",
+      "path": "scripts/game-runtime-lease.mjs",
+      "bytes": 2873,
+      "sha256": "c9b319cb55f7f5e5472c2917f318e1ff22326ebd8c14c69ba05caabde37a5569"
+    },
+    {
+      "version": "repair",
+      "commit": "3d52739fb22e3fc83a01e82e314830bd394ae200",
+      "path": "scripts/game-runtime-lease.d.mts",
+      "bytes": 232,
+      "sha256": "7d92c888a76b80a570c18e0a874f5e00dc695bd8cdbbf326bbf77a663b63dacc"
+    },
+    {
+      "version": "repair",
+      "commit": "3d52739fb22e3fc83a01e82e314830bd394ae200",
+      "path": "scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5"
+    },
+    {
+      "version": "repair",
+      "commit": "3d52739fb22e3fc83a01e82e314830bd394ae200",
+      "path": "apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe"
+    },
+    {
+      "version": "repair",
+      "commit": "3d52739fb22e3fc83a01e82e314830bd394ae200",
+      "path": "scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9"
+    }
+  ]
+}

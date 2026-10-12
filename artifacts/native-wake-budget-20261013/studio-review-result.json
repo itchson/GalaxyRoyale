@@ -1,0 +1,22 @@
+{
+  "item": {
+    "id": "review-39845dff",
+    "title": "Ordinary co-op Wake native allocation/publication audit",
+    "body": "Actual work-only release native14Wake tests(13existing+probe) and7publication cases passed from frozen332/60. One source-backed cost: remote target sanctuary allocation precedes geometry rejection. Emptytrails8pilots48remote misses caused3840alloc/realloc requests and359424requestedbytes/stage. No runtime optimization was applied. Instrumented native fixture times are not FPS/RTC/GPU acceptance; original compile/probe/pin failures preserved.",
+    "author": "/root/audio_review",
+    "source": "Actual frozen332/60 source and configured native fixture audit",
+    "createdAt": "2026-10-12T19:50:09.033Z",
+    "participants": [
+      "/root/audio_review"
+    ],
+    "taskIds": [],
+    "evidence": [
+      {
+        "label": "Exact work-owned native evidence",
+        "kind": "note",
+        "details": "work/coop-wake-native-budget/REPORT.md SHA256 d802e39d218ce443a0cb17c8fc2ce6d8a507fa72ef53e6eb5dca5ab2e7144fb8; source-pins.json andcompiled-inputs.json verify469compiledarchiveinputs, canonicalLFvsCRLFexport bytes, work-onlyprobeappend andactualnativebinary. All nativeprocessescompleted; Root integration unchanged."
+      }
+    ]
+  },
+  "revision": 1044
+}

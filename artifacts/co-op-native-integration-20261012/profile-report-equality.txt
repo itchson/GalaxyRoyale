@@ -1,0 +1,1 @@
+Actual WebGL2 browser host creation and END SESSION: before/after PROFILE console reports byte-equal. This is the fields exposed by that report, not full browser IndexedDB or full Game equality. Native transactional restoration tests cover exact serialized solo Profile separately. No invitation/session capability retained.

@@ -1,0 +1,19 @@
+
+running 11 tests
+test tests::icon_hover_press_and_disabled_colors_preserve_opaque_role_contrast ... ok
+test tests::ten_original_32_cell_control_masks_are_distinct_detailed_and_contained ... ok
+test tests::reflected_sheared_parent_and_128_slot_boundary_preserve_nested_corners ... ok
+test tests::group_preflight_rejects_without_partial_geometry_or_budget_mutation ... ok
+test tests::finite_clipping_consumes_all_submitted_work_including_masked_cells ... ok
+test tests::nonfinite_invalid_layouts_are_closed_and_bad_time_is_static_zero ... ok
+test tests::default_and_narrow_fractional_fit_keep_every_occupied_cell ... ok
+test tests::expressions_change_actual_eye_and_mouth_colors_with_same_bounds ... ok
+test tests::main_hair_and_sub_horns_recolor_only_explicit_disjoint_roles ... ok
+test tests::real_cached_layers_have_disjoint_regions_and_fine_detail_below_group_budget ... ok
+test tests::animation_needs_explicit_speech_and_freezes_for_reduced_or_disabled ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.53s
+
+Actual native portrait/icon packets emitted:9 posed portraits,10 controls
+Flat native packets rasterized; no GPU/browser/material or animation-playback claim
+Native proof saved to C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\work\kikai-character-art\final; posed software review only

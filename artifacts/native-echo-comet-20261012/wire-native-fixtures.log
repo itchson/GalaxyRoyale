@@ -1,0 +1,25 @@
+(node:38552) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ equipment extraction delegates to native solo Profile, preserving receiver (1.5736ms)
+✔ equipment extraction fails closed for absent native export and malformed declarations (1.1418ms)
+✔ optional owned equipment preserves legacy spec and publication while rejecting inconsistent hulls (0.539ms)
+✔ ordinary Echo evolution survives native extraction, join and publication boundaries (0.653ms)
+✔ Echo evolution refuses malformed tokens, wrong slots and persisted progression containers (0.4933ms)
+✔ actual native legacy and evolved Echo value exports replay without invented history or rank clamping (1.0565ms)
+✔ tracked real publication DTOs retain canonical native export hashes and validate wire (2.0527ms)
+✔ actual Galaxy batch delegate preserves receiver and native response bytes (0.3435ms)
+✔ replica port maps real publisher DTOs to exact agreed native operation keys (1.8745ms)
+✔ missing exports report unavailable without pretending that a native replica exists (0.1595ms)
+✔ rejected and malformed end replies retain the native session recovery handle (0.283ms)
+✔ ambiguous begin response keeps a token for cleanup, explicit native rejection does not (0.188ms)
+✔ stale acquisitions and mismatched sessions are refused before native invocation (0.3363ms)
+✔ unbounded or invalid native response envelopes never become successful operations (0.239ms)
+✔ complete ef5b55b native operation recording maps through ports with no manufactured success replies (3.6792ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 143.9814

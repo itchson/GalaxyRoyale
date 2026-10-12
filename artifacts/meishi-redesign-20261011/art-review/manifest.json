@@ -1,0 +1,168 @@
+{
+  "scope": "native source/packet software review only; no GPU/browser/device acceptance",
+  "commit": "be4e9cc72497b7de3b4b7f5b44e58a69ceb309a9",
+  "prior": "2bb76a7e2cf90da95499ac38cecb1ad65878c0e6",
+  "files": {
+    "crates/game_web/src/meishi_art.rs": {
+      "sha256": "6a08d819914181792fe21f7b556e460cec81c1c11699dec8ef19efe37b5431f5",
+      "bytes": 40810
+    },
+    "work/meishi-reference-detail/amendment/HANDOFF.md": {
+      "sha256": "98518975eb3ea3b1206528c5d21fe97f597037a8e4425f9f503c138378a966d9",
+      "bytes": 2818
+    },
+    "work/meishi-reference-detail/amendment/tests.log": {
+      "sha256": "31bd4338ad0f0312cde3388e91f78fe70c71468ecc9fd02497d99c313d73cc54",
+      "bytes": 2266
+    },
+    "work/meishi-reference-detail/amendment/clippy.log": {
+      "sha256": "e5740fb603c5512f405c2c1a0abbefdfed0fbf4d2db4659dde90efc9f16502ac",
+      "bytes": 184
+    },
+    "work/meishi-reference-detail/amendment/render_packets.py": {
+      "sha256": "156bee6bb321f45f530048bcd0f95eaa44aec2cbd431c92ed11e21dea994f9f5",
+      "bytes": 2049
+    },
+    "work/meishi-reference-detail/amendment/packets/kind0-corp0.json": {
+      "sha256": "bbe6ecb1014d66905b95a70f11d1c97bfb52bcd5485330234f81d4980502764f",
+      "bytes": 2983580
+    },
+    "work/meishi-reference-detail/amendment/packets/kind0-corp1.json": {
+      "sha256": "6bad50cfad86f547f83d8347bda39d89ab242091fca76bcaa50ced834ca6ba6c",
+      "bytes": 2981707
+    },
+    "work/meishi-reference-detail/amendment/packets/kind0-corp2.json": {
+      "sha256": "94a484b843be3f3ff49abb115d31e71c1334e39b458d50ae4e8af05b3401b266",
+      "bytes": 3005354
+    },
+    "work/meishi-reference-detail/amendment/packets/kind1-corp0.json": {
+      "sha256": "c2008a1d4c5f4c37ea09fce5ad6eab0c9bd5715448f02d3e9233bd7168b6e68f",
+      "bytes": 2637991
+    },
+    "work/meishi-reference-detail/amendment/packets/kind1-corp1.json": {
+      "sha256": "d17fab8217fb69b46f2fff2cc7a75c3effa041b56877b4d47a317985b3db256f",
+      "bytes": 2636118
+    },
+    "work/meishi-reference-detail/amendment/packets/kind1-corp2.json": {
+      "sha256": "e8aadd3edd32d44b36321ead58f9200728824338d00784b9839557ae51eda516",
+      "bytes": 2659765
+    },
+    "work/meishi-reference-detail/amendment/packets/kind2-corp0.json": {
+      "sha256": "08d689d2637a1f78c4563ac79ee7c5657d547356d8a2acee5dba21ac98d20a37",
+      "bytes": 2395427
+    },
+    "work/meishi-reference-detail/amendment/packets/kind2-corp1.json": {
+      "sha256": "dcff73f87d90a23697bf6f2d6d1c74bcb6a78bc3c5a38b1adb9d82ff1cf69799",
+      "bytes": 2393554
+    },
+    "work/meishi-reference-detail/amendment/packets/kind2-corp2.json": {
+      "sha256": "30862c4c085b01c8e594669e451eafcd4ff912432b32ec1b9e0fb8642fbb4c92",
+      "bytes": 2417201
+    },
+    "work/meishi-reference-detail/amendment/kind0-corp0-native-software.png": {
+      "sha256": "a910cc6b3ddb5a6e864d03d9ccbf481d729a9ec0aad72d513fd61718ea44e6f6",
+      "bytes": 101856
+    },
+    "work/meishi-reference-detail/amendment/kind0-corp1-native-software.png": {
+      "sha256": "e9d4116aace8de539745fcd2fbc6ea639d903492fd21dadc92115abec9160c03",
+      "bytes": 100907
+    },
+    "work/meishi-reference-detail/amendment/kind0-corp2-native-software.png": {
+      "sha256": "f9b08d0cf2b9ae2134e4621ce6539a007403d774e7498c9d8f9cbb691f1e7881",
+      "bytes": 100684
+    },
+    "work/meishi-reference-detail/amendment/kind1-corp0-native-software.png": {
+      "sha256": "b108a5e0ee389b16bfe3dc440c2294c31758bfd86268e24bf297cec9c58f3608",
+      "bytes": 96203
+    },
+    "work/meishi-reference-detail/amendment/kind1-corp1-native-software.png": {
+      "sha256": "82ce98ccbd3bfb09d14238d9a6350cd99df719f631d71fbe2d87611f583d1225",
+      "bytes": 96079
+    },
+    "work/meishi-reference-detail/amendment/kind1-corp2-native-software.png": {
+      "sha256": "659ae9d071123cfa189d00ddbb348136540943449fb64c2c492567e16cc7d1d7",
+      "bytes": 95685
+    },
+    "work/meishi-reference-detail/amendment/kind2-corp0-native-software.png": {
+      "sha256": "af7e36a3d6f3e7e99794f74ce6f8d136676199c02b715bcc952dbda969830900",
+      "bytes": 82438
+    },
+    "work/meishi-reference-detail/amendment/kind2-corp1-native-software.png": {
+      "sha256": "e087b1bd3458dd94182b9f397583269140caef39e8f43c978da8bba63fa957e3",
+      "bytes": 82486
+    },
+    "work/meishi-reference-detail/amendment/kind2-corp2-native-software.png": {
+      "sha256": "929bb828549890e991444142a2a439105788c3bbc72918e462dd4e504df5631c",
+      "bytes": 82163
+    },
+    "work/meishi-reference-detail/amendment/native-software-contact.png": {
+      "sha256": "fac58f496c92f1f037c90f6b583a1ac0826063adcc0e4e529e690dd8f285142d",
+      "bytes": 539742
+    }
+  },
+  "frames": [
+    {
+      "kind": 0,
+      "corporation": 0,
+      "submitted": 52546,
+      "alpha_nonzero": 52546,
+      "decoration": 12949
+    },
+    {
+      "kind": 0,
+      "corporation": 1,
+      "submitted": 52510,
+      "alpha_nonzero": 52510,
+      "decoration": 12887
+    },
+    {
+      "kind": 0,
+      "corporation": 2,
+      "submitted": 52932,
+      "alpha_nonzero": 52932,
+      "decoration": 12957
+    },
+    {
+      "kind": 1,
+      "corporation": 0,
+      "submitted": 46476,
+      "alpha_nonzero": 46476,
+      "decoration": 12949
+    },
+    {
+      "kind": 1,
+      "corporation": 1,
+      "submitted": 46440,
+      "alpha_nonzero": 46440,
+      "decoration": 12887
+    },
+    {
+      "kind": 1,
+      "corporation": 2,
+      "submitted": 46862,
+      "alpha_nonzero": 46862,
+      "decoration": 12957
+    },
+    {
+      "kind": 2,
+      "corporation": 0,
+      "submitted": 42214,
+      "alpha_nonzero": 42214,
+      "decoration": 12949
+    },
+    {
+      "kind": 2,
+      "corporation": 1,
+      "submitted": 42178,
+      "alpha_nonzero": 42178,
+      "decoration": 12887
+    },
+    {
+      "kind": 2,
+      "corporation": 2,
+      "submitted": 42600,
+      "alpha_nonzero": 42600,
+      "decoration": 12957
+    }
+  ]
+}

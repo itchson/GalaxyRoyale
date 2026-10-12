@@ -1,0 +1,48 @@
+{
+  "sourceCommit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+  "sources": [
+    {
+      "path": "scripts/test/coop-transport.test.mjs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "bytes": 29268,
+      "sha256": "ae15b671e51e8989058aa66d895b864a21346d59c31c7537c643bb45a5887f03"
+    },
+    {
+      "path": "apps/game/src/coop/transport.ts",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "bytes": 28841,
+      "sha256": "005128dd09bb4306e38a1bec0b0cae3bdede99dc48a80c210d966923e2faf93c"
+    },
+    {
+      "path": "apps/game/src/coop/signaling.ts",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "bytes": 5192,
+      "sha256": "5582f1434b5e9b485c08dd41463e349e04bacdf7cc2409f6b9b71a4e15eaf120"
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "bytes": 11691,
+      "sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20"
+    },
+    {
+      "path": "apps/coop/store.mjs",
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "bytes": 19460,
+      "sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 2718,
+      "sha256": "ddd2572d6963eb3fd48b64f62a2f9248169c5e73d4630900b0a95419a4d8db4d"
+    },
+    {
+      "path": "pin.py",
+      "bytes": 1254,
+      "sha256": "76a85079ba2f8a7509caae52f5b7ff2cc49915fc6ed57ee35d5ab8fa534d58e8"
+    }
+  ],
+  "scope": "source-only test teardown review; no execution or stage preparation"
+}

@@ -1,0 +1,26 @@
+{
+  "head": "f407dda355d92ec3ed2c6fc867d9eba0ffa9a6fd",
+  "trackedStatus": "",
+  "prototypeSource": "940836824af19a901097aa072a8a0c11774b4482",
+  "canonicalInputsVerified": 4,
+  "sourceFiles": [
+    {
+      "path": "fractional-event-scheduler.ts",
+      "bytes": 8098,
+      "sha256": "7225813fa8f6a403a1381565341251c938b1a5684050fc2214ffb8bbfd92b3ff"
+    },
+    {
+      "path": "fractional-event-scheduler.test.mjs",
+      "bytes": 21192,
+      "sha256": "bdea711222cd74bc32d6e46fa169108a7c435d60e382541d57cafcf3720ebba7"
+    },
+    {
+      "path": "PROTOCOL.md",
+      "bytes": 8039,
+      "sha256": "7007ebc035bf6288ef8313bcf32845e9bd6ce44e2530b98eb7e0d4bc18c3fbab"
+    }
+  ],
+  "nodeVersion": "v24.18.0",
+  "typescriptVersion": "5.9.3",
+  "prettierVersion": "3.9.9"
+}

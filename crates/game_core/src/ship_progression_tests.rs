@@ -28,11 +28,11 @@ fn json(g: &Game) -> serde_json::Value {
 fn fresh_hull_is_level_one_with_empty_three_slots_and_six_unpurchased_hardware_rows() {
     let mut g = Game::new(Profile::default());
     let h = g.hud();
-    assert_eq!(g.profile.schema_version, 4);
+    assert_eq!(g.profile.schema_version, components::SCHEMA_VERSION);
     assert_eq!(h.ship_level, 1);
     assert_eq!(h.ship_xp, 0);
     assert_eq!(h.upgrades.len(), 6);
-    assert_eq!(h.abilities.len(), 17);
+    assert_eq!(h.abilities.len(), 3);
     assert!(h.loadout.iter().all(Option::is_none));
     assert!(
         g.profile
@@ -76,7 +76,7 @@ fn three_real_starters_craft_then_equip_with_exact_atomic_banked_costs() {
     }
     let stats = Stats::from_profile(g.profile());
     assert!((stats.damage - base.damage * 1.1).abs() < 0.001);
-    assert_eq!(stats.shield, 20.0);
+    assert_eq!(stats.shield, 60.0);
     assert!((stats.speed - base.speed * 1.04).abs() < 0.001);
     assert!((stats.acceleration - base.acceleration * 1.04).abs() < 0.001);
     for category in 0..3 {
@@ -127,7 +127,11 @@ fn crafted_hull_has_independent_zero_xp_hardware_but_shared_rank_is_level_capped
     g.profile.campaign.ship_xp[0] = 1320;
     g.purchase("damage").unwrap();
     g.craft_ability("pulse-lens").unwrap();
-    for _ in 0..4 {
+    g.upgrade_ability("pulse-lens").unwrap();
+    for _ in 0..6 {
+        g.craft_component("pulse-conductor").unwrap();
+    }
+    for _ in 0..3 {
         g.upgrade_ability("pulse-lens").unwrap();
     }
     g.equip_ability(0, Some("pulse-lens")).unwrap();
@@ -310,7 +314,7 @@ fn legacy_owned_hardware_is_level_capped_then_real_ship_kills_activate_it_withou
     );
     let first = Stats::from_profile(g.profile());
     assert_eq!(first.hull, 115.0);
-    assert_eq!(first.shield, 20.0);
+    assert_eq!(first.shield, 40.0);
     assert!((first.damage - 13.44).abs() < 0.001);
     assert_eq!(first.fire_rate, 5.5);
     assert_eq!(first.regeneration, 0.4);
@@ -365,7 +369,7 @@ fn legacy_owned_hardware_is_level_capped_then_real_ship_kills_activate_it_withou
     assert_eq!(g.profile.campaign.stored_materials, stash);
     let second = Stats::from_profile(g.profile());
     assert_eq!(second.hull, 130.0);
-    assert_eq!(second.shield, 30.0);
+    assert_eq!(second.shield, 50.0);
     assert!((second.damage - 14.88).abs() < 0.001);
     assert_eq!(second.fire_rate, 6.0);
     assert_eq!(second.regeneration, 0.8);
@@ -504,12 +508,29 @@ fn shared_typescript_migration_fixtures_match_actual_constructor_fields_and_loss
         let g = Game::new(input);
         let mut actual = json(&g);
         let mut expected = case["expected"].clone();
+        expected["schema_version"] = components::SCHEMA_VERSION.into();
+        expected["campaign"]["components"] = serde_json::json!([0, 0, 0]);
+        for key in ["cargo_training_materials", "stored_training_materials"] {
+            expected["campaign"][key] = serde_json::json!([0, 0, 0]);
+        }
+        // The older shared schema-4 fixtures omit the two new nullable fields.
+        // New schema-5 identity fixtures keep their actual expected values.
+        expected
+            .as_object_mut()
+            .unwrap()
+            .entry("identity")
+            .or_insert(serde_json::Value::Null);
+        expected
+            .as_object_mut()
+            .unwrap()
+            .entry("onboarding")
+            .or_insert(serde_json::Value::Null);
         actual.as_object_mut().unwrap().remove("revision");
         expected.as_object_mut().unwrap().remove("revision");
         assert_eq!(actual, expected, "{}", case["name"]);
         assert_eq!(
             g.profile.revision,
-            before_revision + u64::from(version < 4 || has_cargo),
+            before_revision + u64::from(version < components::SCHEMA_VERSION || has_cargo),
             "{}",
             case["name"]
         );

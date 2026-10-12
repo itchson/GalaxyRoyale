@@ -1,0 +1,20 @@
+warning: in the working copy of 'scripts/qa/co-op-transport/client.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/qa/co-op-transport/server.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/qa/co-op-transport/wasm-review.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/test/coop-transport-qa.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/test/coop-transport-wasm-qa.test.mjs', LF will be replaced by CRLF the next time Git touches it
+{
+  "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "tests": [
+    5,
+    2
+  ],
+  "reviewed": {
+    "scripts/qa/co-op-transport/client.js": "6c47a2ff38cc70936201f778d20cbb24be20a23e2b01268152c2dadda3620893",
+    "scripts/qa/co-op-transport/wasm-review.js": "f8cfce59e7581c6f41d12b51146944739be77d0e0a22310bdb25b71925c9e1c7",
+    "scripts/qa/co-op-transport/server.mjs": "e38555f2615fd9689460699cf3df300cc2d5f7853d9c32493b610b281faa1229",
+    "scripts/test/coop-transport-qa.test.mjs": "e6809359124d3690e21b9a8c5361f002a36aa9531a9cc7a1ffe2c5809a408231",
+    "scripts/test/coop-transport-wasm-qa.test.mjs": "0716aec32f92117658c90cdd6034be9d8a2ba12370874f01871a6deb5ae75211"
+  },
+  "reportSha256": "a623cbbd662ae5dfe74805a99b0843dcf0fce3548763d807fb0929d0b74cfdb5"
+}

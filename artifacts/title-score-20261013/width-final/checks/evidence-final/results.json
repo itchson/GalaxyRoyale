@@ -1,0 +1,56 @@
+{
+  "recordedAt": "2026-10-12T18:04:18.178Z",
+  "before": {
+    "runtime": {
+      "head": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "branch": "codex/testing",
+      "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e"
+    },
+    "reviewInputs": "d2fe54e383548b82ac8a6424568395217960e896ef42efa663bec1a7f7a1b786"
+  },
+  "after": {
+    "runtime": {
+      "head": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "branch": "codex/testing",
+      "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e"
+    },
+    "reviewInputs": "d2fe54e383548b82ac8a6424568395217960e896ef42efa663bec1a7f7a1b786"
+  },
+  "unchanged": true,
+  "compiledPackage": {
+    "schemaVersion": 1,
+    "head": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e",
+    "packageHash": "a1afe6da521b45b60a6e1eae1c6d0269c8837615ffcee478e168d1457e1e242c",
+    "builtAt": "2026-10-12T17:41:53.879Z"
+  },
+  "scope": "Current full shell/wiki/helper amendment and tsc. No new Rust/GPU/physical/RTC or native-PCM run; the F4 package remains byte-identical.",
+  "results": [
+    {
+      "name": "shell",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "apps/studio/test/*.test.mjs",
+        "scripts/test/*.test.mjs",
+        "scripts/qa/audio-review/*.test.mjs"
+      ],
+      "exit": 0,
+      "counts": {
+        "tests": 641,
+        "pass": 638,
+        "fail": 0,
+        "skipped": 3
+      }
+    },
+    {
+      "name": "typecheck",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0
+    }
+  ]
+}

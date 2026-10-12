@@ -1,0 +1,6 @@
+from pathlib import Path
+p = Path('work/boxed-world-review/HANDOFF.md')
+s = p.read_text(encoding='utf-8')
+s = s.replace('The current live helper, per the actual read-only report from audio_review, observes acquire/entity/body/replica_commit but not native begin/join/leave/end or replica_begin/end, and lacks a stable pre/post local-world HUD/body/RNG observation.', 'An earlier bounded read of the live helper, reported by audio_review during this task, observed acquire/entity/body/replica_commit but not native begin/join/leave/end or replica_begin/end, and no stable pre/post local-world HUD/body/RNG observation.')
+s = s.replace('IndexedDB migrations/open, concurrent save work, failed restoration retry and actual signaling/WebRTC end propagation are outside this native regression.', 'Root has since reported actual two-client loopback admission/end/rejoin/leave and persisted-profile captures on both renderers. This task has not independently inspected those later artifacts; that evidence remains separate from exact world restoration. IndexedDB migrations/open, concurrent save work, failed restoration retry and actual signaling/WebRTC end propagation are outside this native regression.')
+p.write_text(s, encoding='utf-8')

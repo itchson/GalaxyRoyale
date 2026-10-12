@@ -1,0 +1,39 @@
+.mission-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.mission-tabs > button {
+  min-width: min(160px, 45%);
+}
+.mission-body > h3 {
+  font-size: var(--ui-text);
+  font-weight: normal;
+  margin: 24px 0 12px;
+}
+.mission-training {
+  margin-block: 16px;
+  max-width: 620px;
+}
+.mission-training > button {
+  width: min(280px, 100%);
+  margin-top: 12px;
+}
+.mission-log {
+  padding-left: 20px;
+  font-size: var(--ui-text);
+  line-height: 1.65;
+}
+.mission-families {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.mission-families h3 {
+  font-size: var(--ui-text);
+  font-weight: normal;
+  color: var(--amber);
+}
+.narrow-ui .mission-families {
+  grid-template-columns: 1fr;
+}

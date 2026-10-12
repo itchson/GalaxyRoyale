@@ -28,6 +28,59 @@ pub(crate) fn scene(view: [f32; 2], insets: [f32; 4], hit: f32) -> UiScene {
         }],
     }
 }
+
+/// New measured top-left toolbar fixture. `hit` is the supplied logical BCR,
+/// not a hard-coded painter size or a claim of browser measurement.
+pub(crate) fn left_scene(view: [f32; 2], insets: [f32; 4], hit: f32) -> UiScene {
+    let mut result = scene(view, insets, hit);
+    for (i, node) in result.groups[0].nodes.iter_mut().enumerate() {
+        node.rect[0] = insets[3] + 12.0 + i as f32 * (hit + 3.0);
+    }
+    result
+}
+
+#[test]
+fn new_left_toolbar_union_preserves_measured_hit_rectangles_and_fullscreen() {
+    let insets = [7.0, 19.0, 13.0, 11.0];
+    for hit in [14.0, 28.0, 44.0, 22.375] {
+        let mut s = left_scene([533.0, 300.0], insets, hit);
+        assert_eq!(
+            flight_header(&s, insets),
+            Some([12.0, 12.0, hit * 4.0 + 9.0, hit])
+        );
+        s.groups[0].nodes.push(UiNode {
+            kind: "fullscreen-icon".into(),
+            rect: [
+                insets[3] + 12.0 + 4.0 * (hit + 3.0),
+                insets[0] + 12.0,
+                hit,
+                hit,
+            ],
+            ..Default::default()
+        });
+        assert_eq!(
+            flight_header(&s, insets),
+            Some([12.0, 12.0, hit * 5.0 + 12.0, hit])
+        );
+        let i = FlightStatusInput {
+            viewport: [533.0, 300.0],
+            insets,
+            header: flight_header(&s, insets),
+            status_hits: [None; 2],
+            touch: true,
+            attached_vitals: true,
+            player: Vec2::ZERO,
+            player_radius: 20.0,
+            protected_core: None,
+            camera: [0.0; 2],
+            zoom: 1.6,
+        };
+        let l = FlightStatusLayout::new(&i).unwrap();
+        for r in [l.strip, l.navigation, l.vitals].into_iter().flatten() {
+            assert!(!hud_overlap(r, i.header.unwrap(), 2.0));
+        }
+    }
+}
 fn native_hud() -> Hud {
     let mut h = game_core::Game::new(game_core::Profile::default()).hud();
     h.dock = false;
@@ -72,7 +125,7 @@ fn corners_fit(
                 Vec2::new(-0.5, 0.5),
                 Vec2::splat(0.5),
             ] {
-                let p = b.transforms[pixel.transform as usize]
+                let p = b.transforms[pixel.transform_slot()]
                     .point(Vec2::from_array(pixel.local) + offset)
                     - origin;
                 assert!(

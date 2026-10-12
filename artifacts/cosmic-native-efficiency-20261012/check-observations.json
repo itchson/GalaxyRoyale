@@ -1,0 +1,25 @@
+{
+  "scope": "Actual command results observed in tool output; compile/Clippy raw transcripts were not retained. Native process measurement logs are retained separately.",
+  "checks": [
+    {
+      "command": "cargo test --release --locked -p game_core --lib --no-run",
+      "exit_code": 0,
+      "observed_compile_seconds": 18.79
+    },
+    {
+      "command": "cargo clippy --locked -p game_core --tests -- -D warnings",
+      "exit_code": 0,
+      "observed_compile_seconds": 4.24
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "earlier_formatter_result": "New instrumentation formatting was corrected before compiling/measuring; no production runtime code was changed.",
+  "parser_first_attempt": "The native cold test passed. The first Python parser expected the marker at line start, but the Rust harness prefixed it with the test name. Fixed the parser; parser-first-cold.log is retained and excluded from all final distributions."
+}

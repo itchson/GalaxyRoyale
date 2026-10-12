@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "commit": "db15b91f3a1614ebd245fbab47787de737535882",
+  "parent": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+  "source": [
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/engine_core/src/frame.rs",
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "bytes": 30850,
+      "snapshot": "source/crates/engine_core/src/frame.rs"
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/engine_core/src/lib.rs",
+      "sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869",
+      "bytes": 891,
+      "snapshot": "source/crates/engine_core/src/lib.rs"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/engine_core/src/pixel_rig.rs",
+      "sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "bytes": 14857,
+      "snapshot": "source/crates/engine_core/src/pixel_rig.rs"
+    },
+    {
+      "path": "crates/engine_core/src/shadow.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/engine_core/src/shadow.rs",
+      "sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "bytes": 9438,
+      "snapshot": "source/crates/engine_core/src/shadow.rs"
+    },
+    {
+      "path": "crates/game_core/src/hub_shadows.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_core/src/hub_shadows.rs",
+      "sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "bytes": 9642,
+      "snapshot": "source/crates/game_core/src/hub_shadows.rs"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_core/src/lib.rs",
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "bytes": 196705,
+      "snapshot": "source/crates/game_core/src/lib.rs"
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/dock_art.rs",
+      "sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "bytes": 9952,
+      "snapshot": "source/crates/game_web/src/dock_art.rs"
+    },
+    {
+      "path": "crates/game_web/src/dock_art_tests.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/dock_art_tests.rs",
+      "sha256": "c1f8d7b90f71d29ac44ad16cc1ebc584d676dca5b082d712852bd3ae3e932864",
+      "bytes": 16491,
+      "snapshot": "source/crates/game_web/src/dock_art_tests.rs"
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/lib.rs",
+      "sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570",
+      "bytes": 495,
+      "snapshot": "source/crates/game_web/src/lib.rs"
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/lighting.rs",
+      "sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1",
+      "bytes": 12924,
+      "snapshot": "source/crates/game_web/src/lighting.rs"
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/pixel.wgsl",
+      "sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "bytes": 8685,
+      "snapshot": "source/crates/game_web/src/pixel.wgsl"
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/renderer.rs",
+      "sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "bytes": 32057,
+      "snapshot": "source/crates/game_web/src/renderer.rs"
+    },
+    {
+      "path": "crates/game_web/src/shadow_uniforms.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/shadow_uniforms.rs",
+      "sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "bytes": 6127,
+      "snapshot": "source/crates/game_web/src/shadow_uniforms.rs"
+    }
+  ],
+  "unchanged_inputs": [
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/engine_core/src/camera.rs",
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "bytes": 8926,
+      "snapshot": "source/crates/engine_core/src/camera.rs"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/engine_core/src/transform.rs",
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "bytes": 5578,
+      "snapshot": "source/crates/engine_core/src/transform.rs"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/engine_core/src/pixels.rs",
+      "sha256": "b0ecc9e662f598de055e43517163917c182dcb1bee5300b0170f3b54c42559a8",
+      "bytes": 21861,
+      "snapshot": "source/crates/engine_core/src/pixels.rs"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_core/src/campaign.rs",
+      "sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "bytes": 22135,
+      "snapshot": "source/crates/game_core/src/campaign.rs"
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_core/src/identity.rs",
+      "sha256": "370309e9a2e4706e0380694de00069dd8f83bd73ca1207f1788329d4f6a24286",
+      "bytes": 46183,
+      "snapshot": "source/crates/game_core/src/identity.rs"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_core/src/raicho_fine.rs",
+      "sha256": "a1bdb339a81ad0062d3b2bb53e26233a680e735a431982ec49ac748b4cc4c0c1",
+      "bytes": 17765,
+      "snapshot": "source/crates/game_core/src/raicho_fine.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_core/src/co_op_replica.rs",
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194",
+      "bytes": 51287,
+      "snapshot": "source/crates/game_core/src/co_op_replica.rs"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/src/browser.rs",
+      "sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907",
+      "bytes": 39952,
+      "snapshot": "source/crates/game_web/src/browser.rs"
+    },
+    {
+      "path": "crates/game_web/Cargo.toml",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:crates/game_web/Cargo.toml",
+      "sha256": "8bb52063bf17a29e773ae6b47a1efd0702d723354df6297946f8312ad1e54611",
+      "bytes": 789,
+      "snapshot": "source/crates/game_web/Cargo.toml"
+    },
+    {
+      "path": "Cargo.toml",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:Cargo.toml",
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "bytes": 447,
+      "snapshot": "source/Cargo.toml"
+    },
+    {
+      "path": "Cargo.lock",
+      "git": "db15b91f3a1614ebd245fbab47787de737535882:Cargo.lock",
+      "sha256": "bc919f0f4492cedaf76458d59304a0df851bf6cc5c60e109e0ac4e440e24bd9c",
+      "bytes": 27800,
+      "snapshot": "source/Cargo.lock"
+    }
+  ],
+  "author_raw": [
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/native-fields.json",
+      "sha256": "2860b5f76fe5a33842ff7b7d5564e4ecb8f7b31481b27731851315b13becbe04",
+      "bytes": 121826
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/native-deck-packets.json",
+      "sha256": "ad8ef27f533ef39ed077f9671e1d9f794ceb6c934d1067318ffc0951c0ccb013",
+      "bytes": 28797771
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/native-export-committed.log",
+      "sha256": "69229c9d8b7c744fb5b72630206e30d39cd6186802d1357cfdb09f274f0519e1",
+      "bytes": 345
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/deck-export-committed.log",
+      "sha256": "f0a2f02e7d637055ad74631322362d1d0727f62cc59f5f954e713240b72480b8",
+      "bytes": 1200
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/native-portable-final.log",
+      "sha256": "3c2826483b81332bf11eca8813764fb802691712720a92ce8f135af4f79694f5",
+      "bytes": 62399
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/dock-tests-final.log",
+      "sha256": "3108d7d21418e99419ad924bcb0eecc5ea4380875c860218c4242759a36d4d92",
+      "bytes": 1494
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/lighting-tests-final.log",
+      "sha256": "dfe13664d3dec4d2c503216abad3acf35a865ee35fe7d09f6f91a88c90e07439",
+      "bytes": 1309
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/packing-tests-final.log",
+      "sha256": "a18282428fc436301326e6747431ecfab639dad515c1b292943e8ec842898538",
+      "bytes": 681
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/game-shadow-final.log",
+      "sha256": "589ae4cc27cb5143222619617e5d50b4c12331fc40cc6ad1a3736478f0572183",
+      "bytes": 889
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/clippy-portable-final.log",
+      "sha256": "3f60acfb765df6eba2c7f67b7704dd8877fe9e2166921925dde3313cadc89c6d",
+      "bytes": 313
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/clippy-web-native-final-qualified.log",
+      "sha256": "80aa764d0c94dad9d6fc74622fb1a4cbd62b1815ce25f882cb2d9a1d0b78ed67",
+      "bytes": 189
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/clippy-webgl-final-qualified.log",
+      "sha256": "dd6fd4ef614ff279308e9582b5efd5a0182455d5bfec723f5bc4e8096a4bfc04",
+      "bytes": 429
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/clippy-webgpu-final-qualified.log",
+      "sha256": "458c0090c30a69312f4cd3d0859fa50a5b7c39c54a5c76ca462a0945a5fe77bd",
+      "bytes": 189
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/clippy-native-first.log",
+      "sha256": "a9f5ccee93b3423bd6365026e902d33aa66a460c20da5c6ed49f0c841a293a08",
+      "bytes": 2313
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/clippy-wasm-webgl-first.log",
+      "sha256": "5638301ce629bb4968032d3942a3cccadc18357d39a6bb373526ee492b5e1fee",
+      "bytes": 2489
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/clippy-web-native-baseline-exception.log",
+      "sha256": "69eaecfbf2781512693d064b2eabd5b79fdc306f081a05780384dc67d5ec937b",
+      "bytes": 1104
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/native-all-first.log",
+      "sha256": "5eadfca9e94fe658050cea835f8307dbce8b8fc977550fd33c7ade38303a7bba",
+      "bytes": 99114
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/fmt-result.json",
+      "sha256": "4129c50d3e70a1a201c1fbf4017b2fffdc779f43d6cdcbabfec4e4939c35be24",
+      "bytes": 125
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/naga-glsl.log",
+      "sha256": "aaf6f2a95d88afda3877055ee0437cb4cc4579e9966b954b1a2f588005e1bc97",
+      "bytes": 2044
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/software-proof.log",
+      "sha256": "a1721624259ccd34193a36512dda5f30c183535cbe7e12bb049de61a923a4bc0",
+      "bytes": 121
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/software-proof.py",
+      "sha256": "4078ae03dcb4376d822441442a635e619bf29e0e24bae642967011794cf67f29",
+      "bytes": 3193
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/native-software-ray-contact.png",
+      "sha256": "74e293253bb093bbdab487fd0ee361153a8dce40f0a838c2687f71ca163e50cb",
+      "bytes": 265962
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/naga-portable/vs_main.glsl",
+      "sha256": "b9df4656f7a9a35de0e26be926ac7ab78b5a7c8919e2c86ca227e49c08903745",
+      "bytes": 6417
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/naga-portable/fs_main.glsl",
+      "sha256": "7bad97d6a25711ce3912178ad8d2a37f4cea06a59a7bceaf57e7c291ab60d324",
+      "bytes": 10665
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/naga-portable/src/main.rs",
+      "sha256": "dfbc968b4f5f2f623f6a3a4c6a7b39ddef2ff4debb145601c7ddfbdaa808ed45",
+      "bytes": 1469
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/naga-portable/Cargo.toml",
+      "sha256": "a0dcb3db0c566901241ba862d1b53f9c8be361ac19940a82b480a023eb4d60d2",
+      "bytes": 178
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/naga-portable/Cargo.lock",
+      "sha256": "ce7d1005d8d08ded258b2531c43feca414492032e56ab0c886eb1a67c5dd7ce4",
+      "bytes": 7162
+    }
+  ],
+  "author_handoff": {
+    "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/HANDOFF.md",
+    "sha256": "8b065e405cf1c24d6b23f0f00136c728e373153386426163eaa0413326fbacfc",
+    "bytes": 8314
+  },
+  "author_manifest": {
+    "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/MANIFEST.json",
+    "sha256": "626cdf5ea5e9c443495b464632ab9771827c6a8ce795e7ebfaeef83ce94353d8",
+    "bytes": 10777
+  },
+  "author_canonical_manifest": {
+    "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/hub-shadow-prototype/MANIFEST-GIT-V2.json",
+    "sha256": "9e5dcac8778aac1deb01012734d9ddfaf54c6d0c66857004d7c2e98a50dda5d9",
+    "bytes": 14376
+  },
+  "review_evidence": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 9827,
+      "sha256": "35211283e646e6aee0c215dad61130fa1c603cf5ce239a1109fbb5f53c63d3bc"
+    },
+    {
+      "path": "verify.mjs",
+      "bytes": 12872,
+      "sha256": "3998c0a3237991535cbdb11d50852aaae0174ca321e56944a78d742ec6c81f7f"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 2326,
+      "sha256": "8a1cd52bc31c261cf6a26d167c25b9cb322f553fdbeaa05000b78aa455a280a4"
+    },
+    {
+      "path": "verify-first.log",
+      "bytes": 8650,
+      "sha256": "b1ef0b2b66617bd85e31c005961f246cf1c6af767ecb67cd4b9a1e077a23107e"
+    },
+    {
+      "path": "verify-final.log",
+      "bytes": 660,
+      "sha256": "811a35bb09f6f3b69b9767e2c82968de4b1b0f2458619174876e052f157cf2bb"
+    },
+    {
+      "path": "verify-accepted.log",
+      "bytes": 1678,
+      "sha256": "c40607ac5329669ac1302fb6c047b4f1919b41ea21195bd9ae153a9cadee1bdd"
+    }
+  ]
+}

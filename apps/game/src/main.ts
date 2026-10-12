@@ -1,9 +1,19 @@
 import "./style.css";
+import { CoopController } from "./coop/controller";
+import { createGalaxyCoopPorts, readOwnedLoadout } from "./coop/wasm-ports";
+import { paintCoopPanel } from "./coop/panel";
+import { enterAfterSave } from "./coop/entry";
 import { FlightInput } from "./input";
 import { watchPwaUpdates } from "./pwa-updates";
 import { AudioEngine, type AudioState } from "./audio";
+import { TITLE_THEME } from "./title-theme";
 import { PixelUiBridge } from "./pixel-ui";
 import { paintFlightMenu, type FlightMenuHud } from "./flight-menu";
+import { paintMeishiCard } from "./meishi";
+import { paintMissions } from "./missions";
+import { paintVault } from "./vault-scene";
+import { paintForgeScene, resetForgeScene } from "./forge-scene";
+import { paintHangarScene } from "./hangar-scene";
 import { paintUniverseMap, type UniverseMapData } from "./universe-map";
 import {
   bindWebglLifecycle,
@@ -12,19 +22,20 @@ import {
 } from "./webgl-lifecycle";
 import { DebugConsole } from "./debug-console";
 import { DialoguePanel } from "./dialogue";
+import type { PortraitIdentity } from "./kikai-portrait";
+import { DroidCreation, type IdentityHud, type OnboardingHud } from "./kikai";
 import {
-  paintCampaign,
   paintCredits,
   type CampaignHud,
   type CampaignActions,
 } from "./campaign";
+import type { ForgeHud } from "./loadout";
 import {
-  paintForge,
-  resetForge,
-  paintShipHangar,
-  type ForgeHud,
-} from "./loadout";
-import { NarrativeDirector, type NarrativeContext } from "./narrative";
+  NarrativeDirector,
+  splitPages,
+  type NarrativeContext,
+} from "./narrative";
+import doraGuideSource from "../../../assets/narrative/dora-initial-mission.json?raw";
 import {
   SaveStore,
   SaveConflict,
@@ -36,8 +47,11 @@ import {
 } from "./storage";
 
 declare const __WASM_BUILDS__: Record<"webgpu" | "webgl2", string>;
+declare const __COOP_SERVICE__: string | null;
 
 interface Hud extends ForgeHud, FlightMenuHud {
+  identity: IdentityHud | null;
+  onboarding: OnboardingHud | null;
   audio: AudioState;
   position: [number, number];
   camera: [number, number];
@@ -115,12 +129,15 @@ interface RendererRecovery {
   free(): void;
 }
 interface GalaxyRuntime {
+  co_op_batch(request: string): string;
+  co_op_replica(request: string): string;
   step(milliseconds: number, input: unknown): Step;
   hud(): Hud;
   universe_map(): UniverseMapData;
   profile(): Profile;
   purchase(id: string): void;
   craft_ability(id: string): void;
+  craft_component(id: string): void;
   upgrade_ability(id: string): void;
   equip_ability(slot: number, id: string | null): void;
   resize(width: number, height: number): void;
@@ -147,8 +164,15 @@ interface GalaxyRuntime {
   switch_ship(id: number): void;
   acknowledge_credits(): void;
   return_to_home(): void;
+  register_droid(
+    kind: string,
+    corporation: string,
+    subCorporation: string,
+    hexId: string,
+  ): void;
+  acknowledge_license(): void;
   dock_facility_at(x: number, y: number): number;
-  diagnostic(command: string): void;
+  diagnostic(command: string): boolean;
   boss_ui_bounds(): Float32Array;
   install_recovery(renderer: RendererRecovery): void;
   lose_device(): void;
@@ -158,13 +182,15 @@ const element = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 let canvas = element<HTMLCanvasElement>("universe");
 const store = new SaveStore();
-const audio = new AudioEngine();
+const audio = new AudioEngine(TITLE_THEME);
+audio.setTitleScreen(true);
 const settings = loadSettings();
 document.body.classList.toggle("reduced-motion", settings.reduced_motion);
 audio.setLevels(settings.master, settings.music, settings.sfx);
 const narrative = new NarrativeDirector({
   voiceEnabled: settings.dialogue_voice,
   voiceVolume: settings.master * settings.voice_volume,
+  onVoiceStatus: (status) => dialoguePanel?.setSpeaking(status === "speaking"),
 });
 const launch = element<HTMLButtonElement>("launch");
 launch.disabled = true;
@@ -181,6 +207,9 @@ const touchUi =
   (diagnosticMode && params.has("touch"));
 document.body.classList.toggle("touch-ui", touchUi);
 let galaxy: GalaxyRuntime;
+let coop: CoopController | null = null;
+let previousCoopMode = "solo";
+let coopActionEpoch = 0;
 let prepareRecovery: (canvas: HTMLCanvasElement) => Promise<RendererRecovery>;
 let input: FlightInput;
 let pixelUi: PixelUiBridge;
@@ -188,22 +217,32 @@ let flightSafeInsets: [number, number] = [0, 0];
 let beforeLaunchMenu = false;
 type MenuTab =
   | "pause"
+  | "meishi"
+  | "cargo"
   | "upgrades"
   | "hangar"
-  | "campaign"
-  | "journal"
+  | "ship"
+  | "missions"
   | "map"
   | "settings"
   | "archive"
+  | "coop"
   | "credits";
 let menuTab: MenuTab = "upgrades";
 let lastMapPaint = 0;
-const facilityPages = ["upgrades", "hangar", "journal", "campaign"] as const;
+const facilityPages = [
+  "upgrades",
+  "hangar",
+  "missions",
+  "coop",
+  "cargo",
+] as const;
 const facilityPositions = [
   [-120, -80],
   [120, -80],
   [-120, 95],
   [120, 95],
+  [0, 170],
 ] as const;
 let pendingSaves = 0;
 let saveFailed = false;
@@ -212,6 +251,8 @@ let transitionEpoch = 0;
 let preparingEncounter: number | null = null;
 let hud: Hud;
 let launched = false;
+let needsDroidCreation = false;
+let lastTrainingStage = -1;
 let paused = true;
 let recovering = false;
 let graphicsFailed = false;
@@ -247,6 +288,7 @@ const debugConsole = new DebugConsole({
     paused = true;
     input.enabled = false;
     input.reset();
+    coop?.cancelInput();
     galaxy.set_paused(true);
     galaxy.set_ui_mode(0);
     document.body.classList.remove("engine-flight");
@@ -260,17 +302,28 @@ const debugConsole = new DebugConsole({
   },
   run: async (command) => {
     const [verb, ...args] = command.trim().toLowerCase().split(/\s+/);
+    if (verb === "coop") {
+      const state = coop?.state();
+      return state
+        ? `${state.phase.toUpperCase()} / ${state.role ?? "SOLO"} / ${state.members}/8 PILOTS\n${state.admitted} ADMITTED / ${state.transport_ready} CHANNELS READY\n${state.message}`
+        : "CO-OP UNAVAILABLE / session service is not configured.";
+    }
+    if (coop?.blocksSolo() && ["warp", "scene"].includes(verb))
+      return "Leave co-op before changing the local QA scene.";
     if (verb === "help")
-      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|biome-riveter|biome-mote|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nWARP x y (QA mode, world coordinates within +/-1000000)\nCLEAR / Up, Down: history / Backtick or Escape: close";
+      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|material|biome-riveter|biome-mote|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nMATERIAL requires a PAN starter, empty cargo and no active run, arena or co-op session.\nWARP x y (QA mode, world coordinates within +/-1000000)\nCLEAR / Up, Down: history / Backtick or Escape: close";
     if (verb === "stats") {
       const panel = Array.from(galaxy.boss_ui_bounds(), (value) =>
         value.toFixed(0),
       );
-      return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}\nZOOM ${galaxy.zoom().toFixed(2)} / WORLD ${Array.from(galaxy.world_viewport(), (v) => v.toFixed(0)).join(" x ")} / UI ${galaxy.viewport().join(" x ")}\nSHIP LV ${hud.ship_level} / XP ${hud.ship_xp} / CARGO ${hud.cargo_materials}/${hud.cargo_capacity}\nLAST BOSS UI ${panel.length ? panel.join(" / ") : "NONE"}`;
+      return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}\nZOOM ${galaxy.zoom().toFixed(2)} / WORLD ${Array.from(galaxy.world_viewport(), (v) => v.toFixed(0)).join(" x ")} / UI ${galaxy.viewport().join(" x ")}\nRAICHO LV ${hud.ship_level} / XP ${hud.ship_xp} / CARGO ${hud.cargo_materials}/${hud.cargo_capacity}\nLAST BOSS UI ${panel.length ? panel.join(" / ") : "NONE"}`;
     }
     if (verb === "profile") {
       const p = galaxy.profile();
-      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nBOSS GENERATIONS ${p.boss_generations?.map((row) => row.join(",")).join(" / ") ?? "legacy"}\nDISCOVERIES ${p.discoveries.length} / missions ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / ship ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\nSHIP XP ${p.campaign.ship_xp.join(" / ")}\nMATERIAL CARGO ${p.campaign.cargo_materials.join(" / ")} / STASH ${p.campaign.stored_materials.join(" / ")}\nSLOTS ${p.campaign.loadouts[p.campaign.selected_ship].slots.map((id) => id ?? "EMPTY").join(" / ")}\n${store.message}`;
+      const training = p.onboarding
+        ? `TRAINING v${p.onboarding.version} / STAGE ${p.onboarding.stage} / ASTEROIDS ${p.onboarding.asteroids_destroyed}/10 / MATERIALS ${p.onboarding.materials_collected}/10`
+        : "TRAINING NONE";
+      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nBOSS GENERATIONS ${p.boss_generations?.map((row) => row.join(",")).join(" / ") ?? "legacy"}\nDISCOVERIES ${p.discoveries.length} / missions ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / RAICHO ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\nRAICHO XP ${p.campaign.ship_xp.join(" / ")}\nMATERIAL CARGO ${p.campaign.cargo_materials.join(" / ")} / STASH ${p.campaign.stored_materials.join(" / ")}\nNAMED T1 CARGO ${p.campaign.cargo_training_materials.join(" / ")} / STASH ${p.campaign.stored_training_materials.join(" / ")}\n${training}\nSLOTS ${p.campaign.loadouts[p.campaign.selected_ship].slots.map((id) => id ?? "EMPTY").join(" / ")}\n${store.message}`;
     }
     if (verb === "renderer")
       return `${backend.toUpperCase()} / ${galaxy.viewport().join(" x ")} logical pixels / eight bounded lights`;
@@ -288,7 +341,8 @@ const debugConsole = new DebugConsole({
         )
       )
         return "Usage: WARP x y / finite world coordinates within +/-1000000.";
-      galaxy.diagnostic(`warp ${position.join(" ")}`);
+      if (!galaxy.diagnostic(`warp ${position.join(" ")}`))
+        return "WARP refused by the native session.";
       hud = galaxy.hud();
       scenario = "warp";
       destination = null;
@@ -307,6 +361,7 @@ const debugConsole = new DebugConsole({
           "belt",
           "combat",
           "site",
+          "material",
           "biome-riveter",
           "biome-mote",
           "boss-dart",
@@ -322,7 +377,8 @@ const debugConsole = new DebugConsole({
         ].includes(name)
       )
         return "Unknown scene. Type HELP for supported names.";
-      galaxy.diagnostic(name);
+      if (!galaxy.diagnostic(name))
+        return "Scene refused. MATERIAL needs a PAN starter, empty cargo and no active run, arena or co-op session.";
       hud = galaxy.hud();
       scenario = name;
       destination = null;
@@ -345,6 +401,7 @@ const dialoguePanel = new DialoguePanel({
     paused = true;
     input.enabled = false;
     input.reset();
+    coop?.cancelInput();
     galaxy.set_paused(true);
     galaxy.set_ui_mode(0);
     document.body.classList.remove("engine-flight");
@@ -358,6 +415,147 @@ const dialoguePanel = new DialoguePanel({
     pixelUi?.invalidate();
   },
 });
+const droidCreation = new DroidCreation({
+  onOpen: () => {
+    launchScreen.hidden = true;
+    galaxy.set_ui_mode(0);
+    input.reset();
+    coop?.cancelInput();
+    input.enabled = false;
+    pixelUi?.invalidate();
+  },
+  onClose: () => {
+    pixelUi?.invalidate();
+    if (!needsDroidCreation) {
+      void resume().then(() => {
+        if (!launched) {
+          launchScreen.hidden = false;
+          galaxy.set_ui_mode(2);
+          pixelUi?.invalidate();
+          launch.focus();
+          return;
+        }
+        showDoraGuide();
+      });
+    } else {
+      launchScreen.hidden = false;
+      galaxy.set_ui_mode(2);
+      launch.focus();
+    }
+  },
+  create: async (identity) => {
+    // Retry the same issued license after a failed save, without another grant.
+    if (!galaxy.hud().identity)
+      galaxy.register_droid(
+        identity.kind,
+        identity.corporation,
+        identity.sub_corporation,
+        identity.hex_id,
+      );
+    hud = galaxy.hud();
+    await persist(galaxy.profile());
+    needsDroidCreation = false;
+    launch.textContent = "CONTINUE EXPEDITION";
+    paintHud();
+  },
+});
+function showDoraGuide(): void {
+  if (coop?.blocksSolo()) return;
+  const training = hud?.onboarding;
+  if (!training || !hud.identity || !launched || !deathScreen.hidden) return;
+  if (!menu.hidden) menu.hidden = true;
+  narrative.close();
+  const content = JSON.parse(doraGuideSource) as {
+    stages: { stage: number; pages: { text: string; expression: string }[] }[];
+  };
+  const authored = content.stages.find(
+    (stage) => stage.stage === training.stage,
+  )?.pages ?? [{ text: training.description, expression: "neutral" }];
+  const pages = authored.flatMap((page) =>
+    splitPages(
+      page.text
+        .replaceAll(
+          "{material}",
+          training.material_name ?? "matching materials",
+        )
+        .replaceAll(
+          "{asteroid}",
+          training.asteroid_name ?? "designated asteroids",
+        )
+        .replaceAll(
+          "{starter}",
+          training.starter_name ?? hud.identity!.starter_ability,
+        )
+        .replaceAll(
+          "{slot}",
+          training.starter_slot ?? hud.identity!.corporation_role.toLowerCase(),
+        ),
+    ).map((text) => ({
+      text,
+      expression: ["neutral", "focused", "concerned", "pleased"].indexOf(
+        page.expression,
+      ),
+    })),
+  );
+  if (training.stage >= 2 && training.stage <= 5 && training.version === 2)
+    pages.unshift(
+      ...splitPages(training.description).map((text) => ({
+        text,
+        expression: 1,
+      })),
+    );
+  if (training.stage === 0)
+    pages.unshift({
+      text: `Welcome, ${hud.identity.short_designation}. Your MEISHI CARD records ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`,
+      expression: 3,
+    });
+  let index = 0;
+  const draw = (): void => {
+    dialoguePanel.show({
+      speaker: "APR-1337 / DORA",
+      text: pages[index].text,
+      portrait: 8,
+      expression: Math.max(0, pages[index].expression),
+      page: index,
+      pageCount: pages.length,
+      onPrevious:
+        index > 0
+          ? () => {
+              index--;
+              draw();
+            }
+          : undefined,
+      onNext:
+        index < pages.length - 1
+          ? () => {
+              index++;
+              draw();
+            }
+          : undefined,
+      actionLabel: training.stage === 0 ? "BEGIN TRAINING" : "CONTINUE FLIGHT",
+      onAction:
+        index === pages.length - 1
+          ? async () => {
+              const presentation = dialoguePanel.presentationToken;
+              if (hud.onboarding?.stage === 0) {
+                galaxy.acknowledge_license();
+                hud = galaxy.hud();
+                await persist(galaxy.profile());
+              }
+              if (
+                !dialoguePanel.opened ||
+                dialoguePanel.presentationToken !== presentation
+              )
+                return;
+              dialoguePanel.close();
+              toast(hud.onboarding?.description ?? "Your expedition is ready.");
+            }
+          : undefined,
+    });
+  };
+  draw();
+  pixelUi?.invalidate();
+}
 function restoreUi(): void {
   if (
     graphicsFailed &&
@@ -432,6 +630,8 @@ function paintSaveStatus(): void {
   pixelUi?.invalidate();
 }
 async function persist(profile: Profile): Promise<void> {
+  if (coop?.blocksSolo())
+    throw new Error("Leave co-op before saving local progression.");
   pendingSaves++;
   paintSaveStatus();
   try {
@@ -446,6 +646,7 @@ async function persist(profile: Profile): Promise<void> {
   }
 }
 function save(profile: Profile): void {
+  if (needsDroidCreation || coop?.blocksSolo()) return;
   void persist(profile).catch((error) => {
     if (error instanceof SaveConflict && launched && menu.hidden) pause(false);
     toast(store.message);
@@ -494,6 +695,7 @@ function resizeGraphics(): void {
       ]),
     );
     input.reset();
+    coop?.cancelInput();
     syncFlightStatusLayout();
     pixelUi?.invalidate();
   }
@@ -550,23 +752,42 @@ function syncFlightStatusLayout(): void {
     right: (text[0] + text[2]) * scale,
     bottom: hitY + hitHeight,
   };
-  const blocked = [
-    "save-indicator",
-    "pause-button",
-    "map-button",
-    "flight-settings",
-    ...(touchUi ? ["joystick", "fire-button"] : []),
-  ].some((id) => {
-    const rect = element(id).getBoundingClientRect();
-    return (
-      rect.width > 0 &&
-      rect.height > 0 &&
-      hit.left < rect.right &&
-      hit.right > rect.left &&
-      hit.top < rect.bottom &&
-      hit.bottom > rect.top
-    );
-  });
+  const overlaps = (rect: {
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+  }): boolean =>
+    hit.left < rect.right &&
+    hit.right > rect.left &&
+    hit.top < rect.bottom &&
+    hit.bottom > rect.top;
+  const navigation = galaxy.flight_navigation_bounds();
+  // The accessible context hit can be taller than its glyphs. Keep the entire
+  // target clear of the native map, as well as measured shell controls.
+  const blocksNavigation =
+    navigation.length === 4 &&
+    Array.from(navigation).every(Number.isFinite) &&
+    navigation[2] > 0 &&
+    navigation[3] > 0 &&
+    overlaps({
+      left: navigation[0] * scale,
+      top: navigation[1] * scale,
+      right: (navigation[0] + navigation[2]) * scale,
+      bottom: (navigation[1] + navigation[3]) * scale,
+    });
+  const blocked =
+    blocksNavigation ||
+    [
+      "save-indicator",
+      "pause-button",
+      "map-button",
+      "flight-settings",
+      ...(touchUi ? ["joystick", "fire-button"] : []),
+    ].some((id) => {
+      const rect = element(id).getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && overlaps(rect);
+    });
   strip.dataset.contextInteractive = String(
     hasContext &&
       !blocked &&
@@ -574,11 +795,15 @@ function syncFlightStatusLayout(): void {
       hit.bottom <= innerHeight - flightSafeInsets[1],
   );
 }
-function pause(dock: boolean): void {
+function pause(
+  dock: boolean,
+  page: MenuTab = dock ? "upgrades" : "pause",
+): void {
   if (!galaxy || !launched) return;
   transitionEpoch++;
   input.enabled = false;
   input.reset();
+  coop?.cancelInput();
   galaxy.cancel_course();
   galaxy.set_ui_mode(3);
   document.body.classList.remove("engine-flight");
@@ -586,24 +811,30 @@ function pause(dock: boolean): void {
   element("quick-menu").hidden = true;
   deathScreen.hidden = true;
   menu.hidden = false;
-  element("menu-title").textContent = dock ? "Evolve your ship" : "SHIP STATUS";
+  // A delayed save conflict can open this menu while a contact is active.
+  // Close after showing the menu so the contact restores the current UI mode.
+  dialoguePanel.close();
+  element("menu-title").textContent = dock
+    ? "Evolve your RAICHO"
+    : "RAICHO STATUS";
   element("menu-description").textContent = dock
-    ? "Craft abilities and improve this ship with banked points and materials."
+    ? "Craft abilities and improve this RAICHO with banked points and materials."
     : "Live telemetry / the universe keeps running.";
   hud = galaxy.hud();
-  paintUpgrades(dock);
   element("apply-update").hidden = !waitingUpdate;
   element<HTMLButtonElement>("apply-update").disabled = !hud.dock;
   paintSaveStatus();
   save(galaxy.profile());
   beforeLaunchMenu = false;
-  selectMenuTab(dock ? "upgrades" : "pause");
+  selectMenuTab(page);
+  element("menu-close").focus();
   syncFlightState();
 }
 // Menus consume controls without stopping the world. Lifecycle interruptions
 // and intentional debug/dialogue/death transitions remain separate gates.
 function canSimulateFlight(): boolean {
   return (
+    coop?.frameMode() !== "blocked" &&
     launched &&
     deathScreen.hidden &&
     preparingEncounter === null &&
@@ -626,17 +857,36 @@ function syncFlightState(): void {
     lastTime = 0;
   }
   input.enabled = run && menu.hidden;
+  audio.setTitleScreen(!launched);
   if (run) {
     // A profile/world transition may precede the next simulation frame.
-    audio.update(galaxy.hud().audio);
+    const soundHud = galaxy.hud();
+    audio.update({
+      ...soundHud.audio,
+      corporation: soundHud.identity?.corporation ?? null,
+    });
+    void audio.resume().catch(() => {});
+  } else if (
+    !launched &&
+    !document.hidden &&
+    !recovering &&
+    !graphicsFailed &&
+    !webglLifecycle?.lost
+  ) {
     void audio.resume().catch(() => {});
   } else audio.suspend();
 }
 function openMenu(page: MenuTab): void {
   if (!galaxy) return;
-  if (page === "upgrades") resetForge(element("upgrade-content"));
-  if (launched) pause(false);
-  else {
+  if (coop?.blocksSolo() && !["coop", "pause", "settings"].includes(page)) {
+    toast("Leave co-op to manage your local collection and missions.");
+    page = "coop";
+  }
+  if (page === "upgrades") resetForgeScene(element("upgrade-content"));
+  if (launched) {
+    pause(false, page);
+    return;
+  } else {
     transitionEpoch++;
     beforeLaunchMenu = true;
     launchScreen.hidden = true;
@@ -666,25 +916,31 @@ const campaignActions: CampaignActions = {
   },
   craft: (index) => {
     try {
+      if (coop?.blocksSolo())
+        throw new Error("Leave co-op before crafting a RAICHO.");
       galaxy.craft_ship(index);
       hud = galaxy.hud();
       save(galaxy.profile());
-      paintShipHangar(element("hangar-content"), hud, campaignActions);
+      if (menuTab === "hangar") refreshHangar();
+      if (menuTab === "upgrades") paintUpgrades(hud.dock);
       paintHud();
-      toast("SHIP CRAFTED / select it at Haven");
+      toast("RAICHO CRAFTED / select it at Haven");
     } catch (error) {
       toast(String(error));
     }
   },
   select: (id) => {
     try {
+      if (coop?.blocksSolo())
+        throw new Error("Leave co-op before changing your RAICHO.");
       galaxy.switch_ship(id);
       hud = galaxy.hud();
       save(galaxy.profile());
-      paintShipHangar(element("hangar-content"), hud, campaignActions);
+      if (menuTab === "hangar") refreshHangar();
+      if (menuTab === "upgrades") paintUpgrades(hud.dock);
       paintUpgrades(true);
       paintHud();
-      toast("SHIP SELECTED");
+      toast("RAICHO SELECTED");
     } catch (error) {
       toast(String(error));
     }
@@ -706,6 +962,8 @@ async function navigate(position: [number, number]): Promise<void> {
   toast("COURSE SET / fly or steer to your destination");
 }
 async function beginEncounter(start: () => void): Promise<void> {
+  if (coop?.blocksSolo())
+    throw new Error("Leave co-op before starting a local encounter.");
   const epoch = ++transitionEpoch;
   preparingEncounter = epoch;
   syncFlightState();
@@ -719,6 +977,7 @@ async function beginEncounter(start: () => void): Promise<void> {
     preparingEncounter = null;
     dialoguePanel.close();
     input.reset();
+    coop?.cancelInput();
     destination = null;
     previousDock = hud.dock;
     paintHud();
@@ -741,7 +1000,7 @@ function openCredits(): void {
   pause(false);
   element("menu-title").textContent = "GALAXY ROYALE WON";
   element("menu-description").textContent =
-    "Your Sovereign ship is ready. Thank you for flying.";
+    "Your Sovereign RAICHO is ready. Thank you for flying.";
   selectMenuTab("credits");
 }
 function finishCredits(): void {
@@ -755,54 +1014,81 @@ function finishCredits(): void {
   selectMenuTab("hangar");
 }
 function selectMenuTab(tab: MenuTab): void {
+  if (coop?.blocksSolo() && !["coop", "pause", "settings"].includes(tab)) {
+    tab = "coop";
+    toast("Leave co-op to manage your local collection and missions.");
+  }
   menuTab = tab;
   const headings: Record<MenuTab, [string, string]> = {
-    pause: ["SHIP STATUS", "Live telemetry / the universe keeps running."],
-    upgrades: [
-      "HAVEN FORGE",
-      "Craft compatible abilities, choose your three slots, and improve this ship's hardware.",
-    ],
+    coop: ["MULTIPLAYER", "Private world / up to eight pilots."],
+    pause: ["RAICHO", "FLIGHT LIVE"],
+    meishi: ["MEISHI CARD", "FLIGHT LIVE"],
+    cargo: ["VAULT", "Banked materials / components / mission items."],
+    upgrades: ["ABILITY COLLECTION", "Craft, equip and upgrade at Haven."],
     hangar: [
-      "SHIP HANGAR",
-      hud.dock
-        ? "Craft blueprints and choose your next ship."
-        : "Return to Haven to craft or switch ships.",
+      "HANGAR",
+      hud.dock ? "Choose your RAICHO." : "Return to Haven to craft or switch.",
     ],
-    campaign: [
-      "ARENA CHAMPIONS",
-      "Eight patches reveal the Galaxy Royale tournament.",
-    ],
-    settings: ["SETTINGS", "Tune your flight. Settings stay on this device."],
-    archive: [
-      "SAVE & BACKUP",
-      "Automatic saves keep your progression on this device.",
-    ],
-    journal: [
-      "EXPEDITION JOURNAL",
-      "Discover sanctuaries and return to claim their rewards.",
-    ],
-    map: [
-      "UNIVERSE MAP",
-      "Chart discovered beacons / the universe keeps running.",
-    ],
+    ship: ["RAICHO SYSTEMS", "Statistics / offensive / defensive / passive."],
+    missions: ["MISSIONS", "Expeditions / arena league."],
+    settings: ["SETTINGS", ""],
+    archive: ["SAVE & BACKUP", "Saved on this device."],
+    map: ["UNIVERSE MAP", "Discovered beacons / flight live."],
     credits: [
       "GALAXY ROYALE WON",
-      "Your Sovereign ship is ready. Thank you for flying.",
+      "Your Sovereign RAICHO is ready. Thank you for flying.",
     ],
   };
   element("menu-title").textContent = headings[tab][0];
   element("menu-description").textContent = headings[tab][1];
+  element("menu-description").hidden = !headings[tab][1];
   element("pause-content").hidden = tab !== "pause";
+  element("meishi-content").hidden = tab !== "meishi";
+  const card = tab === "meishi";
+  element("menu-surface").classList.toggle("meishi-surface", card);
+  element("menu-surface").dataset.pixelValue = String(
+    ["pan", "renko", "hugo"].indexOf(hud.identity?.corporation ?? "pan"),
+  );
+  element("menu-title").hidden = card;
+  element("menu-description").hidden = card || !headings[tab][1];
+  element("menu-footer").hidden = card;
+  element("menu-close").setAttribute(
+    "aria-label",
+    card ? "Close MEISHI card" : "Close menu",
+  );
+  element("cargo-content").hidden = tab !== "cargo";
+  element("coop-content").hidden = tab !== "coop";
+  element("collection-navigation").hidden = tab !== "pause";
+  for (const page of [
+    "meishi",
+    "cargo",
+    "hangar",
+    "upgrades",
+    "pause",
+  ] as const) {
+    element(`collection-${page}`).setAttribute(
+      "aria-pressed",
+      String(tab === page),
+    );
+  }
   element("upgrade-content").hidden = tab !== "upgrades";
   element("settings-content").hidden = tab !== "settings";
   element("archive-content").hidden = tab !== "archive";
-  element("quest-content").hidden = tab !== "journal";
+  element("missions-content").hidden = tab !== "missions";
   element("map-content").hidden = tab !== "map";
   element("hangar-content").hidden = tab !== "hangar";
-  element("campaign-content").hidden = tab !== "campaign" && tab !== "credits";
+  element("ship-content").hidden = tab !== "ship";
+  element("campaign-content").hidden = tab !== "credits";
   menu.classList.toggle("pause-menu", tab === "pause");
-  menu.setAttribute("aria-labelledby", "menu-title");
+  menu.setAttribute(
+    "aria-labelledby",
+    card ? "meishi-card-title" : "menu-title",
+  );
+  menu.setAttribute("aria-describedby", card ? "" : "menu-description");
   if (tab === "pause") paintFlightMenu(element("flight-status"), hud);
+  if (tab === "coop") paintCoop();
+  if (tab === "meishi") paintMeishiCard(element("meishi-content"), hud);
+  if (tab === "cargo") paintVault(element("cargo-content"), hud);
   if (tab === "map") {
     paintUniverseMap(
       element("map-content"),
@@ -812,66 +1098,141 @@ function selectMenuTab(tab: MenuTab): void {
     lastMapPaint = performance.now();
   }
   if (tab === "upgrades") paintUpgrades(hud.dock);
-  if (tab === "campaign")
-    paintCampaign(element("campaign-content"), hud.campaign, campaignActions);
-  if (tab === "hangar")
-    paintShipHangar(element("hangar-content"), hud, campaignActions);
+  if (tab === "missions") refreshMissions();
+  if (tab === "hangar") refreshHangar();
+  if (tab === "ship") paintFlightMenu(element("ship-statistics"), hud, true);
   if (tab === "credits")
     paintCredits(element("campaign-content"), {
       ...campaignActions,
       credits: finishCredits,
     });
-  if (tab === "journal") {
-    const target = element("quest-content");
-    target.replaceChildren();
-    const heading = document.createElement("p");
-    heading.textContent = `${hud.discoveries} discoveries / ${hud.relics} relics. Each relic adds 1 hull, up to 20.`;
-    const missionHeading = document.createElement("h3");
-    missionHeading.textContent = "MISSIONS";
-    target.append(heading, missionHeading);
-    const list = document.createElement("ul");
-    const knownSites = new Map(galaxy.universe_map().sites.map(site => [site.id, site.name]));
-    for (const quest of hud.quest_log) {
-      const item = document.createElement("li");
-      item.textContent = `${knownSites.get(quest.site_id) ?? quest.site_id} / ${quest.event === "courier" ? "DELIVERY" : "FAMILY BOUNTY"} / ${quest.completed ? "REWARD CLAIMED" : `${quest.progress}/${quest.target} - return to source`}`;
-      list.append(item);
-    }
-    if (!hud.quest_log.length) {
-      const hint = document.createElement("p");
-      hint.textContent =
-        "Seek sanctuary beacons beyond Haven. Accept a delivery or bounty mission, then return for a unique relic.";
-      target.append(hint);
-    }
-    target.append(list);
-    const bossHeading = document.createElement("h3");
-    bossHeading.textContent = "HOSTILE EVOLUTION";
-    const bossHint = document.createElement("p");
-    bossHint.textContent =
-      "24 family kills summon the first boss. Two defeated bosses summon their next generation. Unfinished queues survive retreat and ship loss.";
-    target.append(bossHeading, bossHint);
-    for (const family of hud.boss_progress ?? []) {
-      const familyHeading = document.createElement("h3");
-      familyHeading.textContent =
-        ["DART", "BASTION", "COIL"][family.family] ?? "HOSTILE";
-      const generations = document.createElement("ul");
-      for (let generation = 0; generation < 5; generation++) {
-        const item = document.createElement("li");
-        const queued = family.queued[generation] ?? 0;
-        item.textContent = `G${generation + 1} / ${family.defeats[generation] ?? 0} defeated${queued > 0 ? ` / ${queued} queued` : ""}`;
-        generations.append(item);
-      }
-      target.append(familyHeading, generations);
-    }
-  }
-  if (tab === "upgrades" && !hud.dock) {
-    const hint = document.createElement("p");
-    hint.textContent = "Return to Haven dock to spend your upgrade points.";
-    element("upgrade-content").replaceChildren(hint);
-  }
   pixelUi?.invalidate();
+}
+function refreshMissions(): void {
+  if (
+    paintMissions(
+      element("missions-content"),
+      hud,
+      galaxy.universe_map().sites,
+      campaignActions,
+      showDoraGuide,
+      () => pixelUi?.invalidate(),
+    )
+  )
+    pixelUi?.invalidate();
+}
+function refreshHangar(): void {
+  if (
+    paintHangarScene(element("hangar-content"), hud, {
+      select: campaignActions.select,
+      details: () => openMenu("ship"),
+    })
+  )
+    pixelUi?.invalidate();
 }
 function openLaunchSettings(): void {
   openMenu("settings");
+}
+function paintCoop(): void {
+  const target = element("coop-content");
+  if (!coop) {
+    target.textContent =
+      "Co-op needs a configured session service. Your local universe is available.";
+    pixelUi?.invalidate();
+    return;
+  }
+  if (
+    paintCoopPanel(
+      target,
+      coop.state(),
+      {
+        create: async () => {
+          await startCoop(() => coop!.create());
+        },
+        join: async (invitation) => {
+          await startCoop(() => coop!.join(invitation));
+        },
+        leave: () => {
+          coopActionEpoch++;
+          return coop!.leave();
+        },
+        end: () => {
+          coopActionEpoch++;
+          return coop!.end();
+        },
+        replaceCode: () => coop!.replaceCode(),
+        setJoiningLocked: (locked) => coop!.setJoiningLocked(locked),
+        approve: (peer, accept) => coop!.approve(peer, accept),
+        invite: () => coop!.invite(),
+        copy: (invitation) => navigator.clipboard.writeText(invitation),
+        changed: () => pixelUi?.invalidate(),
+      },
+      launched && hud.dock,
+    )
+  )
+    pixelUi?.invalidate();
+}
+async function startCoop(enter: () => Promise<void>): Promise<void> {
+  const controller = coop;
+  const transition = transitionEpoch;
+  const action = ++coopActionEpoch;
+  await enterAfterSave(
+    () => persist(galaxy.profile()),
+    () => store.flush(),
+    () =>
+      controller !== null &&
+      controller === coop &&
+      action === coopActionEpoch &&
+      transition === transitionEpoch &&
+      launched &&
+      !menu.hidden &&
+      menuTab === "coop" &&
+      galaxy.hud().dock &&
+      !controller.blocksSolo(),
+    enter,
+  );
+}
+function configureCoop(): void {
+  const local =
+    location.hostname === "localhost" ||
+    location.hostname === "127.0.0.1" ||
+    location.hostname.endsWith(".localhost");
+  const service = __COOP_SERVICE__ ?? (local ? "http://127.0.0.1:4176" : null);
+  if (!service) return;
+  const ports = createGalaxyCoopPorts(galaxy);
+  if (!ports.availability.host || !ports.availability.guest) return;
+  try {
+    coop = new CoopController({
+      service,
+      native: ports.native,
+      replica: ports.replica,
+      availability: ports.availability,
+      localSpec: () => {
+        const profile = galaxy.profile();
+        return {
+          local_seed: profile.seed,
+          identity: profile.identity ?? null,
+          owned_loadout: readOwnedLoadout(galaxy),
+        };
+      },
+      onChange: () => {
+        const mode = coop?.frameMode() ?? "solo";
+        if (mode !== previousCoopMode) {
+          previousCoopMode = mode;
+          input?.reset();
+          coop?.cancelInput();
+          destination = null;
+          lastTime = 0;
+        }
+        syncFlightState();
+        if (!menu.hidden && menuTab === "coop") paintCoop();
+        pixelUi?.invalidate();
+      },
+    });
+  } catch {
+    // A bad deployment endpoint cannot prevent solo play or expose its details.
+    coop = null;
+  }
 }
 async function resume(): Promise<void> {
   if (menuTab === "credits" && hud?.campaign.credits_pending) {
@@ -920,12 +1281,15 @@ async function resume(): Promise<void> {
     paused = true;
     input.enabled = false;
     input.reset();
+    coop?.cancelInput();
     galaxy.set_paused(true);
     audio.suspend();
   }
 }
 function forgeMutation(action: () => void, message: string): void {
   try {
+    if (coop?.blocksSolo())
+      throw new Error("Leave co-op before changing your local equipment.");
     action();
     hud = galaxy.hud();
     save(galaxy.profile());
@@ -944,25 +1308,55 @@ function forgeMutation(action: () => void, message: string): void {
   }
 }
 function paintUpgrades(_dock: boolean): void {
-  paintForge(element("upgrade-content"), hud, {
-    purchase: (id) =>
-      forgeMutation(() => galaxy.purchase(id), "SHIP HARDWARE UPGRADED"),
-    craftAbility: (id) =>
-      forgeMutation(
-        () => galaxy.craft_ability(id),
-        "ABILITY CRAFTED / choose EQUIP to install it",
-      ),
-    upgradeAbility: (id) =>
-      forgeMutation(() => galaxy.upgrade_ability(id), "ABILITY UPGRADED"),
-    equipAbility: (slot, id) =>
-      forgeMutation(
-        () => galaxy.equip_ability(slot, id),
-        id ? "ABILITY EQUIPPED" : "ABILITY SLOT EMPTY",
-      ),
-  });
+  paintForgeScene(
+    element("upgrade-content"),
+    hud,
+    {
+      purchase: (id) =>
+        forgeMutation(() => galaxy.purchase(id), "RAICHO HARDWARE UPGRADED"),
+      craftAbility: (id) =>
+        forgeMutation(
+          () => galaxy.craft_ability(id),
+          "ABILITY CRAFTED / choose EQUIP to install it",
+        ),
+      craftComponent: (id) =>
+        forgeMutation(
+          () => galaxy.craft_component(id),
+          "COMPONENT STORED AT HAVEN",
+        ),
+      upgradeAbility: (id) =>
+        forgeMutation(() => galaxy.upgrade_ability(id), "ABILITY UPGRADED"),
+      equipAbility: (slot, id) =>
+        forgeMutation(
+          () => galaxy.equip_ability(slot, id),
+          id ? "ABILITY EQUIPPED" : "ABILITY SLOT EMPTY",
+        ),
+    },
+    campaignActions,
+    () => pixelUi?.invalidate(),
+  );
 }
 function paintHud(): void {
   if (!hud) return;
+  if (hud.onboarding) {
+    const title = document.getElementById("training-title");
+    const description = document.getElementById("training-description");
+    const label = `APR-1337 / ${hud.onboarding.title}`;
+    if (title && title.textContent !== label) title.textContent = label;
+    if (description && description.textContent !== hud.onboarding.description)
+      description.textContent = hud.onboarding.description;
+  }
+  if (
+    launched &&
+    hud.onboarding &&
+    hud.onboarding.stage !== lastTrainingStage
+  ) {
+    if (lastTrainingStage >= 0)
+      toast(
+        `APR-1337 / ${hud.onboarding.title}: ${hud.onboarding.description}`,
+      );
+    lastTrainingStage = hud.onboarding.stage;
+  }
   syncFlightStatusLayout();
   element("sector").textContent =
     `${hud.biome.name.toUpperCase()} / ${hud.safe ? "PROTECTED SPACE" : `DANGER ${hud.danger}`}`;
@@ -1039,6 +1433,7 @@ function paintFacilities(): void {
     "pause-button",
     "map-button",
     "flight-settings",
+    "multiplayer-button",
     ...(touchUi ? ["joystick", "fire-button"] : []),
   ]
     .map((id) => element(id).getBoundingClientRect())
@@ -1148,6 +1543,7 @@ function paintDestination(): void {
 }
 function onWebglLost(): void {
   input.reset();
+  coop?.cancelInput();
   input.enabled = false;
   galaxy.set_paused(true);
   audio.suspend();
@@ -1168,6 +1564,7 @@ async function recover(_trigger: unknown): Promise<boolean> {
   recovering = true;
   document.body.classList.remove("pixel-ready");
   input.reset();
+  coop?.cancelInput();
   input.enabled = false;
   galaxy.set_paused(true);
   audio.suspend();
@@ -1186,6 +1583,7 @@ async function recover(_trigger: unknown): Promise<boolean> {
     document.body.classList.add("pixel-ready");
     resizeGraphics();
     const canRun =
+      coop?.frameMode() !== "blocked" &&
       launched &&
       deathScreen.hidden &&
       preparingEncounter === null &&
@@ -1197,7 +1595,11 @@ async function recover(_trigger: unknown): Promise<boolean> {
     galaxy.set_paused(paused);
     input.enabled = canRun && menu.hidden;
     if (canRun) {
-      audio.update(galaxy.hud().audio);
+      const soundHud = galaxy.hud();
+      audio.update({
+        ...soundHud.audio,
+        corporation: soundHud.identity?.corporation ?? null,
+      });
       void audio.resume().catch(() => {});
     } else if (
       launched &&
@@ -1235,7 +1637,7 @@ async function recover(_trigger: unknown): Promise<boolean> {
     if (recoverAfterContextRestore && !webglLifecycle?.lost) {
       recoverAfterContextRestore = false;
       void recover("WebGL restored during preparation");
-    }
+    } else if (!launched) syncFlightState();
   }
 }
 function frame(time: number): void {
@@ -1253,8 +1655,15 @@ function frame(time: number): void {
   lastTime = time;
   try {
     pixelUi?.sync();
-    const controls = input.sample();
-    const result = galaxy.step(dt, controls);
+    let controls = input.sample();
+    const modeBeforeStep = coop?.frameMode() ?? "solo";
+    coop?.beforeStep(dt / 1000, controls);
+    const modeChanged = modeBeforeStep !== (coop?.frameMode() ?? "solo");
+    if (modeChanged) controls = input.sample();
+    if (coop?.frameMode() === "blocked") galaxy.set_paused(true);
+    const stepDt = modeChanged ? 0 : dt;
+    const result = galaxy.step(stepDt, controls);
+    coop?.afterStep(stepDt / 1000);
     hud = result.hud;
     input.camera = hud.camera;
     const worldViewport = galaxy.world_viewport();
@@ -1275,7 +1684,10 @@ function frame(time: number): void {
       if (event.kind === "pickup" && event.intensity >= 2)
         toast("NEW SIGNATURE ABILITY / evolve at Haven");
     }
-    audio.update(hud.audio);
+    audio.update({
+      ...hud.audio,
+      corporation: hud.identity?.corporation ?? null,
+    });
     previousDock = hud.dock;
     if (
       launched &&
@@ -1291,11 +1703,35 @@ function frame(time: number): void {
     }
     if (time - lastHudPaint > 80) {
       paintHud();
+      if (!menu.hidden && menuTab === "coop") paintCoop();
       if (!menu.hidden && menuTab === "pause") {
         if (paintFlightMenu(element("flight-status"), hud))
           pixelUi?.invalidate();
       }
+      if (!menu.hidden && menuTab === "hangar") refreshHangar();
+      if (
+        !menu.hidden &&
+        menuTab === "ship" &&
+        paintFlightMenu(element("ship-statistics"), hud, true)
+      )
+        pixelUi?.invalidate();
+      if (
+        !menu.hidden &&
+        menuTab === "meishi" &&
+        paintMeishiCard(element("meishi-content"), hud)
+      )
+        pixelUi?.invalidate();
+      if (
+        !menu.hidden &&
+        menuTab === "cargo" &&
+        paintVault(element("cargo-content"), hud)
+      )
+        pixelUi?.invalidate();
       lastHudPaint = time;
+    }
+    if (!menu.hidden && menuTab === "missions" && time - lastMapPaint > 1000) {
+      refreshMissions();
+      lastMapPaint = time;
     }
     if (!menu.hidden && menuTab === "map" && time - lastMapPaint > 1000) {
       if (
@@ -1389,6 +1825,7 @@ async function init(): Promise<void> {
   const profile = await store.open((message) => {
     loadStatus.textContent = message;
   });
+  needsDroidCreation = profile === null;
   const forceWebgl = params.get("renderer") === "webgl2";
   const gpuAvailable = "gpu" in navigator;
   const candidates =
@@ -1451,9 +1888,13 @@ async function init(): Promise<void> {
   pixelUi = new PixelUiBridge(galaxy, () => innerHeight / galaxy.viewport()[1]);
   document.body.classList.add("pixel-ready");
   hud = galaxy.hud();
+  configureCoop();
   paintHud();
   loadStatus.textContent = "SYSTEMS ONLINE / READY TO FLY";
   launch.disabled = false;
+  launch.textContent = needsDroidCreation
+    ? "CREATE YOUR DROID"
+    : "CONTINUE EXPEDITION";
   paintSaveStatus();
   save(galaxy.profile());
   if (diagnosticMode) {
@@ -1480,6 +1921,7 @@ async function init(): Promise<void> {
       const button = document.createElement("button");
       button.textContent = scene;
       button.addEventListener("click", () => {
+        if (coop?.blocksSolo()) return;
         scenario = scene;
         minPixels = Infinity;
         maxPixels = 0;
@@ -1491,6 +1933,7 @@ async function init(): Promise<void> {
         destination = null;
         previousDock = true;
         input.reset();
+        coop?.cancelInput();
       });
       controls.append(button);
     }
@@ -1586,34 +2029,118 @@ async function init(): Promise<void> {
       );
   }
 }
+// Browser autoplay rules require a gesture; the title track uses the existing
+// context and never installs a second media player. No request without a track.
+for (const gesture of ["pointerdown", "keydown"] as const)
+  launchScreen.addEventListener(gesture, () => {
+    if (!launched && !document.hidden && TITLE_THEME.enabled) void audio.unlock();
+  });
 launch.addEventListener("click", async () => {
   const epoch = ++transitionEpoch;
   await audio.unlock();
   if (epoch !== transitionEpoch || beforeLaunchMenu || launched) return;
+  if (needsDroidCreation) {
+    droidCreation.open();
+    return;
+  }
   await resume();
+  if (hud.onboarding?.stage === 0) showDoraGuide();
 });
 element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
 element("menu-close").addEventListener("click", () => void resume());
+element("ship-hangar-back").addEventListener("click", () => openMenu("hangar"));
+element("death-close").addEventListener("click", () =>
+  element("retry").click(),
+);
 element("pause-settings").addEventListener("click", () => openMenu("settings"));
+for (const page of [
+  "meishi",
+  "cargo",
+  "hangar",
+  "upgrades",
+  "pause",
+] as const) {
+  element(`collection-${page}`).addEventListener("click", () => {
+    selectMenuTab(page);
+    element("menu-close").focus();
+  });
+}
 element("settings-backup").addEventListener("click", () => openMenu("archive"));
+// Only the hovered or keyboard-focused action explains itself. Its native text
+// shares the toolbar's stable edge; controls never move to make room for it.
+const toolbar =
+  element("game-ui").querySelector<HTMLElement>(".header-actions")!;
+const toolbarHint = element("toolbar-hint");
+function showToolbarHint(button: HTMLButtonElement | null): void {
+  if (!button || !document.body.classList.contains("engine-flight")) {
+    toolbarHint.hidden = true;
+    return;
+  }
+  const labels: Record<string, string> = {
+    "pause-button": "RAICHO MENU / ESC",
+    "map-button": "UNIVERSE MAP",
+    "flight-settings": "SETTINGS",
+    "multiplayer-button": "MULTIPLAYER",
+    "save-indicator": "AUTOSAVE / BACKUP",
+    fullscreen: "FULLSCREEN",
+  };
+  const label = labels[button.id];
+  if (!label) return;
+  const scale = innerHeight / galaxy.viewport()[1];
+  const anchor = toolbar.getBoundingClientRect();
+  const map = galaxy.flight_navigation_bounds();
+  const left = Math.max(8, anchor.left);
+  let top = anchor.bottom + 4 * scale;
+  let width = Math.min(160 * scale, innerWidth - left - 8);
+  if (map.length === 4 && map[2] > 0 && map[3] > 0) {
+    const clearWidth = map[0] * scale - left - 4 * scale;
+    if (clearWidth >= 100) width = Math.min(width, clearWidth);
+    else top = Math.max(top, (map[1] + map[3]) * scale + 4 * scale);
+  }
+  toolbarHint.style.left = `${left}px`;
+  toolbarHint.style.top = `${top}px`;
+  toolbarHint.style.width = `${Math.max(0, width)}px`;
+  toolbarHint.textContent = label;
+  toolbarHint.hidden = false;
+  pixelUi?.invalidate();
+}
+toolbar.addEventListener("pointerover", (event) =>
+  showToolbarHint((event.target as Element).closest("button")),
+);
+toolbar.addEventListener("pointerout", (event) => {
+  if (!toolbar.contains((event as PointerEvent).relatedTarget as Node | null))
+    showToolbarHint(null);
+});
+toolbar.addEventListener("pointerdown", () => showToolbarHint(null));
+document.addEventListener("focusin", (event) =>
+  showToolbarHint(
+    toolbar.contains(event.target as Node)
+      ? (event.target as Element).closest("button")
+      : null,
+  ),
+);
+window.addEventListener("resize", () => showToolbarHint(null));
 element("save-indicator").addEventListener("click", () => openMenu("archive"));
+element("multiplayer-button").addEventListener("click", () => openMenu("coop"));
 element("restart-flight").addEventListener("click", () => {
   void beginEncounter(() => galaxy.return_to_home()).catch((error) =>
     toast(String(error)),
   );
 });
 for (const [index, page] of facilityPages.entries()) {
-  element(`facility-${index}`).addEventListener("click", () => {
+  element(`facility-${index}`).addEventListener("click", (event) => {
+    const world =
+      event.detail === 0
+        ? ([...facilityPositions[index]] as [number, number])
+        : input.worldPoint(event.clientX, event.clientY);
     if (
       launched &&
       !paused &&
       menu.hidden &&
       hud.dock &&
-      galaxy.dock_facility_at(
-        facilityPositions[index][0],
-        facilityPositions[index][1],
-      ) === index
+      world &&
+      galaxy.dock_facility_at(...world) === index
     )
       openMenu(page);
   });
@@ -1641,6 +2168,7 @@ function showDeath(): void {
   paused = true;
   input.enabled = false;
   input.reset();
+  coop?.cancelInput();
   destination = null;
   galaxy.set_paused(true);
   galaxy.set_ui_mode(0);
@@ -1664,7 +2192,7 @@ function showDeath(): void {
       `${Math.round(summary.time)} SECONDS / ${Math.round(summary.distance_peak)} M FURTHEST FROM HAVEN`,
       `${summary.enemies} ENEMIES / ${summary.asteroids} ASTEROIDS / ${summary.champions} CHAMPIONS`,
       `BANKED POINTS / ${summary.points_gained.join(" / ")}`,
-      `${summary.xp_gained} SHIP XP RETAINED / ${summary.materials_gained} MATERIALS COLLECTED`,
+      `${summary.xp_gained} RAICHO XP RETAINED / ${summary.materials_gained} MATERIALS COLLECTED`,
       `CARRIED MATERIALS LOST / ${summary.materials_lost.map((n, tier) => `T${tier + 1} ${n}`).join(" / ")}`,
     ]) {
       const row = document.createElement("p");
@@ -1672,7 +2200,7 @@ function showDeath(): void {
       target.append(row);
     }
   const bank = document.createElement("p");
-  bank.textContent = `DOCK STASH ${hud.stored_materials} MATERIALS / SHIP LEVEL ${hud.ship_level}`;
+  bank.textContent = `DOCK STASH ${hud.stored_materials} MATERIALS / RAICHO LEVEL ${hud.ship_level}`;
   target.append(bank);
   save(galaxy.profile());
   pixelUi.invalidate();
@@ -1680,6 +2208,22 @@ function showDeath(): void {
 }
 function returnToTitle(): void {
   if (!galaxy) return;
+  coopActionEpoch++;
+  if (coop?.blocksSolo()) {
+    void coop
+      .leave()
+      .then(() => {
+        if (coop?.blocksSolo())
+          toast("Restore your local universe before returning to title.");
+        else returnToTitle();
+      })
+      .catch(() =>
+        toast(
+          "Local restoration needs attention. Retry in the Haven co-op menu.",
+        ),
+      );
+    return;
+  }
   transitionEpoch++;
   preparingEncounter = null;
   // Returning ends an active encounter through the same Rust retreat rules.
@@ -1699,10 +2243,11 @@ function returnToTitle(): void {
   destination = null;
   input.enabled = false;
   input.reset();
+  coop?.cancelInput();
   galaxy.set_paused(true);
   galaxy.set_ui_mode(2);
   document.body.classList.remove("engine-flight");
-  audio.suspend();
+  syncFlightState();
   pixelUi.invalidate();
   launch.focus();
 }
@@ -1718,14 +2263,16 @@ async function quitGame(): Promise<void> {
   const button = element<HTMLButtonElement>("quit-game");
   button.disabled = true;
   try {
-    await persist(galaxy.profile());
+    if (!needsDroidCreation) await persist(galaxy.profile());
     await store.flush();
     audio.suspend();
     narrative.close();
     // Browsers allow a script-opened window to close; an ordinary browser tab
     // may stay open. Keep its saved title screen usable in that case.
     window.close();
-    loadStatus.textContent = "PROGRESS SAVED / close this tab or app to quit.";
+    loadStatus.textContent = needsDroidCreation
+      ? "Close this tab or app to quit."
+      : "PROGRESS SAVED / close this tab or app to quit.";
   } catch (error) {
     loadStatus.textContent =
       "SAVE NEEDS ATTENTION / use Settings > Save & backup.";
@@ -1737,6 +2284,7 @@ async function quitGame(): Promise<void> {
 }
 element("dock-button").addEventListener("click", () => pause(true));
 function interactSite(): void {
+  if (coop?.blocksSolo()) return;
   if (paused || !menu.hidden || debugConsole.opened || hud.campaign.encounter)
     return;
   if (hud.campaign.arena) {
@@ -1746,19 +2294,20 @@ function interactSite(): void {
     showConversation(
       {
         id: champion.id,
-        speaker: champion.name,
+        speaker: champion.identity?.short_designation ?? champion.name,
         personality: champion.index,
-        description: `${champion.species} arena champion. I fly the ${champion.ship}. ${champion.ability}`,
+        description: champion.introduction,
         status: champion.patch ? "completed" : "available",
         facts: [
           champion.patch
-            ? "You earned my patch and blueprint. Craft my ship at Haven."
-            : "Win this duel to earn my arena patch and ship blueprint.",
-          "The trial boundary is marked. Retreat or ship loss ends your attempt.",
+            ? "You earned my patch and blueprint. Craft my RAICHO at Haven."
+            : "Win this duel to earn my arena patch and RAICHO blueprint.",
+          "The trial boundary is marked. Retreat or RAICHO loss ends your attempt.",
         ],
       },
       arena.can_challenge ? "CHALLENGE" : undefined,
       arena.can_challenge ? () => beginChampion(arena.index) : undefined,
+      champion.identity ?? undefined,
     );
     return;
   }
@@ -1772,7 +2321,7 @@ function interactSite(): void {
           "Welcome to Galaxy Royale. Rival champions from eight universes await. Every entrant meets every other entrant once.",
         status: hud.campaign.tournament_won ? "completed" : "available",
         facts: [
-          "Win duels for three points. Finish first to unlock the Sovereign ship and complete the campaign.",
+          "Win duels for three points. Finish first to unlock the Sovereign RAICHO and complete the campaign.",
           "NPC versus NPC results are seeded simulations. Your eight matches are real duels.",
         ],
       },
@@ -1808,6 +2357,7 @@ function showConversation(
   context: NarrativeContext,
   label?: string,
   action?: () => void | Promise<void>,
+  appearance?: PortraitIdentity,
 ): void {
   const pages = narrative.open(context);
   const draw = (): void => {
@@ -1818,6 +2368,7 @@ function showConversation(
       speaker: page.speaker,
       text: page.text,
       portrait: page.portrait,
+      portraitIdentity: appearance,
       page: index,
       pageCount: pages.length,
       actionLabel: label,
@@ -1858,7 +2409,7 @@ function commitSite(): void {
     toast(
       hud.site?.status === "completed"
         ? "RELIC ACQUIRED / +1 MAX HULL"
-        : "EVENT ACCEPTED / see Journal for progress",
+        : "MISSION ACCEPTED / see MISSIONS for progress",
     );
   } catch (error) {
     toast(String(error));
@@ -1866,6 +2417,10 @@ function commitSite(): void {
 }
 element("site-button").addEventListener("click", interactSite);
 element("apply-update").addEventListener("click", async () => {
+  if (coop?.blocksSolo()) {
+    toast("Return to your universe before applying the update.");
+    return;
+  }
   if (!waitingUpdate || !galaxy.hud().dock) return;
   try {
     await persist(galaxy.profile());
@@ -1897,7 +2452,9 @@ window.addEventListener("keydown", (event) => {
   }
   if (!menu.hidden && event.key === "Tab") {
     const controls = Array.from(
-      menu.querySelectorAll<HTMLElement>("button,input,select,a[href]"),
+      menu.querySelectorAll<HTMLElement>(
+        'button,input,select,a[href],#meishi-content[tabindex="0"]',
+      ),
     ).filter(
       (node) =>
         !node.closest("[hidden]") &&
@@ -1951,17 +2508,29 @@ window.addEventListener("keydown", (event) => {
     interactSite();
 });
 window.addEventListener("resize", resize);
-document.addEventListener("visibilitychange", () => {
-  if (!galaxy) return;
+function onVisibilityChanged(): void {
+  // The title may unlock music before the asynchronous WASM initialization.
+  if (document.hidden) audio.suspend();
+  if (!galaxy) {
+    if (!document.hidden && !launched) void audio.resume().catch(() => {});
+    return;
+  }
   if (document.hidden) {
     input?.reset();
+    coop?.cancelInput();
     galaxy.cancel_course();
     destination = null;
-    audio.suspend();
     narrative.pause();
     save(galaxy.profile());
   }
   syncFlightState();
+}
+document.addEventListener("visibilitychange", onVisibilityChanged);
+window.addEventListener("pagehide", () => {
+  coopActionEpoch++;
+  // Native restoration and channel teardown start synchronously; service
+  // liveness remains the fallback when browser shutdown aborts the request.
+  void coop?.dispose().catch(() => {});
 });
 for (const key of ["master", "music", "sfx"] as const) {
   const slider = element<HTMLInputElement>(`${key}-volume`);
@@ -2034,6 +2603,10 @@ function onFlightWheel(event: WheelEvent): void {
   setZoom(settings.zoom * Math.exp(-delta * 0.001));
 }
 element("export-save").addEventListener("click", () => {
+  if (coop?.blocksSolo()) {
+    toast("Leave co-op before exporting your local save.");
+    return;
+  }
   const url = URL.createObjectURL(
     new Blob([JSON.stringify(galaxy.profile(), null, 2)], {
       type: "application/json",
@@ -2056,8 +2629,18 @@ element<HTMLInputElement>("import-save").addEventListener(
     if (!file) return;
     let importEpoch: number | null = null;
     try {
+      if (coop?.blocksSolo())
+        throw new Error("Leave co-op before importing a save.");
+      const action = coopActionEpoch;
+      const transition = transitionEpoch;
       if (file.size > 65536) throw new Error("Save file is too large.");
       const value: unknown = JSON.parse(await file.text());
+      if (
+        coop?.blocksSolo() ||
+        action !== coopActionEpoch ||
+        transition !== transitionEpoch
+      )
+        throw new Error("Save import cancelled by a session or screen change.");
       if (!validProfile(value)) throw new Error("Unsupported or invalid save.");
       pause(false);
       importEpoch = ++transitionEpoch;

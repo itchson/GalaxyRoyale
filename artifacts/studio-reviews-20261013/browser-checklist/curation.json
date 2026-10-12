@@ -1,0 +1,17 @@
+{
+  "sourceDirectory": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/wake-browser-integration-checklist",
+  "verifiedRawFiles": 35,
+  "scope": "Root verified all frozen manifest raw entries; selected immutable review documents copied here. Full source/fixture/author raw evidence remains in the original pinned reviewer directory and referenced existing game artifacts.",
+  "copied": [
+    {
+      "name": "CHECKLIST.md",
+      "bytes": 11588,
+      "sha256": "bef0eab5c70b8737f226801e73b8a21a3dbee4b7ee56cdabefd0241ddcc47aca"
+    },
+    {
+      "name": "MANIFEST.json",
+      "bytes": 6496,
+      "sha256": "48a84392c50acf0bbb11b1d49ade3b7461ade86db9fabd9370248bac7efe6d15"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "final_health": 1,
+  "leave_health": 1,
+  "expected_assertion_failures": 1,
+  "scope": "Actual exact frozen-function VM execution with declared API replies; no native/browser/RTC."
+}

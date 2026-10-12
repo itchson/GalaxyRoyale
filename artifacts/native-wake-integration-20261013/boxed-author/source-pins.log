@@ -1,0 +1,24 @@
+{
+  "candidate": "c95c008d22c9b7351463aa1575bf02347659d999",
+  "base": "af060d8377389bb0b73de0e09d8f6de58b4f4c3f",
+  "reference_root": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "unchanged_boundary_files": [
+    "crates/game_core/src/co_op.rs",
+    "crates/game_core/src/co_op_publish.rs",
+    "crates/game_core/src/co_op_control.rs",
+    "crates/game_core/src/co_op_replica.rs",
+    "crates/game_core/src/lib.rs",
+    "crates/game_core/src/campaign.rs",
+    "crates/engine_core/src/pixels.rs",
+    "crates/engine_core/src/frame.rs",
+    "crates/game_web/src/co_op_replica_bridge.rs",
+    "crates/game_web/src/co_op_bridge.rs",
+    "crates/game_web/src/browser.rs",
+    "apps/game/src/coop/controller.ts",
+    "apps/game/src/coop/wasm-ports.ts"
+  ],
+  "different_files": [
+    "crates/game_core/src/co_op_tests.rs",
+    "apps/game/src/main.ts"
+  ]
+}

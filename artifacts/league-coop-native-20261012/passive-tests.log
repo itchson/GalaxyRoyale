@@ -1,0 +1,10 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.32s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 2 tests
+test co_op::passive_tests::actual_solo_and_admitted_pan_movement_match_for_slots_training_and_other_hull_manufacturers ... ok
+test co_op::passive_tests::eight_real_pilots_recharge_only_their_unlocked_build_after_their_own_hit_delay ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 448 filtered out; finished in 1.37s
+

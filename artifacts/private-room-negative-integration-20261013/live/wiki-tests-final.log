@@ -1,0 +1,34 @@
+✔ all eight Wiki champion identities, hulls, categories, seed grids and base hulls match the authoritative Rust table (3.2333ms)
+✔ all seventeen ability IDs, effect categories and descriptions match stable Rust registry order (0.7953ms)
+✔ six biome labels/spawn mixes and seed/belt parameters agree with actual Rust generation (0.9611ms)
+✔ boss generations, ship-level gates, save schema and pixel packing facts remain source-backed (1.7204ms)
+✔ Wiki variant cell counts match actual runtime atlas occupancy and provenance; missions keep player-facing terminology (0.9409ms)
+✔ curated reader text retains UTF-8 symbols without legacy decoding artifacts (0.4585ms)
+✔ courier guidance includes the actual Haven delivery and source-beacon claim stages (0.6338ms)
+(node:44096) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual whole-workspace render preserves a focused backward range and middle caret across refreshes (1.6574ms)
+✔ actual Wiki input edits keep Unicode UTF-16 selection and focus after shared rerender (0.5255ms)
+✔ refresh does not steal focus from another control and missing/null selection is safe (0.5451ms)
+(node:24324) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gallery serves exact committed native/browser artifacts with distinct classifications and readable provenance (18.8696ms)
+✔ gallery captions preserve observed desktop/QA scope and do not turn a native raster into GPU acceptance (0.308ms)
+✔ artifact namespace retains exact catalog allowlists and excludes arbitrary records, hidden paths and audio (4.9212ms)
+(node:41448) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual catalog categories, references and classified media all validate and resolve (309.6321ms)
+✔ server and actual UI search cover names, source facts, categories and verification boundaries (2.4791ms)
+✔ rendering escapes every prose/attribute surface and constructs only local allowlisted link shapes (0.3728ms)
+✔ catalog validates stable ids, related links, status and bounded structured content (0.2992ms)
+✔ source/media read paths reject traversal, secrets, unlisted and wrong-type content (9.0394ms)
+✔ catalog itself and listed ancestor links fail closed rather than reading redirected content (7.7658ms)
+✔ HTTP Wiki routes return actual listed bytes, filtered catalog and controlled lookup errors (135.4199ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 575.338

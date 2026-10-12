@@ -1,0 +1,28 @@
+{
+  "reviewed_commit": "c95c008d22c9b7351463aa1575bf02347659d999",
+  "parent": "af060d8377389bb0b73de0e09d8f6de58b4f4c3f",
+  "review_scope": "Independent source and pinned recorded evidence review; no native/Rust/browser rerun",
+  "frozen_ion_wake": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "evidence": [
+    {
+      "path": "candidate.diff",
+      "bytes": 12131,
+      "sha256": "dcdb9fdfc6cd4f3a2d678cfa80c3f5e584863243d07770bff923262906122e9e"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 7640,
+      "sha256": "5707c2d0291ee4498d8b650f8f2fe928ef21299632eae0e7113c5f409af450ea"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 4908,
+      "sha256": "e0a5bddf085ac95a00942f09792c430de22061a46dc627414cd7d74e1af00b28"
+    },
+    {
+      "path": "verify-readonly.py",
+      "bytes": 4270,
+      "sha256": "45fee0d6148e76e2b7f0b2d1a50d0e2b10a7afe093aa26fe4448675d570904e1"
+    }
+  ]
+}

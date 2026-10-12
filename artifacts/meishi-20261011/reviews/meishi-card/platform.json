@@ -1,0 +1,6 @@
+{
+  "node": "v24.18.0",
+  "commit": "1a6bf7c80b5f426880e79506d58ae18af22f482b",
+  "parent": "9c6431df204f4ab094c0ef9bc7606bdec1125a90",
+  "scope": "actual TS DOM-adapter tests; no browser/native extraction"
+}

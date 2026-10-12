@@ -1,0 +1,34 @@
+(node:17204) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ a 400ms title scheduler gap must not enqueue past onsets (4.3759ms)
+ℹ {"now":0.4,"fresh":12,"overdue":[{"kind":"oscillator","start":0.22222640673460342,"lateBySeconds":0.1777735932653966},{"kind":"oscillator","start":0.31083961010190514,"lateBySeconds":0.08916038989809488},{"kind":"oscillator","start":0.31083961010190514,"lateBySeconds":0.08916038989809488},{"kind":"buffer","start":0.31083961010190514,"lateBySeconds":0.08916038989809488},{"kind":"oscillator","start":0.39945281346920686,"lateBySeconds":0.0005471865307931645},{"kind":"oscillator","start":0.39945281346920686,"lateBySeconds":0.0005471865307931645},{"kind":"oscillator","start":0.39945281346920686,"lateBySeconds":0.0005471865307931645},{"kind":"buffer","start":0.39945281346920686,"lateBySeconds":0.0005471865307931645}],"scope":"recorded API"}
+✔ changing title while suspended must preserve the frozen beat on resume (1.0686ms)
+ℹ {"beforeBeat":3.5406687500000005,"afterBeat":3.5406687500000005,"targetBpm":120,"scope":"recorded API"}
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 111.925
+
+✖ failing tests:
+
+test at work\title-score-independent-review\edge-review.test.mjs:8:1
+✖ a 400ms title scheduler gap must not enqueue past onsets (4.3759ms)
+  AssertionError [ERR_ASSERTION]: missed notes should be skipped, not started immediately
+  
+  8 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-score-independent-review/edge-review.test.mjs:23:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

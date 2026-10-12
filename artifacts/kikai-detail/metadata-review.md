@@ -1,0 +1,3 @@
+# Metadata-only final atlas addendum
+
+The earlier c88352e3… review is unchanged. Independently compared actual Art Git blobs606d525 to01aa5b5. Exactly three fields change: profiles/{dora,doro,talo}/asset_metadata/manifest_sha256. Version, palettes, all cell arrays/positions and roles are byte-value identical. Final atlasSHA03b2651c77f6164c9261b880e407ba333318f67e4e3b1155248edca033e0db95 replaces testedc0c00242 for canonical-LF manifest provenance only. Engine runtimee4098875 is unchanged. No new native/browser run is claimed or required to prove ignored metadata equivalence; actual browser/device/cold initialization gates remain separate.

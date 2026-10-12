@@ -12,7 +12,7 @@ import {
   isMain,
 } from "./config.mjs";
 
-export const CAPTURE_LIMIT = 12 * 1024 * 1024;
+export const CAPTURE_LIMIT = 20 * 1024 * 1024;
 const assets = new Set(["index.html", "review.js", "metrics.js"]);
 const mime = {
   ".html": "text/html; charset=utf-8",
@@ -33,7 +33,7 @@ export function staticFile(urlPath, output) {
 
 export function capturePath(urlPath, output) {
   const match =
-    /^\/capture\/(qa-[0-9]{13}-[a-f0-9]{8})\/(prior-engine\.wav|warm-engine\.wav|representative-mix\.wav|max-bus-burst\.wav|report\.json)$/.exec(
+    /^\/capture\/(qa-[0-9]{13}-[a-f0-9]{8})\/(prior-engine\.wav|warm-engine\.wav|representative-mix\.wav|max-bus-burst\.wav|current-score\.wav|title-score\.wav|title-transition\.wav|report\.json)$/.exec(
       urlPath,
     );
   return match ? path.join(output, "captures", match[1], match[2]) : null;

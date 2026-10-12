@@ -1,0 +1,786 @@
+$ node --experimental-transform-types --test apps/studio/test/*.test.mjs scripts/test/*.test.mjs scripts/qa/audio-review/*.test.mjs
+✔ phase update records metadata and activity only; restart and backup retain previous complete document (21.1194ms)
+✔ queued project metadata edits use the project revision, accept one and atomically reject stale second (6.4095ms)
+✔ invalid phase patches reject full-project rewrites without revision, disk, activity or notification mutation (7.4225ms)
+✔ HTTP PATCH project accepts revision-checked metadata and preserves origin/content-type barriers (89.7399ms)
+✔ CLI project update requires explicit file and routes to PATCH without direct store access (0.6978ms)
+✔ review attachments retain independent evidence after restart without aliasing caller data (21.4357ms)
+✔ invalid review attachments reject atomically and do not poison a later valid append (12.9609ms)
+✔ serialized writes reject stale revisions without losing accepted state; restart and backup preserve documents (10.5707ms)
+✔ completion needs actual criteria and evidence, including existing artifacts (13.0399ms)
+✔ artifact allowlist rejects traversal, secrets, missing files and directory requests (29.8647ms)
+✔ canonical workspace aliases allow real artifacts without widening approved roots (38.9638ms)
+✔ HTTP API returns stale-edit 409 and blocks foreign origins and non-JSON mutations (184.0866ms)
+✔ dependency cycles are rejected and feedback is queued until explicitly acknowledged or resolved (28.2324ms)
+✔ run records persist as append-only observations without inferring task completion or agent presence (226.6334ms)
+✔ run observations validate state, identity, timestamp, task references and artifact evidence (175.9614ms)
+✔ HTTP run endpoint appends observations and rejects edit attempts (73.7475ms)
+✔ review, decision and build records retain their source and explicit check coverage after restart (20.1188ms)
+✔ reviews preserve omitted and empty task references and existing append-only history (17.315ms)
+✔ malformed review references reject atomically without revision, activity, backup or disk mutation (25.804ms)
+✔ review reference limit accepts forty unique existing tasks and rejects forty-one (11.1059ms)
+✔ HTTP reviews reject null task IDs from a misread creation response and accept item.id references (32.7224ms)
+✔ all eight Wiki champion identities, hulls, categories, seed grids and base hulls match the authoritative Rust table (4.4103ms)
+✔ all seventeen ability IDs, effect categories and descriptions match stable Rust registry order (1.4248ms)
+✔ six biome labels/spawn mixes and seed/belt parameters agree with actual Rust generation (1.6202ms)
+✔ boss generations, ship-level gates, save schema and pixel packing facts remain source-backed (2.7583ms)
+✔ Wiki variant cell counts match actual runtime atlas occupancy and provenance; missions keep player-facing terminology (1.3869ms)
+✔ curated reader text retains UTF-8 symbols without legacy decoding artifacts (0.7554ms)
+✔ courier guidance includes the actual Haven delivery and source-beacon claim stages (1.1356ms)
+(node:38120) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual whole-workspace render preserves a focused backward range and middle caret across refreshes (3.5191ms)
+✔ actual Wiki input edits keep Unicode UTF-16 selection and focus after shared rerender (0.8722ms)
+✔ refresh does not steal focus from another control and missing/null selection is safe (1.1227ms)
+(node:5460) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gallery serves exact committed native/browser artifacts with distinct classifications and readable provenance (47.8538ms)
+✔ gallery captions preserve observed desktop/QA scope and do not turn a native raster into GPU acceptance (0.8602ms)
+✔ artifact namespace retains exact catalog allowlists and excludes arbitrary records, hidden paths and audio (21.3352ms)
+(node:37428) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual catalog categories, references and classified media all validate and resolve (1116.8569ms)
+✔ server and actual UI search cover names, source facts, categories and verification boundaries (2.7983ms)
+✔ rendering escapes every prose/attribute surface and constructs only local allowlisted link shapes (0.4369ms)
+✔ catalog validates stable ids, related links, status and bounded structured content (0.4566ms)
+✔ source/media read paths reject traversal, secrets, unlisted and wrong-type content (11.99ms)
+✔ catalog itself and listed ancestor links fail closed rather than reading redirected content (9.9223ms)
+✔ HTTP Wiki routes return actual listed bytes, filtered catalog and controlled lookup errors (139.1485ms)
+✔ the four earlier declared algorithms are unchanged across every scheduler time (484.8272ms)
+✔ current score declares three home identities, exploration, real boss inputs and healed thrust release (2.2439ms)
+✔ new declared cues are bounded, chronological and end before the native release tail (0.3472ms)
+✔ missing native DSP rejects visibly before mutating adapter globals (4.8755ms)
+✔ pre-render injected unlock failure disposes callbacks and restores every adapter owner without samples (4.5265ms)
+✔ CLI constrains output to work/, ports and bounded autoquit without silently changing an occupied port (765.6819ms)
+✔ prepare compiles real tracked sources and exact historical Git bytes with locked TypeScript (166.2285ms)
+✔ server refuses an altered prepared module instead of reporting false source pins (6.921ms)
+✔ static and capture allowlists cannot address source, arbitrary paths or malformed run IDs (0.607ms)
+✔ actual loopback HTTP serves pinned modules and preserves captures once, rejecting unrelated Origins and oversized input (81.1399ms)
+✔ occupied-port CLI fails clearly and leaves the existing server alive (102.9484ms)
+Isolated native DSP review http://127.0.0.1:54258/; output C:\Users\mitch\Documents\ChatGPT\galaxy-royale\work\audio-review-helper-test-Q4PAgo; autoquit 1 seconds
+Closing isolated audio review server.
+Helper evidence output: C:\Users\mitch\Documents\ChatGPT\galaxy-royale\work\audio-review-helper-test-Q4PAgo
+✔ autoquit closes only its actual local server and removes its process signal handlers (1007.5566ms)
+✔ PCM metrics count actual nonfinite and >1 values without silently clamping (0.9469ms)
+✔ PCM windows include channels and preserve the requested time interval (0.2183ms)
+✔ Hann FFT distinguishes known low/high analytical tones (math-only fixture) (32.0383ms)
+✔ float32 WAV preserves exact interleaved PCM including values above unity (1.0413ms)
+(node:39100) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sanctuary exit selects authored Expanse exploration, then blends back home (7.3981ms)
+✔ six biome identities and eight champion motifs remain distinct and bounded (11.4305ms)
+✔ real aggro rises smoothly and sanctuary/recovery fades it without false distance (0.7398ms)
+✔ low hull alarm recedes on healing and engine requires actual live ports (3.1578ms)
+✔ nonfinite boundaries, no-op time and source input normalization are deterministic (1.5373ms)
+✔ three original corporate homes preserve old identities and fade through real sanctuary exit (4.2694ms)
+✔ boss arrangement requires a real hostile and aggro, with bounded smooth rise and decay (3.3096ms)
+(node:15292) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ charge is one dry voice, two distinct rising tones, and ends by 125 ms (7.4232ms)
+✔ pulse is one dry voice with falling tones and original bandpass noise (1.5619ms)
+✔ 100 mixed cues retain the existing 16-voice effects cap and release stolen nodes (4.6007ms)
+✔ separate volume buses and master mute remain authoritative for new cues (1.4377ms)
+✔ suspend, interrupted recovery, repeat gesture and disposal preserve one context (1.9565ms)
+✔ suspend during asynchronous resume prevents late scheduling and audio debt (0.906ms)
+✔ source state cannot create audio before gesture, after suspension, or disposal (3.4745ms)
+✔ continuous engine and hull alarm reuse one voice each inside the shared16 cap (9.9784ms)
+✔ adaptive score follows actual biome/champion states and stays within32 music voices (47.8047ms)
+✔ distinct ability and shield timbres use one dry bounded voice each (1.0907ms)
+✔ wake sound rate limiting never schedules delayed debt and diagnostics are observational (0.568ms)
+✔ continuous effects honor independent mute buses, interruption and one-context recovery (0.5611ms)
+✔ an older failed resume cannot suspend a newer successful audio intent (0.5553ms)
+✔ healing during an OS interruption cannot revive a stale hull alarm (0.8384ms)
+✔ death finish retains only the real existing cue and suspends after its bounded tail (1.3305ms)
+✔ retry cancels a death timeout and a stale callback cannot suspend resumed music (0.8584ms)
+✔ hidden/full suspend and disposal cut death tails without creating a context (0.4808ms)
+✔ a late resume state event preserves only the bounded death tail and obeys hard suspend (0.3934ms)
+✔ thrust uses a calm sine fifth with one shared lowpass and duck stage (0.8633ms)
+✔ throttle and speed retarget smooth continuous parameters without restarting the engine (0.8543ms)
+✔ only admitted important cues briefly duck propulsion without pumping music (0.9332ms)
+✔ low-hull priority and strongest cue holds fade away after actual healing (4.0126ms)
+✔ hidden stop, retry and death cleanup cannot carry a propulsion duck into the next life (0.9875ms)
+✔ real gain envelopes leave a quieter engine bed and finite bounded stacked mix (2.8125ms)
+ℹ {"engineEnvelope":0.015503942221969217,"historicalEngineEnvelope":0.06993,"priorWarmEnvelope":0.03008,"historicalScalarChangeDb":-13.084427740029469,"priorWarmScalarChangeDb":-5.756713813616779,"maximumCue":{"kind":"upgrade","envelope":0.544},"stackedEffects":7.793003942221965,"defaultBusScalar":4.383564717499855}
+✔ combined adaptive score, alarm, propulsion and real cues retain finite bus gains and voice limits (157.742ms)
+ℹ {"samples":960,"seconds":24,"maximumMusicVoices":14,"maximumSfxVoices":4,"musicEnvelope":0.4613339677177024,"effectsEnvelope":0.568554,"combinedEnvelope":0.450172040118094,"conservativeEchoEnvelope":0.47798327107464084,"scope":"recorded graph envelope sums; no DSP peak/RMS"}
+✔ all real buses reach one final bounded soft ceiling after compression (3.3051ms)
+✔ calm thrust pitch stays within a tiny musical bend while breathing reuses all sources (4.7008ms)
+✔ corporate home and quiet Iron exploration produce actual softer score nodes (5.4727ms)
+✔ one shared filtered power-chord voice follows aggro and adds only the actual boss counter-note (24.4072ms)
+✔ the ninth Royale emblem appears only for authoritative tournament victory (4.5465ms)
+✔ competitor identity and independent sponsor appear only after discovery without mutating rewards (1.1737ms)
+✔ campaign exposes only genuinely discovered champions and their catalog details (4.0994ms)
+✔ a completed losing season offers a new season without victory or credits claims (1.3968ms)
+✔ a losing-season retry remains gated by location and an active encounter (1.5827ms)
+✔ only an authoritative winning season exposes credits and Sovereign victory text (0.9954ms)
+✔ discovered arena copy distinguishes a found hull, an earned blueprint and an owned craft (0.9826ms)
+✔ named T1 subsets sum to the true cargo and bank totals, never double counted (2.3039ms)
+✔ banking updates inventory while unchanged snapshots retain DOM and scroll (1.4798ms)
+✔ only active courier packets appear as mission items, with actual delivery state (1.3785ms)
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (102.2179ms)
+✔ AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes (93.2846ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (37.6152ms)
+✔ reservations and active guests expire separately; heartbeat does not extend pending admission (39.2224ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (71.4267ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (63.2217ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (29.9227ms)
+✔ replacement ends only the previous session and failed replacement preserves it (30.6575ms)
+✔ authenticated replacement shares create rates across new bearer credentials (19.5117ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (71.2397ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (26.2373ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (114.0461ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (30.6807ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (73.1338ms)
+✔ service stop resolves existing polls and closes every test listener (24.7623ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.8669ms)
+✔ byte quota and membership overflow preserve terminal notices instead of orphaning peers (15.0334ms)
+✔ ready and guest leave are once-only, free capacity and prune old credentials while host stays live (23.8392ms)
+✔ chunked request stream enforces the body bound without a Content-Length header (6.2063ms)
+✔ maintenance wakes an outstanding poll on host expiry with its retained end notice (257.2898ms)
+✔ drawer retains pause/capture until the closing transform finishes (5.7086ms)
+✔ closing can reopen without pause callback churn or stale timers (21.4879ms)
+✔ persisted and OS reduced motion both settle immediately (3.1795ms)
+✔ readiness and repeat guard toggles; disposal cancels unfinished opening (1.8462ms)
+✔ commands, history/draft and text-only output remain bounded (22.8379ms)
+✔ async commands cannot overlap and closing ignores submissions (2.0198ms)
+✔ champion dialogue uses independently manufactured detailed portraits and clears identity for the next guide (3.783ms)
+✔ paged dialogue exposes navigation and voice controls without leaking modal focus (1.5907ms)
+✔ a late asynchronous action cannot duplicate a reward or overwrite a newer dialogue page (1.3674ms)
+✔ presentation tokens change on refresh and close, without changing on reads (4.7359ms)
+✔ overflowing dialogue text joins keyboard focus while actions remain available (8.0183ms)
+✔ Escape opens a live MEISHI menu, cancels controls and course, and toggles closed (5.6385ms)
+✔ opening a dedicated page paints it once without building hidden collections (1.8039ms)
+✔ a world facility hit opens exactly its dedicated page without changing progression (12.4988ms)
+✔ misses and home/launch/pause gates leave flight untouched (7.2319ms)
+✔ facility overlay handlers validate the authoritative hit before opening (6.3615ms)
+✔ closing a dedicated flight page resumes; closing title settings returns to title (7.1742ms)
+✔ pause settings and both backup actions select only their dedicated content (1.6464ms)
+✔ a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it (1.1984ms)
+✔ Quit waits for a committed save and flush, then provides a normal-tab fallback (2.4899ms)
+✔ Quit write failure keeps the title available and does not close the browser (6.4342ms)
+✔ a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent (3.872ms)
+✔ dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate (9.9676ms)
+✔ restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming (2.0045ms)
+✔ restart save failure leaves the menu/input safe and reports the actual failure (1.3142ms)
+✔ save indicator moves from pending to committed only after the adapter commits (4.6457ms)
+✔ overlapping saves do not show saved while any write is outstanding (1.0858ms)
+✔ write rejection exposes attention state and a successful retry clears it (1.3988ms)
+✔ memory-only storage never reports a successful persistent save (0.8486ms)
+✔ a SaveConflict opens the live menu once without recursively scheduling rejected saves (1.0261ms)
+✔ dedicated map and settings icons replace the live page and map toggles back to flight (1.1516ms)
+✔ M uses the discovered map without a simulation pause or a repeat toggle (1.5649ms)
+✔ a delayed map course cannot consume a newer Settings intent (1.6123ms)
+✔ map navigation sets a real course after resume even when optional audio is unavailable (1.134ms)
+✔ same Haven chooses above-footer labels at GPU2.4scale and below at GL2scale without moving hits (11.2775ms)
+✔ blocked text has no unsafe substitute and a blocked real hit is hidden (1.3666ms)
+✔ invalid world extents and live modal gates never publish interactive facility boxes (1.3718ms)
+✔ actual exported minimap geometry reserves facility art and labels at UI scale (3.5194ms)
+✔ issued license reuses the selected native appearance without resetting live-menu focus or scroll (9.8935ms)
+✔ live status distinguishes earned shield recharge from a locked starter without mutating the loadout (4.2395ms)
+✔ status affinity follows Rust hull metadata rather than the pilot, sponsor or visible slot guesses (2.1807ms)
+✔ status clears nullable legacy affinity and labels Sovereign's licensed fallback explicitly (2.4671ms)
+✔ live status displays selected-ship XP, effective stats, slots and actual cargo tiers (2.1478ms)
+✔ compact default shows the short license and essentials while retaining full detail behind an accessible button (2.6942ms)
+✔ Details expansion and button focus persist through real live HUD paints, ship changes and nullable affinity (3.0916ms)
+✔ empty cargo has no risk warning and its zero-tier detail remains explicit without repetitive rows (1.5454ms)
+✔ named T1 inventory is shown inside existing totals and clears without recreating the menu (1.7077ms)
+✔ identical or sub-display-resolution live readings perform zero DOM writes (1.6616ms)
+✔ changed values update stable nodes while retaining scroll and action focus (1.531ms)
+✔ ship switches use the new ship XP and exact shared icon mapping, including max-level caption (1.4568ms)
+✔ HUD names remain plain text and unavailable numbers are not fabricated (5.1257ms)
+✖ dedicated status actions and title Quit use supported native icons with accessible labels (3.2938ms)
+✔ clear native glyphs cannot create a context hit that covers the top-right map (2.7211ms)
+✔ actual native strip and text bounds scale together without rounding fractional quad geometry (1.4493ms)
+✔ clear glyph row cannot create a touch hit overlapping the real movement/fire pads (0.7541ms)
+✔ 44px contextual hit remains centered in a touch gap and clamps only at real safe-area boundaries (1.2715ms)
+✔ native no-fit and nonfinite text geometry removes invisible contextual hit areas (1.8688ms)
+✔ compiled bridge emits exact single-line footer glyphs and a separate real44px contact hit once (6.4809ms)
+✔ five-cell micro footer preserves warnings and contact input at fractional display scales (6.4936ms)
+✔ compiled bridge forwards focused facility label placement without changing hit geometry (3.252ms)
+✔ visible toast wins the native slot without leaving a concealed contact hit (2.7013ms)
+✔ unavailable or unsafe interactive context creates no invisible button geometry (2.1185ms)
+✔ menu recovery toast retains multiline DOM bounds instead of a flight-only font slot (0.8048ms)
+✔ footer style and interaction visibility changes invalidate actual bridge geometry (1.011ms)
+✔ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (12.798ms)
+✔ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.5128ms)
+✔ real Forge category survives successful repaint while a fresh open resets to overview (3.5888ms)
+✔ mutation success is not a committed-save claim while deferred persistence fails (2.0356ms)
+✔ Hangar page and construction/selection bindings pass full per-hull XP metadata (2.5949ms)
+✔ rejected ship construction or switching cannot save or report success (3.5991ms)
+✔ an unavailable audio context cannot reject a successful mutation/save flow (2.5237ms)
+✔ OS lease rejects a concurrent runtime and is reusable after idempotent close (30.1126ms)
+✔ OS releases the lease when its actual child process is killed (347.8351ms)
+✔ failed service closes its actual sibling before supervision completes (220.8523ms)
+✔ explicit stop waits for every owned child and reports a clean stop (17.7851ms)
+✔ actual Vite never-listened close is idempotent and releases its lease (50.4524ms)
+✔ actual Vite restarts twice without releasing its cross-process reservation (151.5249ms)
+✔ rebundled Vite plugin owners keep the lease until their final explicit close (26.5806ms)
+✔ actual Vite preview close releases its lease (13.7715ms)
+✔ failed Vite preview listen releases the lease and preserves the occupied port owner (10.9273ms)
+✔ real loss notice outlives transient toasts and clears only after restoration (8.3326ms)
+✔ failed reconstruction retains its actual reason across other notifications (1.3858ms)
+✔ pending preparation leaves Game readable and defers GPU resize to latest dimensions (6.1112ms)
+✔ resuming flight uses the latest authoritative audio state before scheduling (1.0291ms)
+✔ overlapping recovery requests prepare and install exactly once (1.0355ms)
+✔ settlement honors death, title, encounter, console, visibility and orientation interruptions (5.6972ms)
+✔ graphics recovery restores a live menu without restoring flight controls (0.8111ms)
+✔ reconstruction rejection reports its cause, preserves Game and stops the RAF retry loop (0.8991ms)
+✔ a modal closed while preparation is pending restores the previously live world (0.9563ms)
+✔ failed reconstruction preserves an existing death report, title or other modal (3.1867ms)
+✔ an invalid install is a controlled failure without changing the live profile (0.7426ms)
+✔ Resume's awaited audio cannot re-enable input when recovery starts meanwhile (1.0131ms)
+✔ a real context loss gates drawing, resize and preparation until restored (3.1516ms)
+✔ a context lost during preparation disposes the uninstalled candidate (0.9076ms)
+✔ restoration during preparation discards stale resources and queues one fresh replacement (1.0386ms)
+✔ closing the last modal after failed reconstruction exposes the pause menu (2.9653ms)
+(node:36480) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ simultaneous joystick and fire use independent pointer channels (24.2707ms)
+✔ blur resets every interrupted input, including mouse buttons (0.587ms)
+✔ desktop destination maps from unshaken camera and is submitted once (0.5049ms)
+✔ stationary held left cursor continuously projects thrust while a released click retains its course (0.3577ms)
+✔ both mouse buttons keep forward thrust and cursor aim independent of button release order (0.1883ms)
+✔ interrupted capture cancels the Rust course but ordinary click release preserves it (0.2585ms)
+✔ disabled or cancelled control cannot continue firing (0.1827ms)
+✔ right mouse fires and Space is not a weapon shortcut (0.1944ms)
+✔ campaign navigation submits a real course once and respects interrupted controls (0.1933ms)
+✔ Haven can intercept even a short weapon press from mouse or touch without a lingering shot (0.2854ms)
+✔ right mouse aims at its cursor world point without submitting a navigation course (0.1851ms)
+✔ held stationary mouse aim follows the current unshaken camera and eased world viewport (0.1548ms)
+✔ mouse aim stays held while the one-shot left destination is consumed and then released independently (0.1602ms)
+✔ keyboard thrust and mobile fire retain their own directions while mouse aim is a separate channel (0.1616ms)
+✔ touch canvas releases cannot clear an independently held right-mouse aim (0.1033ms)
+✔ mouse release, cancellation, capture loss, reset and disable cannot resurrect stale aim (0.3836ms)
+✔ malformed or zero-size projections cannot send a nonfinite cursor target or destination (0.4276ms)
+✔ pressing right during a captured left drag triggers Haven interception exactly once (0.2875ms)
+✔ initial left facility press consumes the world point before movement capture and blocks its drag (0.2505ms)
+✔ declined facility press navigates normally and held left dragging never invokes interaction (0.1359ms)
+✔ canvas touch facility taps consume while empty-space touches preserve joystick controls (0.1401ms)
+✔ right aim and mobile fire do not invoke facilities and retain optional fire-start compatibility (0.1271ms)
+✔ facility callback disabling input cannot restore a course or consumed held gesture (0.1664ms)
+✔ invalid or disabled projection never invokes a facility callback (0.1072ms)
+✔ release outside an uncaptured facility press admits the next initial click (0.3418ms)
+✔ creator exposes DORA/DORO/TALO and updates the actual license preview across 27 combinations (9.8476ms)
+✔ confirmation issues the previewed identity once and blocks edits/cancellation during the save (3.8538ms)
+✔ failed persistence locks the issued portrait and retries the same identity despite attempted choice changes (5.166ms)
+(node:41244) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ delayed flight SaveConflict closes the guide before showing the live menu (67.9357ms)
+✔ delayed flight SaveConflict closes the guide before showing the live menu with its action pending (30.8525ms)
+✔ training contact presents supplied HUD text and corporation fields without issuing progress (40.4909ms)
+✔ a saved guide acknowledgement cannot close a newer contact (13.2727ms)
+✔ a saved guide acknowledgement respects Back while persistence is pending (13.5142ms)
+✔ an unchanged final guide page closes only after its acknowledgement persists (12.3295ms)
+✔ failed guide persistence keeps the page actionable without acknowledging twice (9.5949ms)
+✔ creator restores Launch if hidden prevents flight after persistence (3.4876ms)
+✔ creator restores Launch if portrait prevents flight after persistence (2.5322ms)
+✔ creator restores Launch if graphics-failed prevents flight after persistence (2.0625ms)
+✔ creator restores Launch if recovering prevents flight after persistence (1.8448ms)
+✔ creator restores Launch if context-lost prevents flight after persistence (2.3207ms)
+✔ healthy creator completion launches and opens the guide once (2.8165ms)
+✔ retrying failed creator persistence preserves the issued identity and one grant (2.9763ms)
+(node:8764) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema4 upgrades preserve actual progress without a license or starter grant (4.0789ms)
+✔ three valid licensed starters retain one real equipped item through normalization (2.329ms)
+✔ identity and onboarding validation rejects malformed keys and impossible stages (3.1619ms)
+✔ licensed save reload and backup recovery preserve hash and exactly one starter (18.8287ms)
+✔ schema6 barrier waits for cached schema5 connection and rejects its subsequent writer (2.8267ms)
+✔ schema5 tutorial migration preserves the license and earned assets without invented training counts (2.6308ms)
+✔ named training materials are bounded Tier1 subsets and impossible mission checkpoints are rejected (1.1695ms)
+✔ named material and mission snapshots recover together without duplicating a starter upgrade (5.6314ms)
+✔ first-upgrade recipe shows the actual named banked subset and calls the ordinary native upgrade action (5.1256ms)
+✔ Forge separates three automatic slots and six ship hardware actions (1.463ms)
+✔ category editor has contextual Back and explicit craft versus equip (1.7503ms)
+✔ availability is authoritative even when visible balances look sufficient or insufficient (1.5732ms)
+✔ owned rank cap and replacement retain inventory and send exact category (1.464ms)
+✔ actual HUD repaint preserves category, while ship change/reset returns overview (3.7824ms)
+✔ busy mutation and outside-dock clearing cannot dispatch; cargo stays in its separate page (1.3884ms)
+✔ Hangar shows each hull's XP, construction recipe and exact selection callback (1.4423ms)
+✔ all game-provided names and errors are plain text, including malicious markup (1.2504ms)
+✔ victory-only hull has no fake construction recipe and retains real LV1 reward XP (1.0183ms)
+✔ legacy stored hardware rank and active ship cap are shown separately without inventing power (0.8572ms)
+✔ Forge prioritizes slots and collection access without repeating cargo inventory (1.0998ms)
+✔ Forge excludes an undiscovered ability rather than showing its locked name (0.9504ms)
+✔ ability filters run after discovery and distinguish ownership from blueprint and compatibility (1.9618ms)
+✔ ability filters preserve focus and scroll across real HUD replacements without stealing outside focus (1.6726ms)
+✔ successful crafting exposes Equip and retains action focus without automatically equipping (1.2881ms)
+✔ hull filters keep found, owned and earned blueprint states distinct and preserve real recipe gates (1.5577ms)
+✔ hull filter state persists through checkpoint repaint and does not retain a second inventory (1.2948ms)
+✔ collection costs and level requirements remain supplied by the HUD, including named recipes (2.2686ms)
+✔ canonical lore terms have distinct ASCII labels and functional English introductions (3.9717ms)
+✔ source readings preserve long vowels while canonical labels stay user ASCII (0.471ms)
+✔ starter display models retain the exact manufacturer, hull and ability mapping (0.3401ms)
+✔ historical aliases are exact prefixed labels and never rename champion Bulwark (0.2457ms)
+✔ each lexical claim resolves to an identified checked government or publisher dictionary source (0.2732ms)
+✔ display wording preserves license/progression identifiers and sponsor independence (0.1869ms)
+✔ documentation agrees with data and distinguishes authoring tests from runtime acceptance (0.1579ms)
+✔ actual map art emits semantic Home and site buttons once with fractional chart clipping (4.8781ms)
+✔ selected map marker remains independent of transient hover and real heading value (1.3391ms)
+✔ map style-only pan and pixel-value heading changes invalidate without text mutation (1.2799ms)
+✔ new native header semantic kinds appear through the actual flight selector (0.7321ms)
+✔ a wholly off-chart site is omitted and a partial hitbox keeps the exact chart clip (1.0505ms)
+✔ map details and course controls are clipped to content before the saved-status footer (1.3341ms)
+✔ scrolled map artwork intersects both chart and content ancestors on both axes (1.2561ms)
+✔ card uses authoritative native profile and exactly eight anonymous empty patch slots (4.502ms)
+✔ unchanged refresh preserves nodes, scroll, focus and writes nothing (1.8811ms)
+✔ patches are indexed rather than list ordered and only earned identities reach DOM (1.5752ms)
+✔ an unearned champion name is never read even when source includes private metadata (1.5129ms)
+✔ losing an earned flag clears visible art and its former name in the same stable slot (1.6661ms)
+✔ all eight earned flags use existing campaign-patch routes without a ninth slot (1.5079ms)
+✔ corporate balances follow offense/defense/passive ledger order regardless of pilot manufacturer (2.1656ms)
+✔ selected RAICHO and effective equipped ranks refresh without inherited-rank or XP fabrication (1.7087ms)
+✔ legacy and malformed identity do not relabel another portrait; invalid selected hull paints no art (1.8831ms)
+✔ nonfinite HUD numbers are displayed as unavailable, not positive progression (1.7109ms)
+✔ view source stays read-only and responsive CSS retains native logical patch/ship dimensions (0.5588ms)
+(node:17496) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ authored pages are bounded, grounded copies and require no service (2.7165ms)
+✔ invalid facts, progress, characters and personalities are rejected (1.0956ms)
+✔ valid optional flavor only updates greeting and preserves canonical state (3.9242ms)
+✔ a replaced greeting cancels replay of its old displayed text (1.1561ms)
+✔ close/reopen aborts stale generation even when provider ignores cancellation (0.8803ms)
+✔ generation timeout and malformed response retain immediate authored content (45.1733ms)
+✔ voice is opt-in, explicit and supports per-page replay/pause/resume/volume (0.5998ms)
+✔ stale synthesis never plays; timeout and invalid audio use optional platform fallback (39.5271ms)
+✔ validated audio is copied, bounded and has a matching supported header (0.4354ms)
+✔ invalid synthesis falls back without changing the displayed text request (0.8752ms)
+✔ browser adapter cancels platform speech and releases local audio URLs (1.1216ms)
+✔ live license portraits deliver all 27 independent appearance choices to native rendering (25.4892ms)
+✔ missing, fractional or malformed profile tokens never invent a fallback identity (7.1411ms)
+✔ short-window license body clips the full portrait geometry above the fixed footer (2.6837ms)
+✔ zoom slider pixel thumb follows the semantic range at both limits and default zoom (2.9276ms)
+✔ fractional CSS campaign icons retain authored integer fit and measured centers (11.0628ms)
+✔ champion emblem earned state comes from saved progress rather than focus (1.5133ms)
+✔ volume and default HTML range bounds produce finite clamped pixel positions (6.1657ms)
+✔ native controls receive physical active state and cancellation without changing geometry (1.1385ms)
+✔ semantic actions carry persistent selection independently of focus and category colors (1.1582ms)
+✔ MEISHI collection selection remains visible after focus leaves the navigation (0.8791ms)
+✔ owned filters retain selected native style while category filters keep their semantic color (0.8923ms)
+✔ scroll clipping intersects panel on both axes and rejects wholly obscured actions (1.0384ms)
+✔ console command preserves spaces and sends the actual codepoint caret, including selection-only edits (2.7874ms)
+✔ pause actions inherit their own scroll viewport rather than bleeding into the footer (0.8351ms)
+✔ settings transfer independently measured input and label rectangles through UI scaling (0.7891ms)
+✔ physical menu font caps preserve sub-unit native glyph scale on large viewports (1.9692ms)
+✔ facility pixel labels require hover or deliberate focus while controls keep their hit geometry (2.7343ms)
+✔ dialogue self-scroll moves full text through a fixed clip without touching actions (3.3975ms)
+✔ dialogue scrolling clamps invalid/overshoot metrics and leaves other paragraphs untouched (4.1422ms)
+✔ owned game listener detection excludes other projects, Studio and QA tools (1.3887ms)
+✔ build fingerprint catches cell source and packaged output edits; excluded generated inputs do not affect source (78.6308ms)
+✔ a complete pair addresses all four files and removes only stale generated outputs (84.1103ms)
+✔ each JS, binary and declaration byte independently participates in the content address (17.7553ms)
+✔ missing, corrupt, incomplete and traversal manifests fail closed with a build instruction (48.1555ms)
+✔ incomplete staging and unknown public files cannot destroy a prior complete pair (55.0089ms)
+﹣ the read-only loader rejects a linked manifest without changing external bytes (23.6654ms) # Windows file-symlink privilege is unavailable; directory-junction coverage remains active
+✔ the read-only loader rejects a manifest directory junction before parsing (27.4877ms)
+✔ linked managed targets are rejected before cleanup or publication (47.6663ms)
+✔ new worker navigation and assets read only their own complete release cache (1.5234ms)
+✔ legacy stable-path worker cannot return old bindings for a new content-addressed entry or binary (29.4096ms)
+PWA: 10 game assets cached under galaxy-b4de46efc420f269
+✔ actual PWA generation lists exactly the current pairs and derives cache from all payload bytes (49.8474ms)
+(node:40556) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ already waiting update is offered immediately and never twice (1.476ms)
+✔ installation begun before registration resolves is still watched (0.2328ms)
+✔ installed state before waiting assignment still offers the actual worker (0.1673ms)
+✔ first installation and failed workers do not offer an update (0.2496ms)
+✔ later updates are observed and disposal detaches pending listeners (0.1968ms)
+✔ PWA generation is deterministic, excludes its worker, and changes version when asset content or path changes (458.7673ms)
+✔ installed game assets and entry navigation work offline; unknown, API, studio, foreign and non-GET requests pass through (63.8789ms)
+✔ navigation and listed assets use their coherent installed cache with network only for missing entries (58.5889ms)
+✔ updates wait until an explicit dock activation request, then remove only obsolete game caches (70.0139ms)
+(node:9808) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema-five migration waits for a real old database connection and prevents old-version writers (11.769ms)
+✔ an actual version-change event closes obsolete connections and rejects queued and imported writes (3.825ms)
+✔ legacy migration banks scalar materials once and isolates old hardware and XP per hull (1.4237ms)
+✔ legacy saturation and unknown new-looking fields cannot poison the supported migration (0.4963ms)
+✔ schema four accepts learned uncrafted blueprints and rejects impossible equipment and mirrors (2.3518ms)
+✔ save normalization preserves live tiered cargo and clones all mutable inventory state (1.3219ms)
+✔ crafting and slot snapshots retain previous inventory and block stale-session material duplication (5.4297ms)
+✔ corrupt slot recovery retains banked assets, per-ship XP, and recorded death material loss (3.455ms)
+(node:13140) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ profile boundary rejects malformed arrays, impossible signature ranks and unsupported versions (3.3127ms)
+✔ saving full snapshots never adds currency twice and ignores equal or older revisions (13.2314ms)
+✔ reload recovers a valid previous snapshot when current is corrupted (5.1768ms)
+✔ two corrupted snapshots produce a visible new-profile recovery state (1.4303ms)
+✔ import is ordered after pending saves, captures its input and prevents old-session saves overwriting it (3.9239ms)
+✔ invalid imports preserve current and previous; unavailable storage cannot report a persisted import (2.4791ms)
+✔ another open session cannot overwrite newer progression or duplicate currency (4.4639ms)
+✔ failed database writes leave the accepted snapshot intact and report the failure (1.4822ms)
+✔ v1 current and previous snapshots migrate to v5 without changing progression or awarding currency (5.0122ms)
+✔ legacy recovery and legacy import both retain revision, ranks and currency in v5 snapshots (4.3287ms)
+✔ discoveries, quests and relics persist exactly across reload without replaying completion rewards (1.9676ms)
+✔ v2 rejects malformed, oversized and duplicate site collections and quest bounds (1.335ms)
+✔ settings migrate old values and round-trip motion and cosmetic density with safe validation (0.6058ms)
+✔ v2 expedition progression migrates to a blank campaign with no new reward or XP (2.1686ms)
+✔ campaign boundary rejects fabricated ownership, malformed league, cargo and run summaries (0.6119ms)
+✔ ship, campaign and run snapshots survive reload without replaying rewards or material costs (2.8865ms)
+✔ old boss aggregates migrate into generation one for every supported save format without rewards (1.2948ms)
+✔ generation boundary rejects malformed or impossible promoted counters and accepts saturated aggregates (0.6457ms)
+✔ same-schema legacy current and backup persist canonical generation matrices atomically with unchanged revisions (3.2811ms)
+✔ generation counters, surplus base kills and pending reservations survive reload without duplicate advancement (2.8434ms)
+✔ another session cannot overwrite a newer boss defeat with stale counters even at a newer proposed revision (2.2773ms)
+✔ impossible generation current recovers its prior legacy snapshot and invalid imports cannot replace it (2.674ms)
+✔ map displays only supplied charted sites and real Haven/belt geometry (3.7583ms)
+✔ selection reveals authoritative quest/tier data and navigates to current coordinates without mutating them (1.6925ms)
+✔ unchanged refresh preserves nodes, selection, focus and scroll (0.9113ms)
+✔ real map listeners pan and zoom geometry without changing any world destination (1.3106ms)
+✔ dense discovered maps bound real marker nodes and disclose omitted visible markers (1.8529ms)
+✔ unavailable site belts stay absent and invalid coordinates are not materialized (0.9094ms)
+(node:10568) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ binding never acquires a context and cancels loss before reporting it (5.1641ms)
+✔ only the restored event clears lost state and cancels stale readiness (13.6038ms)
+✔ dispose removes both handlers, cancels timers and is idempotent (0.6167ms)
+✔ replaced canvases have independent lifecycle state (0.634ms)
+✔ probe reports missing context or extension without requesting loss (0.2716ms)
+✔ extension requests neither synthesize events nor prematurely restore lifecycle (1.197ms)
+✔ same loss callback cannot request restoration before dispatch completes (13.4398ms)
+✔ probe does not claim to restore a natural loss it did not request (16.2641ms)
+✔ disposed probes cannot call extensions (0.2873ms)
+✔ extension exceptions propagate and do not consume a restore request (15.1228ms)
+✔ a later requested loss starts a fresh restore cycle (30.6986ms)
+ℹ tests 411
+ℹ suites 0
+ℹ pass 409
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 2264.6715
+
+✖ failing tests:
+
+test at scripts\test\flight-menu.test.mjs:556:1
+✖ dedicated status actions and title Quit use supported native icons with accessible labels (3.2938ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /id="flight-status"[^>]+aria-label="Live RAICHO status"/. Input:
+  
+  '<!doctype html>\n' +
+    '<html lang="en">\n' +
+    '  <head>\n' +
+    '    <meta charset="utf-8" />\n' +
+    '    <meta\n' +
+    '      name="viewport"\n' +
+    '      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"\n' +
+    '    />\n' +
+    '    <meta name="theme-color" content="#090d20" />\n' +
+    '    <meta\n' +
+    '      name="description"\n' +
+    '      content="Explore a living pixel galaxy. Break asteroids, survive the swarm, evolve your RAICHO, and return home."\n' +
+    '    />\n' +
+    '    <meta name="apple-mobile-web-app-capable" content="yes" />\n' +
+    '    <link rel="manifest" href="/manifest.webmanifest" />\n' +
+    '    <link rel="icon" href="/icon.svg" type="image/svg+xml" />\n' +
+    '    <link rel="apple-touch-icon" href="/icon-192.png" />\n' +
+    '    <title>Galaxy Royale</title>\n' +
+    '  </head>\n' +
+    '  <body>\n' +
+    '    <canvas id="universe" aria-label="Galaxy Royale game universe"></canvas>\n' +
+    '    <div id="game-ui">\n' +
+    '      <header class="flight-header">\n' +
+    '        <div class="header-actions">\n' +
+    '          <button\n' +
+    '            id="save-indicator"\n' +
+    '            class="icon-button save-indicator"\n' +
+    '            aria-label="Save & backup"\n' +
+    '            title="Progress autosaves on this device. Open Save & backup."\n' +
+    '          >\n' +
+    '            <span aria-hidden="true">S</span>\n' +
+    '          </button>\n' +
+    '          <nav class="flight-toolbar" aria-label="Flight pages">\n' +
+    '            <button\n' +
+    '              id="pause-button"\n' +
+    '              class="icon-button"\n' +
+    '              data-pixel-icon="status-icon"\n' +
+    '              aria-label="MEISHI CARD"\n' +
+    '              title="MEISHI CARD / Escape"\n' +
+    '            >\n' +
+    '              ≡\n' +
+    '            </button>\n' +
+    '            <button\n' +
+    '              id="map-button"\n' +
+    '              class="icon-button"\n' +
+    '              data-pixel-icon="map-icon"\n' +
+    '              aria-label="Universe map"\n' +
+    '              title="Universe map"\n' +
+    '            >\n' +
+    '              MAP\n' +
+    '            </button>\n' +
+    '            <button\n' +
+    '              id="flight-settings"\n' +
+    '              class="icon-button"\n' +
+    '              data-pixel-icon="settings-icon"\n' +
+    '              aria-label="Settings"\n' +
+    '              title="Settings"\n' +
+    '            >\n' +
+    '              SET\n' +
+    '            </button>\n' +
+    '          </nav>\n' +
+    '          <button\n' +
+    '            id="fullscreen"\n' +
+    '            class="icon-button"\n' +
+    '            data-pixel-icon="fullscreen-icon"\n' +
+    '            aria-label="Fullscreen"\n' +
+    '          >\n' +
+    '            ⛶\n' +
+    '          </button>\n' +
+    '        </div>\n' +
+    '      </header>\n' +
+    '      <p id="toolbar-hint" hidden aria-hidden="true"></p>\n' +
+    '      <nav id="quick-menu" hidden aria-label="Flight menu">\n' +
+    '        <button id="quick-settings">SETTINGS</button>\n' +
+    '        <button id="quick-title">TITLE SCREEN</button>\n' +
+    '      </nav>\n' +
+    '      <div id="boss-hud" hidden>\n' +
+    '        <small id="boss-phase">HOSTILE SIGNATURE DETECTED</small\n' +
+    '        ><b id="boss-name"></b>\n' +
+    '        <div class="boss-track"><i id="boss-health"></i></div>\n' +
+    '      </div>\n' +
+    '      <section class="flight-telemetry" aria-label="Flight telemetry">\n' +
+    '        <small id="sector">HAVEN / PROTECTED SPACE</small>\n' +
+    '        <div class="cargo" aria-label="Collected upgrade points">\n' +
+    '          <span class="offense">Offense <b id="currency-0">0</b></span>\n' +
+    '          <span class="defense">Defense <b id="currency-1">0</b></span>\n' +
+    '          <span class="passive">Passive <b id="currency-2">0</b></span>\n' +
+    '        </div>\n' +
+    '        <div class="nav-module">\n' +
+    '          <canvas\n' +
+    '            id="radar"\n' +
+    '            width="112"\n' +
+    '            height="112"\n' +
+    '            aria-label="Dock bearing radar"\n' +
+    '            aria-hidden="true"\n' +
+    '          ></canvas>\n' +
+    '          <div>\n' +
+    '            <small id="distance">0 m FROM HAVEN</small\n' +
+    '            ><b id="danger">SANCTUARY</b>\n' +
+    '          </div>\n' +
+    '        </div>\n' +
+    '        <div class="ship-module">\n' +
+    '          <div class="hull-label">\n' +
+    '            <span>HULL INTEGRITY</span><b id="hull-number">100 / 100</b>\n' +
+    '          </div>\n' +
+    '          <div class="hull-track"><i id="hull-fill"></i></div>\n' +
+    '          <div class="shield-track"><i id="shield-fill"></i></div>\n' +
+    '        </div>\n' +
+    '      </section>\n' +
+    '      <div id="flight-status-strip" aria-label="Flight status">\n' +
+    '        <button\n' +
+    '          id="dock-button"\n' +
+    '          class="dock-prompt"\n' +
+    '          data-pixel-kind="status-text"\n' +
+    '          aria-label="Open RAICHO upgrades"\n' +
+    '          hidden\n' +
+    '        >\n' +
+    '          FORGE / RAICHO UPGRADES [E]\n' +
+    '        </button>\n' +
+    '        <button\n' +
+    '          id="site-button"\n' +
+    '          class="dock-prompt"\n' +
+    '          data-pixel-kind="status-text"\n' +
+    '          hidden\n' +
+    '        >\n' +
+    '          DISCOVERY / INTERACT [E]\n' +
+    '        </button>\n' +
+    '        <div id="toast" data-pixel-kind="warning-text" role="status"></div>\n' +
+    '      </div>\n' +
+    '      <button\n' +
+    '        id="facility-0"\n' +
+    '        class="dock-facility"\n' +
+    '        aria-label="RAICHO upgrades"\n' +
+    '        hidden\n' +
+    '      >\n' +
+    '        <span aria-hidden="true">FORGE</span>\n' +
+    '      </button>\n' +
+    '      <button\n' +
+    '        id="facility-1"\n' +
+    '        class="dock-facility"\n' +
+    '        aria-label="RAICHO hangar"\n' +
+    '        hidden\n' +
+    '      >\n' +
+    '        <span aria-hidden="true">HANGAR</span>\n' +
+    '      </button>\n' +
+    '      <button\n' +
+    '        id="facility-2"\n' +
+    '        class="dock-facility"\n' +
+    '        aria-label="Expedition journal"\n' +
+    '        hidden\n' +
+    '      >\n' +
+    '        <span aria-hidden="true">JOURNAL</span>\n' +
+    '      </button>\n' +
+    '      <button\n' +
+    '        id="facility-3"\n' +
+    '        class="dock-facility"\n' +
+    '        aria-label="Arena campaign"\n' +
+    '        hidden\n' +
+    '      >\n' +
+    '        <span aria-hidden="true">ARENAS</span>\n' +
+    '      </button>\n' +
+    '      <div id="destination-marker" hidden><i></i></div>\n' +
+    '      <div id="joystick" aria-label="Movement joystick">\n' +
+    '        <div class="joystick-ring"></div>\n' +
+    '        <div id="joystick-stick"></div>\n' +
+    '      </div>\n' +
+    '      <button id="fire-button" aria-label="Hold to fire">\n' +
+    '        <span>⌖</span><small>FIRE</small>\n' +
+    '      </button>\n' +
+    '      <div id="performance" hidden></div>\n' +
+    '    </div>\n' +
+    '    <section id="launch-screen" class="screen-overlay">\n' +
+    '      <div class="launch-card">\n' +
+    '        <div class="eyebrow"><i></i> AN ENDLESS PIXEL FRONTIER</div>\n' +
+    '        <h1>GALAXY<br /><span>ROYALE</span></h1>\n' +
+    '        <div class="title-crest" aria-hidden="true"></div>\n' +
+    '        <p>\n' +
+    '          Leave the sanctuary. Break the belt.<br />Become the brightest thing\n' +
+    '          in the void.\n' +
+    '        </p>\n' +
+    '        <button id="launch" class="primary-button">\n' +
+    '          LAUNCH EXPEDITION <span>↗</span>\n' +
+    '        </button>\n' +
+    '        <nav class="title-actions" aria-label="Title actions">\n' +
+    '          <button id="launch-settings" class="text-button">SETTINGS</button>\n' +
+    '          <button\n' +
+    '            id="quit-game"\n' +
+    '            class="text-button exit-button"\n' +
+    '            data-pixel-icon="quit-icon"\n' +
+    '            aria-label="Quit game"\n' +
+    '            title="Quit game"\n' +
+    '          >\n' +
+    '            QUIT\n' +
+    '          </button>\n' +
+    '        </nav>\n' +
+    '        <div class="control-guide desktop-guide">\n' +
+    '          <span><b>LEFT CLICK</b> Set course / use a dock facility</span\n' +
+    '          ><span><b>RIGHT HOLD</b> Aim + fire</span\n' +
+    '          ><span><b>ESC</b> MEISHI CARD</span>\n' +
+    '        </div>\n' +
+    '        <div class="control-guide touch-guide">\n' +
+    '          <span><b>LEFT STICK</b> Thrust & steer</span\n' +
+    '          ><span><b>RIGHT HOLD</b> Fire weapons</span>\n' +
+    '          <span><b>TAP FACILITY</b> Open dock service</span>\n' +
+    '        </div>\n' +
+    '        <div class="build-line">\n' +
+    '          <span>PLAYABLE SLICE / 01</span\n' +
+    '          ><span id="load-status">INITIALIZING PIXEL ENGINE</span>\n' +
+    '        </div>\n' +
+    '      </div>\n' +
+    '    </section>\n' +
+    '    <section\n' +
+    '      id="menu-screen"\n' +
+    '      class="screen-overlay"\n' +
+    '      role="dialog"\n' +
+    '      aria-modal="true"\n' +
+    '      aria-labelledby="menu-title"\n' +
+    '      aria-describedby="menu-description"\n' +
+    '      hidden\n' +
+    '    >\n' +
+    '      <div class="menu-card">\n' +
+    '        <button\n' +
+    '          id="meishi-settings"\n' +
+    '          class="icon-button meishi-settings"\n' +
+    '          data-pixel-icon="settings-icon"\n' +
+    '          aria-label="Settings"\n' +
+    '          title="Settings"\n' +
+    '          hidden\n' +
+    '        >\n' +
+    '          SET\n' +
+    '        </button>\n' +
+    '        <button\n' +
+    '          id="menu-close"\n' +
+    '          class="icon-button menu-close"\n' +
+    '          aria-label="Close menu"\n' +
+    '        >\n' +
+    '          <span aria-hidden="true">X</span>\n' +
+    '        </button>\n' +
+    '        <h2 id="menu-title">RAICHO status</h2>\n' +
+    '        <p id="menu-description">\n' +
+    '          The universe continues while you inspect your RAICHO.\n' +
+    '        </p>\n' +
+    '        <nav\n' +
+    '          id="collection-navigation"\n' +
+    '          aria-label="Personal collections"\n' +
+    '          hidden\n' +
+    '        >\n' +
+    '          <button\n' +
+    '            id="collection-meishi"\n' +
+    '            class="text-button"\n' +
+    '            aria-pressed="false"\n' +
+    '          >\n' +
+    '            MEISHI\n' +
+    '          </button>\n' +
+    '          <button\n' +
+    '            id="collection-cargo"\n' +
+    '            class="text-button"\n' +
+    '            aria-pressed="false"\n' +
+    '          >\n' +
+    '            CARGO\n' +
+    '          </button>\n' +
+    '          <button\n' +
+    '            id="collection-hangar"\n' +
+    '            class="text-button"\n' +
+    '            aria-pressed="false"\n' +
+    '          >\n' +
+    '            HULLS\n' +
+    '          </button>\n' +
+    '          <button\n' +
+    '            id="collection-upgrades"\n' +
+    '            class="text-button"\n' +
+    '            aria-pressed="false"\n' +
+    '          >\n' +
+    '            ABILITIES\n' +
+    '          </button>\n' +
+    '          <button\n' +
+    '            id="collection-pause"\n' +
+    '            class="text-button"\n' +
+    '            aria-pressed="false"\n' +
+    '          >\n' +
+    '            STATS\n' +
+    '          </button>\n' +
+    '        </nav>\n' +
+    '        <div id="meishi-content" class="menu-page" hidden></div>\n' +
+    '        <div id="cargo-content" class="menu-page" hidden></div>\n' +
+    '        <div id="pause-content" class="menu-page pause-page" hidden>\n' +
+    '          <nav class="flight-menu-actions" aria-label="Flight actions">\n' +
+    '            <button\n' +
+    '              id="resume"\n' +
+    '              class="flight-menu-action primary-button"\n' +
+    '              data-pixel-icon="resume-icon"\n' +
+    '              aria-label="Continue flight"\n' +
+    '              title="Continue flight"\n' +
+    '            >\n' +
+    '              GO\n' +
+    '            </button>\n' +
+    '            <button\n' +
+    '              id="restart-flight"\n' +
+    '              class="flight-menu-action text-button restart-button"\n' +
+    '              data-pixel-icon="restart-icon"\n' +
+    '              aria-label="Restart flight"\n' +
+    '              title="Restart flight / carried materials are lost"\n' +
+    '            >\n' +
+    '              RST\n' +
+    '            </button>\n' +
+    '            <button\n' +
+    '              id="pause-settings"\n' +
+    '              class="flight-menu-action text-button"\n' +
+    '              data-pixel-icon="settings-icon"\n' +
+    '              aria-label="Settings"\n' +
+    '             '... 6918 more characters
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/flight-menu.test.mjs:577:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '<!doctype html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <meta\n      name="viewport"\n      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"\n    />\n    <meta name="theme-color" content="#090d20" />\n    <meta\n      name="description"\n      content="Explore a living pixel galaxy. Break asteroids, survive the swarm, evolve your RAICHO, and return home."\n    />\n    <meta name="apple-mobile-web-app-capable" content="yes" />\n    <link rel="manifest" href="/manifest.webmanifest" />\n    <link rel="icon" href="/icon.svg" type="image/svg+xml" />\n    <link rel="apple-touch-icon" href="/icon-192.png" />\n    <title>Galaxy Royale</title>\n  </head>\n  <body>\n    <canvas id="universe" aria-label="Galaxy Royale game universe"></canvas>\n    <div id="game-ui">\n      <header class="flight-header">\n        <div class="header-actions">\n          <button\n            id="save-indicator"\n            class="icon-button save-indicator"\n            aria-label="Save & backup"\n            title="Progress autosaves on this device. Open Save & backup."\n          >\n            <span aria-hidden="true">S</span>\n          </button>\n          <nav class="flight-toolbar" aria-label="Flight pages">\n            <button\n              id="pause-button"\n              class="icon-button"\n              data-pixel-icon="status-icon"\n              aria-label="MEISHI CARD"\n              title="MEISHI CARD / Escape"\n            >\n              ≡\n            </button>\n            <button\n              id="map-button"\n              class="icon-button"\n              data-pixel-icon="map-icon"\n              aria-label="Universe map"\n              title="Universe map"\n            >\n              MAP\n            </button>\n            <button\n              id="flight-settings"\n              class="icon-button"\n              data-pixel-icon="settings-icon"\n              aria-label="Settings"\n              title="Settings"\n            >\n              SET\n            </button>\n          </nav>\n          <button\n            id="fullscreen"\n            class="icon-button"\n            data-pixel-icon="fullscreen-icon"\n            aria-label="Fullscreen"\n          >\n            ⛶\n          </button>\n        </div>\n      </header>\n      <p id="toolbar-hint" hidden aria-hidden="true"></p>\n      <nav id="quick-menu" hidden aria-label="Flight menu">\n        <button id="quick-settings">SETTINGS</button>\n        <button id="quick-title">TITLE SCREEN</button>\n      </nav>\n      <div id="boss-hud" hidden>\n        <small id="boss-phase">HOSTILE SIGNATURE DETECTED</small\n        ><b id="boss-name"></b>\n        <div class="boss-track"><i id="boss-health"></i></div>\n      </div>\n      <section class="flight-telemetry" aria-label="Flight telemetry">\n        <small id="sector">HAVEN / PROTECTED SPACE</small>\n        <div class="cargo" aria-label="Collected upgrade points">\n          <span class="offense">Offense <b id="currency-0">0</b></span>\n          <span class="defense">Defense <b id="currency-1">0</b></span>\n          <span class="passive">Passive <b id="currency-2">0</b></span>\n        </div>\n        <div class="nav-module">\n          <canvas\n            id="radar"\n            width="112"\n            height="112"\n            aria-label="Dock bearing radar"\n            aria-hidden="true"\n          ></canvas>\n          <div>\n            <small id="distance">0 m FROM HAVEN</small\n            ><b id="danger">SANCTUARY</b>\n          </div>\n        </div>\n        <div class="ship-module">\n          <div class="hull-label">\n            <span>HULL INTEGRITY</span><b id="hull-number">100 / 100</b>\n          </div>\n          <div class="hull-track"><i id="hull-fill"></i></div>\n          <div class="shield-track"><i id="shield-fill"></i></div>\n        </div>\n      </section>\n      <div id="flight-status-strip" aria-label="Flight status">\n        <button\n          id="dock-button"\n          class="dock-prompt"\n          data-pixel-kind="status-text"\n          aria-label="Open RAICHO upgrades"\n          hidden\n        >\n          FORGE / RAICHO UPGRADES [E]\n        </button>\n        <button\n          id="site-button"\n          class="dock-prompt"\n          data-pixel-kind="status-text"\n          hidden\n        >\n          DISCOVERY / INTERACT [E]\n        </button>\n        <div id="toast" data-pixel-kind="warning-text" role="status"></div>\n      </div>\n      <button\n        id="facility-0"\n        class="dock-facility"\n        aria-label="RAICHO upgrades"\n        hidden\n      >\n        <span aria-hidden="true">FORGE</span>\n      </button>\n      <button\n        id="facility-1"\n        class="dock-facility"\n        aria-label="RAICHO hangar"\n        hidden\n      >\n        <span aria-hidden="true">HANGAR</span>\n      </button>\n      <button\n        id="facility-2"\n        class="dock-facility"\n        aria-label="Expedition journal"\n        hidden\n      >\n        <span aria-hidden="true">JOURNAL</span>\n      </button>\n      <button\n        id="facility-3"\n        class="dock-facility"\n        aria-label="Arena campaign"\n        hidden\n      >\n        <span aria-hidden="true">ARENAS</span>\n      </button>\n      <div id="destination-marker" hidden><i></i></div>\n      <div id="joystick" aria-label="Movement joystick">\n        <div class="joystick-ring"></div>\n        <div id="joystick-stick"></div>\n      </div>\n      <button id="fire-button" aria-label="Hold to fire">\n        <span>⌖</span><small>FIRE</small>\n      </button>\n      <div id="performance" hidden></div>\n    </div>\n    <section id="launch-screen" class="screen-overlay">\n      <div class="launch-card">\n        <div class="eyebrow"><i></i> AN ENDLESS PIXEL FRONTIER</div>\n        <h1>GALAXY<br /><span>ROYALE</span></h1>\n        <div class="title-crest" aria-hidden="true"></div>\n        <p>\n          Leave the sanctuary. Break the belt.<br />Become the brightest thing\n          in the void.\n        </p>\n        <button id="launch" class="primary-button">\n          LAUNCH EXPEDITION <span>↗</span>\n        </button>\n        <nav class="title-actions" aria-label="Title actions">\n          <button id="launch-settings" class="text-button">SETTINGS</button>\n          <button\n            id="quit-game"\n            class="text-button exit-button"\n            data-pixel-icon="quit-icon"\n            aria-label="Quit game"\n            title="Quit game"\n          >\n            QUIT\n          </button>\n        </nav>\n        <div class="control-guide desktop-guide">\n          <span><b>LEFT CLICK</b> Set course / use a dock facility</span\n          ><span><b>RIGHT HOLD</b> Aim + fire</span\n          ><span><b>ESC</b> MEISHI CARD</span>\n        </div>\n        <div class="control-guide touch-guide">\n          <span><b>LEFT STICK</b> Thrust & steer</span\n          ><span><b>RIGHT HOLD</b> Fire weapons</span>\n          <span><b>TAP FACILITY</b> Open dock service</span>\n        </div>\n        <div class="build-line">\n          <span>PLAYABLE SLICE / 01</span\n          ><span id="load-status">INITIALIZING PIXEL ENGINE</span>\n        </div>\n      </div>\n    </section>\n    <section\n      id="menu-screen"\n      class="screen-overlay"\n      role="dialog"\n      aria-modal="true"\n      aria-labelledby="menu-title"\n      aria-describedby="menu-description"\n      hidden\n    >\n      <div class="menu-card">\n        <button\n          id="meishi-settings"\n          class="icon-button meishi-settings"\n          data-pixel-icon="settings-icon"\n          aria-label="Settings"\n          title="Settings"\n          hidden\n        >\n          SET\n        </button>\n        <button\n          id="menu-close"\n          class="icon-button menu-close"\n          aria-label="Close menu"\n        >\n          <span aria-hidden="true">X</span>\n        </button>\n        <h2 id="menu-title">RAICHO status</h2>\n        <p id="menu-description">\n          The universe continues while you inspect your RAICHO.\n        </p>\n        <nav\n          id="collection-navigation"\n          aria-label="Personal collections"\n          hidden\n        >\n          <button\n            id="collection-meishi"\n            class="text-button"\n            aria-pressed="false"\n          >\n            MEISHI\n          </button>\n          <button\n            id="collection-cargo"\n            class="text-button"\n            aria-pressed="false"\n          >\n            CARGO\n          </button>\n          <button\n            id="collection-hangar"\n            class="text-button"\n            aria-pressed="false"\n          >\n            HULLS\n          </button>\n          <button\n            id="collection-upgrades"\n            class="text-button"\n            aria-pressed="false"\n          >\n            ABILITIES\n          </button>\n          <button\n            id="collection-pause"\n            class="text-button"\n            aria-pressed="false"\n          >\n            STATS\n          </button>\n        </nav>\n        <div id="meishi-content" class="menu-page" hidden></div>\n        <div id="cargo-content" class="menu-page" hidden></div>\n        <div id="pause-content" class="menu-page pause-page" hidden>\n          <nav class="flight-menu-actions" aria-label="Flight actions">\n            <button\n              id="resume"\n              class="flight-menu-action primary-button"\n              data-pixel-icon="resume-icon"\n              aria-label="Continue flight"\n              title="Continue flight"\n            >\n              GO\n            </button>\n            <button\n              id="restart-flight"\n              class="flight-menu-action text-button restart-button"\n              data-pixel-icon="restart-icon"\n              aria-label="Restart flight"\n              title="Restart flight / carried materials are lost"\n            >\n              RST\n            </button>\n            <button\n              id="pause-settings"\n              class="flight-menu-action text-button"\n              data-pixel-icon="settings-icon"\n              aria-label="Settings"\n             '... 6918 more characters,
+    expected: /id="flight-status"[^>]+aria-label="Live RAICHO status"/,
+    operator: 'match',
+    diff: 'simple'
+  }
+[ELIFECYCLE] Test failed. See above for more details.

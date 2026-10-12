@@ -1,0 +1,43 @@
+{
+  "test_commit": "81d0b6ff0aa80b958b52caff15dad2f3aaa7a19a",
+  "committed_test": {
+    "path": "scripts/test/meishi.test.mjs",
+    "sha256": "7cbb31bf56838a674e5a71f2125c001ed789b04c2059799e686df05ffefdf34c",
+    "bytes": 15103,
+    "domain": "committed Git bytes"
+  },
+  "evidence_pins": [
+    {
+      "file": "combined-pass.log",
+      "sha256": "3bae3d96db6042021089d5d1a2897cd7133b5c8b729d45b176b19d0a8cc3ca99",
+      "bytes": 5083
+    },
+    {
+      "file": "focused-pass.log",
+      "sha256": "8e4720395f9c7aeff4849cb050c70434c5becb3bed0a47f8dd1f1bbd7f1ea0ea",
+      "bytes": 1490
+    },
+    {
+      "file": "HANDOFF.md",
+      "sha256": "94a1d579e231872f45a90941b4eb5a255ddc1626f4d8bd9eed734022d9eed70a",
+      "bytes": 2370
+    },
+    {
+      "file": "new-regressions-old-painter-fail.log",
+      "sha256": "7d42bfee8ccefe63b61fe1c889ae0b1ac0d93611481bcacaa656bb63d4112988",
+      "bytes": 2055
+    },
+    {
+      "file": "old-expectations-fail.log",
+      "sha256": "bc7b6b1f55af6e2749c60d447dd4cd95c6758c0cd30cb1bb740099782b20db04",
+      "bytes": 2898
+    },
+    {
+      "file": "root-meishi-input.ts",
+      "sha256": "28bc379f64964dc68ab47229c114373553179151021e4728d33f51b83c9e8015",
+      "bytes": 9306
+    }
+  ],
+  "tracked_clean": true,
+  "scope": "actual retained Root TS input in Node VM; no browser/native build"
+}

@@ -1,0 +1,6 @@
+{
+  "command": "rustc --edition 2024 --crate-name dock_runtime_benchmark -O -C lto=thin work/dock-runtime-benchmark/probe.rs -L dependency=work/dock-runtime-benchmark/target/release/deps --extern engine_core=<actual release rlib> --extern game_core=<actual release rlib> --extern game_web=<actual release rlib> --extern serde_json=<actual release rlib> -o work/dock-runtime-benchmark/dock-runtime-benchmark.exe",
+  "exit_code": 0,
+  "output": "",
+  "scope": "Actual completed tool invocation; compiler emitted no stdout/stderr, so Tee-Object created no log. Exact linked rlib bytes are pinned in input-and-results-pins.json."
+}

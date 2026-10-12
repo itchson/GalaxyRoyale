@@ -1,0 +1,10 @@
+{
+  "input_hashes": 107,
+  "actual_body_frames": 3,
+  "actual_rig_frames": 3,
+  "actual_camera_views": 3,
+  "cells_each": 28549,
+  "transforms_each": 16,
+  "decoded_evidence": "exact bytes verified",
+  "scope": "Offline source/native/flat software only; live Game/GPU/phone pending"
+}

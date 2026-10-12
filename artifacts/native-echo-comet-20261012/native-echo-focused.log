@@ -1,0 +1,21 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.18s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 9 tests
+actual_legacy_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,null],"trained_starter":false,"relic_count":0}
+actual_evolved_echo_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[{"index":3,"rank":5},null,null],"trained_starter":false,"relic_count":0,"echo_evolution":5}
+actual_evolved_publication_bytes=3085 projectiles=8 native_replica_cells=1999 damaged_rock_cells=356
+test co_op::echo_tests::real_publication_and_native_replica_preserve_evolved_owned_fan_and_holes ... ok
+test co_op::echo_tests::native_export_validates_evolution_without_defeat_history_or_legacy_byte_changes ... ok
+test co_op::echo_tests::real_lens_bonus_keeps_priority_before_echo_at_shared_short_capacity ... ok
+test co_op::echo_tests::ordinary_slot_only_excludes_lens_empty_and_royal_echo_bundles ... ok
+test co_op::echo_tests::actual_echo_pierces_cells_and_segments_with_debris_attribution_without_pvp_or_grants ... ok
+test co_op::echo_tests::safe_pause_timeout_respawn_leave_and_session_end_bound_member_phase ... ok
+test co_op::echo_tests::shared_cap_preserves_ordered_partial_fans_and_consumes_refused_trigger_fx ... ok
+actual_eight_member_primaries=[18, 18, 18, 18, 18, 18, 18, 18]; maximum_queued_fans=8; maximum_fan_attempts=56
+test co_op::echo_tests::eight_staggered_members_and_moving_fans_have_independent_native_owner_and_phase ... ok
+test co_op::echo_tests::actual_solo_and_guest_ticks_match_all_evolutions_and_effective_damage_ranks ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 454 filtered out; finished in 0.21s
+

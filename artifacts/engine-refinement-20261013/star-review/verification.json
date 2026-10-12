@@ -1,0 +1,117 @@
+{
+  "scope": "Independent exact source/compiled-input and actual native probe evidence inspection only; no compiler/test/probe/browser/GPU/listener rerun",
+  "candidate": "49e3e686d5ea3e04523a8e40f4ef102756700ec2",
+  "parent": "8b0896d7ccd2c4dece1dc7a0d2cae6c4986505ab",
+  "two_changed_source_files": true,
+  "source_and_evidence_pins_verified": {
+    "source_files": 2,
+    "author_evidence_files": 27,
+    "additional_manifest_files": 7
+  },
+  "actual_compiled_input_sets": {
+    "before": 108,
+    "after": 109,
+    "candidate": 108
+  },
+  "actual_binary_and_depfile_pins_verified": 9,
+  "probe_hooks_strip_to_exact_parent_or_candidate_production_source": true,
+  "compiled_after_unused_visible_test_fixture_difference_preserved": true,
+  "native_ordered_packet_digest_and_recorded_counts_matching_cases": 72,
+  "empty_geometric_tile_samples_before_after": [
+    4,
+    0
+  ],
+  "query_totals": {
+    "full": {
+      "cases": 36,
+      "before": 2912,
+      "after": 2704,
+      "avoided": 208
+    },
+    "reduced": {
+      "cases": 36,
+      "before": 2912,
+      "after": 2456,
+      "avoided": 456
+    }
+  },
+  "actual_focused_tests": {
+    "passed": 34,
+    "failed": 0,
+    "ignored": 5
+  },
+  "external_compiled_proof_pins": [
+    {
+      "label": "before",
+      "kind": "binary",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-before/release/deps/game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 11721728,
+      "sha256": "98b2d6f3c32cc56a88f10178c4ad5a008a465d7b82b36528bba90b6c61848dc9"
+    },
+    {
+      "label": "before",
+      "kind": "depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-before/release/deps/game_core-2b707a8b4a4ebce6.d",
+      "bytes": 13670,
+      "sha256": "139542af359bc433ff26455e934230d00f5eb69478955bc717f0e0d2c263d3a7"
+    },
+    {
+      "label": "before",
+      "kind": "engine_depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-before/release/deps/engine_core-01d892b7672387e8.d",
+      "bytes": 1707,
+      "sha256": "73d97d307eb787ae9a37fa81ff9795814781948b95a15575e91a998be425a812"
+    },
+    {
+      "label": "after",
+      "kind": "binary",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-after/release/deps/game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 11726336,
+      "sha256": "0f3f127e58f3602b50033ce3717bfa124752acb8b2accc8e13c6651dff4702b0"
+    },
+    {
+      "label": "after",
+      "kind": "depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-after/release/deps/game_core-2b707a8b4a4ebce6.d",
+      "bytes": 13812,
+      "sha256": "a11c9f7cf1d6e08e60e10f7186a27c3217030c2c4926272b452ba199080ee229"
+    },
+    {
+      "label": "after",
+      "kind": "engine_depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-after/release/deps/engine_core-01d892b7672387e8.d",
+      "bytes": 1704,
+      "sha256": "bf8b83c1e6fbb83a898457486d7197fcec119d3b35473ec3f78c14e5d31df4b7"
+    },
+    {
+      "label": "candidate",
+      "kind": "binary",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-current/release/deps/game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 11686912,
+      "sha256": "aa01b158e9b356f18b336c1a3d39be6c602ad61b442ff2a7602f233b2114c04c"
+    },
+    {
+      "label": "candidate",
+      "kind": "depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-current/release/deps/game_core-2b707a8b4a4ebce6.d",
+      "bytes": 13637,
+      "sha256": "57df49bab7e92fb8adf0a4943e17b56e087ef01d23995108c24464b6c2efd06b"
+    },
+    {
+      "label": "candidate",
+      "kind": "engine_depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-current/release/deps/engine_core-01d892b7672387e8.d",
+      "bytes": 1710,
+      "sha256": "3947cba080d41de55757c4cd03141466fb3b6f11348bb401dfddfe97426b1ad1"
+    }
+  ],
+  "source_blocker": null,
+  "limits": [
+    "FNV64 digest and count retention of cell/affine instance streams, not preserved full packet bytes or cryptographic equality proof",
+    "Only no quality/viewport-surviving seeded candidate skips sampling; all-density-rejected tiles still need one FieldBlend",
+    "Query counts do not establish allocation, elapsed timing, FPS, GPU or physical-device gains",
+    "No nebula gas morphology, shader, gameplay, save, new visual or RTC changes",
+    "The after query probe compiles its original visible-test definition but runs only the filtered probe; final tracked suite separately compiles corrected800viewport test",
+    "Existing compilation/fixture/Studio dispatch failures remain preserved"
+  ]
+}

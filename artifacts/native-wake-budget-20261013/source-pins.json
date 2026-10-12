@@ -1,0 +1,858 @@
+{
+  "frozenAt": "2026-10-12T19:49:14.461Z",
+  "runtimeRef": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "snapshotRef": "60e16acaba7ceda12afd02bf497f6aadd34da885",
+  "nativeSourcesEqualBetweenRefs": true,
+  "nativeSnapshotFiles": 469,
+  "nativeBinary": {
+    "relative": "cargo-target/release/deps/game_core-2b707a8b4a4ebce6.exe",
+    "bytes": 11636736,
+    "sha256": "f17dd6ba23f17868c6e4dce81932575c99b0c070bd4488d9f8949d7cfff2cb72"
+  },
+  "checkoutHead": "7c188d4198901ead15e4bffa2b0063b9c95f7674",
+  "trackedClean": true,
+  "originalNegativeBranchPreserved": true,
+  "sources": {
+    "crates/game_core/src/co_op_wake.rs": {
+      "canonicalBytes": 5299,
+      "canonicalSha256": "d956706475f0f311d4a049b36ba2d50927e6a3817852fbc3e7853765fdb250c4",
+      "compiled": {
+        "canonicalGitBlob": "aa277e09a2bd85f478bad46957118ce8a6088c80",
+        "canonicalSha256": "d956706475f0f311d4a049b36ba2d50927e6a3817852fbc3e7853765fdb250c4",
+        "archiveExportSha256": "4c7d2fabd32c1a18a4ba18919063eb88156dd893a68214b1f638deb28c836976",
+        "archiveExportBytes": 5417,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "4c7d2fabd32c1a18a4ba18919063eb88156dd893a68214b1f638deb28c836976",
+        "compiledBytes": 5417,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "crates/game_core/src/co_op_wake_tests.rs": {
+      "canonicalBytes": 29835,
+      "canonicalSha256": "ffddc1de0e5fc2a02d0b6628b80c151535d80a5d8b20d9583dea6f5d7978208f",
+      "compiled": {
+        "canonicalGitBlob": "75ab0817712cb7411176e90f912117b917018fdb",
+        "canonicalSha256": "ffddc1de0e5fc2a02d0b6628b80c151535d80a5d8b20d9583dea6f5d7978208f",
+        "archiveExportSha256": "6fc2eceb448a7b949704844fa83495b0940c189c93e568c15b09601fb5700787",
+        "archiveExportBytes": 30613,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "860b7e90ce7adc6268460a9dc259b1cd217e4c62cecd135ae56c354a464399cc",
+        "compiledBytes": 38029,
+        "workOnlyProbeAppended": true
+      }
+    },
+    "crates/game_core/src/co_op.rs": {
+      "canonicalBytes": 51192,
+      "canonicalSha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec",
+      "compiled": {
+        "canonicalGitBlob": "fb2e63b21aa300e9e797776ee0bd8a2ad8e93c02",
+        "canonicalSha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec",
+        "archiveExportSha256": "0c143ea67a33f353f275bbf38c479bafd968843bd32fed22577a6d0919d391e3",
+        "archiveExportBytes": 52610,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "0c143ea67a33f353f275bbf38c479bafd968843bd32fed22577a6d0919d391e3",
+        "compiledBytes": 52610,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "crates/game_core/src/lib.rs": {
+      "canonicalBytes": 196705,
+      "canonicalSha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "compiled": {
+        "canonicalGitBlob": "4b43e47418bcc880ebd7df5f52277ebaf14d0a72",
+        "canonicalSha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+        "archiveExportSha256": "e7997b5b90c3ac2f70ba12c2521480ee2123136b712274334f6e784b713b0636",
+        "archiveExportBytes": 201923,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "e7997b5b90c3ac2f70ba12c2521480ee2123136b712274334f6e784b713b0636",
+        "compiledBytes": 201923,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "crates/game_core/src/regions.rs": {
+      "canonicalBytes": 36159,
+      "canonicalSha256": "0b47fb15446f24e31953c56d120e55bb544511a13bb63bdb83bb599a6a015a2a",
+      "compiled": {
+        "canonicalGitBlob": "e1360b94652a0040611a9aef0678d56e75d16907",
+        "canonicalSha256": "0b47fb15446f24e31953c56d120e55bb544511a13bb63bdb83bb599a6a015a2a",
+        "archiveExportSha256": "7cd4f0383ff93126fde978492970671e3097d6162f316da65597de8c7a46137f",
+        "archiveExportBytes": 37153,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "7cd4f0383ff93126fde978492970671e3097d6162f316da65597de8c7a46137f",
+        "compiledBytes": 37153,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "crates/game_core/src/co_op_publish.rs": {
+      "canonicalBytes": 7851,
+      "canonicalSha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+      "compiled": {
+        "canonicalGitBlob": "e9b89bf8d424cdd0c81ccfcf14107ba36308058c",
+        "canonicalSha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+        "archiveExportSha256": "6c21184ed46db90ce992a74fc2699f1356210d474aa77f152c837a983de2a676",
+        "archiveExportBytes": 8078,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "6c21184ed46db90ce992a74fc2699f1356210d474aa77f152c837a983de2a676",
+        "compiledBytes": 8078,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "crates/game_core/src/co_op_publish_tests.rs": {
+      "canonicalBytes": 12233,
+      "canonicalSha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3",
+      "compiled": {
+        "canonicalGitBlob": "78362f9888d1f747b2535a98e0f361f2636bdd3d",
+        "canonicalSha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3",
+        "archiveExportSha256": "c67dd8bbe722c444db981d244442b9cfd06cf575b0c89c34bdc38cd1a5eb7a66",
+        "archiveExportBytes": 12590,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "c67dd8bbe722c444db981d244442b9cfd06cf575b0c89c34bdc38cd1a5eb7a66",
+        "compiledBytes": 12590,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "Cargo.toml": {
+      "canonicalBytes": 447,
+      "canonicalSha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "compiled": {
+        "canonicalGitBlob": "06af63f286fff4c4de784049248b574692aef286",
+        "canonicalSha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+        "archiveExportSha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27",
+        "archiveExportBytes": 467,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27",
+        "compiledBytes": 467,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "Cargo.lock": {
+      "canonicalBytes": 27800,
+      "canonicalSha256": "bc919f0f4492cedaf76458d59304a0df851bf6cc5c60e109e0ac4e440e24bd9c",
+      "compiled": {
+        "canonicalGitBlob": "4ca62ada4b783e51af87be2def98419ea80977ff",
+        "canonicalSha256": "bc919f0f4492cedaf76458d59304a0df851bf6cc5c60e109e0ac4e440e24bd9c",
+        "archiveExportSha256": "d2e5246ec6a928e39823a72eceba6a342cabba9ed3706b287a00b6c74b25f120",
+        "archiveExportBytes": 28916,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "d2e5246ec6a928e39823a72eceba6a342cabba9ed3706b287a00b6c74b25f120",
+        "compiledBytes": 28916,
+        "workOnlyProbeAppended": false
+      }
+    },
+    "rust-toolchain.toml": {
+      "canonicalBytes": 123,
+      "canonicalSha256": "62db6c8f71f29cf6404e2e664dbfcd0bcb85426c64370fa56a1eca445c5b40e2",
+      "compiled": {
+        "canonicalGitBlob": "4cb4acc00292da0675bcae4bd7814755e25509d1",
+        "canonicalSha256": "62db6c8f71f29cf6404e2e664dbfcd0bcb85426c64370fa56a1eca445c5b40e2",
+        "archiveExportSha256": "2c9520d3e1e165e9fa01506e42d4c942776ef7cc349830e4e1e46a4b72602b5a",
+        "archiveExportBytes": 128,
+        "archiveCRLFConversion": true,
+        "compiledSha256": "2c9520d3e1e165e9fa01506e42d4c942776ef7cc349830e4e1e46a4b72602b5a",
+        "compiledBytes": 128,
+        "workOnlyProbeAppended": false
+      }
+    }
+  },
+  "evidence": {
+    "REPORT.md": {
+      "bytes": 10046,
+      "sha256": "d802e39d218ce443a0cb17c8fc2ce6d8a507fa72ef53e6eb5dca5ab2e7144fb8"
+    },
+    "probe.rs": {
+      "bytes": 7415,
+      "sha256": "802c1c3d07051828c588d9e9b303ef4c4ea194198a314e39ea7b6d8ad97b77c3"
+    },
+    "probe-original.rs": {
+      "bytes": 6994,
+      "sha256": "d5aa4730d6be08ae51d4324934235e15013a5854d097daba057ea730f2e84254"
+    },
+    "probe-publication-original.rs": {
+      "bytes": 6998,
+      "sha256": "100b26d4e4db8d1f9581b6677a7081943116cd13b12612ea4052fe8582d53df4"
+    },
+    "compiler.log": {
+      "bytes": 201,
+      "sha256": "4b9a8c1d3470825bcc9f452028d0779a83c4e7237762cfa6ab7c9a8b99ae704b"
+    },
+    "frozen-native-source.zip": {
+      "bytes": 18205425,
+      "sha256": "181b0522ad514fb50f1ca0b0539ba1a511de2f7c91db3e69474e541b4d91df57"
+    },
+    "frozen-test-fixtures.zip": {
+      "bytes": 2809,
+      "sha256": "df2cd9d0910da137760abc00f9104116433d761f80a01fdfab1f9d903ca4d36a"
+    },
+    "compiled-inputs.json": {
+      "bytes": 263320,
+      "sha256": "a98e1c5d2b881590e49dc316c7c19d7a3f168a7ced5f5a7d13f03bb337fb366d"
+    },
+    "native-probe-original.log": {
+      "bytes": 3033,
+      "sha256": "55c5a34adf22d846db1b2686d2977cb8cc3c278414081509b48a3b44aa5a4082"
+    },
+    "native-probe-first-runtime.log": {
+      "bytes": 5384,
+      "sha256": "569eab321caa9510b40179ff1f6281753a11ff663042d48dc843be50d761ef04"
+    },
+    "native-probe.log": {
+      "bytes": 6562,
+      "sha256": "658ea87b7ba747aa83f5941f4515d163859dc2cbb04ad8497f4fb800eb7ea1d4"
+    },
+    "native-wake-tests.log": {
+      "bytes": 9519,
+      "sha256": "1e58e2419acf6754f112859d5b5f9742139e021fa5fa56c5147cbc5245c51e51"
+    },
+    "native-publication-tests.log": {
+      "bytes": 1337,
+      "sha256": "9c27bddc6e22ea1478b694f0f84a9e125b497e2d38510f6c9a467c3ee000fb4f"
+    },
+    "verify-snapshot.py": {
+      "bytes": 2096,
+      "sha256": "6700442ad074c2929ce3214437465f26f0f5a633957eecab81925f1f10920d50"
+    },
+    "verify-snapshot-original.py": {
+      "bytes": 1720,
+      "sha256": "c7ea8eb771c5d9a47c37e51ceee22f0a9c91354ed0cab73579f721284adcaead"
+    },
+    "pin-original-failure.log": {
+      "bytes": 325,
+      "sha256": "746e5a45055befba46bdd2ed418b8af1dfa12529b3bfdb1b6308ce2c42f262b7"
+    },
+    "pin-count-original-failure.log": {
+      "bytes": 601,
+      "sha256": "13e8c28422c3d8630da02542f5628d18d1a75ac39ccb61b705f5b0a56ee54aa6"
+    },
+    "pin-evidence.mjs": {
+      "bytes": 5585,
+      "sha256": "9e82d59dbdf8acca573596d3c5a1478d34b266867b7f915421b2a28fd09fe48d"
+    }
+  },
+  "records": [
+    {
+      "log": "native-probe.log",
+      "batches": 5,
+      "candidate_links": 0,
+      "case": "empty_local_no_targets",
+      "configured_samples": 0,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 0,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9149999999999999
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9058333333333334
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9108333333333333
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9116666666666667
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9141666666666667
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": false,
+      "warm_stages_per_batch": 20,
+      "medianUs": 0.9116666666666667,
+      "minimumUs": 0.9058333333333334,
+      "maximumUs": 0.9149999999999999
+    },
+    {
+      "log": "native-probe.log",
+      "batches": 5,
+      "candidate_links": 184,
+      "case": "full_local_no_targets",
+      "configured_samples": 192,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 0,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 120.8725
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 120.95833333333333
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 120.07833333333333
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 120.34333333333332
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 119.7175
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": false,
+      "warm_stages_per_batch": 20,
+      "medianUs": 120.34333333333332,
+      "minimumUs": 119.7175,
+      "maximumUs": 120.95833333333333
+    },
+    {
+      "log": "native-probe.log",
+      "batches": 5,
+      "candidate_links": 184,
+      "case": "full_local_48_misses",
+      "configured_samples": 192,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 48,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 113.945
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 114.66833333333334
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 114.99749999999999
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 115.86166666666666
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 115.37249999999999
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": false,
+      "warm_stages_per_batch": 20,
+      "medianUs": 114.99749999999999,
+      "minimumUs": 113.945,
+      "maximumUs": 115.86166666666666
+    },
+    {
+      "log": "native-probe.log",
+      "batches": 5,
+      "candidate_links": 0,
+      "case": "empty_remote_48_misses",
+      "configured_samples": 0,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 48,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 179.91750000000002
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 180.1
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 181.6783333333333
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 194.53416666666666
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 183.40583333333333
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": true,
+      "warm_stages_per_batch": 20,
+      "medianUs": 181.6783333333333,
+      "minimumUs": 179.91750000000002,
+      "maximumUs": 194.53416666666666
+    },
+    {
+      "log": "native-probe.log",
+      "batches": 5,
+      "candidate_links": 184,
+      "case": "full_remote_48_misses",
+      "configured_samples": 192,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 48,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 294.3958333333333
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 293.11
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 301.51500000000004
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 306.9916666666667
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 292.6125
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": true,
+      "warm_stages_per_batch": 20,
+      "medianUs": 294.3958333333333,
+      "minimumUs": 292.6125,
+      "maximumUs": 306.9916666666667
+    },
+    {
+      "log": "native-probe.log",
+      "batches": 5,
+      "case": "packed_publication_full_192_wake_48_enemies",
+      "measured_acquisitions_per_batch": 120,
+      "measurements": [
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 50.624166666666675
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 50.14833333333333
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 50.09333333333334
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 50.068333333333335
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 50.28
+        }
+      ],
+      "scope": "acquisition only; JSON lengths computed separately after timing",
+      "medianUs": 50.14833333333333,
+      "minimumUs": 50.068333333333335,
+      "maximumUs": 50.624166666666675
+    },
+    {
+      "log": "native-wake-tests.log",
+      "batches": 5,
+      "candidate_links": 0,
+      "case": "empty_local_no_targets",
+      "configured_samples": 0,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 0,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9283333333333332
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.8991666666666666
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9116666666666667
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.9066666666666666
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 0,
+          "requested_bytes_per_stage": 0,
+          "us_per_wake_stage": 0.8958333333333334
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": false,
+      "warm_stages_per_batch": 20,
+      "medianUs": 0.9066666666666666,
+      "minimumUs": 0.8958333333333334,
+      "maximumUs": 0.9283333333333332
+    },
+    {
+      "log": "native-wake-tests.log",
+      "batches": 5,
+      "candidate_links": 184,
+      "case": "full_local_no_targets",
+      "configured_samples": 192,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 0,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 91.42416666666666
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 91.30749999999999
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 91.31416666666668
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 91.25833333333334
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 91.60166666666667
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": false,
+      "warm_stages_per_batch": 20,
+      "medianUs": 91.31416666666668,
+      "minimumUs": 91.25833333333334,
+      "maximumUs": 91.60166666666667
+    },
+    {
+      "log": "native-wake-tests.log",
+      "batches": 5,
+      "candidate_links": 184,
+      "case": "full_local_48_misses",
+      "configured_samples": 192,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 48,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 140.005
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 138.81916666666666
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 138.2525
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 138.49333333333334
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 1872,
+          "requested_bytes_per_stage": 179904,
+          "us_per_wake_stage": 138.5875
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": false,
+      "warm_stages_per_batch": 20,
+      "medianUs": 138.5875,
+      "minimumUs": 138.2525,
+      "maximumUs": 140.005
+    },
+    {
+      "log": "native-wake-tests.log",
+      "batches": 5,
+      "candidate_links": 0,
+      "case": "empty_remote_48_misses",
+      "configured_samples": 0,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 48,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 248.01583333333335
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 228.81416666666667
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 229.145
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 230.26583333333335
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 3840,
+          "requested_bytes_per_stage": 359424,
+          "us_per_wake_stage": 230.59833333333333
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": true,
+      "warm_stages_per_batch": 20,
+      "medianUs": 230.26583333333335,
+      "minimumUs": 228.81416666666667,
+      "maximumUs": 248.01583333333335
+    },
+    {
+      "log": "native-wake-tests.log",
+      "batches": 5,
+      "candidate_links": 184,
+      "case": "full_remote_48_misses",
+      "configured_samples": 192,
+      "dt_seconds": 0.01666666753590107,
+      "enemy_misses": 48,
+      "measured_stages_per_batch": 120,
+      "measurements": [
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 386.15333333333336
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 364.06499999999994
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 362.1216666666667
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 365.0541666666667
+        },
+        {
+          "allocation_or_reallocation_calls_per_stage": 5712,
+          "requested_bytes_per_stage": 539328,
+          "us_per_wake_stage": 359.22083333333336
+        }
+      ],
+      "pilots": 8,
+      "remote_target_cache": true,
+      "warm_stages_per_batch": 20,
+      "medianUs": 364.06499999999994,
+      "minimumUs": 359.22083333333336,
+      "maximumUs": 386.15333333333336
+    },
+    {
+      "log": "native-wake-tests.log",
+      "batches": 5,
+      "case": "packed_publication_full_192_wake_48_enemies",
+      "measured_acquisitions_per_batch": 120,
+      "measurements": [
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 49.54666666666666
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 48.94416666666666
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 48.846666666666664
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 49.03083333333334
+        },
+        {
+          "all_body_page_json_bytes": 115216,
+          "allocation_or_reallocation_calls_per_acquisition": 295,
+          "body_pages": 56,
+          "capture_json_bytes": 5248,
+          "entities": 56,
+          "entity_pages": 1,
+          "occupied_cells": 6064,
+          "requested_bytes_per_acquisition": 105144,
+          "storage_cells": 19200,
+          "us_per_acquisition": 49.068333333333335
+        }
+      ],
+      "scope": "acquisition only; JSON lengths computed separately after timing",
+      "medianUs": 49.03083333333334,
+      "minimumUs": 48.846666666666664,
+      "maximumUs": 49.54666666666666
+    }
+  ],
+  "commands": [
+    {
+      "command": "CARGO_TARGET_DIR=<own>/cargo-target cargo test --manifest-path <own>/snapshot/Cargo.toml -p game_core --release --offline --locked work_only_native_budget_probe -- --nocapture --test-threads=1",
+      "exitCode": 0,
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "log": "native-probe.log"
+    },
+    {
+      "command": "CARGO_TARGET_DIR=<own>/cargo-target cargo test --manifest-path <own>/snapshot/Cargo.toml -p game_core --release --offline --locked co_op::wake_tests:: -- --nocapture --test-threads=1",
+      "exitCode": 0,
+      "tests": 14,
+      "existing": 13,
+      "workOnlyProbe": 1,
+      "pass": 14,
+      "fail": 0,
+      "log": "native-wake-tests.log"
+    },
+    {
+      "command": "CARGO_TARGET_DIR=<own>/cargo-target cargo test --manifest-path <own>/snapshot/Cargo.toml -p game_core --release --offline --locked co_op_publish::tests:: -- --nocapture --test-threads=1",
+      "exitCode": 0,
+      "tests": 7,
+      "pass": 7,
+      "fail": 0,
+      "log": "native-publication-tests.log"
+    }
+  ],
+  "failures": [
+    {
+      "log": "native-probe-original.log",
+      "exitCode": 101,
+      "reason": "Initial source archive omitted two include fixtures; work-only probe binding needed mut"
+    },
+    {
+      "log": "native-probe-first-runtime.log",
+      "exitCode": 101,
+      "reason": "Work-only probe mistakenly forbade wake text in valid owned equipment JSON; replaced by exact snapshot comparison"
+    },
+    {
+      "log": "pin-original-failure.log",
+      "exitCode": 1,
+      "reason": "Verifier initially required literal Git bytes from git archive despite configured CRLF export; final verification distinguishes exact compiled/export bytes and canonical LF Git blobs"
+    },
+    {
+      "log": "pin-count-original-failure.log",
+      "exitCode": 1,
+      "reason": "Expected ZIP count included directory entries; actual 469 compiled files verified individually"
+    }
+  ],
+  "scope": "Actual native configured fixtures and instrumented stage/publication measurements only. No production changes/GPU/browser/listener/RTC/FPS claim; all processes completed."
+}

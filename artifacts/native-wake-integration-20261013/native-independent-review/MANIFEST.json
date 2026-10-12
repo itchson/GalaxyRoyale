@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "candidate": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "parent": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "pin_semantics": "canonical source/input bytes explicitly named; author/reviewer evidence pins are raw filesystem bytes",
+  "source": [
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "git_blob": "fb2e63b21aa300e9e797776ee0bd8a2ad8e93c02",
+      "canonical_bytes": 51192,
+      "canonical_sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec",
+      "raw_checkout_bytes": 52610,
+      "raw_checkout_sha256": "0c143ea67a33f353f275bbf38c479bafd968843bd32fed22577a6d0919d391e3",
+      "snapshot": "source/crates/game_core/src/co_op.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "git_blob": "1e08aa5dd2915f9c45fef0a5f2e81178e5410be9",
+      "canonical_bytes": 8962,
+      "canonical_sha256": "dcbb09adc2a97794ed01de19f1dfacd8e059f5d21523f88776baa6448da3ef99",
+      "raw_checkout_bytes": 9179,
+      "raw_checkout_sha256": "c7a80ea0bdb885ef0527af29c310444b6ad767e8ce35b7a2c15c00115f8acca4",
+      "snapshot": "source/crates/game_core/src/co_op_loadout.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "git_blob": "209af19c77abb60d2dedb74eced0639ca075afda",
+      "canonical_bytes": 5321,
+      "canonical_sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e",
+      "raw_checkout_bytes": 5321,
+      "raw_checkout_sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e",
+      "snapshot": "source/crates/game_core/src/co_op_wake.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "git_blob": "2c1a3dcd8b55a71363415305622e5e9163504f11",
+      "canonical_bytes": 29839,
+      "canonical_sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6",
+      "raw_checkout_bytes": 29839,
+      "raw_checkout_sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6",
+      "snapshot": "source/crates/game_core/src/co_op_wake_tests.rs"
+    }
+  ],
+  "unchanged_inputs": [
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/lib.rs",
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/lib.rs"
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/ship_progression.rs",
+      "bytes": 24832,
+      "sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/ship_progression.rs"
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/bosses.rs",
+      "bytes": 47224,
+      "sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/bosses.rs"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/regions.rs",
+      "bytes": 36159,
+      "sha256": "0b47fb15446f24e31953c56d120e55bb544511a13bb63bdb83bb599a6a015a2a",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/regions.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_fx.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/co_op_fx.rs",
+      "bytes": 7782,
+      "sha256": "711c5aebd8ff1639f682069a6c94b0cc29c436d38208a26fe02f83dd4eaf4cc8",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/co_op_fx.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_control.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/co_op_control.rs",
+      "bytes": 3994,
+      "sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/co_op_control.rs"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/campaign.rs",
+      "bytes": 22135,
+      "sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/campaign.rs"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52483,
+      "sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/campaign_runtime.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/co_op_publish.rs",
+      "bytes": 7851,
+      "sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/co_op_publish.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_core/src/co_op_replica.rs",
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_core/src/co_op_replica.rs"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:crates/game_web/src/co_op_bridge.rs",
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77",
+      "unchanged_from_parent": true,
+      "snapshot": "source/crates/game_web/src/co_op_bridge.rs"
+    },
+    {
+      "path": "apps/game/src/coop/wire.ts",
+      "git": "87de1f7afad1a53183fcca91e146c9a59ee012cd:apps/game/src/coop/wire.ts",
+      "bytes": 19368,
+      "sha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4",
+      "unchanged_from_parent": true,
+      "snapshot": "source/apps/game/src/coop/wire.ts"
+    }
+  ],
+  "author_evidence": [
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/baseline-pins.json",
+      "bytes": 603,
+      "sha256": "198368c560c359ab5cbb5133bc8c6e5e690c823034024845b70a5dbeb7eb5e1b"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/baseline-reproduction.log",
+      "bytes": 1150,
+      "sha256": "43ae24afc8f6d1f0b45bcef807cc204252ada754402f940a1625301f3e91a954"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/candidate-pins.json",
+      "bytes": 2306,
+      "sha256": "5b416618161ad32d1c238997513174730d1a01901c943e44048f7c72b2179fe1"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/co-op-regression.log",
+      "bytes": 17352,
+      "sha256": "c0d391af06ce3b4984e513d0ee0f3ca0f427d30dc1a7c33d866ad38f059b2e0d"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/first-candidate.log",
+      "bytes": 556,
+      "sha256": "a9290ebdb78ec47d65c4957d36656c4a357b080fbbe7e2eee8977f6d27e7f4a0"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/game-core-check.log",
+      "bytes": 303,
+      "sha256": "49fe6955bf83fcde4d091a9d6d14a92f7ba2f89c9c4e2ad1a1512886b01f49c8"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/HANDOFF.md",
+      "bytes": 8160,
+      "sha256": "f3e5a678e159a2a0019c63ca5a46b78440d44c981915ca87d4ac75fdd31637b8"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/toolchain.log",
+      "bytes": 118,
+      "sha256": "d610180e0db8d52a3f319bdb44014f435ebffa2158eb82d91c72d1ec81c1cb2d"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wake-tests-attempt-2.log",
+      "bytes": 4006,
+      "sha256": "6d8dd44899848f14ed6af2030eb9947dcc54a9672f91a8af6e7dec7e546be262"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wake-tests-attempt-3.log",
+      "bytes": 3476,
+      "sha256": "0e3f52adb27fc61ac18478e7a2ac3c1bd83ab7a1f2223cc2898cf3712bd25a2c"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wake-tests-attempt.log",
+      "bytes": 6637,
+      "sha256": "78ed26c8da8958e6e68e56d55c4de9acf47b7aac09c8735e6a43bb92fb7946d3"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wire-fixtures/legacy.json",
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wire-fixtures/ordinary-evolution-1.json",
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wire-fixtures/ordinary-evolution-2.json",
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wire-fixtures/ordinary-evolution-3.json",
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wire-fixtures/ordinary-evolution-4.json",
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-ion-wake/wire-fixtures/ordinary-evolution-5.json",
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    }
+  ],
+  "review_evidence": [
+    {
+      "path": "work/ion-wake-review/REVIEW.md",
+      "bytes": 7920,
+      "sha256": "18464778988e14143f46b0efa93d0dccd290883b1ec9451bd99f72125db0be88"
+    },
+    {
+      "path": "work/ion-wake-review/verification.json",
+      "bytes": 14428,
+      "sha256": "5bdf393be077f17181b85ff5b159ae4aa4037ab4c39f122945993e0175a3687d"
+    },
+    {
+      "path": "work/ion-wake-review/verify.log",
+      "bytes": 756,
+      "sha256": "c72854e9dd309e47f5ba4a335e40799279e39acf97fc9731e8fcf6b080cf2db0"
+    },
+    {
+      "path": "work/ion-wake-review/verify.py",
+      "bytes": 5404,
+      "sha256": "5adf94a7e801294ee418a78b45dd376c219b04c5004e08e2fc17eaeba1b34723"
+    }
+  ],
+  "verdict": "No native source blocker in ordinary ID5 scope; matching browser integration/testing needed; no RTC/visual/performance acceptance."
+}

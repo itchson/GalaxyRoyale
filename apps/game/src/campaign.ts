@@ -1,5 +1,11 @@
 import "./campaign.css";
 import type { LoadoutShipHud } from "./loadout";
+import type { KikaiIdentity } from "./storage";
+
+export interface ChampionIdentity extends KikaiIdentity {
+  designation: string;
+  short_designation: string;
+}
 
 export interface Champion {
   index: number;
@@ -15,6 +21,13 @@ export interface Champion {
   patch: boolean;
   blueprint: boolean;
   crafted: boolean;
+  discovered?: boolean;
+  identity: ChampionIdentity | null;
+  sponsor: KikaiIdentity["corporation"] | null;
+  display_model: string;
+  legacy_model: string;
+  legacy_species: string;
+  introduction: string;
 }
 export interface CampaignHud {
   champions: Champion[];
@@ -96,18 +109,45 @@ export function paintCampaign(
   target.append(
     text(
       "p",
-      `${collected}/8 ARENA PATCHES / defeat champions to earn their ship blueprints.`,
+      `${collected}/8 ARENA PATCHES / defeat champions to earn hull blueprints.`,
     ),
   );
   const roster = document.createElement("div");
   roster.className = "campaign-roster";
-  for (const champion of hud.champions) {
+  const knownChampions = hud.champions.filter(
+    (champion) => champion.discovered ?? champion.blueprint,
+  );
+  if (!knownChampions.length)
+    roster.append(
+      text(
+        "p",
+        "Explore to discover arena champions and their RAICHO. Unfound rewards stay hidden.",
+      ),
+    );
+  for (const champion of knownChampions) {
     const card = document.createElement("article");
     card.className = "campaign-card";
     card.append(icon("campaign-patch", champion.index, champion.patch));
     const content = document.createElement("div");
     content.append(text("h3", `${champion.name} / ${champion.species}`));
+    if (champion.identity)
+      content.append(
+        text(
+          "p",
+          `${champion.identity.short_designation} / ${champion.sponsor?.toUpperCase() ?? "INDEPENDENT"} SPONSORED`,
+        ),
+      );
     content.append(text("p", `${champion.ship} / ${champion.ability}`));
+    const collectionState = text(
+      "p",
+      champion.crafted
+        ? "HULL OWNED / SELECT IN HULL COLLECTION"
+        : champion.blueprint
+          ? "HULL BLUEPRINT / CRAFT IN HULL COLLECTION"
+          : "ARENA FOUND / DEFEAT TO EARN HULL BLUEPRINT",
+    );
+    collectionState.className = "campaign-collection-state";
+    content.append(collectionState);
     content.append(
       text(
         "p",

@@ -19,7 +19,7 @@ assert.ok(adapter);
 const compiled = ts.transpileModule(adapter.getText(source), {
   compilerOptions: { target: ts.ScriptTarget.ES2022 },
 }).outputText;
-function fixture(height, viewport, rect, text) {
+function fixture(height, viewport, rect, text, navigation = []) {
   const values = new Map(),
     writes = [];
   const blockers = new Map();
@@ -37,6 +37,7 @@ function fixture(height, viewport, rect, text) {
     viewport: () => new Float32Array(viewport),
     flight_status_bounds: () => new Float32Array(rect),
     flight_status_text_bounds: () => new Float32Array(text),
+    flight_navigation_bounds: () => new Float32Array(navigation),
   };
   const context = vm.createContext({
     innerHeight: height,
@@ -71,6 +72,31 @@ function fixture(height, viewport, rect, text) {
     run: () => context.syncFlightStatusLayout(),
   };
 }
+test("clear native glyphs cannot create a context hit that covers the top-right map", () => {
+  const f = fixture(
+    180,
+    [320, 180],
+    [134, 54, 180, 22],
+    [134, 66, 180, 5],
+    [270, 6, 44, 44],
+  );
+  f.run();
+  assert.equal(f.strip.dataset.contextAvailable, "true");
+  assert.equal(f.strip.dataset.contextInteractive, "false");
+  const scaled = fixture(
+    720,
+    [640, 360],
+    [454, 54, 180, 22],
+    [454, 66, 180, 5],
+    [590, 6, 44, 44],
+  );
+  scaled.run();
+  assert.equal(
+    scaled.strip.dataset.contextInteractive,
+    "true",
+    "44px target clears the map at desktop uiScale2",
+  );
+});
 test("actual native strip and text bounds scale together without rounding fractional quad geometry", () => {
   const f = fixture(720, [426.6667, 240], [6, 212, 414, 22], [12, 226, 402, 7]);
   f.run();

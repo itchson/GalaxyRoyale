@@ -1,0 +1,11 @@
+✔ named T1 subsets sum to the true cargo and bank totals, never double counted (1.3654ms)
+✔ banking updates inventory while unchanged snapshots retain DOM and scroll (0.5347ms)
+✔ only active courier packets appear as mission items, with actual delivery state (0.6107ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 222.6367

@@ -1,0 +1,62 @@
+{
+  "card": {
+    "height": 414,
+    "width": 300,
+    "x": 274,
+    "y": 33
+  },
+  "children": [
+    {
+      "bottom": 106.65000343322754,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 91.8000030517578
+    },
+    {
+      "bottom": 146.50000953674316,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 131.65000915527344
+    },
+    {
+      "bottom": 195.5,
+      "id": "coop-join-input",
+      "inside": true,
+      "tag": "INPUT",
+      "top": 151.5
+    },
+    {
+      "bottom": 244.5,
+      "id": "coop-create",
+      "inside": true,
+      "tag": "BUTTON",
+      "top": 200.5
+    },
+    {
+      "bottom": 244.5,
+      "id": "coop-join",
+      "inside": true,
+      "tag": "BUTTON",
+      "top": 200.5
+    },
+    {
+      "bottom": 312.9000015258789,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 253.5
+    }
+  ],
+  "content": {
+    "bottom": 415.40000915527344,
+    "height": 324,
+    "scrollHeight": 324,
+    "top": 91.8000030517578
+  },
+  "viewport": [
+    848,
+    480
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "scope": "Independent frozen source, preserved raw logs and compiled-input/measurement arithmetic review; no native rerun, whole-workspace/build/browser/RTC/GPU/listener or throughput claim",
+  "candidate": "d8ec6294976f54d26aab9ffaf5fc3dc251cb170a",
+  "parent": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "source_pins": [
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "category": "changed_sources",
+      "git_blob": "03b9664b7e4ec4d17b075e82e301c76ca082b223",
+      "canonical_bytes": 5547,
+      "canonical_sha256": "bd2c5f1ea302b126e3fdee1bc1224342ab7788956947cd05cc4c1a819a39021f",
+      "raw_bytes": 5547,
+      "raw_sha256": "bd2c5f1ea302b126e3fdee1bc1224342ab7788956947cd05cc4c1a819a39021f",
+      "snapshot": "source/crates/game_core/src/co_op_wake.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "category": "changed_sources",
+      "git_blob": "281964f75538bc049daa743e478e9b1b78532380",
+      "canonical_bytes": 34194,
+      "canonical_sha256": "1dbb3116adb4426cd9b5cc2a3d6fd45f2f05ff220efa799befa66eae04c5f0db",
+      "raw_bytes": 34194,
+      "raw_sha256": "1dbb3116adb4426cd9b5cc2a3d6fd45f2f05ff220efa799befa66eae04c5f0db",
+      "snapshot": "source/crates/game_core/src/co_op_wake_tests.rs"
+    },
+    {
+      "path": "Cargo.toml",
+      "category": "unchanged_sources",
+      "git_blob": "06af63f286fff4c4de784049248b574692aef286",
+      "canonical_bytes": 447,
+      "canonical_sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "raw_bytes": 467,
+      "raw_sha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27",
+      "snapshot": "source/Cargo.toml"
+    },
+    {
+      "path": "Cargo.lock",
+      "category": "unchanged_sources",
+      "git_blob": "4ca62ada4b783e51af87be2def98419ea80977ff",
+      "canonical_bytes": 27800,
+      "canonical_sha256": "bc919f0f4492cedaf76458d59304a0df851bf6cc5c60e109e0ac4e440e24bd9c",
+      "raw_bytes": 28916,
+      "raw_sha256": "d2e5246ec6a928e39823a72eceba6a342cabba9ed3706b287a00b6c74b25f120",
+      "snapshot": "source/Cargo.lock"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "category": "unchanged_sources",
+      "git_blob": "4ba1308947e7a7280a5ab4ff86ab08f633d120c8",
+      "canonical_bytes": 285,
+      "canonical_sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "raw_bytes": 301,
+      "raw_sha256": "9808ea450c15c662f8b2168d232905b1485c3d22a8f4bf58e595b79ed03396f1",
+      "snapshot": "source/crates/game_core/Cargo.toml"
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "category": "unchanged_sources",
+      "git_blob": "01e6b6b217d71c36986ed5404c87a7eb1085f3aa",
+      "canonical_bytes": 51682,
+      "canonical_sha256": "3ed2e9a84792ca2d96eb4e1b4d6942a4ab1e9b72a934bf9b55148212b0d5fa99",
+      "raw_bytes": 51682,
+      "raw_sha256": "3ed2e9a84792ca2d96eb4e1b4d6942a4ab1e9b72a934bf9b55148212b0d5fa99",
+      "snapshot": "source/crates/game_core/src/co_op.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_fx.rs",
+      "category": "unchanged_sources",
+      "git_blob": "3df2426237babfb5923cfbd83fc50d0c934ab6de",
+      "canonical_bytes": 6201,
+      "canonical_sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb",
+      "raw_bytes": 6201,
+      "raw_sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb",
+      "snapshot": "source/crates/game_core/src/co_op_wake_fx.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "category": "unchanged_sources",
+      "git_blob": "675aff7eaabd64e4f6857cc6ab826da72afd3a1d",
+      "canonical_bytes": 9583,
+      "canonical_sha256": "c1bbb4642a9493a071c76dbd7684904c35157afef4e247a34b38663ccde7b54f",
+      "raw_bytes": 9583,
+      "raw_sha256": "c1bbb4642a9493a071c76dbd7684904c35157afef4e247a34b38663ccde7b54f",
+      "snapshot": "source/crates/game_core/src/co_op_publish.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "category": "unchanged_sources",
+      "git_blob": "7d4c32e5ab17c726ddee8f85deb7861522081c54",
+      "canonical_bytes": 55071,
+      "canonical_sha256": "3d077be3ee58b081302f16020bed3237c2717ec082baa84efdffec89b836dcba",
+      "raw_bytes": 55071,
+      "raw_sha256": "3d077be3ee58b081302f16020bed3237c2717ec082baa84efdffec89b836dcba",
+      "snapshot": "source/crates/game_core/src/co_op_replica.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_wake_tests.rs",
+      "category": "unchanged_sources",
+      "git_blob": "bc0c168f91005ed242f1e35a3746953896b13cd4",
+      "canonical_bytes": 30484,
+      "canonical_sha256": "bf7024cd560d81d0e2dde3664b847ebd1ece78ccd476fb4fc03fff88e92df63a",
+      "raw_bytes": 30484,
+      "raw_sha256": "bf7024cd560d81d0e2dde3664b847ebd1ece78ccd476fb4fc03fff88e92df63a",
+      "snapshot": "source/crates/game_core/src/co_op_replica_wake_tests.rs"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "category": "unchanged_sources",
+      "git_blob": "6711231cfc043b5e721ab36a94125ddd0148659e",
+      "canonical_bytes": 197054,
+      "canonical_sha256": "fd6e46d4cdff291fca626e407fe1ebbb060b70a2d9ddd569781655c3558e18e5",
+      "raw_bytes": 197054,
+      "raw_sha256": "fd6e46d4cdff291fca626e407fe1ebbb060b70a2d9ddd569781655c3558e18e5",
+      "snapshot": "source/crates/game_core/src/lib.rs"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "category": "unchanged_sources",
+      "git_blob": "c64e5ac841cd962c8b104269a0d4e245a5cbd13a",
+      "canonical_bytes": 7596,
+      "canonical_sha256": "eb230f2e1944fbc345b7650de9ab22ebf218341fdd2866ee13c7115c72070d4f",
+      "raw_bytes": 7859,
+      "raw_sha256": "0e84c662a85118ee02a7ff5806124185c328eca5c37e1768aec446b69b62fd3e",
+      "snapshot": "source/crates/game_web/src/co_op_bridge.rs"
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "category": "unchanged_sources",
+      "git_blob": "b429ea2a3afb44e10ddb91660aa0cb23af19d117",
+      "canonical_bytes": 14332,
+      "canonical_sha256": "5331a410cc7de1a21aa78b32919d22e7ec733d699f0730d98b3c8a4cef94628c",
+      "raw_bytes": 14332,
+      "raw_sha256": "5331a410cc7de1a21aa78b32919d22e7ec733d699f0730d98b3c8a4cef94628c",
+      "snapshot": "source/crates/game_web/src/co_op_replica_bridge.rs"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "category": "unchanged_sources",
+      "git_blob": "51920f77e532afd967cafad3bb268f99000f8767",
+      "canonical_bytes": 50262,
+      "canonical_sha256": "e099e7e6bdbcd279c4db8c8e40452b2c3f26d228ff27b2461dc434856a0bf897",
+      "raw_bytes": 50262,
+      "raw_sha256": "e099e7e6bdbcd279c4db8c8e40452b2c3f26d228ff27b2461dc434856a0bf897",
+      "snapshot": "source/apps/game/src/audio.ts"
+    },
+    {
+      "path": "apps/game/src/title-theme.ts",
+      "category": "unchanged_sources",
+      "git_blob": "d36ca6d851f00444a49cd8ace0bf74a69ce95d45",
+      "canonical_bytes": 2787,
+      "canonical_sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "raw_bytes": 2787,
+      "raw_sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "snapshot": "source/apps/game/src/title-theme.ts"
+    }
+  ],
+  "raw_author_evidence_pins": 19,
+  "compiled_snapshot_files_verified": 170,
+  "same_compiled_probe_verified": true,
+  "only_runtime_variant": "crates/game_core/src/co_op_wake.rs",
+  "canonical_probe_sha256": "a75b3d4e1c8159dafcc2fdaa103f9107b0e0cfec0624ee083aa3f4971017c6a9",
+  "raw_probe_sha256": "4e89e82aa07b1ec39d49fc5c6e7f5fe5cff429ce1ae3a816bef7ee53e6df394a",
+  "measurement_summaries_recomputed": [
+    {
+      "case": "empty_local_no_targets",
+      "before": {
+        "allocation_requests_per_stage": 0,
+        "requested_bytes_per_stage": 0,
+        "instrumented_median_us_per_stage": 0.9049999999999999
+      },
+      "after": {
+        "allocation_requests_per_stage": 0,
+        "requested_bytes_per_stage": 0,
+        "instrumented_median_us_per_stage": 0.8949999999999999
+      }
+    },
+    {
+      "case": "full_local_no_targets",
+      "before": {
+        "allocation_requests_per_stage": 1872,
+        "requested_bytes_per_stage": 179904,
+        "instrumented_median_us_per_stage": 122.45666666666666
+      },
+      "after": {
+        "allocation_requests_per_stage": 1872,
+        "requested_bytes_per_stage": 179904,
+        "instrumented_median_us_per_stage": 122.1375
+      }
+    },
+    {
+      "case": "full_local_48_misses",
+      "before": {
+        "allocation_requests_per_stage": 1872,
+        "requested_bytes_per_stage": 179904,
+        "instrumented_median_us_per_stage": 117.10083333333334
+      },
+      "after": {
+        "allocation_requests_per_stage": 1872,
+        "requested_bytes_per_stage": 179904,
+        "instrumented_median_us_per_stage": 114.35
+      }
+    },
+    {
+      "case": "empty_remote_48_misses",
+      "before": {
+        "allocation_requests_per_stage": 3840,
+        "requested_bytes_per_stage": 359424,
+        "instrumented_median_us_per_stage": 186.35750000000002
+      },
+      "after": {
+        "allocation_requests_per_stage": 0,
+        "requested_bytes_per_stage": 0,
+        "instrumented_median_us_per_stage": 1.8566666666666665
+      }
+    },
+    {
+      "case": "full_remote_48_misses",
+      "before": {
+        "allocation_requests_per_stage": 5712,
+        "requested_bytes_per_stage": 539328,
+        "instrumented_median_us_per_stage": 300.3683333333333
+      },
+      "after": {
+        "allocation_requests_per_stage": 1872,
+        "requested_bytes_per_stage": 179904,
+        "instrumented_median_us_per_stage": 114.79583333333333
+      }
+    }
+  ],
+  "requests_removed_for_48_remote_misses_per_stage": 3840,
+  "requested_bytes_removed_per_stage": 359424,
+  "unchanged_full_link_baseline": {
+    "requests": 1872,
+    "requested_bytes": 179904
+  },
+  "author_recorded_checks": {
+    "Wake": 15,
+    "co_op": 129,
+    "co_op_ignored": 4,
+    "strict_game_core_all_targets_clippy": "passed"
+  },
+  "verdict": "No source/probe provenance blocker for bounded integration; protection and damage semantics remain authoritative before collection/damage; whole-tick/whole-game and real performance gates remain open"
+}

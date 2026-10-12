@@ -1,0 +1,12 @@
+test_corporate_hair_and_horn_roles_are_disjoint_and_signals_belong_to_horns (__main__.KikaiTests.test_corporate_hair_and_horn_roles_are_disjoint_and_signals_belong_to_horns) ... ok
+test_different_source_shape_refuses_an_implicit_recrop (__main__.KikaiTests.test_different_source_shape_refuses_an_implicit_recrop) ... ok
+test_exact_authored_pngs_roundtrip_every_index_and_palette (__main__.KikaiTests.test_exact_authored_pngs_roundtrip_every_index_and_palette) ... ok
+test_onboarding_dialogue_uses_declared_actual_stages_and_bounded_plain_pages (__main__.KikaiTests.test_onboarding_dialogue_uses_declared_actual_stages_and_bounded_plain_pages) ... ok
+test_portrait_layers_do_not_overlap_or_change_occupied_mask_between_states (__main__.KikaiTests.test_portrait_layers_do_not_overlap_or_change_occupied_mask_between_states) ... ok
+test_source_loss_is_declared_and_no_component_is_silently_removed (__main__.KikaiTests.test_source_loss_is_declared_and_no_component_is_silently_removed) ... ok
+test_ten_controls_are_original_32_cell_silhouettes_with_six_role_palette (__main__.KikaiTests.test_ten_controls_are_original_32_cell_silhouettes_with_six_role_palette) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.188s
+
+OK

@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "authorship": "Original96-cell overhead material planes, canopy clusters, vents, rails, reactor windows and fasteners authored by Codex in Python.",
+  "generation_model": null,
+  "source_geometry": "Integer rational reconstruction of accepted48 starter silhouette fields; no source RGBA resizing.",
+  "reference_geometry_commit": "f69d6cbe8d58d182da6e45460b42b963655c5fbc",
+  "reference_geometry_path": "crates/game_core/src/identity.rs:STARTERS",
+  "new_detail": "Fine cluster geometry/colors authored directly at96; not doubled48 color blocks.",
+  "conversion_loss": "none between authored native-grid PNG and packed cells; proposed Hugo surface has declared fine perimeter inset",
+  "source_grid": [
+    96,
+    96
+  ],
+  "reference48_occupied": [
+    662,
+    688,
+    1040
+  ],
+  "palette_count": 32,
+  "alpha_policy": "exact binary",
+  "components": "all retained",
+  "source_png_encoding": "fixed filter0 / stored DEFLATE, independent of linked compressor",
+  "atlas_sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+  "source_sha256": {
+    "pan_hikari": "ffa9a65986335f8f5151f88478d64c1e7167b23dbbae05d44445df90fded4a7d",
+    "pan_hikari_fine": "78079e3ba3a971c3c21877730374f5ba88e8ba8b2aab0dee486393e007221f57",
+    "renko_hibana": "655813bb706b5f319b411e7480ca0662e6e1bad6af22b9d946ffa89fb0a9d6d9",
+    "renko_hibana_fine": "f41a536633b43423d9dc652bc1fb80c4cf2232cd9bf2ad6b96e8a43398647174",
+    "hugo_mamori": "910f9eb69b6ace24e054416983769de98696f07084be490aa613f9539c9d53f1",
+    "hugo_mamori_fine": "92e6f8d771799448b04021aa6a92c7d4f4587dd13f51662700f0f76d7770bacd"
+  },
+  "code_fingerprint_policy": "UTF-8 source bytes with CRLF normalized to LF; PNG, manifest and atlas hashes retain exact raw bytes",
+  "authoring_inputs": {
+    "asset-raicho-fine.py": "fbfbf7cffa3a42d8e8f9ad73b7cd4c39384a41fdb671c619c6b75d5d13b5dc9a",
+    "asset-pack.py": "dc1673175eadf56042d273e6d816d93eb36ce9517c7dd75e85d39f276bca1e35",
+    "asset-flight-icons.py": "ebda1cb6420a1dba745ee65b66a4ef784a3b73828106e4f3678890e40df16433"
+  },
+  "budgets": {
+    "pan_hikari": {
+      "occupied": 2648,
+      "signals": 31,
+      "fine": 1205,
+      "materials": {
+        "metal": 1613,
+        "recess": 487,
+        "glass": 176,
+        "main_accent": 208,
+        "reactor": 114,
+        "exhaust": 20,
+        "fastener": 30
+      }
+    },
+    "pan_hikari_fine": {
+      "occupied": 1205,
+      "signals": 31,
+      "fine": 1205,
+      "materials": {
+        "metal": 170,
+        "recess": 487,
+        "glass": 176,
+        "main_accent": 208,
+        "reactor": 114,
+        "exhaust": 20,
+        "fastener": 30
+      }
+    },
+    "renko_hibana": {
+      "occupied": 2752,
+      "signals": 27,
+      "fine": 1176,
+      "materials": {
+        "metal": 1800,
+        "recess": 583,
+        "glass": 104,
+        "main_accent": 83,
+        "reactor": 114,
+        "exhaust": 20,
+        "fastener": 48
+      }
+    },
+    "renko_hibana_fine": {
+      "occupied": 1176,
+      "signals": 27,
+      "fine": 1176,
+      "materials": {
+        "metal": 224,
+        "recess": 583,
+        "glass": 104,
+        "main_accent": 83,
+        "reactor": 114,
+        "exhaust": 20,
+        "fastener": 48
+      }
+    },
+    "hugo_mamori": {
+      "occupied": 3736,
+      "signals": 31,
+      "fine": 1740,
+      "materials": {
+        "metal": 2389,
+        "recess": 719,
+        "glass": 206,
+        "main_accent": 256,
+        "reactor": 114,
+        "exhaust": 20,
+        "fastener": 32
+      }
+    },
+    "hugo_mamori_fine": {
+      "occupied": 1740,
+      "signals": 31,
+      "fine": 1740,
+      "materials": {
+        "metal": 393,
+        "recess": 719,
+        "glass": 206,
+        "main_accent": 256,
+        "reactor": 114,
+        "exhaust": 20,
+        "fastener": 32
+      }
+    }
+  },
+  "review_scope": "Source-native PNG cells and declared nearest29/48/77px software samples only; no native extraction, GPU, animation, damage integration, human or device acceptance."
+}

@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "source_commit": "38742784f6000135a68354750bdf0d3204334422",
+  "native_authority_commit": "60934969913ad1e49a3ce4b2b63af514d890518b",
+  "domain": "Source: committed Git LF and observed raw working bytes, LF equivalence verified. Evidence: raw bytes.",
+  "source": [
+    {
+      "path": "apps/game/src/coop/signaling.ts",
+      "git_lf_sha256": "5582f1434b5e9b485c08dd41463e349e04bacdf7cc2409f6b9b71a4e15eaf120",
+      "git_lf_bytes": 5192,
+      "raw_sha256": "5582f1434b5e9b485c08dd41463e349e04bacdf7cc2409f6b9b71a4e15eaf120",
+      "raw_bytes": 5192
+    },
+    {
+      "path": "apps/game/src/coop/transport.ts",
+      "git_lf_sha256": "18070f8a5d92c6e25f63d4dce55e60af2115787c39d7acecf3f3f6b97e417b4b",
+      "git_lf_bytes": 27184,
+      "raw_sha256": "18070f8a5d92c6e25f63d4dce55e60af2115787c39d7acecf3f3f6b97e417b4b",
+      "raw_bytes": 27184
+    },
+    {
+      "path": "apps/game/src/coop/wire.ts",
+      "git_lf_sha256": "b7918003fac1a7d20dfff32696277a8bb3be98cfe8c7cdb88eb4aca59db6d5b8",
+      "git_lf_bytes": 13495,
+      "raw_sha256": "b7918003fac1a7d20dfff32696277a8bb3be98cfe8c7cdb88eb4aca59db6d5b8",
+      "raw_bytes": 13495
+    },
+    {
+      "path": "scripts/qa/co-op-transport/prepare.mjs",
+      "git_lf_sha256": "ae0a8813897f2ec903207d3d869bdb91a1eb2b38b74e48e03c9a7a464d240297",
+      "git_lf_bytes": 3511,
+      "raw_sha256": "ae0a8813897f2ec903207d3d869bdb91a1eb2b38b74e48e03c9a7a464d240297",
+      "raw_bytes": 3511
+    },
+    {
+      "path": "scripts/qa/co-op-transport/review.html",
+      "git_lf_sha256": "173e2a4d5520231befb3cb09e589812e8aa535a3bf1d0ccfc475a5d5d6c1d48b",
+      "git_lf_bytes": 1856,
+      "raw_sha256": "173e2a4d5520231befb3cb09e589812e8aa535a3bf1d0ccfc475a5d5d6c1d48b",
+      "raw_bytes": 1856
+    },
+    {
+      "path": "scripts/qa/co-op-transport/review.js",
+      "git_lf_sha256": "75285248e89dc4c3fbd1967941eb4b2748bcd8eb2eabffbdb1b98c81084a8e06",
+      "git_lf_bytes": 7905,
+      "raw_sha256": "75285248e89dc4c3fbd1967941eb4b2748bcd8eb2eabffbdb1b98c81084a8e06",
+      "raw_bytes": 7905
+    },
+    {
+      "path": "scripts/qa/co-op-transport/server.mjs",
+      "git_lf_sha256": "ae78feca1a41363c7f93fac0d2838fb57ce57e619400598a5f627d1832be7253",
+      "git_lf_bytes": 8391,
+      "raw_sha256": "ae78feca1a41363c7f93fac0d2838fb57ce57e619400598a5f627d1832be7253",
+      "raw_bytes": 8391
+    },
+    {
+      "path": "scripts/test/coop-transport-qa.test.mjs",
+      "git_lf_sha256": "11478dc767e3eaf3008a2a8931ceeef91aec229e68ea261376c9c586fc44a149",
+      "git_lf_bytes": 5302,
+      "raw_sha256": "11478dc767e3eaf3008a2a8931ceeef91aec229e68ea261376c9c586fc44a149",
+      "raw_bytes": 5302
+    },
+    {
+      "path": "scripts/test/coop-transport.test.mjs",
+      "git_lf_sha256": "973a8f697a6e7cffc29db5f7c21c20636e5a20c2ba84a1b0dc133fb9edf9c2d4",
+      "git_lf_bytes": 27023,
+      "raw_sha256": "973a8f697a6e7cffc29db5f7c21c20636e5a20c2ba84a1b0dc133fb9edf9c2d4",
+      "raw_bytes": 27023
+    },
+    {
+      "path": "apps/coop/store.mjs",
+      "git_lf_sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a",
+      "git_lf_bytes": 19460,
+      "raw_sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a",
+      "raw_bytes": 19460
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "git_lf_sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20",
+      "git_lf_bytes": 11691,
+      "raw_sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20",
+      "raw_bytes": 11691
+    },
+    {
+      "path": "package.json",
+      "git_lf_sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b",
+      "git_lf_bytes": 1085,
+      "raw_sha256": "d04f8b6033d1ed21cfdf8afa2ef2315d8e4b5279bd8068508ce25b303d90d902",
+      "raw_bytes": 1113
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "git_lf_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "git_lf_bytes": 21972,
+      "raw_sha256": "aab28ac69c754ea40aaf58749f6a97f1983f70307053ac5fcf70b5495e8fa2ed",
+      "raw_bytes": 22682
+    },
+    {
+      "path": "tsconfig.json",
+      "git_lf_sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db",
+      "git_lf_bytes": 291,
+      "raw_sha256": "fd047473fcc1dde40dcba9d9eeec5a1fa669293a8f06e18ac34bd4c537bdd143",
+      "raw_bytes": 298
+    }
+  ],
+  "evidence": [
+    {
+      "path": "work/co-op-transport-review/actual-segment-page.json",
+      "raw_sha256": "2f98830878dc86104acca83267414d4afc889f590020e7a295799378478e33bb",
+      "raw_bytes": 18478
+    },
+    {
+      "path": "work/co-op-transport-review/baseline-page-rejection.log",
+      "raw_sha256": "98132d4a0849c9cbcb701019e9f4d1b60d05c36291eff09dde4d1c8e968303d4",
+      "raw_bytes": 1296
+    },
+    {
+      "path": "work/co-op-transport-review/baseline-wire.ts",
+      "raw_sha256": "dd1e0d3e031ae814c11449e30ecf05ad16129f236bea521ddfea4e3a485bf688",
+      "raw_bytes": 13257
+    },
+    {
+      "path": "work/co-op-transport-review/final-wire.ts",
+      "raw_sha256": "b7918003fac1a7d20dfff32696277a8bb3be98cfe8c7cdb88eb4aca59db6d5b8",
+      "raw_bytes": 13495
+    },
+    {
+      "path": "work/co-op-transport-review/fixture-compatibility-final.log",
+      "raw_sha256": "51be3374ee33ca978747e165d9b5895d77440451a65ac19d5cd3f00c03d74a48",
+      "raw_bytes": 887
+    },
+    {
+      "path": "work/co-op-transport-review/focused-final.log",
+      "raw_sha256": "08daf3efff921ec0595c306028dee85413efac5a34e81b6ccf010425bf000b67",
+      "raw_bytes": 2925
+    },
+    {
+      "path": "work/co-op-transport-review/native-page-probe-initial.log",
+      "raw_sha256": "12a3f96a43b8d41d90ce33c6f004d938518b654561b28dea887503888278e559",
+      "raw_bytes": 865
+    },
+    {
+      "path": "work/co-op-transport-review/native-page-probe.log",
+      "raw_sha256": "cb79f1f59353fbff0f65638dc62f181d348630f177e89aec807b6f813d6d1594",
+      "raw_bytes": 352
+    },
+    {
+      "path": "work/co-op-transport-review/native-probe/Cargo.lock",
+      "raw_sha256": "d19e31cf21b1e6ab9630f11811c850f1299d4bb1126363c34ba091422a2c1d35",
+      "raw_bytes": 4479
+    },
+    {
+      "path": "work/co-op-transport-review/native-probe/Cargo.toml",
+      "raw_sha256": "df00457a074e0487649ca5b48356b59982a9faeac8601e524acb68f5ddf7d940",
+      "raw_bytes": 177
+    },
+    {
+      "path": "work/co-op-transport-review/native-probe/src/main.rs",
+      "raw_sha256": "ae219c846089ed01ffad16796ddb82a21b9235419cc55ff4c83658bc94b60116",
+      "raw_bytes": 1363
+    },
+    {
+      "path": "work/co-op-transport-review/REVIEW.md",
+      "raw_sha256": "5a7a6be90677cc798f78f412d616558572821837b37372e1b9aa9bf4a0d4625d",
+      "raw_bytes": 4846
+    },
+    {
+      "path": "work/co-op-transport-review/validate-fixtures.mjs",
+      "raw_sha256": "f6d634d30141354f4a551ca68e22600271a5087a58db8a07e97fa6d6b71b44d6",
+      "raw_bytes": 2179
+    },
+    {
+      "path": "work/co-op-transport-review/validate-page.mjs",
+      "raw_sha256": "00b2aff975edf1715cb9c8362886e82b696b0ddcea848ecdc88adba9a7591b37",
+      "raw_bytes": 752
+    },
+    {
+      "path": "work/co-op-authority/serialization/admissions.json",
+      "raw_sha256": "b81f1459215fdbfc7f2a7e9dff964be2fa6c98d756a75da141d77fff5fbbd7db",
+      "raw_bytes": 490
+    },
+    {
+      "path": "work/co-op-authority/serialization/body.json",
+      "raw_sha256": "4edca76b8c98e2683bdaf8e496ea66a7b8c4ee4aed90f1ba6311f10cc7547167",
+      "raw_bytes": 18289
+    },
+    {
+      "path": "work/co-op-authority/serialization/entities.json",
+      "raw_sha256": "4ab867baabd41e11da0614dd30777c1ff114a9dfc5bbac4b3ec8d627e5df2168",
+      "raw_bytes": 20814
+    },
+    {
+      "path": "work/co-op-authority/serialization/input.json",
+      "raw_sha256": "f88c33d374addc23a244517657d6c5fe60c9f940a4f31e7cfee56eb51dc0def0",
+      "raw_bytes": 117
+    },
+    {
+      "path": "work/co-op-authority/serialization/snapshot.json",
+      "raw_sha256": "7d9102ced00b45fa912be88264c792cd48aa9ea63f3814e5cb7a02d01cbf8021",
+      "raw_bytes": 45004
+    }
+  ],
+  "result": {
+    "remaining_source_blockers": 0,
+    "focused_pass": 27,
+    "browser_rtc_executed": false,
+    "native_page_probe_tick": 1460
+  }
+}

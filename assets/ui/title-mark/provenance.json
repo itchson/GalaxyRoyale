@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "generated_reference": "reference.png",
+  "reference_sha256": "c995256c188af6c24ec94f0a062d17c0c8aa4b12fb73fef62b175474159b52a2",
+  "dimensions": [
+    2048,
+    768
+  ],
+  "tool": "built-in image_gen.imagegen",
+  "model_version": "not exposed by tool",
+  "transparent_background_requested": true,
+  "actual_alpha": "Raw output retained. Partially transparent pixels and near-black haze/recess cells are present; conversion declares alpha>=128 and maxRGB>=40 cutout policy.",
+  "prompt": "PROMPT.txt",
+  "generation_date_local": "2026-10-12",
+  "generated_output": "exec-a4586172-a7bb-4d04-9257-f6cdacd08db1.png",
+  "native_authoring": "Explicit512x192 conversion through asset-pack, exact nine-subobject partition and energy/metal/award masks. Only the gold award face moves; authored arena light chase and narrow metal sweep change explicit masks. No additional glitter, model-generated animation or lossless reference conversion claim.",
+  "reference_status": "Sports-league revision requested by the user. Root inspected the reference and source-cell identity; final browser presentation and user approval remain separate.",
+  "historical_reference": "Previous fantasy/adventure wordmark at ee16cea is superseded. Its source/native proof remain in Git history and work/title-mark; work/title-sports-mark/historical/title-mark retains the earlier asset folder.",
+  "acceptance": "Native source/extraction tested. Actual WebGPU/WebGL2 presentation, subjective title readability and final user approval remain separate. Title MP3 is pending user supply."
+}

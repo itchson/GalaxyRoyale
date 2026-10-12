@@ -1,0 +1,13 @@
+✔ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (8.5425ms)
+✔ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.0365ms)
+✔ mutation success is not a committed-save claim while deferred persistence fails (1.413ms)
+✔ component workshop reveals only discovered recipes and delegates exact authoritative actions (3.6197ms)
+✔ advanced ability recipes include banked crafted components without changing starter training (1.0633ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 299.9014

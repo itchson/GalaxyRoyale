@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "scope": "Read-only final log, current preview fingerprint, and matching Vite process audit; no tests/build/browser/server actions",
+  "root": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale",
+  "head": "f3a723081033a2cdd9bab15e37241fe334530716",
+  "logTotals": {
+    "native": {
+      "passed": 680,
+      "failed": 0,
+      "ignored": 1,
+      "parts": [
+        37,
+        3,
+        368,
+        241,
+        31
+      ]
+    },
+    "shell": {
+      "total": 426,
+      "passed": 425,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "skip": "Windows file-symlink privilege is unavailable; directory-junction coverage remains active"
+    }
+  },
+  "build": {
+    "verifiedAt": "2026-10-11T14:14:44.934Z",
+    "stamp": {
+      "schemaVersion": 1,
+      "head": "f3a723081033a2cdd9bab15e37241fe334530716",
+      "branch": "codex/testing",
+      "sourceHash": "adfb3ad34b0c4499b98fc76ba089386a0d0bd5d099ff43210e86298410b26d3c",
+      "packageHash": "0edfe1a2d7112494f4d504b68e1564bb0e16a5b6fa7f0442516f7a81d73894b5",
+      "builtAt": "2026-10-11T14:06:18.939Z"
+    },
+    "previewRecordMatchesBuild": true
+  },
+  "process": {
+    "observedAt": "2026-10-11T14:14:44.9919481Z",
+    "count": 1,
+    "processes": [
+      {
+        "ProcessId": 4912,
+        "ParentProcessId": 28024,
+        "CreationDate": "2026-10-12T00:06:19.596807+10:00",
+        "Name": "node.exe",
+        "ExecutablePath": "C:\\Program Files\\nodejs\\node.exe",
+        "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\node_modules\\vite\\bin\\vite.js preview --config apps/game/vite.config.ts"
+      }
+    ],
+    "listeners": [
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 4173,
+        "OwningProcess": 4912
+      },
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 4172,
+        "OwningProcess": 4912
+      }
+    ]
+  },
+  "inputPins": [
+    {
+      "path": "work/meishi-redesign-native-final.log",
+      "bytes": 71282,
+      "sha256": "f3221d4065fbaecfa15372abb7065b418c83d906653bc7108500a9fc3bf705f5"
+    },
+    {
+      "path": "work/meishi-redesign-clippy.log",
+      "bytes": 168,
+      "sha256": "94e554bbceb15c674dd153e05863f34d42861b93e4deced850e9b4f9462defaf"
+    },
+    {
+      "path": "work/meishi-redesign-shell.log",
+      "bytes": 46032,
+      "sha256": "e17f9ce562722b7c851bd1f63a7919aa5aeb716be8a054200e30e40c35bc7b89"
+    },
+    {
+      "path": "work/game-preview.json",
+      "bytes": 391,
+      "sha256": "ad8c240870acfc9fafd8d6d6d77a8069d1412120a681d3a278fc87c49750e8d5"
+    },
+    {
+      "path": "work/preview-build.json",
+      "bytes": 317,
+      "sha256": "fc3881bcdcbb28017a04c5ed72f158aa4b5b9a79d0655b866ccd7e95e0773d93"
+    },
+    {
+      "path": "scripts/preview-build.mjs",
+      "bytes": 2746,
+      "sha256": "f770467d93e124e7f04df12bf157eec563d7993451dfa2a8f3ba55ecec397dae"
+    }
+  ]
+}

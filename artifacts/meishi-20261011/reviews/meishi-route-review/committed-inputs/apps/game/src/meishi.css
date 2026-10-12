@@ -1,0 +1,162 @@
+/* One native UiGroup owns this card surface and its local art/text transforms. */
+.menu-card.meishi-surface {
+  width: min(740px, 100%);
+  height: auto;
+  max-height: 100%;
+  padding: 24px;
+  gap: 0;
+}
+.meishi-surface #meishi-content {
+  flex: 0 1 auto;
+  padding: 0;
+}
+.meishi-surface .menu-close {
+  top: 6px;
+  right: 6px;
+}
+.meishi-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 12px 0 0;
+  background: #080f18;
+}
+.meishi-heading {
+  display: flex;
+  align-items: center;
+  gap: min(18px, calc(8px * var(--ui-scale, 1)));
+}
+.meishi-identity,
+.meishi-ship-summary,
+.meishi-equipped {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.meishi-portrait {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 128px;
+}
+.meishi-card h3 {
+  font-size: var(--ui-text);
+  font-weight: normal;
+  line-height: 1.5;
+  color: var(--cyan);
+  margin: 0;
+}
+.meishi-card p {
+  font-size: min(12px, var(--ui-caption));
+  line-height: 1.5;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.meishi-card .meishi-designation {
+  font-size: var(--ui-caption);
+  color: #edf4f5;
+  margin-top: 6px;
+}
+.meishi-card .meishi-manufacturer {
+  margin-top: 6px;
+  color: var(--muted);
+}
+.meishi-raicho {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 0;
+  padding-right: 22px;
+}
+.meishi-ship-icon {
+  width: calc(32px * var(--ui-scale, 1));
+  height: calc(32px * var(--ui-scale, 1));
+}
+.meishi-equipped {
+  grid-column: 1 / -1;
+}
+.meishi-card .upgrade-category {
+  display: block;
+  margin: 0;
+}
+.meishi-card .upgrade-category p {
+  color: inherit;
+}
+.meishi-balances {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 0;
+  padding-top: 8px;
+  border-top: 1px solid #263d50;
+}
+.meishi-patches {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  padding-top: 8px;
+  border-top: 1px solid #263d50;
+}
+.meishi-patch-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px 4px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.meishi-patch-slot {
+  min-width: 0;
+  text-align: center;
+}
+.meishi-patch-icon,
+.meishi-card .meishi-patch-empty {
+  width: calc(24px * var(--ui-scale, 1));
+  height: calc(24px * var(--ui-scale, 1));
+  margin: 0 auto 4px;
+}
+.meishi-card .meishi-patch-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+.meishi-card .meishi-patch-caption {
+  font-size: var(--ui-caption);
+}
+/* Preserve hidden native art and placeholder semantics despite flex rules. */
+.meishi-card [hidden] {
+  display: none;
+}
+/* Native quads paint the card's art/text; CSS remains the accessible fallback. */
+body.pixel-ready .meishi-card {
+  background: transparent;
+  border-color: transparent;
+}
+@media (max-width: 600px) {
+  .meishi-patch-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .meishi-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .meishi-portrait {
+    width: 72px;
+    height: 96px;
+  }
+  .meishi-balances {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .meishi-patch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-height: 500px) {
+  .meishi-portrait {
+    width: 72px;
+    height: 96px;
+  }
+}

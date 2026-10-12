@@ -1,0 +1,15 @@
+✔ QA prepare pins actual source and bounded HTTP serves only allowlisted modules; captures are sanitized (261.3266ms)
+✔ QA reports exclude arbitrary telemetry/credentials and prepare refuses outside work (0.2669ms)
+✔ Actual client frame code calls Galaxy.step only, pauses solo/guest, and resets a restored frame (14.3137ms)
+✔ Actual rejoin gate requires a new complete native commit, not a cumulative old commit (4.882ms)
+✔ WASM report accepts finite observations, refuses capabilities/profile payloads and does not infer a native commit (0.8625ms)
+✔ WASM allowlist fixes backend paths and cannot request unrelated files (0.2763ms)
+﹣ Actual supplied normal WASM stage serves two exact QA origins, real binaries and immutable secret-free captures (0.0638ms) # SKIP
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 324.3888

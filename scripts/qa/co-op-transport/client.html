@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
+  <title>Native co-op QA client</title>
+  <style>
+    body {
+      margin: 0;
+      background: #080b10;
+      color: #eef2f6;
+      font: 14px system-ui;
+    }
+    canvas {
+      width: 100%;
+      height: 280px;
+      display: block;
+    }
+    p {
+      margin: 8px;
+      min-height: 20px;
+    }
+  </style>
+  <canvas
+    id="canvas"
+    width="640"
+    height="360"
+    aria-label="Actual native Galaxy renderer"
+  ></canvas>
+  <p id="status" role="status">Native client not initialized.</p>
+  <script type="module" src="/client.js"></script>
+</html>

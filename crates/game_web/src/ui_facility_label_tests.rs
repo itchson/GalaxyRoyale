@@ -40,7 +40,7 @@ fn visible_points(frame: &RenderFrame) -> Vec<Vec2> {
                 .iter()
                 .filter(|pixel| pixel.color >> 24 != 0)
                 .map(|pixel| {
-                    let transform = batch.transforms[pixel.transform as usize];
+                    let transform = batch.transforms[pixel.transform_slot()];
                     assert_eq!(transform.b[2..], [0.0, 0.0], "UI stays unlit");
                     assert_eq!([transform.a[2], transform.a[3]], [1.0, 0.0]);
                     assert_eq!([transform.b[0], transform.b[1]], [0.0, 1.0]);

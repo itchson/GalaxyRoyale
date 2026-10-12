@@ -33,6 +33,9 @@
 .campaign-card p {
   overflow-wrap: anywhere;
 }
+.campaign-card .campaign-collection-state {
+  color: #b9cadd;
+}
 .campaign-controls,
 .save-actions {
   display: flex;

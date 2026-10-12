@@ -1,0 +1,929 @@
+{
+  "version": 1,
+  "instrumentation": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+  "production_reference": "597f0720704656187056bf57c5d5c1d6bdcfcab3",
+  "stellar_source": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+  "historical_runtime_source_hash": "dfbcd33501214c59dafcf3d4c766b84c20a47f7c79e4567cb05f5c66ab8be3ce",
+  "cold_not_rerun": true,
+  "stellar_coverage": 0,
+  "source": [
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "assets/pixels/atlas.json",
+      "git_size": 39608,
+      "git_sha256": "67635f779449feac9d1b24ce1aa264aadb10d7bf70cd54aa5542de44f855876f",
+      "working": true,
+      "raw_size": 39609,
+      "raw_sha256": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "assets/pixels/boss-atlas.json",
+      "git_size": 421056,
+      "git_sha256": "68b83e1d83a94993074f06bcb3ffc23a61d9542474fcbac42a11150114e3c850",
+      "working": true,
+      "raw_size": 421057,
+      "raw_sha256": "0a946b13cef528578c6863b73fae0b9c2c1fd5ecdb6232bd8b37626875b9e3a3"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "assets/pixels/mote-atlas.json",
+      "git_size": 7208,
+      "git_sha256": "fee68d81defca47f8bb7a4d6c177f7f70bb00d40b8df38d568e82eabf837381a",
+      "working": true,
+      "raw_size": 7209,
+      "raw_sha256": "004c24eefeccbe25d836dd8ad1ff00346f86879492c2bff3fe828721dc838714"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "assets/pixels/raicho-fine-detail/atlas.json",
+      "git_size": 230223,
+      "git_sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "working": true,
+      "raw_size": 230223,
+      "raw_sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "assets/pixels/riveter-atlas.json",
+      "git_size": 5594,
+      "git_sha256": "6a312b6e0d957e6bb95dfefe5d44563d9c53125a84f5b00586aedc561ee742ae",
+      "working": true,
+      "raw_size": 5595,
+      "raw_sha256": "6bbf5a1333b486d54a7fb7f3600d89220dd774e1e80e9a699ad4edf75231247d"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "assets/ui/campaign-atlas.json",
+      "git_size": 41347,
+      "git_sha256": "a7950c45e92c18d5305e6ecb3c1f66ee308cab9489473a73b4b4352a852c8aa0",
+      "working": true,
+      "raw_size": 41348,
+      "raw_sha256": "27c99be6b55e0e17a7d5149e566aedfa269fb266234ca24b44fa34c103524738"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "Cargo.lock",
+      "git_size": 27791,
+      "git_sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "working": true,
+      "raw_size": 28906,
+      "raw_sha256": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "Cargo.toml",
+      "git_size": 447,
+      "git_sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "working": true,
+      "raw_size": 467,
+      "raw_sha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/Cargo.toml",
+      "git_size": 242,
+      "git_sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "working": true,
+      "raw_size": 256,
+      "raw_sha256": "6da6af202b5a9d01028ae0e4eefe45a776de3ab00f0ec88e28e671fcf162272f"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/src/camera.rs",
+      "git_size": 8926,
+      "git_sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "working": true,
+      "raw_size": 9177,
+      "raw_sha256": "1ac883393d468b0501953e59dc6538e292b1a4aeba412bdbbc7af6a279382fe1"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/src/frame.rs",
+      "git_size": 25415,
+      "git_sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "working": true,
+      "raw_size": 26160,
+      "raw_sha256": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/src/lib.rs",
+      "git_size": 726,
+      "git_sha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "working": true,
+      "raw_size": 747,
+      "raw_sha256": "42d731037c40748ca7949e31903b262f8f1c5a53805e5c2ca24caf7249f1b1aa"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "git_size": 14135,
+      "git_sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "working": true,
+      "raw_size": 14550,
+      "raw_sha256": "e26f9c373e34b6ddf35edcb45236664fbf1eff62f44029e815f2407fabbcd442"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/src/pixels.rs",
+      "git_size": 20423,
+      "git_sha256": "cb2a283d8798e3d705be859fbe0385981a1e9f4dd78c79a198e917ebd78bfa17",
+      "working": true,
+      "raw_size": 20968,
+      "raw_sha256": "46c69f3c9806fdcaeba02a8ecb9539c98d68861f10e23992f7876a6ce2247b6e"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/src/topology.rs",
+      "git_size": 13140,
+      "git_sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "working": true,
+      "raw_size": 13482,
+      "raw_sha256": "ebdf873912e179df5280f3019a05d2f88713302c43fe6e99a171383a3dfeebc3"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/engine_core/src/transform.rs",
+      "git_size": 5578,
+      "git_sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "working": true,
+      "raw_size": 5770,
+      "raw_sha256": "25e8ca1995b845b36b558ef73fa40dc122fa579465e2a237c4de841652ab25bb"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/Cargo.toml",
+      "git_size": 285,
+      "git_sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "working": true,
+      "raw_size": 301,
+      "raw_sha256": "9808ea450c15c662f8b2168d232905b1485c3d22a8f4bf58e595b79ed03396f1"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/abilities.rs",
+      "git_size": 14884,
+      "git_sha256": "394d8dcd566d4bbcf2a9d2dea7320512248dfc16b83fa3ee98d767849ba47509",
+      "working": true,
+      "raw_size": 15353,
+      "raw_sha256": "8f023ca505874d83f5764800ec09dd5cb5913e09fd74be0ab6423a7bd6eb6f4c"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/asteroid_art.rs",
+      "git_size": 11508,
+      "git_sha256": "8f302bfdadee2dab167eccc0b38db33eb0b0c57ebe89ce7aa59b2126ec64f9bc",
+      "working": true,
+      "raw_size": 11848,
+      "raw_sha256": "2c4f31de4db4637c1d23c4e52590d24d7502bc51f5c3b311e207852804d17876"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/asteroid_diversity_tests.rs",
+      "git_size": 15414,
+      "git_sha256": "1182da9f57b938a7f8a63dd9e65be72d692c2e761007605df7427637450006a9",
+      "working": true,
+      "raw_size": 15797,
+      "raw_sha256": "f58d0095a7a5c7191eaf188f229d0beea6c2b69b2967101f053e69046c3ce5e7"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/asteroid_zones/tests.rs",
+      "git_size": 16018,
+      "git_sha256": "fb8c2ffb8fe53e418f7b9567a80906b41f1cbffe575266c166e855860c0e780c",
+      "working": true,
+      "raw_size": 16445,
+      "raw_sha256": "2995fd5e981fb8507bd92ea29eeea517ad0d4d621042a651943f0d4bad7aa316"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/asteroid_zones.rs",
+      "git_size": 7952,
+      "git_sha256": "9f1ba2e68d403796e3ea64ec771c6fb433cfb1614c4091d1170beb28732e61f7",
+      "working": true,
+      "raw_size": 8149,
+      "raw_sha256": "0c406e0d361bb52517e21df7fd2a474fc57843a4a6cc40d694e6ef0419c4e851"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/audio_runtime.rs",
+      "git_size": 19456,
+      "git_sha256": "77b46a8dc815347df8625262a099bdf7d9fd7c3a6ca3e5ce56b6171c3fa8c171",
+      "working": true,
+      "raw_size": 19970,
+      "raw_sha256": "61b0f546d0a2106b53f0935e8e383a21f13b1d6e9826a937026ea97be85f3ff8"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "git_size": 34586,
+      "git_sha256": "b897d6841f9de935e42879f98d8fae2cca8b755ed501cbe6eb3499ab38cbbe64",
+      "working": true,
+      "raw_size": 35515,
+      "raw_sha256": "64c30077c96e4e22f3b61381ec8c8e449da3f50e5f37d1dc577f9a839977db60"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/boss_assets.rs",
+      "git_size": 4078,
+      "git_sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "working": true,
+      "raw_size": 4193,
+      "raw_sha256": "212b030b73c2a57cad6facc9d6e20f4a9a7cc44fe836adb21ed5c594954a7e58"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/bosses.rs",
+      "git_size": 47224,
+      "git_sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408",
+      "working": true,
+      "raw_size": 48440,
+      "raw_sha256": "f4ee90687a1a449a430b7a91f1375f1451322c0b16066a19a75ae0b1ed6dfc43"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/campaign.rs",
+      "git_size": 22135,
+      "git_sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "working": true,
+      "raw_size": 22848,
+      "raw_sha256": "08c2ddf555a871750d1b3415d6ab05a19362406dc3259ef3118b25c129822a92"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "git_size": 52483,
+      "git_sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85",
+      "working": true,
+      "raw_size": 52483,
+      "raw_sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/champion_roster_tests.rs",
+      "git_size": 10838,
+      "git_sha256": "fed4da5898c64ee52fe20cffd990e5313b3c1dda250d86612ac2f1989d1f5a6a",
+      "working": true,
+      "raw_size": 11127,
+      "raw_sha256": "89f47dbe8a516ffd099da3c2ef27e14e0774bc0efed4b6f199e5373affb0f12a"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op.rs",
+      "git_size": 48785,
+      "git_sha256": "9abdb9b5c4e541e28f784e4630dd7439e9f1c301f28f0c8e3e9082e9b1330d29",
+      "working": true,
+      "raw_size": 48785,
+      "raw_sha256": "9abdb9b5c4e541e28f784e4630dd7439e9f1c301f28f0c8e3e9082e9b1330d29"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_control.rs",
+      "git_size": 3994,
+      "git_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "working": true,
+      "raw_size": 3994,
+      "raw_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_echo_tests.rs",
+      "git_size": 33895,
+      "git_sha256": "e04604d0e0e66bac0e8099726d831fe3b928c74153fa8f2933f2079a46e66c22",
+      "working": true,
+      "raw_size": 33895,
+      "raw_sha256": "e04604d0e0e66bac0e8099726d831fe3b928c74153fa8f2933f2079a46e66c22"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "git_size": 8348,
+      "git_sha256": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666",
+      "working": true,
+      "raw_size": 8348,
+      "raw_sha256": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_loadout_tests.rs",
+      "git_size": 22547,
+      "git_sha256": "c69798a91578137472ceb02d9b32af225f678942103e4bebe1c9c274407b0bae",
+      "working": true,
+      "raw_size": 22547,
+      "raw_sha256": "c69798a91578137472ceb02d9b32af225f678942103e4bebe1c9c274407b0bae"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_local_cue_tests.rs",
+      "git_size": 5428,
+      "git_sha256": "ed6018b5f3bafb6cd426eac2c3d610576988730a276ba3f7eb08119cb4832984",
+      "working": true,
+      "raw_size": 5428,
+      "raw_sha256": "ed6018b5f3bafb6cd426eac2c3d610576988730a276ba3f7eb08119cb4832984"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_nova_tests.rs",
+      "git_size": 26543,
+      "git_sha256": "672d0efc10332bdec97e3bcb07eb7f5fe8f5c600090561a3a3094062a7cfe506",
+      "working": true,
+      "raw_size": 26543,
+      "raw_sha256": "672d0efc10332bdec97e3bcb07eb7f5fe8f5c600090561a3a3094062a7cfe506"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_passive_tests.rs",
+      "git_size": 16093,
+      "git_sha256": "80648b3117c8b10ae7b6437d7b2c5a69c3faf44a6accd20e276386a6d0488429",
+      "working": true,
+      "raw_size": 16093,
+      "raw_sha256": "80648b3117c8b10ae7b6437d7b2c5a69c3faf44a6accd20e276386a6d0488429"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "git_size": 7851,
+      "git_sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+      "working": true,
+      "raw_size": 8078,
+      "raw_sha256": "6c21184ed46db90ce992a74fc2699f1356210d474aa77f152c837a983de2a676"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_publish_tests.rs",
+      "git_size": 12233,
+      "git_sha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3",
+      "working": true,
+      "raw_size": 12590,
+      "raw_sha256": "c67dd8bbe722c444db981d244442b9cfd06cf575b0c89c34bdc38cd1a5eb7a66"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "git_size": 44941,
+      "git_sha256": "6c083cca3e89d78f3970f5f69cf4d865115a5abaaf50a5cb2edda4ba2ea076ff",
+      "working": true,
+      "raw_size": 44941,
+      "raw_sha256": "6c083cca3e89d78f3970f5f69cf4d865115a5abaaf50a5cb2edda4ba2ea076ff"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_replica_tests.rs",
+      "git_size": 31330,
+      "git_sha256": "dcde5ddb7d64fcc34fd958808ef17d8355ade8e0f19b595e1702cb99476dc3f1",
+      "working": true,
+      "raw_size": 31330,
+      "raw_sha256": "dcde5ddb7d64fcc34fd958808ef17d8355ade8e0f19b595e1702cb99476dc3f1"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_starter_tests.rs",
+      "git_size": 22324,
+      "git_sha256": "cd32414fb9ed7a92b0c2911be14196d00daa45590f3bdf4067d9175015b4479f",
+      "working": true,
+      "raw_size": 22324,
+      "raw_sha256": "cd32414fb9ed7a92b0c2911be14196d00daa45590f3bdf4067d9175015b4479f"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "git_size": 33125,
+      "git_sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a",
+      "working": true,
+      "raw_size": 33125,
+      "raw_sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/component_tests.rs",
+      "git_size": 18126,
+      "git_sha256": "ada882c35adf64d7285a6fca966db2a456346e5df1cd1470771be1df99b712a6",
+      "working": true,
+      "raw_size": 18605,
+      "raw_sha256": "1ce6c6d33be20d85a3421be72c0d533bd79ad0108cb86142b23c02538db1cb73"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/components.rs",
+      "git_size": 9224,
+      "git_sha256": "c2a9cef6263bd9be289e991fa80dfcdfd85502f92b13536670dc2dff9e680471",
+      "working": true,
+      "raw_size": 9479,
+      "raw_sha256": "647f83a576473985593e2dc539ecd92e4aa9df75bd4c0cf7a17f3be3d9e7f470"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "git_size": 72473,
+      "git_sha256": "21dfe4ceda4bb43381a16916f7513b114b8272e1f190962bf0e710559b68533e",
+      "working": true,
+      "raw_size": 74478,
+      "raw_sha256": "4b613071be257b4d085359ed0849a9fba5bfb1022aff4aef992af8cbfcc83715"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/cosmic_detail_tests.rs",
+      "git_size": 21775,
+      "git_sha256": "7c7d25dfc74273fc7ce5b5aa4689f71926737796b200da03c499f6c6d5df5340",
+      "working": true,
+      "raw_size": 22327,
+      "raw_sha256": "4e3bb1f9d2aab2a31861954edc2b0eb2af1a3f7e8f67dd3e93dcbd591ad18670"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/cursor_aim_tests.rs",
+      "git_size": 7483,
+      "git_sha256": "4abfc3c200c8500a22b334d2d9839386b6f8764bcc0a8c39034d83a1577cdf29",
+      "working": true,
+      "raw_size": 7719,
+      "raw_sha256": "60b5619eb69a1a99b441274d71cdcf098fa10f0647afbc88a53fb3056d180c33"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/deep_nebula_tests.rs",
+      "git_size": 16013,
+      "git_sha256": "044932786ed692bb744837426ae611cc5baff0168cea5ea7a9e0e205d525931c",
+      "working": true,
+      "raw_size": 16453,
+      "raw_sha256": "040c66df0c50b9a80a8239a275969906e4200ca1dba808c80c8d6aa63e9ba07a"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/diagnostic_death_tests.rs",
+      "git_size": 13484,
+      "git_sha256": "8d57d8feabda34b79dbb27b8858865a9344adb9e52ff859bae7d0d318a68dc87",
+      "working": true,
+      "raw_size": 13871,
+      "raw_sha256": "579288be642af0c441b0faec65b8e65424ad79aa2de8fce0a2c1a61bd85fc4cd"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/diagnostic_warp_tests.rs",
+      "git_size": 4080,
+      "git_sha256": "33b4b93f6d1049c209e7e50677b9899c3fa09c2e8fcb6b191467e92c458b1971",
+      "working": true,
+      "raw_size": 4184,
+      "raw_sha256": "c01a3416123185844f67272d3168221df67be99872e164575fe4ecc1fbacf7a8"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/dock_facilities.rs",
+      "git_size": 17507,
+      "git_sha256": "12eb9a70ee44e6431565e13f760a901b3c88206403b68078073a4fc4a980ac61",
+      "working": true,
+      "raw_size": 18003,
+      "raw_sha256": "f783a1602f6e01574f60018c11111ed2f34a2286edfdc7721839f6d11b63d7e5"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/held_thrust_tests.rs",
+      "git_size": 4307,
+      "git_sha256": "6923df268524ab17b812ffb41457abb94dd415a9d3f34efbd5d0730cd6c0df3b",
+      "working": true,
+      "raw_size": 4452,
+      "raw_sha256": "395e78dde620dc097bd90233797b457fb33a11ffc7efda7d38ac1f52381d5db7"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/identity.rs",
+      "git_size": 27690,
+      "git_sha256": "4fe94ee18b5c43713ae75c2d6f0307819f95438b8e74c175bfdf729af8cdbeca",
+      "working": true,
+      "raw_size": 28460,
+      "raw_sha256": "23fe04110a9168681cf93cf121c28867b6d5406127b31924296006b085ecab4d"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/identity_tests.rs",
+      "git_size": 36306,
+      "git_sha256": "aca9a9651f3e0c138d2fecc2aa84c62045a091cce03fdcb115d54b9124f059dd",
+      "working": true,
+      "raw_size": 37316,
+      "raw_sha256": "1aa5f2194b525993fd0f4e4f6b49b211ca7173f3365c36efdee65be6884dfabf"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/isotope_region_tests.rs",
+      "git_size": 4885,
+      "git_sha256": "0b44ac187e36da8461f3d8ae3147a3dd02d087d04675e1b3178b80d917ead02a",
+      "working": true,
+      "raw_size": 5024,
+      "raw_sha256": "388929e91b7c27b75585f074234f3fbd4cd6cac0bd1bb8841c70afb4aaa18551"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/isotope_scar.rs",
+      "git_size": 14871,
+      "git_sha256": "1129a660f47d75219654ebb9bc89e4c5e201e89d5a5ccbd4407cd56b5e720018",
+      "working": true,
+      "raw_size": 15312,
+      "raw_sha256": "880c3ea6668b867d19d889f58881562caa40fdd3fbda5e5b2b7708d8d27ec418"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/lib.rs",
+      "git_size": 195203,
+      "git_sha256": "610fcc5eb36165e3fcecfe138419c62b1f3e42fd32c59cad8e7d63a90d380393",
+      "working": true,
+      "raw_size": 200386,
+      "raw_sha256": "0fe613299ed2e720c43d0799fe6e95205f91979f740f5d7d3881e926bba15983"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/live_overlay_tests.rs",
+      "git_size": 7176,
+      "git_sha256": "0fe3d4b32460f061768292d683adf9edd14d0496799c7666eca06e8406f76326",
+      "working": true,
+      "raw_size": 7369,
+      "raw_sha256": "022bd3c7ef14d18059036d24a424fcda271cc61c1e2e300076880e526fc68058"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/mote_art.rs",
+      "git_size": 5528,
+      "git_sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "working": true,
+      "raw_size": 5700,
+      "raw_sha256": "ffd02d0475e638f55c8a634291265cfd024b68353104755b6426d9f1434b250b"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/mote_controller.rs",
+      "git_size": 19750,
+      "git_sha256": "1f8127aeb40d02402a11a17cc6a1e90485ea5314b364847349975d538341e881",
+      "working": true,
+      "raw_size": 20308,
+      "raw_sha256": "8a0ff904ea66b409cf30a18e81cdbb6aa4542b6dc9a37983ccdcd36233062e6d"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/navigation.rs",
+      "git_size": 7080,
+      "git_sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa",
+      "working": true,
+      "raw_size": 7080,
+      "raw_sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/particle_tests.rs",
+      "git_size": 12963,
+      "git_sha256": "4c9279b38f68658a2e1a732ccfbcb5d2c8501f4eeff26cd9b145a860c648fb13",
+      "working": true,
+      "raw_size": 13343,
+      "raw_sha256": "f9bb3a4d6ef59b11c6b7d4e519f4b647d1b9a7abb485a82d64fdbc8b7ede031b"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "git_size": 13834,
+      "git_sha256": "1d4bdb14ff635bce57986e92da68badce09973bb3558a949005df78d5ebeacaa",
+      "working": true,
+      "raw_size": 14210,
+      "raw_sha256": "1a662f6dcdaaef60170861f0dc0e33eab24a80adbc1ba20d06b01367d1319d0f"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/player_presentation.rs",
+      "git_size": 7858,
+      "git_sha256": "81627fa126d52dcde90a84a979c597893790a64301d70454c780e76d069c432d",
+      "working": true,
+      "raw_size": 8066,
+      "raw_sha256": "9a780e2558d8e3285863e5ab1741120b1078c47d3dad29c65180ccfbd298017c"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/radiation_audio_tests.rs",
+      "git_size": 7656,
+      "git_sha256": "69045bbd0cd846d77dd8ce6a89811bcc850ef79e0ae7e1f4d383a8974125442b",
+      "working": true,
+      "raw_size": 7906,
+      "raw_sha256": "8cc0136d08e9fa3f06be4306330fced7e6290886e832e3ee9117adfc0a42cfb4"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "git_size": 10756,
+      "git_sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a",
+      "working": true,
+      "raw_size": 11034,
+      "raw_sha256": "3ba40361fe25d37049a1d30029c218f7b7e3de5307ac631ef36fcbe5bfaf10c2"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/radiation_enemy_tests.rs",
+      "git_size": 32322,
+      "git_sha256": "6aaf4dc074559e2e9c6c481111e87565d0549196942d60343d2508e1108642f5",
+      "working": true,
+      "raw_size": 33205,
+      "raw_sha256": "3ea0d30f457a4ec046190733e1c5736b19fcc7f4f056fafe859b1266d4ca1a81"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/raicho_affinity_hud_tests.rs",
+      "git_size": 6736,
+      "git_sha256": "b50b7e6f3cf3712c959d18f3ff27d35f4c19f15fe60e5355fe4e333b7b111c89",
+      "working": true,
+      "raw_size": 6910,
+      "raw_sha256": "035c0bb2592e551a427ad1d212216c4acabc47b3c51ba428af21f6915e9eedda"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/raicho_draw_tests.rs",
+      "git_size": 3601,
+      "git_sha256": "a09ed61d0cf4edad12221cd9c6caeb5772709171b61fdb2d101f0dc9d77b01d8",
+      "working": true,
+      "raw_size": 3699,
+      "raw_sha256": "3f4bc6f5ae15f0c4274fb5b6e5b9b87e170e0bb254d454c6dce7f2f2cf183af8"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/raicho_fine.rs",
+      "git_size": 13818,
+      "git_sha256": "2b0708400999c46a1c6091ae1eb6b2fd211e7c69fdc5f2e0a6f012f6c15d1552",
+      "working": true,
+      "raw_size": 14229,
+      "raw_sha256": "2c473c5d894d6f2ec1754dbb503288244b179e05d782fee9dc00601c63911a28"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/raicho_fine_tests.rs",
+      "git_size": 16407,
+      "git_sha256": "fd3670de3e336e76b8090b1e20353e9af3d7627fc9715f954d71721575fd6252",
+      "working": true,
+      "raw_size": 16928,
+      "raw_sha256": "9d0e04c0e537c3a12faf0f17f60b47b3134354f0e2fcc05d37fafb57d723ef6a"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/region_immersion_tests.rs",
+      "git_size": 11898,
+      "git_sha256": "aef52f0d81112d1629ebb796adbf2989e0b33c16ccb16356d5f757bd692f1a5f",
+      "working": true,
+      "raw_size": 12200,
+      "raw_sha256": "55a30fc9267a05cc4e9aa68063e72e3ad9d8c685d87443c58e81cb46c1d34d80"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/region_node_tests.rs",
+      "git_size": 19463,
+      "git_sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa",
+      "working": true,
+      "raw_size": 19953,
+      "raw_sha256": "42a33b2c5b40526fb5233888b4938558f3dc3c4f986f00c02542bff55906c0aa"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/regions.rs",
+      "git_size": 35964,
+      "git_sha256": "b17d5861933a90bef535313ebfbdd0dd097a2763622fcfaf1d8fd754b745e6d4",
+      "working": true,
+      "raw_size": 36956,
+      "raw_sha256": "bdeb0cd9b90f419baff01df5779052c05e5bfe1054b93c659d9787bb91d40760"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/regions_lod_tests.rs",
+      "git_size": 14256,
+      "git_sha256": "a6283d19cd6135d1fcf2e64a4492bcb3ba42d8b282524ce9f150c9ae6d406944",
+      "working": true,
+      "raw_size": 14256,
+      "raw_sha256": "a6283d19cd6135d1fcf2e64a4492bcb3ba42d8b282524ce9f150c9ae6d406944"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/segmented/tests.rs",
+      "git_size": 9972,
+      "git_sha256": "370dabe7c76ffd024fa75b5fafcfe30e0089fa03465d8d9b1f8f9b3a9ea718db",
+      "working": true,
+      "raw_size": 10232,
+      "raw_sha256": "e5efb5613f48b1a09f0b10936c5ae09bb2031cdacdd78b302b761c5c94b5396c"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/segmented.rs",
+      "git_size": 9359,
+      "git_sha256": "638463899c37713f1d07c7ff2e2714811f79ac212182eb4fbaffb299b07d979a",
+      "working": true,
+      "raw_size": 9594,
+      "raw_sha256": "3d5824e13e7bf288e103d1323623503dc3a8c72d2f2d8488178211d4e2ab5359"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/shield_progression.rs",
+      "git_size": 5281,
+      "git_sha256": "a308a0c46cbaa020bc0c998fa90be20276322b6912ef209df7d9bb89a93d97af",
+      "working": true,
+      "raw_size": 5431,
+      "raw_sha256": "0a38a560632be94813d27ca6eced7f9a9033fdfa3965e603047297fec69c2763"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/shield_progression_tests.rs",
+      "git_size": 24989,
+      "git_sha256": "4f3423ce9095557f72a8d4d146fe1c197ed04e1206eb955917859755535a40fe",
+      "working": true,
+      "raw_size": 25669,
+      "raw_sha256": "dcef6c054751f09a9c5047bbcb675cf0fa015631072a3c44ad8d0935aaf76a4f"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/ship_progression.rs",
+      "git_size": 24832,
+      "git_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "working": true,
+      "raw_size": 24832,
+      "raw_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/ship_progression_tests.rs",
+      "git_size": 29900,
+      "git_sha256": "519fe9e9e451a96e621aa5b134818aad69127c4b1fab0f459827c04188b59403",
+      "working": true,
+      "raw_size": 30763,
+      "raw_sha256": "80f026e3b840f202b41935222521636e540479222009da4823192299955925fa"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/shooting_star.rs",
+      "git_size": 22504,
+      "git_sha256": "549444b3c23dc05d072083de6c23b4ff88e706307c714b95869744f4aba74b59",
+      "working": true,
+      "raw_size": 23182,
+      "raw_sha256": "ad860f4ea2c425dbe910606e41046b9084f9d7d4998c3642727d33d86501ca73"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/starter_ability_tests.rs",
+      "git_size": 9267,
+      "git_sha256": "ed5896d1c6e96c2a1621f58620788cb4d6a5388973cfa9ee92cb0d58c6e958fc",
+      "working": true,
+      "raw_size": 9559,
+      "raw_sha256": "74a1785f67887afc67099c5f6d93b62d33d7fc6d562447d1f73821daa6298812"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/stellar_cost_tests.rs",
+      "git_size": 4093,
+      "git_sha256": "16b96e256a533440e45136861425ab4c42631dfdc8c2156893adf4362aa04cef",
+      "working": true,
+      "raw_size": 4093,
+      "raw_sha256": "16b96e256a533440e45136861425ab4c42631dfdc8c2156893adf4362aa04cef"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/stellar_neighborhood_tests.rs",
+      "git_size": 8407,
+      "git_sha256": "ef04db3538a447cbbd51479ac455c8c6c217ea84f9ecd81586ffbb68f8920333",
+      "working": true,
+      "raw_size": 8609,
+      "raw_sha256": "ec802e64bdb862b403099a25411da83e7e0e72fbd4e9738324959f5e3e08261d"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/training.rs",
+      "git_size": 11304,
+      "git_sha256": "072b7792a40456dda95e63d14d4f7d7fe9fada06f7d96bf1730ad7d8d70f7a59",
+      "working": true,
+      "raw_size": 11654,
+      "raw_sha256": "6be78fa97ced3aedd8fa5271d0cf5ebc53350713166a3d96c9cb61a58c6652f5"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/training_tests.rs",
+      "git_size": 27814,
+      "git_sha256": "1976caa165ab0a4b84307b87f78acf174ab55da63f39c40fa156a10a8ffcb473",
+      "working": true,
+      "raw_size": 28559,
+      "raw_sha256": "2e176c658cd89d597c66b76f6921ef5030fcafcbb3e6f5294ab963ccbb48258d"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/universe_map.rs",
+      "git_size": 5595,
+      "git_sha256": "502fa8b3d7c2854be42f98b57ea49d07ebbe660eca5887591484d29b9d803ad7",
+      "working": true,
+      "raw_size": 5753,
+      "raw_sha256": "1b999eb9b68116efefd0a50e3f6e5d63eaddc1ec3fc2cde1a107676b7297994d"
+    },
+    {
+      "commit": "8d307a2640f8934a5cfd6ef6ee85489b89ac2ca8",
+      "path": "crates/game_core/src/weapon_cadence_tests.rs",
+      "git_size": 9424,
+      "git_sha256": "3fb9ac9a8d94d28e854974caa1ce31a056b5249b8668a4c85b978296bb26681e",
+      "working": true,
+      "raw_size": 9711,
+      "raw_sha256": "b4169dc35df8deed20a1c2ebd85a2df4f59dfa964fd92882a59b763dd7b889d7"
+    },
+    {
+      "commit": "597f0720704656187056bf57c5d5c1d6bdcfcab3",
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "git_size": 72401,
+      "git_sha256": "0d4ef0c612d20d888ac92a4d6dce848005d3242092ff889464f04a6817b07068",
+      "working": false
+    },
+    {
+      "commit": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "git_size": 72401,
+      "git_sha256": "0d4ef0c612d20d888ac92a4d6dce848005d3242092ff889464f04a6817b07068",
+      "working": false
+    },
+    {
+      "commit": "22a8906cd668e92db0180d725da87b0a2c8408d5",
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "git_size": 71306,
+      "git_sha256": "a7e2a670a388ee1f6d86dbf1d5c218b97ca56aaf7df70e98a697613135daab9b",
+      "working": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\check-observations.json",
+      "bytes": 609,
+      "sha256": "fd8b3318a0ba5391280344b86f420ea794128bc3c9ea4c77f9e01c26bda70e3b"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\compile-artifacts.jsonl",
+      "bytes": 31259,
+      "sha256": "c1f6836198dcbb871a13691227eb7fb37f9dafa956f37294fafe8de988e56ede"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\compile.log",
+      "bytes": 856,
+      "sha256": "aee8d2ca95723b81691d11758ba173c1704890b721d06b626e1add00a48e482f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\HANDOFF.md",
+      "bytes": 5309,
+      "sha256": "b551f621ed28d9206af0f98fca5c4da0725d5f36a00e27f5d2f3cdb82a28a63e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\machine-config.json",
+      "bytes": 869,
+      "sha256": "9a481e95eb395a0fceecd240d18cf6252e413abc9d1fa6af6037f79ce5510b23"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\measurements.json",
+      "bytes": 34111,
+      "sha256": "873cac86fcc5e6a808fe2e9228374966a5313750146d4ce89d9c2e51523eca27"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\production-cosmic-diff.patch",
+      "bytes": 2799,
+      "sha256": "89fc0cc808e08b89b37b4119ae7dbad9f84bff7a18ff7c173f0523ea61b84125"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\run.py",
+      "bytes": 3733,
+      "sha256": "6d2d468aca394cf806477e0b867591b606b73d42f4b7ee44c1b240e9fd9f2181"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\verify.py",
+      "bytes": 1305,
+      "sha256": "5fbfd2beafdf219069c47f1f483632e36066e66d33f9f68d8c2068065629dc2a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\warm.log",
+      "bytes": 11446,
+      "sha256": "e2dd61b6782eb3b57f3119c592c9b25ebef6b2f42892067694656d08609463db"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\cosmic-native-efficiency\\HANDOFF.md",
+      "bytes": 9020,
+      "sha256": "cc67e43827a6bbb5d89a7d4f376248829c5b878715e0d8916085abc39a4d3e4d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\cosmic-native-efficiency\\manifest.json",
+      "bytes": 30609,
+      "sha256": "fde1882023da04a5a32cbf67ed2f8c88da9afaee2ab37bd152b0df03d2ccf1ab"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\cosmic-native-efficiency\\measurements.json",
+      "bytes": 97943,
+      "sha256": "65e0ab5c2d8801c226e826ea27a63428ab85a4788d2ffa4a09fcbe2c18865745"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\cosmic-native-efficiency\\machine-config.json",
+      "bytes": 768,
+      "sha256": "5f74281efe35a27e97b81fdc0fcce0c6268dc1c7488163c5dbc6853dd8e68b5a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\cosmic-native-efficiency\\warm.log",
+      "bytes": 31472,
+      "sha256": "fa48ab84755c5860576bbe4051cb354ba8df42ea5206d7448ec16d8a90389b61"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\stellar-native-efficiency\\target\\release\\deps\\game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 8129536,
+      "sha256": "d3b41fca6ad4b768c74c6183f6cf421a36f6c006421b7601a14a1906bb67bf96"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\target\\release\\deps\\game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 7881216,
+      "sha256": "339062839a6a71711cad4a39029f527a594c2e1bfc7482e5dfad3fbc9d59e232"
+    }
+  ]
+}

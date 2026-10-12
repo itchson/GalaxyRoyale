@@ -1,0 +1,33 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling foldhash v0.2.0
+   Compiling spin v0.12.3
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling hashbrown v0.17.1
+   Compiling hecs v0.11.2
+   Compiling syn v3.0.7
+   Compiling glam v0.30.10
+   Compiling serde_derive v1.0.229
+   Compiling bytemuck_derive v1.12.1
+   Compiling bytemuck v1.25.2
+   Compiling engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\work\coop-wake-sanctuary-order\native-snapshot\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\work\coop-wake-sanctuary-order\native-snapshot\crates\game_core)
+    Finished `release` profile [optimized] target(s) in 26.21s
+     Running unittests src\lib.rs (work\coop-wake-sanctuary-order\cargo-target\release\deps\game_core-2b707a8b4a4ebce6.exe)
+
+running 1 test
+test co_op::wake_tests::work_only_wake_sanctuary_order_probe ... NATIVE_BUDGET {"batches":5,"candidate_links":0,"case":"empty_local_no_targets","configured_samples":0,"dt_seconds":0.01666666753590107,"enemy_misses":0,"measured_stages_per_batch":120,"measurements":[{"allocation_or_reallocation_calls_per_stage":0,"requested_bytes_per_stage":0,"us_per_wake_stage":0.9016666666666667},{"allocation_or_reallocation_calls_per_stage":0,"requested_bytes_per_stage":0,"us_per_wake_stage":0.9049999999999999},{"allocation_or_reallocation_calls_per_stage":0,"requested_bytes_per_stage":0,"us_per_wake_stage":0.9083333333333333},{"allocation_or_reallocation_calls_per_stage":0,"requested_bytes_per_stage":0,"us_per_wake_stage":0.9075000000000001},{"allocation_or_reallocation_calls_per_stage":0,"requested_bytes_per_stage":0,"us_per_wake_stage":0.8983333333333334}],"pilots":8,"remote_target_cache":false,"warm_stages_per_batch":20}
+NATIVE_BUDGET {"batches":5,"candidate_links":184,"case":"full_local_no_targets","configured_samples":192,"dt_seconds":0.01666666753590107,"enemy_misses":0,"measured_stages_per_batch":120,"measurements":[{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":123.06166666666667},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":122.63916666666665},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":122.45666666666666},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":122.41166666666666},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":121.80749999999999}],"pilots":8,"remote_target_cache":false,"warm_stages_per_batch":20}
+NATIVE_BUDGET {"batches":5,"candidate_links":184,"case":"full_local_48_misses","configured_samples":192,"dt_seconds":0.01666666753590107,"enemy_misses":48,"measured_stages_per_batch":120,"measurements":[{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":116.12333333333335},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":115.74166666666666},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":117.10083333333334},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":118.52916666666667},{"allocation_or_reallocation_calls_per_stage":1872,"requested_bytes_per_stage":179904,"us_per_wake_stage":117.67833333333333}],"pilots":8,"remote_target_cache":false,"warm_stages_per_batch":20}
+NATIVE_BUDGET {"batches":5,"candidate_links":0,"case":"empty_remote_48_misses","configured_samples":0,"dt_seconds":0.01666666753590107,"enemy_misses":48,"measured_stages_per_batch":120,"measurements":[{"allocation_or_reallocation_calls_per_stage":3840,"requested_bytes_per_stage":359424,"us_per_wake_stage":191.075},{"allocation_or_reallocation_calls_per_stage":3840,"requested_bytes_per_stage":359424,"us_per_wake_stage":186.35750000000002},{"allocation_or_reallocation_calls_per_stage":3840,"requested_bytes_per_stage":359424,"us_per_wake_stage":184.01416666666668},{"allocation_or_reallocation_calls_per_stage":3840,"requested_bytes_per_stage":359424,"us_per_wake_stage":186.36999999999998},{"allocation_or_reallocation_calls_per_stage":3840,"requested_bytes_per_stage":359424,"us_per_wake_stage":184.47583333333333}],"pilots":8,"remote_target_cache":true,"warm_stages_per_batch":20}
+NATIVE_BUDGET {"batches":5,"candidate_links":184,"case":"full_remote_48_misses","configured_samples":192,"dt_seconds":0.01666666753590107,"enemy_misses":48,"measured_stages_per_batch":120,"measurements":[{"allocation_or_reallocation_calls_per_stage":5712,"requested_bytes_per_stage":539328,"us_per_wake_stage":303.09749999999997},{"allocation_or_reallocation_calls_per_stage":5712,"requested_bytes_per_stage":539328,"us_per_wake_stage":296.4125},{"allocation_or_reallocation_calls_per_stage":5712,"requested_bytes_per_stage":539328,"us_per_wake_stage":300.3683333333333},{"allocation_or_reallocation_calls_per_stage":5712,"requested_bytes_per_stage":539328,"us_per_wake_stage":296.6383333333333},{"allocation_or_reallocation_calls_per_stage":5712,"requested_bytes_per_stage":539328,"us_per_wake_stage":301.2366666666666}],"pilots":8,"remote_target_cache":true,"warm_stages_per_batch":20}
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 555 filtered out; finished in 0.52s
+

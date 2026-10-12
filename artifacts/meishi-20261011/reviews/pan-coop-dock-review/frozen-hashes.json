@@ -1,0 +1,531 @@
+{
+  "format": 1,
+  "commit": "92fb9f677a94c6740b6a14380a7dd403219795b2",
+  "root": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale",
+  "inputs": [
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/README.md",
+      "bytes": 6469,
+      "sha256": "ea354911fb66fb58fcf54223b491da8fbd2ff3bbb6fa04db0a367212572c3096"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/archive.json",
+      "bytes": 1031,
+      "sha256": "3d1645e6d3d40ab4b9c9ade2e685c5d372a733bafb1a7e9220e71cef0c1e48b6"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/authoring-states.png",
+      "bytes": 3761057,
+      "sha256": "1334b7471aad3dd378b627ee70d5e7a625a42e4a9fd587c236edc69ca817e535"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/conversion-losses.json",
+      "bytes": 1355,
+      "sha256": "2370916bfe1922418281535a5742d7e978fffeaf4d060b306718b7c04782a17a"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/full-state-0.png",
+      "bytes": 262488,
+      "sha256": "acf853686fb77bbe184d8d5853bb576688b4661f86e87ecb5ea32a0796cd1003"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/full-state-1.png",
+      "bytes": 262488,
+      "sha256": "6c48442898ca64505c484c9f336cb9d37b18497724bb21226d7277212f729f7a"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/full-state-2.png",
+      "bytes": 262488,
+      "sha256": "8dcdfbee42f0db2042b12405dec8fc89574b345351d64dcafb9c967a3705598f"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/manifest.json",
+      "bytes": 154002,
+      "sha256": "497b06d52c24544e104abb9a6898c67c12e39e2d718231e3525d752a2120b5f9"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/native-audit.json",
+      "bytes": 1503,
+      "sha256": "4e6e8e445dc0027954b2daa35b36f684d68e50cd627fbe191c19b1d33aab03d2"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/native-extraction.json.gz",
+      "bytes": 838202,
+      "sha256": "13fb92a6c46bbea357936a98370da76ac25d0a476588990aeb4890e1abe43f94"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/native-preview.png",
+      "bytes": 149087,
+      "sha256": "77fc314215a6bd054b08428c535b37c05c0e5df290cf4fa89efb08acab75f5aa"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "07175ae38b91099c828e06c55446c66a91f49e0f18ecfc57e550ad785b235cf4"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "07175ae38b91099c828e06c55446c66a91f49e0f18ecfc57e550ad785b235cf4"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "07175ae38b91099c828e06c55446c66a91f49e0f18ecfc57e550ad785b235cf4"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-body-0.png",
+      "bytes": 65737,
+      "sha256": "fe58363e7cdb0c11c82a59cd2773f7b0ebc153188d09b61606e1818fd39f8491"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-body-1.png",
+      "bytes": 65737,
+      "sha256": "66406f29380a1a12f35e225daccad9f106012ac7f556575c9c52989a35292da5"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-body-2.png",
+      "bytes": 65737,
+      "sha256": "1a9825e346905cdfd73ecf7652b2817f418bad2585d2cf13afa4ec70381291a5"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-deck-0.png",
+      "bytes": 65737,
+      "sha256": "2c100eb203fd47350bf8bc15be19c3c40c1aed81d9595a07ffff1d150f8df620"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-deck-1.png",
+      "bytes": 65737,
+      "sha256": "2c100eb203fd47350bf8bc15be19c3c40c1aed81d9595a07ffff1d150f8df620"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-deck-2.png",
+      "bytes": 65737,
+      "sha256": "2c100eb203fd47350bf8bc15be19c3c40c1aed81d9595a07ffff1d150f8df620"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-screens-0.png",
+      "bytes": 65737,
+      "sha256": "d6062e98ceb54061b04c4c4c8bb447159434e334d410f47be37822f60b2e49d4"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-screens-1.png",
+      "bytes": 65737,
+      "sha256": "d6062e98ceb54061b04c4c4c8bb447159434e334d410f47be37822f60b2e49d4"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-screens-2.png",
+      "bytes": 65737,
+      "sha256": "d6062e98ceb54061b04c4c4c8bb447159434e334d410f47be37822f60b2e49d4"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-signals-0.png",
+      "bytes": 65737,
+      "sha256": "65160715240df5fb7ff345d1fba41d17fac00dfad5369308d7f59ae397397ead"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-signals-1.png",
+      "bytes": 65737,
+      "sha256": "7c739d7a047ed45cf5bbba747854180aebfb0cdb1a84d2e2452770ad0ef1c669"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/ne-signals-2.png",
+      "bytes": 65737,
+      "sha256": "e10c781180eb7a9443c3823d792e81182a69e502c3726792f98c29caa41262dd"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "29290243b765cfdd53735a6c7112f9c3886f0e70f558a04298289649b3c5c130"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "29290243b765cfdd53735a6c7112f9c3886f0e70f558a04298289649b3c5c130"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "29290243b765cfdd53735a6c7112f9c3886f0e70f558a04298289649b3c5c130"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-body-0.png",
+      "bytes": 65737,
+      "sha256": "2a574d5a3763284301c2f1972c94e484aa251719f2d84c23ee23c0ef138555dd"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-body-1.png",
+      "bytes": 65737,
+      "sha256": "781b1561633872a17aeb1d18647c50bd0c7970d91df99179a0a7d3274647f814"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-body-2.png",
+      "bytes": 65737,
+      "sha256": "10672ff36fb89d60e5356290c7a6483ce9f954a3fd553dc7cb2946f9b7150c8c"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-deck-0.png",
+      "bytes": 65737,
+      "sha256": "561757992e8aa0f24da6834d17b85807022d4df9481a29ae25cf10a3fae574a5"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-deck-1.png",
+      "bytes": 65737,
+      "sha256": "561757992e8aa0f24da6834d17b85807022d4df9481a29ae25cf10a3fae574a5"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-deck-2.png",
+      "bytes": 65737,
+      "sha256": "561757992e8aa0f24da6834d17b85807022d4df9481a29ae25cf10a3fae574a5"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-screens-0.png",
+      "bytes": 65737,
+      "sha256": "9579e2122e12e03434dce4dfb087b4cec9048431c5ef9e55fd08747035354d1e"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-screens-1.png",
+      "bytes": 65737,
+      "sha256": "9579e2122e12e03434dce4dfb087b4cec9048431c5ef9e55fd08747035354d1e"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-screens-2.png",
+      "bytes": 65737,
+      "sha256": "9579e2122e12e03434dce4dfb087b4cec9048431c5ef9e55fd08747035354d1e"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-signals-0.png",
+      "bytes": 65737,
+      "sha256": "775f66c6ddb051e55f47c18ef9bb2cc1f13a6216b094d914018ea9b984b7f5ad"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-signals-1.png",
+      "bytes": 65737,
+      "sha256": "501414ffbe4110e65cb14dc858dc89c21c1a9bad1e954c90182649ba28ff10e0"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/nw-signals-2.png",
+      "bytes": 65737,
+      "sha256": "34e7ebd28d316f5566a27326697c1bf7c5897214b9362fef9fe40968cc048bee"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/pack.json",
+      "bytes": 2302820,
+      "sha256": "36031366f135b12b290f59e3f2c382e56774f9663e5fdb5241584051ad24832b"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/rig-extraction.json.gz",
+      "bytes": 875741,
+      "sha256": "ffc135d2b9f327444a6a80f6cf271cd406af9867160824891a180c27f13baa82"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "9c1800306390634203a77c5ab3abbea6ee25e650288df15bafc705bd9f660245"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "9c1800306390634203a77c5ab3abbea6ee25e650288df15bafc705bd9f660245"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "9c1800306390634203a77c5ab3abbea6ee25e650288df15bafc705bd9f660245"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-body-0.png",
+      "bytes": 65737,
+      "sha256": "95ddc32d8869aa972e73b03e54ad00006d82356f072b802a22f14b3e1536b2d2"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-body-1.png",
+      "bytes": 65737,
+      "sha256": "d33e0f4f54183a67a2cb761b65d8e65e5275ced66d6c77a08e7741186537b591"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-body-2.png",
+      "bytes": 65737,
+      "sha256": "e2b020253ba7e6bf94f78c50d4c22c401f569246ec493b1bbd8dd228c9947926"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-deck-0.png",
+      "bytes": 65737,
+      "sha256": "7523770e05c1fa2ba77987ae97b03807a23fd7ce7ae7f8397079ffe3e1d24dc6"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-deck-1.png",
+      "bytes": 65737,
+      "sha256": "7523770e05c1fa2ba77987ae97b03807a23fd7ce7ae7f8397079ffe3e1d24dc6"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-deck-2.png",
+      "bytes": 65737,
+      "sha256": "7523770e05c1fa2ba77987ae97b03807a23fd7ce7ae7f8397079ffe3e1d24dc6"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-screens-0.png",
+      "bytes": 65737,
+      "sha256": "7bcea35c19f3da0ada37d83eaced123849f23ce81f50f76c6dae4b1e29d1c261"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-screens-1.png",
+      "bytes": 65737,
+      "sha256": "7bcea35c19f3da0ada37d83eaced123849f23ce81f50f76c6dae4b1e29d1c261"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-screens-2.png",
+      "bytes": 65737,
+      "sha256": "7bcea35c19f3da0ada37d83eaced123849f23ce81f50f76c6dae4b1e29d1c261"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-signals-0.png",
+      "bytes": 65737,
+      "sha256": "cbf2e811e9bff59403d6bd573d0fe9b7a0563bc58d6aa6a2879bc0ea7d72f74a"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-signals-1.png",
+      "bytes": 65737,
+      "sha256": "9ed8196c276148bb16892c0f67c374f5a631ad9d5fd380b1d8044342d05b8177"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/se-signals-2.png",
+      "bytes": 65737,
+      "sha256": "b5fdc83a69da153ca046ad05d53c6648a1e1b3e3d8a18a07dea0d95bb34839a2"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-alloy-0.png",
+      "bytes": 65737,
+      "sha256": "7a26e30c3b6d51aa70f196598102a7c881518d665947c3fa00d6ca06f5b78cb6"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-alloy-1.png",
+      "bytes": 65737,
+      "sha256": "7a26e30c3b6d51aa70f196598102a7c881518d665947c3fa00d6ca06f5b78cb6"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-alloy-2.png",
+      "bytes": 65737,
+      "sha256": "7a26e30c3b6d51aa70f196598102a7c881518d665947c3fa00d6ca06f5b78cb6"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-body-0.png",
+      "bytes": 65737,
+      "sha256": "cc07d2245c0e21ddf4a0c034411d02c4ceb8fec9aaf3c8dc735cddbd3226a928"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-body-1.png",
+      "bytes": 65737,
+      "sha256": "79f32c1d4ca3be11c3645dbb9c257fdb5a0ee84766e5a9dd060bd59bfbfe8136"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-body-2.png",
+      "bytes": 65737,
+      "sha256": "fbb9c7403dfce24da3da9fd4ec9f2975a6ca6f4c431ab0e51f11598510612f10"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-deck-0.png",
+      "bytes": 65737,
+      "sha256": "cd2d2f2911b426774d45778cf1d915bb7d19cd05d977c3b587151e4493acc71d"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-deck-1.png",
+      "bytes": 65737,
+      "sha256": "cd2d2f2911b426774d45778cf1d915bb7d19cd05d977c3b587151e4493acc71d"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-deck-2.png",
+      "bytes": 65737,
+      "sha256": "cd2d2f2911b426774d45778cf1d915bb7d19cd05d977c3b587151e4493acc71d"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-screens-0.png",
+      "bytes": 65737,
+      "sha256": "8aa527c30959df47acead5716a3c7da91762ef017165d990463aeacb4d56344d"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-screens-1.png",
+      "bytes": 65737,
+      "sha256": "8aa527c30959df47acead5716a3c7da91762ef017165d990463aeacb4d56344d"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-screens-2.png",
+      "bytes": 65737,
+      "sha256": "8aa527c30959df47acead5716a3c7da91762ef017165d990463aeacb4d56344d"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-signals-0.png",
+      "bytes": 65737,
+      "sha256": "a9715e0a32a29dce400ec2c2c0939addb535fb78dbbfe5e81104859608f8193e"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-signals-1.png",
+      "bytes": 65737,
+      "sha256": "c9dfbcb6c8d0584771c3477db414a86ad15626cbe029050097eaa67852a950e3"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/sw-signals-2.png",
+      "bytes": 65737,
+      "sha256": "1bfbbf10279c1c1ee4f9cd58c18853533900230d283b4347c253010423b40810"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/validation.json",
+      "bytes": 30397,
+      "sha256": "c8b6ee428fa0343a1a44faa9711748605e151eba58a1658c7b34e3726a65ddc1"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/zoom-extraction.json.gz",
+      "bytes": 1044450,
+      "sha256": "cf7cf7af629a4c4a71fdf165a61d5b2c74892ffc5c1e653640290697a393329b"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/zoom-preview.png",
+      "bytes": 296463,
+      "sha256": "19f24d866a37243d98466b4ca267d96ef642343558a2ea3ffbcd16138d0dab19"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/archive_256.py",
+      "bytes": 2572,
+      "sha256": "9ac31be1fefaa53f77cb72c45aee0c5ffc74d866b612cf35b6b9b265c8d17430"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/convert_256.py",
+      "bytes": 7352,
+      "sha256": "a27f9d0d2ec88369b6f122afae0979cd5de6fb8b5d111d4566c9d6dd1419e3b3"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/native256/Cargo.lock",
+      "bytes": 3510,
+      "sha256": "f28ce54918cd3c2f1c0bc93e3278d7bc1b41de4c1bd17e518f303e24f0689cc4"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/native256/Cargo.toml",
+      "bytes": 245,
+      "sha256": "9c51cd04c7d65696936a7c767a9a46a85111a48c4005ea31ea2c238bb72457b8"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/native256/src/main.rs",
+      "bytes": 14212,
+      "sha256": "e85adb1c9428de112a57393199c5be43c91ca856e655cab6215c3e94cd64c72e"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/test_256.py",
+      "bytes": 6971,
+      "sha256": "2ec9432b1aa28d39d463f6b268f64b0208bb8a8355dcf3efc625e8cd68e3365e"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/verify_256.py",
+      "bytes": 4785,
+      "sha256": "a86d1cf39b0b494a0641fce080a4382f00ab45b4be36b17ec356c13ba24f80cb"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/convert.py",
+      "bytes": 14697,
+      "sha256": "00116cc547c27646bb47ac05a6e85d02a8cd0c8f3b40bc539a6ec70bd468dfa0"
+    },
+    {
+      "path": "scripts/asset-pack.py",
+      "bytes": 28688,
+      "sha256": "dc1673175eadf56042d273e6d816d93eb36ce9517c7dd75e85d39f276bca1e35"
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/source.png",
+      "bytes": 1572973,
+      "sha256": "eab5fa7c3b604451fdb5fadff75c2138d614aa8d8bbcedd31402527c59380918"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14135,
+      "sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "bytes": 5578,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "peer-logs/python-tests.log",
+      "bytes": 115,
+      "sha256": "93060052da67996a9b9c2d73973cc7eb533c893401b6518d5d4062594418a26c",
+      "attribution": "Art owner executed; independently read, not rerun"
+    },
+    {
+      "path": "peer-logs/native-tests.log",
+      "bytes": 871,
+      "sha256": "9d3f53f8c55461b2d1f16240add934830dbb5dfa82489f60a40701c65c78afc4",
+      "attribution": "Art owner executed; independently read, not rerun"
+    },
+    {
+      "path": "peer-logs/clippy.log",
+      "bytes": 220,
+      "sha256": "1e78023c301595755be1dd67f8c97e64774bd99d4c762776521c7eaa257104ef",
+      "attribution": "Art owner executed; independently read, not rerun"
+    },
+    {
+      "path": "peer-logs/verify.log",
+      "bytes": 295,
+      "sha256": "daa389f031a5d8d640815127e32dbf7e9cb75ec4ddc07654783ae37dbb4c8217",
+      "attribution": "Art owner executed; independently read, not rerun"
+    },
+    {
+      "path": "peer-logs/body-run.log",
+      "bytes": 316,
+      "sha256": "6beb36e27de85e0eb77e23efd2548a9a7aa25d414f7671dee15dbad81e7d7192",
+      "attribution": "Art owner executed; independently read, not rerun"
+    },
+    {
+      "path": "peer-logs/rig-run.log",
+      "bytes": 429,
+      "sha256": "a1b5df2c2898e0ec1dd174e6a4e506283117f1311b4e8b945b1bd7e7bb68d0ad",
+      "attribution": "Art owner executed; independently read, not rerun"
+    },
+    {
+      "path": "peer-logs/python-tests-archive-fixture-error.log",
+      "bytes": 1117,
+      "sha256": "f7983a717e1a28cb5ef56d0b2622574455893577a3fb3eb5efef8b361331e6d0",
+      "attribution": "Art owner executed; independently read, not rerun"
+    },
+    {
+      "path": "inspect.mjs",
+      "bytes": 5348,
+      "sha256": "e474bd9c4b0a6059c3b65fdafa0ed7520b618e5d278c3eb4d06ec785da797491",
+      "attribution": "Independent source/retained-packet review"
+    },
+    {
+      "path": "packet-inspection.json",
+      "bytes": 904,
+      "sha256": "81f0fbe0a75bd1fa3038385a58ad5648ec0df3f633f218d3c02c39e1cc792177",
+      "attribution": "Independent source/retained-packet review"
+    },
+    {
+      "path": "inspection.log",
+      "bytes": 590,
+      "sha256": "a32045fe7ad744d414a6923fb01f2e5eb8aab8a342a91924e78feee56121ec07",
+      "attribution": "Independent source/retained-packet review"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 4060,
+      "sha256": "bdd6335f7941032147d0e86f88facc3279407a980f4e4aa54adc95ed792464ea",
+      "attribution": "Independent source/retained-packet review"
+    }
+  ],
+  "scope": "Read-only source, source-art and actual retained native packets. No native rebuild, Game, GPU, services, co-op or phone acceptance."
+}

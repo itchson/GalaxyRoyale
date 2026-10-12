@@ -1,0 +1,1310 @@
+[
+  {
+    "image": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\compact-webgpu.jpg",
+    "image_sha256": "54050169745d903bdb32a63d7bd3af1a52a611500c2ca21d79538d3b2c864777",
+    "native_packet": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-0-reduced-false.json",
+    "packet_sha256": "0b7300a83520f0ef133a6117085f2100a161bdd4e795c4010106912fb8820cd9",
+    "camera_offset_x": 400,
+    "logical": [
+      640,
+      360
+    ],
+    "zoom": 1,
+    "css": [
+      1280,
+      720
+    ],
+    "points": [
+      {
+        "index": 0,
+        "predicted_center": [
+          340.78324127197266,
+          379.83787536621094
+        ],
+        "predicted_corners": [
+          [
+            339.63323974609375,
+            378.6878662109375
+          ],
+          [
+            341.93324279785156,
+            378.6878662109375
+          ],
+          [
+            341.93324279785156,
+            380.9878845214844
+          ],
+          [
+            339.63323974609375,
+            380.9878845214844
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          340,
+          379
+        ],
+        "peak_rgb": [
+          154,
+          153,
+          159
+        ],
+        "peak_luma": 153.6458,
+        "median_local_background": 0.6458,
+        "contrast": 153.0,
+        "peak_distance": 1.146953364101809
+      },
+      {
+        "index": 1,
+        "predicted_center": [
+          473.1088409423828,
+          329.19482421875
+        ],
+        "predicted_corners": [
+          [
+            471.9588317871094,
+            328.0448303222656
+          ],
+          [
+            474.25885009765625,
+            328.0448303222656
+          ],
+          [
+            474.25885009765625,
+            330.3448181152344
+          ],
+          [
+            471.9588317871094,
+            330.3448181152344
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          473,
+          328
+        ],
+        "peak_rgb": [
+          167,
+          166,
+          174
+        ],
+        "peak_luma": 166.7902,
+        "median_local_background": 0.7902,
+        "contrast": 166.0,
+        "peak_distance": 1.19977133840175
+      },
+      {
+        "index": 2,
+        "predicted_center": [
+          464.0727844238281,
+          370.7217712402344
+        ],
+        "predicted_corners": [
+          [
+            462.92279052734375,
+            369.57177734375
+          ],
+          [
+            465.2227783203125,
+            369.57177734375
+          ],
+          [
+            465.2227783203125,
+            371.87176513671875
+          ],
+          [
+            462.92279052734375,
+            371.87176513671875
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          463,
+          371
+        ],
+        "peak_rgb": [
+          141,
+          140,
+          146
+        ],
+        "peak_luma": 140.64579999999998,
+        "median_local_background": 0.6458,
+        "contrast": 139.99999999999997,
+        "peak_distance": 1.108276889034938
+      },
+      {
+        "index": 3,
+        "predicted_center": [
+          449.49609375,
+          302.4631576538086
+        ],
+        "predicted_corners": [
+          [
+            448.3460998535156,
+            301.3131561279297
+          ],
+          [
+            450.6460876464844,
+            301.3131561279297
+          ],
+          [
+            450.6460876464844,
+            303.6131591796875
+          ],
+          [
+            448.3460998535156,
+            303.6131591796875
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          449,
+          302
+        ],
+        "peak_rgb": [
+          156,
+          179,
+          187
+        ],
+        "peak_luma": 174.68779999999998,
+        "median_local_background": 0.6458,
+        "contrast": 174.04199999999997,
+        "peak_distance": 0.6786928768379286
+      },
+      {
+        "index": 4,
+        "predicted_center": [
+          382.1508483886719,
+          327.9896240234375
+        ],
+        "predicted_corners": [
+          [
+            381.0008544921875,
+            326.8396301269531
+          ],
+          [
+            383.30084228515625,
+            326.8396301269531
+          ],
+          [
+            383.30084228515625,
+            329.1396179199219
+          ],
+          [
+            381.0008544921875,
+            329.1396179199219
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          382,
+          327
+        ],
+        "peak_rgb": [
+          151,
+          150,
+          156
+        ],
+        "peak_luma": 150.6458,
+        "median_local_background": 0.6458,
+        "contrast": 150.0,
+        "peak_distance": 1.0010549156412583
+      },
+      {
+        "index": 5,
+        "predicted_center": [
+          459.8479461669922,
+          399.0260467529297
+        ],
+        "predicted_corners": [
+          [
+            458.69793701171875,
+            397.87603759765625
+          ],
+          [
+            460.9979553222656,
+            397.87603759765625
+          ],
+          [
+            460.9979553222656,
+            400.1760559082031
+          ],
+          [
+            458.69793701171875,
+            400.1760559082031
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          459,
+          399
+        ],
+        "peak_rgb": [
+          154,
+          153,
+          161
+        ],
+        "peak_luma": 153.7902,
+        "median_local_background": 0.6458,
+        "contrast": 153.1444,
+        "peak_distance": 0.8483461177225502
+      },
+      {
+        "index": 6,
+        "predicted_center": [
+          390.8138732910156,
+          392.1137390136719
+        ],
+        "predicted_corners": [
+          [
+            389.66387939453125,
+            390.9637451171875
+          ],
+          [
+            391.9638671875,
+            390.9637451171875
+          ],
+          [
+            391.9638671875,
+            393.26373291015625
+          ],
+          [
+            389.66387939453125,
+            393.26373291015625
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          391,
+          391
+        ],
+        "peak_rgb": [
+          155,
+          154,
+          160
+        ],
+        "peak_luma": 154.64579999999998,
+        "median_local_background": 0.6458,
+        "contrast": 153.99999999999997,
+        "peak_distance": 1.1291845475262914
+      }
+    ],
+    "scope": "Persisted JPEG coordinate/contrast analysis; predicted geometry from actual native packet. Peaks can include other stars; manual inspection is required. Not exact parity or new native/browser execution."
+  },
+  {
+    "image": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\loose-webgpu.jpg",
+    "image_sha256": "483dca896ee9f8b6fba50c60fb816297c6dce9469a9b6f84c77d57a494bb4396",
+    "native_packet": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-3-reduced-false.json",
+    "packet_sha256": "5e9769079e571bedba8ab043b847a4c1d0b40f4c76909c97fe8ea9b874953416",
+    "camera_offset_x": 400,
+    "logical": [
+      640,
+      360
+    ],
+    "zoom": 1,
+    "css": [
+      1280,
+      720
+    ],
+    "points": [
+      {
+        "index": 0,
+        "predicted_center": [
+          492.48316955566406,
+          301.7973937988281
+        ],
+        "predicted_corners": [
+          [
+            491.3331604003906,
+            300.64739990234375
+          ],
+          [
+            493.6331787109375,
+            300.64739990234375
+          ],
+          [
+            493.6331787109375,
+            302.9473876953125
+          ],
+          [
+            491.3331604003906,
+            302.9473876953125
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          493,
+          302
+        ],
+        "peak_rgb": [
+          190,
+          190,
+          188
+        ],
+        "peak_luma": 189.85559999999998,
+        "median_local_background": 0.6458,
+        "contrast": 189.20979999999997,
+        "peak_distance": 0.5551242932405146
+      },
+      {
+        "index": 1,
+        "predicted_center": [
+          548.6377258300781,
+          388.82737731933594
+        ],
+        "predicted_corners": [
+          [
+            547.4877319335938,
+            387.6773681640625
+          ],
+          [
+            549.7877197265625,
+            387.6773681640625
+          ],
+          [
+            549.7877197265625,
+            389.9773864746094
+          ],
+          [
+            547.4877319335938,
+            389.9773864746094
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          549,
+          389
+        ],
+        "peak_rgb": [
+          180,
+          180,
+          188
+        ],
+        "peak_luma": 180.5776,
+        "median_local_background": 0.5776,
+        "contrast": 180.0,
+        "peak_distance": 0.40129934471941325
+      },
+      {
+        "index": 2,
+        "predicted_center": [
+          277.27925872802734,
+          344.83978271484375
+        ],
+        "predicted_corners": [
+          [
+            276.12925720214844,
+            343.6897888183594
+          ],
+          [
+            278.42926025390625,
+            343.6897888183594
+          ],
+          [
+            278.42926025390625,
+            345.9897766113281
+          ],
+          [
+            276.12925720214844,
+            345.9897766113281
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          277,
+          344
+        ],
+        "peak_rgb": [
+          176,
+          175,
+          183
+        ],
+        "peak_luma": 175.7902,
+        "median_local_background": 0.7902,
+        "contrast": 175.0,
+        "peak_distance": 0.8849974267362528
+      },
+      {
+        "index": 3,
+        "predicted_center": [
+          437.944580078125,
+          220.22441864013672
+        ],
+        "predicted_corners": [
+          [
+            436.7945861816406,
+            219.0744171142578
+          ],
+          [
+            439.0945739746094,
+            219.0744171142578
+          ],
+          [
+            439.0945739746094,
+            221.37442016601562
+          ],
+          [
+            436.7945861816406,
+            221.37442016601562
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          438,
+          219
+        ],
+        "peak_rgb": [
+          164,
+          163,
+          169
+        ],
+        "peak_luma": 163.64579999999998,
+        "median_local_background": 0.6458,
+        "contrast": 162.99999999999997,
+        "peak_distance": 1.2256722131364823
+      },
+      {
+        "index": 4,
+        "predicted_center": [
+          527.9129943847656,
+          378.8527526855469
+        ],
+        "predicted_corners": [
+          [
+            526.7630004882812,
+            377.7027587890625
+          ],
+          [
+            529.06298828125,
+            377.7027587890625
+          ],
+          [
+            529.06298828125,
+            380.00274658203125
+          ],
+          [
+            526.7630004882812,
+            380.00274658203125
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          527,
+          379
+        ],
+        "peak_rgb": [
+          148,
+          147,
+          153
+        ],
+        "peak_luma": 147.6458,
+        "median_local_background": 0.6458,
+        "contrast": 147.0,
+        "peak_distance": 0.9247921486621843
+      },
+      {
+        "index": 5,
+        "predicted_center": [
+          507.16168212890625,
+          413.93634033203125
+        ],
+        "predicted_corners": [
+          [
+            506.0116882324219,
+            412.7863464355469
+          ],
+          [
+            508.3116760253906,
+            412.7863464355469
+          ],
+          [
+            508.3116760253906,
+            415.0863342285156
+          ],
+          [
+            506.0116882324219,
+            415.0863342285156
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          507,
+          414
+        ],
+        "peak_rgb": [
+          175,
+          174,
+          182
+        ],
+        "peak_luma": 174.7902,
+        "median_local_background": 0.6458,
+        "contrast": 174.1444,
+        "peak_distance": 0.17376324160635567
+      },
+      {
+        "index": 6,
+        "predicted_center": [
+          376.87242889404297,
+          411.77467346191406
+        ],
+        "predicted_corners": [
+          [
+            375.72242736816406,
+            410.6246643066406
+          ],
+          [
+            378.0224304199219,
+            410.6246643066406
+          ],
+          [
+            378.0224304199219,
+            412.9246826171875
+          ],
+          [
+            375.72242736816406,
+            412.9246826171875
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          376,
+          411
+        ],
+        "peak_rgb": [
+          153,
+          152,
+          160
+        ],
+        "peak_luma": 152.7902,
+        "median_local_background": 0.7902,
+        "contrast": 152.0,
+        "peak_distance": 1.1667266808275862
+      }
+    ],
+    "scope": "Persisted JPEG coordinate/contrast analysis; predicted geometry from actual native packet. Peaks can include other stars; manual inspection is required. Not exact parity or new native/browser execution."
+  },
+  {
+    "image": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\compact-webgl2-ab714.jpg",
+    "image_sha256": "96b807ab54e78e4590107fcec6b23ebd70ec9cb6f8e2394e0548ce487fbdfe58",
+    "native_packet": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-0-reduced-false.json",
+    "packet_sha256": "0b7300a83520f0ef133a6117085f2100a161bdd4e795c4010106912fb8820cd9",
+    "camera_offset_x": 400,
+    "logical": [
+      640,
+      360
+    ],
+    "zoom": 1,
+    "css": [
+      1280,
+      720
+    ],
+    "points": [
+      {
+        "index": 0,
+        "predicted_center": [
+          340.78324127197266,
+          379.83787536621094
+        ],
+        "predicted_corners": [
+          [
+            339.63323974609375,
+            378.6878662109375
+          ],
+          [
+            341.93324279785156,
+            378.6878662109375
+          ],
+          [
+            341.93324279785156,
+            380.9878845214844
+          ],
+          [
+            339.63323974609375,
+            380.9878845214844
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          341,
+          379
+        ],
+        "peak_rgb": [
+          162,
+          162,
+          162
+        ],
+        "peak_luma": 162.0,
+        "median_local_background": 0.0,
+        "contrast": 162.0,
+        "peak_distance": 0.8654591125403583
+      },
+      {
+        "index": 1,
+        "predicted_center": [
+          473.1088409423828,
+          329.19482421875
+        ],
+        "predicted_corners": [
+          [
+            471.9588317871094,
+            328.0448303222656
+          ],
+          [
+            474.25885009765625,
+            328.0448303222656
+          ],
+          [
+            474.25885009765625,
+            330.3448181152344
+          ],
+          [
+            471.9588317871094,
+            330.3448181152344
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          472,
+          328
+        ],
+        "peak_rgb": [
+          183,
+          183,
+          183
+        ],
+        "peak_luma": 183.0,
+        "median_local_background": 0.0,
+        "contrast": 183.0,
+        "peak_distance": 1.6300715165954995
+      },
+      {
+        "index": 2,
+        "predicted_center": [
+          464.0727844238281,
+          370.7217712402344
+        ],
+        "predicted_corners": [
+          [
+            462.92279052734375,
+            369.57177734375
+          ],
+          [
+            465.2227783203125,
+            369.57177734375
+          ],
+          [
+            465.2227783203125,
+            371.87176513671875
+          ],
+          [
+            462.92279052734375,
+            371.87176513671875
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          463,
+          370
+        ],
+        "peak_rgb": [
+          166,
+          166,
+          166
+        ],
+        "peak_luma": 165.99999999999997,
+        "median_local_background": 0.0,
+        "contrast": 165.99999999999997,
+        "peak_distance": 1.2929888411110553
+      },
+      {
+        "index": 3,
+        "predicted_center": [
+          449.49609375,
+          302.4631576538086
+        ],
+        "predicted_corners": [
+          [
+            448.3460998535156,
+            301.3131561279297
+          ],
+          [
+            450.6460876464844,
+            301.3131561279297
+          ],
+          [
+            450.6460876464844,
+            303.6131591796875
+          ],
+          [
+            448.3460998535156,
+            303.6131591796875
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          449,
+          302
+        ],
+        "peak_rgb": [
+          169,
+          191,
+          202
+        ],
+        "peak_luma": 187.117,
+        "median_local_background": 0.0,
+        "contrast": 187.117,
+        "peak_distance": 0.6786928768379286
+      },
+      {
+        "index": 4,
+        "predicted_center": [
+          382.1508483886719,
+          327.9896240234375
+        ],
+        "predicted_corners": [
+          [
+            381.0008544921875,
+            326.8396301269531
+          ],
+          [
+            383.30084228515625,
+            326.8396301269531
+          ],
+          [
+            383.30084228515625,
+            329.1396179199219
+          ],
+          [
+            381.0008544921875,
+            329.1396179199219
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          382,
+          327
+        ],
+        "peak_rgb": [
+          160,
+          160,
+          160
+        ],
+        "peak_luma": 159.99999999999997,
+        "median_local_background": 0.0,
+        "contrast": 159.99999999999997,
+        "peak_distance": 1.0010549156412583
+      },
+      {
+        "index": 5,
+        "predicted_center": [
+          459.8479461669922,
+          399.0260467529297
+        ],
+        "predicted_corners": [
+          [
+            458.69793701171875,
+            397.87603759765625
+          ],
+          [
+            460.9979553222656,
+            397.87603759765625
+          ],
+          [
+            460.9979553222656,
+            400.1760559082031
+          ],
+          [
+            458.69793701171875,
+            400.1760559082031
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          459,
+          399
+        ],
+        "peak_rgb": [
+          161,
+          161,
+          161
+        ],
+        "peak_luma": 161.0,
+        "median_local_background": 0.0,
+        "contrast": 161.0,
+        "peak_distance": 0.8483461177225502
+      },
+      {
+        "index": 6,
+        "predicted_center": [
+          390.8138732910156,
+          392.1137390136719
+        ],
+        "predicted_corners": [
+          [
+            389.66387939453125,
+            390.9637451171875
+          ],
+          [
+            391.9638671875,
+            390.9637451171875
+          ],
+          [
+            391.9638671875,
+            393.26373291015625
+          ],
+          [
+            389.66387939453125,
+            393.26373291015625
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 3,
+        "peak_position": [
+          391,
+          391
+        ],
+        "peak_rgb": [
+          166,
+          166,
+          166
+        ],
+        "peak_luma": 165.99999999999997,
+        "median_local_background": 0.0,
+        "contrast": 165.99999999999997,
+        "peak_distance": 1.1291845475262914
+      }
+    ],
+    "scope": "Persisted JPEG coordinate/contrast analysis; predicted geometry from actual native packet. Peaks can include other stars; manual inspection is required. Not exact parity or new native/browser execution."
+  },
+  {
+    "image": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\loose-webgl2-ab714.jpg",
+    "image_sha256": "70486367ce6b6962c1e3e707afb6f10d46824eced1652ebde7a46bf6a7caa728",
+    "native_packet": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-3-reduced-false.json",
+    "packet_sha256": "5e9769079e571bedba8ab043b847a4c1d0b40f4c76909c97fe8ea9b874953416",
+    "camera_offset_x": 400,
+    "logical": [
+      640,
+      360
+    ],
+    "zoom": 1,
+    "css": [
+      1280,
+      720
+    ],
+    "points": [
+      {
+        "index": 0,
+        "predicted_center": [
+          492.48316955566406,
+          301.7973937988281
+        ],
+        "predicted_corners": [
+          [
+            491.3331604003906,
+            300.64739990234375
+          ],
+          [
+            493.6331787109375,
+            300.64739990234375
+          ],
+          [
+            493.6331787109375,
+            302.9473876953125
+          ],
+          [
+            491.3331604003906,
+            302.9473876953125
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 6,
+        "peak_position": [
+          493,
+          301
+        ],
+        "peak_rgb": [
+          197,
+          194,
+          179
+        ],
+        "peak_luma": 193.5548,
+        "median_local_background": 0.0,
+        "contrast": 193.5548,
+        "peak_distance": 0.9502371170408105
+      },
+      {
+        "index": 1,
+        "predicted_center": [
+          548.6377258300781,
+          388.82737731933594
+        ],
+        "predicted_corners": [
+          [
+            547.4877319335938,
+            387.6773681640625
+          ],
+          [
+            549.7877197265625,
+            387.6773681640625
+          ],
+          [
+            549.7877197265625,
+            389.9773864746094
+          ],
+          [
+            547.4877319335938,
+            389.9773864746094
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 6,
+        "peak_position": [
+          549,
+          389
+        ],
+        "peak_rgb": [
+          181,
+          183,
+          182
+        ],
+        "peak_luma": 182.5026,
+        "median_local_background": 0.2888,
+        "contrast": 182.2138,
+        "peak_distance": 0.40129934471941325
+      },
+      {
+        "index": 2,
+        "predicted_center": [
+          277.27925872802734,
+          344.83978271484375
+        ],
+        "predicted_corners": [
+          [
+            276.12925720214844,
+            343.6897888183594
+          ],
+          [
+            278.42926025390625,
+            343.6897888183594
+          ],
+          [
+            278.42926025390625,
+            345.9897766113281
+          ],
+          [
+            276.12925720214844,
+            345.9897766113281
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 6,
+        "peak_position": [
+          277,
+          345
+        ],
+        "peak_rgb": [
+          182,
+          184,
+          183
+        ],
+        "peak_luma": 183.50260000000003,
+        "median_local_background": 0.0,
+        "contrast": 183.50260000000003,
+        "peak_distance": 0.3219549900875728
+      },
+      {
+        "index": 3,
+        "predicted_center": [
+          437.944580078125,
+          220.22441864013672
+        ],
+        "predicted_corners": [
+          [
+            436.7945861816406,
+            219.0744171142578
+          ],
+          [
+            439.0945739746094,
+            219.0744171142578
+          ],
+          [
+            439.0945739746094,
+            221.37442016601562
+          ],
+          [
+            436.7945861816406,
+            221.37442016601562
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 6,
+        "peak_position": [
+          439,
+          220
+        ],
+        "peak_rgb": [
+          187,
+          187,
+          187
+        ],
+        "peak_luma": 187.0,
+        "median_local_background": 0.0,
+        "contrast": 187.0,
+        "peak_distance": 1.079015726266974
+      },
+      {
+        "index": 4,
+        "predicted_center": [
+          527.9129943847656,
+          378.8527526855469
+        ],
+        "predicted_corners": [
+          [
+            526.7630004882812,
+            377.7027587890625
+          ],
+          [
+            529.06298828125,
+            377.7027587890625
+          ],
+          [
+            529.06298828125,
+            380.00274658203125
+          ],
+          [
+            526.7630004882812,
+            380.00274658203125
+          ]
+        ],
+        "source_rgb": [
+          229,
+          211,
+          179
+        ],
+        "search_radius_pixels": 6,
+        "peak_position": [
+          529,
+          379
+        ],
+        "peak_rgb": [
+          194,
+          195,
+          189
+        ],
+        "peak_luma": 194.3542,
+        "median_local_background": 0.0,
+        "contrast": 194.3542,
+        "peak_distance": 1.09693344336141
+      },
+      {
+        "index": 5,
+        "predicted_center": [
+          507.16168212890625,
+          413.93634033203125
+        ],
+        "predicted_corners": [
+          [
+            506.0116882324219,
+            412.7863464355469
+          ],
+          [
+            508.3116760253906,
+            412.7863464355469
+          ],
+          [
+            508.3116760253906,
+            415.0863342285156
+          ],
+          [
+            506.0116882324219,
+            415.0863342285156
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 6,
+        "peak_position": [
+          507,
+          415
+        ],
+        "peak_rgb": [
+          155,
+          159,
+          158
+        ],
+        "peak_luma": 158.0774,
+        "median_local_background": 0.0,
+        "contrast": 158.0774,
+        "peak_distance": 1.0758777811959166
+      },
+      {
+        "index": 6,
+        "predicted_center": [
+          376.87242889404297,
+          411.77467346191406
+        ],
+        "predicted_corners": [
+          [
+            375.72242736816406,
+            410.6246643066406
+          ],
+          [
+            378.0224304199219,
+            410.6246643066406
+          ],
+          [
+            378.0224304199219,
+            412.9246826171875
+          ],
+          [
+            375.72242736816406,
+            412.9246826171875
+          ]
+        ],
+        "source_rgb": [
+          172,
+          211,
+          227
+        ],
+        "search_radius_pixels": 6,
+        "peak_position": [
+          377,
+          412
+        ],
+        "peak_rgb": [
+          180,
+          180,
+          180
+        ],
+        "peak_luma": 180.0,
+        "median_local_background": 0.0,
+        "contrast": 180.0,
+        "peak_distance": 0.25893326522657056
+      }
+    ],
+    "scope": "Persisted JPEG coordinate/contrast analysis; predicted geometry from actual native packet. Peaks can include other stars; manual inspection is required. Not exact parity or new native/browser execution."
+  }
+]

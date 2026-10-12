@@ -1,0 +1,67 @@
+{
+  "inspectedAt": "2026-10-12T18:50:52.235Z",
+  "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "sources": {
+    "scripts/qa/co-op-transport/client.js": {
+      "bytes": 22669,
+      "workingSha256": "a558131bbdd13754a0bd2aac1e86ac8f69457993b89d55f05fd0f3bbafb2280a",
+      "lfSha256": "a558131bbdd13754a0bd2aac1e86ac8f69457993b89d55f05fd0f3bbafb2280a"
+    },
+    "scripts/qa/co-op-transport/wasm-review.js": {
+      "bytes": 15443,
+      "workingSha256": "4b339c4ef7eae782aab081f77e22f8e84290b89c2422474bb88a8c6aa7516a74",
+      "lfSha256": "4b339c4ef7eae782aab081f77e22f8e84290b89c2422474bb88a8c6aa7516a74"
+    },
+    "scripts/qa/co-op-transport/wasm-review.html": {
+      "bytes": 4127,
+      "workingSha256": "642d21fad7864da16aa69f7e3353c49a70ec5ac389a87f68f1582c4663148a79",
+      "lfSha256": "4ab12668c87edc747d2ccc2e522c7134669bc0ccabc21a1fe71d6efadfa0751d"
+    },
+    "scripts/qa/co-op-transport/server.mjs": {
+      "bytes": 17774,
+      "workingSha256": "34907d5a16fdc96a1ef0bd388317b3fa8c3722a218a4e5a24444352d66fd3834",
+      "lfSha256": "34907d5a16fdc96a1ef0bd388317b3fa8c3722a218a4e5a24444352d66fd3834"
+    },
+    "apps/game/src/coop/controller.ts": {
+      "bytes": 33592,
+      "workingSha256": "2f886539fa1532f136a9d23d3ec817abbd497183e972435db92afc7894926f6a",
+      "lfSha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    "apps/game/src/coop/transport.ts": {
+      "bytes": 37858,
+      "workingSha256": "702d058d8529a754c943ccc79f2e9a785d9d8e10422aa41a270f89f030195101",
+      "lfSha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    "apps/game/src/coop/wire.ts": {
+      "bytes": 19368,
+      "workingSha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4",
+      "lfSha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4"
+    },
+    "apps/game/src/storage.ts": {
+      "bytes": 34850,
+      "workingSha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8",
+      "lfSha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8"
+    },
+    "apps/coop/server.mjs": {
+      "bytes": 12445,
+      "workingSha256": "4a135b5d97d2599354975a18e6017daf49eeceb99fbef192860d96ccd076b478",
+      "lfSha256": "032d2988360bd8d066cd28cf010a0e1f49eb4a391c4fdc294525d0285e1790e5"
+    },
+    "apps/coop/store.mjs": {
+      "bytes": 24690,
+      "workingSha256": "551d7dc521122a06251a1cc57293e954d8e5678a35bc8dfc7c54946086c377f4",
+      "lfSha256": "5d13df9bbcda769f1a35aeda6a4314902125bb7840b80f4123bc53af30339444"
+    }
+  },
+  "evidence": {
+    "PLAN.md": {
+      "bytes": 7114,
+      "sha256": "b91155ba7319780717f8b72e27c518f7a545099c97e54f97e760e9b8d6c56370"
+    },
+    "pin-plan.mjs": {
+      "bytes": 1709,
+      "sha256": "c7093612e61c227bd48a63331c6a14454704ec16683b8ee719b3470cb93f7598"
+    }
+  },
+  "scope": "Read-only source-backed future QA implementation plan; no helper edits/stages/listeners/browser/RTC/profile operation or new test/live claim. Root-reported positive live results remain Root provenance."
+}

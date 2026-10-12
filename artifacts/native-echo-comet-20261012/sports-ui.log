@@ -1,0 +1,24 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.83s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 10 tests
+test ui_scene::sports_ui::tests::neutral_surface_survives_linear_eight_bit_ui_quantization_without_cyan_shift ... ok
+test ui_scene::sports_ui::tests::header_competition_wing_has_authored_slope_facets_award_and_recess ... ok
+test ui_scene::sports_ui::tests::authored_cut_metal_corners_have_distinct_facets_recesses_enamel_and_locator ... ok
+test ui_scene::sports_ui::tests::whole_chrome_quota_and_invalid_transform_rejection_is_atomic ... ok
+test ui_scene::sports_ui::tests::partial_clip_retains_and_charges_hidden_cells_with_reflected_sheared_parent ... ok
+test ui_scene::sports_ui::tests::hover_selection_and_corporate_accents_preserve_neutral_metal_geometry ... ok
+test ui_scene::sports_ui::tests::panel_inherited_focus_and_corporation_cannot_tint_the_opaque_neutral_backing ... ok
+test ui_scene::sports_ui::tests::fractional_tiny_chrome_preserves_full_source_cells_and_local_geometry ... ok
+test ui_scene::sports_ui::tests::optional_native_sports_packet_export_uses_actual_scene_only ... ok
+test ui_scene::sports_ui::tests::realistic_five_icon_largest_portrait_menu_keeps_every_isolated_component ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 278 filtered out; finished in 0.78s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

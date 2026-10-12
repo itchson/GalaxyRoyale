@@ -1,0 +1,18 @@
+test_192_states_are_authored_distinct_fine_features_with_gold_iris_colors (__main__.DetailArtTests.test_192_states_are_authored_distinct_fine_features_with_gold_iris_colors) ... ok
+test_actual_forehead_skin_never_inherits_corporate_color_and_crystals_still_do (__main__.DetailArtTests.test_actual_forehead_skin_never_inherits_corporate_color_and_crystals_still_do) ... ok
+test_all60_composed_poses_have_disjoint_identical_occupied_positions (__main__.DetailArtTests.test_all60_composed_poses_have_disjoint_identical_occupied_positions) ... ok
+test_all_types_have_distinct_real_body_and_hair_masks (__main__.DetailArtTests.test_all_types_have_distinct_real_body_and_hair_masks) ... ok
+test_another_reference_size_refuses_implicit_recrop_or_upscale (__main__.DetailArtTests.test_another_reference_size_refuses_implicit_recrop_or_upscale) ... ok
+test_authored_png_import_and_indexed_png_roundtrip_preserve_every_cell (__main__.DetailArtTests.test_authored_png_import_and_indexed_png_roundtrip_preserve_every_cell) ... ok
+test_bad_dimensions_palette_indices_roles_and_pose_overlap_fail_closed (__main__.DetailArtTests.test_bad_dimensions_palette_indices_roles_and_pose_overlap_fail_closed) ... ok
+test_binary_alpha_palette_and_49152_cell_bound_are_exact (__main__.DetailArtTests.test_binary_alpha_palette_and_49152_cell_bound_are_exact) ... ok
+test_committed_atlas_exactly_matches_full_source_regeneration (__main__.DetailArtTests.test_committed_atlas_exactly_matches_full_source_regeneration) ... ok
+test_conversion_loss_is_explicit_and_never_an_upscaled96_pack (__main__.DetailArtTests.test_conversion_loss_is_explicit_and_never_an_upscaled96_pack) ... ok
+test_neutral_expression_and_all_torso_cells_preserve_converted_reference (__main__.DetailArtTests.test_neutral_expression_and_all_torso_cells_preserve_converted_reference) ... ok
+test_roles_are_sorted_body_cells_independent_hair_and_horn_masks (__main__.DetailArtTests.test_roles_are_sorted_body_cells_independent_hair_and_horn_masks) ... ok
+test_sources_pin_generated_edits_and_full_resolution_original_dora (__main__.DetailArtTests.test_sources_pin_generated_edits_and_full_resolution_original_dora) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 17.828s
+
+OK

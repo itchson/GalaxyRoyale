@@ -1,0 +1,45 @@
+{
+  "item": {
+    "id": "task-71611b9e",
+    "title": "Bounded actual room decline, code replacement and lock QA controls",
+    "description": "Implement in isolated branch from the next reviewed Root helper checkpoint. Own only scripts/qa/co-op-transport and its focused tests in that checkout; Root owns integration/listeners/browser. Use actual controller/store operations, private continuity facts and sanitized reports. No service/runtime modification, no fabricated RTC or world evidence. Source plan frozen in work/private-room-negative-plan.",
+    "department": "Networking QA tooling",
+    "owner": "/root/audio_review",
+    "status": "review",
+    "priority": "high",
+    "dependencies": [
+      "task-769c0361"
+    ],
+    "acceptanceCriteria": [
+      {
+        "text": "Actual pending decline and old-code/locked join controls with approved-peer continuity and private credential handling.",
+        "met": false
+      },
+      {
+        "text": "Meaningful source/function/report and bounded lifecycle tests plus independent review on exact candidate.",
+        "met": false
+      },
+      {
+        "text": "Root executes matching actual native two-client negative cases; broader8/TURN remains separate.",
+        "met": false
+      }
+    ],
+    "evidence": [
+      {
+        "label": "Source-backed bounded negative-case implementation plan",
+        "kind": "artifact",
+        "path": "artifacts/private-room-live-20261013/negative-plan/PLAN.md"
+      },
+      {
+        "label": "Actual isolated negative QA candidate and focused author evidence",
+        "kind": "note",
+        "details": "Commit1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c on codex/private-room-negative-qa from fbb8b1c640f0e11d495cf00c11bf557500701674. Clean tracked tree,6QA/doc/test files; actual11+16+10focused checks pass. Evidence at isolated galaxy-audio-refinement/work/private-room-negative-implementation/HANDOFF.md and source-pins.json. Independent review and actual negative browser/RTC cases pending; no native/service/runtime changes or live pass."
+      }
+    ],
+    "blocker": "",
+    "revision": 3,
+    "createdAt": "2026-10-12T18:59:18.513Z",
+    "updatedAt": "2026-10-12T19:18:25.976Z"
+  },
+  "revision": 1036
+}

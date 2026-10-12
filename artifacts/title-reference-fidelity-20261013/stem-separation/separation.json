@@ -1,0 +1,106 @@
+{
+  "scope": "Actual work-only GPU model-separated estimates from supplied MP3; not original stems, a recovered score, source-waveform runtime playback or listening/song-match acceptance.",
+  "source": {
+    "path": "C:/Users/mitch/Downloads/Galaxy Royale (3).mp3",
+    "bytes": 1032175,
+    "sha256": "95fcb149bb55da752c4d93c18fcc1913a23b70ccafecb52d8db5548dc64755d6"
+  },
+  "repository": "adefossez/HTDemucs",
+  "revision": "cbc8a9b1a87023b7fd74e7b3412e6321c0eab003",
+  "model": {
+    "path": "C:/AI/models/huggingface/hub/models--adefossez--HTDemucs/snapshots/cbc8a9b1a87023b7fd74e7b3412e6321c0eab003/955717e8.safetensors",
+    "bytes": 84025440,
+    "sha256": "d9fa14133cfcc034a6758923bb3a8ca9f8dfd0b582134643bbf83f72c17576dd"
+  },
+  "script": {
+    "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/separate.py",
+    "bytes": 4644,
+    "sha256": "4181500ea815e11cc95f15bda035df9d3e233369fca45e4d8519a5301ce2f0eb"
+  },
+  "torch": "2.13.0+cu130",
+  "demucs": "4.1.0",
+  "cuda": "13.0",
+  "device": "NVIDIA GeForce RTX 5090",
+  "decode_command": [
+    "ffmpeg",
+    "-v",
+    "error",
+    "-i",
+    "C:\\Users\\mitch\\Downloads\\Galaxy Royale (3).mp3",
+    "-vn",
+    "-ac",
+    "2",
+    "-ar",
+    "44100",
+    "-f",
+    "f32le",
+    "pipe:1"
+  ],
+  "decoded_float32_sha256": "7b168e669e1b27fe20e8c4b00dd36ac6523ea2c0f840c7bac81ac0321936c904",
+  "sample_rate": 44100,
+  "samples": 1882188,
+  "seconds": 42.68,
+  "channels": 2,
+  "settings": {
+    "shifts": 0,
+    "split": true,
+    "segment_seconds": 7,
+    "overlap": 0.25,
+    "workers": 0,
+    "seed": 0
+  },
+  "elapsed_separation_seconds": 16.24245229999724,
+  "peak_torch_allocated_bytes": 845307392,
+  "peak_torch_reserved_bytes": 1457520640,
+  "nonfinite": 0,
+  "stems": [
+    {
+      "name": "drums",
+      "wav": {
+        "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/drums.wav",
+        "bytes": 15057562,
+        "sha256": "6afdb901f533fdbd8cfc41035567971a93f01a6bc933b0bb16fcc239677c52dc"
+      },
+      "rms": 0.0555111670730896,
+      "peak": 0.5349948406219482
+    },
+    {
+      "name": "bass",
+      "wav": {
+        "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/bass.wav",
+        "bytes": 15057562,
+        "sha256": "4825370eb427c391f78f1045383fedc7a2e352283138b2c1af45bdb9c791a64e"
+      },
+      "rms": 0.02804682225562308,
+      "peak": 0.13374482095241547
+    },
+    {
+      "name": "other",
+      "wav": {
+        "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/other.wav",
+        "bytes": 15057562,
+        "sha256": "326750972e062081b2b567c659b9bdfdb58e91d98ed5eb6bf402148236b63dce"
+      },
+      "rms": 0.0697280211328807,
+      "peak": 0.5252731442451477
+    },
+    {
+      "name": "vocals",
+      "wav": {
+        "path": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/title-stem-separation/stems/vocals.wav",
+        "bytes": 15057562,
+        "sha256": "e3763c29788e7584fb437e0541be9387623e5c479807f51637380845b12fa5fa"
+      },
+      "rms": 0.0001626889620182503,
+      "peak": 0.0058121271431446075
+    }
+  ],
+  "sum_residual_rms": 0.0030178864080035363,
+  "source_rms": 0.09954079521186487,
+  "remaining": [
+    "Synthetic arcade/glitch separation bleed review",
+    "Source-supported beat/note/envelope extraction from estimates",
+    "Instrument parameter synthesis and tempo integration",
+    "Human same-song acceptance"
+  ]
+}

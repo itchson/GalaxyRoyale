@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "commit": "60934969913ad1e49a3ce4b2b63af514d890518b",
+  "parent": "5aa5cfaeb4db4e71511ac4dc251ce17d1b423923",
+  "source_domain": "Committed Git LF bytes and observed raw working bytes are both pinned; LF equivalence verified.",
+  "evidence_domain": "Observed raw bytes; do not normalize logs or serializer fixtures.",
+  "source": [
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "raw_sha256": "8a2377e1b1e0002d21bd92b4ba89a6be0ed17895f1267b82cead5053be0020d3",
+      "raw_bytes": 37911,
+      "git_lf_sha256": "8a2377e1b1e0002d21bd92b4ba89a6be0ed17895f1267b82cead5053be0020d3",
+      "git_lf_bytes": 37911,
+      "kind": "owned_source"
+    },
+    {
+      "path": "crates/game_core/src/co_op_control.rs",
+      "raw_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "raw_bytes": 3994,
+      "git_lf_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "git_lf_bytes": 3994,
+      "kind": "owned_source"
+    },
+    {
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "raw_sha256": "64e901fd286d51ef8868c7e13c261e28d3ca254fa3dadfcc3afd43fa77aaf806",
+      "raw_bytes": 33066,
+      "git_lf_sha256": "64e901fd286d51ef8868c7e13c261e28d3ca254fa3dadfcc3afd43fa77aaf806",
+      "git_lf_bytes": 33066,
+      "kind": "owned_source"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "raw_sha256": "fa9d113972961219b5b5875905b58c9e84b82fab3db99db50465c52c2fc5dd68",
+      "raw_bytes": 197326,
+      "git_lf_sha256": "fa9d113972961219b5b5875905b58c9e84b82fab3db99db50465c52c2fc5dd68",
+      "git_lf_bytes": 197326,
+      "kind": "owned_source"
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "raw_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "raw_bytes": 24832,
+      "git_lf_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "git_lf_bytes": 24832,
+      "kind": "owned_source"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "raw_sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85",
+      "raw_bytes": 52483,
+      "git_lf_sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85",
+      "git_lf_bytes": 52483,
+      "kind": "owned_source"
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "raw_sha256": "23fe04110a9168681cf93cf121c28867b6d5406127b31924296006b085ecab4d",
+      "raw_bytes": 28460,
+      "git_lf_sha256": "4fe94ee18b5c43713ae75c2d6f0307819f95438b8e74c175bfdf729af8cdbeca",
+      "git_lf_bytes": 27690,
+      "kind": "owned_source"
+    },
+    {
+      "path": "Cargo.lock",
+      "raw_sha256": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574",
+      "raw_bytes": 28906,
+      "git_lf_sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "git_lf_bytes": 27791,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "raw_sha256": "9808ea450c15c662f8b2168d232905b1485c3d22a8f4bf58e595b79ed03396f1",
+      "raw_bytes": 301,
+      "git_lf_sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "git_lf_bytes": 285,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "raw_sha256": "08c2ddf555a871750d1b3415d6ab05a19362406dc3259ef3118b25c129822a92",
+      "raw_bytes": 22848,
+      "git_lf_sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "git_lf_bytes": 22135,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/game_core/src/shield_progression.rs",
+      "raw_sha256": "0a38a560632be94813d27ca6eced7f9a9033fdfa3965e603047297fec69c2763",
+      "raw_bytes": 5431,
+      "git_lf_sha256": "a308a0c46cbaa020bc0c998fa90be20276322b6912ef209df7d9bb89a93d97af",
+      "git_lf_bytes": 5281,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "raw_sha256": "1a662f6dcdaaef60170861f0dc0e33eab24a80adbc1ba20d06b01367d1319d0f",
+      "raw_bytes": 14210,
+      "git_lf_sha256": "1d4bdb14ff635bce57986e92da68badce09973bb3558a949005df78d5ebeacaa",
+      "git_lf_bytes": 13834,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "raw_sha256": "c3e2dca428eaf67a3343dfbb20ac8989280584074e1381c204289b357ac6bdf5",
+      "raw_bytes": 34209,
+      "git_lf_sha256": "c3e2dca428eaf67a3343dfbb20ac8989280584074e1381c204289b357ac6bdf5",
+      "git_lf_bytes": 34209,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/game_core/src/segmented.rs",
+      "raw_sha256": "3d5824e13e7bf288e103d1323623503dc3a8c72d2f2d8488178211d4e2ab5359",
+      "raw_bytes": 9594,
+      "git_lf_sha256": "638463899c37713f1d07c7ff2e2714811f79ac212182eb4fbaffb299b07d979a",
+      "git_lf_bytes": 9359,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/game_core/src/training.rs",
+      "raw_sha256": "6be78fa97ced3aedd8fa5271d0cf5ebc53350713166a3d96c9cb61a58c6652f5",
+      "raw_bytes": 11654,
+      "git_lf_sha256": "072b7792a40456dda95e63d14d4f7d7fe9fada06f7d96bf1730ad7d8d70f7a59",
+      "git_lf_bytes": 11304,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "raw_sha256": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+      "raw_bytes": 26160,
+      "git_lf_sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "git_lf_bytes": 25415,
+      "kind": "unchanged_input"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "raw_sha256": "2791ba6a228086a2cfce2308102a62fefda0ad46fef5d0b20bf447c199e5ed90",
+      "raw_bytes": 17598,
+      "git_lf_sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "git_lf_bytes": 17138,
+      "kind": "unchanged_input"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "work/co-op-authority/clippy-final-session-guard.log",
+      "raw_sha256": "33f0c5dd362f3aca89e19531f101e392cd62df1b2931a513c12cd3d3741172eb",
+      "raw_bytes": 191
+    },
+    {
+      "path": "work/co-op-authority/clippy-final.log",
+      "raw_sha256": "31631d9d1b3d059ec62009500c1357795c4250ef7dc02be9e31903b769a2648f",
+      "raw_bytes": 191
+    },
+    {
+      "path": "work/co-op-authority/clippy-initial.log",
+      "raw_sha256": "f34ba6ee7a58f758b51bed23c74ddc6cec67c0ad91dc10d1cdb80a3299d286b0",
+      "raw_bytes": 191
+    },
+    {
+      "path": "work/co-op-authority/core-final-after-guard.log",
+      "raw_sha256": "de2906c493d6239f3838505662f7e30cbddff107a7aab80e3310c0664f0557d7",
+      "raw_bytes": 43123
+    },
+    {
+      "path": "work/co-op-authority/core-final-session-guard.log",
+      "raw_sha256": "cc225a30970d426cedbf9483691d03c248c47d13c6b3ef9169699a0d19cd9671",
+      "raw_bytes": 42611
+    },
+    {
+      "path": "work/co-op-authority/core-final.log",
+      "raw_sha256": "ca1d90faccd541a6484282cfcec311fef000ff01d1db22210fe3f3333e6e33e3",
+      "raw_bytes": 42381
+    },
+    {
+      "path": "work/co-op-authority/fixture-compile-initial.log",
+      "raw_sha256": "fa961a824171306534efb01464517d8dcd76581752e302479e2acfd811958696",
+      "raw_bytes": 1925
+    },
+    {
+      "path": "work/co-op-authority/focused-at-commit.log",
+      "raw_sha256": "c10f76a6a6528a890717a5362dbca57e574c97549482b8a046130461ddfefd0f",
+      "raw_bytes": 2109
+    },
+    {
+      "path": "work/co-op-authority/focused-final.log",
+      "raw_sha256": "af913bec80e21e336589e5bf6905694db6c4671e60fc55b76016809724720097",
+      "raw_bytes": 2227
+    },
+    {
+      "path": "work/co-op-authority/focused-initial.log",
+      "raw_sha256": "8b0dbeeb427d52db8330666f7a73bc1d8c030a3589088ef8ce9145f86358ef0b",
+      "raw_bytes": 2520
+    },
+    {
+      "path": "work/co-op-authority/HANDOFF.md",
+      "raw_sha256": "2d1c69939564e4e5e1867126560b5f62f563a38a234e77d40af34a3cc47234ca",
+      "raw_bytes": 8093
+    },
+    {
+      "path": "work/co-op-authority/serialization/admissions.json",
+      "raw_sha256": "b81f1459215fdbfc7f2a7e9dff964be2fa6c98d756a75da141d77fff5fbbd7db",
+      "raw_bytes": 490
+    },
+    {
+      "path": "work/co-op-authority/serialization/body.json",
+      "raw_sha256": "4edca76b8c98e2683bdaf8e496ea66a7b8c4ee4aed90f1ba6311f10cc7547167",
+      "raw_bytes": 18289
+    },
+    {
+      "path": "work/co-op-authority/serialization/entities.json",
+      "raw_sha256": "4ab867baabd41e11da0614dd30777c1ff114a9dfc5bbac4b3ec8d627e5df2168",
+      "raw_bytes": 20814
+    },
+    {
+      "path": "work/co-op-authority/serialization/input.json",
+      "raw_sha256": "f88c33d374addc23a244517657d6c5fe60c9f940a4f31e7cfee56eb51dc0def0",
+      "raw_bytes": 117
+    },
+    {
+      "path": "work/co-op-authority/serialization/snapshot.json",
+      "raw_sha256": "7d9102ced00b45fa912be88264c792cd48aa9ea63f3814e5cb7a02d01cbf8021",
+      "raw_bytes": 45004
+    },
+    {
+      "path": "work/co-op-authority/serialization-export.log",
+      "raw_sha256": "65e8918e35f65feb71610733565dadc4e28a23e9461447255894370db5b83730",
+      "raw_bytes": 608
+    }
+  ],
+  "checks": {
+    "focused_pass": 17,
+    "focused_ignored_explicit_export": 1,
+    "full_core_pass": 401,
+    "full_core_ignored_explicit_exports": 4,
+    "serializer_export_pass": 1,
+    "native_strict_clippy": true
+  }
+}

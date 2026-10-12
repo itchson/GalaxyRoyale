@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "hashMode": "SHA256 of canonical staged Git blob bytes; verify with git show HEAD:path",
+  "files": [
+    {
+      "path": "artifacts/space-coop-refinement-20261012/README.md",
+      "sha256": "ffae01aea45f9e2bc5056b548d8bf6da844a7101fc6bc897ca49cb79b3aa4ffd"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/assignments.txt",
+      "sha256": "5a2c1b51e098cb8a2452917f7415459be5956be3ccc230a400d24171da0054a2"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/boundary-review.md",
+      "sha256": "5c0cc7822477e8e21a446305e7854e70438d4d19c54ff2da984265592b26d1d2"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/build-final.log",
+      "sha256": "4d5bbb3cc4317a2a7a72614ad38cad56aa3ba6ea16ed1a9619d6cd25272edfbb"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/build.log",
+      "sha256": "049ed6f1a29fbd1b129e1cdb017ca7489232f8e840ba766b27db917408355fbf"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/clippy.log",
+      "sha256": "b8289cde9e8c4c5250305575c28fad318d52cda86b1c4fc66c543a192d2871aa"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/cloud-capture-review.md",
+      "sha256": "b91070163aac197403c18e9e5f0379988f5c519f50ad59e893467368d240ae26"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/final-panel-review.md",
+      "sha256": "e2fa5f55098651857f771a7c1fed537a78b16860c5a60d012dd3c7b9bb59eff9"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/loadout-handoff.md",
+      "sha256": "485026714967b6b049f71ce03e6ccbbf6254d536b6715b93f2e7e91ce3133d7a"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/native-bridge.log",
+      "sha256": "61a156c92c52502aa7814f35c29370458efdf37a05ede7c6f329ff76b1a54896"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/native-cosmic.log",
+      "sha256": "c1ca4b3c1e1affe6d92f2eca636d8d1eb38b15a5281278c8b6389642c7968f11"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/native-full.log",
+      "sha256": "4c5fa897d61b48b3d1d8a63f082baf48e433165ac359112f3b444656face3016"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/nebula-handoff.md",
+      "sha256": "a8cbabc182d56af7662e62b179157d25d769a8f1ee60ed60030607b5fe1b6d8d"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/nebula-software-contact.png",
+      "sha256": "155aab6296c5b6e773a66244f386e043c30e2181eae31037c4f980c79a7275a4"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/nebula-webgl2.jpg",
+      "sha256": "b7ba7467ec79542dc079c3b8e3ccf1559815e49576fe0b2db4d4943a9d20212d"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/nebula-webgpu.jpg",
+      "sha256": "cfa4c1476029db2002e04aa02c2d6f952a6a284a88fd8c11670c70ce9366599e"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/panel-webgl2-final.jpg",
+      "sha256": "f0848acbe57ad1a987b5f40631224173f7dcff5cd5f1eebbe3dcbac19e596eac"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/panel-webgl2.jpg",
+      "sha256": "1770e4020adfc475083ea0c37321a325dc1bee86a093318cff38e572cb3d8109"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/panel.log",
+      "sha256": "c69e64f2e5d3271a2c3d374a3718cb36bb2babdcd5bf9ae0e0a95a39f975e78b"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/qa-helper-with-dist.log",
+      "sha256": "e06c941fbaab1448e4878e6ca389f3146cc241db694685998ed99563e93104bc"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/qa-helper.log",
+      "sha256": "6b1cb20f9bebf4b593ea66e2bfd80e66e914fcea85c8dddabbba1edf04ea702d"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-initialize-failure.jpg",
+      "sha256": "b03d93fe2d5dc3f2f87d947554184e20b64d9beee2ed54420681efbbb4f852e0"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-qa-handoff.md",
+      "sha256": "86dc0b72eccc1c9fc8c7f97c5cbae943e04ecdf0686140513500a6ac5514d5d3"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-rejoin-correction.md",
+      "sha256": "0e5e92d4b84c1a84bc8d7dfe23c8742f50ac772cb8424a49189571ea8a2398c7"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-captures/a1f7e28099cd446d-054a1d98a4ffb6459191f7f30e69d7bfb480ba13cba47207c47684887ea5a2d3.json",
+      "sha256": "054a1d98a4ffb6459191f7f30e69d7bfb480ba13cba47207c47684887ea5a2d3"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-captures/a1f7e28099cd446d-1de8a92e939a0a081604f04dda87c57fa48a35f66adc35cc55bef321d24ebd8c.json",
+      "sha256": "1de8a92e939a0a081604f04dda87c57fa48a35f66adc35cc55bef321d24ebd8c"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-captures/a1f7e28099cd446d-49029cc4db19a083c9e2192e952a1a5228932784de72c93cf1bec0fec87da832.json",
+      "sha256": "49029cc4db19a083c9e2192e952a1a5228932784de72c93cf1bec0fec87da832"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-captures/a1f7e28099cd446d-98f660966ca43d2a88d47c8649c04cfb2002590fdad078ca9c6bba4187943acc.json",
+      "sha256": "98f660966ca43d2a88d47c8649c04cfb2002590fdad078ca9c6bba4187943acc"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-captures/a1f7e28099cd446d-bdb8dc5b29d0032b6b6e5ef43d51f080607bd3f8b6b422c141a55c77b389dc76.json",
+      "sha256": "bdb8dc5b29d0032b6b6e5ef43d51f080607bd3f8b6b422c141a55c77b389dc76"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-captures/a1f7e28099cd446d-ed8fa8e372f294174c0ecec314f1f3d62dfae3e4a6a22a90421ed733de5ee010.json",
+      "sha256": "ed8fa8e372f294174c0ecec314f1f3d62dfae3e4a6a22a90421ed733de5ee010"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-flight.jpg",
+      "sha256": "817b78005e749b6a2ddc7779ef48517e2e15c0d0aca23f5f9e287480761840c1"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-review.md",
+      "sha256": "9615d9c910cd171136d8c6ecc771967ce3a5a6fa0c82326b4b3f9984d7500d70"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/shell-after-helper-with-dist.log",
+      "sha256": "d16cab8b40f9607e0921e45adaeb2bf3b7ae4457ff868c93d9e75d43046f3753"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/shell-final-with-dist.log",
+      "sha256": "34d1d89f12ac41bf9e64a2f18d2f7be9a4b950efbaddd89abbf646cd17dfa114"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/shell-full-final.log",
+      "sha256": "ff0dbd73d66dd9b5205abb0c5cb6e6ac9e147b1746a8a9dce17be69292ba41e8"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/shell-full.log",
+      "sha256": "34c012b8728cc9b8b17e0c5247c1559607556f9c7df2939c775a71da00bd370f"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/sports-ui-review.md",
+      "sha256": "e9d5a1e715c6ac81f220c195ff012858fe6c3ebec5cc0b8ef33f6ec820f18984"
+    },
+    {
+      "path": "artifacts/space-coop-refinement-20261012/wasm-clippy.log",
+      "sha256": "0aabec90e857f94a3565328d4b4c11571307ea3b0ad5c734f0922e9efbb4e636"
+    }
+  ]
+}

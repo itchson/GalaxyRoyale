@@ -1,0 +1,41 @@
+✔ the ninth Royale emblem appears only for authoritative tournament victory (4.8405ms)
+✔ competitor identity and independent sponsor appear only after discovery without mutating rewards (1.4601ms)
+✔ campaign exposes only genuinely discovered champions and their catalog details (1.1217ms)
+✔ a completed losing season offers a new season without victory or credits claims (2.4163ms)
+✔ a losing-season retry remains gated by location and an active encounter (1.8893ms)
+✔ only an authoritative winning season exposes credits and Sovereign victory text (1.1066ms)
+✔ discovered arena copy distinguishes a found hull, an earned blueprint and an owned craft (1.2585ms)
+✔ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (8.3638ms)
+✔ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.0142ms)
+✔ real Forge category survives successful repaint while a fresh open resets to overview (2.4201ms)
+✔ mutation success is not a committed-save claim while deferred persistence fails (1.3378ms)
+✔ Hangar page and construction/selection bindings pass full per-hull XP metadata (1.6679ms)
+✔ rejected ship construction or switching cannot save or report success (1.8192ms)
+✔ an unavailable audio context cannot reject a successful mutation/save flow (1.304ms)
+✔ first-upgrade recipe shows the actual named banked subset and calls the ordinary native upgrade action (5.0157ms)
+✔ Forge separates three automatic slots and six ship hardware actions (1.5511ms)
+✔ category editor has contextual Back and explicit craft versus equip (3.0028ms)
+✔ availability is authoritative even when visible balances look sufficient or insufficient (1.1552ms)
+✔ owned rank cap and replacement retain inventory and send exact category (1.0386ms)
+✔ actual HUD repaint preserves category, while ship change/reset returns overview (1.188ms)
+✔ busy mutation and outside-dock clearing cannot dispatch; cargo stays in its separate page (1.0323ms)
+✔ Hangar shows each hull's XP, construction recipe and exact selection callback (0.9826ms)
+✔ all game-provided names and errors are plain text, including malicious markup (0.7608ms)
+✔ victory-only hull has no fake construction recipe and retains real LV1 reward XP (0.6766ms)
+✔ legacy stored hardware rank and active ship cap are shown separately without inventing power (0.6241ms)
+✔ Forge prioritizes slots and collection access without repeating cargo inventory (0.7737ms)
+✔ Forge excludes an undiscovered ability rather than showing its locked name (0.6572ms)
+✔ ability filters run after discovery and distinguish ownership from blueprint and compatibility (1.3164ms)
+✔ ability filters preserve focus and scroll across real HUD replacements without stealing outside focus (0.9821ms)
+✔ successful crafting exposes Equip and retains action focus without automatically equipping (1.8574ms)
+✔ hull filters keep found, owned and earned blueprint states distinct and preserve real recipe gates (1.0819ms)
+✔ hull filter state persists through checkpoint repaint and does not retain a second inventory (0.7973ms)
+✔ collection costs and level requirements remain supplied by the HUD, including named recipes (0.7109ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 438.448

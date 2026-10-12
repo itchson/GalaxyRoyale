@@ -277,6 +277,7 @@ mod tests {
         fill_bullets(&mut game);
         game.take_events();
         let shots = game.shot_count;
+        let cooldown = game.fire_timer;
         game.fire(stats);
         let events = game.take_events();
         assert!(
@@ -284,7 +285,8 @@ mod tests {
                 .iter()
                 .any(|e| e.kind == "shot" || e.kind == "ability-echo")
         );
-        assert_eq!(game.shot_count, shots + 1);
+        assert_eq!(game.shot_count, shots); // Refused capacity is not a fired primary.
+        assert!((game.fire_timer - cooldown - 1.0 / stats.fire_rate).abs() < 0.00001);
         assert_eq!(game.world.query::<&Bullet>().iter().count(), MAX_BULLETS);
         game.move_player(Vec2::ZERO);
         clear_bullets(&mut game);
@@ -450,12 +452,13 @@ mod tests {
             assert_eq!(game.rng, rng);
             game.move_player(center + Vec2::X * 321.0);
             assert_eq!(game.hud().audio.champion, None);
-            // An actual ordinary pursuer in the contact region must retain
-            // its normal one-head intensity, without a fictitious duel bonus.
-            game.move_player(center + Vec2::X * 300.0);
-            game.spawn_enemy(0, false, center + Vec2::X * 550.0, 1);
+            // The seeded arena sanctuary is larger than the ambient contact.
+            // An actual ordinary pursuer outside it retains normal intensity,
+            // without a fictitious duel bonus or sanctuary aggro.
+            game.move_player(center + Vec2::X * (site.radius + 20.0));
+            game.spawn_enemy(0, false, center + Vec2::X * (site.radius + 250.0), 1);
             let audio = game.hud().audio;
-            assert_eq!(audio.champion, Some(index as u8));
+            assert_eq!(audio.champion, None);
             assert_eq!(audio.hostiles, 1);
             assert!((audio.combat - 0.255).abs() < 0.0001);
             game.move_player(center);

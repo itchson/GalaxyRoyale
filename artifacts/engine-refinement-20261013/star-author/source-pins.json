@@ -1,0 +1,190 @@
+{
+  "commit": "49e3e686d5ea3e04523a8e40f4ef102756700ec2",
+  "parent": "8b0896d7ccd2c4dece1dc7a0d2cae6c4986505ab",
+  "scope": "Native CPU query-count reduction and ordered packet digest/count retention; no new gas morphology, native full suite, normal build, browser/GPU/RTC/listener/FPS/visual acceptance claim.",
+  "source_pins": {
+    "crates/game_core/src/cosmic_background.rs": {
+      "canonical_git_bytes": 72897,
+      "canonical_git_sha256": "45d9fafe0ff66eb8ac1fb31044762ff0947ff243bb0a85f42785f1f26b5c835c",
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/crates/game_core/src/cosmic_background.rs",
+        "bytes": 74912,
+        "sha256": "dc01e84ee898c50b832ccf2eaa07a542c01a9fd4ca87cd2b149be5391d3d6fa4"
+      }
+    },
+    "crates/game_core/src/cosmic_background_tests.rs": {
+      "canonical_git_bytes": 2533,
+      "canonical_git_sha256": "8869b684610093abb287325e19597def4422678132f79d0c95b66e41c25a2e91",
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/crates/game_core/src/cosmic_background_tests.rs",
+        "bytes": 2533,
+        "sha256": "8869b684610093abb287325e19597def4422678132f79d0c95b66e41c25a2e91"
+      }
+    }
+  },
+  "compiled_scope_summary": {
+    "before": {
+      "compiled_input_count": 108,
+      "binary": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-before/release/deps/game_core-2b707a8b4a4ebce6.exe",
+        "bytes": 11721728,
+        "sha256": "98b2d6f3c32cc56a88f10178c4ad5a008a465d7b82b36528bba90b6c61848dc9"
+      }
+    },
+    "after": {
+      "compiled_input_count": 109,
+      "binary": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-after/release/deps/game_core-2b707a8b4a4ebce6.exe",
+        "bytes": 11726336,
+        "sha256": "0f3f127e58f3602b50033ce3717bfa124752acb8b2accc8e13c6651dff4702b0"
+      }
+    },
+    "candidate": {
+      "compiled_input_count": 108,
+      "binary": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-current/release/deps/game_core-2b707a8b4a4ebce6.exe",
+        "bytes": 11686912,
+        "sha256": "aa01b158e9b356f18b336c1a3d39be6c602ad61b442ff2a7602f233b2114c04c"
+      }
+    }
+  },
+  "evidence": {
+    "before-probe.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/before-probe.log",
+      "bytes": 2326,
+      "sha256": "ad754be4168d05303ab3195bd4ece033257df2e54c61ba730f812b19767a1314"
+    },
+    "before-probe-retry.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/before-probe-retry.log",
+      "bytes": 649,
+      "sha256": "d6f0a3fa38222f4bc6d21c61c5cedf2c6f7425e018ab21c86d762adef9c80294"
+    },
+    "after-probe-prerequisite-failure.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/after-probe-prerequisite-failure.log",
+      "bytes": 93,
+      "sha256": "f59f1ad1b9607978c6dccbaec82466575eafa31d078191754a98b8a1035349fd"
+    },
+    "after-probe.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/after-probe.log",
+      "bytes": 1366,
+      "sha256": "b32071812578c2c12267f0d5aaaf673816dfbb6dd8a124ab9bbd0e8fbba4919e"
+    },
+    "before-query-results.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/before-query-results.json",
+      "bytes": 23723,
+      "sha256": "60aba5b0fe560ed8ee02caa134359be40a21b313315446eafd5b1d48e54b5ec7"
+    },
+    "after-query-results.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/after-query-results.json",
+      "bytes": 23723,
+      "sha256": "a6e3d055b78aa59e13c49558c423a534052e3bc1242846a2c16ebfa51664df1e"
+    },
+    "comparison.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/comparison.json",
+      "bytes": 624,
+      "sha256": "8018beb38f24101dc97647cf5ef5c078bbb13ddff1039356ac3c18ce7c5e4c94"
+    },
+    "focused-cosmic-tests.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/focused-cosmic-tests.log",
+      "bytes": 10561,
+      "sha256": "3a689a485989fd3cf4f8609d776ea5da0f25409dd0e5bc29c88f4b0e011b38d7"
+    },
+    "focused-cosmic-tests-original-fixture-failure.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/focused-cosmic-tests-original-fixture-failure.log",
+      "bytes": 10561,
+      "sha256": "3a689a485989fd3cf4f8609d776ea5da0f25409dd0e5bc29c88f4b0e011b38d7"
+    },
+    "focused-cosmic-tests-final.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/focused-cosmic-tests-final.log",
+      "bytes": 9351,
+      "sha256": "f81b9bb3a1115accb060bd3b947eb91730811b0002032b2c4622903816dc4d51"
+    },
+    "clippy.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/clippy.log",
+      "bytes": 870,
+      "sha256": "98b2e7f627d538e15b094e06d4affccdb7e2e96ec6b3165946ac745a397123a9"
+    },
+    "format.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-test-fixture.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/format-test-fixture.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-check.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/format-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diff-check.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "staged-scope.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/staged-scope.log",
+      "bytes": 196,
+      "sha256": "256af54c04d7cd64aeb50e3bed7bdab76d1d4c7d89ecfce75db6f065b5a17731"
+    },
+    "commit.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/commit.log",
+      "bytes": 215,
+      "sha256": "e19b5af04ecd15d8a75ecf19e13eeec2fc17c53efaa693790d31981c27d1a276"
+    },
+    "candidate.diff": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/candidate.diff",
+      "bytes": 4756,
+      "sha256": "2ddb8982c501d343b6815f708baffa7e52835a9da4dc78f9dbdcb8c0a2434335"
+    },
+    "baseline-archive-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/baseline-archive-pins.json",
+      "bytes": 79740,
+      "sha256": "f0616d01ad1dcf19efd8f66f139c1a40ce002882bf4ee534cfac76697f4d3bbf"
+    },
+    "supplemental-fixture-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/supplemental-fixture-pins.json",
+      "bytes": 12672,
+      "sha256": "3153e19972b9f9f2fb65e0e741e2901186439efeb3d29cdca07405b1ad991a49"
+    },
+    "query-probe.rs": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/query-probe.rs",
+      "bytes": 3095,
+      "sha256": "6a37fd05ab7ed6e0c72f1e5a08a7a457ea3232a9fc3b24883c9d2215e612a31b"
+    },
+    "compiled-inputs.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/compiled-inputs.json",
+      "bytes": 111700,
+      "sha256": "c3729efa5b3c5064814c46078a70e451d5bfec0d18610c6a9ea27f1316a668b5"
+    },
+    "studio-running-input.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/studio-running-input.json",
+      "bytes": 1098,
+      "sha256": "f12e41ad96a41a67e0d6b35871125abf5e92730e81f9d371170ae5decf577ef8"
+    },
+    "studio-running-retry-input.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/studio-running-retry-input.json",
+      "bytes": 1098,
+      "sha256": "5bb149b3252fc1b9c91ca17f7f93e54c00f3aa5f9ec3f25466c975f7a33786bf"
+    },
+    "studio-running-valid-input.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/studio-running-valid-input.json",
+      "bytes": 1095,
+      "sha256": "b2546744c2c7ae4c424da70f5cd9fa48ba89be435c69d0d8d3308cfb84655e5d"
+    },
+    "studio-running-failure.txt": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/studio-running-failure.txt",
+      "bytes": 27,
+      "sha256": "86a9f52fdddd07f8fdf3e76a745c058d48f2db238d8407c88289c9f88f92899c"
+    },
+    "studio-running-result.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/studio-running-result.json",
+      "bytes": 1077,
+      "sha256": "52dc06f1c54d3e35d04bde1c5244caf6717fd43e5bacd0948d436283da76a81d"
+    }
+  },
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)\nbinary: rustc\ncommit-hash: 2d8144b7880597b6e6d3dfd63a9a9efae3f533d3\ncommit-date: 2026-07-07\nhost: x86_64-pc-windows-msvc\nrelease: 1.97.0\nLLVM version: 22.1.6\n",
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)\n"
+}

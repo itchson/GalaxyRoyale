@@ -1,7 +1,12 @@
 import { AudioEngine } from "./modules/audio.js";
 import { AudioEngine as BaselineEngine } from "./modules/baseline-audio.js";
 import { QUIET_STATE } from "./modules/audio-state.js";
-import { pcmMetrics, highFrequencyRatio, wav } from "./metrics.js";
+import {
+  pcmMetrics,
+  stereoMetrics,
+  highFrequencyRatio,
+  wav,
+} from "./metrics.js";
 
 const button = document.getElementById("run"),
   status = document.getElementById("status");
@@ -38,12 +43,104 @@ const fixtures = [
     seconds: 5,
     burst: true,
   },
+  {
+    key: "current-score",
+    title: "Current corporate homes, exploration, combat and boss release",
+    Engine: AudioEngine,
+    seconds: 24,
+    currentScore: true,
+  },
+  {
+    key: "title-score",
+    title: "Synthesized title draft, one complete loop and pickup",
+    Engine: AudioEngine,
+    seconds: 48,
+    titleOnly: true,
+  },
+  {
+    key: "title-transition",
+    title: "Title to Haven, exploration, chase and release",
+    Engine: AudioEngine,
+    seconds: 32,
+    titleTransition: true,
+  },
+];
+// Declared DSP states, not an invented playthrough or a change to pilot identity.
+const currentScorePhases = [
+  { key: "pan-home", start: 0, end: 3, state: { corporation: "pan" } },
+  { key: "renko-home", start: 3, end: 6, state: { corporation: "renko" } },
+  { key: "hugo-home", start: 6, end: 9, state: { corporation: "hugo" } },
+  {
+    key: "quiet-expanse",
+    start: 9,
+    end: 12,
+    state: {
+      area: "reach",
+      corporation: "hugo",
+      engines: 2,
+      throttle: 0.65,
+      speed: 0.4,
+    },
+  },
+  {
+    key: "active-combat",
+    start: 12,
+    end: 16,
+    state: {
+      area: "reach",
+      biome: 3,
+      corporation: "hugo",
+      combat: 0.8,
+      hostiles: 6,
+      hull: 0.65,
+      engines: 2,
+      throttle: 0.9,
+      speed: 0.75,
+    },
+  },
+  {
+    key: "boss-low-hull",
+    start: 16,
+    end: 20,
+    state: {
+      area: "reach",
+      biome: 5,
+      corporation: "hugo",
+      combat: 1,
+      hostiles: 1,
+      boss: true,
+      hull: 0.08,
+      engines: 2,
+      throttle: 1,
+      speed: 1,
+    },
+  },
+  {
+    key: "home-healed-release",
+    start: 20,
+    end: 24,
+    state: { corporation: "pan", engines: 2 },
+  },
 ];
 const sha = async (bytes) =>
   [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
     .map((n) => n.toString(16).padStart(2, "0"))
     .join("");
 function fixtureState(fixture, time) {
+  if (fixture.titleOnly) return { ...QUIET_STATE };
+  if (fixture.titleTransition)
+    return {
+      ...QUIET_STATE,
+      ...(time >= 11 && time < 26
+        ? { area: "reach", engines: 2, throttle: 0.5, speed: 0.4 }
+        : {}),
+      ...(time >= 15 && time < 20 ? { combat: 0.8, hostiles: 6 } : {}),
+      corporation: "pan",
+    };
+  if (fixture.currentScore) {
+    const phase = currentScorePhases.findLast((p) => time >= p.start);
+    return { ...QUIET_STATE, ...phase.state };
+  }
   if (fixture.engine)
     return {
       ...QUIET_STATE,
@@ -65,6 +162,28 @@ function fixtureState(fixture, time) {
   };
 }
 function fixtureEvents(fixture) {
+  if (fixture.titleOnly || fixture.titleTransition) return [];
+  if (fixture.currentScore)
+    return [
+      { at: 0.8, kind: "dock", count: 1 },
+      { at: 3.8, kind: "dock", count: 1 },
+      { at: 6.8, kind: "dock", count: 1 },
+      { at: 10, kind: "shot", count: 1 },
+      { at: 11.2, kind: "pickup", count: 1 },
+      { at: 12.2, kind: "shot", count: 1 },
+      { at: 12.7, kind: "shot", count: 1 },
+      { at: 13.2, kind: "shield", count: 1 },
+      { at: 14, kind: "player-hit", count: 1 },
+      { at: 15, kind: "ability-echo", count: 1 },
+      { at: 16, kind: "boss", count: 1 },
+      { at: 16.4, kind: "boss-charge", count: 1 },
+      { at: 17, kind: "mote-charge", count: 1 },
+      { at: 18, kind: "mote-pulse", count: 1 },
+      { at: 18.4, kind: "ability-nova", count: 1 },
+      { at: 19, kind: "explosion", count: 1 },
+      { at: 20.1, kind: "dock", count: 1 },
+      { at: 21.2, kind: "ability-repair", count: 1 },
+    ];
   if (fixture.engine) return [];
   if (fixture.burst)
     return [
@@ -88,6 +207,47 @@ function fixtureEvents(fixture) {
     count: 1,
   }));
 }
+export function createOfflineAdapter(real, nodes, sources) {
+  const methods = new Set([
+    "createGain",
+    "createBiquadFilter",
+    "createDelay",
+    "createDynamicsCompressor",
+    "createWaveShaper",
+    "createBuffer",
+    "createOscillator",
+    "createBufferSource",
+    "createStereoPanner",
+  ]);
+  // This adapter is scoped exclusively to this isolated page/render. All graph
+  // work and PCM rendering is native, not a recording or replacement DSP.
+  return new Proxy(real, {
+    get(target, name) {
+      if (name === "state") return "running";
+      if (name === "resume" || name === "suspend" || name === "close")
+        return async () => {};
+      if (name === "onstatechange") return null;
+      if (methods.has(name)) {
+        const factory = Reflect.get(target, name, target);
+        // Preserve native capability absence so AudioEngine's mono fallback
+        // sees the same surface as a direct AudioContext.
+        if (typeof factory !== "function") return factory;
+        return (...args) => {
+          const value = Reflect.apply(factory, target, args);
+          if (name !== "createBuffer") nodes.push(value);
+          if (name === "createOscillator" || name === "createBufferSource")
+            sources.push(value);
+          return value;
+        };
+      }
+      return Reflect.get(target, name, target);
+    },
+    set(_target, name) {
+      if (name === "onstatechange") return true;
+      throw new Error(`Unexpected offline adapter write ${String(name)}`);
+    },
+  });
+}
 async function renderFixture(fixture) {
   const Constructor =
     window.OfflineAudioContext ?? window.webkitOfflineAudioContext;
@@ -103,39 +263,7 @@ async function renderFixture(fixture) {
     savedClear = window.clearInterval;
   const nodes = [],
     sources = [];
-  const methods = new Set([
-    "createGain",
-    "createBiquadFilter",
-    "createDelay",
-    "createDynamicsCompressor",
-    "createWaveShaper",
-    "createBuffer",
-    "createOscillator",
-    "createBufferSource",
-  ]);
-  // This adapter is scoped exclusively to this isolated page/render. All graph
-  // work and PCM rendering is native, not a recording or replacement DSP.
-  const host = new Proxy(real, {
-    get(target, name) {
-      if (name === "state") return "running";
-      if (name === "resume" || name === "suspend" || name === "close")
-        return async () => {};
-      if (name === "onstatechange") return null;
-      if (methods.has(name))
-        return (...args) => {
-          const value = target[name](...args);
-          if (name !== "createBuffer") nodes.push(value);
-          if (name === "createOscillator" || name === "createBufferSource")
-            sources.push(value);
-          return value;
-        };
-      return Reflect.get(target, name, target);
-    },
-    set(_target, name) {
-      if (name === "onstatechange") return true;
-      throw new Error(`Unexpected offline adapter write ${String(name)}`);
-    },
-  });
+  const host = createOfflineAdapter(real, nodes, sources);
   window.AudioContext = class {
     constructor() {
       return host;
@@ -160,6 +288,8 @@ async function renderFixture(fixture) {
   const sourceStates = [];
   try {
     engine = new fixture.Engine();
+    if (fixture.titleOnly || fixture.titleTransition)
+      engine.setTitleScreen(true);
     engine.setLevels(
       fixture.burst ? 1 : 0.75,
       fixture.engine ? 0 : fixture.burst ? 1 : 0.4,
@@ -176,6 +306,7 @@ async function renderFixture(fixture) {
       if (real.state !== "suspended")
         throw new Error("Scheduler did not reach a real native suspension.");
       const time = real.currentTime;
+      if (fixture.titleTransition) engine.setTitleScreen(time < 6);
       engine.update(fixtureState(fixture, time));
       while (nextEvent < events.length && events[nextEvent].at <= time) {
         const event = events[nextEvent++];
@@ -203,6 +334,22 @@ async function renderFixture(fixture) {
           hull: d.hull,
           engine: d.engine,
           engineDuck: d.engineDuck ?? 1,
+          ...(d.score ? { score: d.score } : {}),
+          ...(fixture.currentScore
+            ? {
+                area: d.area,
+                biome: d.biome,
+                corporation: d.corporation,
+                combat: d.combat,
+                targetCombat: d.targetCombat,
+                boss: d.boss,
+                bossLayer: d.bossLayer,
+                lowHull: d.lowHull,
+                throttle: d.throttle,
+                speed: d.speed,
+                themes: d.themes,
+              }
+            : {}),
         });
       checkpoints++;
       await real.resume();
@@ -229,6 +376,7 @@ async function renderFixture(fixture) {
       cue_calls: cueCalls,
       dispatched,
       full: pcmMetrics(buffer),
+      stereo: stereoMetrics(buffer),
       steady: pcmMetrics(buffer, 1, Math.min(3, fixture.seconds)),
       tail: pcmMetrics(buffer, fixture.seconds - 0.5, fixture.seconds),
       steady_power_above_1khz_ratio: fixture.engine
@@ -237,6 +385,22 @@ async function renderFixture(fixture) {
       wav_bytes: encoded.byteLength,
       wav_sha256: await sha(encoded),
       sourceStates,
+      ...(fixture.currentScore
+        ? {
+            declared_phases: currentScorePhases.map(({ key, start, end }) => ({
+              key,
+              start,
+              end,
+              state: fixtureState(fixture, start),
+            })),
+            phase_metrics: currentScorePhases.map(({ key, start, end }) => ({
+              key,
+              start,
+              end,
+              pcm: pcmMetrics(buffer, start, end),
+            })),
+          }
+        : {}),
     };
     engine.dispose();
     summary.cleanup = {

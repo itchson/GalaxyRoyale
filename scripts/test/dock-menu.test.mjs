@@ -10,6 +10,38 @@ const html = readFileSync(
   new URL("../../apps/game/index.html", import.meta.url),
   "utf8",
 );
+const nativeDock = readFileSync(
+  new URL("../../crates/game_core/src/dock_facilities.rs", import.meta.url),
+  "utf8",
+);
+const nativeRadius = Number(
+  nativeDock.match(/const HIT_RADIUS: f32 = ([\d.]+);/)?.[1],
+);
+const nativeCenters = [
+  ...nativeDock
+    .split("const CENTERS:")[1]
+    .split("= [")[1]
+    .split("];", 1)[0]
+    .matchAll(/\[\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*\]/g),
+].map((match) => [Number(match[1]), Number(match[2])]);
+assert.equal(nativeRadius, 24);
+assert.equal(nativeCenters.length, 5);
+const inputExports = {};
+vm.runInNewContext(
+  ts.transpileModule(
+    readFileSync(
+      new URL("../../apps/game/src/input.ts", import.meta.url),
+      "utf8",
+    ),
+    {
+      compilerOptions: {
+        target: ts.ScriptTarget.ES2022,
+        module: ts.ModuleKind.CommonJS,
+      },
+    },
+  ).outputText,
+  { exports: inputExports },
+);
 const source = ts.createSourceFile(
   "main.ts",
   readFileSync(new URL("../../apps/game/src/main.ts", import.meta.url), "utf8"),
@@ -26,6 +58,9 @@ const functions = [
   "openMenu",
   "interactDock",
   "selectMenuTab",
+  "refreshMissions",
+  "refreshHangar",
+  "paintCoop",
   "openLaunchSettings",
   "resume",
   "navigate",
@@ -108,6 +143,7 @@ const compiled = ts.transpileModule(
       "quit-game",
       "map-button",
       "flight-settings",
+      "ship-hangar-back",
     ].map(registration),
     facilities.getText(source),
     keydown.getText(source),
@@ -118,10 +154,14 @@ const compiled = ts.transpileModule(
 
 const pageIds = [
   "pause-content",
+  "coop-content",
+  "meishi-content",
+  "cargo-content",
   "upgrade-content",
   "hangar-content",
+  "ship-content",
   "campaign-content",
-  "quest-content",
+  "missions-content",
   "map-content",
   "settings-content",
   "archive-content",
@@ -179,8 +219,8 @@ function fixture() {
     addEventListener(name, callback) {
       this.events.set(name, callback);
     }
-    click() {
-      if (!this.disabled) return this.events.get("click")?.();
+    click(event = { detail: 0 }) {
+      if (!this.disabled) return this.events.get("click")?.(event);
     }
     focus() {
       document.activeElement = this;
@@ -226,10 +266,12 @@ function fixture() {
     campaign: { credits_pending: false },
   };
   const context = {
+    coop: null,
     menu: element("menu-screen"),
     deathScreen: element("death-screen"),
     launchScreen: element("launch-screen"),
     launched: true,
+    needsDroidCreation: false,
     paused: false,
     beforeLaunchMenu: false,
     menuTab: "upgrades",
@@ -262,6 +304,14 @@ function fixture() {
       setCourse(position) {
         calls.push(["set-course", ...position]);
       },
+      worldPoint(x, y) {
+        calls.push(["project-pointer", x, y]);
+        return inputExports.FlightInput.prototype.worldPoint.call(
+          context.projection,
+          x,
+          y,
+        );
+      },
       reset() {
         calls.push("input-reset");
       },
@@ -269,6 +319,9 @@ function fixture() {
     audio: {
       update(state) {
         calls.push(["audio-update", state]);
+      },
+      setTitleScreen(active) {
+        this.titleScreen = active;
       },
       async unlock() {},
       suspend() {
@@ -300,13 +353,33 @@ function fixture() {
       },
       dock_facility_at(x, y) {
         calls.push(["facility-hit", x, y]);
+        if (context.hit === undefined)
+          // Declared native boundary model, using source-authored centers/radius.
+          // This does not execute Rust; the actual handler/projection is above it.
+          return nativeCenters.findIndex(
+            ([cx, cy]) =>
+              Math.hypot(Math.fround(x) - cx, Math.fround(y) - cy) <=
+              nativeRadius,
+          );
         return context.hit;
       },
       return_to_home() {
         calls.push("return-home");
       },
     },
-    hit: -1,
+    hit: undefined,
+    projection: {
+      camera: [0, 0],
+      viewport: [640, 360],
+      canvas: {
+        getBoundingClientRect: () => ({
+          left: 12,
+          top: 20,
+          width: 640,
+          height: 360,
+        }),
+      },
+    },
     store: {
       persistent: true,
       message: "Progress stays on this device.",
@@ -320,26 +393,39 @@ function fixture() {
     paintUpgrades(dock) {
       calls.push(["paint-upgrades", dock]);
     },
-    paintFlightMenu() {
+    paintMeishiCard() {
+      calls.push("paint-meishi");
+      return true;
+    },
+    paintVault() {
+      calls.push("paint-vault");
+      return true;
+    },
+    paintFlightMenu(target, _hud, expanded) {
       calls.push("paint-flight-menu");
+      calls.push(["paint-flight-target", target.id, expanded === true]);
       return true;
     },
     paintUniverseMap(_target, data) {
       calls.push(["paint-map", data.sites.length]);
       return true;
     },
-    resetForge() {},
-    paintShipHangar() {
+    resetForgeScene() {},
+    paintHangarScene(_target, _hud, actions) {
       calls.push("paint-hangar");
+      context.hangarActions = actions;
+      return true;
     },
-    paintCampaign() {
-      calls.push("paint-campaign");
+    paintMissions() {
+      calls.push("paint-missions");
+      return true;
     },
     paintCredits() {},
     paintHud() {
       calls.push("paint-hud");
     },
     campaignActions: {},
+    showDoraGuide() {},
     finishCredits() {},
     interactSite() {},
     toast(value) {
@@ -372,20 +458,22 @@ function fixture() {
     context.launchScreen.hidden =
       true;
   vm.runInNewContext(compiled, context);
+  context.facilityCenters = vm.runInNewContext("facilityPositions", context);
   return {
     context,
     calls,
     notices,
     profile,
     element,
-    visiblePages: () => pageIds.filter((id) => !element(id).hidden),
+    visiblePages: () =>
+      context.menu.hidden ? [] : pageIds.filter((id) => !element(id).hidden),
     press(key, properties = {}) {
       windowEvents.get("keydown")({ key, preventDefault() {}, ...properties });
     },
   };
 }
 
-test("Escape opens a live ship menu, cancels controls and course, and toggles closed", async () => {
+test("Escape opens the live RAICHO menu, cancels controls and course, and toggles closed", async () => {
   const f = fixture(),
     c = f.context;
   f.press("Escape");
@@ -394,13 +482,17 @@ test("Escape opens a live ship menu, cancels controls and course, and toggles cl
   assert.equal(c.menu.hidden, false);
   assert.deepEqual(f.visiblePages(), ["pause-content"]);
   assert.ok(f.calls.includes("cancel-course"));
-  assert.ok(f.calls.includes("paint-flight-menu"));
+  assert.equal(f.calls.includes("paint-meishi"), false);
+  assert.equal(
+    f.calls.some((call) => Array.isArray(call) && call[0] === "paint-upgrades"),
+    false,
+  );
   assert.equal(f.calls.includes("audio-suspend"), false);
   assert.equal(
     f.calls.some((call) => Array.isArray(call) && call[0] === "paused"),
     false,
   );
-  assert.match(f.element("menu-description").textContent, /keeps running/);
+  assert.equal(f.element("menu-description").textContent, "FLIGHT LIVE");
   assert.doesNotMatch(
     html,
     /menu-tabs|role="tab(?:list|panel)?"|aria-labelledby="tab-/,
@@ -413,19 +505,46 @@ test("Escape opens a live ship menu, cancels controls and course, and toggles cl
   await settle();
 });
 
+test("opening a dedicated page paints it once without building hidden collections", () => {
+  const f = fixture();
+  f.context.openMenu("settings");
+  assert.deepEqual(f.visiblePages(), ["settings-content"]);
+  assert.equal(f.calls.includes("paint-meishi"), false);
+  assert.equal(
+    f.calls.some((call) => Array.isArray(call) && call[0] === "paint-upgrades"),
+    false,
+  );
+  f.context.openMenu("upgrades");
+  assert.deepEqual(f.visiblePages(), ["upgrade-content"]);
+  assert.equal(
+    f.calls.filter(
+      (call) => Array.isArray(call) && call[0] === "paint-upgrades",
+    ).length,
+    1,
+  );
+});
+
 test("a world facility hit opens exactly its dedicated page without changing progression", async () => {
+  const positions = [
+    [-120, -80],
+    [120, -80],
+    [-120, 95],
+    [120, 95],
+    [0, 170],
+  ];
   const expected = [
     "upgrade-content",
     "hangar-content",
-    "quest-content",
-    "campaign-content",
+    "missions-content",
+    "coop-content",
+    "cargo-content",
   ];
   for (let index = 0; index < expected.length; index++) {
     const f = fixture(),
       c = f.context,
       before = structuredClone(f.profile);
     c.hit = index;
-    assert.equal(c.interactDock([40, -25]), true);
+    assert.equal(c.interactDock(positions[index]), true);
     assert.deepEqual(f.visiblePages(), [expected[index]]);
     assert.equal(c.menu.hidden, false);
     assert.equal(c.paused, false);
@@ -435,11 +554,30 @@ test("a world facility hit opens exactly its dedicated page without changing pro
       f.calls.find(
         (value) => Array.isArray(value) && value[0] === "facility-hit",
       ),
-      ["facility-hit", 40, -25],
+      ["facility-hit", ...positions[index]],
     );
     assert.deepEqual(f.profile, before);
     await settle();
   }
+});
+
+test("the central Haven hub is not a Multiplayer facility and does not alter flight or progression", async () => {
+  const f = fixture(),
+    c = f.context,
+    before = structuredClone(f.profile);
+  assert.equal(c.interactDock([0, 0]), false);
+  assert.deepEqual(f.visiblePages(), []);
+  assert.equal(c.menu.hidden, true);
+  assert.equal(
+    f.calls.some(
+      (value) => Array.isArray(value) && value[0] === "facility-hit",
+    ),
+    true,
+  );
+  assert.equal(c.input.enabled, true);
+  assert.equal(c.document.activeElement, null);
+  assert.deepEqual(f.profile, before);
+  await settle();
 });
 
 test("misses and home/launch/pause gates leave flight untouched", () => {
@@ -448,7 +586,7 @@ test("misses and home/launch/pause gates leave flight untouched", () => {
       c.hit = -1;
     },
     (c) => {
-      c.hit = 4;
+      c.hit = 5;
     },
     (c) => {
       c.hud.dock = false;
@@ -467,7 +605,7 @@ test("misses and home/launch/pause gates leave flight untouched", () => {
       c = f.context;
     configure(c);
     const before = [c.paused, c.input.enabled];
-    assert.equal(c.interactDock([0, 0]), false);
+    assert.equal(c.interactDock([100, 0]), false);
     assert.equal(c.menu.hidden, true);
     assert.deepEqual([c.paused, c.input.enabled], before);
     assert.equal(
@@ -481,12 +619,13 @@ test("facility overlay handlers validate the authoritative hit before opening", 
   const expected = [
     "upgrade-content",
     "hangar-content",
-    "quest-content",
-    "campaign-content",
+    "missions-content",
+    "coop-content",
+    "cargo-content",
   ];
   for (let index = 0; index < expected.length; index++) {
     const f = fixture();
-    f.context.hit = (index + 1) % 4;
+    f.context.hit = (index + 1) % expected.length;
     f.element(`facility-${index}`).click();
     assert.equal(f.context.menu.hidden, true);
     f.context.hit = index;
@@ -496,12 +635,123 @@ test("facility overlay handlers validate the authoritative hit before opening", 
   }
 });
 
+test("five source-authored centers match native and keyboard activation bypasses pointer projection", () => {
+  const expected = [
+    "upgrade-content",
+    "hangar-content",
+    "missions-content",
+    "coop-content",
+    "cargo-content",
+  ];
+  for (let index = 0; index < nativeCenters.length; index++) {
+    const f = fixture();
+    assert.deepEqual(
+      JSON.parse(JSON.stringify(f.context.facilityCenters)),
+      nativeCenters,
+    );
+    f.element(`facility-${index}`).click({
+      detail: 0,
+      clientX: NaN,
+      clientY: NaN,
+    });
+    assert.deepEqual(f.visiblePages(), [expected[index]]);
+    assert.equal(
+      f.calls.some(
+        (call) => Array.isArray(call) && call[0] === "project-pointer",
+      ),
+      false,
+    );
+    assert.deepEqual(
+      f.calls.find((call) => Array.isArray(call) && call[0] === "facility-hit"),
+      ["facility-hit", ...nativeCenters[index]],
+    );
+  }
+});
+
+test("actual zoomed pointer projection respects the modeled native circle rather than the DOM square", () => {
+  const expected = [
+    "upgrade-content",
+    "hangar-content",
+    "missions-content",
+    "coop-content",
+    "cargo-content",
+  ];
+  for (const zoom of [0.6, 1, 1.6]) {
+    for (let index = 0; index < nativeCenters.length; index++) {
+      for (const [dx, dy, accepted] of [
+        [0, 0, true],
+        [24, 0, true],
+        [24.1, 0, false],
+        [24, 24, false],
+      ]) {
+        const f = fixture(),
+          c = f.context;
+        c.projection.camera = [17.375, -9.25];
+        c.projection.viewport = [640 / zoom, 360 / zoom];
+        const point = [
+          nativeCenters[index][0] + dx,
+          nativeCenters[index][1] + dy,
+        ];
+        const [vx, vy] = c.projection.viewport,
+          [cx, cy] = c.projection.camera;
+        const event = {
+          detail: 1,
+          clientX: 12 + (0.5 + (point[0] - cx) / vx) * 640,
+          clientY: 20 + (0.5 + (point[1] - cy) / vy) * 360,
+        };
+        f.element(`facility-${index}`).click(event);
+        assert.equal(c.menu.hidden, !accepted);
+        assert.deepEqual(f.visiblePages(), accepted ? [expected[index]] : []);
+        assert.equal(
+          f.calls.filter(
+            (call) => Array.isArray(call) && call[0] === "project-pointer",
+          ).length,
+          1,
+        );
+        assert.deepEqual(f.profile, { revision: 9, currency: [3, 4, 5] });
+      }
+    }
+  }
+  const f = fixture();
+  f.element("facility-0").click({ detail: 1, clientX: NaN, clientY: 20 });
+  assert.equal(f.context.menu.hidden, true);
+  assert.equal(
+    f.calls.some((call) => Array.isArray(call) && call[0] === "facility-hit"),
+    false,
+  );
+});
+
+test("Hangar showcase details use a separate statistics target and preserve the back handler", async () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("hangar");
+  c.hangarActions.details();
+  assert.deepEqual(f.visiblePages(), ["ship-content"]);
+  assert.ok(
+    f.calls.some(
+      (call) =>
+        Array.isArray(call) &&
+        call[0] === "paint-flight-target" &&
+        call[1] === "ship-statistics" &&
+        call[2],
+    ),
+  );
+  f.element("ship-hangar-back").click();
+  assert.deepEqual(f.visiblePages(), ["hangar-content"]);
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  await settle();
+});
+
 test("closing a dedicated flight page resumes; closing title settings returns to title", async () => {
   for (const page of [
+    "meishi",
+    "cargo",
     "upgrades",
     "hangar",
-    "journal",
-    "campaign",
+    "missions",
+    "ship",
+    "coop",
     "settings",
     "archive",
   ]) {
@@ -911,4 +1161,62 @@ test("map navigation sets a real course after resume even when optional audio is
         call[2] === 1000,
     ),
   );
+});
+
+test("MEISHI is a standalone live card; facility scenes restore chrome without cross-collection tabs", () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("meishi");
+  assert.deepEqual(f.visiblePages(), ["meishi-content"]);
+  assert.equal(
+    f.element("menu-surface").classList.contains("meishi-surface"),
+    true,
+  );
+  for (const id of [
+    "collection-navigation",
+    "menu-title",
+    "menu-description",
+    "menu-footer",
+  ])
+    assert.equal(f.element(id).hidden, true, id);
+  assert.equal(
+    f.element("menu-close").attributes.get("aria-label"),
+    "Close MEISHI card",
+  );
+  assert.equal(c.menu.attributes.get("aria-labelledby"), "meishi-card-title");
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  assert.doesNotMatch(html, /meishi-settings/);
+  c.selectMenuTab("cargo");
+  assert.deepEqual(f.visiblePages(), ["cargo-content"]);
+  for (const id of ["menu-title", "menu-footer"])
+    assert.equal(f.element(id).hidden, false, id);
+  assert.equal(f.element("collection-navigation").hidden, true);
+  assert.equal(
+    f.element("menu-surface").classList.contains("meishi-surface"),
+    false,
+  );
+  assert.equal(c.menu.attributes.get("aria-labelledby"), "menu-title");
+  c.selectMenuTab("pause");
+  assert.equal(f.element("collection-navigation").hidden, false);
+});
+
+test("standalone card keyboard focus can reach its read-only scrolling region", () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("meishi");
+  const close = f.element("menu-close"),
+    content = f.element("meishi-content");
+  c.menu.querySelectorAll = (selector) => {
+    assert.ok(selector.includes('#meishi-content[tabindex="0"]'));
+    return [close, content];
+  };
+  close.closest = content.closest = () => null;
+  close.focus();
+  f.press("Tab");
+  assert.equal(c.document.activeElement, content);
+  f.press("Tab");
+  assert.equal(c.document.activeElement, close);
+  f.press("Tab", { shiftKey: true });
+  assert.equal(c.document.activeElement, content);
 });

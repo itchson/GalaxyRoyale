@@ -1,0 +1,47 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.19s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 39 tests
+test cosmic_background::deep_nebula_tests::export_actual_deep_nebula_packets ... ignored, explicit native packet export; requires owned output directory
+test cosmic_background::cosmic_background_tests::empty_star_tile_inside_render_scan_skips_all_biome_samples ... ok
+test cosmic_background::detail_tests::export_actual_fine_cosmic_packets_for_software_contact_proof ... ignored, explicit native software evidence export; requires owned output directory
+test cosmic_background::detail_tests::export_actual_galaxy_revision_packets ... ignored, explicit bounded native galaxy packet proof
+test cosmic_background::stellar_neighborhood_tests::export_actual_seeded_stellar_neighborhood_packets ... ignored, explicit native stellar packet writer; requires owned absolute output
+test cosmic_background::cosmic_background_tests::visible_star_tile_samples_one_field_and_preserves_reduced_subset ... ok
+test cosmic_background::tests::cosmic_field_blends_are_continuous_at_adjacent_birth_space_edges ... ok
+test cosmic_background::tests::export_actual_seeded_remnant_packets ... ignored, explicit native remnant proof writer; requires owned absolute output
+test cosmic_background::stellar_neighborhood_tests::seeded_neighborhoods_include_broad_clusters_and_different_physical_spreads ... ok
+test cosmic_background::stellar_neighborhood_tests::whole_seven_star_packets_keep_quality_motion_parallax_and_atomic_admission ... ok
+test cosmic_background::tests::cosmic_far_world_stars_keep_local_spacing_before_camera_subtraction ... ok
+test cosmic_background::tests::stellar_neighborhoods_keep_exact_seeded_stars_without_chart_strokes_under_quality_and_parallax ... ok
+test cosmic_background::tests::gas_curl_is_repeatable_and_reduced_motion_freezes_all_submitted_cells ... ok
+test cosmic_background::deep_nebula_tests::gas_volume_local_cells_compose_reflection_and_shear_without_minimum_size ... ok
+test cosmic_background::tests::soft_seeded_gas_uses_local_fractional_cells_and_charges_actual_shared_quota ... ok
+test cosmic_background::deep_nebula_tests::cloud_has_diffuse_outskirts_dark_sky_and_unequal_connected_billow_outline ... ok
+test cosmic_background::deep_nebula_tests::dust_negative_space_is_open_not_large_enclosed_oval_cavities ... ok
+test cosmic_background::tests::cosmic_seed_revisit_is_exact_and_changes_only_presentation ... ok
+test cosmic_background::tests::cosmic_invalid_inputs_preserve_prior_frame_and_authored_negative_space ... ok
+test cosmic_background::tests::supernova_ejecta_has_interior_knots_and_multiple_open_sky_exits ... ok
+test cosmic_background::tests::supernova_has_broad_faint_density_beside_sparse_bright_filaments ... ok
+test cosmic_background::detail_tests::inclined_galaxy_has_connected_interior_mass_and_winding_dust_without_a_central_slit ... ok
+test cosmic_background::deep_nebula_tests::deep_cloud_cache_has_real_coherent_volume_and_bounded_complete_cost ... ok
+test cosmic_background::deep_nebula_tests::deep_cloud_whole_group_rejects_one_short_and_crosses_transform_batch_safely ... ok
+test cosmic_background::detail_tests::actual_fine_cells_compose_reflection_shear_and_fractional_zoom_without_minimum_geometry ... ok
+test cosmic_background::detail_tests::cached_half_unit_clusters_have_bounded_whole_motif_cost_and_same_physical_extents ... ok
+test cosmic_background::detail_tests::reduced_sampling_preserves_actual_dark_lanes_and_broken_rim ... ok
+test cosmic_background::detail_tests::atomic_whole_motif_admission_preserves_prior_packets_at_transform_boundary ... ok
+test cosmic_background::tests::cosmic_motifs_actually_animate_and_never_swap_identity_with_view_or_quality ... ok
+test cosmic_background::detail_tests::qa_galaxy_and_remnant_centers_use_actual_seed_selection_and_calm_group_geometry ... ok
+test cosmic_background::tests::nebula_visibility_keeps_authored_cells_unlit_and_within_existing_group_budget ... ok
+test cosmic_background::deep_nebula_tests::deep_cloud_streamed_camera_motion_keeps_birth_field_and_single_parallax_subtraction ... ok
+test cosmic_background::deep_nebula_tests::cloud_layers_breathe_continuously_and_reduced_motion_is_exact ... ok
+test cosmic_background::tests::cosmic_reduced_motion_freezes_all_authored_cells_and_group_transforms ... ok
+test cosmic_background::tests::cosmic_haven_is_measurably_sparser_than_outer_biomes ... ok
+test cosmic_background::detail_tests::actual_motifs_keep_small_continuous_motion_and_freeze_under_reduced_motion ... ok
+test cosmic_background::detail_tests::far_streamed_motifs_keep_local_detail_finite_and_inside_conservative_culling_bound ... ok
+test cosmic_background::tests::cosmic_groups_reject_atomically_and_all_packets_respect_custom_caps ... ok
+test cosmic_background::tests::cosmic_real_seeded_motifs_keep_their_authored_packets_across_view_and_quality_changes ... ok
+
+test result: ok. 34 passed; 0 failed; 5 ignored; 0 measured; 528 filtered out; finished in 0.09s
+

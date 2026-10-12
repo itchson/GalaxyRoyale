@@ -1,0 +1,27 @@
+{
+  "sourceDirectory": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/coop-wake-presentation-native-review",
+  "verifiedRawFiles": 85,
+  "scope": "Root verified all frozen manifest raw entries; selected immutable review documents copied here. Full source/fixture/author raw evidence remains in the original pinned reviewer directory and referenced existing game artifacts.",
+  "copied": [
+    {
+      "name": "REVIEW.md",
+      "bytes": 9390,
+      "sha256": "81f790148b43e6213ea7d9f4a764a208fb5b197519db82d79eee984fd99ec4c3"
+    },
+    {
+      "name": "MANIFEST.json",
+      "bytes": 16475,
+      "sha256": "cf676a65c29207c82a351844d61b358bd22043b7ecdfbc6f0427f1261f4d43be"
+    },
+    {
+      "name": "verification.json",
+      "bytes": 15932,
+      "sha256": "de939126363f074851401848962e6d74ba09cb11fc1c8cefba306ef7b21e6101"
+    },
+    {
+      "name": "verify.log",
+      "bytes": 2060,
+      "sha256": "7ec2330b0aab3fcdb11b3b77e209c99290bbbbd0d43c18444c2b14fe9b895055"
+    }
+  ]
+}

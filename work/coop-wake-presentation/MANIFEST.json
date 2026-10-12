@@ -1,0 +1,278 @@
+{
+  "base_commit": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "branch": "codex/coop-wake-presentation",
+  "source_pins_sha256": "0ce2ff575b286af19847bcf735aa46b3218b8292ab503fcf3ac2de423988aa85",
+  "handoff_sha256": "a6b7aaf5510121cf1eccc551686618c103da06e168888510bb53e54b1b095d04",
+  "native_execution": {
+    "workspace_passed": 928,
+    "workspace_failed": 0,
+    "workspace_ignored": 19,
+    "strict_workspace_all_targets_clippy": "passed",
+    "persistent_trail_focused_passed": 11,
+    "gameplay_wake_passed": 14,
+    "explicit_core_serializer_export_passed": 1,
+    "explicit_native_request_maximum_fixture_passed": 1
+  },
+  "files": [
+    {
+      "path": "work/coop-wake-presentation/baseline-missing-host-quads.log",
+      "bytes": 1059,
+      "sha256": "df71bbb680bf139102836cc88c529e577ec91e83c64a2a37cac445fc53228b7c"
+    },
+    {
+      "path": "work/coop-wake-presentation/clippy-author-final.log",
+      "bytes": 186,
+      "sha256": "8fea8947e3048a41ff4f8374b06932c879c542b41b92927b17a6a87130ab6a32"
+    },
+    {
+      "path": "work/coop-wake-presentation/clippy-final-pinned.log",
+      "bytes": 186,
+      "sha256": "9ebce43e7142acb73e0091db3526a042b5b33d689d62624cddfda9f63243ab63"
+    },
+    {
+      "path": "work/coop-wake-presentation/clippy-final.log",
+      "bytes": 297,
+      "sha256": "ed4e470e2ab572b5ff2023978ce4ebce9d69283dd2f92bd90cfeeada91df1beb"
+    },
+    {
+      "path": "work/coop-wake-presentation/clippy-first.log",
+      "bytes": 1042,
+      "sha256": "e50e759aaf707ee99e3861d26819b11239185416bcf4dfc50a8253027895aba1"
+    },
+    {
+      "path": "work/coop-wake-presentation/clippy-frozen-source.log",
+      "bytes": 186,
+      "sha256": "4d2a26bdd6736d774c28f463ea31554de956dc2f111b82fc8ce6b268b9f1eee1"
+    },
+    {
+      "path": "work/coop-wake-presentation/edge-first-inspection.log",
+      "bytes": 36794,
+      "sha256": "148e21b69c5eb9e2a8927ca49312b0bd180d4471aa2f1c937385c8e968724e94"
+    },
+    {
+      "path": "work/coop-wake-presentation/export-final.log",
+      "bytes": 662,
+      "sha256": "23e6cb72823d77f6327bc86da462c9bc855ac77bc62fff9fd94b1a1b0396c5b5"
+    },
+    {
+      "path": "work/coop-wake-presentation/export-first.log",
+      "bytes": 958,
+      "sha256": "7a4e05d0f0314531b1efc690e9bfa972a2061df70e72ece96cb716155406ce5d"
+    },
+    {
+      "path": "work/coop-wake-presentation/export-frozen-source.log",
+      "bytes": 779,
+      "sha256": "ff7239822eaaaf8827aee257c4cebb67f68bf4bdfb587cb1dda7e299b25a310a"
+    },
+    {
+      "path": "work/coop-wake-presentation/export-second.log",
+      "bytes": 662,
+      "sha256": "045a916654c8dd7246a438e93cd21310c153dd080dda4d2e9821d91160aff793"
+    },
+    {
+      "path": "work/coop-wake-presentation/first-implementation-test.log",
+      "bytes": 566,
+      "sha256": "72594f9e4889ec22afffb71670ffc1a505b0f9eb2177485d8f1811035b39ba17"
+    },
+    {
+      "path": "work/coop-wake-presentation/HANDOFF.md",
+      "bytes": 11989,
+      "sha256": "a6b7aaf5510121cf1eccc551686618c103da06e168888510bb53e54b1b095d04"
+    },
+    {
+      "path": "work/coop-wake-presentation/host-bridge-first.log",
+      "bytes": 1168,
+      "sha256": "e761045c42cf6d0fca8fe1b2956166c61487686db457c38a2a768b625086c6ff"
+    },
+    {
+      "path": "work/coop-wake-presentation/presentation-final-focused.log",
+      "bytes": 2017,
+      "sha256": "50bb30938bbd5c81bb54a85c492096a0fbc9a6d4dc9931ddd28873d1fb974184"
+    },
+    {
+      "path": "work/coop-wake-presentation/presentation-first-test.log",
+      "bytes": 2122,
+      "sha256": "a1dd8931e9e01696f32de6749ca549984db746e062ded5b2086776204c6e7486"
+    },
+    {
+      "path": "work/coop-wake-presentation/presentation-fourth-test.log",
+      "bytes": 1902,
+      "sha256": "6635fdb68fcdbcee6228a259d692edefc91d5aa2ab88e4c5f49cb5505eaaa085"
+    },
+    {
+      "path": "work/coop-wake-presentation/presentation-frozen-source.log",
+      "bytes": 2017,
+      "sha256": "2a587ccc4f0bdde4fa073fe5986450d5f7b413e0390b133d4890e436377bc172"
+    },
+    {
+      "path": "work/coop-wake-presentation/presentation-second-test.log",
+      "bytes": 1940,
+      "sha256": "81a16f9b6db9533f88182809dc713d9f4203a181234a04828e21a37749fec480"
+    },
+    {
+      "path": "work/coop-wake-presentation/presentation-third-test.log",
+      "bytes": 1505,
+      "sha256": "61ad9603df72c8d32e57f0684827560f36368b2ad8c5e1f466f4d1aaff65fa72"
+    },
+    {
+      "path": "work/coop-wake-presentation/raw-page-bound-first.log",
+      "bytes": 761,
+      "sha256": "9e1fb52973561fdf69a3653dc0cea726c04f9d0d2adcd31123905f812bb69c09"
+    },
+    {
+      "path": "work/coop-wake-presentation/replica-maximum-boundary-first.log",
+      "bytes": 1055,
+      "sha256": "5ce43e6dc639e041ab8037e59c48b9347d03710a1568e9cb1c427724f4e8bea6"
+    },
+    {
+      "path": "work/coop-wake-presentation/replica-maximum-boundary-frozen.log",
+      "bytes": 565,
+      "sha256": "b4f7c193f4f8825eb335d2abbb6a62e854938b53660b64c95b33e81c18ad1601"
+    },
+    {
+      "path": "work/coop-wake-presentation/source-pins.json",
+      "bytes": 7392,
+      "sha256": "0ce2ff575b286af19847bcf735aa46b3218b8292ab503fcf3ac2de423988aa85"
+    },
+    {
+      "path": "work/coop-wake-presentation/studio-native-completed.json",
+      "bytes": 1647,
+      "sha256": "a5a530c7c49d8e87cd1ffe468deb1c35a4048f89a117e1a8ddc4f877bf301354"
+    },
+    {
+      "path": "work/coop-wake-presentation/studio-start.json",
+      "bytes": 1044,
+      "sha256": "c1fc5463e8d157db032898c5cf4878e843cc55bc5f0dbdbca8ce2e2f2c9afe51"
+    },
+    {
+      "path": "work/coop-wake-presentation/studio-task-native-review.json",
+      "bytes": 3081,
+      "sha256": "4a1791fd915cc38d7545687607546cca3da019b21cf08c72fc5d0f4e71aa07ad"
+    },
+    {
+      "path": "work/coop-wake-presentation/wake-regression-first-pass.log",
+      "bytes": 3626,
+      "sha256": "228b7fd1482b271952bd1816886ae2fee333c17767d230ebd8c9f15fde709bd9"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/actual-host-batch-response.json",
+      "bytes": 4090,
+      "sha256": "da0613a2050513e5b03ffd9b4ea0fe56431cde6635ef3dde8e2ac49177a1fa6c"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/actual-host-header.json",
+      "bytes": 899,
+      "sha256": "5a19d5d9a87e55fb735f1746629d0c36c7cdb8741a4408aad537e59ce9005f29"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/actual-host-page.json",
+      "bytes": 2015,
+      "sha256": "462da0d0a8a656384c2a0b3515a24a1f2dea6cc7370738c14411a9d7ac54a9ab"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/empty-header.json",
+      "bytes": 9659,
+      "sha256": "0fff7df0b557884f03359de1a87faeda7168b4f23a666f8fe1ce776ba4c3d04e"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/empty-page.json",
+      "bytes": 83,
+      "sha256": "c94c11a29c727daf0276e299f4e75463783c1c70a337b3ad2d59e02668871222"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/expired-header.json",
+      "bytes": 6000,
+      "sha256": "5908c863f21e3238a5cc4990cbadf438b4234ddbf57812c0d34c4e4339d7cbec"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/expired-page.json",
+      "bytes": 85,
+      "sha256": "e6e530dd295b581e2e610e7c5d0dc19e63b13a1653c90cc27e2c65c1fd61f8f1"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/initial-header.json",
+      "bytes": 6028,
+      "sha256": "a56df9e6b4e237fe5f4cbee0ae2faaa66268ad951b54df4e55a1535a20aaea21"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/initial-page.json",
+      "bytes": 766,
+      "sha256": "40beddf272c2465e7d20b97d5bb216b247ff0b8130ce8800dc947d7d7e1b7cc2"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/legacy-header.json",
+      "bytes": 6005,
+      "sha256": "311efbbd04af510c3760ea719b3aff7c6d1c95023f497fbf3f8b85339026ceca"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/maximum-header.json",
+      "bytes": 49352,
+      "sha256": "5b36143d683936ef920d63889ffee2969de80d6519489f079bb65cd922da551f"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/maximum-native-stage.json",
+      "bytes": 49390,
+      "sha256": "c78e688f22bb0f4731bf1fb9715b38ddcffcc7ff660e6ec1a54daf71908fe92e"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/maximum-native-wake.json",
+      "bytes": 18453,
+      "sha256": "d5448ee4cdd3dc5985eab45152116064e4978610a5644906d5b8b63f72069070"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/maximum-page.json",
+      "bytes": 18402,
+      "sha256": "edd9fa8b1d5035d88ab217794b9c63a3878282ef2ec09435ede4aedde53f2cdf"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/maximum-transport-body.json",
+      "bytes": 18496,
+      "sha256": "42bb5f9824b7d66f4c1649ca35b4d177e37acbfc68fd892d01ae231304346f01"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/maximum-transport-publication.json",
+      "bytes": 49453,
+      "sha256": "c52e51e1da64f50a1cba2611414b0011fb8acdad61caa98b483ccb26c61544c2"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/raw-life-round-down.json",
+      "bytes": 757,
+      "sha256": "25002ace3193cf45bf6300249edc29ef5d94bcd77c6cf2a9268e00e250eae93b"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/raw-life-short-valid.json",
+      "bytes": 751,
+      "sha256": "9e15ff029e0bb40a47d97c4561ff783c8736c3f82c2eda1f1dd5aaecb4958ddd"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/raw-life-underflow.json",
+      "bytes": 753,
+      "sha256": "8eb0712d749dee23251ee07cb8ca46151422b165a73fb927fd1b7bf891e4ecf3"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/scalar-stress-native-wake.json",
+      "bytes": 21806,
+      "sha256": "c7d4c57bba97d409677409d60fee425c4e0e5db2e7f4dba320289efb4ce8f968"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/scalar-stress-page.json",
+      "bytes": 21746,
+      "sha256": "ab2453caea4bd7a35b574b8bc07c6df40c595e5e2ebd54b51febcc0fa1e0e86f"
+    },
+    {
+      "path": "work/coop-wake-presentation/wire-fixtures/scalar-stress-transport-body.json",
+      "bytes": 21840,
+      "sha256": "88b846c7c7a93af84b86b5f815f4b049b61e2ef98040d0b2bbaafe61f16eedbb"
+    },
+    {
+      "path": "work/coop-wake-presentation/workspace-native-final.log",
+      "bytes": 101018,
+      "sha256": "9aafd43239798f7f77ea0ab19c33d435f1125e11313773e887df6a9c2e6bc844"
+    },
+    {
+      "path": "work/coop-wake-presentation/workspace-native-tests.log",
+      "bytes": 101136,
+      "sha256": "7469756749536ed86c195eed4861501c79d56f8ad2bd4e8209febf478e2a6ce2"
+    }
+  ]
+}

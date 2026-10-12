@@ -1,0 +1,5 @@
+Actual session assignments, 2026-10-12:
+/root/engine_research running: native owned RAICHO loadout validation and admission; isolated engine worktree.
+/root/gameplay_design running: actual two-WASM WebRTC QA harness with independent durable save scopes; isolated gameplay worktree.
+/root/production_research running: native deep nebula open-cleft gas morphology, sampled field and real packet review; isolated art worktree.
+Root owns browser/native bridge integration, combined validation, listener cleanup, Studio records. These are assignments and observed run states, not completion claims.

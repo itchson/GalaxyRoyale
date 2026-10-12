@@ -1,0 +1,138 @@
+(node:45480) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ channel ready is separate from native admission and complete replica application (7.5542ms)
+✔ host approval is required before guest join frames and native admission (1.5235ms)
+✔ invalid join leaves an owned host world and restoration handle intact (0.9638ms)
+✔ same-room code and lock management do not restart native ownership or guest view (1.4242ms)
+✔ authenticated sender is the native pilot ID, and input is bounded to one local sequence per cadence (13.9712ms)
+✔ acknowledged unchanged body signatures reuse cells while pose pages continue (4.1497ms)
+✔ same-count color mutation changes signature and sends actual indexed cells (3.4325ms)
+✔ backpressure does not advance input sequence or grow a queued input history (4.5758ms)
+✔ a rejected remote input retires only its authenticated pilot and preserves the host (1.5941ms)
+✔ host end and guest leave restore native boundaries exactly once without touching local progression (1.9045ms)
+✔ missing native replica never claims connected and returns to a terminal state (2.6894ms)
+✔ state contains only controlled presentation data and explicit copy getter owns invitation access (0.4309ms)
+✔ unexpected native SCTP close is generic, not falsely attributed to host intent (0.9204ms)
+✔ invalid elapsed/input cannot become an authority tick or native operation (0.3734ms)
+✔ publication wire enforces finite counts, signature format, roles and token bounds (0.2852ms)
+✔ failed native restoration remains latched and blocks a new session until explicit successful recovery (1.4039ms)
+✔ failed replica restoration retains its recovery handle and cannot reopen gameplay (1.5754ms)
+✔ cancellation while signaling create is pending cannot begin native authority after completion (0.2293ms)
+✔ a stale prior-session callback cannot mutate a replacement native session (2.1101ms)
+✔ native commit refusal cannot mark a staged replica running (0.8089ms)
+✔ incomplete or stale publication end cannot install partially received cells (0.5084ms)
+✔ rolling publication quotas remain bounded at120Hz rather than allowing window-boundary bursts (40.3543ms)
+✔ no acknowledged receipt expires only the stalled guest while host simulation remains available (1.3135ms)
+✔ replica binds authenticated host world seed while preserving distinct guest local metadata (1.5969ms)
+✔ one-frame click courses survive sampling cadence and backpressure, then are consumed once (1.4112ms)
+✔ cancelInput sends the existing native zero-stick course cancellation, then resumes fresh controls (1.5582ms)
+✔ a synchronous transport end followed by failed native restoration cannot submit another input (1.6736ms)
+✔ an ambiguous successful native begin reply retains ownership until real cleanup (0.5894ms)
+✔ an admitted guest drops a stale published world after 30 seconds without claiming host background simulation (1.1326ms)
+✔ unavailable concrete ports do not launch signaling or publish a connected state (0.1955ms)
+✔ actual 91a18ab publisher rows and indexed cells reach the controller, but partial export cannot claim a complete world (6.7625ms)
+(node:46896) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ cancel during disk save never starts an invitation after the save completes (1.442ms)
+✔ title or replacement controller during flush prevents a delayed join (0.2425ms)
+✔ a successful save and flush admit exactly one current request (0.5088ms)
+(node:42780) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ room code normalizes eight hex digits and permits only bounded ASCII separators (2.5406ms)
+✔ default unavailable dock state cannot start sessions and exposes semantic input hooks (1.4932ms)
+✔ available session copy discloses current guest and reward limitations (0.7242ms)
+✔ join forwards the full bounded code once, including Enter composition guard (1.5077ms)
+✔ create invokes inside the real click and promise success cannot invent hosting (0.9497ms)
+✔ only controller phases declare readiness, admission and coherent connection (0.8449ms)
+✔ cancel supersedes a pending start and ignores its late rejection (0.951ms)
+✔ guest cannot end and repeated exit clicks cannot invoke twice (0.7633ms)
+✔ invitation is read only for an actual copyable host state and copied explicitly (0.8756ms)
+✔ clipboard rejection keeps full manual copy and never displays thrown capability (0.7946ms)
+✔ unknown reasons and controller messages cannot leak secret or raw transport errors (0.8695ms)
+✔ unchanged repaint preserves input node, selection, focus, scroll and performs no writes (0.6799ms)
+✔ ended session and teardown clear fields and isolate late completion from a new view (1.7339ms)
+✔ invalid controller counts or progression fail closed without reading invitations (0.85ms)
+✔ malformed capability getter remains hidden with no unsafe fallback (0.7649ms)
+✔ failed solo restoration keeps the actual reason and prevents another start (0.6252ms)
+✔ failed restoration exposes one explicit retry without claiming restored solo state (0.8803ms)
+✔ invalid state cannot expose recovery or invoke an exit callback (0.5855ms)
+✔ Join is the initial tab; tab selection and draft survive reactive updates (0.6594ms)
+✔ host management sends explicit actions without inventing policy or stopping hosting (0.8894ms)
+✔ only current host requests expose Accept/Decline and stale or disposed rows cannot act (1.1376ms)
+✔ approval and room failures use controlled useful copy (0.6696ms)
+(node:53152) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ short room code accepts exactly eight hex digits, ASCII separators and raw64 bound (1.1235ms)
+✔ session policy requires canonical host code or explicit guest null and finite revision (1.6644ms)
+✔ create/join grants enforce role-specific policy projection and keep bearer separate (0.3207ms)
+✔ HTTP room outcomes are status-matched allowlisted codes, never remote messages (29.3164ms)
+(node:56200) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ versioned frame bounds reject corruption, persistent profiles and nonfinite input (2.191ms)
+✔ native snapshot contract rejects duplicate slots, wrong profile semantics and nonfinite geometry (1.2578ms)
+✔ HTTP reader refuses credential redirects and bounded oversized responses (3.3692ms)
+✔ body pages retain exact cell indices and reject duplicates, oversize and wrong query kinds (0.4703ms)
+✔ snapshot carries same-tick revision and permits finite authoritative projectiles beyond world edge (0.285ms)
+✔ actual naturally spawned Coil metadata preserves the segment unknown-maximum sentinel only (0.3331ms)
+✔ actual HTTP membership never implies a ready channel or Rust admission (108.5637ms)
+✔ already-open incoming native channel plus later open event sends exactly one hello (74.5933ms)
+✔ RTC diagnostics retain only allowlisted native error detail, never messages or candidates (44.8589ms)
+✔ real HTTP offer/answer/ICE path binds peer IDs and admits only explicit frames (92.1267ms)
+✔ host plus seven guest channels are bounded; ninth reservation fails (165.0553ms)
+✔ backpressure refuses without advancing wire sequence, queueing or replaying stale input (82.1898ms)
+✔ malformed forged peer hello closes only that host peer and leaves no duplicate RTC (61.0819ms)
+✔ malformed replayed sequence closes only that host peer and leaves no duplicate RTC (50.3357ms)
+✔ malformed wrong session closes only that host peer and leaves no duplicate RTC (56.1203ms)
+✔ malformed guest snapshot authority closes only that host peer and leaves no duplicate RTC (61.3095ms)
+✔ input epoch and immutable snapshot seed are checked before sends (66.3957ms)
+✔ explicit rejection frees the guest reservation without ending the host (57.4939ms)
+✔ host end notifies guest, aborts polls and allows a distinct-session rejoin (74.8015ms)
+✔ expiry ends channels using real polling terminal notices (46.725ms)
+✔ failed negotiation does not fabricate readiness and guest leave frees its reservation (49.654ms)
+✔ late create result after disposal cannot reopen state and gets a leave cleanup (75.909ms)
+✔ guest cannot end a host; explicit leave and repeated disposal clean every handler (48.1661ms)
+✔ a retired peer's already-queued ICE cannot terminate an unrelated host peer (160.6435ms)
+✔ SCTP message bound and send rate refuse without an application backlog (63.2012ms)
+✔ unopened negotiation deadline frees membership and every tracked clock task (77.0202ms)
+✔ pending request waits without RTC and decline retains its exact terminal outcome (47.0234ms)
+✖ approval timeout is independent of approved negotiation reservation timeout (127.2606ms)
+✔ same-world rotate/lock preserves approved channels and retires only pending requests (148.9787ms)
+✔ hostile pre-approval SDP event cannot create guest RTC or bypass approval (47.2325ms)
+✔ newest whole policy wins delayed rotation and heartbeat responses (76.866ms)
+✔ delayed old join-request cannot recreate an approval row after a newer policy (68.0752ms)
+✔ late admin response after leave cannot reopen code, policy, requests or RTC (24.1397ms)
+✔ bounded retained terminal read wins failed heartbeat and ignores later old poll (94.345ms)
+✔ terminal poll wins a competing retained read without reason rollback (107.9327ms)
+✔ leave and replacement while terminal recovery is held cannot end the new request (109.4611ms)
+✔ unavailable retained terminal read falls back once and tears down all resources (91.9488ms)
+✔ dispose during terminal recovery ignores both held replies and clears its tracked tasks (92.7294ms)
+✔ reconnection cancels loss timeout; actual failed connection closes once (61.7556ms)
+ℹ tests 99
+ℹ suites 0
+ℹ pass 98
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2881.4798
+
+✖ failing tests:
+
+test at scripts\test\coop-transport.test.mjs:961:1
+✖ approval timeout is independent of approved negotiation reservation timeout (127.2606ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'channel_closed'
+  - 'reservation_timeout'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-transport.test.mjs:997:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'channel_closed',
+    expected: 'reservation_timeout',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

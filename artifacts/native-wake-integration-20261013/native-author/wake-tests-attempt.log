@@ -1,0 +1,131 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+error[E0277]: the trait bound `engine_core::PixelBody: serde::Serialize` is not satisfied
+    --> crates\game_core\src\co_op_wake_tests.rs:147:39
+     |
+ 147 |                 serde_json::to_string(&*coop.world.get::<&PixelBody>(b).unwrap()).unwrap();
+     |                 --------------------- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `_::_serde::Serialize` is not implemented for `engine_core::PixelBody`
+     |                 |
+     |                 required by a bound introduced by this call
+     |
+     = note: for local types consider adding `#[derive(serde::Serialize)]` to your `engine_core::PixelBody` type
+     = note: for types from other crates check whether the crate offers a `serde` feature flag
+     = help: the following other types implement trait `_::_serde::Serialize`:
+               &'a T
+               &'a mut T
+               ()
+               (T,)
+               (T0, T1)
+               (T0, T1, T2)
+               (T0, T1, T2, T3)
+               (T0, T1, T2, T3, T4)
+             and 252 others
+note: required by a bound in `serde_json::to_string`
+    --> C:\Users\mitch\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde_json-1.0.151\src\ser.rs:2247:17
+     |
+2245 | pub fn to_string<T>(value: &T) -> Result<String>
+     |        --------- required by a bound in this function
+2246 | where
+2247 |     T: ?Sized + Serialize,
+     |                 ^^^^^^^^^ required by this bound in `to_string`
+
+error[E0277]: the trait bound `engine_core::PixelBody: serde::Serialize` is not satisfied
+    --> crates\game_core\src\co_op_wake_tests.rs:163:39
+     |
+ 163 |                 serde_json::to_string(&*coop.world.get::<&PixelBody>(b).unwrap()).unwrap(),
+     |                 --------------------- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `_::_serde::Serialize` is not implemented for `engine_core::PixelBody`
+     |                 |
+     |                 required by a bound introduced by this call
+     |
+     = note: for local types consider adding `#[derive(serde::Serialize)]` to your `engine_core::PixelBody` type
+     = note: for types from other crates check whether the crate offers a `serde` feature flag
+     = help: the following other types implement trait `_::_serde::Serialize`:
+               &'a T
+               &'a mut T
+               ()
+               (T,)
+               (T0, T1)
+               (T0, T1, T2)
+               (T0, T1, T2, T3)
+               (T0, T1, T2, T3, T4)
+             and 252 others
+note: required by a bound in `serde_json::to_string`
+    --> C:\Users\mitch\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde_json-1.0.151\src\ser.rs:2247:17
+     |
+2245 | pub fn to_string<T>(value: &T) -> Result<String>
+     |        --------- required by a bound in this function
+2246 | where
+2247 |     T: ?Sized + Serialize,
+     |                 ^^^^^^^^^ required by this bound in `to_string`
+
+error[E0599]: no method named `as_str` found for struct `co_op::ParticipantId` in the current scope
+   --> crates\game_core\src\co_op_wake_tests.rs:393:14
+    |
+393 |         a.id.as_str(),
+    |              ^^^^^^ method not found in `co_op::ParticipantId`
+    |
+   ::: crates\game_core\src\co_op.rs:17:1
+    |
+ 17 | pub struct ParticipantId([u8; 16]);
+    | ------------------------ method `as_str` not found for this struct
+
+error[E0277]: the trait bound `engine_core::PixelBody: serde::Serialize` is not satisfied
+    --> crates\game_core\src\co_op_wake_tests.rs:498:31
+     |
+ 498 |         serde_json::to_string(&*game.world.get::<&PixelBody>(game.player).unwrap()).unwrap();
+     |         --------------------- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `_::_serde::Serialize` is not implemented for `engine_core::PixelBody`
+     |         |
+     |         required by a bound introduced by this call
+     |
+     = note: for local types consider adding `#[derive(serde::Serialize)]` to your `engine_core::PixelBody` type
+     = note: for types from other crates check whether the crate offers a `serde` feature flag
+     = help: the following other types implement trait `_::_serde::Serialize`:
+               &'a T
+               &'a mut T
+               ()
+               (T,)
+               (T0, T1)
+               (T0, T1, T2)
+               (T0, T1, T2, T3)
+               (T0, T1, T2, T3, T4)
+             and 252 others
+note: required by a bound in `serde_json::to_string`
+    --> C:\Users\mitch\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde_json-1.0.151\src\ser.rs:2247:17
+     |
+2245 | pub fn to_string<T>(value: &T) -> Result<String>
+     |        --------- required by a bound in this function
+2246 | where
+2247 |     T: ?Sized + Serialize,
+     |                 ^^^^^^^^^ required by this bound in `to_string`
+
+error[E0277]: the trait bound `engine_core::PixelBody: serde::Serialize` is not satisfied
+    --> crates\game_core\src\co_op_wake_tests.rs:537:31
+     |
+ 537 |         serde_json::to_string(&*game.world.get::<&PixelBody>(game.player).unwrap()).unwrap(),
+     |         --------------------- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `_::_serde::Serialize` is not implemented for `engine_core::PixelBody`
+     |         |
+     |         required by a bound introduced by this call
+     |
+     = note: for local types consider adding `#[derive(serde::Serialize)]` to your `engine_core::PixelBody` type
+     = note: for types from other crates check whether the crate offers a `serde` feature flag
+     = help: the following other types implement trait `_::_serde::Serialize`:
+               &'a T
+               &'a mut T
+               ()
+               (T,)
+               (T0, T1)
+               (T0, T1, T2)
+               (T0, T1, T2, T3)
+               (T0, T1, T2, T3, T4)
+             and 252 others
+note: required by a bound in `serde_json::to_string`
+    --> C:\Users\mitch\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde_json-1.0.151\src\ser.rs:2247:17
+     |
+2245 | pub fn to_string<T>(value: &T) -> Result<String>
+     |        --------- required by a bound in this function
+2246 | where
+2247 |     T: ?Sized + Serialize,
+     |                 ^^^^^^^^^ required by this bound in `to_string`
+
+Some errors have detailed explanations: E0277, E0599.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `game_core` (lib test) due to 5 previous errors

@@ -1,0 +1,115 @@
+{
+  "scope": "Independent frozen Git/evidence/source consumer review, plus two declared-observation source-function counterexamples; no actual native/browser/RTC/listener execution",
+  "original_candidate": "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+  "original_source_pins": [
+    {
+      "path": "scripts/qa/co-op-transport/README.md",
+      "git_blob": "bc08b4dd8280fed00e6b921b71765c73fcf07ef3",
+      "bytes": 14692,
+      "sha256": "51c0be92863b3f12b6059120e577eaf0af2ca9fc78790fda54cc23d19684bf9f",
+      "snapshot": "original-source/scripts/qa/co-op-transport/README.md"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/client.js",
+      "git_blob": "f3a0c06dafa28b2acd47120bd0056aa6b08062a6",
+      "bytes": 26189,
+      "sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825",
+      "snapshot": "original-source/scripts/qa/co-op-transport/client.js"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/server.mjs",
+      "git_blob": "a460b9d154abbc3b2158e67a3aca9d0149546476",
+      "bytes": 18044,
+      "sha256": "3834be8d41892914150eb8ea657a724a68b8e98cc937b212dd5b42bb38466b2f",
+      "snapshot": "original-source/scripts/qa/co-op-transport/server.mjs"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/wasm-review.html",
+      "git_blob": "6a2c2c5952712c1d28a652399a31220f9752d60a",
+      "bytes": 4945,
+      "sha256": "193dd816c8489022190f7185ce99aa3b96fda3698b5a422c4eb1d00201c997b1",
+      "snapshot": "original-source/scripts/qa/co-op-transport/wasm-review.html"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/wasm-review.js",
+      "git_blob": "3aaa7d6c721d7f789154492af1045315a8c8912a",
+      "bytes": 23940,
+      "sha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7",
+      "snapshot": "original-source/scripts/qa/co-op-transport/wasm-review.js"
+    },
+    {
+      "path": "scripts/test/coop-private-room-negative-qa.test.mjs",
+      "git_blob": "414d84fa33ee60138e586bf50c7431e1ca081260",
+      "bytes": 19081,
+      "sha256": "2729c2be2c6563b19895f6ebbc51e6898ff7a12206da2845b723de125739bc44",
+      "snapshot": "original-source/scripts/test/coop-private-room-negative-qa.test.mjs"
+    }
+  ],
+  "unchanged_inputs": [
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "unchanged_from_base": true,
+      "snapshot": "baseline-inputs/apps/game/src/coop/controller.ts"
+    },
+    {
+      "path": "apps/game/src/coop/transport.ts",
+      "git_blob": "b5f335cbc15bdb2ef8c3d86bffbb7ad86118a5a2",
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+      "unchanged_from_base": true,
+      "snapshot": "baseline-inputs/apps/game/src/coop/transport.ts"
+    },
+    {
+      "path": "apps/game/src/coop/signaling.ts",
+      "git_blob": "498053c18d75892a6b42795b36f57097a455b7dc",
+      "bytes": 6716,
+      "sha256": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433",
+      "unchanged_from_base": true,
+      "snapshot": "baseline-inputs/apps/game/src/coop/signaling.ts"
+    },
+    {
+      "path": "apps/game/src/coop/wasm-ports.ts",
+      "git_blob": "82b21a7b3ec894ee217061b1d18dfc0932c47f52",
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+      "unchanged_from_base": true,
+      "snapshot": "baseline-inputs/apps/game/src/coop/wasm-ports.ts"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/prepare.mjs",
+      "git_blob": "9986e3fb972378dc6a045a42bb2422f9c708b925",
+      "bytes": 17064,
+      "sha256": "2f5242434ea82793a0789efc8bff9070e451791e065ead6846612e7a3204ad51",
+      "unchanged_from_base": true,
+      "snapshot": "baseline-inputs/scripts/qa/co-op-transport/prepare.mjs"
+    },
+    {
+      "path": "scripts/test/coop-transport-wasm-qa.test.mjs",
+      "git_blob": "8d0694fc2d7e856b581fcdaffa8ab94aa54323d2",
+      "bytes": 41891,
+      "sha256": "925c879fc4229a5ba851f347453a17a802a6237e79061b3da8482d2ba2028f16",
+      "unchanged_from_base": true,
+      "snapshot": "baseline-inputs/scripts/test/coop-transport-wasm-qa.test.mjs"
+    },
+    {
+      "path": "scripts/test/coop-transport-fifth-qa.test.mjs",
+      "git_blob": "a9cae3ca80aba82fad53c3def6585ed017a2a83d",
+      "bytes": 14649,
+      "sha256": "2814ae9ac3fa68dd41627dccbf7c196ba5cc7930da51c2209d3d238f51d81cd1",
+      "unchanged_from_base": true,
+      "snapshot": "baseline-inputs/scripts/test/coop-transport-fifth-qa.test.mjs"
+    }
+  ],
+  "original_raw_evidence_verified": 19,
+  "author_recorded_function_tests": 37,
+  "original_independent_reproduction_pass": 0,
+  "original_independent_reproduction_fail": 2,
+  "remaining_findings": [
+    "post-policy commit floor",
+    "visibility through awaited observations"
+  ],
+  "native_loop_health_qualification_pending": true
+}

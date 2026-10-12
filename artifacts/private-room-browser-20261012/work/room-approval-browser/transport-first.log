@@ -1,0 +1,60 @@
+(node:52796) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ versioned frame bounds reject corruption, persistent profiles and nonfinite input (1.581ms)
+✔ native snapshot contract rejects duplicate slots, wrong profile semantics and nonfinite geometry (0.4907ms)
+✔ HTTP reader refuses credential redirects and bounded oversized responses (3.5247ms)
+✔ body pages retain exact cell indices and reject duplicates, oversize and wrong query kinds (0.3768ms)
+✔ snapshot carries same-tick revision and permits finite authoritative projectiles beyond world edge (0.1609ms)
+✔ actual naturally spawned Coil metadata preserves the segment unknown-maximum sentinel only (0.2788ms)
+✔ actual HTTP membership never implies a ready channel or Rust admission (79.0642ms)
+✔ already-open incoming native channel plus later open event sends exactly one hello (75.3945ms)
+✔ RTC diagnostics retain only allowlisted native error detail, never messages or candidates (42.21ms)
+✔ real HTTP offer/answer/ICE path binds peer IDs and admits only explicit frames (80.6969ms)
+✔ host plus seven guest channels are bounded; ninth reservation fails (145.0902ms)
+✔ backpressure refuses without advancing wire sequence, queueing or replaying stale input (72.8601ms)
+✔ malformed forged peer hello closes only that host peer and leaves no duplicate RTC (62.3273ms)
+✔ malformed replayed sequence closes only that host peer and leaves no duplicate RTC (62.6136ms)
+✔ malformed wrong session closes only that host peer and leaves no duplicate RTC (60.4291ms)
+✔ malformed guest snapshot authority closes only that host peer and leaves no duplicate RTC (47.3327ms)
+✔ input epoch and immutable snapshot seed are checked before sends (62.4472ms)
+✔ explicit rejection frees the guest reservation without ending the host (59.5646ms)
+✔ host end notifies guest, aborts polls and allows a distinct-session rejoin (72.6056ms)
+✔ expiry ends channels using real polling terminal notices (61.7669ms)
+✔ failed negotiation does not fabricate readiness and guest leave frees its reservation (33.1902ms)
+✔ late create result after disposal cannot reopen state and gets a leave cleanup (75.2881ms)
+✔ guest cannot end a host; explicit leave and repeated disposal clean every handler (30.8724ms)
+✔ a retired peer's already-queued ICE cannot terminate an unrelated host peer (128.2501ms)
+✔ SCTP message bound and send rate refuse without an application backlog (60.5002ms)
+✔ unopened negotiation deadline frees membership and every tracked clock task (79.4372ms)
+✔ pending request waits without RTC and decline retains its exact terminal outcome (47.0813ms)
+✖ approval timeout is independent of approved negotiation reservation timeout (0.4373ms)
+✔ same-world rotate/lock preserves approved channels and retires only pending requests (150.839ms)
+✔ hostile pre-approval SDP event cannot create guest RTC or bypass approval (34.5039ms)
+✔ newest whole policy wins delayed rotation and heartbeat responses (78.6661ms)
+✔ delayed old join-request cannot recreate an approval row after a newer policy (61.5117ms)
+✔ late admin response after leave cannot reopen code, policy, requests or RTC (16.514ms)
+✔ reconnection cancels loss timeout; actual failed connection closes once (61.5082ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 33
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1984.6223
+
+✖ failing tests:
+
+test at scripts\test\coop-transport.test.mjs:961:1
+✖ approval timeout is independent of approved negotiation reservation timeout (0.4373ms)
+  Error: Limits may only narrow the documented bounds.
+      at new SessionStore (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/apps/coop/store.mjs:117:15)
+      at fixture (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-transport.test.mjs:198:17)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-transport.test.mjs:964:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)

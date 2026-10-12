@@ -1,4 +1,7 @@
-use crate::{AffineTransform, PixelBody, Transform, Vec2};
+use crate::{
+    AffineTransform, ObjectMeta, PIXEL_TRANSFORM_SLOT_MASK, PixelBody, PlanarShadows, ShadowLight,
+    Surface, Transform, Vec2,
+};
 use bytemuck::{Pod, Zeroable};
 
 pub const MAX_BATCH_TRANSFORMS: usize = 128;
@@ -69,19 +72,31 @@ impl GpuTransform {
 pub struct PixelInstance {
     pub local: [f32; 2],
     pub color: u32,
+    /// Low7 bits select the transform; optional surface occupies the upper25.
     pub transform: u32,
+}
+impl PixelInstance {
+    pub fn transform_slot(self) -> usize {
+        (self.transform & PIXEL_TRANSFORM_SLOT_MASK) as usize
+    }
+    pub fn surface(self) -> Option<Surface> {
+        Surface::from_cell_word(self.transform)
+    }
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct RenderBatch {
     pub transforms: Vec<GpuTransform>,
     pub pixels: Vec<PixelInstance>,
+    /// Optional parallel table; absent entries have exact default metadata.
+    pub objects: Option<Vec<ObjectMeta>>,
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct RenderFrame {
     pub batches: Vec<RenderBatch>,
     pub pixel_count: usize,
+    pub shadows: Option<Box<PlanarShadows>>,
 }
 
 /// Order-preserving extraction. Splits before the portable transform-table
@@ -91,6 +106,7 @@ pub struct FrameBuilder {
     frame: RenderFrame,
     spare_batches: Vec<RenderBatch>,
     pixel_transforms: Vec<(u32, u32)>,
+    object_meta: ObjectMeta,
 }
 
 impl FrameBuilder {
@@ -105,16 +121,60 @@ impl FrameBuilder {
         for mut batch in self.frame.batches.drain(..).rev() {
             batch.transforms.clear();
             batch.pixels.clear();
+            if let Some(objects) = &mut batch.objects {
+                objects.clear();
+            }
             self.spare_batches.push(batch);
         }
         self.frame.pixel_count = 0;
         self.pixel_transforms.clear();
+        self.object_meta = ObjectMeta::default();
+        if let Some(shadows) = &mut self.frame.shadows {
+            shadows.clear();
+        }
     }
 
     /// Borrows the current extraction without moving or copying its buffers.
     /// Clear and rebuild this builder after the renderer has consumed the borrow.
     pub fn frame(&self) -> &RenderFrame {
         &self.frame
+    }
+
+    /// Object-local presentation scope, restored before subsequent particles or
+    /// UI. Separate particle size caches cannot alias transforms across scopes.
+    pub fn with_object_meta<R>(
+        &mut self,
+        meta: ObjectMeta,
+        draw: impl FnOnce(&mut Self) -> R,
+    ) -> R {
+        let previous = self.object_meta;
+        let meta = meta.sanitized();
+        if meta == previous {
+            return draw(self);
+        }
+        self.object_meta = meta;
+        self.pixel_transforms.clear();
+        let result = draw(self);
+        self.object_meta = previous;
+        self.pixel_transforms.clear();
+        result
+    }
+    pub fn set_planar_shadow(
+        &mut self,
+        body: &PixelBody,
+        transform: AffineTransform,
+        height: f32,
+        light: ShadowLight,
+    ) -> bool {
+        self.frame
+            .shadows
+            .get_or_insert_with(|| Box::new(PlanarShadows::default()))
+            .set_body(body, transform, height, light)
+    }
+    pub fn clear_planar_shadow(&mut self) {
+        if let Some(shadows) = &mut self.frame.shadows {
+            shadows.clear();
+        }
     }
 
     pub fn push_body(&mut self, body: &PixelBody, transform: Transform) {
@@ -178,13 +238,14 @@ impl FrameBuilder {
             .last_mut()
             .expect("transform creates batch");
         batch.pixels.reserve(body.occupied_count());
-        batch
-            .pixels
-            .extend(body.cells().map(|(local, original)| PixelInstance {
-                local: local.to_array(),
-                color: color(local, original),
-                transform: slot,
-            }));
+        batch.pixels.extend(
+            body.cells_indexed()
+                .map(|(index, local, original)| PixelInstance {
+                    local: local.to_array(),
+                    color: color(local, original),
+                    transform: slot | body.surface_index(index).map_or(0, Surface::packed),
+                }),
+        );
         self.frame.pixel_count += body.occupied_count();
     }
 
@@ -241,6 +302,22 @@ impl FrameBuilder {
         }
         self.push_cells_packed(GpuTransform::from(transform).with_material(material), cells)
     }
+    /// Occupied subobject extraction retaining independent local surface fields.
+    /// Invalid positions are skipped; no PixelBody clone or extra GPU stream.
+    pub fn push_cells_affine_surface_material(
+        &mut self,
+        transform: AffineTransform,
+        material: PixelMaterial,
+        cells: impl IntoIterator<Item = (Vec2, u32, Option<Surface>)>,
+    ) -> usize {
+        if !transform.position.is_finite()
+            || !transform.basis_x.is_finite()
+            || !transform.basis_y.is_finite()
+        {
+            return 0;
+        }
+        self.push_surface_cells_packed(GpuTransform::from(transform).with_material(material), cells)
+    }
 
     /// Radially filtered cosmetic cells with local fractional geometry. The
     /// shader conserves projected area while filtering a subpixel footprint;
@@ -292,7 +369,17 @@ impl FrameBuilder {
         transform: GpuTransform,
         cells: impl IntoIterator<Item = (Vec2, u32)>,
     ) -> usize {
-        let mut cells = cells.into_iter().filter(|(local, _)| local.is_finite());
+        self.push_surface_cells_packed(
+            transform,
+            cells.into_iter().map(|(local, color)| (local, color, None)),
+        )
+    }
+    fn push_surface_cells_packed(
+        &mut self,
+        transform: GpuTransform,
+        cells: impl IntoIterator<Item = (Vec2, u32, Option<Surface>)>,
+    ) -> usize {
+        let mut cells = cells.into_iter().filter(|(local, _, _)| local.is_finite());
         let Some(first) = cells.next() else {
             return 0;
         };
@@ -303,17 +390,15 @@ impl FrameBuilder {
             .last_mut()
             .expect("transform creates batch");
         let previous = batch.pixels.len();
-        batch
-            .pixels
-            .extend(
-                std::iter::once(first)
-                    .chain(cells)
-                    .map(|(local, color)| PixelInstance {
-                        local: local.to_array(),
-                        color,
-                        transform: slot,
-                    }),
-            );
+        batch.pixels.extend(
+            std::iter::once(first)
+                .chain(cells)
+                .map(|(local, color, surface)| PixelInstance {
+                    local: local.to_array(),
+                    color,
+                    transform: slot | surface.map_or(0, Surface::packed),
+                }),
+        );
         let count = batch.pixels.len() - previous;
         self.frame.pixel_count += count;
         count
@@ -333,6 +418,7 @@ impl FrameBuilder {
             let batch = self.spare_batches.pop().unwrap_or_else(|| RenderBatch {
                 transforms: Vec::with_capacity(MAX_BATCH_TRANSFORMS),
                 pixels: Vec::with_capacity(1024),
+                objects: None,
             });
             self.frame.batches.push(batch);
             self.pixel_transforms.clear();
@@ -340,6 +426,13 @@ impl FrameBuilder {
         let batch = self.frame.batches.last_mut().expect("nonempty batch pool");
         let slot = batch.transforms.len() as u32;
         batch.transforms.push(transform);
+        if self.object_meta != ObjectMeta::default() && batch.objects.is_none() {
+            batch.objects = Some(Vec::with_capacity(MAX_BATCH_TRANSFORMS));
+        }
+        if let Some(objects) = &mut batch.objects {
+            objects.resize(slot as usize, ObjectMeta::default());
+            objects.push(self.object_meta);
+        }
         slot
     }
 }
@@ -349,6 +442,53 @@ mod tests {
     use super::*;
     fn pixel_body() -> PixelBody {
         PixelBody::from_ascii(&["#"], &[('#', 0xff_abcdef)])
+    }
+
+    #[test]
+    fn optional_object_metadata_respects_scopes_slots_and_reuses_storage() {
+        let body = pixel_body();
+        let mut builder = FrameBuilder::new();
+        builder.push_body(&body, Transform::default());
+        assert!(builder.frame().batches[0].objects.is_none());
+        builder.with_object_meta(ObjectMeta::receiver(0.0), |frame| {
+            for _ in 0..129 {
+                frame.push_body(&body, Transform::default());
+            }
+            frame.with_object_meta(
+                ObjectMeta {
+                    height: 6.0,
+                    flags: 0,
+                },
+                |frame| frame.push_pixel(Vec2::ZERO, 1.0, 0xff_ffffff),
+            );
+            frame.push_pixel(Vec2::X, 1.0, 0xff_ffffff);
+        });
+        builder.push_pixel(Vec2::Y, 1.0, 0xff_ffffff);
+        let first = builder.frame().batches[0].objects.as_ref().unwrap();
+        assert_eq!(first.len(), 128);
+        assert_eq!(first[0], ObjectMeta::default());
+        assert!(first[1..].iter().all(|m| *m == ObjectMeta::receiver(0.0)));
+        let second = builder.frame().batches[1].objects.as_ref().unwrap();
+        assert_eq!(second[2].height, 6.0);
+        assert_eq!(second[3], ObjectMeta::receiver(0.0));
+        assert_eq!(second[4], ObjectMeta::default());
+        let pointers = builder
+            .frame()
+            .batches
+            .iter()
+            .map(|b| b.objects.as_ref().unwrap().as_ptr())
+            .collect::<Vec<_>>();
+        builder.clear();
+        for _ in 0..130 {
+            builder.push_body(&body, Transform::default());
+        }
+        for (batch, pointer) in builder.frame().batches.iter().zip(pointers) {
+            let objects = batch.objects.as_ref().unwrap();
+            assert_eq!(objects.as_ptr(), pointer);
+            assert!(objects.iter().all(|m| *m == ObjectMeta::default()));
+        }
+        assert_eq!(std::mem::size_of::<PixelInstance>(), 16);
+        assert_eq!(std::mem::size_of::<GpuTransform>(), 32);
     }
     fn near(a: Vec2, b: Vec2) {
         assert!((a - b).length() < 0.0001, "{a:?} != {b:?}");
@@ -460,7 +600,7 @@ mod tests {
                 batch
                     .pixels
                     .iter()
-                    .all(|pixel| (pixel.transform as usize) < batch.transforms.len())
+                    .all(|pixel| pixel.transform_slot() < batch.transforms.len())
             );
         }
         assert_eq!(frame.batches[1].pixels[0].transform, 0);
@@ -481,7 +621,7 @@ mod tests {
         assert_eq!(frame.batches.len(), 1);
         assert_eq!(frame.batches[0].transforms.len(), 2);
         for (x, pixel) in frame.batches[0].pixels.iter().enumerate() {
-            let t = frame.batches[0].transforms[pixel.transform as usize];
+            let t = frame.batches[0].transforms[pixel.transform_slot()];
             near(
                 t.point(Vec2::from_array(pixel.local)),
                 Vec2::new(x as f32, -3.0),
@@ -502,7 +642,7 @@ mod tests {
         let batch = &frame.batches[1];
         let p = batch.pixels.last().unwrap();
         near(
-            batch.transforms[p.transform as usize].point(Vec2::from_array(p.local)),
+            batch.transforms[p.transform_slot()].point(Vec2::from_array(p.local)),
             Vec2::new(-3.0, 9.0),
         );
     }

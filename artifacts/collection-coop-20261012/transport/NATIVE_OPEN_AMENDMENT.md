@@ -1,0 +1,11 @@
+# Native channel-open follow-up
+
+Source `4cb003b167672326d01e77928f084ae1f29689fa`, parent `38742784f6000135a68354750bdf0d3204334422`. Five owned source/test/helper files; clean tracked. Earlier commits/reports/captures remain historical.
+
+Root reported its corrected cross-origin browser run created/closed2 peers and failed with channel_error. The source could manually call open for an already-open incoming channel and later run the queued native open event again, sending a second hello that the strict peer rejects. The follow-up makes opening idempotent per channel. A realistic API-model regression delivers an already-open channel through ondatachannel then a later native open; it proves one hello per side and no closure. This fixes a concrete valid event sequence; it does **not** establish the causal explanation for every Root browser channel_error.
+
+Current **29/29** focused checks pass; TypeScript/diff checks pass. The added diagnostics retain only native RTCError.errorDetail from seven finite platform enum values,atmost8; messages,candidates,SDP,credentials excluded. Tool captures/DOM use the same allowlist; arbitrary error text rejects. Root owns real browser rerun; no successful native RTC result claimed in this report.
+
+Root should stop the previous verified listener and prepare a NEW stage (for example `work/co-op-transport/stage-native-open`) before launch. Open printed localhost page;service remains127.0.0.1 at sameport/singlelistener. Connect→Send join/input fixture→Host end→Rejoin→Dispose;simulation stays waiting.
+
+For future authority integration, pages must match a coherent published revision. A60Hz native tick invalidates current-page queries across asynchronous round trips; querying only the newest revision can repeatedly fail. Acquire pages synchronously with the captured snapshot revision on the host and publish a coherent set,or design an explicit bounded native snapshot cache. Do not weaken current stale revision rejection. The receive2MiB/s limit also means maximum44,924-byte snapshots cannot be sent60Hz: send at a bounded lower cadence (e.g20Hz before page traffic),skip obsolete snapshots under backpressure,and preserve fresh input cadence. These are next-stage integration constraints,not an implemented remote renderer.

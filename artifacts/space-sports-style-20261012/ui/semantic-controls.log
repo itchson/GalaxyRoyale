@@ -1,0 +1,25 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 12 tests
+test ui_scene::semantic_button_tests::legacy_serialized_nodes_default_to_unselected ... ok
+test ui_scene::semantic_button_tests::too_short_semantic_rects_keep_frames_without_crossing_glyphs ... ok
+test ui_scene::semantic_button_tests::semantic_groups_keep_screen_position_when_camera_moves ... ok
+test ui_scene::semantic_button_tests::category_headers_share_their_action_colors_without_hover_dependency ... ok
+test ui_scene::semantic_button_tests::persistent_selection_survives_hover_of_another_tab ... ok
+test ui_scene::semantic_button_tests::legacy_settings_text_stays_inside_the_padded_nonoverlapping_regions ... ok
+test ui_scene::semantic_button_tests::semantic_actions_have_distinct_unlit_opaque_colors_and_no_motion ... ok
+test ui_scene::semantic_button_tests::disabled_controls_remain_opaque_readable_and_ignore_hover ... ok
+test ui_scene::semantic_button_tests::horizontal_and_vertical_clips_apply_to_frames_and_label_centers ... ok
+test ui_scene::semantic_button_tests::semantic_scene_caps_and_pool_reuse_preserve_real_transform_indices ... ok
+test ui_scene::semantic_button_tests::labels_fit_inner_bounds_at_narrow_fractional_and_large_font_extents ... ok
+test ui_scene::semantic_button_tests::logo_intro_settle_never_leaves_a_tightly_fitted_mobile_rect ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 246 filtered out; finished in 0.23s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

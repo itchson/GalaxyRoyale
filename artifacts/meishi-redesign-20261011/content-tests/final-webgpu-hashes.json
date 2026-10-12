@@ -1,0 +1,16 @@
+{
+  "runtime_source_commit": "f3a723081033a2cdd9bab15e37241fe334530716",
+  "scope": "Independently viewed one supplied saved 1280x720 PAN/DORA zero-earned WebGPU capture; no browser control/build/runtime edits or fresh tests",
+  "evidence_pins": [
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\meishi-redesign-20261011\\pan-final-webgpu-1280.png",
+      "sha256": "e08ca8c14a2c3ec01aa0860cfa7f832dad34804f5487561beea21c8012398a1b",
+      "bytes": 63023
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\meishi-layout-tests\\FINAL_WEBGPU_REVIEW.md",
+      "sha256": "40c0e6f1e3b9475325ecddcfcb1424eb272fad07d2840af5160dfc020ed590fa",
+      "bytes": 1522
+    }
+  ]
+}

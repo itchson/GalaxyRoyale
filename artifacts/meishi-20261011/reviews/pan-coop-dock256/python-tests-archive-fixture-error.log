@@ -1,0 +1,17 @@
+.E.........
+======================================================================
+ERROR: test_archive_corruption_and_changed_decoded_cell_fail_closed (__main__.TiledDockTests.test_archive_corruption_and_changed_decoded_cell_fail_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\scripts\qa\pan-coop-dock\test_256.py", line 126, in test_archive_corruption_and_changed_decoded_cell_fail_closed
+    A.decode(corrupt,record)
+  File "C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\scripts\qa\pan-coop-dock\archive_256.py", line 33, in decode
+    N.M.AP.require(digest(encoded) == record["gzip_sha256"], "Encoded evidence hash differs")
+  File "C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\scripts\asset-pack.py", line 21, in require
+    raise AssetError(message)
+dock_asset_pack.AssetError: Encoded evidence hash differs
+
+----------------------------------------------------------------------
+Ran 11 tests in 9.116s
+
+FAILED (errors=1)

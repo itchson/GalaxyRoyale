@@ -1,0 +1,46 @@
+{
+  "scope": "Actual author experiment handoff only; source/ear/production acceptance still open",
+  "verified_evidence_count": 184,
+  "files": {
+    "HANDOFF.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/HANDOFF.md",
+      "bytes": 6515,
+      "sha256": "8a6bf606f29fe06786329bae1229581928c673904a4055090eb927ad24f01524"
+    },
+    "source-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/source-pins.json",
+      "bytes": 63226,
+      "sha256": "5167b6e27a20cc857144eda922630d50fe60037da036d8446baae1dd3a997173"
+    },
+    "pin-experiment.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/pin-experiment.log",
+      "bytes": 1033,
+      "sha256": "c155d95c11c211f2afc49d2d69fd73f623a9303cda2d03ba9c5cf044357f8f76"
+    },
+    "studio-completed-input.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/studio-completed-input.json",
+      "bytes": 1558,
+      "sha256": "8ed54fbf6d3005efd724d0f56931f9c8bfcb7badccad9acc0d470c44d33ce835"
+    },
+    "studio-completed-result.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/studio-completed-result.json",
+      "bytes": 1551,
+      "sha256": "0afc59ed1da7b73bd77da6596e2fb1e0fa8e2cd0072ab83a41d7953134d754cb"
+    },
+    "frozen-hook8/MANIFEST.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/MANIFEST.json",
+      "bytes": 19875,
+      "sha256": "eb41e7ab2976dd0bb348a889a7c099b83feb71ce0856fb74b8ec258f67df05a6"
+    },
+    "frozen-full420/MANIFEST.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/MANIFEST.json",
+      "bytes": 4695,
+      "sha256": "437916b19fc92105a95d103403c1a3a3a3e4d624a46c61b2201c7468e6c5da63"
+    },
+    "frozen-full443/MANIFEST.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/MANIFEST.json",
+      "bytes": 6243,
+      "sha256": "f5b16b67e2b6432f949f460003281aa862dea42ee27e1fee416418dfcffdbf0a"
+    }
+  }
+}

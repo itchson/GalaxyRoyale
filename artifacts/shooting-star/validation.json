@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-11T05:12:14.271389+00:00",
+  "base_commit": "bcbaa670ae8335b4e5cffff3348b0ae0a3144299",
+  "scope": "Pure native detailed shooting-star helper; source and actual packet proof, no shared registration/regions edits",
+  "source_palette_entries": 16,
+  "head_cells": 644,
+  "coma_cells": 176,
+  "full_tail_cells": 64,
+  "reduced_tail_cells": 32,
+  "full_group_cells": 884,
+  "reduced_group_cells": 852,
+  "transforms": 4,
+  "head_cell_scale": 0.25,
+  "parallax": 0.48,
+  "cycle_seconds": 80,
+  "active_seconds": 18,
+  "travel_world_units_per_second": 22,
+  "stream_radius": 300,
+  "local_radius": 96,
+  "checks": {
+    "python": {
+      "tests_passed": 2,
+      "exit_code": 0,
+      "python": "3.12.10",
+      "pillow": "12.3.0",
+      "command": "python scripts/asset-shooting-star-tests.py",
+      "log": "artifacts/shooting-star/python-tests.log"
+    },
+    "native": {
+      "tests_passed": 10,
+      "exit_code": 0,
+      "strict_library_clippy": true,
+      "command": "powershell -NoProfile -File scripts/asset-shooting-star-native.ps1 -Python <pinned Python> -SkipDependencies -OutputDirectory work/shooting-star-detail/final",
+      "engine_dependencies": "Reused exact dependency build from art baseline, cargo build --locked -p game_web exit0",
+      "logs": [
+        "artifacts/shooting-star/native-tests.log",
+        "artifacts/shooting-star/native-proof.log",
+        "artifacts/shooting-star/native-checks.log"
+      ]
+    }
+  },
+  "actual_native_scenes": [
+    {
+      "name": "full_1x",
+      "zoom": 1.0,
+      "quads": 884,
+      "transforms": 4,
+      "tail_cells": 64,
+      "time": 14.902847290039062,
+      "birth_hash": 0,
+      "camera": [
+        0.0,
+        0.0
+      ],
+      "reduced": false,
+      "reduced_motion": false
+    },
+    {
+      "name": "reduced_1x",
+      "zoom": 1.0,
+      "quads": 852,
+      "transforms": 4,
+      "tail_cells": 32,
+      "time": 14.902847290039062,
+      "birth_hash": 0,
+      "camera": [
+        0.0,
+        0.0
+      ],
+      "reduced": true,
+      "reduced_motion": false
+    },
+    {
+      "name": "later_1x",
+      "zoom": 1.0,
+      "quads": 884,
+      "transforms": 4,
+      "tail_cells": 64,
+      "time": 15.202847480773926,
+      "birth_hash": 0,
+      "camera": [
+        0.0,
+        0.0
+      ],
+      "reduced": false,
+      "reduced_motion": false
+    },
+    {
+      "name": "full_min_zoom",
+      "zoom": 0.6000000238418579,
+      "quads": 884,
+      "transforms": 4,
+      "tail_cells": 64,
+      "time": 14.902847290039062,
+      "birth_hash": 0,
+      "camera": [
+        0.0,
+        0.0
+      ],
+      "reduced": false,
+      "reduced_motion": false
+    },
+    {
+      "name": "full_max_zoom",
+      "zoom": 1.600000023841858,
+      "quads": 884,
+      "transforms": 4,
+      "tail_cells": 64,
+      "time": 14.902847290039062,
+      "birth_hash": 0,
+      "camera": [
+        0.0,
+        0.0
+      ],
+      "reduced": false,
+      "reduced_motion": false
+    },
+    {
+      "name": "frozen_time0",
+      "zoom": 1.0,
+      "quads": 884,
+      "transforms": 4,
+      "tail_cells": 64,
+      "time": 0.0,
+      "birth_hash": 7,
+      "camera": [
+        0.0,
+        0.0
+      ],
+      "reduced": false,
+      "reduced_motion": true
+    },
+    {
+      "name": "frozen_time543",
+      "zoom": 1.0,
+      "quads": 884,
+      "transforms": 4,
+      "tail_cells": 64,
+      "time": 543.0,
+      "birth_hash": 7,
+      "camera": [
+        0.0,
+        0.0
+      ],
+      "reduced": false,
+      "reduced_motion": true
+    },
+    {
+      "name": "far_world_min_zoom",
+      "zoom": 0.6000000238418579,
+      "quads": 884,
+      "transforms": 4,
+      "tail_cells": 64,
+      "time": 14.902847290039062,
+      "birth_hash": 0,
+      "camera": [
+        999000.0,
+        -999000.0
+      ],
+      "reduced": false,
+      "reduced_motion": false
+    }
+  ],
+  "software_preview": "artifacts/shooting-star/native-contact-sheet.png",
+  "software_scope": "Actual CameraView/FrameBuilder packet corners, flat alpha blend and approximate bounded emission brightness; GPU soft radial coverage/linear blending not executed",
+  "raw_packets_untracked_path": "work/shooting-star-detail/final/native-packets.json",
+  "raw_packets_sha256": "c1c6e6f2eec5ea5de2c23aacb96fa62aab9f7821208e6d3e75a6a1ec2eb84941",
+  "raw_packets_bytes": 1686537,
+  "pending": [
+    "Root module registration and regions replacement/stream-margin/material-test updates",
+    "Normal dual-WASM/browser moving playback and subjective tail/readability",
+    "Physical phone/soak performance"
+  ],
+  "sha256": {
+    "artifacts/shooting-star/native-checks.log": "e1a541a3a16c53d61517996d1972e228a7cd28dc0a78a56c4fe514c0556ab5d9",
+    "artifacts/shooting-star/native-contact-sheet.png": "c808cae43a492ea9335495adfebe546f1a802bd25d3a1c5287956fca79f978f6",
+    "artifacts/shooting-star/native-proof.log": "87448f9afabdd2f738591d437c7c6d71a1e805c3e7df52b4ae80d3a270a0d5a1",
+    "artifacts/shooting-star/native-tests.log": "499fbc7f347d215be997c1dcec88af7d284e35a44c6c9657c13815f01f578715",
+    "artifacts/shooting-star/python-tests.log": "810e394afb463598cf3e4e8a3f8de9ac442d9a09fba69b993c37f5e0a6edda89",
+    "assets/pixels/shooting-star/atlas.json": "90c45f07f06e8609dde331470b14979e96f7d6ed98767e9c430eaaa67429f61d",
+    "assets/pixels/shooting-star/authored-preview.png": "ee0b22f8e1628a4a68d87161aa5a070beff2f5a128e52b06400a6600680d2f6f",
+    "assets/pixels/shooting-star/manifest.json": "46ac7c882c7df84c8bb16f12bcfc7e70da3103a8e61295c327c5e32a81724da4",
+    "assets/pixels/shooting-star/provenance.json": "6d9ff75aa0e26b628a75b46033dc206743ba5a15d8a62162fa8a96696f66187b",
+    "assets/pixels/shooting-star/source/coma.png": "7cdc3fcc1031fcfd3f438d9f116e8e06b1c63db822f62383c3610ab49331d469",
+    "assets/pixels/shooting-star/source/nucleus.png": "04bc3b128c881e7f0eb1f3f57430056a82a91a14fc4168c1fae62d9086cd8820",
+    "Cargo.lock": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574",
+    "crates/engine_core/src/camera.rs": "1ac883393d468b0501953e59dc6538e292b1a4aeba412bdbbc7af6a279382fe1",
+    "crates/engine_core/src/frame.rs": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+    "crates/engine_core/src/lib.rs": "42d731037c40748ca7949e31903b262f8f1c5a53805e5c2ca24caf7249f1b1aa",
+    "crates/engine_core/src/pixel_rig.rs": "e26f9c373e34b6ddf35edcb45236664fbf1eff62f44029e815f2407fabbcd442",
+    "crates/engine_core/src/pixels.rs": "2791ba6a228086a2cfce2308102a62fefda0ad46fef5d0b20bf447c199e5ed90",
+    "crates/engine_core/src/topology.rs": "ebdf873912e179df5280f3019a05d2f88713302c43fe6e99a171383a3dfeebc3",
+    "crates/engine_core/src/transform.rs": "25e8ca1995b845b36b558ef73fa40dc122fa579465e2a237c4de841652ab25bb",
+    "crates/game_core/src/regions.rs": "c545e2f8242a90fea2e9c0b2255831f3c9b96fbb3d36e2eb791109c182f57800",
+    "crates/game_core/src/shooting_star.rs": "395f79f8ff5cfddcef7007567cb34d450a4d689fe9fa751f0d94991dcdd7b4c2",
+    "docs/SHOOTING_STAR_ART.md": "c2c7f1354f072e22835585fc1d70b8eeab6d0f0b7573cd4a9b24de89e8346e51",
+    "scripts/asset-pack.py": "a83e4a0a031681d40157fafcf827078562b2288d38ef42e8ec4dd735843e4d2b",
+    "scripts/asset-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35",
+    "scripts/asset-shooting-star-native.ps1": "0f08706bf644d9fcf1fa03d777c045dc1190d9f3cf52ed2298aeb4ee92601845",
+    "scripts/asset-shooting-star-proof.rs": "6b6176a9c859ffa3a76890a18fa10402c2ba2accc8ea81928181f7e6ef3f0a50",
+    "scripts/asset-shooting-star-render.py": "306552ada8233da868e7ba48a45874917388799079aafde8df7d12d504ae9ae9",
+    "scripts/asset-shooting-star-tests.py": "d5a0687d305cca09a9c9ca4e3d121507cd0d62a176f9426889be8fb97d4d0ea8",
+    "scripts/asset-shooting-star.py": "0886442bbc5bf3d1bcf0766c7daa97b36c6dffb518ab5c285bd743f4e9450ec1"
+  }
+}

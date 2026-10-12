@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "source_commit": "1a6bf7c80b5f426880e79506d58ae18af22f482b",
+  "domain": "exact committed blobs and raw owned evidence; no line normalization",
+  "inputs": [
+    {
+      "path": "apps/game/src/meishi.ts",
+      "bytes": 8629,
+      "sha256": "30f97de61cc309a46a84fc5779b84ae0072353590bd9f9d77f609d695274c34a"
+    },
+    {
+      "path": "apps/game/src/meishi.css",
+      "bytes": 2934,
+      "sha256": "954d4fe132613542e4587973be2504d350ece92334cc0f3be0313352ed8743a3"
+    },
+    {
+      "path": "scripts/test/meishi.test.mjs",
+      "bytes": 11690,
+      "sha256": "f63393ca96ea92c60afdcd5b22be01012e4000b16cf35724b575f679bec93b82"
+    },
+    {
+      "path": "apps/game/src/kikai-portrait.ts",
+      "bytes": 1319,
+      "sha256": "a2c1d7f69623871a7db5a529e3600724d8478492411abffe848b338f5f823071"
+    },
+    {
+      "path": "apps/game/src/kikai.ts",
+      "bytes": 10634,
+      "sha256": "2e84e9d2166d1855bd23d18bb4c7eb106a9d5b75f7958f6c52cfd36f506bc098"
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "bytes": 8963,
+      "sha256": "0ce3bb27a56a34ef385db5c5a66f0e6a619573310874639a75e57708d701f807"
+    },
+    {
+      "path": "apps/game/src/loadout.ts",
+      "bytes": 16683,
+      "sha256": "6595eec15bbfd796404f8477860b21f35672fc83437df91583c32cde82d0c312"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "bytes": 18601,
+      "sha256": "42243d4735427de719369828a5204c9f35c3091ff0e6cd6cf999c5e256fc8277"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "bytes": 25557,
+      "sha256": "68785d0a5481ef60fed9315d2b5abe68af736ea1999873678eb5bf73ff08ebcc"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52387,
+      "sha256": "c3caa928f345345b0ddad757ecd152b1b29d7904c40579d0e4d09aa77a5c2d11"
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "bytes": 27493,
+      "sha256": "f967778a6061578c984a74cec9a7052d0ac6d90783e998bbfdd4273c378337c4"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 86663,
+      "sha256": "fc6bc5e5a4c0da198dc8383fd3f8bc467650452fdafd255c0d4367ea518fda4a"
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "bytes": 35916,
+      "sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1085,
+      "sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 291,
+      "sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db"
+    }
+  ],
+  "files": [
+    {
+      "path": "freeze.py",
+      "bytes": 2003,
+      "sha256": "9d10f92b4f1d716a6841b8a34252fa5cc7513e5f60403a44c3ac8f20ce5f19d8"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 4448,
+      "sha256": "0328dc904f25458f4dc2bd98cea399c0870f04be2d84860c2b07723acf7d3c88"
+    },
+    {
+      "path": "platform.json",
+      "bytes": 215,
+      "sha256": "54ec4caba1614fbf444e319042cc7b9e4bf8075e66c8f1595376f5691d0e6a16"
+    },
+    {
+      "path": "source/apps/game/src/campaign.ts",
+      "bytes": 8963,
+      "sha256": "0ce3bb27a56a34ef385db5c5a66f0e6a619573310874639a75e57708d701f807"
+    },
+    {
+      "path": "source/apps/game/src/kikai-portrait.ts",
+      "bytes": 1319,
+      "sha256": "a2c1d7f69623871a7db5a529e3600724d8478492411abffe848b338f5f823071"
+    },
+    {
+      "path": "source/apps/game/src/kikai.ts",
+      "bytes": 10634,
+      "sha256": "2e84e9d2166d1855bd23d18bb4c7eb106a9d5b75f7958f6c52cfd36f506bc098"
+    },
+    {
+      "path": "source/apps/game/src/loadout.ts",
+      "bytes": 16683,
+      "sha256": "6595eec15bbfd796404f8477860b21f35672fc83437df91583c32cde82d0c312"
+    },
+    {
+      "path": "source/apps/game/src/meishi.css",
+      "bytes": 2934,
+      "sha256": "954d4fe132613542e4587973be2504d350ece92334cc0f3be0313352ed8743a3"
+    },
+    {
+      "path": "source/apps/game/src/meishi.ts",
+      "bytes": 8629,
+      "sha256": "30f97de61cc309a46a84fc5779b84ae0072353590bd9f9d77f609d695274c34a"
+    },
+    {
+      "path": "source/apps/game/src/pixel-ui.ts",
+      "bytes": 18601,
+      "sha256": "42243d4735427de719369828a5204c9f35c3091ff0e6cd6cf999c5e256fc8277"
+    },
+    {
+      "path": "source/apps/game/src/style.css",
+      "bytes": 25557,
+      "sha256": "68785d0a5481ef60fed9315d2b5abe68af736ea1999873678eb5bf73ff08ebcc"
+    },
+    {
+      "path": "source/crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52387,
+      "sha256": "c3caa928f345345b0ddad757ecd152b1b29d7904c40579d0e4d09aa77a5c2d11"
+    },
+    {
+      "path": "source/crates/game_core/src/identity.rs",
+      "bytes": 27493,
+      "sha256": "f967778a6061578c984a74cec9a7052d0ac6d90783e998bbfdd4273c378337c4"
+    },
+    {
+      "path": "source/crates/game_web/src/kikai_art.rs",
+      "bytes": 35916,
+      "sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a"
+    },
+    {
+      "path": "source/crates/game_web/src/ui_scene.rs",
+      "bytes": 86663,
+      "sha256": "fc6bc5e5a4c0da198dc8383fd3f8bc467650452fdafd255c0d4367ea518fda4a"
+    },
+    {
+      "path": "source/package.json",
+      "bytes": 1085,
+      "sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b"
+    },
+    {
+      "path": "source/scripts/test/meishi.test.mjs",
+      "bytes": 11690,
+      "sha256": "f63393ca96ea92c60afdcd5b22be01012e4000b16cf35724b575f679bec93b82"
+    },
+    {
+      "path": "source/tsconfig.json",
+      "bytes": 291,
+      "sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db"
+    },
+    {
+      "path": "tests.log",
+      "bytes": 1239,
+      "sha256": "872381f026e54eef22064529c8499f9d379885642153d595300fb5dbc343846f"
+    },
+    {
+      "path": "typecheck.log",
+      "bytes": 52,
+      "sha256": "52ddba30851547f80094631eacb58c88f09a2c03f5366096441dea07007deeed"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 762,
+      "sha256": "d543d7add46568e8847f3e0e4f2c893f0c371d2fd69cab4552d49381c2d30307"
+    }
+  ]
+}

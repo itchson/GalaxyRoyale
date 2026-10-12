@@ -1,0 +1,112 @@
+{
+  "engine_commit": "e4098875c57aabf56b6a4974cb240206e1966664",
+  "shell_commit": "93ad9bb5a4791576b2455b8b675fd0bf06d2f15b",
+  "scope": "Read-only static/source-art review; own independent raw-cell validation and shell tests. Native/WASM logs are peer execution, not rerun here.",
+  "engine": {
+    "crates/game_web/src/kikai_art.rs": {
+      "working_sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a",
+      "git_sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a",
+      "bytes": 35916
+    },
+    "crates/game_web/src/kikai_profile_tests.rs": {
+      "working_sha256": "f820f279bb73b75781488ec6e487525387b866d0a187b401a506cdbc9e7de6e0",
+      "git_sha256": "f820f279bb73b75781488ec6e487525387b866d0a187b401a506cdbc9e7de6e0",
+      "bytes": 13142
+    },
+    "crates/game_web/src/lighting.rs": {
+      "working_sha256": "a126e38f40f8cd750f9a92483dc244d9fbcabfcd6685ac4e2a767227f3e9f5c6",
+      "git_sha256": "a126e38f40f8cd750f9a92483dc244d9fbcabfcd6685ac4e2a767227f3e9f5c6",
+      "bytes": 11278
+    },
+    "crates/game_web/src/present.wgsl": {
+      "working_sha256": "1358893da587da69815034ae430ccc12890f2b374f78cacb0754b4386f5a2a21",
+      "git_sha256": "767e72b385823cfb10bee5ba055812ae40fd32f20130ea32271aa7e85a212de5",
+      "bytes": 1678
+    },
+    "crates/game_web/src/renderer.rs": {
+      "working_sha256": "b005d9be722c94ee85826faa3bfc480c644b0b8a09c49dd0df1da2a3c9127359",
+      "git_sha256": "b005d9be722c94ee85826faa3bfc480c644b0b8a09c49dd0df1da2a3c9127359",
+      "bytes": 26563
+    },
+    "crates/game_web/src/ui_kikai_integration_tests.rs": {
+      "working_sha256": "ac211090d3ccc251846c70ab0260051c61e9d9f75eb3e23efeed0124226c7e91",
+      "git_sha256": "ac211090d3ccc251846c70ab0260051c61e9d9f75eb3e23efeed0124226c7e91",
+      "bytes": 31808
+    },
+    "crates/game_web/src/ui_scene.rs": {
+      "working_sha256": "7ddf1c124a82641ce3fc0e3a754d1c89625ac87672ba8297a1a0357bc70855fa",
+      "git_sha256": "7ddf1c124a82641ce3fc0e3a754d1c89625ac87672ba8297a1a0357bc70855fa",
+      "bytes": 82474
+    },
+    "crates/engine_core/src/frame.rs": {
+      "working_sha256": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+      "git_sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "bytes": 26160
+    },
+    "crates/engine_core/src/pixels.rs": {
+      "working_sha256": "2791ba6a228086a2cfce2308102a62fefda0ad46fef5d0b20bf447c199e5ed90",
+      "git_sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "bytes": 17598
+    }
+  },
+  "art": {
+    "assets/ui/kikai/detail/atlas.json": {
+      "sha256": "c0c0024297618b36076e091a802cb621c4dd3fd5c24a904f31b670a6226ca809",
+      "bytes": 3252935
+    },
+    "assets/ui/kikai/detail/authoring-overview.png": {
+      "sha256": "1d75d189ac9e83d125568e60e228ada9bbb595f320aefe8651a6171c42dcab24",
+      "bytes": 139817
+    },
+    "assets/ui/kikai/detail/authoring-contact-sheet.png": {
+      "sha256": "0e860bf54512bd5981756e916dade10dcbd32b890ad6514516da891db79f3de0",
+      "bytes": 233699
+    },
+    "assets/ui/kikai/detail/authoring-evidence.json": {
+      "sha256": "d5f035d460e46b2b3a64523cc72611e48fb8dd0bd77d247975eb5c4ab4157bc7",
+      "bytes": 1465
+    },
+    "assets/concepts/kikai/detail/doro-reference.png": {
+      "sha256": "bc2528830a21bee7d20548587cc3099580d94524c480ebde232a0a6056ebfb73",
+      "bytes": 1391268
+    },
+    "assets/concepts/kikai/detail/talo-reference.png": {
+      "sha256": "dd8c5db88da03861ecef13dce28bda1f04ddc77d5b2faaba24d5acd6c349938a",
+      "bytes": 1161749
+    },
+    "assets/concepts/kikai/detail/generation.json": {
+      "sha256": "e2d206e5a6d5cfafe4dae23d98368ba4e19141d7b9809d03e56aae678c9bf593",
+      "bytes": 4685
+    },
+    "scripts/asset-kikai-detail.py": {
+      "sha256": "ec252848d6f008ca45f007ec524b9e189c845c440f443d795f4de413d1d2735d",
+      "bytes": 20205
+    },
+    "scripts/asset-kikai-detail-tests.py": {
+      "sha256": "e6d25be31bf7eb5b792fe086724b6f0f23292f52bed30dc0e219955ebf46134e",
+      "bytes": 11832
+    },
+    "scripts/asset-pack.py": {
+      "sha256": "a83e4a0a031681d40157fafcf827078562b2288d38ef42e8ec4dd735843e4d2b",
+      "bytes": 29171
+    }
+  },
+  "peer_logs": {
+    "native-tests-final.log": {
+      "sha256": "8a15339dbf77215ad3c116d424fa7d9bdfaae9128f496aa6c7f944918847594a",
+      "bytes": 22269
+    },
+    "native-clippy-final.log": {
+      "sha256": "6abff196c9c037e879af51dbe9929e32251cd9e5590e6dd6004d9a9b75fbc549",
+      "bytes": 189
+    },
+    "webgpu-clippy-final.log": {
+      "sha256": "326152b565f4e7c6de8c87ba134d750afdf860760a5f4402dba2b8e819cf0556",
+      "bytes": 244
+    },
+    "webgl-clippy-final.log": {
+      "sha256": "ee082bfe5ee140bf8748d71ee1dd1f2c7719be95cda64b3542e3e444451443c4",
+      "bytes": 244
+    }
+  }
+}

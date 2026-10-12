@@ -1,9 +1,13 @@
 import "./dialogue.css";
+import { paintLicensePortrait, type PortraitIdentity } from "./kikai-portrait";
 
 export interface DialogueContent {
   speaker: string;
   text: string;
   portrait?: number;
+  portraitIdentity?: PortraitIdentity;
+  expression?: number;
+  speaking?: boolean;
   actionLabel?: string;
   onAction?: () => void | Promise<void>;
   onNext?: () => void;
@@ -58,6 +62,7 @@ export class DialoguePanel {
     this.speaker.id = "dialogue-title";
     this.text.id = "dialogue-text";
     this.text.setAttribute("aria-live", "polite");
+    this.text.tabIndex = 0;
     const actions = document.createElement("div");
     actions.className = "dialogue-actions";
     this.action.id = "dialogue-action";
@@ -73,7 +78,13 @@ export class DialoguePanel {
     this.replay.id = "dialogue-replay";
     this.replay.type = "button";
     this.replay.textContent = "REPLAY VOICE";
-    actions.append(this.previous, this.next, this.action, this.replay, this.closeButton);
+    actions.append(
+      this.previous,
+      this.next,
+      this.action,
+      this.replay,
+      this.closeButton,
+    );
     content.append(this.speaker, this.text, actions);
     card.append(this.portrait, content);
     this.screen.append(card);
@@ -94,6 +105,11 @@ export class DialoguePanel {
     return this.isOpen;
   }
 
+  /** Changes whenever displayed content is replaced or the panel is closed. */
+  get presentationToken(): number {
+    return this.revision;
+  }
+
   show(content: DialogueContent): void {
     if (this.disposed) return;
     this.revision++;
@@ -101,12 +117,31 @@ export class DialoguePanel {
     this.screen.removeAttribute("aria-busy");
     this.speaker.textContent = content.speaker.trim().slice(0, 64);
     this.text.textContent = content.text.trim().slice(0, 256);
+    this.text.scrollTop = 0;
     const portrait = content.portrait ?? 0;
-    this.portrait.dataset.portrait = String(
-      Number.isFinite(portrait)
-        ? Math.max(0, Math.min(7, Math.floor(portrait)))
-        : 0,
+    if (content.portraitIdentity) {
+      paintLicensePortrait(this.portrait, content.portraitIdentity);
+      this.portrait.dataset.portrait = "9";
+    } else {
+      for (const key of [
+        "pixelKind",
+        "pixelValue",
+        "portraitKind",
+        "portraitMain",
+        "portraitSub",
+      ])
+        delete this.portrait.dataset[key];
+      this.portrait.removeAttribute("aria-label");
+      this.portrait.dataset.portrait = String(
+        Number.isFinite(portrait)
+          ? Math.max(0, Math.min(8, Math.floor(portrait)))
+          : 0,
+      );
+    }
+    this.portrait.dataset.portraitExpression = String(
+      Math.max(0, Math.min(3, content.expression ?? 0)),
     );
+    this.portrait.dataset.portraitSpeaking = String(content.speaking === true);
     this.onAction = content.onAction;
     this.onNext = content.onNext;
     this.onPrevious = content.onPrevious;
@@ -131,7 +166,12 @@ export class DialoguePanel {
     }
     if (!this.isOpen || this.disposed) return;
     // Refreshes and actions cannot accidentally move focus back into flight.
-    (this.next.hidden ? this.action.hidden ? this.closeButton : this.action : this.next).focus({
+    (this.next.hidden
+      ? this.action.hidden
+        ? this.closeButton
+        : this.action
+      : this.next
+    ).focus({
       preventScroll: true,
     });
   }
@@ -146,6 +186,7 @@ export class DialoguePanel {
     this.onPrevious = undefined;
     this.onReplay = undefined;
     this.screen.hidden = true;
+    this.portrait.dataset.portraitSpeaking = "false";
     this.screen.removeAttribute("aria-busy");
     const previousFocus = this.previousFocus;
     this.previousFocus = null;
@@ -153,6 +194,10 @@ export class DialoguePanel {
     if (!this.isOpen && previousFocus?.isConnected)
       previousFocus.focus({ preventScroll: true });
   };
+
+  setSpeaking(value: boolean): void {
+    if (this.isOpen) this.portrait.dataset.portraitSpeaking = String(value);
+  }
 
   dispose(): void {
     if (this.disposed) return;
@@ -195,11 +240,18 @@ export class DialoguePanel {
       if (!event.isComposing) this.close();
     } else if (event.key === "Tab") {
       event.preventDefault();
-      const available = [this.previous, this.next, this.action, this.replay, this.closeButton]
-        .filter(button => !button.hidden && !button.disabled);
-      const index = available.indexOf(
-        document.activeElement as HTMLButtonElement,
-      );
+      const buttons = [
+        this.previous,
+        this.next,
+        this.action,
+        this.replay,
+        this.closeButton,
+      ].filter((button) => !button.hidden && !button.disabled);
+      const available: HTMLElement[] =
+        this.text.scrollHeight > this.text.clientHeight
+          ? [this.text, ...buttons]
+          : buttons;
+      const index = available.indexOf(document.activeElement as HTMLElement);
       const next =
         index < 0
           ? event.shiftKey

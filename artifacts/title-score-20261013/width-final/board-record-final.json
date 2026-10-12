@@ -1,0 +1,207 @@
+{
+  "recordedAt": "2026-10-12T18:05:15.451Z",
+  "revision": 1001,
+  "tasks": [
+    {
+      "id": "task-c359d033",
+      "title": "Integrate room menu, multiplayer HUD icon and native flow",
+      "description": "Reviewed short-code service/browser and native hub/HUD routes integrated into normal dual-renderer testing build. Actual current Join-default scene observed on both backends. Actual one-host WebGL2 copy/replace/lock/stop run displayed1/8 and restored local points. Two-client approval/new-code/disconnect/failure and full8/TURN remain pending; older RTC evidence is historical.",
+      "department": "Integration",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "task-6ddbc654",
+        "task-5fe5d40b",
+        "task-6697d51b"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Dedicated floating MULTIPLAYER hub and detailed pixel HUD icon open the same full-screen reactive room scene.",
+          "met": true
+        },
+        {
+          "text": "Reviewed source integrates with authoritative Rust host and boxed local worlds; appropriate combined checks and one latest preview.",
+          "met": true
+        },
+        {
+          "text": "Actual both-backend menu/layout and two-client approval/replacement/end/failure evidence recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact requested flow, API and validation contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T13:06:52.472Z",
+      "updatedAt": "2026-10-12T18:00:13.223Z"
+    },
+    {
+      "id": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "description": "Bounded one-local-caster/one-hub-beacon prototype integrated. Author native/Naga/CPU packet proof and independent canonical/raw pin/ray review accepted for renderer testing; frozen manifests and failed checker attempts preserved. Root observed both GPU initialization and a safe WebGPU home flight, not accepted shadow appearance/parity/recovery/performance. Remaining explicit GPU/zoom/light/receiver/holes gates are open.",
+      "department": "Engine lighting",
+      "owner": "/root/engine_fx",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [
+        "task-f9bf0095"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Source-backed design accounts for RAICHO/receiver height, native occupancy holes, layer/parent transforms and light directions.",
+          "met": true
+        },
+        {
+          "text": "Prototype real receiver-aware moving shadows with existing normal/emission shading and bounded costs; no collision or save changes.",
+          "met": true
+        },
+        {
+          "text": "Actual WebGPU/WebGL2 compare flying above hub and empty space; reduced-motion/zoom/light/receiver gaps checked with source/cost evidence.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest scene contract and confirmed deposit rule",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Frozen author/QA scope and exact curation",
+          "kind": "artifact",
+          "path": "artifacts/hub-shadows-20261013/README-REVIEW.md"
+        },
+        {
+          "label": "Independent source/CPU review",
+          "kind": "artifact",
+          "path": "artifacts/hub-shadows-20261013/independent-review/REVIEW.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T15:48:39.489Z",
+      "updatedAt": "2026-10-12T18:00:13.363Z"
+    },
+    {
+      "id": "task-a7eeab89",
+      "title": "Recreate title theme in shared dynamic synthesis transport",
+      "description": "Reviewed native synthesized title is integrated and normally rebuilt. Three instrument passes have actual source/clock/resource tests and seven-fixture native PCM captures. Latest stereo lead/pads/bass retain shared title169.275→corporate Haven120→chase166→release120 beat transport. The original MP3 is offline reference only. First user feedback requested instrument sound/mix; second still needed fuller instruments; third audition awaits feedback. Exact melody/form and final instrument acceptance remain open.",
+      "department": "Audio score",
+      "owner": "/root/audio_score",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Remove runtime title URL/MP3 decode; synthesize authored notes through existing music bus and voice budget.",
+          "met": true
+        },
+        {
+          "text": "Shared beat/harmony phase through title→corporate Haven120 BPM, chase166 BPM and release; bounded queue/lifecycle tests.",
+          "met": true
+        },
+        {
+          "text": "Actual native offline DSP output and title/Continue game flow verified.",
+          "met": true
+        },
+        {
+          "text": "Listening comparison and exact melody/form recreation accepted separately from draft synthesis.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        },
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T16:38:07.096Z",
+      "updatedAt": "2026-10-12T18:00:13.082Z"
+    },
+    {
+      "id": "task-5301e8a1",
+      "title": "Review synthesized title melody, mix and theme transitions against user song",
+      "description": "Root rendered three actual native title/transition drafts and presented their engine-generated audition exports. The third seven-fixture capture is finite/within unity with cleanup0, title stereo correlation.988069/downmix RMS loss.0261dB. Feedback is recorded; native measurements do not establish perceived fullness or exact transcription. Third audition remains pending.",
+      "department": "Audio score",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Render actual engine full title loop and title/Haven/chase/release with source pins and PCM metrics.",
+          "met": true
+        },
+        {
+          "text": "Record direct listening feedback and corrections; never equate spectral estimates with song fidelity.",
+          "met": true
+        },
+        {
+          "text": "Preserve source track as offline reference only; record final accepted notes/arrangement provenance.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        },
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T16:38:07.128Z",
+      "updatedAt": "2026-10-12T18:00:13.145Z"
+    }
+  ],
+  "note": "Completed recorded session/worker scopes do not complete fidelity, newRTC/8/TURN, or physical/GPU validation gates."
+}

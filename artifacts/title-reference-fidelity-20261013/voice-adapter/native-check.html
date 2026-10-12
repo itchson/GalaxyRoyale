@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Source harmonic native check</title>
+<body><h1>Source harmonic parameter check</h1><p>Offline WebAudio; no song resemblance or game-play claim.</p><button id="run">Run native checks</button><pre id="report"></pre>
+<script type="module">
+import { periodicParameters } from './periodic-patch.js';
+document.getElementById('run').onclick = async () => {
+  const button = document.getElementById('run'); button.disabled = true;
+  const cases=[];
+  try {
+    for (const frequencyHz of [55, 440, 1760]) {
+      const patch = {frequencyHz,phaseOrigin:'event-first-sample-zero',partials:[
+        {harmonic:1,real:[.17,-.08],imaginary:[-.12,.23]},
+        {harmonic:4,real:[.04,.01],imaginary:[.03,-.06]},
+      ]};
+      const context = new OfflineAudioContext(2,48000,48000);
+      const parameters = periodicParameters(patch,context.sampleRate);
+      const merger = context.createChannelMerger(2); merger.connect(context.destination);
+      for (let channel=0;channel<2;channel++) {
+        const wave = parameters.channels[channel], oscillator = context.createOscillator();
+        oscillator.setPeriodicWave(context.createPeriodicWave(wave.real,wave.imaginary,{disableNormalization:parameters.disableNormalization}));
+        oscillator.frequency.value=frequencyHz; oscillator.connect(merger,0,channel); oscillator.start(0); oscillator.stop(1);
+      }
+      const buffer = await context.startRendering();
+      for (let channel=0;channel<2;channel++) {
+        let square=0,maxError=0,peak=0,nonfinite=0;
+        const pcm=buffer.getChannelData(channel);
+        for (let sample=0;sample<pcm.length;sample++) {
+          const phase=2*Math.PI*frequencyHz*sample/buffer.sampleRate;
+          const expected=patch.partials.reduce((sum,p)=>sum+p.real[channel]*Math.cos(p.harmonic*phase)-p.imaginary[channel]*Math.sin(p.harmonic*phase),0);
+          const error=Math.abs(pcm[sample]-expected);
+          if(!Number.isFinite(pcm[sample]))nonfinite++;
+          square+=error*error;maxError=Math.max(maxError,error);peak=Math.max(peak,Math.abs(pcm[sample]));
+        }
+        const errorRms=Math.sqrt(square/pcm.length);
+        cases.push({frequencyHz,channel,samples:pcm.length,errorRms,maxError,peak,nonfinite,pass:nonfinite===0&&errorRms<.0002&&maxError<.001});
+      }
+    }
+    const report={scope:'Actual OfflineAudioContext generated known harmonics versus analytic local-phase basis. No source song, game simulation, listening or fidelity acceptance.',observedAt:new Date().toISOString(),userAgent:navigator.userAgent,sampleRate:48000,cases,pass:cases.length===6&&cases.every(c=>c.pass)};
+    document.getElementById('report').textContent=JSON.stringify(report,null,2);
+    const saved=await fetch('/report',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(report)});
+    if(!saved.ok)throw new Error('Report preservation failed');
+  } catch(error) {document.getElementById('report').textContent=String(error.stack||error);}
+};
+</script></body></html>

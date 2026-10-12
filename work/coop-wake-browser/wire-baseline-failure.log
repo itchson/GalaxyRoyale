@@ -1,0 +1,97 @@
+(node:44776) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ all exact modern native headers and diagnostic pages cross their distinct strict variants (0.9052ms)
+✖ Wake metadata distinguishes absence from malformed presence (1.6646ms)
+✖ Wake pages reject mixed shapes, bad raw/post-f32 numbers and chronology (2.1228ms)
+✖ actual raw transport fixtures decode and both encoded wrapper budgets remain bounded (0.9812ms)
+✖ raw32KiB page span is enforced independently of normalized value/frame bytes (0.3735ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 104.033
+
+✖ failing tests:
+
+test at scripts\test\coop-wake-wire.test.mjs:14:1
+✖ all exact modern native headers and diagnostic pages cross their distinct strict variants (0.9052ms)
+  Error [TransportError]: invalid_object
+      at fail (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:66:9)
+      at record (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:83:5)
+      at snapshot (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:454:13)
+      at publication (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:294:3)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-wake-wire.test.mjs:16:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    code: 'invalid_object'
+  }
+
+test at scripts\test\coop-wake-wire.test.mjs:26:1
+✖ Wake metadata distinguishes absence from malformed presence (1.6646ms)
+  Error [TransportError]: invalid_object
+      at fail (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:66:9)
+      at record (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:83:5)
+      at snapshot (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:454:13)
+      at publication (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:294:3)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-wake-wire.test.mjs:33:37)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12) {
+    code: 'invalid_object'
+  }
+
+test at scripts\test\coop-wake-wire.test.mjs:36:1
+✖ Wake pages reject mixed shapes, bad raw/post-f32 numbers and chronology (2.1228ms)
+  Error [TransportError]: invalid_page
+      at fail (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:66:9)
+      at page (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:339:5)
+      at validatePayload (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:278:31)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-wake-wire.test.mjs:59:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    code: 'invalid_page'
+  }
+
+test at scripts\test\coop-wake-wire.test.mjs:62:1
+✖ actual raw transport fixtures decode and both encoded wrapper budgets remain bounded (0.9812ms)
+  Error [TransportError]: invalid_object
+      at fail (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:66:9)
+      at record (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:83:5)
+      at snapshot (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:454:13)
+      at publication (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:294:3)
+      at validatePayload (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:264:36)
+      at validateFrame (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:665:3)
+      at decode (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:680:3)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-wake-wire.test.mjs:64:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25) {
+    code: 'invalid_object'
+  }
+
+test at scripts\test\coop-wake-wire.test.mjs:76:1
+✖ raw32KiB page span is enforced independently of normalized value/frame bytes (0.3735ms)
+  Error [TransportError]: invalid_page
+      at fail (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:66:9)
+      at page (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:339:5)
+      at validatePayload (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:278:31)
+      at validateFrame (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:665:3)
+      at decode (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\apps\game\src\coop\wire.ts:680:3)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-wake-wire.test.mjs:83:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19) {
+    code: 'invalid_page'
+  }

@@ -30,6 +30,11 @@ class Param {
     assert(Number.isFinite(constant) && constant > 0);
     return this.record("target", v, t, constant);
   }
+  cancelScheduledValues(t) {
+    assert(Number.isFinite(t) && t >= 0);
+    this.events.push({ kind: "cancel", time: t });
+    return this;
+  }
 }
 class Node {
   connections = new Set();
@@ -117,6 +122,11 @@ class Context {
   createWaveShaper() {
     return new Node(this, "ceiling");
   }
+  createStereoPanner() {
+    const n = new Node(this, "panner");
+    n.pan = new Param();
+    return n;
+  }
   createBuffer(channels, length, sampleRate) {
     assert.equal(channels, 1);
     assert.equal(sampleRate, this.sampleRate);
@@ -187,6 +197,89 @@ async function fixture() {
   await engine.unlock();
   return { engine, context: engine.context, timers };
 }
+
+// Evaluate recorded set/linear/exponential gain automation, not audio samples.
+function gainAt(param, time) {
+  let events = [];
+  for (const event of param.events) {
+    if (event.kind === "cancel")
+      events = events.filter((e) => e.time < event.time);
+    else events.push(event);
+  }
+  events = events
+    .map((event, order) => ({ ...event, order }))
+    .sort((a, b) => a.time - b.time || a.order - b.order);
+  let previous = events[0];
+  for (const event of events.slice(1)) {
+    if (time < event.time) {
+      const fraction = Math.min(
+        1,
+        Math.max(0, (time - previous.time) / (event.time - previous.time)),
+      );
+      if (event.kind === "linear")
+        return previous.value + (event.value - previous.value) * fraction;
+      if (event.kind === "exponential")
+        return previous.value * (event.value / previous.value) ** fraction;
+      return previous.value;
+    }
+    previous = event;
+  }
+  return previous.value;
+}
+function sourceEnvelope(source) {
+  let node = [...source.connections][0];
+  while (node.kind !== "gain") node = [...node.connections][0];
+  return node.gain;
+}
+async function titleFixture(stereo = true) {
+  const timers = browser(),
+    engine = new AudioEngine();
+  if (!stereo)
+    window.AudioContext = class extends Context {
+      constructor(...args) {
+        super(...args);
+        this.createStereoPanner = undefined;
+      }
+    };
+  engine.setTitleScreen(true);
+  engine.setLevels(0.75, 0.4, 0.75);
+  await engine.unlock();
+  return { engine, context: engine.context, timers };
+}
+
+test("authored title shares music controls/context and silences gameplay effects", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.setLevels(0.6, 0.5, 0.7);
+  engine.play({ kind: "shot", x: 0, y: 0, intensity: 1 });
+  assert([...engine.voices].some((v) => v.lane === "sfx"));
+  engine.setTitleScreen(true);
+  assert.equal(engine.music.gain.value, 0.5);
+  assert.equal(engine.musicWet.gain.value, 0.12);
+  assert.equal(engine.master.gain.value, 0.6);
+  assert.equal([...engine.voices].filter((v) => v.lane === "sfx").length, 0);
+  const count = context.sources.length;
+  context.advance(0.5);
+  for (const tick of timers.values()) tick();
+  assert(
+    context.sources.length > count,
+    "native title notes use the existing scheduler",
+  );
+  assert([...engine.voices].some((v) => v.cue === "music-title"));
+  const sourceCount = context.sources.length;
+  engine.play({ kind: "shot", x: 0, y: 0, intensity: 1 });
+  assert.equal(
+    context.sources.length,
+    sourceCount,
+    "title has no gameplay effects",
+  );
+  engine.setTitleScreen(false);
+  assert.equal(engine.music.gain.value, 0.5);
+  assert.equal(engine.musicWet.gain.value, 0.12);
+  assert.equal(engine.context, context, "no second AudioContext");
+  engine.suspend();
+  assert.equal(timers.size, 0);
+  engine.dispose();
+});
 const cue = (kind, intensity = 1) => ({ kind, x: 10, y: -20, intensity });
 const sfx = (engine) => [...engine.voices].filter((v) => v.lane === "sfx");
 function play(engine, kind, intensity = 1) {
@@ -723,7 +816,7 @@ test("a late resume state event preserves only the bounded death tail and obeys 
   engine.dispose();
 });
 
-test("thrust uses a quiet warm sine/triangle bed with one shared lowpass and duck stage", async () => {
+test("thrust uses a calm sine fifth with one shared lowpass and duck stage", async () => {
   const { engine, context, timers } = await fixture();
   engine.update(dynamic({ throttle: 1, speed: 1, engines: 2 }));
   for (let i = 0; i < 80; i++) stepAudio(context, timers);
@@ -731,26 +824,35 @@ test("thrust uses a quiet warm sine/triangle bed with one shared lowpass and duc
   assert(voice && !voice.released);
   assert.deepEqual(
     voice.sources.slice(0, 2).map((s) => s.type),
-    ["sine", "triangle"],
+    ["sine", "sine"],
   );
   const gains = voice.sources.map((s) => [...s.connections][0]);
   assert.deepEqual(
     gains.map((n) => n.gain.value),
-    [0.055, 0.025, 0.02],
+    [0.045, 0.014, 0.008],
   );
   assert(gains.every((n) => [...n.connections][0] === engine.engineFilter));
   assert.equal(engine.engineFilter.type, "lowpass");
-  assert.equal(engine.engineFilter.Q.value, 0.55);
-  assert.equal(engine.engineFilter.frequency.value, 860);
+  assert.equal(engine.engineFilter.Q.value, 0.5);
+  assert.equal(engine.engineFilter.frequency.value, 440);
   assert.deepEqual(
     [...engine.engineFilter.connections],
     [engine.engineDuckGain],
   );
   assert.deepEqual([...engine.engineDuckGain.connections], [voice.gain]);
   assert.deepEqual([...voice.gain.connections], [engine.sfx]);
-  assert(voice.gain.gain.value > 0.319 && voice.gain.gain.value <= 0.32);
-  assert.equal(voice.sources[0].frequency.value, 90);
-  assert.equal(voice.sources[1].frequency.value, 90 * 1.985);
+  assert(voice.gain.gain.value >= 0.225 && voice.gain.gain.value <= 0.24);
+  assert(
+    Math.abs(
+      voice.sources[0].frequency.value - 440 * 2 ** ((47 - 69) / 12) * 1.04,
+    ) < 1e-9,
+  );
+  assert(
+    Math.abs(
+      voice.sources[1].frequency.value - 440 * 2 ** ((54 - 69) / 12) * 1.04,
+    ) < 1e-9,
+  );
+  assert.equal(voice.sources[2].loop, true);
   assert(voice.sources.every((s) => s.starts.length === 1));
   engine.dispose();
 });
@@ -764,10 +866,10 @@ test("throttle and speed retarget smooth continuous parameters without restartin
   stepAudio(context, timers);
   assert.equal(engine.engineVoice, voice);
   assert.equal(voice.gain.gain.events.at(-1).kind, "target");
-  assert.equal(voice.gain.gain.events.at(-1).extra, 0.09);
+  assert.equal(voice.gain.gain.events.at(-1).extra, 0.18);
   for (const source of engine.engineOscillators) {
     assert.equal(source.frequency.events.at(-1).kind, "target");
-    assert.equal(source.frequency.events.at(-1).extra, 0.14);
+    assert.equal(source.frequency.events.at(-1).extra, 0.24);
     assert.equal(source.starts.length, 1);
   }
   assert.equal(engine.engineFilter.frequency.events.at(-1).extra, 0.18);
@@ -878,9 +980,11 @@ test("real gain envelopes leave a quieter engine bed and finite bounded stacked 
   engine.update(dynamic({ throttle: 1, speed: 1, engines: 2 }));
   for (let i = 0; i < 80; i++) stepAudio(context, timers);
   const engineEnvelope = envelopeSum(engine.engineVoice);
-  const previousEngineEnvelope = 0.42 * (0.08 + 0.055 + 0.045 * 0.7);
-  assert(engineEnvelope <= 0.030080001);
-  assert(engineEnvelope / previousEngineEnvelope < 0.431);
+  const historicalEngineEnvelope = 0.42 * (0.08 + 0.055 + 0.045 * 0.7);
+  const priorWarmEnvelope = 0.32 * (0.055 + 0.025 + 0.02 * 0.7);
+  assert(engineEnvelope <= 0.015504001);
+  assert(engineEnvelope / historicalEngineEnvelope < 0.223);
+  assert(engineEnvelope / priorWarmEnvelope < 0.516);
   let maximumCue = { kind: "", envelope: 0 };
   for (const kind of [
     "mote-charge",
@@ -931,8 +1035,12 @@ test("real gain envelopes leave a quieter engine bed and finite bounded stacked 
   t.diagnostic(
     JSON.stringify({
       engineEnvelope,
-      previousEngineEnvelope,
-      scalarChangeDb: 20 * Math.log10(engineEnvelope / previousEngineEnvelope),
+      historicalEngineEnvelope,
+      priorWarmEnvelope,
+      historicalScalarChangeDb:
+        20 * Math.log10(engineEnvelope / historicalEngineEnvelope),
+      priorWarmScalarChangeDb:
+        20 * Math.log10(engineEnvelope / priorWarmEnvelope),
       maximumCue,
       stackedEffects,
       defaultBusScalar: stackedEffects * 0.75 * 0.75,
@@ -966,6 +1074,7 @@ test("combined adaptive score, alarm, propulsion and real cues retain finite bus
         hull: 0.08,
         combat: 1,
         hostiles: 12,
+        boss: true,
         throttle: 1,
         speed: 1,
         engines: 2,
@@ -1056,4 +1165,752 @@ test("all real buses reach one final bounded soft ceiling after compression", as
   engine.dispose();
   assert.equal(ceiling.disconnects, 1);
   assert.equal(ceiling.connections.size, 0);
+});
+
+test("calm thrust pitch stays within a tiny musical bend while breathing reuses all sources", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ throttle: 1, speed: 1, engines: 2 }));
+  for (let i = 0; i < 80; i++) stepAudio(context, timers);
+  const voice = engine.engineVoice;
+  const sources = [...voice.sources];
+  const firstNote = 440 * 2 ** ((47 - 69) / 12),
+    fifth = 440 * 2 ** ((54 - 69) / 12);
+  let minGain = 1,
+    maxGain = 0;
+  for (let i = 0; i < 200; i++) {
+    stepAudio(context, timers);
+    const gain = voice.gain.gain.value;
+    minGain = Math.min(minGain, gain);
+    maxGain = Math.max(maxGain, gain);
+    assert(gain >= 0.2255 && gain <= 0.24);
+    assert.equal(engine.engineVoice, voice);
+    assert.deepEqual(voice.sources, sources);
+  }
+  assert(maxGain - minGain > 0.014);
+  for (const throttle of [0, 0.25, 0.5, 0.75, 1])
+    for (const speed of [0, 0.25, 0.5, 0.75, 1]) {
+      engine.update(dynamic({ throttle, speed, engines: 2 }));
+      stepAudio(context, timers);
+      const frequencies = engine.engineOscillators.map(
+        (s) => s.frequency.value,
+      );
+      const bend = 1 + speed * 0.025 + throttle * 0.015;
+      assert(Math.abs(frequencies[0] - firstNote * bend) < 1e-9);
+      assert(Math.abs(frequencies[1] - fifth * bend) < 1e-9);
+      assert(1200 * Math.log2(frequencies[0] / firstNote) < 70);
+      assert.equal(voice.sources.length, 3);
+      assert(voice.sources.every((s) => s.starts.length === 1));
+      assert.equal(engine.diagnostics().voices.continuous, 1);
+    }
+  engine.suspend();
+  assert(voice.released);
+  assert(voice.nodes.every((n) => n.disconnects === 1));
+  await engine.resume();
+  stepAudio(context, timers);
+  assert.equal(engine.diagnostics().voices.continuous, 1);
+  assert.notEqual(engine.engineVoice, voice);
+  engine.dispose();
+});
+
+test("corporate home and quiet Iron exploration produce actual softer score nodes", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.setLevels(0.75, 0.4, 0.75);
+  for (const [corporation, index] of [
+    ["pan", 15],
+    ["renko", 16],
+    ["hugo", 17],
+  ]) {
+    engine.update(dynamic({ area: "haven", corporation }));
+    for (let i = 0; i < 220; i++) stepAudio(context, timers);
+    assert.equal(engine.diagnostics().themes[0].index, index);
+    const existing = new Set(engine.voices);
+    engine.scoreStep(context.currentTime, 0, 60 / 112 / 4);
+    const actual = [...engine.voices].filter((v) => !existing.has(v));
+    assert(actual.some((v) => v.theme === index));
+    assert(actual.every((v) => v.cue !== "music-combat"));
+    assert(
+      actual
+        .flatMap((v) => v.sources)
+        .every((s) => s.type === "sine" || s.type === "triangle"),
+    );
+    assert.equal(engine.diagnostics().corporation, corporation);
+  }
+  engine.update(dynamic({ area: "reach", biome: 3 }));
+  for (let i = 0; i < 220; i++) stepAudio(context, timers);
+  const before = new Set(engine.voices);
+  engine.scoreStep(context.currentTime, 0, 60 / 112 / 4);
+  const quiet = [...engine.voices].filter((v) => !before.has(v));
+  assert(quiet.some((v) => v.theme === 3));
+  assert(quiet.flatMap((v) => v.sources).every((s) => s.type !== "square"));
+  assert.equal(engine.mix.boss, 0);
+  engine.dispose();
+});
+
+test("one shared filtered power-chord voice follows aggro and adds only the actual boss counter-note", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.setLevels(0.75, 0.4, 0.75);
+  const length = 60 / 112 / 4;
+  engine.update(dynamic({ combat: 0.8, hostiles: 4 }));
+  for (let i = 0; i < 120; i++) stepAudio(context, timers);
+  const before = new Set(engine.voices);
+  engine.scoreStep(context.currentTime, 0, length);
+  const combat = [...engine.voices].filter(
+    (v) => !before.has(v) && v.cue === "music-combat",
+  );
+  assert.equal(combat.length, 1);
+  assert.equal(combat[0].sources.length, 2);
+  assert(combat[0].sources.every((s) => s.type === "triangle"));
+  const filters = combat[0].nodes.filter((n) => n.kind === "filter");
+  assert.equal(filters.length, 2);
+  assert(
+    filters.every(
+      (n) =>
+        n.type === "lowpass" && n.Q.value === 0.5 && n.frequency.value === 1000,
+    ),
+  );
+  const curves = combat[0].nodes.filter((n) => n.kind === "ceiling");
+  assert.equal(curves.length, 2);
+  assert(
+    curves.every((n) => n.oversample === "none" && n.curve.length === 257),
+  );
+  assert(
+    curves.every((n) =>
+      [...n.curve].every((v) => Number.isFinite(v) && Math.abs(v) <= 1),
+    ),
+  );
+  assert.deepEqual([...combat[0].gain.connections], [engine.music]);
+  assert.equal(engine.sfx.gain.value, 0.75);
+  assert.equal(engine.music.gain.value, 0.4);
+  engine.update(dynamic({ combat: 0.8, hostiles: 1, boss: true }));
+  for (let i = 0; i < 100; i++) stepAudio(context, timers);
+  assert(engine.diagnostics().bossLayer > 0.99);
+  const previous = new Set(engine.voices);
+  engine.scoreStep(context.currentTime, 4, length);
+  const boss = [...engine.voices].filter(
+    (v) => !previous.has(v) && v.cue === "music-combat",
+  );
+  assert.equal(boss.length, 1);
+  assert.equal(boss[0].sources.length, 3);
+  assert(
+    boss[0].nodes
+      .filter((n) => n.kind === "filter")
+      .every((n) => n.frequency.value > 1600),
+  );
+  for (let i = 0; i < 1000; i++) {
+    if (i % 40 === 0)
+      engine.update(
+        dynamic({
+          area: i % 80 ? "reach" : "arena",
+          champion: i % 8,
+          combat: 0.8,
+          hostiles: 1,
+          boss: true,
+          corporation: "pan",
+          throttle: 1,
+          engines: 2,
+          hull: 0.1,
+        }),
+      );
+    stepAudio(context, timers);
+    assert(
+      engine.diagnostics().voices.music <= 32 &&
+        engine.diagnostics().voices.sfx <= 16,
+    );
+    assert(engine.diagnostics().themes.length <= 2);
+  }
+  const nodes = [...engine.voices].flatMap((v) => v.nodes);
+  engine.suspend();
+  assert.equal(engine.mix.boss, 0);
+  assert.equal(engine.voices.size, 0);
+  assert(nodes.every((n) => n.disconnects === 1));
+  engine.update(dynamic({ area: "haven", boss: true, combat: 1, hostiles: 1 }));
+  await engine.resume();
+  for (let i = 0; i < 100; i++) stepAudio(context, timers);
+  assert.equal(engine.mix.boss, 0);
+  assert.equal(engine.mix.combat, 0);
+  assert(![...engine.voices].some((v) => v.cue === "music-combat"));
+  engine.dispose();
+});
+
+test("Continue at different phrase positions preserves beat and shares the selected corporate arrangement", async (t) => {
+  for (const [corporation, index, position] of [
+    ["pan", 15, 0.3],
+    ["renko", 16, 0.925],
+    ["hugo", 17, 6.8],
+  ]) {
+    const timers = browser(),
+      engine = new AudioEngine();
+    engine.setTitleScreen(true);
+    engine.setLevels(0.75, 0.4, 0.75);
+    await engine.unlock();
+    const context = engine.context,
+      clock = engine.clock;
+    for (let elapsed = 0; elapsed < position; elapsed += 0.025)
+      stepAudio(context, timers);
+    const beat = engine.diagnostics().score.beat;
+    const future = [...engine.voices].filter(
+      (v) => v.lane === "music" && v.start > context.currentTime,
+    );
+    engine.update({ ...QUIET_STATE, corporation });
+    engine.setTitleScreen(false);
+    const arrival = engine.diagnostics();
+    assert(
+      Math.abs(arrival.score.beat - beat) < 1e-8,
+      "Continue retains the heard phrase phase",
+    );
+    assert.equal(engine.clock, clock);
+    assert.equal(arrival.score.targetBpm, 120);
+    assert.equal(arrival.score.rampEndBeat - arrival.score.rampStartBeat, 8);
+    assert(
+      future.every((v) => v.released),
+      "queued title notes are canceled before replacement",
+    );
+    for (let i = 0; i < 180; i++) {
+      stepAudio(context, timers);
+      const d = engine.diagnostics();
+      assert(
+        d.voices.music <= 32 && d.voices.sfx <= 16 && d.score.futureVoices <= 8,
+      );
+      assert(
+        [...engine.voices]
+          .filter((v) => v.lane === "music")
+          .every((v) => v.gain.connections.has(engine.music)),
+      );
+    }
+    const settled = engine.diagnostics();
+    assert.equal(settled.themes[0].index, index);
+    assert(Math.abs(settled.score.bpm - 120) < 1e-8);
+    assert(settled.title.blend < 0.001);
+    assert.equal(timers.size, 1, "title/hub share one scheduler");
+    t.diagnostic(
+      JSON.stringify({
+        corporation,
+        atSeconds: position,
+        beat,
+        settledBpm: settled.score.bpm,
+        scope: "recorded WebAudio calls; no DSP/listening",
+      }),
+    );
+    engine.dispose();
+  }
+});
+
+test("real combat intent retimes queued notes; release hold and re-chase never restart the clock", async () => {
+  const { engine, context, timers } = await fixture();
+  for (let i = 0; i < 16; i++) stepAudio(context, timers);
+  const clock = engine.clock,
+    beat = engine.diagnostics().score.beat;
+  const oldFuture = [...engine.voices].filter(
+    (v) => v.lane === "music" && v.start > context.currentTime,
+  );
+  engine.update(dynamic({ combat: 0.8, hostiles: 3 }));
+  const chase = engine.diagnostics().score;
+  assert.equal(engine.clock, clock);
+  assert(Math.abs(chase.beat - beat) < 1e-8);
+  assert.equal(chase.targetBpm, 166);
+  assert.equal(chase.rampEndBeat - chase.rampStartBeat, 4);
+  const boundary = clock.timeAtBeat(chase.rampStartBeat);
+  const canceled = oldFuture.filter((v) => v.start >= boundary - 1e-8);
+  assert(
+    canceled.length > 0,
+    "fixture contains notes beyond the changed boundary",
+  );
+  assert(
+    canceled.every(
+      (v) =>
+        v.released &&
+        v.sources.every((s) => s.connections.size === 0 && s.onended === null),
+    ),
+  );
+  const audiblePads = [...engine.voices].filter(
+    (v) => v.harmonicEndBeat !== null && v.start < context.currentTime,
+  );
+  assert(audiblePads.length > 0);
+  assert(
+    audiblePads.every((v) =>
+      v.sources.every(
+        (s) =>
+          Math.abs(s.stopAt - (clock.timeAtBeat(v.harmonicEndBeat) + 0.025)) <
+          1e-8,
+      ),
+    ),
+    "audible chord tails stop at the retimed harmonic boundary",
+  );
+  for (let i = 0; i < 160; i++) stepAudio(context, timers);
+  assert(Math.abs(engine.diagnostics().score.bpm - 166) < 1e-8);
+  engine.update(dynamic());
+  const release = engine.diagnostics().score;
+  assert.equal(release.targetBpm, 120);
+  assert.equal(release.rampEndBeat - release.rampStartBeat, 8);
+  assert(
+    Math.abs(release.rampStartBeat - (Math.ceil(release.beat - 1e-9) + 2)) <
+      1e-8,
+  );
+  for (let i = 0; i < 6; i++) stepAudio(context, timers);
+  engine.update(dynamic({ combat: 0.8, hostiles: 1 }));
+  assert.equal(engine.diagnostics().score.targetBpm, 166);
+  for (let i = 0; i < 100; i++) stepAudio(context, timers);
+  assert(
+    Math.abs(engine.diagnostics().score.bpm - 166) < 1e-8,
+    "pending release cannot slow re-chase",
+  );
+  assert.equal(engine.clock, clock);
+  assert.equal(timers.size, 1);
+  engine.dispose();
+});
+
+test("scheduler stalls skip missed notes and bound only the next lookahead queue", async () => {
+  for (const title of [false, true]) {
+    for (const delay of [0.4, 20]) {
+      const { engine, context, timers } = await fixture();
+      if (title) engine.setTitleScreen(true);
+      const clock = engine.clock;
+      context.advance(delay);
+      const before = context.sources.length;
+      for (const tick of timers.values()) tick();
+      const fresh = context.sources.slice(before);
+      assert(fresh.length > 0);
+      assert(
+        fresh.every((source) => source.starts[0] >= context.currentTime),
+        "no burst of overdue note debt",
+      );
+      assert(
+        fresh.every((source) => source.starts[0] < context.currentTime + 0.18),
+      );
+      const d = engine.diagnostics();
+      assert(
+        d.score.nextStep <=
+          Math.ceil(clock.beatAtTime(context.currentTime + 0.18) * 4),
+      );
+      assert(d.score.futureVoices <= 8 && d.voices.music <= 32);
+      engine.dispose();
+    }
+  }
+});
+
+test("native title mute, interruption and late resume retain one clock and no stale scheduled notes", async () => {
+  const count = Context.created.length,
+    timers = browser(),
+    engine = new AudioEngine();
+  engine.setTitleScreen(true);
+  await engine.unlock();
+  const context = engine.context,
+    clock = engine.clock;
+  for (let i = 0; i < 60; i++) stepAudio(context, timers);
+  engine.setLevels(0, 0, 0);
+  assert.equal(engine.master.gain.value, 0);
+  assert.equal(engine.music.gain.value, 0);
+  const beat = engine.diagnostics().score.beat,
+    bpm = engine.diagnostics().score.bpm;
+  const scheduled = [...engine.voices];
+  engine.suspend();
+  assert.equal(engine.voices.size, 0);
+  assert.equal(timers.size, 0);
+  assert(
+    scheduled.every(
+      (v) => v.released && v.nodes.every((n) => n.connections.size === 0),
+    ),
+  );
+  await engine.resume();
+  assert.equal(engine.clock, clock);
+  assert.equal(Context.created.length, count + 1);
+  assert(Math.abs(engine.diagnostics().score.beat - beat) < 1e-8);
+  assert(Math.abs(engine.diagnostics().score.bpm - bpm) < 1e-8);
+  assert.equal(engine.music.gain.value, 0);
+  assert.equal(timers.size, 1);
+  engine.setLevels(0.75, 0.4, 0.75);
+  stepAudio(context, timers, 0.1);
+  assert([...engine.voices].some((v) => v.cue === "music-title"));
+  engine.dispose();
+  assert.equal(engine.voices.size, 0);
+  assert.equal(engine.clock, null);
+  assert.equal(timers.size, 0);
+});
+
+test("rapid title, chase, release and area changes keep music/effects budgets and finite gain events", async (t) => {
+  const { engine, context, timers } = await fixture();
+  let maxMusic = 0,
+    maxFuture = 0,
+    maxMusicSources = 0,
+    maxMusicNodes = 0;
+  for (let i = 0; i < 1200; i++) {
+    if (i % 7 === 0) engine.setTitleScreen(i % 49 < 14);
+    if (i % 5 === 0)
+      engine.update(
+        dynamic({
+          area: i % 31 === 0 ? "haven" : "reach",
+          biome: i % 6,
+          corporation: ["pan", "renko", "hugo"][i % 3],
+          combat: i % 25 < 15 ? 0.8 : 0,
+          hostiles: i % 25 < 15 ? 3 : 0,
+          boss: i % 60 < 10,
+          engines: 2,
+          throttle: 0.7,
+          hull: 0.1,
+        }),
+      );
+    if (i % 11 === 0) engine.play(cue("ability-nova"));
+    stepAudio(context, timers);
+    const d = engine.diagnostics();
+    maxMusic = Math.max(maxMusic, d.voices.music);
+    maxFuture = Math.max(maxFuture, d.score.futureVoices);
+    const musicVoices = [...engine.voices].filter(
+      (voice) => voice.lane === "music",
+    );
+    maxMusicSources = Math.max(
+      maxMusicSources,
+      musicVoices.reduce((sum, voice) => sum + voice.sources.length, 0),
+    );
+    maxMusicNodes = Math.max(
+      maxMusicNodes,
+      musicVoices.reduce((sum, voice) => sum + voice.nodes.length, 0),
+    );
+    assert(
+      musicVoices.every((voice) => voice.sources.length <= 11),
+      "compound title backbeats bound lead3 + arp1 + bass3 + kick2 + snare2",
+    );
+    assert(
+      d.voices.music <= 32 && d.voices.sfx <= 16 && d.score.futureVoices <= 32,
+    );
+    assert(
+      [...engine.voices]
+        .filter((v) => v.lane === "music" && v.start > context.currentTime)
+        .every((v) => v.start < context.currentTime + 0.18 + 1e-9),
+      "future note queue stays inside real lookahead",
+    );
+    assert(
+      d.score.segments <= 16 &&
+        Number.isFinite(d.score.bpm) &&
+        Number.isFinite(d.score.beat),
+    );
+    if (engine.titleScreen)
+      assert.equal(
+        d.voices.continuous,
+        0,
+        "title cannot restart faded engine/alarm layers",
+      );
+    assert.equal(timers.size, 1);
+  }
+  t.diagnostic(
+    JSON.stringify({
+      seconds: 30,
+      maxMusic,
+      maxFuture,
+      maxMusicSources,
+      maxMusicNodes,
+      scope: "recorded API calls; no native DSP or audible acceptance",
+    }),
+  );
+  engine.suspend();
+  assert.equal(engine.voices.size, 0);
+  engine.dispose();
+});
+
+test("title chip body and bass hold through the authored gate then release and clean up", async (t) => {
+  const { engine, context } = await titleFixture();
+  const voice = [...engine.voices].find(
+    (v) => v.cue === "music-title" && !v.titlePad && v.start === 0.045,
+  );
+  const chip = voice.sources.find((s) => s.type === "square");
+  const pitch = chip.frequency.events[0].value / 2 ** (3 / 1200);
+  const body = voice.sources.find(
+    (s) =>
+      s.type === "triangle" &&
+      Math.abs(s.frequency.events[0].value - pitch) < 1e-8,
+  );
+  assert(body, "lead has a soft body on the same authored pitch and voice");
+  const chipEnvelope = sourceEnvelope(chip),
+    duration = chip.stopAt - chip.starts[0] - 0.025;
+  const peak = Math.max(...chipEnvelope.events.map((e) => e.value));
+  assert(
+    gainAt(chipEnvelope, chip.starts[0] + duration * 0.5) >= peak * 0.99,
+    "lead is still present at half the note, rather than already decayed to the floor",
+  );
+  assert(gainAt(chipEnvelope, chip.starts[0] + duration * 0.95) < peak * 0.1);
+  assert(
+    Math.abs(gainAt(chipEnvelope, chip.starts[0] + duration) - 0.0001) < 1e-9,
+  );
+  const bassSine = voice.sources.find(
+    (s) =>
+      s.type === "sine" &&
+      s.frequency.events[0].value < 200 &&
+      s.frequency.events.every((e) => e.value === s.frequency.events[0].value),
+  );
+  const bassTriangle = voice.sources.find(
+    (s) =>
+      s.type === "triangle" &&
+      s.frequency.events[0].value === bassSine.frequency.events[0].value,
+  );
+  assert(
+    bassSine && bassTriangle,
+    "round bass shares a fundamental without adding another voice",
+  );
+  const bassEnvelope = sourceEnvelope(bassSine),
+    bassDuration = bassSine.stopAt - bassSine.starts[0] - 0.025;
+  assert(gainAt(bassEnvelope, bassSine.starts[0] + bassDuration * 0.5) > 0.025);
+  assert.equal(engine.music.gain.value, 0.4);
+  assert.equal(engine.master.gain.value, 0.75);
+  t.diagnostic(
+    JSON.stringify({
+      leadHoldAtHalfGate: gainAt(chipEnvelope, chip.starts[0] + duration * 0.5),
+      leadGateSeconds: duration,
+      scope: "gain automation and resource calls, not DSP RMS",
+    }),
+  );
+  const sources = [...voice.sources],
+    nodes = [...voice.nodes];
+  context.advance(voice.end + 0.1);
+  assert(voice.released && sources.every((s) => s.onended === null));
+  assert(nodes.every((n) => n.disconnects === 1));
+  engine.dispose();
+});
+
+test("title pad inner sustain follows the retimed outer bar release when Continue slows the score", async () => {
+  const { engine, context, timers } = await titleFixture();
+  for (let i = 0; i < 12; i++) stepAudio(context, timers);
+  const pad = [...engine.voices].find((v) => v.titlePad),
+    oldEnd = pad.end - 0.025;
+  const inner = pad.sources.map(sourceEnvelope);
+  assert(
+    inner.every((param) => param.events.every((e) => e.kind !== "exponential")),
+    "held pad does not contain a fixed early inner decay",
+  );
+  engine.update({ ...QUIET_STATE, corporation: "pan" });
+  engine.setTitleScreen(false);
+  const newEnd = engine.clock.timeAtBeat(pad.harmonicEndBeat);
+  assert(
+    newEnd > oldEnd,
+    "deceleration extends this actual pad's harmonic gate",
+  );
+  assert(
+    inner.every(
+      (param) =>
+        gainAt(param, (oldEnd + newEnd) / 2) >=
+        Math.max(...param.events.map((event) => event.value)) * 0.99,
+    ),
+  );
+  assert(
+    pad.sources.every(
+      (source) => Math.abs(source.stopAt - (newEnd + 0.025)) < 1e-9,
+    ),
+  );
+  assert(Math.abs(gainAt(pad.gain.gain, newEnd) - 0.0001) < 1e-9);
+  assert.equal(engine.diagnostics().score.targetBpm, 120);
+  const nodes = [...pad.nodes];
+  context.advance(newEnd - context.currentTime + 0.03);
+  assert(pad.released && nodes.every((node) => node.disconnects === 1));
+  engine.dispose();
+});
+
+test("title pad retiming preserves its instantaneous release gain across repeated gate changes", async () => {
+  const { engine, context } = await titleFixture();
+  const pad = [...engine.voices].find((v) => v.titlePad),
+    oldEnd = pad.end - 0.025;
+  const now = oldEnd - 0.04,
+    before = gainAt(pad.gain.gain, now);
+  engine.titlePadGate(pad, oldEnd + 0.4, now);
+  assert(
+    Math.abs(gainAt(pad.gain.gain, now) - before) < 1e-9,
+    "retiming cannot jump to full gain",
+  );
+  const next = now + 0.01,
+    duringRecovery = gainAt(pad.gain.gain, next);
+  engine.titlePadGate(pad, oldEnd + 0.25, next);
+  assert(Math.abs(gainAt(pad.gain.gain, next) - duringRecovery) < 1e-9);
+  engine.titlePadGate(pad, next + 0.007, next);
+  assert(
+    pad.sources.every(
+      (source) => Math.abs(source.stopAt - (next + 0.015 + 0.025)) < 1e-9,
+    ),
+  );
+  assert(Math.abs(gainAt(pad.gain.gain, next + 0.015) - 0.0001) < 1e-9);
+  context.advance(next + 0.1);
+  assert(pad.released);
+  engine.dispose();
+});
+
+test("world and cue envelopes retain the original attack-to-floor curve with no title hold", async () => {
+  const { engine } = await fixture();
+  const world = [...engine.voices].filter((v) => v.lane === "music");
+  const effect = play(engine, "mote-charge");
+  assert(world.length > 0 && effect);
+  for (const voice of [...world, effect]) {
+    assert.equal(voice.titlePad, null);
+    for (const source of voice.sources)
+      assert.deepEqual(
+        sourceEnvelope(source).events.map((event) => event.kind),
+        ["set", "linear", "exponential"],
+      );
+  }
+  engine.dispose();
+});
+
+test("title bubble reaches its destination while the held body remains audible", async () => {
+  const { engine, context } = await titleFixture();
+  const time = engine.clock.timeAtBeat(3.5),
+    length = engine.clock.timeAtBeat(3.75) - time;
+  const previous = new Set(engine.voices);
+  engine.titleStep(time, 14, length, [47, 50, 54, 57]);
+  const voice = [...engine.voices].find((v) => !previous.has(v));
+  const bubble = voice.sources.find(
+    (source) =>
+      source.type === "sine" &&
+      source.frequency.events.length === 2 &&
+      source.frequency.events[0].value < source.frequency.events[1].value,
+  );
+  const destination = bubble.frequency.events[1];
+  const envelope = sourceEnvelope(bubble);
+  assert(
+    destination.time <
+      envelope.events.find((event) => event.kind === "set" && event.time > time)
+        .time,
+  );
+  assert(gainAt(envelope, destination.time) > 0.03);
+  context.advance(voice.end + 0.1);
+  assert(voice.released);
+  engine.dispose();
+});
+
+test("title lead is a finite stereo detuned pulse pair with a nominal warm body and shared gate", async () => {
+  const { engine, context } = await titleFixture();
+  const voice = engine.createVoice("music", 0.3, 0.35, 1);
+  engine.chip(voice, 0.3, 440, 0.35, 0.04);
+  assert.equal(voice.sources.length, 3);
+  const pulses = voice.sources.filter((source) => source.type === "square");
+  const body = voice.sources.find((source) => source.type === "triangle");
+  assert.equal(body.frequency.events[0].value, 440);
+  assert.equal(pulses.length, 2);
+  const cents = pulses.map(
+    (source) => 1200 * Math.log2(source.frequency.events[0].value / 440),
+  );
+  assert(Math.abs(cents[0] - 3) < 1e-8 && Math.abs(cents[1] + 4) < 1e-8);
+  assert(
+    voice.sources.every((source) => Math.abs(source.stopAt - 0.675) < 1e-9),
+  );
+  const panners = voice.nodes.filter((node) => node.kind === "panner");
+  assert.equal(panners.length, 2);
+  assert.deepEqual(
+    panners.map((node) => node.pan.value),
+    [-0.28, 0.28],
+  );
+  assert(panners.every((node) => node.connections.has(voice.gain)));
+  assert(
+    voice.nodes
+      .filter((node) => node.kind === "filter")
+      .every((node) =>
+        node.frequency.events.every(
+          (event) => event.value > 0 && event.value <= 4080,
+        ),
+      ),
+  );
+  assert.equal(engine.music.gain.value, 0.4);
+  assert.equal(engine.master.gain.value, 0.75);
+  const nodes = [...voice.nodes];
+  context.advance(0.7);
+  assert(voice.released && nodes.every((node) => node.disconnects === 1));
+  engine.dispose();
+});
+
+test("title pad and bass patches bound sources, stay in their register, and own stereo cleanup", async () => {
+  const { engine } = await titleFixture();
+  const pad = [...engine.voices].find((voice) => voice.titlePad);
+  assert.equal(pad.sources.length, 8, "four chord tones, two layers per tone");
+  assert.equal(
+    pad.sources.filter((source) => source.type === "triangle").length,
+    4,
+  );
+  assert.equal(
+    pad.sources.filter((source) => source.type === "sawtooth").length,
+    4,
+  );
+  assert.equal(pad.nodes.filter((node) => node.kind === "panner").length, 8);
+  const padPitch = pad.sources
+    .filter((source) => source.type === "triangle")
+    .map((source) => source.frequency.events[0].value);
+  for (const source of pad.sources.filter(
+    (source) => source.type === "sawtooth",
+  ))
+    assert(
+      padPitch.some(
+        (pitch) =>
+          Math.abs(
+            1200 * Math.log2(source.frequency.events[0].value / pitch),
+          ) <= 4.001,
+      ),
+      "harmonic pad layers keep the authored register",
+    );
+  assert(
+    pad.nodes
+      .filter((node) => node.kind === "panner")
+      .every((node) => Math.abs(node.pan.value) <= 0.32),
+  );
+  const voice = [...engine.voices].find(
+    (voice) =>
+      voice.cue === "music-title" && !voice.titlePad && voice.start === 0.045,
+  );
+  assert(
+    voice.sources.length <= 9,
+    "fixed score onset remains a bounded compound patch",
+  );
+  const root = 440 * 2 ** ((47 - 69) / 12);
+  const bass = voice.sources.filter(
+    (source) => Math.abs(source.frequency.events[0].value - root) < 1e-8,
+  );
+  assert.deepEqual(
+    bass.map((source) => source.type),
+    ["triangle", "sine", "sawtooth"],
+  );
+  for (const source of bass) {
+    let output = [...source.connections][0];
+    while (output.kind !== "gain") output = [...output.connections][0];
+    assert(output.connections.has(voice.gain), "bass body stays centered");
+  }
+  const heldNodes = [...pad.nodes, ...voice.nodes];
+  engine.suspend();
+  assert.equal(engine.voices.size, 0);
+  assert(heldNodes.every((node) => node.disconnects === 1));
+  assert(
+    [...pad.sources, ...voice.sources].every(
+      (source) => source.onended === null,
+    ),
+  );
+  engine.dispose();
+});
+
+test("missing stereo panner support keeps every title layer in a finite mono route", async () => {
+  const { engine, context } = await titleFixture(false);
+  const title = [...engine.voices].filter(
+    (voice) => voice.cue === "music-title",
+  );
+  assert(title.some((voice) => voice.titlePad && voice.sources.length === 8));
+  assert(
+    title.every((voice) => voice.nodes.every((node) => node.kind !== "panner")),
+  );
+  for (const voice of title)
+    for (const source of voice.sources) {
+      let node = [...source.connections][0];
+      while (node !== voice.gain) {
+        assert.equal(
+          node.connections.size,
+          1,
+          "each layer has one mono output path",
+        );
+        node = [...node.connections][0];
+      }
+      assert(source.stopAt <= voice.end + 1e-9);
+    }
+  context.advance(2);
+  assert(title.every((voice) => voice.released));
+  engine.dispose();
+});
+
+test("world, effects and propulsion never opt into title stereo nodes or layered oscillators", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ combat: 0.8, hostiles: 3, engines: 2, throttle: 1 }));
+  for (let i = 0; i < 120; i++) stepAudio(context, timers);
+  play(engine, "mote-pulse");
+  assert(context.nodes.every((node) => node.kind !== "panner"));
+  assert.equal(engine.engineVoice.sources.length, 3);
+  assert(sfx(engine).every((voice) => voice.sources.length <= 3));
+  engine.dispose();
 });

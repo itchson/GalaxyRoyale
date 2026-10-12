@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "source": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+  "regions_exact_to_native_ring_source": "87be4b8232e7022ceadb91c938eb4d181e092e4c",
+  "regions_git_sha256": "b17d5861933a90bef535313ebfbdd0dd097a2763622fcfaf1d8fd754b745e6d4",
+  "files": [
+    {
+      "path": "derive_targets.py",
+      "bytes": 8189,
+      "sha256": "a4b58b69a45907da0bf83834efeffe49f14133c776b2c309e5ab80af4ac2c4b5"
+    },
+    {
+      "path": "freeze.py",
+      "bytes": 1638,
+      "sha256": "54aa9856a5032f98515b1f0fa6b552e1f389256c3bbc4426b6d1fce6f3ba0ef1"
+    },
+    {
+      "path": "inputs/apps/game/src/main.ts",
+      "bytes": 88855,
+      "sha256": "f6138b2922a9563d031420c602995d45b49ca423d09ca808c3c4d39fde8f30bc"
+    },
+    {
+      "path": "inputs/crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "inputs/crates/game_core/src/cosmic_background.rs",
+      "bytes": 72401,
+      "sha256": "0d4ef0c612d20d888ac92a4d6dce848005d3242092ff889464f04a6817b07068"
+    },
+    {
+      "path": "inputs/crates/game_core/src/lib.rs",
+      "bytes": 195203,
+      "sha256": "610fcc5eb36165e3fcecfe138419c62b1f3e42fd32c59cad8e7d63a90d380393"
+    },
+    {
+      "path": "inputs/crates/game_core/src/region_immersion_tests.rs",
+      "bytes": 11898,
+      "sha256": "aef52f0d81112d1629ebb796adbf2989e0b33c16ccb16356d5f757bd692f1a5f"
+    },
+    {
+      "path": "inputs/crates/game_core/src/regions.rs",
+      "bytes": 35964,
+      "sha256": "b17d5861933a90bef535313ebfbdd0dd097a2763622fcfaf1d8fd754b745e6d4"
+    },
+    {
+      "path": "inputs/crates/game_core/src/regions_lod_tests.rs",
+      "bytes": 14256,
+      "sha256": "a6283d19cd6135d1fcf2e64a4492bcb3ba42d8b282524ce9f150c9ae6d406944"
+    },
+    {
+      "path": "inputs/crates/game_web/src/browser.rs",
+      "bytes": 39690,
+      "sha256": "99670ca781c1df5c21059c45bb5fe40ff7da540bb57862ac08c78e3e44e78156"
+    },
+    {
+      "path": "inputs/crates/game_web/src/lighting.rs",
+      "bytes": 11278,
+      "sha256": "a126e38f40f8cd750f9a92483dc244d9fbcabfcd6685ac4e2a767227f3e9f5c6"
+    },
+    {
+      "path": "inputs/crates/game_web/src/renderer.rs",
+      "bytes": 26563,
+      "sha256": "b005d9be722c94ee85826faa3bfc480c644b0b8a09c49dd0df1da2a3c9127359"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 9113,
+      "sha256": "015070f591f56eca65f12679e4289093747fff3feae5e04784e978a77c3653cc"
+    },
+    {
+      "path": "targets.json",
+      "bytes": 10024,
+      "sha256": "ff9fbbf736b24c5f08af3658175d7096de790dce70eb784c01bda728d5f78a33"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 1124,
+      "sha256": "82398b5fed2f8b879389fa4db0311ac7e4fe1a64a7e8b1c7839ca84556215995"
+    }
+  ],
+  "external_pins": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\qa-targets-final.log",
+      "sha256": "02bf76eac35fd1d0b0de7eb40fc3dbcf819a8be5f7d005dbf39532c050177527"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\planet-ring-shadow\\packet-audit.json",
+      "sha256": "89a19e57de08998bb25ff88e1bedeb3f0c06ae81fc3882e3448d1ae10cd81395"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\planet-ring-shadow\\final-packets\\region-1-reduced-false.json",
+      "sha256": "d64b425329a682299e5124a9bc3d10dff50f4ada04459c9ab03ae418a45d9680"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\planet-ring-shadow\\final-packets\\region-1-reduced-true.json",
+      "sha256": "da4f4b6934664a2862b60a3d79d7efd99961ba60443fa1daf37f10657df571ee"
+    }
+  ]
+}

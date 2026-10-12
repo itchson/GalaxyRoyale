@@ -1,0 +1,129 @@
+{
+  "version": 3,
+  "profile_mode": "owned",
+  "source_root": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale",
+  "source_commit": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "git_inputs": {
+    "apps/game/src/coop/wire.ts": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4",
+    "apps/game/src/coop/room-code.ts": "744bd717bde86b8d199f31c3f4f639ee6dfc6a8792abc79200852595eb3a66b3",
+    "apps/game/src/coop/signaling.ts": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433",
+    "apps/game/src/coop/transport.ts": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+    "apps/game/src/coop/controller.ts": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+    "apps/game/src/coop/wasm-ports.ts": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+    "apps/game/src/storage.ts": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8"
+  },
+  "build_stamp": {
+    "schemaVersion": 1,
+    "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e",
+    "packageHash": "a1afe6da521b45b60a6e1eae1c6d0269c8837615ffcee478e168d1457e1e242c",
+    "builtAt": "2026-10-12T17:41:53.879Z",
+    "compiledFromHead": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+    "carriedAt": "2026-10-12T18:07:31.395Z",
+    "carryReason": "Only docs/production/evidence, Wiki fixture and isolated unshipped QA helper changed. Runtime source and package hashes rechecked exactly; original build timestamp preserved."
+  },
+  "compiled_source_commit": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+  "compiled_git_inputs": {
+    "apps/game/src/coop/wire.ts": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4",
+    "apps/game/src/coop/room-code.ts": "744bd717bde86b8d199f31c3f4f639ee6dfc6a8792abc79200852595eb3a66b3",
+    "apps/game/src/coop/signaling.ts": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433",
+    "apps/game/src/coop/transport.ts": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+    "apps/game/src/coop/controller.ts": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+    "apps/game/src/coop/wasm-ports.ts": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+    "apps/game/src/storage.ts": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8"
+  },
+  "mode": "wasm",
+  "fifth_shot": true,
+  "builds": {
+    "webgpu": "/wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy.js",
+    "webgl2": "/wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy.js"
+  },
+  "artifacts": [
+    {
+      "path": "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy.d.ts",
+      "bytes": 11579,
+      "sha256": "2c9bc5f8b35faec1fa1ec226f69bfc59bd9b37cec6214b2be7bf09a90213168d"
+    },
+    {
+      "path": "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy.js",
+      "bytes": 87114,
+      "sha256": "682b26e828cfa7e106c481624e5e4aee5df02f48c0b85e0037f20dc2b08712f9"
+    },
+    {
+      "path": "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy_bg.wasm",
+      "bytes": 10463533,
+      "sha256": "3af85666ebae564c1aed32ff016f5ba5def9697e8a0e3ed63353e92b4ca91137"
+    },
+    {
+      "path": "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy_bg.wasm.d.ts",
+      "bytes": 6028,
+      "sha256": "5f7a3cf1294f656692cb9abc40cc1c736ba97312a0aeba3d778d0efaab83b271"
+    },
+    {
+      "path": "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy.d.ts",
+      "bytes": 10313,
+      "sha256": "d9b5339d8c05c8a8533d29ad1833e78b867d14b37721a5b4d8eb498fdba9cad6"
+    },
+    {
+      "path": "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy.js",
+      "bytes": 90888,
+      "sha256": "b69840214409172482db00f5d518ae242f57f3e00b8c18a4330daa5121da635e"
+    },
+    {
+      "path": "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy_bg.wasm",
+      "bytes": 14067457,
+      "sha256": "b079527f84d033b1c350bdae6035408abf22ad85321596d9fb35e463436fc08a"
+    },
+    {
+      "path": "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy_bg.wasm.d.ts",
+      "bytes": 4762,
+      "sha256": "214b9061cb4b792edfe12f10fd966526b4d190d7fe74f537aebaaabea33f9653"
+    }
+  ],
+  "dist": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\dist",
+  "typescript": "5.9.3",
+  "service_inputs": {
+    "apps/coop/server.mjs": "4a135b5d97d2599354975a18e6017daf49eeceb99fbef192860d96ccd076b478",
+    "apps/coop/store.mjs": "551d7dc521122a06251a1cc57293e954d8e5678a35bc8dfc7c54946086c377f4"
+  },
+  "scope": "prepared real owned-loadout two-Galaxy WASM/RTC QA from exact compiled source; browser execution pending; no shared rewards/NAT/eight-player/fifth-shot acceptance",
+  "inputs": {
+    "apps/coop/server.mjs": "4a135b5d97d2599354975a18e6017daf49eeceb99fbef192860d96ccd076b478",
+    "apps/coop/store.mjs": "551d7dc521122a06251a1cc57293e954d8e5678a35bc8dfc7c54946086c377f4",
+    "apps/game/src/coop/wire.ts": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4",
+    "apps/game/src/coop/room-code.ts": "35a0a41bcb1d6d335d1516e6aed44cbfdf76eb59c53585488df5badfe8b80d6d",
+    "apps/game/src/coop/signaling.ts": "1dc10a16171fc16a4f8a3481a46dc8ca94894d7703feeb141c0e011610fc201c",
+    "apps/game/src/coop/transport.ts": "702d058d8529a754c943ccc79f2e9a785d9d8e10422aa41a270f89f030195101",
+    "apps/game/src/coop/controller.ts": "2f886539fa1532f136a9d23d3ec817abbd497183e972435db92afc7894926f6a",
+    "apps/game/src/coop/wasm-ports.ts": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+    "apps/game/src/storage.ts": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8",
+    "scripts/qa/co-op-transport/wasm-review.html": "642d21fad7864da16aa69f7e3353c49a70ec5ac389a87f68f1582c4663148a79",
+    "scripts/qa/co-op-transport/wasm-review.js": "f8cfce59e7581c6f41d12b51146944739be77d0e0a22310bdb25b71925c9e1c7",
+    "scripts/qa/co-op-transport/client.html": "97b8d7dc1daed1fa51b1abb0d98816b1898a0f378d394bdea908b19d57125289",
+    "scripts/qa/co-op-transport/client.js": "6c47a2ff38cc70936201f778d20cbb24be20a23e2b01268152c2dadda3620893",
+    "scripts/qa/co-op-transport/fifth-shot.js": "7080dcb130d2813117a90852fe51b4581e1fc81ee4cbcf5dc16a34599a9588ea"
+  },
+  "files": {
+    "modules/wire.js": "75e813898bf29e4e1289b43f36934840278c73f81d1e1cce8b6b8f8b8450c43a",
+    "modules/room-code.js": "a214b56d34b44f75d6848664ce48a0d42b54b2c2b1c4191563406bbab62633a4",
+    "modules/signaling.js": "39597967098f4c7005a1698d869fe7f9d67cf2c5d7ac2bd62b153652d676c474",
+    "modules/transport.js": "cde1302a8c62cbdf59eefb30de33aeb512950c31528b88a3fdbf2ddb299d76b1",
+    "modules/controller.js": "7f20996fbf02a060981f70b8a644dd6de5c48f07e6c1acc65eb61482fdfbfebe",
+    "modules/wasm-ports.js": "e8b43587a2afa090fad3be5a765b84b3c52448efe5a7ce7671ba17f557c0164a",
+    "modules/storage.js": "bdfa12ec7f2e92ff7271170e09f6bf36fa0b7d6a3f54c2cc1f20ccfe8c1db89e",
+    "wasm-review.html": "642d21fad7864da16aa69f7e3353c49a70ec5ac389a87f68f1582c4663148a79",
+    "wasm-review.js": "f8cfce59e7581c6f41d12b51146944739be77d0e0a22310bdb25b71925c9e1c7",
+    "client.html": "97b8d7dc1daed1fa51b1abb0d98816b1898a0f378d394bdea908b19d57125289",
+    "client.js": "6c47a2ff38cc70936201f778d20cbb24be20a23e2b01268152c2dadda3620893",
+    "fifth-shot.js": "7080dcb130d2813117a90852fe51b4581e1fc81ee4cbcf5dc16a34599a9588ea",
+    "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy.d.ts": "2c9bc5f8b35faec1fa1ec226f69bfc59bd9b37cec6214b2be7bf09a90213168d",
+    "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy.js": "682b26e828cfa7e106c481624e5e4aee5df02f48c0b85e0037f20dc2b08712f9",
+    "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy_bg.wasm": "3af85666ebae564c1aed32ff016f5ba5def9697e8a0e3ed63353e92b4ca91137",
+    "wasm/webgpu-ed418524e2bdb595c7c6c2b537a799fcb01769a65e144e386c089352341e63a8/galaxy_bg.wasm.d.ts": "5f7a3cf1294f656692cb9abc40cc1c736ba97312a0aeba3d778d0efaab83b271",
+    "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy.d.ts": "d9b5339d8c05c8a8533d29ad1833e78b867d14b37721a5b4d8eb498fdba9cad6",
+    "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy.js": "b69840214409172482db00f5d518ae242f57f3e00b8c18a4330daa5121da635e",
+    "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy_bg.wasm": "b079527f84d033b1c350bdae6035408abf22ad85321596d9fb35e463436fc08a",
+    "wasm/webgl2-bf1c0111610c6865fb0d619c6d6e0c47a301dd6070af90957dfb7c47707aaa51/galaxy_bg.wasm.d.ts": "214b9061cb4b792edfe12f10fd966526b4d190d7fe74f537aebaaabea33f9653"
+  }
+}

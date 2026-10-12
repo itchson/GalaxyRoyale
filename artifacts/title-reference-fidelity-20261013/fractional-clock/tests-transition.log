@@ -1,0 +1,39 @@
+(node:29196) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 42.68 source seconds retain their fractional period at 169.275 BPM (1.5414ms)
+✔ source onset and end seconds map independently without rounding or truncating a long gate (0.3818ms)
+✔ half-open quarter windows preserve fractional onsets, sorted ties and input indices (0.5711ms)
+✔ source loop crossing is neither a bar reset nor a fixed quarter-grid alias (0.3438ms)
+✔ ramp onset and end are each mapped through the real clock and independent integration (2.3923ms)
+✔ a note ending after a release hold and ramp retains its authored end beat (1.5498ms)
+✔ a fractional loop crosses a tempo change with shared beat phase intact (0.1599ms)
+✔ overlapping lookahead drains match an independent corpus with no duplicate occurrences (1.1125ms)
+✔ stall skips stale onsets but keeps the future fraction of the current quarter window (0.1486ms)
+✔ a partial quarter remains resumable without scheduling beyond the exact time horizon (0.2229ms)
+✔ actual mapped onset is exclusive at the horizon and inclusive at the floor down to one ULP (0.2856ms)
+✔ event cap retains the rest of a simultaneous chord for the caller's capacity policy (0.4608ms)
+✔ window work and returned event count remain bounded at an extreme actual clock tempo (0.1427ms)
+✔ even many loop crossings inside one quarter window stop at the event cap (0.25ms)
+✔ stall after capacity reports explicit stale-note loss rather than hiding it in the cap (0.135ms)
+✔ explicit cancellation and reset remap future gates across a retarget without changing occurrences (0.1162ms)
+✔ title to Haven 120 to combat 166 cancels and reschedules the same fractional occurrences (0.2244ms)
+✔ a stationary audible long-note caller must retime the stored end beat after each ramp (0.0903ms)
+✔ reanchor keeps fractional loop phase after suspension when caller clears its future voices (0.1227ms)
+✔ lookahead before the real clock's initial anchor does not manufacture a negative onset (0.0511ms)
+✔ invalid timing and caller bounds fail before consuming the valid pending event (0.6781ms)
+✔ an empty score still has bounded window work and no fabricated notes (0.062ms)
+(node:45696) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 120-to-166 ramp retains phase and quarter grid with finite monotonic note times (1.8709ms)
+✔ two-beat release hold and re-chase replace pending future ramp without a phase jump (0.2032ms)
+✔ retarget during a slowing ramp starts from current boundary tempo and preserves heard timing (0.1101ms)
+✔ pause/resume reanchors the existing beat and pending ramp instead of restarting the phrase (0.123ms)
+✔ long runs bound history and reject nonfinite tempo inputs before they reach audio parameters (1.9832ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 124.2303

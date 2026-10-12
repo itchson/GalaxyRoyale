@@ -80,7 +80,7 @@ fn actual_slider_thumb_uses_measured_input_and_keeps_both_endpoint_corners_insid
             let mut thumb = None;
             for batch in &frame.batches {
                 for pixel in &batch.pixels {
-                    let t = batch.transforms[pixel.transform as usize];
+                    let t = batch.transforms[pixel.transform_slot()];
                     for corner in corners(Vec2::from_array(pixel.local)) {
                         let p = point(t, corner, camera);
                         assert!(inside(p, card, 0.0625));
@@ -121,12 +121,12 @@ fn full_reduced_cosmic_detail_caption_is_rendered_at_real_font_width_and_compact
         .chars()
         .map(|c| RoyaleMono::body(c).occupied_count())
         .sum::<usize>();
-    // Wide2x requested font cannot fit the first label. The native1x fallback
-    // renders the entire caption. Compact fixtures contain two or three lines.
-    for (label, requested, lines) in [
-        ([28.25, 38.5, 130.0, 9.0], 2.0, 1),
-        ([28.25, 38.5, 86.0, 17.0], 1.0, 2),
-        ([28.25, 38.5, 50.0, 25.0], 1.0, 3),
+    // Requested 2x cells cannot fit the first label. A continuous 1.04x
+    // fallback uses its real width; compact requested 1x fixtures still wrap.
+    for (label, requested, expected_font, lines) in [
+        ([28.25, 38.5, 130.0, 9.0], 2.0, 1.04, 1),
+        ([28.25, 38.5, 86.0, 17.0], 1.0, 1.0, 2),
+        ([28.25, 38.5, 50.0, 25.0], 1.0, 1.0, 3),
     ] {
         let mut n = node("toggle");
         n.text = name.into();
@@ -134,7 +134,7 @@ fn full_reduced_cosmic_detail_caption_is_rendered_at_real_font_width_and_compact
         n.label_rect = Some(label);
         n.control_rect = Some([166.25, 48.5, 18.0, 18.0]);
         let font = settings_font(label, name, requested);
-        assert_eq!(font, 1.0);
+        assert!((font - expected_font).abs() < 0.0001);
         assert_eq!(
             wrap(name, ((label[2] + font) / (6.0 * font)).floor() as usize).len(),
             lines
@@ -143,7 +143,7 @@ fn full_reduced_cosmic_detail_caption_is_rendered_at_real_font_width_and_compact
         let mut glyphs = 0;
         for batch in &frame.batches {
             for pixel in &batch.pixels {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 // Card/check geometry has other colors. Disabled is tested below.
                 if pixel.color == BUTTON_TEXT {
                     glyphs += 1;
@@ -178,7 +178,7 @@ fn toggle_state_is_confined_to_real_checkbox_and_disabled_has_no_active_cyan() {
             if p.color == CYAN {
                 for corner in corners(Vec2::from_array(p.local)) {
                     assert!(inside(
-                        point(batch.transforms[p.transform as usize], corner, [0.0; 2]),
+                        point(batch.transforms[p.transform_slot()], corner, [0.0; 2]),
                         checkbox,
                         0.0001
                     ));
@@ -251,7 +251,7 @@ fn legacy_regions_and_scrolling_clip_remain_bounded_static_and_unlit() {
                 if p.color >> 24 != 0 {
                     assert!(inside(
                         point(
-                            batch.transforms[p.transform as usize],
+                            batch.transforms[p.transform_slot()],
                             Vec2::from_array(p.local),
                             [0.0; 2]
                         ),

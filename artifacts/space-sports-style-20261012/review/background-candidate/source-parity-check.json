@@ -1,0 +1,123 @@
+{
+  "commit": "61492ce2d3e360375c2a3eb047ca330fd4c937c4",
+  "baseline": "4e014bff3a84b356c5254b4291560e38accef64d",
+  "scope": "Independent exact source/function parity and retained nebula corner/RGBA packet checks; no native test or browser rerun",
+  "changed_inputs": [
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "bytes": 61619,
+      "sha256": "8dffb3f180e8a415b0d734045dfea00113a0e1bae255236cc0121da473121eaa"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_detail_tests.rs",
+      "bytes": 18677,
+      "sha256": "5b771909b12096d4ba118b4fdc723a97e5c8312583505dbf09a4922cc4a4096d"
+    },
+    {
+      "path": "crates/game_core/src/region_immersion_tests.rs",
+      "bytes": 9437,
+      "sha256": "229a8843b4e505fb45734d6f82ec0755c688a8a77b4c1397ea303a72a956f128"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "bytes": 34209,
+      "sha256": "c3e2dca428eaf67a3343dfbb20ac8989280584074e1381c204289b357ac6bdf5"
+    },
+    {
+      "path": "crates/game_core/src/regions_lod_tests.rs",
+      "bytes": 14256,
+      "sha256": "a6283d19cd6135d1fcf2e64a4492bcb3ba42d8b282524ce9f150c9ae6d406944"
+    }
+  ],
+  "unchanged_inputs": [
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 197345,
+      "sha256": "454f2a8b6dd5175524deab46725fd0de0ca60a5f87c3f051dc6d31f98ccee55b"
+    },
+    {
+      "path": "crates/game_core/src/asteroid_art.rs",
+      "bytes": 11508,
+      "sha256": "8f302bfdadee2dab167eccc0b38db33eb0b0c57ebe89ce7aa59b2126ec64f9bc"
+    },
+    {
+      "path": "crates/game_core/src/shield_progression.rs",
+      "bytes": 5281,
+      "sha256": "a308a0c46cbaa020bc0c998fa90be20276322b6912ef209df7d9bb89a93d97af"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "bytes": 10756,
+      "sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a"
+    },
+    {
+      "path": "crates/game_core/src/isotope_scar.rs",
+      "bytes": 14871,
+      "sha256": "1129a660f47d75219654ebb9bc89e4c5e201e89d5a5ccbd4407cd56b5e720018"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "bytes": 26563,
+      "sha256": "b005d9be722c94ee85826faa3bfc480c644b0b8a09c49dd0df1da2a3c9127359"
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "bytes": 3875,
+      "sha256": "8e18cbb217a62659d697f1705b941e09dbfee444fcdf7a9a1e29506c8a5ea976"
+    },
+    {
+      "path": "crates/game_web/src/present.wgsl",
+      "bytes": 1652,
+      "sha256": "767e72b385823cfb10bee5ba055812ae40fd32f20130ea32271aa7e85a212de5"
+    }
+  ],
+  "region_policy_prefix_exact": true,
+  "cosmic_function_text_parity": {
+    "motif": "7e2ca6e5243ee1627aa027545272b24410325a40bbf9b2b7961695253f51b726",
+    "stellar_system": "f5f207b3942ed2b4b7e1404ee7db0aab30179c21c1c0ff8c84d50fd21278de0c",
+    "parent": "3b035444a5a5b082b36ac1566f32a4d7e29b4c70d35f8000113cd8ef13cdd78a",
+    "draw_gas_part": "84117ea5c5382e37fe4af781c1e66c48e5ef46556b9ea6898f2a5993b959d6f6",
+    "render_gas": "fe4b537f4f63f21d0d66843b00fc98ffa3ae8b897f7a9bcb1c72476a47034b55",
+    "gas_density": "ebf713d1a13aea578e53647a4443cdb0a703f03e6dcdb014130f75859468c0c0",
+    "gas_flow": "0085a79808578852fb8a514894d11fcd58df7531aef38f51bfb71defe68a7b92",
+    "star_cells": "b210796fcc0ae53b4923ef44dbdc16bcfc2b5c031f68e33a1d97edb50aa1826c",
+    "draw_part": "dded486660947e31e36a183803455a57d2d636bee2735089b7792da4f831f9e5",
+    "colored": "4d400fb55cb8db281d7cdc2842241e60cf6b599a9260906ac307aacb9c27cb89"
+  },
+  "nebula_packet_parity": [
+    {
+      "file": "motif-1-reduced-false-time-0.json",
+      "quads": 2128,
+      "transforms": 4,
+      "three_views_geometry_rgba_exact": true
+    },
+    {
+      "file": "motif-1-reduced-false-time-18.json",
+      "quads": 2128,
+      "transforms": 4,
+      "three_views_geometry_rgba_exact": true
+    },
+    {
+      "file": "motif-1-reduced-true-time-0.json",
+      "quads": 538,
+      "transforms": 4,
+      "three_views_geometry_rgba_exact": true
+    },
+    {
+      "file": "motif-1-reduced-true-time-18.json",
+      "quads": 538,
+      "transforms": 4,
+      "three_views_geometry_rgba_exact": true
+    }
+  ]
+}

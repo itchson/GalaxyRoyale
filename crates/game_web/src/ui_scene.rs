@@ -1,38 +1,30 @@
 //! Generated artwork and semantic DOM layout rendered as actual engine cells.
 use crate::pixel_ui::RoyaleMono;
+#[path = "collection_ui.rs"]
+mod collection_ui;
+#[path = "component_art.rs"]
+mod component_art;
+#[path = "meishi_art.rs"]
+mod meishi_art;
+#[path = "sports_ui.rs"]
+mod sports_ui;
+#[path = "title_art.rs"]
+mod title_art;
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
 use serde::Deserialize;
 use std::{collections::HashMap, sync::LazyLock};
 
 pub const MAX_UI_PIXELS: usize = 60_000;
-const WHITE: u32 = 0xff_f6ead9;
-const CYAN: u32 = 0xff_f4e887;
-const DIM: u32 = 0xff_a48563;
-const GOLD: u32 = 0xff_85d4ff;
+const WHITE: u32 = 0xff_f4f1eb;
+const CYAN: u32 = 0xff_efde58;
+const DIM: u32 = 0xff_a29787;
+const GOLD: u32 = 0xff_66bce8;
 
 const fn rgb(r: u8, g: u8, b: u8) -> u32 {
     u32::from_le_bytes([r, g, b, 255])
 }
 const BUTTON_TEXT: u32 = rgb(224, 236, 241);
 const BUTTON_DISABLED_TEXT: u32 = rgb(139, 155, 166);
-const ICON_EDGE: u32 = rgb(255, 255, 255);
-const ICON_RECESS: u32 = rgb(42, 56, 65);
-const ICON_BEVEL: u32 = rgb(95, 117, 126);
-
-/// Direct authored cells: no bitmap textures or coarse-icon enlargement.
-fn authored_icon(rows: &[&str]) -> PixelBody {
-    PixelBody::from_ascii(
-        rows,
-        &[
-            ('#', WHITE),
-            ('h', ICON_EDGE),
-            ('s', ICON_BEVEL),
-            ('d', DIM),
-            ('v', ICON_RECESS),
-        ],
-    )
-}
-
 /// Semantic action colors are independent of transient hover and tab selection.
 fn button_accent(kind: &str) -> u32 {
     match kind {
@@ -125,21 +117,82 @@ fn setting_regions(node: &UiNode) -> Option<([f32; 4], [f32; 4])> {
     Some((label, control))
 }
 
-fn settings_font(rect: [f32; 4], text: &str, requested: f32) -> f32 {
-    let requested = if requested.is_finite() {
-        requested.round().clamp(1.0, 4.0) as u32
+const MIN_FONT_SCALE: f32 = 0.25;
+
+fn font_scale(requested: f32) -> f32 {
+    if requested.is_finite() && requested > 0.0 {
+        requested.clamp(MIN_FONT_SCALE, 4.0)
     } else {
-        1
+        1.0
+    }
+}
+
+fn text_capacity(rect: [f32; 4], font: f32) -> (usize, usize) {
+    (
+        ((rect[2] + font) / (RoyaleMono::ADVANCE * font)).floor() as usize,
+        ((rect[3] + font) / (8.0 * font)).floor() as usize,
+    )
+}
+
+fn fractional_text_rect(rect: [f32; 4], font: f32) -> [f32; 4] {
+    if font.fract() == 0.0
+        && rect
+            .iter()
+            .all(|coordinate| (coordinate * 4.0).fract() == 0.0)
+    {
+        return rect;
+    }
+    // Child translation and cell-corner composition can round in opposite
+    // directions on an exact fractional fit. Reserve only f32 arithmetic
+    // roundoff inside the measured box. Integer fonts on the existing exact
+    // quarter-cell grid retain their placement and scale.
+    let magnitude = rect[0]
+        .abs()
+        .max(rect[1].abs())
+        .max((rect[0] + rect[2]).abs())
+        .max((rect[1] + rect[3]).abs())
+        .max(1.0);
+    let gutter = magnitude * f32::EPSILON * 8.0;
+    [
+        rect[0] + gutter,
+        rect[1] + gutter,
+        (rect[2] - gutter * 2.0).max(0.0),
+        (rect[3] - gutter * 2.0).max(0.0),
+    ]
+}
+
+fn settings_font(rect: [f32; 4], text: &str, requested: f32) -> f32 {
+    let requested = font_scale(requested);
+    let complete = |font| {
+        let (columns, rows) = text_capacity(fractional_text_rect(rect, font), font);
+        columns > 0 && rows > 0 && wrap(text, columns).len() <= rows
     };
-    for size in (1..=requested).rev() {
-        let font = size as f32;
-        let columns = ((rect[2] + font) / (RoyaleMono::ADVANCE * font)).floor() as usize;
-        let rows = ((rect[3] + font) / (8.0 * font)).floor() as usize;
-        if columns > 0 && rows > 0 && wrap(text, columns).len() <= rows {
-            return font;
+    if complete(requested) {
+        return requested;
+    }
+    // Each candidate keeps a complete number of lines, but its cell scale is
+    // continuous. The wrapper is stack-only and bounds names to 256 characters;
+    // requested sizes that already fit avoid this bounded fallback search.
+    let mut best = MIN_FONT_SCALE;
+    for columns in 1..=text.chars().take(TEXT_CHARS).count().max(1) {
+        let rows = wrap(text, columns).len().max(1);
+        let mut font = requested
+            .min(rect[2] / (columns as f32 * RoyaleMono::ADVANCE - 1.0))
+            .min(rect[3] / (rows as f32 * 8.0 - 1.0));
+        let fit = fractional_text_rect(rect, font);
+        font = font
+            .min(fit[2] / (columns as f32 * RoyaleMono::ADVANCE - 1.0))
+            .min(fit[3] / (rows as f32 * 8.0 - 1.0));
+        // A division on an exact column/row boundary may round up by one ULP.
+        // Validate with the actual wrapper rather than assume candidate fit.
+        if font >= MIN_FONT_SCALE && !complete(font) {
+            font = font.next_down();
+        }
+        if font > best && complete(font) {
+            best = font;
         }
     }
-    1.0
+    best
 }
 
 #[derive(Debug, Default, Deserialize)]
@@ -159,6 +212,7 @@ pub struct UiNode {
     pub kind: String,
     pub rect: [f32; 4],
     pub text: String,
+    pub text_align: TextAlign,
     pub font: f32,
     pub value: f32,
     pub active: bool,
@@ -170,6 +224,44 @@ pub struct UiNode {
     /// Older clients may omit either region or explicitly send null.
     pub label_rect: Option<[f32; 4]>,
     pub control_rect: Option<[f32; 4]>,
+    pub portrait_expression: u8,
+    pub portrait_speaking: bool,
+    /// ID9 requires all three licensed-profile tokens; absent/unknown tokens draw nothing.
+    #[serde(deserialize_with = "portrait_token")]
+    pub portrait_kind: Option<u8>,
+    #[serde(deserialize_with = "portrait_token")]
+    pub portrait_main: Option<u8>,
+    #[serde(deserialize_with = "portrait_token")]
+    pub portrait_sub: Option<u8>,
+}
+
+/// Semantic horizontal alignment for ordinary text; controls keep their own layout.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub enum TextAlign {
+    #[default]
+    Left,
+    Center,
+    Right,
+}
+impl<'de> Deserialize<'de> for TextAlign {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let token = serde_json::Value::deserialize(deserializer)?;
+        Ok(match token.as_str() {
+            Some("center") => Self::Center,
+            Some("right") => Self::Right,
+            _ => Self::Left,
+        })
+    }
+}
+
+fn portrait_token<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<u8>, D::Error> {
+    let token = serde_json::Value::deserialize(deserializer)?;
+    Ok(token
+        .as_u64()
+        .filter(|&value| value <= 2)
+        .map(|value| value as u8))
 }
 
 #[derive(Deserialize)]
@@ -186,381 +278,13 @@ struct Sprite {
 }
 struct Art {
     body: PixelBody,
-    sprite: Sprite,
 }
 struct Assets {
-    palette: Vec<u32>,
     sprites: HashMap<String, Art>,
 }
 
-/// Original corner silhouettes remain intact. Ornament cells are sampled once
-/// at the center; the remaining rails use a neutral two-cell metal strip.
-#[derive(Clone, Copy)]
-struct FrameGeometry {
-    size: [usize; 2],
-    source: [usize; 2],
-    rail: [usize; 2],
-    corner: [usize; 2],
-    neutral: [usize; 2],
-}
-impl FrameGeometry {
-    fn new(name: &str, size: [usize; 2], source: [usize; 2]) -> Self {
-        let panel = name == "panel";
-        let mut geometry = Self {
-            size,
-            source,
-            rail: if panel { [8, 8] } else { [4, 4] },
-            corner: if panel { [24, 16] } else { [8, 8] },
-            neutral: if panel { [28, 16] } else { [16, 8] },
-        };
-        for axis in 0..2 {
-            geometry.corner[axis] = geometry.corner[axis]
-                .min(size[axis] / 2)
-                .min(source[axis] / 2);
-            geometry.rail[axis] = geometry.rail[axis].min(geometry.corner[axis]);
-            geometry.neutral[axis] = geometry.neutral[axis].min(source[axis].saturating_sub(2));
-        }
-        geometry
-    }
-
-    fn source_at(self, p: [usize; 2]) -> [usize; 2] {
-        let edge = |n: usize, axis: usize| {
-            if n < self.size[axis] / 2 {
-                n
-            } else {
-                self.source[axis] - (self.size[axis] - n)
-            }
-        };
-        let corner_x = p[0] < self.corner[0] || p[0] >= self.size[0] - self.corner[0];
-        let corner_y = p[1] < self.corner[1] || p[1] >= self.size[1] - self.corner[1];
-        if corner_x && corner_y {
-            [edge(p[0], 0), edge(p[1], 1)]
-        } else if p[1] < self.rail[1] || p[1] >= self.size[1] - self.rail[1] {
-            let ornament = 20.min(self.size[0].saturating_sub(self.corner[0] * 2));
-            let begin = (self.size[0] - ornament) / 2;
-            let sx = if (begin..begin + ornament).contains(&p[0]) {
-                (self.source[0] - ornament) / 2 + p[0] - begin
-            } else {
-                self.neutral[0] + p[0] % 2
-            };
-            [sx, edge(p[1], 1)]
-        } else {
-            [edge(p[0], 0), self.neutral[1] + p[1] % 2]
-        }
-    }
-}
 static CELL: LazyLock<PixelBody> = LazyLock::new(|| PixelBody::from_ascii(&["#"], &[('#', WHITE)]));
 // Original 24-cell controls: final-resolution silhouettes, insets and metal details.
-static CLOSE_ICON: LazyLock<PixelBody> = LazyLock::new(|| {
-    authored_icon(&[
-        "........................",
-        "........................",
-        "...h...............h....",
-        "..h#h.............h#h...",
-        "..h##h...........h###h..",
-        ".h####h.........h#####h.",
-        "..h###dhh.....hh#####s..",
-        "...h###d#h...h##d###s...",
-        "....h#####h.h##d###s....",
-        ".....h#####h######s.....",
-        "......h##########s......",
-        ".......h##hhh###s.......",
-        "........h#hhh##s........",
-        ".......h########h.......",
-        "......h##########h......",
-        ".....h#####s######h.....",
-        "....h#####s.h######h....",
-        "...h###d#s...h##d###h...",
-        "..h###d#s.....hs#d###h..",
-        ".h#####s........h#####h.",
-        "..h###s..........h###s..",
-        "...h#s............h#s...",
-        "....h..............h....",
-        "........................",
-    ])
-});
-static SAVE_ICONS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
-    [
-        authored_icon(&[
-            "........................",
-            "........................",
-            "...hhhhhhhhhhhhhhh......",
-            "..h###vvvvvvvvvv##h.....",
-            ".h#h##vvvvvvvhhv###h....",
-            ".h####vvvvvvvhhv####h...",
-            ".h####vvvvvvvhhv#####h..",
-            ".h####vvvvvvvhhv#####s..",
-            ".h####vvvvvvvvvv#####s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###ddddddddddddd###s..",
-            ".h###vvvvvvvvvvhhv###s..",
-            ".h###vvvvvvvvvhhvv###s..",
-            ".h###vvhhvvvvhhvvv###s..",
-            ".h###vvvhhvvhhvvvv###s..",
-            ".h###vvvvhhhhvvvvv###s..",
-            ".h###vvvvvhhvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h#################s#s..",
-            "..h#################s...",
-            "...hssssssssssssssss....",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "...hhhhhhhhhhhhhhh......",
-            "..h###vvvvvvvvvv##h.....",
-            ".h#h##vvvvvvvhhv###h....",
-            ".h####vvvvvvvhhv####h...",
-            ".h####vvvvvvvhhv#####h..",
-            ".h####vvvvvvvhhv#####s..",
-            ".h####vvvvvvvvvv#####s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###ddddddddddddd###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvhhvvhhvvhhv###s..",
-            ".h###vvhhvvhhvvhhv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h#################s#s..",
-            "..h#################s...",
-            "...hssssssssssssssss....",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "...hhhhhhhhhhhhhhh......",
-            "..h###vvvvvvvvvv##h.....",
-            ".h#h##vvvvvvvhhv###h....",
-            ".h####vvvvvvvhhv####h...",
-            ".h####vvvvvvvhhv#####h..",
-            ".h####vvvvvvvhhv#####s..",
-            ".h####vvvvvvvvvv#####s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###ddddddddddddd###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvhhvvhhvvvvv###s..",
-            ".h###vvvhhhhvvvvvv###s..",
-            ".h###vvvvhhvvvvvvv###s..",
-            ".h###vvvhhhhvvvvvv###s..",
-            ".h###vvhhvvhhvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h#################s#s..",
-            "..h#################s...",
-            "...hssssssssssssssss....",
-            "........................",
-        ]),
-    ]
-});
-static MENU_ICONS: LazyLock<[PixelBody; 7]> = LazyLock::new(|| {
-    [
-        authored_icon(&[
-            "........................",
-            ".........hhhhhh.........",
-            ".........h####s.........",
-            "........h######h........",
-            "....hhhh########hhhh....",
-            "....h###v##########s....",
-            "....h#####ssss#####s....",
-            "....h###sd....hs###s....",
-            "...h###s........hv##h...",
-            ".hh####s........d####hh.",
-            ".h####s..........h####s.",
-            ".h####s..........h####s.",
-            ".h####s..........h####s.",
-            ".h####s..........h####s.",
-            ".hs####d........h####ss.",
-            "...h###s........h###s...",
-            "....h#v#hh....dh###s....",
-            "....h#####hhhh#####s....",
-            "....h##########v###s....",
-            "....hsss########ssss....",
-            "........h######s........",
-            ".........h####s.........",
-            ".........hsssss.........",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            ".....h..................",
-            ".....hhh................",
-            ".....h##hh..............",
-            ".....h####h.............",
-            ".....h#####hh...........",
-            ".....h##h####hh.........",
-            ".....h##hhh####hh.......",
-            ".....h#vhhhhh####h......",
-            ".....h#vhhhhhhh###hh....",
-            ".....h#vhhhhhhhhh###hh..",
-            ".....h#v#######dd###ss..",
-            ".....h#vddddddd###ss....",
-            ".....h#vdddddd###s......",
-            ".....h##dddd###ss.......",
-            ".....h##ddd##ss.........",
-            ".....h##d##ss...........",
-            ".....h####s.............",
-            ".....h##ss..............",
-            ".....hss................",
-            ".....h..................",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            ".............hh.........",
-            "...h.........h#hh.......",
-            "...hhhhhhhhhhss##hh.....",
-            "...h#######s...hs##h....",
-            "...h######s......h#s....",
-            "...h#####s........h#h...",
-            "....h###s.........h#s...",
-            "....h##s...........h#h..",
-            "..hh##s............d#s..",
-            "..h##s.............h#s..",
-            "..h#s..............h#s..",
-            "..h#s..............h#s..",
-            "..h#s..............h#s..",
-            "...h#h............h#s...",
-            "...h#d............d#s...",
-            "....h#h..........h#s....",
-            "....h##hh......hh##s....",
-            ".....hs##hhhdhh##ss.....",
-            ".......hs######ss.......",
-            ".........hsssss.........",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "........................",
-            "..........hhhh..........",
-            ".........h####h.........",
-            "........h######h........",
-            ".......h########h.......",
-            "......h#####s####h......",
-            "......h####s.h###s......",
-            ".....h####hhhhh###h.....",
-            "....h####shhhh.h###h....",
-            "...h####s..dd...h###h...",
-            "..hs###s.........h###h..",
-            "....h###hh....hhh#s#s...",
-            ".....h###s....h##s.h....",
-            "......hvvs....hvvs......",
-            "......hvvs....hvvs......",
-            "......hvvs....hvvs......",
-            "......h##s....h##s......",
-            "......h##s....h##s......",
-            ".....h####hhhh####h.....",
-            ".....hsssssssssssss.....",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "..........hhhh..........",
-            "..........h##s..........",
-            ".......h..hh#s..h.......",
-            ".....hhs..hhds..hhh.....",
-            "....h##s..hhds..h##h....",
-            "....h##s..hhds..h##s....",
-            "...h##s...hhds...h##h...",
-            "...h#s....hhds....h#s...",
-            "..h#s.....h##s.....h#h..",
-            "..h#s.....h##s.....h#s..",
-            "..h#s.....hsss.....h#s..",
-            "..h#d..............hds..",
-            "..h#s..............h#s..",
-            "..h#s..............h#s..",
-            "...h#h............h#s...",
-            "...h##h..........h##s...",
-            "....h#dh........h##s....",
-            "....h###h......h###s....",
-            ".....hs##hhhhhh#dss.....",
-            ".......hs######ss.......",
-            ".........hsssss.........",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "........................",
-            "....hhhhhhhhhhhhhhhh....",
-            "...h################h...",
-            "..h#h################h..",
-            "..h##dddddddddddddd##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h##vvvvhvvvvvvvvv##s..",
-            "..h##vvvvvvvvvvhvvv##s..",
-            "..h##vvvhvvvvvhvvvv##s..",
-            "..h##hhhvvvvhhvvhhh##s..",
-            "..h##vvvvvhvvvvvvvv##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h##vvvvvvhvvvvvvv##s..",
-            "..h##v###vdddv###vv##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h################d#s..",
-            "...h################s...",
-            "....hsssssssssssssss....",
-            "........................",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "........h............h..",
-            "......hh#hh........hhs..",
-            "....hh##v##hhh...hh##s..",
-            "..hh####v#####hhh#h##s..",
-            "..h#####v######v##h##s..",
-            "..h#####v######v#hhh#s..",
-            "..h#d###v######v#hhh#s..",
-            "..h##dd#v######vhhvhhs..",
-            "..h#####vd####dv#hhh#s..",
-            "..h#####v#d##d#v#hhh#s..",
-            "..h#####v##dd##v##h##s..",
-            "..h#####v######v##h##s..",
-            "..h#####v######v#####s..",
-            "..h##h##v######v#####s..",
-            "..h#hhh#v######v#####s..",
-            "..h#####v######v#####s..",
-            "..h####svs#####v####ss..",
-            "..h##ss...hss##v##ss....",
-            "..hss........hs#ss......",
-            "..h............h........",
-            "........................",
-            "........................",
-        ]),
-    ]
-});
-fn menu_icon(kind: &str) -> Option<(&'static PixelBody, u32)> {
-    let (index, accent) = match kind {
-        "settings-icon" => (0, rgb(88, 222, 239)),
-        "resume-icon" => (1, rgb(106, 237, 193)),
-        "restart-icon" => (2, rgb(255, 215, 131)),
-        "title-icon" => (3, rgb(182, 201, 219)),
-        "quit-icon" => (4, rgb(220, 125, 130)),
-        "status-icon" => (5, rgb(182, 201, 219)),
-        "map-icon" => (6, rgb(106, 237, 193)),
-        _ => return None,
-    };
-    Some((&MENU_ICONS[index], accent))
-}
-
 // A chart marker is its own compact occupied object. DOM hit regions stay
 // larger than this art; selecting a marker never adds a generic button frame.
 static MAP_HOME: LazyLock<PixelBody> = LazyLock::new(|| {
@@ -866,15 +590,11 @@ fn load_assets(source: &str) -> Assets {
                 name,
                 Art {
                     body: PixelBody::from_ascii(&borrowed, &palette),
-                    sprite,
                 },
             )
         })
         .collect();
-    Assets {
-        palette: atlas.palette,
-        sprites,
-    }
+    Assets { sprites }
 }
 static ASSETS: LazyLock<Assets> =
     LazyLock::new(|| load_assets(include_str!("../../../assets/ui/atlas.json")));
@@ -1080,17 +800,20 @@ impl Painter<'_> {
         self.remaining -= count;
         self.work_remaining -= count;
     }
-    fn control_icon(&mut self, node: &UiNode) {
-        let (body, accent) = if node.kind == "close-icon" {
-            (&*CLOSE_ICON, WHITE)
-        } else if let Some(icon) = menu_icon(&node.kind) {
-            icon
-        } else {
-            let state = selection(node.value, SAVE_ICONS.len());
-            (
-                &SAVE_ICONS[state],
-                [rgb(106, 237, 193), rgb(88, 222, 239), rgb(220, 125, 130)][state],
-            )
+    fn control_icon(&mut self, node: &UiNode, time: f32, reduced: bool) {
+        let Some(icon) = crate::flight_icons::icon(&node.kind) else {
+            return;
+        };
+        let body = &icon.body;
+        let accent = match node.kind.as_str() {
+            "close-icon" => WHITE,
+            "resume-icon" | "map-icon" => rgb(106, 237, 193),
+            "restart-icon" => rgb(255, 215, 131),
+            "title-icon" | "status-icon" => rgb(182, 201, 219),
+            "quit-icon" => rgb(220, 125, 130),
+            "save-icon" => [rgb(106, 237, 193), rgb(88, 222, 239), rgb(220, 125, 130)]
+                [selection(node.value, 3)],
+            _ => rgb(88, 222, 239),
         };
         let count = body.occupied_count();
         if count > self.remaining || count > self.work_remaining {
@@ -1101,11 +824,7 @@ impl Painter<'_> {
         if !fit.is_finite() || fit <= 0.0 {
             return;
         }
-        let scale = if fit >= 1.0 {
-            fit.floor()
-        } else {
-            1.0 / (1.0 / fit).ceil()
-        };
+        let scale = fit;
         let local = Transform {
             position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
             scale: Vec2::splat(scale),
@@ -1126,25 +845,20 @@ impl Painter<'_> {
                         || p.y + half > c[1] + c[3]
                 }) {
                     0
-                } else if node.disabled {
-                    BUTTON_DISABLED_TEXT
-                } else if shade == ICON_EDGE {
-                    let [r, g, b, _] = accent.to_le_bytes();
-                    rgb(
-                        r.saturating_add(38),
-                        g.saturating_add(26),
-                        b.saturating_add(20),
-                    )
-                } else if shade == ICON_RECESS {
-                    button_tone(accent, 0.28)
-                } else if shade == ICON_BEVEL {
-                    button_tone(accent, 0.67)
-                } else if shade == DIM {
-                    button_tone(accent, 0.52)
-                } else if node.active {
-                    brighten(accent)
                 } else {
-                    accent
+                    icon.color(
+                        cell,
+                        shade,
+                        crate::flight_icons::State {
+                            accent,
+                            hovered: node.active,
+                            pressed: node.selected,
+                            disabled: node.disabled,
+                            busy: node.kind == "save-icon" && selection(node.value, 3) == 1,
+                            time,
+                            reduced_motion: reduced,
+                        },
+                    )
                 }
             },
         );
@@ -1260,6 +974,53 @@ impl Painter<'_> {
         self.remaining -= art.body.occupied_count();
     }
     fn portrait(&mut self, node: &UiNode, time: f32, reduced: bool) {
+        let guide = node.value == crate::kikai_art::PORTRAIT_ID as f32;
+        if guide || node.value == crate::kikai_art::PROFILE_PORTRAIT_ID as f32 {
+            let input = crate::kikai_art::DoraInput {
+                rect: node.rect,
+                parent: self.parent,
+                clip: self.clip,
+                time,
+                reduced_motion: reduced,
+                expression: crate::kikai_art::DoraExpression::from_label(
+                    ["neutral", "focused", "concerned", "pleased"]
+                        [node.portrait_expression.min(3) as usize],
+                ),
+                speaking: node.portrait_speaking,
+                disabled: node.disabled,
+            };
+            if guide {
+                crate::kikai_art::append_dora(
+                    self.frame,
+                    &input,
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            } else if let Some(appearance) = node
+                .portrait_kind
+                .zip(node.portrait_main)
+                .zip(node.portrait_sub)
+                .and_then(|((kind, main), sub)| {
+                    crate::kikai_art::ProfileAppearance::from_tokens(kind, main, sub)
+                })
+            {
+                crate::kikai_art::append_profile_portrait(
+                    self.frame,
+                    &input,
+                    appearance,
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            }
+            return;
+        }
+        // New licensed types must never silently use a champion or guide portrait.
+        if !node.value.is_finite()
+            || !(0.0..=7.0).contains(&node.value)
+            || node.value.fract() != 0.0
+        {
+            return;
+        }
         let style = selection(node.value, PORTRAITS.len());
         let art = &PORTRAITS[style];
         let body = &art.body;
@@ -1318,14 +1079,79 @@ impl Painter<'_> {
             );
             return;
         }
-        let names: &[&str] = &CAMPAIGN_SHIPS;
-        let body = &CAMPAIGN_ASSETS.sprites[names[selection(node.value, names.len())]].body;
+        let body = &CAMPAIGN_ASSETS.sprites
+            [CAMPAIGN_SHIPS[selection(node.value, CAMPAIGN_SHIPS.len())]]
+        .body;
+        self.fitted_body(node, body, true);
+    }
+    fn licensed_ship(&mut self, node: &UiNode, time: f32, reduced: bool) {
+        let corporation = [
+            game_core::identity::Corporation::Pan,
+            game_core::identity::Corporation::Renko,
+            game_core::identity::Corporation::Hugo,
+        ][selection(node.value, 3)];
+        let body = game_core::identity::starter_body(corporation);
+        let r = node.rect;
+        let scale = (r[2] / body.width as f32).min(r[3] / body.height as f32);
+        if !scale.is_finite() || scale <= 0.0 {
+            return;
+        }
+        let local = Transform {
+            position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
+            scale: Vec2::splat(scale),
+            ..Default::default()
+        };
+        let clip = self.clip;
+        let disabled = node.disabled;
+        let shade = |cell: Vec2, half: f32, color: u32| {
+            let p = local.point(cell);
+            let half = half * scale;
+            if clip.is_some_and(|c| {
+                p.x - half < c[0]
+                    || p.y - half < c[1]
+                    || p.x + half > c[0] + c[2]
+                    || p.y + half > c[1] + c[3]
+            }) {
+                0
+            } else if disabled {
+                muted(color)
+            } else {
+                color
+            }
+        };
+        let mut budget = game_core::identity::StarterPreviewBudget {
+            pixels: self.remaining,
+            work: self.work_remaining,
+            transforms: 2,
+        };
+        if game_core::identity::append_starter_preview(
+            self.frame,
+            corporation,
+            game_core::identity::StarterPreviewInput {
+                parent: self.parent.compose(local.affine()),
+                time,
+                reduced_motion: reduced,
+                ..Default::default()
+            },
+            &mut budget,
+            |cell, color| shade(cell, 0.5, color),
+            |cell, color| shade(cell, 0.25, color),
+        )
+        .is_ok()
+        {
+            self.remaining = budget.pixels;
+            self.work_remaining = budget.work;
+        }
+    }
+    fn fitted_body(&mut self, node: &UiNode, body: &PixelBody, highlight_active: bool) {
         let count = body.occupied_count();
         let r = node.rect;
-        let scale = (r[2] / body.width as f32)
-            .min(r[3] / body.height as f32)
-            .floor();
-        if scale < 1.0 || count > self.remaining || count > self.work_remaining {
+        let scale = (r[2] / body.width as f32).min(r[3] / body.height as f32);
+        if !scale.is_finite()
+            || scale <= 0.0
+            || count > self.remaining
+            || count > self.work_remaining
+        {
             return;
         }
         let local = Transform {
@@ -1339,13 +1165,17 @@ impl Painter<'_> {
             self.parent.compose(local.affine()),
             |cell, color| {
                 let p = local.point(cell);
-                if clip.is_some_and(|r| {
-                    p.x < r[0] || p.x >= r[0] + r[2] || p.y < r[1] || p.y >= r[1] + r[3]
+                let half = scale * 0.5;
+                if clip.is_some_and(|c| {
+                    p.x - half < c[0]
+                        || p.y - half < c[1]
+                        || p.x + half > c[0] + c[2]
+                        || p.y + half > c[1] + c[3]
                 }) {
                     0
                 } else if node.disabled {
                     muted(color)
-                } else if node.active {
+                } else if highlight_active && node.active {
                     brighten(color)
                 } else {
                     color
@@ -1354,6 +1184,24 @@ impl Painter<'_> {
         );
         self.remaining -= count;
         self.work_remaining -= count;
+    }
+    fn meishi_fittings(&mut self, node: &UiNode, time: f32, reduced: bool) {
+        meishi_art::append(
+            self.frame,
+            meishi_art::Input {
+                kind: &node.kind,
+                rect: node.rect,
+                parent: self.parent,
+                clip: self.clip,
+                value: node.value,
+                // Only the saved earned state illuminates an anonymous socket.
+                earned: node.kind != "meishi-socket" || node.selected,
+                time,
+                reduced,
+            },
+            &mut self.remaining,
+            &mut self.work_remaining,
+        );
     }
     fn console_panel(&mut self, r: [f32; 4]) {
         self.rect(r, 0xff_000000);
@@ -1365,82 +1213,55 @@ impl Painter<'_> {
             }
         }
     }
-    fn frame(&mut self, name: &str, rect: [f32; 4], active: bool, disabled: bool) {
-        let Some(art) = ASSETS.sprites.get(name) else {
-            return;
-        };
-        self.rect(rect, 0xf5_26140d);
-        let width = rect[2].round().max(1.0) as usize;
-        let height = rect[3].round().max(1.0) as usize;
-        let geometry =
-            FrameGeometry::new(name, [width, height], [art.sprite.width, art.sprite.height]);
-        if geometry.rail.contains(&0) {
-            return;
-        }
-        for y in 0..height {
-            let outer = y < geometry.rail[1] || y >= height - geometry.rail[1];
-            let corner = y < geometry.corner[1] || y >= height - geometry.corner[1];
-            let side = if corner {
-                geometry.corner[0]
-            } else {
-                geometry.rail[0]
-            };
-            let left_end = if outer { width } else { side };
-            for x in 0..left_end {
-                self.frame_cell(art, rect, [x, y], geometry, (active, disabled));
-                if self.remaining == 0 || self.work_remaining == 0 {
-                    return;
-                }
-            }
-            if !outer {
-                for x in width - side..width {
-                    self.frame_cell(art, rect, [x, y], geometry, (active, disabled));
-                    if self.remaining == 0 || self.work_remaining == 0 {
-                        return;
-                    }
-                }
-            }
-        }
-    }
-    fn frame_cell(
-        &mut self,
-        art: &Art,
-        rect: [f32; 4],
-        p: [usize; 2],
-        geometry: FrameGeometry,
-        state: (bool, bool),
-    ) {
-        if self.work_remaining == 0 {
-            return;
-        }
-        self.work_remaining -= 1;
-        let (active, disabled) = state;
-        let [sx, sy] = geometry.source_at(p);
-        let index = art.sprite.indices[sy * art.sprite.width + sx] as usize;
-        if index == 0 {
-            return;
-        }
-        let color = ASSETS.palette[index];
-        self.pixel(
-            Vec2::new(rect[0] + p[0] as f32, rect[1] + p[1] as f32),
-            1.0,
-            if disabled {
-                muted(color)
-            } else if active {
-                brighten(color)
-            } else {
-                color
+    fn skin(&mut self, node: &UiNode, kind: sports_ui::Kind) {
+        sports_ui::append(
+            self.frame,
+            &sports_ui::Input {
+                parent: self.parent,
+                rect: node.rect,
+                clip: self.clip,
+                kind,
+                accent: button_accent(&node.kind),
+                active: node.active,
+                selected: node.kind == "nav-tab" && node.selected,
+                disabled: node.disabled,
             },
+            &mut self.remaining,
+            &mut self.work_remaining,
         );
     }
     fn text(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32, centered: bool) {
+        self.text_aligned(
+            rect,
+            text,
+            font,
+            color,
+            if centered {
+                TextAlign::Center
+            } else {
+                TextAlign::Left
+            },
+            centered,
+        );
+    }
+    fn text_aligned(
+        &mut self,
+        rect: [f32; 4],
+        text: &str,
+        font: f32,
+        color: u32,
+        alignment: TextAlign,
+        centered: bool,
+    ) {
+        let bounds = rect;
+        let font = font_scale(font)
+            .min((rect[3] / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE))
+            .min((rect[2] / RoyaleMono::WIDTH).max(MIN_FONT_SCALE));
+        let rect = fractional_text_rect(rect, font);
         let font = font
-            .round()
-            .clamp(1.0, 4.0)
-            .min((rect[3] / 7.0).floor().max(1.0))
-            .min((rect[2] / 5.0).floor().max(1.0));
-        let columns = ((rect[2] + font) / (6.0 * font)).floor() as usize;
-        let rows = ((rect[3] + font) / (8.0 * font)).floor() as usize;
+            .min((rect[3] / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE))
+            .min((rect[2] / RoyaleMono::WIDTH).max(MIN_FONT_SCALE));
+        let (columns, rows) = text_capacity(rect, font);
         if columns == 0 || rows == 0 {
             return;
         }
@@ -1452,10 +1273,11 @@ impl Painter<'_> {
             rect[1]
         };
         for (row, line) in lines.iter().take(rows).enumerate() {
-            let left = if centered {
-                rect[0] + (rect[2] - (line.len() as f32 * 6.0 - 1.0) * font) * 0.5
-            } else {
-                rect[0]
+            let width = (line.len() as f32 * RoyaleMono::ADVANCE - 1.0) * font;
+            let left = match alignment {
+                TextAlign::Left => rect[0],
+                TextAlign::Center => rect[0] + (rect[2] - width) * 0.5,
+                TextAlign::Right => rect[0] + rect[2] - width,
             };
             let text_local = Transform {
                 position: Vec2::new(left, top + row as f32 * 8.0 * font),
@@ -1474,17 +1296,27 @@ impl Painter<'_> {
                 }
                 let letter_local = RoyaleMono::letter_transform(text_local, column);
                 let letter_world = self.parent.compose(letter_local);
-                let clip = self.clip;
+                let clip = self.clip.map_or(bounds, |clip| intersection(bounds, clip));
                 self.frame
                     .push_body_affine_colored(body, letter_world, |cell, _| {
-                        let p = letter_local.point(cell);
-                        if clip.is_some_and(|r| {
-                            p.x < r[0] || p.x >= r[0] + r[2] || p.y < r[1] || p.y >= r[1] + r[3]
-                        }) {
-                            0
-                        } else {
-                            color
-                        }
+                        // Scroll clipping covers complete source cells, including
+                        // fractional edge cells. Hidden cells still charge both
+                        // budgets and retain their glyph's composed transform.
+                        let outside = [
+                            cell + Vec2::splat(-0.5),
+                            cell + Vec2::new(0.5, -0.5),
+                            cell + Vec2::new(-0.5, 0.5),
+                            cell + Vec2::splat(0.5),
+                        ]
+                        .into_iter()
+                        .map(|p| letter_local.point(p))
+                        .any(|p| {
+                            p.x < clip[0]
+                                || p.x > clip[0] + clip[2]
+                                || p.y < clip[1]
+                                || p.y > clip[1] + clip[3]
+                        });
+                        if outside { 0 } else { color }
                     });
                 self.remaining -= count;
                 self.work_remaining -= count;
@@ -1507,10 +1339,22 @@ impl Painter<'_> {
             .collect();
         let characters = label.chars().count();
         let units = (characters as f32 * RoyaleMono::ADVANCE - 1.0).max(RoyaleMono::WIDTH);
-        let font = font
-            .min((width / units).floor().max(1.0))
-            .min((height / RoyaleMono::HEIGHT).floor().max(1.0));
-        let columns = ((width + font) / (RoyaleMono::ADVANCE * font)).floor() as usize;
+        let content = node
+            .label_rect
+            .and_then(|label| contained_region(label, r))
+            .unwrap_or([r[0] + padding_x, r[1] + 2.0, width, height]);
+        let mut font = font_scale(font)
+            .min((width / units).max(MIN_FONT_SCALE))
+            .min((height / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE));
+        let fit = fractional_text_rect(content, font);
+        font = font
+            .min((fit[2] / units).max(MIN_FONT_SCALE))
+            .min((fit[3] / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE));
+        let mut columns = text_capacity(fractional_text_rect(content, font), font).0;
+        if font > MIN_FONT_SCALE && columns < characters {
+            font = font.next_down().max(MIN_FONT_SCALE);
+            columns = text_capacity(fractional_text_rect(content, font), font).0;
+        }
         if characters > columns {
             let visible = if columns >= 4 { columns - 3 } else { columns };
             if let Some((byte, _)) = label.char_indices().nth(visible) {
@@ -1520,14 +1364,15 @@ impl Painter<'_> {
                 label.push_str("...");
             }
         }
-        let content = [r[0] + padding_x, r[1] + 2.0, width, height];
         let previous_clip = self.clip;
         self.clip = Some(previous_clip.map_or(content, |clip| intersection(content, clip)));
         self.text(content, &label, font, color, true);
         self.clip = previous_clip;
     }
     fn settings_label(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32) {
-        if rect[2] < RoyaleMono::WIDTH || rect[3] < RoyaleMono::HEIGHT {
+        if rect[2] < RoyaleMono::WIDTH * MIN_FONT_SCALE
+            || rect[3] < RoyaleMono::HEIGHT * MIN_FONT_SCALE
+        {
             return;
         }
         // DOM text can wrap differently from the native bitmap font. Select the
@@ -1556,13 +1401,9 @@ impl Painter<'_> {
         } else {
             rgb(41, 59, 68)
         };
-        // One quiet card outline. The label and interactive strip are both
-        // independently measured and retain their own padding inside it.
-        self.rect(r, rgb(10, 18, 24));
-        self.rect([r[0], r[1], r[2], 0.5], border);
-        self.rect([r[0], r[1] + r[3] - 0.5, r[2], 0.5], border);
-        self.rect([r[0], r[1], 0.5, r[3]], border);
-        self.rect([r[0] + r[2] - 0.5, r[1], 0.5, r[3]], border);
+        // Open graphite rows retain measured label/control geometry.
+        // Only focus receives a small native competitive chevron.
+        self.skin(node, sports_ui::Kind::Row);
         self.settings_label(
             label,
             &node.text,
@@ -1648,39 +1489,10 @@ impl Painter<'_> {
         let r = node.rect;
         let accent = button_accent(&node.kind);
         let selected = node.kind == "nav-tab" && node.selected;
-        let active = node.active && !node.disabled;
-        let fill = if node.disabled {
-            rgb(10, 16, 22)
-        } else {
-            button_tone(
-                accent,
-                if selected {
-                    0.20
-                } else if active {
-                    0.14
-                } else {
-                    0.07
-                },
-            )
-        };
-        let rail = if node.disabled {
-            rgb(51, 64, 74)
-        } else if selected || active {
-            accent
-        } else {
-            button_tone(accent, 0.40)
-        };
+        self.skin(node, sports_ui::Kind::Button);
         if r[2] < 3.0 || r[3] < 3.0 {
-            self.rect(r, fill);
             return;
         }
-        // Stepped corners, continuous rails and one quiet inner bevel.
-        self.rect([r[0] + 1.0, r[1], r[2] - 2.0, r[3]], fill);
-        self.rect([r[0], r[1] + 1.0, r[2], r[3] - 2.0], fill);
-        self.rect([r[0] + 1.0, r[1], r[2] - 2.0, 1.0], rail);
-        self.rect([r[0] + 1.0, r[1] + r[3] - 1.0, r[2] - 2.0, 1.0], rail);
-        self.rect([r[0], r[1] + 1.0, 1.0, r[3] - 2.0], rail);
-        self.rect([r[0] + r[2] - 1.0, r[1] + 1.0, 1.0, r[3] - 2.0], rail);
         if selected && r[2] >= 10.0 && r[3] >= 10.0 {
             self.rect(
                 [r[0] + 3.0, r[1] + r[3] - 3.0, r[2] - 6.0, 2.0],
@@ -1705,11 +1517,7 @@ impl Painter<'_> {
     }
     fn node(&mut self, node: &UiNode, time: f32, reduced: bool) {
         let r = node.rect;
-        let font = if node.font.is_finite() {
-            node.font.round().clamp(1.0, 4.0)
-        } else {
-            1.0
-        };
+        let font = font_scale(node.font);
         let color = if node.disabled {
             DIM
         } else if node.active {
@@ -1718,7 +1526,118 @@ impl Painter<'_> {
             WHITE
         };
         match node.kind.as_str() {
-            "text" => self.text(r, &node.text, font, color, false),
+            "garage-bay" => {
+                crate::garage_art::append(
+                    self.frame,
+                    &crate::garage_art::Input {
+                        parent: self.parent,
+                        rect: r,
+                        clip: self.clip,
+                        corporation: selection(node.value, 3),
+                        time,
+                        reduced_motion: reduced,
+                        active: node.active,
+                    },
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            }
+            "co-op-invite" | "co-op-join" | "co-op-roster" | "multiplayer-icon" => {
+                use crate::co_op_art::{self, Kind};
+                let kind = match node.kind.as_str() {
+                    "co-op-invite" => Kind::Invite,
+                    "co-op-join" | "multiplayer-icon" => Kind::Join,
+                    _ if node.value.is_finite()
+                        && node.value.fract() == 0.0
+                        && (0.0..=8.0).contains(&node.value) =>
+                    {
+                        Kind::Roster(node.value as u8)
+                    }
+                    _ => return,
+                };
+                co_op_art::append(
+                    self.frame,
+                    &co_op_art::Input {
+                        kind,
+                        rect: r,
+                        clip: self.clip,
+                        parent: self.parent,
+                        style: co_op_art::Style {
+                            hovered: node.active,
+                            busy: node.selected,
+                            disabled: node.disabled,
+                            time,
+                            reduced_motion: reduced,
+                        },
+                    },
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            }
+            "text" => self.text_aligned(r, &node.text, font, color, node.text_align, false),
+            "collection-name" | "collection-state" | "collection-meta" | "collection-cost"
+            | "collection-reason" => {
+                // This is hierarchy only: all copy, ownership and exact costs
+                // come from the discovered-only host HUD, never a local catalog.
+                let color = if node.disabled {
+                    BUTTON_DISABLED_TEXT
+                } else {
+                    match node.kind.as_str() {
+                        "collection-name" if node.selected => CYAN,
+                        "collection-name" | "collection-cost" => WHITE,
+                        "collection-reason" => rgb(212, 172, 96),
+                        "collection-state" => match node.value {
+                            1.0 => GOLD,  // Known blueprint, not crafted.
+                            2.0 => WHITE, // Owned; no inference of compatibility.
+                            3.0 => CYAN,  // Actual active hull/equipped ability.
+                            _ => DIM,
+                        },
+                        _ => DIM,
+                    }
+                };
+                self.text_aligned(r, &node.text, font, color, node.text_align, false);
+            }
+            "collection-entry" | "category-symbol" | "corporation-symbol" => {
+                let token = (node.value.is_finite()
+                    && node.value.fract() == 0.0
+                    && (0.0..3.0).contains(&node.value))
+                .then_some(node.value as usize);
+                let input = collection_ui::Input {
+                    parent: self.parent,
+                    rect: r,
+                    clip: self.clip,
+                    active: node.active,
+                    selected: node.selected,
+                    disabled: node.disabled,
+                    time,
+                    reduced,
+                };
+                if node.kind == "collection-entry" {
+                    if node.value != -1.0 && token.is_none() {
+                        return;
+                    }
+                    collection_ui::append_entry(
+                        self.frame,
+                        &input,
+                        token,
+                        &mut self.remaining,
+                        &mut self.work_remaining,
+                    );
+                } else if let Some(token) = token {
+                    collection_ui::append_symbol(
+                        self.frame,
+                        &input,
+                        if node.kind == "category-symbol" {
+                            collection_ui::SymbolKind::Category
+                        } else {
+                            collection_ui::SymbolKind::Corporation
+                        },
+                        token,
+                        &mut self.remaining,
+                        &mut self.work_remaining,
+                    );
+                }
+            }
             "status-text" | "warning-text" => {
                 // The measured status slot is distinct from its accessible
                 // 44px hitbox. One logical pixel font stays stable on zoom;
@@ -1740,7 +1659,7 @@ impl Painter<'_> {
                 } else {
                     DIM
                 };
-                crate::pixel_ui::micro_text(
+                crate::pixel_ui::micro_text_right(
                     self.frame,
                     self.parent,
                     r,
@@ -1751,7 +1670,7 @@ impl Painter<'_> {
                     &mut self.work_remaining,
                 );
             }
-            "offense-text" | "defense-text" | "passive-text" => self.text(
+            "offense-text" | "defense-text" | "passive-text" => self.text_aligned(
                 r,
                 &node.text,
                 font,
@@ -1760,15 +1679,33 @@ impl Painter<'_> {
                 } else {
                     button_accent(&node.kind)
                 },
+                node.text_align,
                 false,
             ),
-            "panel" => self.frame("panel", r, node.active, node.disabled),
+            "title-backdrop" => self.rect(r, u32::from_le_bytes([1, 2, 5, 246])),
+            "scene" => self.skin(node, sports_ui::Kind::Scene),
+            "panel" => self.skin(node, sports_ui::Kind::Panel),
+            "meishi-panel" | "meishi-portrait-frame" | "meishi-seal" | "meishi-socket" => {
+                self.meishi_fittings(node, time, reduced);
+            }
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
+            "licensed-ship" => self.licensed_ship(node, time, reduced),
+            "craft-component" => {
+                if node.value.is_finite()
+                    && node.value.fract() == 0.0
+                    && node.value >= 0.0
+                    && let Some(body) = component_art::body(node.value as usize)
+                {
+                    self.fitted_body(node, body, false);
+                }
+            }
             "campaign-patch" => self.campaign(node, false, time, reduced),
             "campaign-ship" => self.campaign(node, true, time, reduced),
             "close-icon" | "save-icon" | "settings-icon" | "resume-icon" | "restart-icon"
-            | "title-icon" | "quit-icon" | "status-icon" | "map-icon" => self.control_icon(node),
+            | "title-icon" | "quit-icon" | "status-icon" | "map-icon" | "fullscreen-icon" => {
+                self.control_icon(node, time, reduced)
+            }
             "map-field" => self.map_field(node),
             "map-ring" => self.map_ring(node),
             "map-home" | "map-player" | "map-site" => self.map_marker(node),
@@ -1814,7 +1751,7 @@ impl Painter<'_> {
                 self.rect(r, rgb(0, 0, 0));
                 self.rect([r[0], r[1], r[2], 1.0], rgb(38, 55, 63));
                 let height = (r[3] - 6.0).max(RoyaleMono::HEIGHT);
-                let font = font.min((height / RoyaleMono::HEIGHT).floor().max(1.0));
+                let font = font.min((height / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE));
                 let advance = RoyaleMono::ADVANCE * font;
                 let columns = ((r[2] + font) / advance).floor() as usize;
                 let chars: Vec<_> = node.text.chars().take(256).collect();
@@ -1858,24 +1795,25 @@ impl Painter<'_> {
                 self.clip = previous_clip;
             }
             "button" => {
-                self.frame("button", r, node.active, node.disabled);
+                self.skin(node, sports_ui::Kind::Button);
                 self.button_label(node, font, color);
             }
             "nav-tab" | "primary-button" | "exit-button" | "offense-button" | "defense-button"
             | "passive-button" | "restart-button" => self.semantic_button(node, font),
             "logo" => {
-                let width = ASSETS
-                    .sprites
-                    .get("logo")
-                    .map_or(256.0, |a| a.body.width as f32);
-                let settle = if reduced {
-                    0.0
-                } else {
-                    (6.0 * (-time.max(0.0) * 4.0).exp()).round()
-                };
-                let shimmer = (!reduced)
-                    .then_some((time * 24.0).rem_euclid(width + 40.0) - width * 0.5 - 20.0);
-                self.artwork("logo", r, 0.0, settle, shimmer, node.disabled);
+                title_art::append(
+                    self.frame,
+                    &title_art::Input {
+                        parent: self.parent,
+                        rect: r,
+                        clip: self.clip,
+                        time,
+                        reduced,
+                        disabled: node.disabled,
+                    },
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
             }
             "seal" => {
                 let rotation = if reduced {
@@ -1906,6 +1844,37 @@ impl Painter<'_> {
                 }
             }
             _ => {}
+        }
+    }
+}
+
+// MEISHI sockets and their later emblems share a group. Remember failed sockets
+// without altering ordinary campaign scenes or introducing a new node payload.
+fn paired_meishi_node(
+    painter: &mut Painter<'_>,
+    node: &UiNode,
+    time: f32,
+    reduced: bool,
+    failed_sockets: &mut u8,
+) {
+    if node.kind == "campaign-patch" {
+        let slot = selection(node.value, crate::champion_patches::COUNT);
+        if slot < 8 && *failed_sockets & (1 << slot) != 0 {
+            return;
+        }
+    }
+    let previous = painter.remaining;
+    painter.node(node, time, reduced);
+    if node.kind == "meishi-socket"
+        && node.value.is_finite()
+        && node.value.fract() == 0.0
+        && (0.0..24.0).contains(&node.value)
+    {
+        let bit = 1 << (node.value as usize % 8);
+        if painter.remaining == previous {
+            *failed_sockets |= bit;
+        } else {
+            *failed_sockets &= !bit;
         }
     }
 }
@@ -1945,6 +1914,7 @@ pub fn draw(
             ..Transform::default()
         }
         .affine();
+        let mut failed_sockets = 0;
         for node in &group.nodes {
             if nodes == 512 || painter.remaining == 0 || painter.work_remaining == 0 {
                 return;
@@ -1968,7 +1938,13 @@ pub fn draw(
             {
                 continue;
             }
-            painter.node(node, time, reduced_motion);
+            paired_meishi_node(
+                &mut painter,
+                node,
+                time,
+                reduced_motion,
+                &mut failed_sockets,
+            );
         }
     }
 }
@@ -2131,7 +2107,7 @@ mod tests {
     }
 
     #[test]
-    fn campaign_quads_fit_integer_scale_and_keep_unlit_material() {
+    fn campaign_quads_fit_authored_rects_and_keep_unlit_material() {
         for kind in ["campaign-ship", "campaign-patch", "portrait"] {
             for value in 0..8 {
                 let mut scene = scene(kind);
@@ -2145,7 +2121,11 @@ mod tests {
                 assert_eq!(batch.transforms.len(), 1);
                 let t = batch.transforms[0];
                 assert_eq!(t.b[2..], [0.0, 0.0]);
-                assert_eq!(t.a[2].fract(), 0.0);
+                match kind {
+                    "campaign-patch" => assert_eq!(t.a[2], 2.5),
+                    "campaign-ship" => assert_eq!(t.a[2], 60.0 / 32.0),
+                    _ => assert_eq!(t.a[2].fract(), 0.0),
+                }
                 assert_eq!(t.a[2], t.b[1]);
                 for pixel in &batch.pixels {
                     let p = t.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0)
@@ -2156,6 +2136,855 @@ mod tests {
         }
     }
     #[test]
+    fn licensed_ui_preview_keeps_authored_fine_cells_and_clips_both_cell_extents() {
+        for (corp, count) in [(0, 1867), (1, 1864), (2, 2780)] {
+            for extent in [15.125, 120.25] {
+                for clipped in [false, true] {
+                    let mut input = scene("licensed-ship");
+                    let group = Vec2::from_array(input.groups[0].position);
+                    let node = &mut input.groups[0].nodes[0];
+                    node.value = corp as f32;
+                    node.rect = [5.125, 9.25, extent, extent * 1.25];
+                    let bounds = if clipped {
+                        [5.125, 9.25, extent * 0.63, extent * 1.25]
+                    } else {
+                        node.rect
+                    };
+                    node.clip = clipped.then_some(bounds);
+                    let mut frame = FrameBuilder::new();
+                    draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+                    assert_eq!(
+                        frame.frame().pixel_count,
+                        count,
+                        "UI retains both authored source grids at every fit"
+                    );
+                    let mut visible = 0;
+                    for batch in &frame.frame().batches {
+                        for pixel in &batch.pixels {
+                            if pixel.color >> 24 == 0 {
+                                continue;
+                            }
+                            visible += 1;
+                            let t = batch.transforms[pixel.transform_slot()];
+                            for corner in [
+                                Vec2::splat(-0.5),
+                                Vec2::new(-0.5, 0.5),
+                                Vec2::new(0.5, -0.5),
+                                Vec2::splat(0.5),
+                            ] {
+                                let p = t.point(Vec2::from_array(pixel.local) + corner)
+                                    + Vec2::new(320.0, 180.0)
+                                    - group;
+                                assert!(
+                                    p.x >= bounds[0] - 0.0001
+                                        && p.y >= bounds[1] - 0.0001
+                                        && p.x <= bounds[0] + bounds[2] + 0.0001
+                                        && p.y <= bounds[1] + bounds[3] + 0.0001
+                                );
+                            }
+                        }
+                    }
+                    if clipped {
+                        assert!(visible > 0 && visible < count);
+                    } else {
+                        assert_eq!(visible, count);
+                    }
+                }
+            }
+        }
+    }
+    #[test]
+    fn campaign_ship_continuous_fit_retains_all_cells_below_authored_size() {
+        for (index, name) in CAMPAIGN_SHIPS.iter().enumerate() {
+            let body = &CAMPAIGN_ASSETS.sprites[*name].body;
+            // 32 CSS pixels at UI scale 2.4, plus deliberately subpixel fits.
+            for extent in [0.125, 32.0 / 2.4, 22.5, 32.0, 48.0, 60.0] {
+                let mut input = scene("campaign-ship");
+                let node = &mut input.groups[0].nodes[0];
+                node.value = index as f32;
+                node.rect = [5.125, 9.375, extent, extent * 0.75];
+                let rect = node.rect;
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+                assert_eq!(
+                    frame.frame().pixel_count,
+                    body.occupied_count(),
+                    "{name}, {extent}"
+                );
+                let batch = &frame.frame().batches[0];
+                assert_eq!(batch.transforms.len(), 1);
+                let t = batch.transforms[0];
+                let scale = extent * 0.75 / 32.0;
+                assert_eq!(t.a[2], scale);
+                assert_eq!(t.b[1], scale);
+                assert_eq!(t.b[2..], [0.0, 0.0]);
+                for pixel in &batch.pixels {
+                    assert_ne!(pixel.color >> 24, 0);
+                    let center = t.point(Vec2::from_array(pixel.local)) + Vec2::new(220.0, 130.0);
+                    let half = scale * 0.5;
+                    for corner in [
+                        Vec2::new(-half, -half),
+                        Vec2::new(half, -half),
+                        Vec2::new(-half, half),
+                        Vec2::new(half, half),
+                    ] {
+                        let point = center + corner;
+                        assert!(
+                            point.x >= rect[0] - 0.0001 && point.x <= rect[0] + rect[2] + 0.0001
+                        );
+                        assert!(
+                            point.y >= rect[1] - 0.0001 && point.y <= rect[1] + rect[3] + 0.0001
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn campaign_ship_continuous_fit_preserves_state_colors_and_whole_cell_clip() {
+        for (index, name) in CAMPAIGN_SHIPS.iter().enumerate() {
+            let body = &CAMPAIGN_ASSETS.sprites[*name].body;
+            for (active, disabled) in [(false, false), (true, false), (false, true), (true, true)] {
+                let mut input = scene("campaign-ship");
+                let node = &mut input.groups[0].nodes[0];
+                node.value = index as f32;
+                node.rect = [5.125, 9.375, 22.5, 17.25];
+                node.active = active;
+                node.disabled = disabled;
+                let clip = [5.125, 9.375, 11.25, 17.25];
+                node.clip = Some(clip);
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 17.0, false);
+                assert_eq!(frame.frame().pixel_count, body.occupied_count());
+                let scale = 17.25 / 32.0;
+                let local = Transform {
+                    position: Vec2::new(16.375, 18.0),
+                    scale: Vec2::splat(scale),
+                    ..Default::default()
+                };
+                let mut visible = 0;
+                for batch in &frame.frame().batches {
+                    for pixel in &batch.pixels {
+                        let cell = Vec2::from_array(pixel.local);
+                        let x = (cell.x + 15.5) as usize;
+                        let y = (cell.y + 15.5) as usize;
+                        let source = body.color_at(x, y).unwrap();
+                        let center = local.point(cell);
+                        let half = scale * 0.5;
+                        let contained = center.x - half >= clip[0]
+                            && center.y - half >= clip[1]
+                            && center.x + half <= clip[0] + clip[2]
+                            && center.y + half <= clip[1] + clip[3];
+                        let expected = if !contained {
+                            0
+                        } else if disabled {
+                            muted(source)
+                        } else if active {
+                            brighten(source)
+                        } else {
+                            source
+                        };
+                        assert_eq!(pixel.color, expected, "{name} cell {x},{y}");
+                        if contained {
+                            visible += 1;
+                            let t = batch.transforms[pixel.transform_slot()];
+                            let actual = t.point(cell) + Vec2::new(220.0, 130.0);
+                            for corner in [
+                                Vec2::new(-half, -half),
+                                Vec2::new(half, -half),
+                                Vec2::new(-half, half),
+                                Vec2::new(half, half),
+                            ] {
+                                let point = actual + corner;
+                                assert!(
+                                    point.x >= clip[0] - 0.0001
+                                        && point.x <= clip[0] + clip[2] + 0.0001
+                                );
+                                assert!(
+                                    point.y >= clip[1] - 0.0001
+                                        && point.y <= clip[1] + clip[3] + 0.0001
+                                );
+                            }
+                        }
+                    }
+                }
+                assert!(visible > 0 && visible < body.occupied_count());
+            }
+        }
+    }
+
+    #[test]
+    fn campaign_ship_continuous_fit_debits_both_quotas_atomically_including_clipped_cells() {
+        for (index, name) in CAMPAIGN_SHIPS.iter().enumerate() {
+            let count = CAMPAIGN_ASSETS.sprites[*name].body.occupied_count();
+            let mut input = scene("campaign-ship");
+            let node = &mut input.groups[0].nodes[0];
+            node.value = index as f32;
+            node.rect = [5.125, 9.375, 13.25, 13.25];
+            // No visible cells: clipping still charges the complete submitted body.
+            let clip = Some([100.0, 100.0, 1.0, 1.0]);
+            for (pixels, work, expected) in [
+                (count - 1, count, 0),
+                (count, count - 1, 0),
+                (count, count, count),
+            ] {
+                let mut frame = FrameBuilder::new();
+                frame.push_body(&CELL, Transform::default());
+                let previous = frame.frame().clone();
+                let mut painter = Painter {
+                    frame: &mut frame,
+                    parent: AffineTransform::default(),
+                    remaining: pixels,
+                    viewport: Vec2::new(640.0, 360.0),
+                    clip,
+                    work_remaining: work,
+                };
+                painter.node(node, 0.0, true);
+                assert_eq!(painter.frame.frame().pixel_count, 1 + expected);
+                assert_eq!(
+                    (painter.remaining, painter.work_remaining),
+                    (pixels - expected, work - expected)
+                );
+                if expected == 0 {
+                    assert_eq!(
+                        painter.frame.frame().batches[0].pixels,
+                        previous.batches[0].pixels
+                    );
+                    assert_eq!(
+                        painter.frame.frame().batches[0].transforms,
+                        previous.batches[0].transforms
+                    );
+                } else {
+                    assert!(
+                        painter.frame.frame().batches[0]
+                            .pixels
+                            .iter()
+                            .skip(1)
+                            .all(|p| p.color == 0)
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_positions_each_wrapped_line_without_vertical_change() {
+        // The authored layout wraps into three differently sized lines at font .75.
+        let lines = ["I", "WWWW", "WWW"];
+        let count = lines
+            .iter()
+            .flat_map(|line| line.chars())
+            .map(|c| RoyaleMono::body(c).occupied_count())
+            .sum::<usize>();
+        for kind in ["text", "offense-text", "defense-text", "passive-text"] {
+            for alignment in [TextAlign::Left, TextAlign::Center, TextAlign::Right] {
+                let mut input = scene(kind);
+                let node = &mut input.groups[0].nodes[0];
+                node.text = "I\nWWWW WWW".into();
+                node.rect = [5.125, 9.375, 24.0, 24.0];
+                node.font = 0.75;
+                node.text_align = alignment;
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+                assert_eq!(frame.frame().pixel_count, count);
+                let batch = &frame.frame().batches[0];
+                assert_eq!(batch.transforms.len(), 8);
+                let mut index = 0;
+                for (row, line) in lines.iter().enumerate() {
+                    let width = (line.len() as f32 * 6.0 - 1.0) * 0.75;
+                    let left = 5.125
+                        + match alignment {
+                            TextAlign::Left => 0.0,
+                            TextAlign::Center => (24.0 - width) * 0.5,
+                            TextAlign::Right => 24.0 - width,
+                        };
+                    for (column, _) in line.chars().enumerate() {
+                        let t = batch.transforms[index];
+                        assert_eq!(t.a[2], 0.75);
+                        assert_eq!(t.b[1], 0.75);
+                        assert!(
+                            (t.a[0] + 220.0 - (left + column as f32 * 4.5 + 1.875)).abs() < 0.0001
+                        );
+                        assert!(
+                            (t.a[1] + 130.0 - (9.375 + row as f32 * 6.0 + 2.625)).abs() < 0.0001
+                        );
+                        index += 1;
+                    }
+                }
+                assert!(batch.pixels.iter().all(|p| p.color >> 24 != 0));
+            }
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_clips_whole_fractional_cells_and_keeps_work_charge() {
+        let mut input = scene("text");
+        let node = &mut input.groups[0].nodes[0];
+        node.rect = [5.125, 9.375, 35.0, 18.0];
+        node.text = "WWW\nI".into();
+        node.font = 0.75;
+        let source_count = "WWWI"
+            .chars()
+            .map(|c| RoyaleMono::body(c).occupied_count())
+            .sum::<usize>();
+        for alignment in [TextAlign::Left, TextAlign::Center, TextAlign::Right] {
+            input.groups[0].nodes[0].text_align = alignment;
+            let clip = [8.125, 10.125, 29.0, 8.25];
+            input.groups[0].nodes[0].clip = Some(clip);
+            let mut frame = FrameBuilder::new();
+            draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            assert_eq!(frame.frame().pixel_count, source_count);
+            let mut visible = 0;
+            for batch in &frame.frame().batches {
+                for pixel in &batch.pixels {
+                    if pixel.color >> 24 == 0 {
+                        continue;
+                    }
+                    visible += 1;
+                    let t = batch.transforms[pixel.transform_slot()];
+                    for corner in [
+                        Vec2::splat(-0.5),
+                        Vec2::new(0.5, -0.5),
+                        Vec2::new(-0.5, 0.5),
+                        Vec2::splat(0.5),
+                    ] {
+                        let p = t.point(Vec2::from_array(pixel.local) + corner)
+                            + Vec2::new(220.0, 130.0);
+                        assert!(p.x >= clip[0] - 0.0001 && p.x <= clip[0] + clip[2] + 0.0001);
+                        assert!(p.y >= clip[1] - 0.0001 && p.y <= clip[1] + clip[3] + 0.0001);
+                    }
+                }
+            }
+            assert!(visible > 0 && visible < source_count);
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: source_count,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: Some(clip),
+                work_remaining: source_count,
+            };
+            painter.node(&input.groups[0].nodes[0], 0.0, true);
+            assert_eq!((painter.remaining, painter.work_remaining), (0, 0));
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_defaults_invalid_payloads_without_losing_other_nodes() {
+        for (token, expected) in [
+            ("\"left\"", TextAlign::Left),
+            ("\"center\"", TextAlign::Center),
+            ("\"right\"", TextAlign::Right),
+            ("\"justify\"", TextAlign::Left),
+            ("null", TextAlign::Left),
+            ("17", TextAlign::Left),
+            ("{}", TextAlign::Left),
+            ("[]", TextAlign::Left),
+        ] {
+            let json = format!(
+                r#"{{"groups":[{{"nodes":[{{"kind":"text","text_align":{token}}},{{"kind":"text"}}]}}]}}"#
+            );
+            let input: UiScene = serde_json::from_str(&json).unwrap();
+            assert_eq!(input.groups[0].nodes.len(), 2);
+            assert_eq!(input.groups[0].nodes[0].text_align, expected);
+            assert_eq!(input.groups[0].nodes[1].text_align, TextAlign::Left);
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_does_not_change_centered_button_label_packets() {
+        let render = |alignment| {
+            let mut input = scene("primary-button");
+            input.groups[0].nodes[0].rect = [5.125, 9.375, 80.0, 24.0];
+            input.groups[0].nodes[0].text = "LAUNCH".into();
+            input.groups[0].nodes[0].font = 0.75;
+            input.groups[0].nodes[0].text_align = alignment;
+            let mut frame = FrameBuilder::new();
+            draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            frame.finish()
+        };
+        let baseline = render(TextAlign::Left);
+        for alignment in [TextAlign::Center, TextAlign::Right] {
+            let other = render(alignment);
+            assert_eq!(baseline.pixel_count, other.pixel_count);
+            for (a, b) in baseline.batches.iter().zip(&other.batches) {
+                assert_eq!(a.pixels, b.pixels);
+                assert_eq!(a.transforms, b.transforms);
+            }
+        }
+    }
+
+    #[test]
+    fn component_icons_keep_source_detail_at_fractional_fit_and_clip_whole_cells() {
+        for category in 0..3 {
+            for extent in [17.25, 48.0, 73.5] {
+                for clipped in [false, true] {
+                    let mut input = scene("craft-component");
+                    let node = &mut input.groups[0].nodes[0];
+                    node.value = category as f32;
+                    node.rect = [5.25, 9.5, extent, extent];
+                    let clip = [5.25, 9.5, extent * 0.6, extent];
+                    node.clip = clipped.then_some(clip);
+                    let mut frame = FrameBuilder::new();
+                    draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 1.5, false);
+                    let full = component_art::body(category).unwrap().occupied_count();
+                    assert!(frame.frame().pixel_count > 0);
+                    assert_eq!(frame.frame().pixel_count, full);
+                    let visible = frame
+                        .frame()
+                        .batches
+                        .iter()
+                        .flat_map(|b| &b.pixels)
+                        .filter(|p| p.color >> 24 != 0)
+                        .count();
+                    if clipped {
+                        assert!(visible > 0 && visible < full);
+                    } else {
+                        assert_eq!(visible, full);
+                    }
+                    for batch in &frame.frame().batches {
+                        for pixel in &batch.pixels {
+                            if pixel.color >> 24 == 0 {
+                                continue;
+                            }
+                            let t = batch.transforms[pixel.transform_slot()];
+                            assert_eq!(t.a[2], extent / 64.0);
+                            assert_eq!(t.b[1], extent / 64.0);
+                            assert_eq!(t.b[2..], [0.0, 0.0]);
+                            let p =
+                                t.point(Vec2::from_array(pixel.local)) + Vec2::new(220.0, 130.0);
+                            let half = extent / 128.0;
+                            let bounds = if clipped {
+                                clip
+                            } else {
+                                [5.25, 9.5, extent, extent]
+                            };
+                            assert!(
+                                p.x - half >= bounds[0] - 0.0001
+                                    && p.y - half >= bounds[1] - 0.0001
+                            );
+                            assert!(
+                                p.x + half <= bounds[0] + bounds[2] + 0.0001
+                                    && p.y + half <= bounds[1] + bounds[3] + 0.0001
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #[test]
+    fn component_icon_rejects_invalid_ids_and_preserves_each_shared_budget() {
+        for value in [-1.0, 1.5, 3.0, f32::NAN, f32::INFINITY, 1e20] {
+            let mut input = scene("craft-component");
+            input.groups[0].nodes[0].value = value;
+            let mut frame = FrameBuilder::new();
+            draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            assert_eq!(frame.frame().pixel_count, 0);
+        }
+        let input = scene("craft-component");
+        let count = component_art::body(0).unwrap().occupied_count();
+        for (pixels, work, expected) in [
+            (count - 1, count, 0),
+            (count, count - 1, 0),
+            (count, count, count),
+        ] {
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: pixels,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: None,
+                work_remaining: work,
+            };
+            painter.node(&input.groups[0].nodes[0], 0.0, true);
+            assert_eq!(painter.frame.frame().pixel_count, expected);
+            assert_eq!(painter.remaining, pixels - expected);
+            assert_eq!(painter.work_remaining, work - expected);
+        }
+    }
+    #[test]
+    fn meishi_fittings_keep_metal_neutral_corporate_enamel_and_whole_clipped_cells() {
+        let camera = Vec2::new(75.5, -39.25);
+        let group = Vec2::new(100.25, 50.5);
+        let viewport = Vec2::new(640.0, 360.0);
+        for kind in [
+            "meishi-panel",
+            "meishi-portrait-frame",
+            "meishi-seal",
+            "meishi-socket",
+        ] {
+            let mut palettes = Vec::new();
+            for corporation in 0..3 {
+                for clip in [None, Some([5.25, 9.5, 22.0, 27.0])] {
+                    let mut input = scene(kind);
+                    input.groups[0].position = group.to_array();
+                    let node = &mut input.groups[0].nodes[0];
+                    node.rect = [5.125, 9.375, 40.5, 40.5];
+                    node.value = if kind == "meishi-socket" {
+                        corporation * 8 + 3
+                    } else {
+                        corporation
+                    } as f32;
+                    node.selected = true;
+                    node.clip = clip;
+                    let mut frame = FrameBuilder::new();
+                    draw(
+                        &mut frame,
+                        &input,
+                        camera.to_array(),
+                        viewport.to_array(),
+                        19.0,
+                        true,
+                    );
+                    assert!(frame.frame().pixel_count > 100);
+                    let allowed = clip.unwrap_or([5.125, 9.375, 40.5, 40.5]);
+                    let mut colors = std::collections::HashSet::new();
+                    for batch in &frame.frame().batches {
+                        for cell in &batch.pixels {
+                            let transform = batch.transforms[cell.transform_slot()];
+                            assert_eq!(transform.b[2..], [0.0, 0.0]);
+                            if cell.color >> 24 == 0 {
+                                continue;
+                            }
+                            colors.insert(cell.color);
+                            for corner in [
+                                Vec2::splat(-0.5),
+                                Vec2::new(0.5, -0.5),
+                                Vec2::new(-0.5, 0.5),
+                                Vec2::splat(0.5),
+                            ] {
+                                let local = transform.point(Vec2::from_array(cell.local) + corner)
+                                    - camera
+                                    + viewport * 0.5
+                                    - group;
+                                assert!(local.is_finite());
+                                assert!(
+                                    local.x >= allowed[0] - 0.0001
+                                        && local.x <= allowed[0] + allowed[2] + 0.0001
+                                );
+                                assert!(
+                                    local.y >= allowed[1] - 0.0001
+                                        && local.y <= allowed[1] + allowed[3] + 0.0001
+                                );
+                            }
+                        }
+                    }
+                    if clip.is_none() {
+                        palettes.push(colors);
+                    }
+                }
+            }
+            assert_ne!(palettes[0], palettes[1]);
+            assert_ne!(palettes[1], palettes[2]);
+            if kind == "meishi-panel" {
+                for (colors, deck) in
+                    palettes
+                        .iter()
+                        .zip([rgb(6, 11, 10), rgb(12, 8, 10), rgb(7, 10, 14)])
+                {
+                    assert!(
+                        colors.contains(&deck),
+                        "opaque deck must carry the main corporation theme"
+                    );
+                }
+            }
+            if kind != "meishi-seal" {
+                for colors in palettes {
+                    assert!(colors.contains(&rgb(162, 175, 176)));
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn meishi_fittings_preflight_each_shared_quota_and_freeze_reduced_color() {
+        for kind in [
+            "meishi-panel",
+            "meishi-portrait-frame",
+            "meishi-seal",
+            "meishi-socket",
+        ] {
+            let input = scene(kind);
+            let mut complete = FrameBuilder::new();
+            draw(&mut complete, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            let count = complete.frame().pixel_count;
+            for (pixels, work, expected) in [
+                (count - 1, 120000, 0),
+                (60000, count - 1, 0),
+                (count, count, count),
+            ] {
+                let mut frame = FrameBuilder::new();
+                frame.push_body(&CELL, Transform::default());
+                let previous = frame.frame().clone();
+                let mut painter = Painter {
+                    frame: &mut frame,
+                    parent: AffineTransform::default(),
+                    remaining: pixels,
+                    viewport: Vec2::new(640.0, 360.0),
+                    clip: None,
+                    work_remaining: work,
+                };
+                painter.node(&input.groups[0].nodes[0], 0.0, true);
+                assert_eq!(painter.frame.frame().pixel_count, 1 + expected);
+                assert_eq!(painter.remaining, pixels - expected);
+                assert_eq!(painter.work_remaining, work - expected);
+                if expected == 0 {
+                    assert_eq!(
+                        painter.frame.frame().batches[0].pixels,
+                        previous.batches[0].pixels
+                    );
+                    assert_eq!(
+                        painter.frame.frame().batches[0].transforms,
+                        previous.batches[0].transforms
+                    );
+                }
+            }
+            let mut later = FrameBuilder::new();
+            draw(&mut later, &input, [0.0; 2], [640.0, 360.0], 3.7, true);
+            assert_eq!(complete.frame().batches.len(), later.frame().batches.len());
+            for (a, b) in complete.frame().batches.iter().zip(&later.frame().batches) {
+                assert_eq!(a.pixels, b.pixels);
+                assert_eq!(a.transforms, b.transforms);
+            }
+        }
+    }
+
+    #[test]
+    fn meishi_short_quota_suppresses_paired_earned_patch_without_affecting_campaign() {
+        let socket = UiNode {
+            value: 0.0,
+            selected: true,
+            ..scene("meishi-socket").groups[0].nodes.remove(0)
+        };
+        let patch = UiNode {
+            value: 0.0,
+            active: true,
+            ..scene("campaign-patch").groups[0].nodes.remove(0)
+        };
+        let submitted_cost = |node: &UiNode| {
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: MAX_UI_PIXELS,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: None,
+                work_remaining: MAX_UI_PIXELS * 2,
+            };
+            painter.node(node, 0.0, true);
+            painter.frame.frame().pixel_count
+        };
+        let socket_cost = submitted_cost(&socket);
+        let patch_cost = submitted_cost(&patch);
+        assert_eq!(socket_cost, 634); // 632 authored well cells plus two floor quads.
+        assert_eq!(patch_cost, 165);
+        let pair_cost = socket_cost + patch_cost;
+        for (pixels, work, expected) in [
+            (200, 120000, 0),
+            (60000, 200, 0),
+            (socket_cost - 1, 120000, 0),
+            (60000, socket_cost - 1, 0),
+            (pair_cost - 1, pair_cost - 1, socket_cost),
+            (pair_cost, pair_cost, pair_cost),
+        ] {
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: pixels,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: None,
+                work_remaining: work,
+            };
+            let mut failed = 0;
+            paired_meishi_node(&mut painter, &socket, 0.0, true, &mut failed);
+            paired_meishi_node(&mut painter, &patch, 0.0, true, &mut failed);
+            assert_eq!(painter.frame.frame().pixel_count, expected);
+            assert_eq!(
+                (painter.remaining, painter.work_remaining),
+                (pixels - expected, work - expected)
+            );
+            if expected == 0 {
+                assert_eq!(failed, 1);
+            }
+        }
+        let mut frame = FrameBuilder::new();
+        let mut painter = Painter {
+            frame: &mut frame,
+            parent: AffineTransform::default(),
+            remaining: 200,
+            viewport: Vec2::new(640.0, 360.0),
+            clip: None,
+            work_remaining: 200,
+        };
+        paired_meishi_node(&mut painter, &patch, 0.0, true, &mut 0);
+        assert_eq!(painter.frame.frame().pixel_count, 165);
+    }
+
+    #[test]
+    fn meishi_collectible_all_earned_card_admits_every_component_for_nine_profiles() {
+        let node = |kind: &str, value, rect| UiNode {
+            kind: kind.into(),
+            value,
+            rect,
+            ..Default::default()
+        };
+        let packet = |frame: &engine_core::RenderFrame| {
+            frame
+                .batches
+                .iter()
+                .flat_map(|batch| {
+                    batch.pixels.iter().map(|pixel| {
+                        let t = batch.transforms[pixel.transform_slot()];
+                        (pixel.local, pixel.color, t.a, t.b)
+                    })
+                })
+                .collect::<Vec<_>>()
+        };
+        let render = |nodes| {
+            let mut frame = FrameBuilder::new();
+            draw(
+                &mut frame,
+                &UiScene {
+                    groups: vec![UiGroup {
+                        position: [20.25, 10.5],
+                        nodes,
+                    }],
+                },
+                [0.0; 2],
+                [640.0, 360.0],
+                0.0,
+                true,
+            );
+            frame.finish()
+        };
+        for kind in 0..3 {
+            for corp in 0..3 {
+                let mut nodes = vec![
+                    node("meishi-panel", corp as f32, [5.0, 5.0, 240.0, 324.0]),
+                    node(
+                        "meishi-portrait-frame",
+                        corp as f32,
+                        [14.0, 30.0, 80.0, 104.0],
+                    ),
+                    UiNode {
+                        portrait_kind: Some(kind),
+                        portrait_main: Some(corp),
+                        portrait_sub: Some((corp + 1) % 3),
+                        ..node("portrait", 9.0, [18.0, 34.0, 72.0, 96.0])
+                    },
+                    node("meishi-seal", corp as f32, [102.0, 34.0, 24.0, 24.0]),
+                    node("licensed-ship", corp as f32, [102.0, 82.0, 32.0, 32.0]),
+                    node("close-icon", 0.0, [215.0, 12.0, 22.0, 22.0]),
+                ];
+                for (index, text) in [
+                    "MEISHI CARD",
+                    "APR#0123456789ABCDEF",
+                    "DORA-PAN-RENKO",
+                    "FACTORY RAICHO LV 1",
+                    "RENKO 13 HUGO 29 PAN 47",
+                    "EIGHT ARENA PATCHES",
+                ]
+                .into_iter()
+                .enumerate()
+                {
+                    nodes.push(UiNode {
+                        text: text.into(),
+                        font: 0.75,
+                        ..node("text", 0.0, [14.0, 144.0 + index as f32 * 11.0, 220.0, 9.0])
+                    });
+                }
+                for slot in 0..8 {
+                    let x = 18.125 + (slot % 4) as f32 * 54.0;
+                    let y = 219.375 + (slot / 4) as f32 * 49.0;
+                    nodes.push(UiNode {
+                        selected: true,
+                        ..node(
+                            "meishi-socket",
+                            (corp as usize * 8 + slot) as f32,
+                            [x, y, 32.0, 32.0],
+                        )
+                    });
+                    // The previous DOM border/75% fit really measured22.5, while
+                    // the corrected well measures24. Both retain the source cells.
+                    let size = if slot % 2 == 0 { 22.5 } else { 24.0 };
+                    let inset = (32.0 - size) * 0.5;
+                    nodes.push(UiNode {
+                        active: true,
+                        ..node(
+                            "campaign-patch",
+                            slot as f32,
+                            [x + inset, y + inset, size, size],
+                        )
+                    });
+                }
+                let mut joined = Vec::new();
+                let mut expected = Vec::new();
+                let mut isolated_counts = Vec::new();
+                for node in nodes {
+                    let mut scene = UiScene {
+                        groups: vec![UiGroup {
+                            position: [20.25, 10.5],
+                            nodes: vec![node],
+                        }],
+                    };
+                    let mut frame = FrameBuilder::new();
+                    draw(&mut frame, &scene, [0.0; 2], [640.0, 360.0], 0.0, true);
+                    assert!(frame.frame().pixel_count > 0);
+                    assert!(
+                        frame
+                            .frame()
+                            .batches
+                            .iter()
+                            .flat_map(|b| &b.pixels)
+                            .all(|p| p.color >> 24 != 0),
+                        "full-fit component lost a visible cell"
+                    );
+                    isolated_counts.push(frame.frame().pixel_count);
+                    expected.extend(packet(frame.frame()));
+                    joined.push(scene.groups[0].nodes.remove(0));
+                }
+                assert_eq!(isolated_counts[2], [34594, 28524, 24262][kind as usize]);
+                // Retained collision cells plus the authored sparse96-grid detail.
+                assert_eq!(isolated_counts[4], [1867, 1864, 2780][corp as usize]);
+                assert_eq!(isolated_counts[0], 5818);
+                assert_eq!(isolated_counts[1], 1677);
+                for (slot, count) in [165, 321, 275, 219, 225, 323, 326, 202]
+                    .into_iter()
+                    .enumerate()
+                {
+                    assert_eq!(isolated_counts[12 + slot * 2], 634);
+                    assert_eq!(isolated_counts[13 + slot * 2], count);
+                }
+                let decoration = isolated_counts[0]
+                    + isolated_counts[1]
+                    + isolated_counts[3]
+                    + (0..8)
+                        .map(|slot| isolated_counts[12 + slot * 2])
+                        .sum::<usize>();
+                assert_eq!(decoration, [12_949, 12_887, 12_957][corp as usize]);
+                assert!(decoration <= 13_000);
+                let complete = render(joined);
+                assert!(complete.pixel_count < MAX_UI_PIXELS);
+                assert_eq!(complete.pixel_count, expected.len());
+                assert_eq!(
+                    packet(&complete),
+                    expected,
+                    "late component suppressed or altered"
+                );
+                println!(
+                    "MEISHI collectible type{kind}/corp{corp}: {} /60000 complete cells",
+                    complete.pixel_count
+                );
+            }
+        }
+    }
+
+    #[test]
     fn console_panel_is_exact_opaque_black_with_only_a_rail_and_pins() {
         let mut scene = scene("console-panel");
         scene.groups[0].nodes[0].rect = [0.0, 0.0, 300.0, 100.0];
@@ -2163,7 +2992,7 @@ mod tests {
         draw(&mut frame, &scene, [0.0; 2], [640.0, 360.0], 0.0, true);
         let batch = &frame.frame().batches[0];
         assert_eq!(batch.pixels[0].color, 0xff_000000);
-        let transform = batch.transforms[batch.pixels[0].transform as usize];
+        let transform = batch.transforms[batch.pixels[0].transform_slot()];
         assert_eq!(transform.a[2], 300.0);
         assert_eq!(transform.b[1], 100.0);
         assert_eq!(transform.b[2..], [0.0, 0.0]);
@@ -2245,25 +3074,6 @@ mod tests {
     }
 
     #[test]
-    fn rails_keep_original_corners_and_one_centered_ornament() {
-        for (name, source) in [("panel", [96, 48]), ("button", [96, 20])] {
-            for width in [96, 300, 600] {
-                let geometry = FrameGeometry::new(name, [width, 120], source);
-                let ornaments: Vec<_> = (geometry.corner[0]..width - geometry.corner[0])
-                    .filter(|&x| (38..58).contains(&geometry.source_at([x, 0])[0]))
-                    .collect();
-                assert_eq!(
-                    ornaments,
-                    (width / 2 - 10..width / 2 + 10).collect::<Vec<_>>()
-                );
-                assert_eq!(geometry.source_at([3, 3]), [3, 3]);
-                assert_eq!(geometry.source_at([width - 3, 118]), [93, source[1] - 2]);
-                assert_eq!(geometry.source_at([0, 60])[1], geometry.neutral[1]);
-            }
-        }
-    }
-
-    #[test]
     fn text_letters_have_individual_composed_object_transforms() {
         let mut scene = scene("text");
         let node = &mut scene.groups[0].nodes[0];
@@ -2328,16 +3138,16 @@ mod tests {
             let frame = extract(text, caret);
             let batch = &frame.batches[0];
             assert_eq!(batch.pixels[0].color, rgb(0, 0, 0));
-            let background = batch.transforms[batch.pixels[0].transform as usize];
+            let background = batch.transforms[batch.pixels[0].transform_slot()];
             assert_eq!((background.a[2], background.b[1]), (60.0, 20.0));
             let cursor = batch.pixels.iter().find(|p| p.color == GOLD).unwrap();
-            let transform = batch.transforms[cursor.transform as usize];
+            let transform = batch.transforms[cursor.transform_slot()];
             assert_eq!((transform.a[2], transform.b[1]), (1.0, 7.0));
             let center = transform.point(Vec2::from_array(cursor.local)) + Vec2::new(320.0, 180.0)
                 - Vec2::new(100.0, 50.0);
             assert_eq!(center.x - 0.5, expected);
             for pixel in &batch.pixels {
-                let transform = batch.transforms[pixel.transform as usize];
+                let transform = batch.transforms[pixel.transform_slot()];
                 let center = transform.point(Vec2::from_array(pixel.local))
                     + Vec2::new(320.0, 180.0)
                     - Vec2::new(100.0, 50.0);
@@ -2388,8 +3198,8 @@ mod tests {
         assert_eq!(a.pixel_count, b.pixel_count);
         for (a, b) in a.batches.iter().zip(&b.batches) {
             for (ap, bp) in a.pixels.iter().zip(&b.pixels) {
-                let aw = a.transforms[ap.transform as usize].point(Vec2::from_array(ap.local));
-                let bw = b.transforms[bp.transform as usize].point(Vec2::from_array(bp.local))
+                let aw = a.transforms[ap.transform_slot()].point(Vec2::from_array(ap.local));
+                let bw = b.transforms[bp.transform_slot()].point(Vec2::from_array(bp.local))
                     - Vec2::new(900.25, -1400.5);
                 assert!(aw.distance(bw) < 0.001);
             }
@@ -2458,7 +3268,7 @@ mod tests {
                     if pixel.color >> 24 == 0 {
                         continue;
                     }
-                    let p = batch.transforms[pixel.transform as usize]
+                    let p = batch.transforms[pixel.transform_slot()]
                         .point(Vec2::from_array(pixel.local))
                         + Vec2::new(320.0, 180.0)
                         - Vec2::new(100.0, 50.0);
@@ -2511,7 +3321,7 @@ mod tests {
         assert!(frame.frame().batches.iter().all(|b| {
             b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
         }));
     }
 }
@@ -2539,3 +3349,19 @@ mod facility_label_tests;
 #[cfg(test)]
 #[path = "ui_settings_tests.rs"]
 mod settings_tests;
+
+#[cfg(test)]
+#[path = "ui_kikai_integration_tests.rs"]
+mod kikai_integration_tests;
+
+#[cfg(test)]
+#[path = "ui_typography_tests.rs"]
+mod typography_tests;
+
+#[cfg(test)]
+#[path = "ui_capped_settings_tests.rs"]
+mod capped_settings_tests;
+
+#[cfg(test)]
+#[path = "ui_settings_skin_tests.rs"]
+mod settings_skin_tests;

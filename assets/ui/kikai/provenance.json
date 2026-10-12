@@ -1,0 +1,46 @@
+{
+  "character": "DORA-PAN-RENKO-1337",
+  "short_name": "DPR#1337",
+  "main_corporation": "PAN",
+  "sub_corporation": "RENKO",
+  "generation_tool": "image_gen.imagegen",
+  "model": null,
+  "model_note": "Model identifier not supplied with session artifact",
+  "reference_path": "assets/concepts/kikai/dora-reference-expression-sheet.png",
+  "reference_sha256": "b558e6572e9d065319ff7957fcdc7faadb1bc38f6ae7cdc39d3d826cc5f83742",
+  "user_original_reference_sha256": "8a47a42eae2e4bf96926d659d917d66bfd58a8b872b694632f166e93fdc8de00",
+  "pillow": "12.3.0",
+  "conversion": {
+    "source_dimensions": [
+      1881,
+      836
+    ],
+    "crop": [
+      0,
+      0,
+      627,
+      836
+    ],
+    "tight_bbox": [
+      0,
+      9,
+      620,
+      836
+    ],
+    "alpha_threshold": 128,
+    "source_nonbinary_alpha_cells": 384237,
+    "source_hard_occupied_cells": 360888,
+    "output_dimensions": [
+      96,
+      128
+    ],
+    "nearest_resize": true,
+    "occupied_after_resize": 8656,
+    "quantize_colors": 47,
+    "dither": false,
+    "changed_occupied_color_cells": 8563,
+    "component_policy": "all; no component removal"
+  },
+  "manual_authoring": "Named eye/mouth patch states and original32x32 six-role control masks; no SVG",
+  "runtime": "Cached PixelBody layers; exactPNG import through asset-pack after explicit authoring loss"
+}

@@ -1,0 +1,200 @@
+{
+  "version": 3,
+  "profile_mode": "owned",
+  "run_id": "e9aeb62bbc611d32",
+  "backend": "webgpu",
+  "checks": [
+    {
+      "name": "two-native-games",
+      "passed": true
+    },
+    {
+      "name": "independent-save-origins",
+      "passed": true
+    },
+    {
+      "name": "distinct-local-profiles",
+      "passed": true
+    },
+    {
+      "name": "native-owned-export",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "room-case-clean",
+      "passed": true
+    },
+    {
+      "name": "operation-failed",
+      "passed": false
+    },
+    {
+      "name": "dispose-clean",
+      "passed": true
+    }
+  ],
+  "clients": [
+    {
+      "role": "host",
+      "init_stage": "ready",
+      "failure_code": null,
+      "phase": "disposed",
+      "mode": "solo",
+      "created": 0,
+      "closed": 0,
+      "frames": 433,
+      "ticks": 0,
+      "captures": 0,
+      "entity_pages": 0,
+      "body_pages": 0,
+      "commits": 0,
+      "body_changes": 0,
+      "same_count_changes": 0,
+      "unchanged_bodies": 0,
+      "projectiles": 0,
+      "requests": 0,
+      "timers": 0,
+      "transport_ready": 0,
+      "admitted": 0,
+      "profile_equal": true,
+      "persisted_equal": true,
+      "persistent": true,
+      "progression_false": null,
+      "movement_observed": null,
+      "profile_sha": "7ecb0dd1ca10a36e629af045827c17dd25090237a49d0029d617b8fecd551894",
+      "baseline_sha": "7ecb0dd1ca10a36e629af045827c17dd25090237a49d0029d617b8fecd551894",
+      "persisted_sha": "7ecb0dd1ca10a36e629af045827c17dd25090237a49d0029d617b8fecd551894",
+      "owned_export": true,
+      "owned_view": null,
+      "selected_ship": 0,
+      "owned_slots": 1,
+      "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+    },
+    {
+      "role": "guest",
+      "init_stage": "ready",
+      "failure_code": null,
+      "phase": "disposed",
+      "mode": "solo",
+      "created": 0,
+      "closed": 0,
+      "frames": 432,
+      "ticks": 0,
+      "captures": 0,
+      "entity_pages": 0,
+      "body_pages": 0,
+      "commits": 0,
+      "body_changes": 0,
+      "same_count_changes": 0,
+      "unchanged_bodies": 0,
+      "projectiles": 0,
+      "requests": 0,
+      "timers": 0,
+      "transport_ready": 0,
+      "admitted": 0,
+      "profile_equal": true,
+      "persisted_equal": true,
+      "persistent": true,
+      "progression_false": null,
+      "movement_observed": null,
+      "profile_sha": "cc87050bbe4c61196d960f470e60a438c6a8b29d22c8b146fb6bab19d44e3d90",
+      "baseline_sha": "cc87050bbe4c61196d960f470e60a438c6a8b29d22c8b146fb6bab19d44e3d90",
+      "persisted_sha": "cc87050bbe4c61196d960f470e60a438c6a8b29d22c8b146fb6bab19d44e3d90",
+      "owned_export": true,
+      "owned_view": null,
+      "selected_ship": 0,
+      "owned_slots": 1,
+      "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+    }
+  ],
+  "session_distinct": null,
+  "source_inputs": {
+    "apps/coop/server.mjs": "4a135b5d97d2599354975a18e6017daf49eeceb99fbef192860d96ccd076b478",
+    "apps/coop/store.mjs": "551d7dc521122a06251a1cc57293e954d8e5678a35bc8dfc7c54946086c377f4",
+    "apps/game/src/coop/wire.ts": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e",
+    "apps/game/src/coop/room-code.ts": "35a0a41bcb1d6d335d1516e6aed44cbfdf76eb59c53585488df5badfe8b80d6d",
+    "apps/game/src/coop/signaling.ts": "1dc10a16171fc16a4f8a3481a46dc8ca94894d7703feeb141c0e011610fc201c",
+    "apps/game/src/coop/transport.ts": "702d058d8529a754c943ccc79f2e9a785d9d8e10422aa41a270f89f030195101",
+    "apps/game/src/coop/controller.ts": "2f886539fa1532f136a9d23d3ec817abbd497183e972435db92afc7894926f6a",
+    "apps/game/src/coop/wasm-ports.ts": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+    "apps/game/src/storage.ts": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8",
+    "scripts/qa/co-op-transport/wasm-review.html": "36b533abed0ab71582ddaa9b8e9f3c831c99582ff977f8758927e3cbdc661b56",
+    "scripts/qa/co-op-transport/wasm-review.js": "eb45595de6b933b14fdc24646752f37376f8ee05d2aab936d0ed07d7500d40f6",
+    "scripts/qa/co-op-transport/client.html": "97b8d7dc1daed1fa51b1abb0d98816b1898a0f378d394bdea908b19d57125289",
+    "scripts/qa/co-op-transport/client.js": "165d0e8671cb168ea009b1650d1826609e3437ac0a92c85a4277206256b79bc2",
+    "scripts/qa/co-op-transport/fifth-shot.js": "7080dcb130d2813117a90852fe51b4581e1fc81ee4cbcf5dc16a34599a9588ea"
+  },
+  "captured_at": "2026-10-12T19:53:13.905Z",
+  "scope": "Root-driven browser observations from real native owned-loadout export and two-Galaxy WASM/controller/RTC; no shared progression/NAT/performance/every-ability acceptance",
+  "builds": {
+    "webgpu": "/wasm/webgpu-aa26b6176b0a6a05e2ebf052f6d8cc17e236ef192b74af7c468ca03b9efbf8e6/galaxy.js",
+    "webgl2": "/wasm/webgl2-0eff68ecf0ac10674ebf276882b4e71ee6335ac1fb8beed929228d78ef62f26b/galaxy.js"
+  },
+  "artifacts": [
+    {
+      "path": "wasm/webgpu-aa26b6176b0a6a05e2ebf052f6d8cc17e236ef192b74af7c468ca03b9efbf8e6/galaxy.d.ts",
+      "bytes": 11579,
+      "sha256": "2c9bc5f8b35faec1fa1ec226f69bfc59bd9b37cec6214b2be7bf09a90213168d"
+    },
+    {
+      "path": "wasm/webgpu-aa26b6176b0a6a05e2ebf052f6d8cc17e236ef192b74af7c468ca03b9efbf8e6/galaxy.js",
+      "bytes": 87114,
+      "sha256": "682b26e828cfa7e106c481624e5e4aee5df02f48c0b85e0037f20dc2b08712f9"
+    },
+    {
+      "path": "wasm/webgpu-aa26b6176b0a6a05e2ebf052f6d8cc17e236ef192b74af7c468ca03b9efbf8e6/galaxy_bg.wasm",
+      "bytes": 10472659,
+      "sha256": "25d82a3c866f9f34cbcaf1a1e9809a25d8edd9c0cdee0ed502bcadd0e6d6f0fd"
+    },
+    {
+      "path": "wasm/webgpu-aa26b6176b0a6a05e2ebf052f6d8cc17e236ef192b74af7c468ca03b9efbf8e6/galaxy_bg.wasm.d.ts",
+      "bytes": 6028,
+      "sha256": "5f7a3cf1294f656692cb9abc40cc1c736ba97312a0aeba3d778d0efaab83b271"
+    },
+    {
+      "path": "wasm/webgl2-0eff68ecf0ac10674ebf276882b4e71ee6335ac1fb8beed929228d78ef62f26b/galaxy.d.ts",
+      "bytes": 10313,
+      "sha256": "d9b5339d8c05c8a8533d29ad1833e78b867d14b37721a5b4d8eb498fdba9cad6"
+    },
+    {
+      "path": "wasm/webgl2-0eff68ecf0ac10674ebf276882b4e71ee6335ac1fb8beed929228d78ef62f26b/galaxy.js",
+      "bytes": 90888,
+      "sha256": "b69840214409172482db00f5d518ae242f57f3e00b8c18a4330daa5121da635e"
+    },
+    {
+      "path": "wasm/webgl2-0eff68ecf0ac10674ebf276882b4e71ee6335ac1fb8beed929228d78ef62f26b/galaxy_bg.wasm",
+      "bytes": 14076723,
+      "sha256": "1afa66688e5dff86248219810697710f2f02a12c548769a4e39195f431a03d53"
+    },
+    {
+      "path": "wasm/webgl2-0eff68ecf0ac10674ebf276882b4e71ee6335ac1fb8beed929228d78ef62f26b/galaxy_bg.wasm.d.ts",
+      "bytes": 4762,
+      "sha256": "214b9061cb4b792edfe12f10fd966526b4d190d7fe74f537aebaaabea33f9653"
+    }
+  ],
+  "source_commit": "e97c29ca262e83dfc46c3a3d4faa10703fa0f64c",
+  "git_inputs": {
+    "apps/game/src/coop/wire.ts": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e",
+    "apps/game/src/coop/room-code.ts": "744bd717bde86b8d199f31c3f4f639ee6dfc6a8792abc79200852595eb3a66b3",
+    "apps/game/src/coop/signaling.ts": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433",
+    "apps/game/src/coop/transport.ts": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+    "apps/game/src/coop/controller.ts": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+    "apps/game/src/coop/wasm-ports.ts": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+    "apps/game/src/storage.ts": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8"
+  },
+  "build_stamp": {
+    "schemaVersion": 1,
+    "head": "e97c29ca262e83dfc46c3a3d4faa10703fa0f64c",
+    "branch": "codex/testing",
+    "sourceHash": "1d1b0b5c01242290cce5c13c9a408a57cd5a7f7bf2911aec69ad82dd355b00df",
+    "packageHash": "4a20017097bc3ae9702e0a3ef6b8ddd8ff4fdd4c66cd364dd66e483876446825",
+    "builtAt": "2026-10-12T19:09:50.356Z",
+    "compiledFromHead": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+    "carriedAt": "2026-10-12T19:51:04.088Z",
+    "carryReason": "Reviewed unshipped co-op QA provenance/approval/compatibility, docs, studio and actual loopback evidence only. Runtime and packaged output hashes rechecked unchanged; original compilation timestamp retained."
+  }
+}

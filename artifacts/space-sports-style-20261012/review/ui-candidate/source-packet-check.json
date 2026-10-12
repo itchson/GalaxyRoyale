@@ -1,0 +1,83 @@
+{
+  "commit": "4d032e99bfdf1da056ba72516667c0f7745bd246",
+  "baseline": "4e014bff3a84b356c5254b4291560e38accef64d",
+  "scope": "Independent exact committed-source scope/parity and retained actual native packet inspection; no test rerun/GPU/browser execution",
+  "changed_files": [
+    {
+      "path": "crates/game_web/src/sports_ui.rs",
+      "bytes": 12231,
+      "sha256": "b059a0dbea9348d41e7c61facfbd33dd66f193911da05ea8661235239db2395e"
+    },
+    {
+      "path": "crates/game_web/src/sports_ui_tests.rs",
+      "bytes": 12090,
+      "sha256": "9da0c77e4dbc60d1b9f889e67581c5efbe4171b06459bfcacb93731d59e2a419"
+    },
+    {
+      "path": "crates/game_web/src/ui_button_tests.rs",
+      "bytes": 15300,
+      "sha256": "9498ed455a0329bbfc8ac2169d8919f127101b0831fa2cc071897e4ce8bb65dc"
+    },
+    {
+      "path": "crates/game_web/src/ui_kikai_integration_tests.rs",
+      "bytes": 40634,
+      "sha256": "66f7ca36821d3d28140a0c32e589ab5e100faf3ef305cfcceae7eda701a2ccb3"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 117981,
+      "sha256": "1dc700dc51b7697032c37f8e6472f2db90d6fa8f6a18cab826b4c98a8323efa7"
+    },
+    {
+      "path": "crates/game_web/src/ui_settings_skin_tests.rs",
+      "bytes": 4854,
+      "sha256": "ebc90f7189ccfb8564b6e6f7df462140cb77dddec14e57b8ed54cfd2a1fe84de"
+    }
+  ],
+  "unchanged_runtime_assets": [
+    {
+      "path": "crates/game_web/src/flight_icons.rs",
+      "sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503",
+      "bytes": 10702
+    },
+    {
+      "path": "assets/ui/flight-icons/atlas.json",
+      "sha256": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73",
+      "bytes": 99595
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a",
+      "bytes": 35916
+    },
+    {
+      "path": "assets/ui/kikai/detail/atlas.json",
+      "sha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+      "bytes": 3247005
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "sha256": "f7631289ca6fcd87c117e67fd6fd3b1705ebb3c602dfcfd74c5d181e0cc4e334",
+      "bytes": 97799
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "bytes": 25415
+    }
+  ],
+  "actual_packet": {
+    "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\sports-ui-skin\\packets\\menu.json",
+    "sha256": "81af32896ecb26f0045ec0ed08262a8056b9bf7ffdefec0bdd7575a206cfce9a",
+    "bytes": 2659978,
+    "cells": 47360,
+    "transforms": 262,
+    "batch_transform_counts": [
+      128,
+      128,
+      6
+    ],
+    "alpha_zero_cells_charged": 0,
+    "all_unlit_finite_with_valid_indices": true
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "hashScope": "Canonical Git index bytes; original author manifests are preserved with their external input scopes.",
+  "runtimeCommit": "597f0720704656187056bf57c5d5c1d6bdcfcab3",
+  "files": [
+    {
+      "path": "artifacts/nova-stellar-20261012/.gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/README.md",
+      "bytes": 1910,
+      "sha256": "9094223b6245b7db2dc330fc75f47c761e75365dd4ebd103c5ca34b5e532057a"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/build-cue-final.log",
+      "bytes": 1478,
+      "sha256": "87c0dfe5df4066d866a11e48da49890acd6f7ebcba5297d5af869af28b6402ab"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/build.log",
+      "bytes": 1478,
+      "sha256": "f323b39c71dc526c6cc085c05ef619271c126da80e6013f28e1aa37bd48902f2"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/clippy-cue-final.log",
+      "bytes": 265,
+      "sha256": "03332feb056408a9370aaa218ed4a3080bb49c7a9adf9ab188c1b061d1cfddd7"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/clippy-wasm-cue-final.log",
+      "bytes": 265,
+      "sha256": "e61681bd586aad6a99705948e64b8f6d6d416f602735a059f3d7a33d490a4331"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/clippy-wasm.log",
+      "bytes": 265,
+      "sha256": "2cb932065444013a67fabc6d3de1d1e750406494ed13a464d95e9d1efad3973b"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/clippy.log",
+      "bytes": 266,
+      "sha256": "d8ab4de1b1b0d88ccdfdcd747cdd2c1fe8bc30a850f9acf16eb8387458b0bbbf"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/compact-webgl2-ab714.jpg",
+      "bytes": 22846,
+      "sha256": "96b807ab54e78e4590107fcec6b23ebd70ec9cb6f8e2394e0548ce487fbdfe58"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/compact-webgpu.jpg",
+      "bytes": 23156,
+      "sha256": "54050169745d903bdb32a63d7bd3af1a52a611500c2ca21d79538d3b2c864777"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/fifth-native-review-REVIEW.md",
+      "bytes": 4984,
+      "sha256": "b8e62138fb9ff2c5fd73a224b65e1e883a6ca44490b200397d5b5e59bd8f3379"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/fifth-native-review-manifest.json",
+      "bytes": 3026,
+      "sha256": "4a27d1ca003a4eaa76a7fb60378bd14d3ce6412e1e11847fd7db6fdb102291a3"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/fifth-qa-author-HANDOFF.md",
+      "bytes": 4249,
+      "sha256": "70b92aa415261e9c4f59b23eea05624b5a175ffcce065d6738d27c325e9e6baf"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/fifth-qa-author-manifest.json",
+      "bytes": 3857,
+      "sha256": "299a345bdceaeab8378ca4b1284e95593e1bb1151f2112d161f059be7a2dc411"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/final-tested-build.json",
+      "bytes": 317,
+      "sha256": "6ee84f914ff1e5e7f5a5dd45614c62d83072e19ac6326008b81b2d6c5dc79196"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/guest-fx-proposal-PROPOSAL.md",
+      "bytes": 8267,
+      "sha256": "9c86ae7ea5181fe1e474b4d21f8d3d7bc4dc89bbd1e990e647a3b563bc5d2665"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/guest-fx-proposal-manifest.json",
+      "bytes": 2698,
+      "sha256": "4a67962b2a3d671888051d56c4423d713c946d4119053752de27134a3b7ec851"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/local-cues-HANDOFF.md",
+      "bytes": 3810,
+      "sha256": "0734be4e65e7d737c4929e05eef5d4ac53651ce389f67a7e80c6f9b8429f4489"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/local-cues-baseline-failure.log",
+      "bytes": 2062,
+      "sha256": "e92be3ba37030aa5603850ab39e3e6f7bcc41262326f9618554650e189a65390"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/local-cues-check-observations.json",
+      "bytes": 283,
+      "sha256": "38f2752c90e04a8aa69ccb7c6dab7e89ed238073eac6e3216ff428f22cf2f3bb"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/local-cues-consumer-review-REVIEW.md",
+      "bytes": 2487,
+      "sha256": "67a29e278d7a55babe90fd06e2fbf994a81abbbe2c938337c35263e47f382a28"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/local-cues-consumer-review-manifest.json",
+      "bytes": 2095,
+      "sha256": "869be08eba5c8ebe2246a49081197f0b089d6754a3e70016ca89b788547b87a3"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/local-cues-focused-final.log",
+      "bytes": 832,
+      "sha256": "94a98af9227d6f49ef870f50b555b5646be5bbe8934eae9c8cd94086595011d7"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/local-cues-manifest.json",
+      "bytes": 5751,
+      "sha256": "d1c7eeec1aab6c42b4e3ec0221e023567f0d67eb04d1697a06730696ea776a3d"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/loose-webgl2-ab714.jpg",
+      "bytes": 24510,
+      "sha256": "70486367ce6b6962c1e3e707afb6f10d46824eced1652ebde7a46bf6a7caa728"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/loose-webgpu.jpg",
+      "bytes": 26932,
+      "sha256": "483dca896ee9f8b6fba50c60fb816297c6dce9469a9b6f84c77d57a494bb4396"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/nova-HANDOFF.md",
+      "bytes": 7263,
+      "sha256": "7d395bb47a84a0dc14f5bfbce75691ddc1a5e7445c4c5aa679db3a51e4d24752"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/nova-co-op-final.log",
+      "bytes": 11463,
+      "sha256": "c05ce3a6449c68fcd8c1f580c4830bb29cf1e2617aefd8301956134e40d71930"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/nova-focused-first.log",
+      "bytes": 3040,
+      "sha256": "70642267125a1c35b4eb178b35e840fa565592f99a12050e8eff21520aeb3158"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/nova-focused-second.log",
+      "bytes": 2432,
+      "sha256": "67d4b6bd32911581ba427972e5fc2258834917e98af268e363a49b2d70db529e"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/nova-focused-third.log",
+      "bytes": 2328,
+      "sha256": "629925c4efa69a1cdca59fdf0958766893a3b0edf45240d824560a82ba5528a9"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/nova-focused.log",
+      "bytes": 2307,
+      "sha256": "c6d5b1b94be265810dcbb33948560c9dd0d8b9d5ed6b01939f1529bd5bae726e"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/nova-manifest.json",
+      "bytes": 7183,
+      "sha256": "c2f3b477dfe2c5177daa8ee49e7f40a7e498ca904b9b624e6e6cd5a7616f4eec"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/ring-plan-PLAN.md",
+      "bytes": 9113,
+      "sha256": "015070f591f56eca65f12679e4289093747fff3feae5e04784e978a77c3653cc"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/ring-plan-manifest.json",
+      "bytes": 3752,
+      "sha256": "356f2f944b12eac5cbd96b7faa858c37145bd5cdf2d4f681992d3145d213ea95"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/shell-cue-final.log",
+      "bytes": 61259,
+      "sha256": "c9addd0b590e3c5a01ece495cbda47255f8ae0de2baecfff6425e7e393a3cbdd"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/shell-tests-final.log",
+      "bytes": 61364,
+      "sha256": "04b84f91e732162d7416d74371d0dbadf5b7a1d2b9d4f059d5b2515ab6d50a71"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/shell-tests.log",
+      "bytes": 62083,
+      "sha256": "ed9cbb341b15842369728cd291d45d87a1bc060a45f378d6122c0473b5a38863"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-author-HANDOFF.md",
+      "bytes": 7647,
+      "sha256": "5e22d43707e391234382c07aa1e6749e34029ac2584425bfc49bc698e260432e"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-author-manifest.json",
+      "bytes": 34989,
+      "sha256": "31b2b99e9e796d175d7d6aafdfd642e76fdb2139935ffac173ac737502e2a3fb"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-author-native-software-contact.png",
+      "bytes": 31911,
+      "sha256": "0d63d1f203d315b3ddef70281587bc1f61c7d02881d612e65eeabf2aba418b95"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-source-review-REVIEW.md",
+      "bytes": 3848,
+      "sha256": "c350d4167491c40110071d1cd5aba9f9e8b90afdb66324fafc5e2f20de904b1c"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-source-review-manifest.json",
+      "bytes": 11707,
+      "sha256": "a3cd534f799b542d966c7e40581dd64cefc78826f1f336694bcec04808572c81"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-stills-review-REVIEW.md",
+      "bytes": 7180,
+      "sha256": "0525382516fd9807809665e4071f9dabcf5f3da7384e195bfad488c4a148a92b"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-stills-review-manifest.json",
+      "bytes": 4849,
+      "sha256": "065fbee2136f0152b8dc8b738d73cfd913c0da345e63dc47a92e463827ee17b3"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-stills-review-point-analysis.json",
+      "bytes": 29422,
+      "sha256": "ae1533bbaba32f55dc153961a855c89a6192767533086f05cbfc5e273556a979"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/stellar-stills-review-source-pins.json",
+      "bytes": 2922,
+      "sha256": "7002a839b9a1a5ca687b8d7b22773d4828bb82f8adfed6d9382467e047479dd3"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/teardown-focused.log",
+      "bytes": 395,
+      "sha256": "ffafdf2006e304e566caf60bd424333df253c7e9e22f4793d1078030eb5e9586"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/teardown-review-REVIEW.md",
+      "bytes": 2718,
+      "sha256": "ddd2572d6963eb3fd48b64f62a2f9248169c5e73d4630900b0a95419a4d8db4d"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/teardown-review-manifest.json",
+      "bytes": 1587,
+      "sha256": "03e77623c469822a4411a8ea89e30dbf8654e31e9f6e63405dc0673b4cb5f295"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/tested-build.json",
+      "bytes": 317,
+      "sha256": "3469e6495dbae9c3ff415bad1e64f33b14292561839c252ffc47071f0241394d"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/workspace-final.log",
+      "bytes": 89518,
+      "sha256": "822acd19cd2c2b8e3886f582d157f5892b2dd8ba6f4cb108aac735b60c2ca6cb"
+    },
+    {
+      "path": "artifacts/nova-stellar-20261012/workspace-tests.log",
+      "bytes": 88968,
+      "sha256": "3982056ac6e0968de92179ba3c5a0f75be2877f82bf4ff99794fe7d70ce74879"
+    }
+  ]
+}

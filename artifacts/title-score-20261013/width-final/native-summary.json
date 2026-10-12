@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-12T17:50:29.542Z",
+  "head": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+  "capture": "work/title-score-native-width-v3/captures/qa-1791826979237-0e10d066",
+  "scope": "Actual native OfflineAudioContext fixtures, not human fidelity or realtime/physical output acceptance",
+  "allSevenClean": true,
+  "title": {
+    "full": {
+      "samples": 4608000,
+      "peak": 0.15757572650909424,
+      "rms": 0.02468012027834705,
+      "peak_dbfs": -16.0502136373183,
+      "rms_dbfs": -32.153054562066735,
+      "over_unity": 0,
+      "nonfinite": 0
+    },
+    "stereo": {
+      "finitePairs": 2304000,
+      "midRms": 0.02460594043646658,
+      "sideRms": 0.0019120753621844951,
+      "correlation": 0.9880693348685355
+    },
+    "maximumVoices": {
+      "music": 7,
+      "effects": 0,
+      "continuous": 0
+    },
+    "cleanup": {
+      "music": 0,
+      "sfx": 0,
+      "continuous": 0,
+      "scheduler_callbacks": 0
+    }
+  },
+  "transition": {
+    "full": {
+      "samples": 3072000,
+      "peak": 0.15757572650909424,
+      "rms": 0.013096167976012027,
+      "peak_dbfs": -16.0502136373183,
+      "rms_dbfs": -37.65711526296191,
+      "over_unity": 0,
+      "nonfinite": 0
+    },
+    "stereo": {
+      "finitePairs": 1536000,
+      "midRms": 0.013064398253222208,
+      "sideRms": 0.0009116545056216571,
+      "correlation": 0.9903545675127735
+    },
+    "maximumVoices": {
+      "music": 11,
+      "effects": 1,
+      "continuous": 1
+    },
+    "cleanup": {
+      "music": 0,
+      "sfx": 0,
+      "continuous": 0,
+      "scheduler_callbacks": 0
+    }
+  },
+  "titleRmsChangeFromV2Db": -1.012368845148102,
+  "titleMonoDownmixEnergyChangeDb": -0.026146070394785278,
+  "artifacts": {
+    "native-dsp-report.json": {
+      "bytes": 110266,
+      "sha256": "5369b426b6d297ce48b9dc0321af7ac3eaa5db8d996b903980c1cc6afc37bba6"
+    },
+    "native-source-pins.json": {
+      "bytes": 2618,
+      "sha256": "6e496b2b9fc0bc940a7428041403561a266147cef92f055c41a7f55415be69c9"
+    },
+    "title-audition.mp3": {
+      "bytes": 1153197,
+      "sha256": "ab354d672359389f406471604e82a340c7184a6b331d5d30e1cf95e2d5aaeda6"
+    },
+    "transition-audition.mp3": {
+      "bytes": 769581,
+      "sha256": "7ac1184b64f71961e1753f8ffd3a5d6c90a9741cbd5e825ee1f58d5d8885beba"
+    }
+  }
+}

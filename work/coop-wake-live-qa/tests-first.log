@@ -1,0 +1,21 @@
+✔ fresh-origin inventory refuses existing Galaxy databases and unsupported/malformed inventory without opening or deleting (1.2107ms)
+✔ exact native role fixtures retain production normalization, distinct derived seeds and minimal native equipment (2.7835ms)
+✔ configured stage is opt-in normal owned WASM with exact helper/native fixture pins; historical allowlists remain unchanged (539.0218ms)
+✔ configured profile bytes are role-local HTTP inputs and never admitted from the other role or a foreign Origin (0.299ms)
+✔ guest wake facts remain uncommitted through header/page staging and rejection; zero commits clear actual active samples (0.7022ms)
+✔ incomplete, stale, wrong-epoch, duplicate, excessive and underflowed Wake pages cannot become native completion facts (0.7167ms)
+✔ native tick expiry waits past the latest observed birth; Haven retreat requires both actual committed pilot positions (0.3835ms)
+✔ leave removal binds actual owner and epoch and failure/death remains inconclusive after end (0.154ms)
+✔ actual configured initialization preflight precedes SaveStore/native creation and constructor mismatch prevents persistence (58.8115ms)
+✔ actual Wake movement uses fire-off native steps/current commits and caps phase work; it never creates trail points (9.9029ms)
+✔ actual retirement latches failure, waits for native restore, frees once even after read failure, and refuses blocked release (3.496ms)
+✔ version-five sanitized reports separate configured/native facts from earned/visual claims and reject unsupported success (1.3099ms)
+✔ actual parent Wake phase guards visibility through final verification and performs explicit failed cleanup (4.5922ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 938.6479

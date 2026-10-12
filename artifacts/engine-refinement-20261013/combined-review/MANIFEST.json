@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "candidate": "b4d2c9aaf2cbc730fe02bdd8af7fc68802896cfb",
+  "parent": "39ce9294bcec25aa500a7b50524295fc66ddd8ce",
+  "scope": "Independent exact test/source and recorded native log inspection; no build/runtime/suite/browser/listener rerun",
+  "rawFiles": [
+    {
+      "path": "candidate.diff",
+      "bytes": 4339,
+      "sha256": "2604a534ae8827b8b00396a9a85d6fbdcc2467b4014046ec621203eb3658c7cc"
+    },
+    {
+      "path": "evidence/combined-edge-wake-final.log",
+      "bytes": 573,
+      "sha256": "6a7d2829c10e8c748ea9d09d66ae01a64131b9c1e2764a03497dbe567da13cc1"
+    },
+    {
+      "path": "evidence/combined-edge-wake-regression.log",
+      "bytes": 6820,
+      "sha256": "37afc052215b9ac52d93a0be63910b4c32700dd02fa7f656838285aea1e3487d"
+    },
+    {
+      "path": "evidence/combined-edge-wake.log",
+      "bytes": 748,
+      "sha256": "d3bf798678768fdcd04a36eb57319ab67243543bc7311057c592fd2c650d952c"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 3479,
+      "sha256": "f0f5c4be4896223e50a0342e418f28bd622eab842e9d60d28c9efe279d95681c"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_publish.rs",
+      "bytes": 10852,
+      "sha256": "f6374c8c648e77a769d663b87c07c9efb2f50ac423f676bf84ad05db9dca5940"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_replica.rs",
+      "bytes": 55232,
+      "sha256": "01f3731724c87bf316a0b42e9c6165f2a5df0f21a3c421ce34b17ab501cf1b97"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_replica_tests.rs",
+      "bytes": 31542,
+      "sha256": "e6dbc04cbcabd0e48c7714d15779a48e11d87bbea5905b26e00783ba5b499d9e"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_replica_wake_tests.rs",
+      "bytes": 31682,
+      "sha256": "bdf771725794f28c30954e565fb0da44aa761f108fb85c7e89f105e1dac81199"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_wake_fx.rs",
+      "bytes": 6201,
+      "sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb"
+    },
+    {
+      "path": "source/prior-co_op_replica_wake_tests.rs",
+      "bytes": 30484,
+      "sha256": "bf7024cd560d81d0e2dde3664b847ebd1ece78ccd476fb4fc03fff88e92df63a"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 2612,
+      "sha256": "1131ed49fcca49a2b15d99f7476d3959b98d11e9f2fbdea29189f7dda9b31957"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 2612,
+      "sha256": "1131ed49fcca49a2b15d99f7476d3959b98d11e9f2fbdea29189f7dda9b31957"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4714,
+      "sha256": "8294ae2156aa971cc5cd5417ce1935aa2bb801d8802d961f6cbbe7bafe4dfb87"
+    }
+  ],
+  "canonicalSourcePins": [
+    {
+      "path": "crates/game_core/src/co_op_replica_wake_tests.rs",
+      "bytes": 31682,
+      "sha256": "bdf771725794f28c30954e565fb0da44aa761f108fb85c7e89f105e1dac81199"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_tests.rs",
+      "bytes": 31542,
+      "sha256": "e6dbc04cbcabd0e48c7714d15779a48e11d87bbea5905b26e00783ba5b499d9e"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "bytes": 55232,
+      "sha256": "01f3731724c87bf316a0b42e9c6165f2a5df0f21a3c421ce34b17ab501cf1b97"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "bytes": 10852,
+      "sha256": "f6374c8c648e77a769d663b87c07c9efb2f50ac423f676bf84ad05db9dca5940"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_fx.rs",
+      "bytes": 6201,
+      "sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb"
+    }
+  ]
+}

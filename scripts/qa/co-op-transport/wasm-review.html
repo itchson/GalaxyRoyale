@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
+  <title>Two native Galaxies co-op acceptance</title>
+  <style>
+    body {
+      font: 16px system-ui;
+      background: #101620;
+      color: #edf1f6;
+      margin: 20px;
+      max-width: 1400px;
+    }
+    button,
+    select {
+      font: inherit;
+      min-height: 44px;
+      margin: 4px;
+      padding: 8px;
+    }
+    iframe {
+      border: 1px solid #536173;
+      width: 100%;
+      height: 330px;
+    }
+    .clients {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #1b2634;
+      padding: 12px;
+    }
+    @media (max-width: 700px) {
+      .clients {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <h1>Real WASM + WebRTC local acceptance</h1>
+  <p>
+    Two actual native Galaxies and canvases, actual controller/ports, ordered
+    RTC channels and independent QA-origin IndexedDB stores. No fixture native
+    replies or shared rewards. Root drives the visible controls. This is local
+    loopback, not Internet/NAT or gameplay release acceptance.
+  </p>
+  <label
+    >Normal pinned backend
+    <select id="backend">
+      <option value="webgpu">WebGPU</option>
+      <option value="webgl2">WebGL2</option>
+    </select></label
+  >
+  <label
+    >Scenario
+    <select id="scenario">
+      <option value="default">
+        PAN host / HUGO guest (existing saves retained)
+      </option>
+      <option value="renko-fifth">
+        Fresh RENKO fifth-shot (empty owned QA stores only)
+      </option>
+      <option value="configured-ion-wake-r1-e1">
+        Configured native Wake R1/E1 — NOT earned (fresh origins only)
+      </option>
+    </select></label
+  >
+  <div>
+    <button id="initialize">1. Initialize two native Games</button
+    ><button id="connect" disabled>2. Create + join</button
+    ><button id="drive" disabled>3. Drive + fire 360 native steps</button
+    ><button id="fifth" disabled>RENKO: depart + verify ten primaries</button
+    ><button id="end" disabled>4. Host end + verify saves</button
+    ><button id="rejoin" disabled>5. New session + join</button
+    ><button id="leave" disabled>Guest leave + verify saves</button
+    ><button id="verify" disabled>Read local saves</button
+    ><button id="dispose" disabled>Dispose native clients</button>
+    <button id="room-decline" disabled>Owned QA: pending Decline</button>
+    <button id="room-replace" disabled>Owned QA: replace + stale code</button>
+    <button id="room-lock" disabled>Owned QA: lock + unlock</button>
+    <button id="wake-drive" disabled>Configured Wake: depart + observe</button>
+    <button id="wake-stop" disabled>Configured Wake: stop + expire</button>
+    <button id="wake-retreat" disabled>Configured Wake: return to Haven</button>
+    <button id="wake-reduced-motion" disabled>
+      Configured Wake: reduced motion
+    </button>
+  </div>
+  <p id="status" role="status">
+    Ready. No native Games or RTC clients created.
+  </p>
+  <div class="clients">
+    <section>
+      <h2>Host · localhost QA origin</h2>
+      <iframe id="host" title="Actual native host Game"></iframe>
+    </section>
+    <section>
+      <h2>Guest · guest.localhost QA origin</h2>
+      <iframe
+        id="guest"
+        title="Actual native guest replica and retained solo Game"
+      ></iframe>
+    </section>
+  </div>
+  <pre id="results" aria-label="Sanitized actual native observations">
+No run yet.</pre>
+  <p>
+    Before Drive, keep this page foreground and both complete client frames
+    visible. Enlarge the viewport or scroll to the frames. Off-screen
+    cross-origin frames can have throttled timers; a visibility change prevents
+    a drive pass. Leave or Dispose after an interrupted command before retrying.
+  </p>
+  <p>
+    Drive uses 360 explicit 1/60-second calls through Galaxy.step per client,
+    paced by browser timers. Ordinary QA presentation is bounded to three
+    minutes and pauses the solo Game. Owned mode reads each actual native local
+    loadout; the report identifies the mode. No claim of real-time 60 FPS, every
+    ability's behavior or human gameplay acceptance. Capabilities/SDP/ICE remain
+    private in memory.
+  </p>
+  <p>
+    Owned default-mode room cases require both clients solo and clean. Each case
+    uses actual pending/controller/RTC operations, a 120-second action budget
+    plus at most 20 seconds for cleanup, and private room/epoch marks. Run one
+    case per fresh initialized page within the first 40 seconds; the helper
+    refuses to start without 140 seconds of the ordinary lifetime remaining.
+    Code replacement preserves an approved guest before leave/stale-code and
+    pending cancellation probes. Two clients test pending and approved phases
+    separately. Named checks and digest observations do not prove exact boxed
+    world, zero migration writes, eight clients, TURN or the shipped panel UX.
+  </p>
+  <p>
+    The optional RENKO case requires a fresh unused QA port and refuses existing
+    saves. Only the host fires. Native shot events count admitted primaries;
+    native simulation pauses after each one while the real guest commits its
+    complete frame. Missing/ambiguous shots are inconclusive, not a pass.
+  </p>
+  <p>
+    Configured Wake is an explicit normal-WASM owned-mode opt-in. It installs
+    the reviewed native R1/E1 role fixtures into fresh, isolated QA origins;
+    this is configured progression, NOT earned play. IndexedDB inventory must
+    show no Galaxy database before opening either role's store. Existing stores
+    are refused and never deleted or replaced. Each role constructs only its own
+    exact native Profile; RTC carries the ordinary bounded equipment and
+    transient publication. Use a new unused QA port for each renderer run.
+  </p>
+  <p>
+    Wake controls use real fire-off movement and native stamping. Each movement
+    phase has a 30-second command budget, at most 960 paced native calls, and a
+    separate 20-second cleanup wait on failure. Both visible clients must obtain
+    their owners' actual capture/complete-commit points. Stop waits for an empty
+    authoritative publication more than two native seconds after the last
+    observed birth; Return uses the ordinary destination input into Haven.
+    Reduced motion records the actual native setting call; human review of dots,
+    color, expiry, global birth-light tails and both canvases remains pending.
+    No JS trails, damage, visual expiry or generated native replies. The
+    configured client loop retires after ten minutes; a timeout alone does not
+    prove that asynchronous teardown has finished.
+  </p>
+  <script type="module" src="/wasm-review.js"></script>
+</html>

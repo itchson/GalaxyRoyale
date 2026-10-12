@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "scope": "Actual author Node/API-boundary/provenance checks; no listener, normal build, browser, WASM/native execution or RTC acceptance.",
+  "final_checks": [
+    {
+      "command": "node --experimental-transform-types --test scripts/test/coop-wake-live-qa.test.mjs scripts/test/coop-transport-fifth-qa.test.mjs scripts/test/coop-private-room-provenance-qa.test.mjs",
+      "log": "tests-frozen-inputs.log", "exit": 0, "pass": 37, "fail": 0,
+      "cases": {"new_configured": 18, "existing_fifth": 10, "existing_provenance": 9}
+    },
+    {
+      "command": "node --experimental-transform-types --test --test-name-pattern='^(Actual (initialization|client|rejoin|approval|child|New|Drive|localSpec|commit)|WASM report|Owned reports|WASM allowlist)' scripts/test/coop-transport-wasm-qa.test.mjs",
+      "log": "wasm-consumers-frozen-inputs.log", "exit": 0, "pass": 16, "fail": 0,
+      "excluded": "Supplied-WASM HTTP/listener cases and unrelated normal-stage preparation case."
+    },
+    {"command": "node --check <six actual QA JS/MJS files; exact names/results in log>", "log": "syntax-frozen-inputs.log", "exit": 0, "checks": 6},
+    {"command": "node node_modules/prettier/bin/prettier.cjs --check <ten owned actual helper/test files>", "log": "format-frozen-inputs.log", "exit": 0},
+    {"command": "node node_modules/typescript/bin/tsc --noEmit", "log": "typecheck.log", "exit": 0, "note": "Empty output; TypeScript input bytes are unchanged and pinned. QA JS is checked separately; no WASM build."},
+    {"command": "python work/coop-wake-live-qa/pin-sources.py", "log": "source-pin-execution.log", "exit": 0, "changed": 14, "unchanged": 30, "original_fixture_inputs": 12},
+    {"command": "actual Node helper default/fixture metadata extraction", "log": "contract-summary-execution.log", "exit": 0, "observer_fields": 26},
+    {"command": "git diff --check", "log": "diff-check.log", "exit": 0}
+  ],
+  "retained_failures": [
+    {"log": "wasm-consumers-first.log", "exit": 1, "reason": "Initial plain Node strip-only mode rejected an existing TS parameter property before cases. Corrected to repository experimental-transform-types command."},
+    {"log": "fifth-provenance-first.log", "exit": 1, "pass": 18, "fail": 1, "reason": "Existing isolated step VM omitted newly read real scenario global; fixed explicit default/RENKO test contexts."},
+    {"log": "format-final.log", "exit": 2, "reason": "Missing closing brace in newly added test double; repaired. File name is an intermediate failed attempt."},
+    {"log": "tests-final.log", "exit": 1, "pass": 19, "fail": 1, "reason": "Same new test syntax error; not a final passing-input record."}
+  ],
+  "failed_source_versions": "Not separately frozen; retained raw logs include context. They are not represented as exact passing-source snapshots.",
+  "author_live_claims": {"listeners_started": 0, "normal_builds": 0, "browser_runs": 0, "rtc_runs": 0, "native_reruns": 0, "save_store_opened_in_browser": 0},
+  "remaining": ["independent source/helper review", "Root integration and strict normal stage provenance", "actual two-role normal-WASM/RTC execution on fresh exclusive origins for both renderers", "human dots/expiry/light-tail/reduced-motion and lifecycle/save review"]
+}

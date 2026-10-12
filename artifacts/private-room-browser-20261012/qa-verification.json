@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-12T13:52:49.965Z",
+  "candidate": "3c00f413eadc78661be5676ad778fa434a28c26d",
+  "parent": "4aa91230ca29ea9b81962834b15ff6277a481a80",
+  "base": "d2acfd2d9faaec2810d67d62f212066e7f1b5b81",
+  "manifest": {
+    "bytes": 4182,
+    "sha256": "85614301dd097b8d202677d2171ed44ff2340584a183bace8072d11dca7f164c"
+  },
+  "source_pins": [
+    {
+      "path": "apps/game/src/coop/room-code.ts",
+      "bytes": 550,
+      "sha256": "744bd717bde86b8d199f31c3f4f639ee6dfc6a8792abc79200852595eb3a66b3"
+    },
+    {
+      "path": "apps/game/src/coop/signaling.ts",
+      "bytes": 6716,
+      "sha256": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433"
+    },
+    {
+      "path": "apps/game/src/coop/transport.ts",
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "apps/game/src/coop/panel.ts",
+      "bytes": 20779,
+      "sha256": "463987d40f88c72183bf521897a9978466c4d27902152ac5d9d6741fb597a032"
+    },
+    {
+      "path": "scripts/test/coop-controller.test.mjs",
+      "bytes": 36697,
+      "sha256": "f8cc86dab7520b2de05ecaefd40f1770f3f703de5d0f9b00b9004c261254af30"
+    },
+    {
+      "path": "scripts/test/coop-panel.test.mjs",
+      "bytes": 22653,
+      "sha256": "59bf090f25f0ccefcf44341bf6e703a8c7f94383905f634dd8782c88f304dcb7"
+    },
+    {
+      "path": "scripts/test/coop-transport.test.mjs",
+      "bytes": 44673,
+      "sha256": "1656a656b51be38d9adc4f2ad6c01b30e005c740ab414c07e1b2b9a5cfcf3c61"
+    },
+    {
+      "path": "scripts/test/coop-signaling-client.test.mjs",
+      "bytes": 4271,
+      "sha256": "18cdd406af3f0a67b90d2b0a3dc9b5ae08f78ffaea853feea84f68ed8ee0bbc3"
+    }
+  ],
+  "raw_evidence_pins": [
+    {
+      "path": "work/room-approval-browser/HANDOFF.md",
+      "bytes": 6195,
+      "sha256": "dccc7eb3e605d12cfe4fc2c86b91c2b51124d6dc0b4be9a31f3173e6d3e96311"
+    },
+    {
+      "path": "work/room-approval-browser/FAILURES.md",
+      "bytes": 2622,
+      "sha256": "1b6470e62623e586f6ee2c191ad40391300218d551c700e91366073c66e9e26b"
+    },
+    {
+      "path": "work/room-approval-browser/focused-client.log",
+      "bytes": 6682,
+      "sha256": "06309c6d06559e20bfb490468fc98f1e1dac72b0283acd6bd1f2ab5e621c4d92"
+    },
+    {
+      "path": "work/room-approval-browser/transport-first.log",
+      "bytes": 4691,
+      "sha256": "3853e7f6892fae0aa2904d86358d9836adf517febc708b4771d137b2caa4bf1a"
+    },
+    {
+      "path": "work/room-approval-browser/transport-final.log",
+      "bytes": 4373,
+      "sha256": "536b6148c388e8d94674daae0b5962aa3c5ed8c99774bd723b7068459b064b35"
+    },
+    {
+      "path": "work/room-approval-browser/transport-after-terminal-fix.log",
+      "bytes": 3571,
+      "sha256": "cb87f6eee19ba2c995cef9900bb2dc83178a87ef49864d5fc36f72d2c0120d7d"
+    },
+    {
+      "path": "work/room-approval-browser/transport-terminal-races.log",
+      "bytes": 3949,
+      "sha256": "5e39daaad1c4905a8a33f757515ebe97d9176ea0610ed65948e2ae259ed4e866"
+    },
+    {
+      "path": "work/room-approval-browser/client-final.log",
+      "bytes": 11416,
+      "sha256": "b7b5ab8b75f85a5ceff35d6ca7af552128e26d544fc946d447f2ab56527bc392"
+    },
+    {
+      "path": "work/room-approval-browser/client-after-close-recovery.log",
+      "bytes": 10608,
+      "sha256": "58c1a67da889d1272987cd6face0314661db1998d47f4ea167ddfedf6235ca5d"
+    },
+    {
+      "path": "work/room-approval-browser/committed-client-final.log",
+      "bytes": 10611,
+      "sha256": "84ef1f25809bc0d12f437a3fe9393a02af2aca8df85c682d967e3e4f1a739889"
+    },
+    {
+      "path": "work/room-approval-browser/typecheck-frozen.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "matched_final_service_pins": [
+    {
+      "path": "apps/coop/store.mjs",
+      "bytes": 23947,
+      "sha256": "5d13df9bbcda769f1a35aeda6a4314902125bb7840b80f4123bc53af30339444"
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "bytes": 12064,
+      "sha256": "032d2988360bd8d066cd28cf010a0e1f49eb4a391c4fdc294525d0285e1790e5"
+    },
+    {
+      "path": "apps/coop/README.md",
+      "bytes": 12722,
+      "sha256": "ccae29aa7ac75fbbf8f9fa005ecf9331dc1c0f06f077a9fdeb05e48e0c7845fd"
+    },
+    {
+      "path": "scripts/test/coop-signalling.test.mjs",
+      "bytes": 29416,
+      "sha256": "0f45fb11572b8d7398035e345fa246a2dbd7c24991684b1c37ce5b53a984fabf"
+    },
+    {
+      "path": "scripts/test/coop-private-rooms.test.mjs",
+      "bytes": 20532,
+      "sha256": "329c1e0fe5fde67d6cfd17f451496d86904ef9a7f9a0933a764430be4aca0b05"
+    }
+  ],
+  "unchanged_input_pins": [
+    {
+      "path": "apps/game/src/coop/wire.ts",
+      "bytes": 19368,
+      "sha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4"
+    },
+    {
+      "path": "apps/game/src/coop/entry.ts",
+      "bytes": 434,
+      "sha256": "659f55249ced1b5922715175c2dcd9f69a18c633c2b7a3afb9ede0710709ad5a"
+    },
+    {
+      "path": "apps/game/src/coop/wasm-ports.ts",
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    {
+      "path": "scripts/test/coop-entry.test.mjs",
+      "bytes": 1630,
+      "sha256": "8ca34357d454deecd22949c6ecc22297df0244f1c72c62886d3543bbe6da2499"
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "bytes": 50348,
+      "sha256": "a04675a4893555ce83de1455a680595307c8e9bf2abf98e4310ce18c89377911"
+    },
+    {
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "bytes": 33125,
+      "sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "bytes": 39952,
+      "sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "bytes": 7981,
+      "sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192"
+    }
+  ],
+  "actual_saved_focused_summary": {
+    "passed": 99,
+    "failed": 0,
+    "skipped": 0
+  },
+  "source_test_cases": [
+    {
+      "path": "scripts/test/coop-controller.test.mjs",
+      "count": 31,
+      "names": [
+        "channel ready is separate from native admission and complete replica application",
+        "host approval is required before guest join frames and native admission",
+        "invalid join leaves an owned host world and restoration handle intact",
+        "same-room code and lock management do not restart native ownership or guest view",
+        "authenticated sender is the native pilot ID, and input is bounded to one local sequence per cadence",
+        "acknowledged unchanged body signatures reuse cells while pose pages continue",
+        "same-count color mutation changes signature and sends actual indexed cells",
+        "backpressure does not advance input sequence or grow a queued input history",
+        "a rejected remote input retires only its authenticated pilot and preserves the host",
+        "host end and guest leave restore native boundaries exactly once without touching local progression",
+        "missing native replica never claims connected and returns to a terminal state",
+        "state contains only controlled presentation data and explicit copy getter owns invitation access",
+        "unexpected native SCTP close is generic, not falsely attributed to host intent",
+        "invalid elapsed/input cannot become an authority tick or native operation",
+        "publication wire enforces finite counts, signature format, roles and token bounds",
+        "failed native restoration remains latched and blocks a new session until explicit successful recovery",
+        "failed replica restoration retains its recovery handle and cannot reopen gameplay",
+        "cancellation while signaling create is pending cannot begin native authority after completion",
+        "a stale prior-session callback cannot mutate a replacement native session",
+        "native commit refusal cannot mark a staged replica running",
+        "incomplete or stale publication end cannot install partially received cells",
+        "rolling publication quotas remain bounded at120Hz rather than allowing window-boundary bursts",
+        "no acknowledged receipt expires only the stalled guest while host simulation remains available",
+        "replica binds authenticated host world seed while preserving distinct guest local metadata",
+        "one-frame click courses survive sampling cadence and backpressure, then are consumed once",
+        "cancelInput sends the existing native zero-stick course cancellation, then resumes fresh controls",
+        "a synchronous transport end followed by failed native restoration cannot submit another input",
+        "an ambiguous successful native begin reply retains ownership until real cleanup",
+        "an admitted guest drops a stale published world after 30 seconds without claiming host background simulation",
+        "unavailable concrete ports do not launch signaling or publish a connected state",
+        "actual 91a18ab publisher rows and indexed cells reach the controller, but partial export cannot claim a complete world"
+      ]
+    },
+    {
+      "path": "scripts/test/coop-panel.test.mjs",
+      "count": 22,
+      "names": [
+        "room code normalizes eight hex digits and permits only bounded ASCII separators",
+        "default unavailable dock state cannot start sessions and exposes semantic input hooks",
+        "available session copy discloses current guest and reward limitations",
+        "join forwards the full bounded code once, including Enter composition guard",
+        "create invokes inside the real click and promise success cannot invent hosting",
+        "only controller phases declare readiness, admission and coherent connection",
+        "cancel supersedes a pending start and ignores its late rejection",
+        "guest cannot end and repeated exit clicks cannot invoke twice",
+        "invitation is read only for an actual copyable host state and copied explicitly",
+        "clipboard rejection keeps full manual copy and never displays thrown capability",
+        "unknown reasons and controller messages cannot leak secret or raw transport errors",
+        "unchanged repaint preserves input node, selection, focus, scroll and performs no writes",
+        "ended session and teardown clear fields and isolate late completion from a new view",
+        "invalid controller counts or progression fail closed without reading invitations",
+        "malformed capability getter remains hidden with no unsafe fallback",
+        "failed solo restoration keeps the actual reason and prevents another start",
+        "failed restoration exposes one explicit retry without claiming restored solo state",
+        "invalid state cannot expose recovery or invoke an exit callback",
+        "Join is the initial tab; tab selection and draft survive reactive updates",
+        "host management sends explicit actions without inventing policy or stopping hosting",
+        "only current host requests expose Accept/Decline and stale or disposed rows cannot act",
+        "approval and room failures use controlled useful copy"
+      ]
+    },
+    {
+      "path": "scripts/test/coop-signaling-client.test.mjs",
+      "count": 4,
+      "names": [
+        "short room code accepts exactly eight hex digits, ASCII separators and raw64 bound",
+        "session policy requires canonical host code or explicit guest null and finite revision",
+        "create/join grants enforce role-specific policy projection and keep bearer separate",
+        "HTTP room outcomes are status-matched allowlisted codes, never remote messages"
+      ]
+    },
+    {
+      "path": "scripts/test/coop-entry.test.mjs",
+      "count": 3,
+      "names": [
+        "cancel during disk save never starts an invitation after the save completes",
+        "title or replacement controller during flush prevents a delayed join",
+        "a successful save and flush admit exactly one current request"
+      ]
+    },
+    {
+      "path": "scripts/test/coop-transport.test.mjs",
+      "count": 39,
+      "names": [
+        "versioned frame bounds reject corruption, persistent profiles and nonfinite input",
+        "native snapshot contract rejects duplicate slots, wrong profile semantics and nonfinite geometry",
+        "HTTP reader refuses credential redirects and bounded oversized responses",
+        "body pages retain exact cell indices and reject duplicates, oversize and wrong query kinds",
+        "snapshot carries same-tick revision and permits finite authoritative projectiles beyond world edge",
+        "actual naturally spawned Coil metadata preserves the segment unknown-maximum sentinel only",
+        "actual HTTP membership never implies a ready channel or Rust admission",
+        "already-open incoming native channel plus later open event sends exactly one hello",
+        "RTC diagnostics retain only allowlisted native error detail, never messages or candidates",
+        "real HTTP offer/answer/ICE path binds peer IDs and admits only explicit frames",
+        "host plus seven guest channels are bounded; ninth reservation fails",
+        "backpressure refuses without advancing wire sequence, queueing or replaying stale input",
+        "input epoch and immutable snapshot seed are checked before sends",
+        "explicit rejection frees the guest reservation without ending the host",
+        "host end notifies guest, aborts polls and allows a distinct-session rejoin",
+        "expiry ends channels using real polling terminal notices",
+        "failed negotiation does not fabricate readiness and guest leave frees its reservation",
+        "late create result after disposal cannot reopen state and gets a leave cleanup",
+        "guest cannot end a host; explicit leave and repeated disposal clean every handler",
+        "a retired peer's already-queued ICE cannot terminate an unrelated host peer",
+        "SCTP message bound and send rate refuse without an application backlog",
+        "unopened negotiation deadline frees membership and every tracked clock task",
+        "pending request waits without RTC and decline retains its exact terminal outcome",
+        "approval timeout is independent of approved negotiation reservation timeout",
+        "same-world rotate/lock preserves approved channels and retires only pending requests",
+        "hostile pre-approval SDP event cannot create guest RTC or bypass approval",
+        "newest whole policy wins delayed rotation and heartbeat responses",
+        "delayed old join-request cannot recreate an approval row after a newer policy",
+        "late admin response after leave cannot reopen code, policy, requests or RTC",
+        "bounded retained terminal read wins failed heartbeat and ignores later old poll",
+        "terminal poll wins a competing retained read without reason rollback",
+        "leave and replacement while terminal recovery is held cannot end the new request",
+        "unavailable retained terminal read falls back once and tears down all resources",
+        "dispose during terminal recovery ignores both held replies and clears its tracked tasks",
+        "reconnection cancels loss timeout; actual failed connection closes once",
+        "malformed forged peer hello closes only that host peer and leaves no duplicate RTC",
+        "malformed replayed sequence closes only that host peer and leaves no duplicate RTC",
+        "malformed wrong session closes only that host peer and leaves no duplicate RTC",
+        "malformed guest snapshot authority closes only that host peer and leaves no duplicate RTC"
+      ]
+    }
+  ],
+  "frozen_typecheck_exit": 0,
+  "scope": "Independent exact source/evidence/dependency pins and saved-run/name/typecheck-status checks. HTTP/model/native source review only; no test/build/listener/browser rerun, actual RTC/game clients or TURN acceptance."
+}

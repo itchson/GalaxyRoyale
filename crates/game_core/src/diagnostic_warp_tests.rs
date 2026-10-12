@@ -69,7 +69,10 @@ fn isolated_warp_cannot_claim_a_ready_quest_but_normal_flight_still_can() {
     let before = serde_json::to_value(&game.profile).unwrap();
     assert!(game.interact_site().unwrap_err().contains("isolated QA"));
     assert_eq!(serde_json::to_value(&game.profile).unwrap(), before);
-    game.boss_qa_scene = false;
+    // Exit through the public normal-mode boundary, then place the authored
+    // ordinary-flight fixture at its already-known source beacon.
+    game.reset_to_dock();
+    game.move_player(Vec2::from_array(site.position));
     game.interact_site().unwrap();
     assert_eq!(game.profile.currency[site.family], 3);
     assert_eq!(game.profile.relics, vec![site.id]);

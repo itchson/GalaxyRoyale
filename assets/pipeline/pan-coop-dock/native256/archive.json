@@ -1,0 +1,27 @@
+{
+  "format": 1,
+  "codec": "gzip",
+  "timestamp": 0,
+  "max_decoded_bytes_per_file": 33554432,
+  "scope": "Exact native proof bytes; no loss, runtime pack or geometry changes",
+  "files": {
+    "native-extraction.json": {
+      "decoded_bytes": 7061124,
+      "decoded_sha256": "2ed5197658bec6735cd6a6f10fb9c47cd82bc5291fe8caf22c925050d7dcbd6e",
+      "gzip_bytes": 838202,
+      "gzip_sha256": "13fb92a6c46bbea357936a98370da76ac25d0a476588990aeb4890e1abe43f94"
+    },
+    "rig-extraction.json": {
+      "decoded_bytes": 11751773,
+      "decoded_sha256": "501fdf1baf59bf2efbffc25663456f55f15351b7df463c9de45b81c21ed3e5ab",
+      "gzip_bytes": 875741,
+      "gzip_sha256": "ffc135d2b9f327444a6a80f6cf271cd406af9867160824891a180c27f13baa82"
+    },
+    "zoom-extraction.json": {
+      "decoded_bytes": 16825724,
+      "decoded_sha256": "6b5ce3be710629bbdb47e22c3331075866993917f06bc8c3d6eeb1219e15cc1f",
+      "gzip_bytes": 1044450,
+      "gzip_sha256": "cf7cf7af629a4c4a71fdf165a61d5b2c74892ffc5c1e653640290697a393329b"
+    }
+  }
+}

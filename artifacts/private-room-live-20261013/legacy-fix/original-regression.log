@@ -1,0 +1,74 @@
+✖ historical transport manifests keep their frozen files and current manifests require their pinned room-code module (0.8889ms)
+✖ historical factory and owned WASM manifests preserve eighteen or nineteen files while current stages serve the pinned extra module (0.2403ms)
+✖ room-code admission uses an own prepared-file marker and never admits arbitrary module or inherited fields (2.014ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 174.5763
+
+✖ failing tests:
+
+test at scripts\test\coop-private-room-provenance-qa.test.mjs:23:1
+✖ historical transport manifests keep their frozen files and current manifests require their pinned room-code module (0.8889ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  6 !== 5
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/coop-private-room-provenance-qa.test.mjs:25:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 6,
+    expected: 5,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\coop-private-room-provenance-qa.test.mjs:35:1
+✖ historical factory and owned WASM manifests preserve eighteen or nineteen files while current stages serve the pinned extra module (0.2403ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  19 !== 18
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/coop-private-room-provenance-qa.test.mjs:44:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 19,
+    expected: 18,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\coop-private-room-provenance-qa.test.mjs:58:1
+✖ room-code admission uses an own prepared-file marker and never admits arbitrary module or inherited fields (2.014ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(!historical.includes("modules/room-code.js"))
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/coop-private-room-provenance-qa.test.mjs:61:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

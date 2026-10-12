@@ -1,0 +1,5 @@
+   Compiling engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.43s
+     Running `target\debug\examples\pack_raicho_surfaces.exe artifacts/pixel-surface-20261012/pan-material-proposal.json work/surface-integration/repacked-material.json`
+native packed: 662 coarse / 1205 fine; output 33702 bytes
+PASS exact native repack SHA256 903BE7EC67FD236C9E2EC788A95DA852779E22F05AD97DD2A066F1F9E77EA01C

@@ -1,0 +1,32 @@
+{
+  "sourceDirectory": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/private-room-negative-live-review",
+  "verifiedRawFiles": 52,
+  "scope": "Root verified all frozen manifest raw entries; selected immutable review documents copied here. Full source/fixture/author raw evidence remains in the original pinned reviewer directory and referenced existing game artifacts.",
+  "copied": [
+    {
+      "name": "REVIEW.md",
+      "bytes": 6954,
+      "sha256": "5db8397b375fad0b9c4a3b06a8f6141c2a4e408552f40017db0d4b68682ef390"
+    },
+    {
+      "name": "MANIFEST.json",
+      "bytes": 14886,
+      "sha256": "68a3262b875d618a5bcad76bb131ce7dfdca588e10c62df0fbef65ee96db6687"
+    },
+    {
+      "name": "verification.json",
+      "bytes": 22466,
+      "sha256": "f07190f45fd7e44f4553f5a5f2dfcfca389a1e5896bee797e5369626de318ff9"
+    },
+    {
+      "name": "verify.log",
+      "bytes": 5031,
+      "sha256": "783241cf22d4f34342eaac9b9366ed237d3dd72f4ac85c6ff105e7bcefeb6add"
+    },
+    {
+      "name": "validate-functions.log",
+      "bytes": 363,
+      "sha256": "c30b6d718542adbdd6595b6ab1fc6f85e3f77f34cd206e2e0a149fd8a42bf81a"
+    }
+  ]
+}

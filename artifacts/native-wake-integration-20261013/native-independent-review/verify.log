@@ -1,0 +1,20 @@
+{
+  "candidate": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "verified": {
+    "raw_sources": 4,
+    "canonical_sources": 4,
+    "unchanged_inputs": 12,
+    "raw_author_files": 18,
+    "wire_payloads": 6,
+    "recorded_native_wake_passes": 13,
+    "recorded_co_op_passes": 115,
+    "recorded_co_op_ignored": 3,
+    "baseline_actual_failure_preserved": true
+  },
+  "source_pin_semantics": "canonical Git bytes and raw checkout bytes explicit; evidence pins exact raw filesystem bytes",
+  "verification": {
+    "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/ion-wake-review/verification.json",
+    "bytes": 14428,
+    "sha256": "5bdf393be077f17181b85ff5b159ae4aa4037ab4c39f122945993e0175a3687d"
+  }
+}

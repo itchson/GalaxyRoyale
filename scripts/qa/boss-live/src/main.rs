@@ -58,7 +58,7 @@ fn render_sample(game: &mut Game, frame: &mut FrameBuilder, counts: &mut BTreeMa
             }
             for pixel in &batch.pixels {
                 assert!(pixel.local.iter().all(|v|v.is_finite()));
-                assert!((pixel.transform as usize)<batch.transforms.len());
+                assert!((pixel.transform_slot())<batch.transforms.len());
             }
         }
         let range=counts.entry(format!("{zoom:.1}")).or_insert((usize::MAX,0));

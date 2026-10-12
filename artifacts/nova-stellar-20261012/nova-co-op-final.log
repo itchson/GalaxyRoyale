@@ -1,0 +1,110 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.37s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 80 tests
+actual_legacy_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,null],"trained_starter":false,"relic_count":0}
+actual_legacy_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,null],"trained_starter":false,"relic_count":0}
+test co_op::nova_tests::death_preserves_solo_cooldown_policy_but_leave_rejoin_resets_membership_and_shots ... ok
+test co_op::nova_tests::actual_hostile_collision_targets_guest_and_attributes_nova_destruction_without_grants ... ok
+test co_op::nova_tests::accepted_localized_hull_hit_keeps_solo_damage_mask_and_triggers_once ... ok
+test co_op::nova_tests::safe_invulnerable_invalid_and_unequipped_damage_cannot_trigger_nova ... ok
+test co_op::nova_tests::champion_impact_and_royal_defense_stay_outside_ordinary_nova_slice ... ok
+test co_op_loadout::tests::legacy_v1_metadata_stays_absent_and_retained_real_fixture_roundtrips ... ok
+test co_op_loadout::tests::serde_rejects_raw_stats_profiles_wrong_array_lengths_and_unsigned_overflow ... ok
+test co_op::nova_tests::evolved_clear_and_reflection_match_solo_and_keep_shared_caps_and_membership_owner ... ok
+actual_evolved_echo_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[{"index":3,"rank":5},null,null],"trained_starter":false,"relic_count":0,"echo_evolution":5}
+test co_op::nova_tests::eight_staggered_collision_triggers_keep_timers_and_destruction_owners_independent ... ok
+test co_op_loadout::tests::malformed_builds_reject_before_membership_or_publication_changes ... ok
+actual_evolved_publication_bytes=3085 projectiles=8 native_replica_cells=1999 damaged_rock_cells=356
+owned_hull=0 loadout_bytes=238 header_bytes=1342 entities=2 cells=1971
+test co_op::echo_tests::real_publication_and_native_replica_preserve_evolved_owned_fan_and_holes ... ok
+signature_golden_2x2_indices0_3_rgba01020304=613c9e3ec04953ef
+test co_op_publish::tests::content_signature_covers_same_count_topology_color_and_dimensions ... ok
+test co_op::echo_tests::native_export_validates_evolution_without_defeat_history_or_legacy_byte_changes ... ok
+test co_op_loadout::tests::stored_ranks_use_actual_selected_xp_and_scoped_factory_training_exception ... ok
+actual_8_owned_180_projectiles_frame_bytes=50071
+test co_op_loadout::tests::manufacturer_bonus_uses_selected_champion_not_pilot_or_sub_corporation ... ok
+actual_evolved_nova_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,5,0,0,0,0],"slots":[null,{"index":4,"rank":5},null],"trained_starter":false,"relic_count":0,"nova_evolution":5}
+test co_op_publish::tests::entity_and_dimension_bounds_fail_before_replacing_cache ... ok
+test co_op_loadout::tests::eight_owned_builds_and_full_projectile_cap_fit_existing_transport_frame_limit ... ok
+test co_op_loadout::tests::actual_native_export_is_read_only_bounded_and_keeps_all_selected_hull_stats ... ok
+test co_op::nova_tests::native_export_preserves_legacy_bytes_and_validates_effect_only_nova_metadata ... ok
+test co_op_publish::tests::membership_end_and_recapture_invalidate_but_invalid_attempts_do_not ... ok
+test co_op::echo_tests::real_lens_bonus_keeps_priority_before_echo_at_shared_short_capacity ... ok
+owned_hull=2 loadout_bytes=238 header_bytes=1342 entities=2 cells=1485
+actual_owned_loadout={"version":1,"selected_ship":2,"owned_ships":1023,"patches":255,"royal_victory":true,"ship_xp":1560,"hardware":[5,5,5,5,5,5],"slots":[{"index":0,"rank":5},{"index":1,"rank":5},{"index":2,"rank":5}],"trained_starter":false,"relic_count":5}
+test co_op_replica::tests::acquisition_session_seed_revision_and_membership_bind_before_any_replacement ... ok
+test co_op_replica::tests::body_pages_are_ordered_bounded_and_transactional ... ok
+test co_op_replica::tests::empty_bodies_use_exact_dimensions_and_verify_signature_without_a_page ... ok
+test co_op_replica::tests::export_native_replica_operations ... ignored, Explicit bounded fixture writer, not part of ordinary test execution
+test co_op_replica::tests::entity_guards_keep_full_cell_transforms_and_reject_false_pilot_metadata ... ok
+owned_hull=9 loadout_bytes=238 header_bytes=1342 entities=2 cells=1378
+test co_op_loadout::tests::owned_publication_replica_hud_and_body_are_coherent_without_local_progression ... ok
+test co_op::nova_tests::solo_and_owned_guest_nova_match_real_actor_damage_holes_impulses_and_cooldowns ... ok
+test co_op_replica::tests::end_invalidates_all_pages_cache_and_scene_without_touching_solo ... ok
+test co_op_replica::tests::factory_guest_hud_clears_all_solo_progression_and_keeps_original_profile ... ok
+test co_op_replica::tests::native_cells_match_real_actor_rotation_and_interpolation_at_every_corner ... ok
+test co_op_replica::tests::exact_cache_reuse_drops_removed_entities_and_invalidates_same_count_color_changes ... ok
+test co_op_tests::all_public_progression_routes_and_diagnostics_cannot_mutate_retained_save ... ok
+test co_op_replica::tests::projectiles_keep_ownership_trails_and_only_explicit_bounded_lights ... ok
+test co_op_replica::tests::failed_or_incomplete_transfer_keeps_committed_scene_and_can_resume ... ok
+test co_op::echo_tests::ordinary_slot_only_excludes_lens_empty_and_royal_echo_bundles ... ok
+test co_op_replica::tests::actual_two_and_eight_player_publications_keep_holes_and_transparent_occupancy ... ok
+test co_op_tests::export_actual_authority_serialization_fixtures ... ignored, explicit native serialization fixture export
+test co_op_tests::bounded_snapshot_pages_preserve_all_cells_and_reject_same_tick_admission_changes ... ok
+test co_op_replica::tests::scalar_and_nested_json_guards_fail_without_admitting_a_profile ... ok
+test co_op_tests::direct_admission_validates_ids_protocol_real_dock_and_living_body ... ok
+actual bounded snapshot bytes=44828
+test co_op_tests::guest_factory_identity_seed_and_stats_never_become_host_profile ... ok
+test co_op_replica::tests::segment_unknown_maximum_is_narrow_and_real_page_compatible ... ok
+test co_op_tests::authority_fills_shared_projectile_cap_and_actual_payload_remains_under_transport_limit ... ok
+test co_op_tests::identified_host_license_acknowledgement_rejects_without_changing_saved_training ... ok
+test co_op::echo_tests::actual_echo_pierces_cells_and_segments_with_debris_attribution_without_pvp_or_grants ... ok
+test co_op_publish::tests::page_boundaries_exact_cells_and_borrowed_native_bodies_agree ... ok
+test co_op::nova_tests::reflected_real_projectile_damages_actor_and_never_other_pilots ... ok
+test co_op_tests::session_and_membership_tokens_close_replay_and_host_impersonation ... ok
+test co_op_replica::tests::host_seed_scenery_home_and_reduced_motion_match_the_real_native_prefix ... ok
+cooldown_fixture stored_rank=1 xp=0 evolution=1 first_retrigger_tick=1081
+test co_op::echo_tests::safe_pause_timeout_respawn_leave_and_session_end_bound_member_phase ... ok
+test co_op_publish::tests::exact_storage_bound_is_admitted_and_overflow_preserves_previous_cache ... ok
+test co_op_publish::tests::coherent_body_and_metadata_survive_motion_damage_and_despawn ... ok
+test co_op_tests::real_primary_shots_keep_owner_and_leaving_removes_only_that_members_shots ... ok
+cooldown_fixture stored_rank=5 xp=0 evolution=4 first_retrigger_tick=919
+test co_op_tests::ordinary_enemy_chooses_nearest_living_unsafe_pilot_not_host ... ok
+test co_op_tests::hostile_swept_hit_damages_actual_guest_and_friendly_shots_never_pvp ... ok
+cooldown_fixture stored_rank=5 xp=1560 evolution=1 first_retrigger_tick=600
+test co_op_tests::two_players_destroy_one_shared_asteroid_cells_once_without_rewards_or_loot_grants ... ok
+actual_six_admitted_steady_speeds=[114.39999, 118.8, 99.99999, 103.99999, 205.91997, 172.22398]; equal_motion_ticks_per_build=210
+test co_op_replica::tests::completed_captures_blend_real_multitick_motion_without_extrapolation_or_header_mutation ... ok
+test co_op::passive_tests::actual_solo_and_admitted_pan_movement_match_for_slots_training_and_other_hull_manufacturers ... ok
+test co_op::starter_tests::all_queued_primaries_take_priority_over_bonuses_near_shared_cap ... ok
+cooldown_fixture stored_rank=5 xp=1560 evolution=4 first_retrigger_tick=510
+test co_op::nova_tests::real_ticks_keep_rank_and_evolution_cooldown_boundaries_per_pilot ... ok
+test co_op_tests::dead_guest_respawns_only_its_body_and_does_not_reset_host_or_profile ... ok
+actual8pilot acquisition_us=20385 header_bytes=2998 rows=120 occupied=181047 storage=477184 entity_pages=2 body_pages=233
+test co_op::starter_tests::fifth_bolt_inherits_the_actual_moving_pilot_velocity_and_spawn_direction ... ok
+actual_fifth_publication_bytes=1562 projectiles=2 native_replica_cells=95093
+test co_op::starter_tests::real_publication_and_replica_render_both_owned_fifth_shots_without_wire_fields ... ok
+test co_op::echo_tests::shared_cap_preserves_ordered_partial_fans_and_consumes_refused_trigger_fx ... ok
+actual_eight_member_primaries=[18, 18, 18, 18, 18, 18, 18, 18]; maximum_queued_fans=8; maximum_fan_attempts=56
+test co_op::echo_tests::eight_staggered_members_and_moving_fans_have_independent_native_owner_and_phase ... ok
+test co_op::echo_tests::actual_solo_and_guest_ticks_match_all_evolutions_and_effective_damage_ranks ... ok
+test co_op::starter_tests::safe_pause_timeout_respawn_and_rejoin_keep_only_the_intended_member_phase ... ok
+test co_op_tests::live_overlay_cancels_only_host_route_and_keeps_normal_momentum_decay ... ok
+test co_op_tests::invalid_input_does_not_consume_sequence_and_stale_controls_brake ... ok
+test co_op::starter_tests::full_cap_does_not_count_and_refused_fifth_bonus_never_replays ... ok
+test co_op_loadout::tests::two_and_eight_owned_pilots_use_real_bodies_movement_shot_damage_and_affinity ... ok
+test co_op::starter_tests::fifth_bolt_hits_real_cells_is_not_pvp_and_never_grants_progression ... ok
+test co_op_tests::solo_control_refactor_retains_current_cursor_thrust_cadence_and_quality_determinism ... ok
+test co_op_tests::end_host_leave_and_return_home_restore_exact_original_solo_instance ... ok
+test co_op_tests::two_and_eight_real_ecs_pilots_move_with_independent_exact_controls ... ok
+actual8pilot warm32_acquisition_p50_us=13146.700 p95_us=22094.600 entity_json_bytes=43434 initial_body_json_bytes=3282949 max_body_page_bytes=18607 CPU_ONLY
+test co_op_publish::tests::real_eight_pilot_capture_reports_cost_and_retains_solo_profile ... ok
+test co_op::starter_tests::equipped_native_rank_not_corporation_controls_factory_and_owned_bonus ... ok
+test co_op::starter_tests::two_and_eight_staggered_pilots_count_only_their_real_successful_primaries ... ok
+actual_eight_pilot_first_recharge_ticks=[None, Some(362), Some(241), None, None, Some(241), Some(241), None]; pilot_1_rehit_tick=121
+test co_op::passive_tests::eight_real_pilots_recharge_only_their_unlocked_build_after_their_own_hit_delay ... ok
+
+test result: ok. 78 passed; 0 failed; 2 ignored; 0 measured; 397 filtered out; finished in 1.41s
+

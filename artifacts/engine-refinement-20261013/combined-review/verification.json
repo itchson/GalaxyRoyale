@@ -1,0 +1,55 @@
+{
+  "scope": "Independent exact test/source and recorded native log inspection; no build/runtime/suite/browser/listener rerun",
+  "candidate": "b4d2c9aaf2cbc730fe02bdd8af7fc68802896cfb",
+  "parent": "39ce9294bcec25aa500a7b50524295fc66ddd8ce",
+  "compiled_runtime_semantics_unchanged_from": "e0f53b970263db88e2f4a61dfe21ac37e019de0f",
+  "source_pins": [
+    {
+      "path": "crates/game_core/src/co_op_replica_wake_tests.rs",
+      "bytes": 31682,
+      "sha256": "bdf771725794f28c30954e565fb0da44aa761f108fb85c7e89f105e1dac81199"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_tests.rs",
+      "bytes": 31542,
+      "sha256": "e6dbc04cbcabd0e48c7714d15779a48e11d87bbea5905b26e00783ba5b499d9e"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "bytes": 55232,
+      "sha256": "01f3731724c87bf316a0b42e9c6165f2a5df0f21a3c421ce34b17ab501cf1b97"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "bytes": 10852,
+      "sha256": "f6374c8c648e77a769d663b87c07c9efb2f50ac423f676bf84ad05db9dca5940"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_fx.rs",
+      "bytes": 6201,
+      "sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb"
+    }
+  ],
+  "only_test_file_changed": true,
+  "actual_recorded_focused_passes": 1,
+  "actual_recorded_replica_regression_passes": 52,
+  "actual_recorded_replica_regression_ignored": 4,
+  "native_cold_and_warm_transfer_observed": {
+    "retained_entities": 99,
+    "outlying_asteroids": 17,
+    "rear_anchor_x": 1000014,
+    "cache_warm_points": 3
+  },
+  "cold_all_entity_position_and_signature_assertions": true,
+  "warm_native_commit_without_body_pages_and_mandatory_wake_page": true,
+  "first_compile_failure_preserved": true,
+  "closes_gate": "Configured positive-X unfiltered native edge geometry and actual live ordinary Wake state now complete cold plus cache-warm native Replica commits together",
+  "limits": [
+    "Two configured R5/E5 native pilots; not naturally earned progression and not live R1/E1 fixture87d92",
+    "Fresh capture/token at the same native tick; receiver clock not advanced here",
+    "Cold explicit positions/signatures cover all99; warm native commit enforces cache matching/signatures, with explicit count/visible-points assertions",
+    "No raw99-body serializer export or new GPU canvas test in this delta",
+    "Other seven edges, receiver elapsed expiry and epochs remain separate existing tests",
+    "No currentWASM/RTC, renderer parity, eight-player/TURN/physical/performance gate"
+  ]
+}

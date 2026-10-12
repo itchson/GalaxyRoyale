@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "observedAt": "2026-10-11T07:37:37.620Z",
+  "captureBuild": {
+    "schemaVersion": 1,
+    "head": "8d9c29a562afce1e7f056cf5d18e670cb6d04b55",
+    "branch": "codex/testing",
+    "sourceHash": "b993c227c84d9a7802320d652b7eae375d0be2f9636fe83f9b162d49873d491d",
+    "packageHash": "c53c3fdca672ac9a4cfd479b75f6f6c3bab6daf6d0f891ef746368f75e70bedf",
+    "builtAt": "2026-10-11T07:31:00.818Z"
+  },
+  "finalAtlasSha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+  "sourceAfterTestFix": "50b710d",
+  "scope": "See EVIDENCE_SCOPE.md. Historical evidence and negative captures are retained. Final browser screenshots use the normal8d9c29a package;50b710d changes only native tests.",
+  "entries": [
+    {
+      "path": "artifacts/kikai-detail/.gitattributes",
+      "bytes": 67,
+      "sha256": "5395b342b6cd3a9b1256947ebd0a985cbd116d3f72f48a4e44dfb02ecaca76a9",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/EVIDENCE_SCOPE.md",
+      "bytes": 5724,
+      "sha256": "ec92d41e7edc99c35af3c778c50c1776b462002739680518cd9cfa2040ce964f",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/apr-guide-webgpu-1280-final.jpg",
+      "bytes": 56107,
+      "sha256": "5ec752ce725935220ec4529f166c07f67e33b9333910dfdb820124c4e4f557d2",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/assets-13-final.txt",
+      "bytes": 2263,
+      "sha256": "1b4500dd65f6f8d78262be1304283f38c3ca5c117408307441822bd940554ced",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/backend-webgl2-final.jpg",
+      "bytes": 30993,
+      "sha256": "973d47c437f2d14f18196a2af74ae202e9592e4f7b22f57501ffc8e6b575fe6a",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/backend-webgpu-final.jpg",
+      "bytes": 32772,
+      "sha256": "b0df5ab94b1fe2bbbb09b401f8ce5c67f401c7dfb4a474095a065b59fd2cfdc1",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/build-before-mask-fix.txt",
+      "bytes": 1319,
+      "sha256": "10810d8a27681a232f53ede8eed5b4309a97d04b6deb10e176826489076ec016",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/build-final.txt",
+      "bytes": 1319,
+      "sha256": "9902b9d47348ecfa2a68c81d7f7be06904883e1304a0d66e81722ecf7cc5bcc8",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/capture-build.json",
+      "bytes": 318,
+      "sha256": "2c7a489c34fb362e938f16272de253732f0d2025db26b6654745f73f070f94d1",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/clippy.txt",
+      "bytes": 166,
+      "sha256": "826aafe1f657d5f05af0d9dd2e4501eba5258b9c75f23b205acafbe7ed8ed82a",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/compact-equivalence.json",
+      "bytes": 534,
+      "sha256": "3aaea91bf345934492a6f3c89b2ee7138f19633a51294e2d68a78689368af749",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/creator-webgpu-320-final.jpg",
+      "bytes": 11529,
+      "sha256": "d75a8fa217cfffda8e454c22b6b8e55feeb80cd8c5582a35f851dc4fa0cddd53",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/creator-webgpu-848-final.jpg",
+      "bytes": 55799,
+      "sha256": "0f51b2e99a292ed89922b3c6394747118710a63d5f4acc7a9872388d40d33497",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/dora-webgpu-1280-final.jpg",
+      "bytes": 116327,
+      "sha256": "fe5c94190cc91a41581c3d832ee33b0fb65860b5e87b66be00589e7a61858ba4",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/doro-webgpu-1280-final.jpg",
+      "bytes": 117546,
+      "sha256": "0f5eb6083297f7e79ac3006cdef864874db72dd72027016f7c2261efcba49db0",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/doro-webgpu-1280.jpg",
+      "bytes": 120822,
+      "sha256": "e8fce7d46bd8697831aa88b68566a3c3c332e0ba4078485d968cc0c20aa1d426",
+      "hashDomain": "raw bytes",
+      "negative": true
+    },
+    {
+      "path": "artifacts/kikai-detail/guide-webgl2-320-final.jpg",
+      "bytes": 14815,
+      "sha256": "165cac788181863b429bdd493531ecc5eb870ffb8d920b7f71dad431897e6c4d",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/guide-webgl2-848-final.jpg",
+      "bytes": 42716,
+      "sha256": "2ccf808aeb785ada997014d1f72e59344fe363fc36746471b6733567cf82749d",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/independent-review.md",
+      "bytes": 5062,
+      "sha256": "95d845331b41ea5bf7b9657f0568c51718d70d132af847222ae10683211b7946",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/license-webgl2-1280-final.jpg",
+      "bytes": 81404,
+      "sha256": "1e36565c43bc28b0859d19b2b2465c539c59cdd29aaaaaa7138fd3892690d306",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/license-webgpu-1280-final.jpg",
+      "bytes": 81746,
+      "sha256": "e9fe0665d073df10b1406fcaaac240f323a5e9ce54fd8c0a6c310393abcc2830",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/metadata-review.md",
+      "bytes": 649,
+      "sha256": "75fe97b5fd760948e1f205e368459c269e53783059afc28fcd1aaa14f5ae392e",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/native-37-final.txt",
+      "bytes": 4639,
+      "sha256": "8912758135745687952c64d9ff7a871e67b5c187b77460194146adb943c404d0",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/native-536.txt",
+      "bytes": 54697,
+      "sha256": "4018cbf94ba8c56527ef863703a8c673a60b4a4e55417fb005b0b7a02d7de786",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/native-538-final.txt",
+      "bytes": 54816,
+      "sha256": "a54043288e0b951367f8f0b2a8cc7798c445a02507ceaa55abeea2bce3817944",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/native-skin-fixed.txt",
+      "bytes": 803,
+      "sha256": "bdaee066b610a04e688152cc55ed19a532b7d7724f709d1902e0f1bb1344b93f",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/native-skin-negative.txt",
+      "bytes": 2296,
+      "sha256": "07af44497516e5ad3e6a7f12bd5fb52559114d99f3a8000c7daa82a88afdb821",
+      "hashDomain": "UTF-8/LF",
+      "negative": true
+    },
+    {
+      "path": "artifacts/kikai-detail/raw-cell-evidence.json",
+      "bytes": 1175,
+      "sha256": "11aed4ce7f87c364a9c270d90c95ba796143d3a5af204a65ef2049a349a445d8",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/role-repair-review.md",
+      "bytes": 3056,
+      "sha256": "960e44bf05afed131bb8bc26cba6ddfabcfa13ff24f2370b9de776f5d2d56694",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/shell-346.txt",
+      "bytes": 37589,
+      "sha256": "105cf0192bd4887c8431b2602106d13de191bfc3f44ab9102a3ce1fd7efd3f79",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/shell-negative-fixture.txt",
+      "bytes": 38514,
+      "sha256": "879c75b460484dd1af03c305336357dd4ceaeb9b42d93d2c5f3d28b1e3d2f102",
+      "hashDomain": "UTF-8/LF",
+      "negative": true
+    },
+    {
+      "path": "artifacts/kikai-detail/source-pins.json",
+      "bytes": 4805,
+      "sha256": "2a0275dc61002fe24d1de02dbffd582532f54518c976ce4a88129761470802c3",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/talo-webgpu-1280-final.jpg",
+      "bytes": 113838,
+      "sha256": "ea09b4166ce41e66dcd7ee4c6fd302b2b5162354d5140e493cf45b7b4a28f430",
+      "hashDomain": "raw bytes",
+      "negative": false
+    },
+    {
+      "path": "artifacts/kikai-detail/talo-webgpu-1280.jpg",
+      "bytes": 116530,
+      "sha256": "5eba50ac7bcad16a5a76a07ec33f4b27d39e353188f99afff54ef8c5eec8e0ee",
+      "hashDomain": "raw bytes",
+      "negative": true
+    },
+    {
+      "path": "artifacts/kikai-detail/wasm-contract-42-final.txt",
+      "bytes": 1108,
+      "sha256": "006d06078224a309da7524e236abcb319c7e1d761bf52256ac7c9ab2395ee097",
+      "hashDomain": "UTF-8/LF",
+      "negative": false
+    }
+  ]
+}

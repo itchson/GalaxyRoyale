@@ -1,0 +1,182 @@
+.forge-view,
+.ship-hangar-view {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.forge-view h3,
+.ship-hangar-view h3 {
+  margin: 0;
+  font-size: var(--ui-text);
+  font-weight: normal;
+  line-height: 1.25;
+}
+.menu-card .forge-view p,
+.menu-card .ship-hangar-view p {
+  margin: 0;
+  font-size: var(--ui-text);
+  line-height: 1.35;
+}
+.loadout-summary,
+.ability-card,
+.hardware-card,
+.ship-hangar-card {
+  min-width: 0;
+  padding: calc(4px * var(--ui-scale, 1));
+  border: 1px solid #38556b;
+  background: #0a1423;
+}
+.loadout-summary,
+.loadout-ship-summary,
+.loadout-card-content,
+.ability-list,
+.hardware-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.loadout-ship-summary {
+  gap: calc(2px * var(--ui-scale, 1));
+}
+.loadout-editor-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(5px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.collection-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(3px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.collection-filters button {
+  flex: 1 1 calc(72px * var(--ui-scale, 1));
+}
+.collection-filters button[data-selected="true"] {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.collection-summary,
+.collection-state {
+  color: #b9cadd;
+}
+.loadout-slots {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: calc(4px * var(--ui-scale, 1));
+}
+.loadout-slot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+  padding: calc(4px * var(--ui-scale, 1));
+  border: 1px solid #38556b;
+  background: #0a1423;
+}
+.loadout-slot .upgrade-category {
+  display: block;
+  margin: 0 0 calc(3px * var(--ui-scale, 1));
+}
+.forge-view .upgrade-category p {
+  color: inherit;
+}
+.forge-view button,
+.ship-hangar-view button {
+  min-width: 0;
+  min-height: var(--ui-hit);
+  padding: calc(5px * var(--ui-scale, 1));
+  font-size: var(--ui-text);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.loadout-slot > button {
+  min-width: max(72px, calc(56px * var(--ui-scale, 1)));
+}
+.loadout-back {
+  align-self: flex-start;
+  max-width: 100%;
+}
+.loadout-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(3px * var(--ui-scale, 1));
+}
+.loadout-actions button {
+  flex: 1 1 max(88px, calc(68px * var(--ui-scale, 1)));
+}
+.forge-view button[data-pixel-action="offense-button"] {
+  color: var(--pink);
+}
+.forge-view button[data-pixel-action="defense-button"] {
+  color: var(--cyan);
+}
+.forge-view button[data-pixel-action="passive-button"] {
+  color: var(--amber);
+}
+.forge-view button[data-pixel-action]:disabled {
+  color: #7891a5;
+}
+.ability-card,
+.hardware-card {
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--ui-scale, 1));
+}
+.ability-card[data-equipped="true"] {
+  border-color: var(--cyan);
+}
+.forge-view .loadout-recipe p,
+.ship-hangar-view .loadout-recipe p {
+  color: #b9cadd;
+}
+.forge-view p.loadout-reason,
+.forge-view p.loadout-note,
+.ship-hangar-view p.loadout-reason,
+.ship-hangar-view p.loadout-note {
+  color: #a2b0c9;
+}
+.ship-hangar-roster {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(8px * var(--ui-scale, 1));
+}
+.ship-hangar-card {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(8px * var(--ui-scale, 1));
+}
+.ship-hangar-card .campaign-ship {
+  width: calc(32px * var(--ui-scale, 1));
+  height: calc(32px * var(--ui-scale, 1));
+  flex: 0 0 auto;
+}
+.ship-hangar-card[data-selected="true"] {
+  border-color: var(--cyan);
+}
+.narrow-ui .ship-hangar-roster {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (max-width: 560px) {
+  .ship-hangar-roster {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (min-width: 600px) {
+  .loadout-slots {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .loadout-slot {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+  .loadout-slot > button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "capturedAt": "2026-10-12T16:47:34.840Z",
+  "candidateCommit": "8727e7e0295095e338cf907b623174807d14e736",
+  "originalCandidateCommit": "4edfd189d4e05f844e91a67a0f93f721800e0565",
+  "currentHead": "d53954c7956a2be71de34de12c4f309563bd8a40",
+  "node": "v24.18.0",
+  "sourcePins": {
+    "apps/game/src/audio.ts": {
+      "bytes": 45440,
+      "sha256": "f92abef370e01744a8cd06cad6ae5575a9525b6f82d9ef31e3c7ac980563767b",
+      "lfBytes": 44058,
+      "lfSha256": "cd71241a18ae6baf34bcc333152fe7ad18fbf907a7fe6507a0c88e6075e89149",
+      "candidateBytes": 44058,
+      "candidateSha256": "cd71241a18ae6baf34bcc333152fe7ad18fbf907a7fe6507a0c88e6075e89149",
+      "frozenExpected": {
+        "bytes": 44064,
+        "sha256": "9f5921aa82f88fea261049dfe9ac8d58abe3ed02b66bd5fe6b864760f51557a0"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    "apps/game/src/audio-state.ts": {
+      "bytes": 11471,
+      "sha256": "c3c9a3c5b34b1001e4d1dd1de531e70dbcd945826b31022e0619187d0ec1b76f",
+      "lfBytes": 10846,
+      "lfSha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea",
+      "candidateBytes": 10846,
+      "candidateSha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea",
+      "frozenExpected": {
+        "bytes": 10846,
+        "sha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    "apps/game/src/title-theme.ts": {
+      "bytes": 2917,
+      "sha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135",
+      "lfBytes": 2787,
+      "lfSha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "candidateBytes": 2787,
+      "candidateSha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "frozenExpected": {
+        "bytes": 2787,
+        "sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    "apps/game/src/music-clock.ts": {
+      "bytes": 4084,
+      "sha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9",
+      "lfBytes": 3973,
+      "lfSha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559",
+      "candidateBytes": 3973,
+      "candidateSha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559",
+      "frozenExpected": {
+        "bytes": 3973,
+        "sha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    "apps/game/src/music-score.ts": {
+      "bytes": 807,
+      "sha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683",
+      "lfBytes": 771,
+      "lfSha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703",
+      "candidateBytes": 771,
+      "candidateSha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703",
+      "frozenExpected": {
+        "bytes": 771,
+        "sha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    "apps/game/src/main.ts": {
+      "bytes": 90428,
+      "sha256": "04dc2ed27851a49b86df00aebfc449aaed5193c12dae6dbd49cf826633bf1b33",
+      "lfBytes": 87760,
+      "lfSha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2",
+      "candidateBytes": 87760,
+      "candidateSha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2",
+      "frozenExpected": {
+        "bytes": 90428,
+        "sha256": "04dc2ed27851a49b86df00aebfc449aaed5193c12dae6dbd49cf826633bf1b33"
+      },
+      "rawMatchesFrozen": true,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    "scripts/test/audio.test.mjs": {
+      "bytes": 53489,
+      "sha256": "95e06ababa5e6d28e355917b308ef5d9ca41d1fb3e552e3152fb47b825041272",
+      "lfBytes": 53489,
+      "lfSha256": "95e06ababa5e6d28e355917b308ef5d9ca41d1fb3e552e3152fb47b825041272",
+      "candidateBytes": 53489,
+      "candidateSha256": "95e06ababa5e6d28e355917b308ef5d9ca41d1fb3e552e3152fb47b825041272",
+      "frozenExpected": {
+        "bytes": 53270,
+        "sha256": "b7a189bea3b2b34d568b99bf9906237413bae71c1e6fc51983fb36cf8f08c45d"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    "scripts/test/title-theme.test.mjs": {
+      "bytes": 2014,
+      "sha256": "ceca0a77ef8ef64336e51661f8a2bea00abfa840c5db491159981b2518790d21",
+      "lfBytes": 1959,
+      "lfSha256": "79422299379d7defcd7f3cbdf4e5b02950c562116b2142cd805a3fd9aee2fce4",
+      "candidateBytes": 1959,
+      "candidateSha256": "79422299379d7defcd7f3cbdf4e5b02950c562116b2142cd805a3fd9aee2fce4",
+      "frozenExpected": {
+        "bytes": 1959,
+        "sha256": "79422299379d7defcd7f3cbdf4e5b02950c562116b2142cd805a3fd9aee2fce4"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    "scripts/test/music-clock.test.mjs": {
+      "bytes": 3837,
+      "sha256": "97f8a6876ab969e92e9dd37894679964070430cbb533cc1ac213c128cef4c319",
+      "lfBytes": 3747,
+      "lfSha256": "330db100684e85549f22156e2bfb156d4981d65d41ce76d9981cc1da0dec3503",
+      "candidateBytes": 3747,
+      "candidateSha256": "330db100684e85549f22156e2bfb156d4981d65d41ce76d9981cc1da0dec3503",
+      "frozenExpected": {
+        "bytes": 3747,
+        "sha256": "330db100684e85549f22156e2bfb156d4981d65d41ce76d9981cc1da0dec3503"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    "scripts/test/audio-state.test.mjs": {
+      "bytes": 6903,
+      "sha256": "a1f0cd5f0a14b54e8b3f6b68d29df7f6c7b608820c3f174eeed93231ba6212c5",
+      "lfBytes": 6725,
+      "lfSha256": "e47da4e32b7420abe9c917bbf9762b947af391315389e1a03e54b9fe5177564a",
+      "candidateBytes": 6725,
+      "candidateSha256": "e47da4e32b7420abe9c917bbf9762b947af391315389e1a03e54b9fe5177564a",
+      "frozenExpected": null,
+      "rawMatchesFrozen": null,
+      "lfMatchesFrozen": null,
+      "commitMatchesFrozen": null,
+      "workspaceMatchesCandidateLf": true
+    },
+    "work/title-score-engine/handoff.md": {
+      "bytes": 5608,
+      "sha256": "0ea1ff1c3bee79eb09228a284bff0747064f2406c35d635ac4fa5a11be3cf97c",
+      "lfBytes": 5564,
+      "lfSha256": "e544fdb298284169ced318f8e22b6fdd080ab6327e0895c1b9c412a4dc70e9e5",
+      "candidateBytes": 5564,
+      "candidateSha256": "e544fdb298284169ced318f8e22b6fdd080ab6327e0895c1b9c412a4dc70e9e5",
+      "frozenExpected": {
+        "bytes": 5564,
+        "sha256": "e544fdb298284169ced318f8e22b6fdd080ab6327e0895c1b9c412a4dc70e9e5"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": true,
+      "commitMatchesFrozen": true,
+      "workspaceMatchesCandidateLf": true
+    },
+    "work/title-score-engine/execution-evidence.json": {
+      "bytes": 1490,
+      "sha256": "d396e800eb60ff97633b286d387116dd39f76ed79ae4748e140bc6f8831407cf",
+      "lfBytes": 1448,
+      "lfSha256": "f5386ec188416dcfbb6aa000de0e7af7b4b1ff0ae4ebfdd443418c3363151cc9",
+      "candidateBytes": 1448,
+      "candidateSha256": "f5386ec188416dcfbb6aa000de0e7af7b4b1ff0ae4ebfdd443418c3363151cc9",
+      "frozenExpected": {
+        "bytes": 1490,
+        "sha256": "d396e800eb60ff97633b286d387116dd39f76ed79ae4748e140bc6f8831407cf"
+      },
+      "rawMatchesFrozen": true,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    "work/title-score-engine/focused-tests.log": {
+      "bytes": 6754,
+      "sha256": "b135e863430526eb84405293b6521de7906deff58352f8caaae4df8002a494df",
+      "lfBytes": 6683,
+      "lfSha256": "ee59fa4c61765fdaae799f06a93de375b177eb26b9cfdc23b209098fbf1088df",
+      "candidateBytes": 6683,
+      "candidateSha256": "ee59fa4c61765fdaae799f06a93de375b177eb26b9cfdc23b209098fbf1088df",
+      "frozenExpected": {
+        "bytes": 6754,
+        "sha256": "b135e863430526eb84405293b6521de7906deff58352f8caaae4df8002a494df"
+      },
+      "rawMatchesFrozen": true,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    "work/title-score-engine/typecheck.log": {
+      "bytes": 65,
+      "sha256": "c5aa045b6acf977624cf932e93e0b9c7b31cf10f05614800ac427c5c98a32dc2",
+      "lfBytes": 63,
+      "lfSha256": "ebc98439b8104eb6540e480661667477bc448c44e2d6523575627f863d9078cd",
+      "candidateBytes": 63,
+      "candidateSha256": "ebc98439b8104eb6540e480661667477bc448c44e2d6523575627f863d9078cd",
+      "frozenExpected": {
+        "bytes": 64,
+        "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+      },
+      "rawMatchesFrozen": false,
+      "lfMatchesFrozen": false,
+      "commitMatchesFrozen": false,
+      "workspaceMatchesCandidateLf": true
+    },
+    "work/title-score-engine/source-pins.json": {
+      "bytes": 2216,
+      "sha256": "30b5aec95464e3ffc120df39b0e563abd989732c03ae0d5635af30e9c2c67ac6",
+      "lfBytes": 2156,
+      "lfSha256": "ca28ceda4c9a93ae38f68e28eaeb5df12d57d208e66b1f2bf7dc26ee5fae3f36",
+      "candidateBytes": 2156,
+      "candidateSha256": "ca28ceda4c9a93ae38f68e28eaeb5df12d57d208e66b1f2bf7dc26ee5fae3f36",
+      "frozenExpected": null,
+      "rawMatchesFrozen": null,
+      "lfMatchesFrozen": null,
+      "commitMatchesFrozen": null,
+      "workspaceMatchesCandidateLf": true
+    }
+  },
+  "ownEvidence": {
+    "review.md": {
+      "bytes": 8531,
+      "sha256": "b918d685df259380b47a3fcea2b6537b5a2a17fed36898316997e1d8f81c3146"
+    },
+    "focused-tests.log": {
+      "bytes": 6753,
+      "sha256": "52da69858e080e138a751b52130764f5a6b111701c8ee39088cba7d91405876e"
+    },
+    "edge-review.log": {
+      "bytes": 633,
+      "sha256": "464bb208b9a6eb40eb163a7aaddf31b4f432bbf000abaf04fc19edbf8825a94d"
+    },
+    "edge-review-original-failure.log": {
+      "bytes": 2135,
+      "sha256": "bbbcb47800b33367f0ea34c94a07c663b8c890719c7cb6872387b958a4eed8f2"
+    },
+    "focused-tests-original.log": {
+      "bytes": 6755,
+      "sha256": "f3a0d83744d37144c2e8b36ad82f8427961868291ab9f2cf16d9e82652f0a7b8"
+    },
+    "review-pins-original.json": {
+      "bytes": 11482,
+      "sha256": "ea9cf1aeab96a052190b71f247387b73de5961ea720358298e2cff13d2a255ce"
+    },
+    "edge-review.test.mjs": {
+      "bytes": 1975,
+      "sha256": "54211951f6443403fa22365335d309939cb5a45aaa539fd3583fd411fd2ee671"
+    },
+    "recorded-api-harness.mjs": {
+      "bytes": 5097,
+      "sha256": "871f8f26aa9f770eddb43248872693a29a242f873c14af52cf26159c4abdae96"
+    },
+    "pin-review.mjs": {
+      "bytes": 4311,
+      "sha256": "01bfe63c3e7da264d56d29d01eab428dab8e2cd482b90a53ef116b28e799c09a"
+    }
+  },
+  "frozenTypecheckEquivalentTextMatches": [
+    {
+      "newlineMask": 2,
+      "bytes": 64,
+      "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+    }
+  ],
+  "commands": [
+    {
+      "command": "node --experimental-transform-types --test scripts/test/music-clock.test.mjs scripts/test/title-theme.test.mjs scripts/test/audio-state.test.mjs scripts/test/audio.test.mjs",
+      "exitCode": 0,
+      "tests": 49,
+      "pass": 49,
+      "fail": 0,
+      "log": "focused-tests.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test work/title-score-independent-review/edge-review.test.mjs",
+      "exitCode": 0,
+      "tests": 2,
+      "pass": 2,
+      "fail": 0,
+      "log": "edge-review.log"
+    }
+  ],
+  "scope": "Source review and recorded WebAudio API tests only. No native DSP, listening, browser, gameplay, device, or full build validation."
+}

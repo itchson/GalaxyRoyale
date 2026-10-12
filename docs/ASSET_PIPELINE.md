@@ -2,6 +2,8 @@
 
 Galaxy Royale draws occupied engine cells. PNG files are authoring inputs and review outputs; importing a pack does not introduce textured sprites or make generated concept art an accepted game asset.
 
+Optional per-cell surface maps follow the same reviewed-source pipeline. Semantic heights and sparse signal masks are packed through the real Rust encoder, bound to the original atlas, and cached for matching native assets. See [PIXEL_SURFACES.md](PIXEL_SURFACES.md) for the normal/luminance contract and current acceptance boundaries.
+
 `scripts/asset-pack.py` is an offline, deterministic pack/unpack/validation tool. Exact conversion is the default: native grid, binary alpha, all components, original dimensions and exact colors. The current game/UI atlas readers keep their version-1 ABI: `palette` contains little-endian u32 RGBA, index0 is transparent, and each named sprite has width, height and row-major indices. Default exact packs have 64 entries, padding unused entries with a duplicate opaque color. A smaller/different palette is possible explicitly, but each runtime consumer's existing limits still apply. The game loader accepts sprites up to128; the UI loader supports its existing larger logo. The packer's generic256-side limit does not override either consumer.
 
 ## Fresh checkout
@@ -95,3 +97,19 @@ The checked-in `native-extraction.json` and `native-preview.png` preserve the ea
 5. Only then adapt the reviewed pack to the intended runtime consumer. Verify real damage holes, group budget rejection, animation/Reduced Motion and both backend presentations. Human moving-play, hearing and physical-phone gates remain separate; native proofs cannot mark those passed.
 
 The earlier `convert-atlas.py` and `convert-ui-atlas.py` remain reproducible historical conversion recipes for their particular inspected sheets. Their hard-coded crops and explicit historical loss policies are not the default of this reusable pipeline. No generation service or global model configuration is installed by these scripts.
+
+## PAN co-op dock conversion candidate
+
+[PAN dock candidate](../assets/pipeline/pan-coop-dock/README.md) retains the actual
+1254×1254 imagegen reference and records explicit alpha128/nearest128 sampling
+and material-stratified palette losses. Its64-color pack preserves all sampled
+components and exterior pad cutouts, with7,100 occupied cells split into four
+logical parts. Three authored lamp-only color states share identical occupancy.
+The existing native utility proves exact PixelBody extraction, and a scoped
+`scripts/qa/pan-coop-dock/native` proof exercises the actual PixelRig, material
+roles, fractional/reflected/sheared corners, damage holes and bounded admission.
+
+192/256 comparison views show the detail tradeoff but exceed the current
+single-rig128-side contract. No engine limit is enlarged and no shipping dock is
+replaced. The reference's finest texture/crystal details are not fully retained
+at128; GPU/live-game/co-op and human/device acceptance remain separate gates.

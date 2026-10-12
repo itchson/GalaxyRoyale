@@ -1,0 +1,14 @@
+{
+  "checks": [
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0,
+      "scope": "Observed final source, empty success output"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "scope": "Observed before source commit"
+    }
+  ]
+}

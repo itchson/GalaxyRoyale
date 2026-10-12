@@ -1,0 +1,27 @@
+
+
+Task complete. Only the two owned files were created; other dirty files shown by git (`main.ts`, `flight-menu.ts`, `pixel-ui.ts`, `style.css`, `missions.*`) predate this worker and were not touched.
+
+## Result
+
+**Created files**
+
+- `apps/game/src/vault-scene.ts` — exports `VaultHud extends CargoHud` with `components: ComponentHud[]` (type-only import from `./loadout`) and `paintVault(target: HTMLElement, hud: VaultHud): boolean`. Follows the `cargo.ts` pattern: `WeakMap` snapshot key → no DOM work on unchanged data, scroll preserved across `replaceChildren`, `textContent` only (no HTML injection), semantic `section`/`h3`/`p` nodes with `aria-label` headings.
+- `apps/game/src/vault-scene.css` — single column by default, 2-column grid at `min-width: 640px` (matches existing loadout.css breakpoint range), auto-fit component grid, fixed 40px icon box with `min-width: 0` overflow guards. No panel chrome, no 44px targets (view only, zero actions).
+
+**Content mapping (HUD values only)**
+
+- Banked materials reuse `cargoRows(hud)` filtered to `banked > 0` — the named T1 subset double-count accounting is inherited, not reimplemented.
+- At-risk unbanked salvage: compact amber total line + per-material carried counts, one line noting bank-at-Haven / lost-on-RAICHO-loss semantics. No cargo/capacity fractions or "RAICHO slots" phrasing anywhere; `cargo_capacity` is never rendered.
+- Crafted components: owned-only cards using the accepted native `data-pixel-kind="craft-component"` + `data-pixel-value=component.index` art node (same kind/value loadout.ts uses), so no custom glyph path.
+- Mission items: incomplete courier deliveries mirrored from `quest_log`, retention wording consistent with `cargo.ts`. No MEISHI/currency content.
+
+**Checks (actual output)**
+
+- `pnpm typecheck` (`tsc --noEmit`): pass, zero diagnostics — run twice, including after final edits.
+- `prettier --check` on the two files: pass after formatting owned files only.
+- No browser/visual run performed (worker constraints) — flagged in the handoff for Root's first full-screen open.
+
+**Concern for Root**: `PixelUiBridge` only observes a fixed id list (`launch-screen`, `menu-screen`, `game-ui`, …). The vault scene must live inside an observed root (or its id added in `pixel-ui.ts`, which Root owns) or repaints won't invalidate the native bridge — noted in the handoff.
+
+Handoff written to `work/haven-scenes/vault-HANDOFF.md` with the exact interface, integration notes, and check log. No git operations performed.

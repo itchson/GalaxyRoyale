@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "authorship": "Original pixel cells authored directly by Codex with Python/Pillow shape masks and explicit pixel clusters.",
+  "generation_model": null,
+  "source_grid": [
+    64,
+    64
+  ],
+  "palette_count": 21,
+  "alpha_policy": "binary exact",
+  "components": "all retained, intentional open silhouette holes",
+  "conversion_loss": "none",
+  "source_png_encoding": "filter0, explicitly stored DEFLATE blocks; decoded by Pillow; reproducible encoded bytes",
+  "style_revision": "Athletic league material pass: authored alloy planes, recessed chip/vent details and fixed gold locators; neutral graphite/platinum metal replaces blue-gray wash.",
+  "preserved_baseline": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73: all occupancy/bounds and both animation masks unchanged",
+  "atlas_sha256": "4d811f30347e72d1fbc9583e1d931065cb44af0d2f59dfae2a6850887a2f0704",
+  "source_sha256": {
+    "icon_status": "404e9f713f40a07371830413156f0c10a71019dd0cfc17e82a6d8e39a098280c",
+    "icon_map": "34ca3a0089526e6e0d573f202e44165bf206c5e1678cd9592281945168a426e5",
+    "icon_settings": "0efe73a66746cbdc4cd369e56c7305755a7f89ec132c380e220e774205e93a36",
+    "icon_save": "ff34d1db1fd6880aa83e1eede1d64e7e615f51df27a44d997825434a09b5e90a",
+    "icon_close": "28bce345eb42ca44a8cc55b3e9144dd88b95c07c7eaab655d75a9fc909e00eae",
+    "icon_resume": "b252964d242c7d29f54d67cf51c9024d8ade47d3195791035e32b7aa76520bab",
+    "icon_restart": "ee544f27ca60b0f65890ca31f378489cace42c8ce865a8620ef43727a0372b8b",
+    "icon_title": "ad6d66d6f3ec8ee5a1d7e9946ab393bf5f1afd23a9e4bddc3a535e02cc5927d1",
+    "icon_quit": "12232000b361afb90609b0e22aa9225eef4d005d1adda620345830eb42c6eda7",
+    "icon_fullscreen": "7c95d05b3043912fc0ab26a481f62b2b4e13839dc7d48dd238c48c44fac09e2a"
+  },
+  "budgets": {
+    "icon_status": {
+      "occupied": 1291,
+      "accent": 113,
+      "emitter": 18
+    },
+    "icon_map": {
+      "occupied": 2036,
+      "accent": 178,
+      "emitter": 15
+    },
+    "icon_settings": {
+      "occupied": 1802,
+      "accent": 100,
+      "emitter": 36
+    },
+    "icon_save": {
+      "occupied": 1503,
+      "accent": 36,
+      "emitter": 12
+    },
+    "icon_close": {
+      "occupied": 1289,
+      "accent": 98,
+      "emitter": 16
+    },
+    "icon_resume": {
+      "occupied": 1362,
+      "accent": 156,
+      "emitter": 26
+    },
+    "icon_restart": {
+      "occupied": 1373,
+      "accent": 97,
+      "emitter": 18
+    },
+    "icon_title": {
+      "occupied": 1591,
+      "accent": 51,
+      "emitter": 18
+    },
+    "icon_quit": {
+      "occupied": 1322,
+      "accent": 100,
+      "emitter": 27
+    },
+    "icon_fullscreen": {
+      "occupied": 1140,
+      "accent": 312,
+      "emitter": 76
+    }
+  },
+  "all_ten_occupied": 14709,
+  "animation_contract": "Host may vary only explicit accent/emitter color or emission, with fixed geometry. Metadata does not install an animation loop.",
+  "review_scope": "Authoring PNGs and nearest software14/28/42px samples only; actual native extraction, GPU presentation, human/phone readability remain unmeasured."
+}

@@ -1,4 +1,18 @@
-/** Authored procedural score and effects: no samples, generated tracks, or network assets. */
+/** Authored title/world synthesis and effects on one bounded WebAudio transport. */
+import {
+  TITLE_THEME,
+  titleNotesAtStep,
+  type TitleTheme,
+} from "./title-theme.ts";
+import { MusicClock } from "./music-clock.ts";
+import {
+  AMBIENT_BPM,
+  COMBAT_BPM,
+  SCORE_BASS,
+  SCORE_CHORDS,
+  SCORE_LOOKAHEAD_SECONDS,
+  SCORE_MAX_STEPS_PER_TICK,
+} from "./music-score.ts";
 import {
   advanceMix,
   audibleThemes,
@@ -17,17 +31,27 @@ type Voice = {
   nodes: AudioNode[];
   sources: AudioScheduledSourceNode[];
   pending: number;
+  start: number;
   end: number;
   released: boolean;
   persistent: boolean;
   cue: string | null;
   theme: number | null;
+  harmonicEndBeat: number | null;
+  /** Title pads sustain inside; this finite outer envelope owns their bar gate. */
+  titlePad: { level: number; points: { time: number; value: number }[] } | null;
 };
 const FLOOR = 0.0001;
 // Leave room for the score, warning and engine layers before the final compressor.
 // The compressor catches stacked events; this trim is not a brick-wall limiter.
 const CUE_LEVEL = 0.85;
-const ENGINE_LEVEL = 0.32;
+const ENGINE_LEVEL = 0.24;
+const ENGINE_NOTES = [47, 54] as const; // Quiet B–F# fifth, shared score harmony.
+// Original palm-muted synth string coloration, not a guitar recording/model.
+const STRING_DRIVE = Float32Array.from(
+  { length: 257 },
+  (_, i) => Math.tanh((i / 128 - 1) * 2.1) / Math.tanh(2.1),
+);
 const clamp = (value: number): number =>
   Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
 const frequency = (note: number): number => 440 * 2 ** ((note - 69) / 12);
@@ -57,37 +81,12 @@ const SOUNDS = new Set([
   ...[6, 7, 8, 9, 12, 13].map((i) => `ability-signature-${i}`),
 ]);
 
-// Eight authored bars in A minor. Dock and combat share harmony and a 112 BPM pulse.
-const CHORDS = [
-  [45, 48, 52, 55],
-  [41, 45, 48, 50],
-  [48, 52, 55, 59],
-  [43, 47, 50, 53],
-  [45, 48, 52, 55],
-  [41, 45, 48, 50],
-  [50, 53, 57, 60],
-  [40, 47, 52, 56],
-] as const;
-const BASS = [
-  0,
-  null,
-  null,
-  0,
-  0,
-  null,
-  7,
-  null,
-  0,
-  null,
-  null,
-  12,
-  7,
-  null,
-  null,
-  7,
-] as const;
-
 export class AudioEngine {
+  private titleScreen = false;
+  private titleBlend = 0;
+  private clock: MusicClock | null = null;
+  private frozenBeat: number | null = null;
+  private scoreMode: "title" | "ambient" | "combat" = "ambient";
   private context: AudioContext | null = null;
   private master: GainNode | null = null;
   private music: GainNode | null = null;
@@ -97,7 +96,6 @@ export class AudioEngine {
   private graph: AudioNode[] = [];
   private voices = new Set<Voice>();
   private timer: number | null = null;
-  private nextNote = 0;
   private step = 0;
   private state: AudioState = { ...QUIET_STATE };
   private mix = newMix();
@@ -117,6 +115,31 @@ export class AudioEngine {
   private levels = [0.75, 0.4, 0.75];
   private paused = true;
   private disposed = false;
+
+  constructor(private titleTheme: TitleTheme = TITLE_THEME) {}
+
+  /** Title and world are arrangements of the same beat/harmonic transport. */
+  setTitleScreen(active: boolean): void {
+    if (this.titleScreen === active) return;
+    this.titleScreen = active;
+    if (!this.context) this.titleBlend = active ? 1 : 0;
+    if (active) {
+      for (const voice of [...this.voices])
+        if (voice.lane === "sfx" || voice.persistent) this.release(voice);
+      this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
+      this.resetEngineDuck();
+    }
+    if (this.context && this.clock) {
+      const now = this.context.currentTime;
+      // Already audible notes receive an envelope, never an abrupt disconnect.
+      for (const voice of this.voices)
+        if (voice.lane === "music" && voice.start < now && !voice.titlePad)
+          voice.gain.gain.setTargetAtTime(0, now, 0.24);
+      this.invalidateFuture(Math.ceil(this.clock.beatAtTime(now) * 4) / 4);
+      this.syncScoreMode(now);
+    }
+    this.setLevels(this.levels[0]!, this.levels[1]!, this.levels[2]!);
+  }
 
   /** Invoked by the launch gesture; the sole AudioContext creation path. */
   async unlock(): Promise<void> {
@@ -143,7 +166,11 @@ export class AudioEngine {
           } else {
             this.stopScheduler();
             for (const voice of [...this.voices]) this.release(voice);
-            this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+            this.mix.engine =
+              this.mix.alarm =
+              this.mix.combat =
+              this.mix.boss =
+                0;
             this.resetEngineDuck();
           }
         };
@@ -163,9 +190,14 @@ export class AudioEngine {
       node?.gain.setTargetAtTime(
         index === 1 && this.tailTimer !== null ? 0 : this.levels[index]!,
         context.currentTime,
-        0.025,
+        index === 1 ? 0.24 : 0.025,
       );
     });
+    this.musicWet?.gain.setTargetAtTime(
+      this.tailTimer !== null ? 0 : 0.12,
+      context.currentTime,
+      0.24,
+    );
   }
 
   /** Called from the authoritative post-step HUD; never creates a context. */
@@ -188,6 +220,29 @@ export class AudioEngine {
     }
     return {
       context: this.context?.state ?? "locked",
+      title: {
+        active: this.titleScreen,
+        track: this.titleTheme.enabled ? "authored-draft" : "disabled",
+        blend: this.titleBlend,
+        directListeningAccepted: false,
+      },
+      score: this.clock
+        ? {
+            ...this.clock.diagnostics(
+              this.frozenBeat === null
+                ? (this.context?.currentTime ?? 0)
+                : this.clock.timeAtBeat(this.frozenBeat),
+            ),
+            mode: this.scoreMode,
+            nextStep: this.step,
+            lookaheadSeconds: SCORE_LOOKAHEAD_SECONDS,
+            futureVoices: [...this.voices].filter(
+              (voice) =>
+                voice.lane === "music" &&
+                voice.start > (this.context?.currentTime ?? 0),
+            ).length,
+          }
+        : null,
       enabled:
         !this.disposed && !this.paused && this.context?.state === "running",
       disposed: this.disposed,
@@ -199,6 +254,8 @@ export class AudioEngine {
       boss: this.state.boss,
       combat: this.mix.combat,
       targetCombat: this.state.combat,
+      bossLayer: this.mix.boss,
+      corporation: this.state.corporation ?? null,
       lowHull: this.mix.alarm,
       hull: this.state.hull,
       engine: this.mix.engine,
@@ -224,7 +281,13 @@ export class AudioEngine {
 
   play(event: SoundEvent): void {
     const context = this.context;
-    if (!context || context.state !== "running" || this.paused || this.disposed)
+    if (
+      !context ||
+      context.state !== "running" ||
+      this.paused ||
+      this.disposed ||
+      this.titleScreen
+    )
       return;
     if (!SOUNDS.has(event.kind)) return;
     const now = context.currentTime;
@@ -479,7 +542,7 @@ export class AudioEngine {
     // delayed pad cannot continue under the sole allowed death effect.
     this.music?.gain.setTargetAtTime(0, context.currentTime, 0.008);
     this.musicWet?.gain.setTargetAtTime(0, context.currentTime, 0.008);
-    this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+    this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
     this.resetEngineDuck();
     this.lastWake = -Infinity;
     for (const voice of [...this.voices])
@@ -513,7 +576,7 @@ export class AudioEngine {
     this.paused = true;
     this.stopScheduler();
     for (const voice of [...this.voices]) this.release(voice);
-    this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+    this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
     this.resetEngineDuck();
     this.lastWake = -Infinity;
     if (this.context && this.context.state !== "closed")
@@ -555,6 +618,8 @@ export class AudioEngine {
     this.clearTail();
     this.paused = true;
     this.stopScheduler();
+    this.clock = null;
+    this.frozenBeat = null;
     for (const voice of [...this.voices]) this.release(voice);
     for (const node of this.graph) node.disconnect();
     this.graph = [];
@@ -602,7 +667,8 @@ export class AudioEngine {
     warmth.frequency.value = 5600;
     warmth.Q.value = 0.45;
     const echo = context.createDelay(1);
-    echo.delayTime.value = (60 / 112) * 0.75;
+    // A quiet fixed short echo avoids pitch bends while the beat tempo ramps.
+    echo.delayTime.value = 0.28;
     const feedback = context.createGain();
     feedback.gain.value = 0.16;
     const wet = context.createGain();
@@ -646,12 +712,33 @@ export class AudioEngine {
 
   private startScheduler(): void {
     if (this.timer !== null || !this.context || this.paused) return;
-    this.nextNote = this.context.currentTime + 0.045;
+    const now = this.context.currentTime;
+    if (!this.clock) {
+      this.scoreMode = this.titleScreen
+        ? "title"
+        : this.state.combat > 0
+          ? "combat"
+          : "ambient";
+      this.clock = new MusicClock(
+        now + 0.045,
+        this.scoreMode === "title"
+          ? this.titleTheme.bpm
+          : this.scoreMode === "combat"
+            ? COMBAT_BPM
+            : AMBIENT_BPM,
+      );
+    } else if (this.frozenBeat !== null) {
+      this.clock.reanchor(now + 0.045, this.frozenBeat);
+      this.frozenBeat = null;
+    }
+    this.step = Math.ceil(this.clock.beatAtTime(now + 0.045) * 4 - 1e-8);
     this.mixTime = this.context.currentTime;
     this.timer = window.setInterval(() => this.schedule(), 25);
     this.schedule();
   }
   private stopScheduler(): void {
+    if (this.clock && this.context && this.frozenBeat === null)
+      this.frozenBeat = this.clock.beatAtTime(this.context.currentTime);
     if (this.timer !== null) window.clearInterval(this.timer);
     this.timer = null;
   }
@@ -659,37 +746,101 @@ export class AudioEngine {
     const context = this.context;
     if (!context || context.state !== "running" || this.paused) return;
     this.advanceSound();
-    if (this.nextNote < context.currentTime - 0.2)
-      this.nextNote = context.currentTime + 0.02;
-    const length = 60 / 112 / 4;
-    while (this.nextNote < context.currentTime + 0.18) {
-      this.scoreStep(this.nextNote, this.step++, length);
-      this.nextNote += length;
+    const clock = this.clock;
+    if (!clock) return;
+    if (clock.timeAtBeat(this.step / 4) < context.currentTime)
+      this.step = Math.ceil(clock.beatAtTime(context.currentTime + 0.02) * 4);
+    for (let queued = 0; queued < SCORE_MAX_STEPS_PER_TICK; queued++) {
+      const beat = this.step / 4;
+      const time = clock.timeAtBeat(beat);
+      if (time >= context.currentTime + SCORE_LOOKAHEAD_SECONDS) break;
+      const length = clock.timeAtBeat(beat + 0.25) - time;
+      this.scoreStep(time, this.step++, length);
+    }
+  }
+
+  private invalidateFuture(beat: number): void {
+    if (!this.clock) return;
+    const time = this.clock.timeAtBeat(beat);
+    for (const voice of [...this.voices])
+      if (voice.lane === "music" && voice.start >= time - 1e-8)
+        this.release(voice);
+    this.step = Math.min(this.step, Math.ceil(beat * 4 - 1e-8));
+  }
+
+  private syncScoreMode(now: number): void {
+    const mode = this.titleScreen
+      ? "title"
+      : this.state.combat > 0
+        ? "combat"
+        : "ambient";
+    if (!this.clock || mode === this.scoreMode) return;
+    const previous = this.scoreMode;
+    this.scoreMode = mode;
+    const target =
+      mode === "title"
+        ? this.titleTheme.bpm
+        : mode === "combat"
+          ? COMBAT_BPM
+          : AMBIENT_BPM;
+    // A chase uses authoritative intent. Release retains two beats before its
+    // eight-beat deceleration; re-chase replaces that pending release ramp.
+    const change = this.clock.retarget(
+      now,
+      target,
+      mode === "combat" ? 4 : 8,
+      previous === "combat" && mode === "ambient" ? 2 : 0,
+    );
+    this.invalidateFuture(change.beat);
+    // An already audible pad was gated under the previous tempo. Retarget its
+    // final voice fade/stop to the new bar boundary so acceleration cannot keep
+    // an old full chord under the next one. Preserve any fade already started.
+    for (const voice of this.voices) {
+      if (voice.harmonicEndBeat === null || voice.start > now) continue;
+      const end = Math.max(now, this.clock.timeAtBeat(voice.harmonicEndBeat));
+      if (voice.titlePad) this.titlePadGate(voice, end, now);
+      else {
+        voice.gain.gain.cancelScheduledValues(now + 0.000001);
+        voice.gain.gain.setTargetAtTime(
+          FLOOR,
+          Math.max(now, end - 0.06),
+          0.008,
+        );
+        for (const source of voice.sources) source.stop(end + 0.025);
+        voice.end = end + 0.025;
+      }
     }
   }
 
   private scoreStep(time: number, step: number, length: number): void {
-    const bar = Math.floor(step / 16) % CHORDS.length;
+    const bar = Math.floor(step / 16) % SCORE_CHORDS.length;
     const beat = step % 16;
-    const chord = CHORDS[bar]!;
+    const chord = SCORE_CHORDS[bar]!;
+    if (this.titleBlend > 0.002) this.titleStep(time, step, length, chord);
     const combat = this.mix.combat;
     for (const [index, weight] of audibleThemes(this.mix)) {
       const theme = THEMES[index]!;
-      const space = this.mix.space * weight;
+      const space = this.mix.space * weight * (1 - this.titleBlend);
+      if (space < 0.002) continue;
       if (beat === 0) {
-        const pad = this.createVoice("music", time, length * 16, space);
+        const padDuration = this.clock
+          ? this.clock.timeAtBeat((step + 15.8) / 4) -
+            this.clock.timeAtBeat(step / 4)
+          : length * 15.8;
+        const pad = this.createVoice("music", time, padDuration, space);
         if (pad) {
           pad.theme = index;
+          pad.harmonicEndBeat = (step + 15.8) / 4;
           chord.forEach((note) =>
             this.tone(
               pad,
               time,
               frequency(note + 12),
               frequency(note + 12),
-              length * 15.8,
-              theme.arp,
-              0.019 * (1 - combat * 0.4),
-              0.12,
+              padDuration,
+              combat < 0.12 && theme.arp === "square" ? "triangle" : theme.arp,
+              0.017 * (1 - combat * 0.5),
+              0.22,
             ),
           );
         }
@@ -705,11 +856,12 @@ export class AudioEngine {
           frequency(note),
           frequency(note),
           length * 1.6,
-          theme.arp,
-          0.038 * (1 - combat * 0.35),
+          combat < 0.12 && theme.arp === "square" ? "triangle" : theme.arp,
+          0.032 * (1 - combat * 0.35),
+          0.016,
         );
       }
-      const bass = BASS[beat];
+      const bass = SCORE_BASS[beat];
       if (
         bass !== null &&
         bass !== undefined &&
@@ -721,7 +873,7 @@ export class AudioEngine {
           frequency(chord[0] + bass),
           frequency(chord[0] + bass),
           length * 1.15,
-          theme.bass,
+          combat < 0.12 && theme.bass === "square" ? "triangle" : theme.bass,
           0.026 + combat * 0.022,
         );
       const lead = theme.motif[(beat + (bar % 2) * 4) % 16];
@@ -736,15 +888,71 @@ export class AudioEngine {
           frequency(lead),
           frequency(lead),
           length * 1.35,
-          theme.lead,
-          0.012 + combat * 0.022,
+          combat < 0.12 && theme.lead === "square" ? "triangle" : theme.lead,
+          0.011 + combat * 0.02,
+          0.01,
+        );
+      // Sparse measured pitch-class draft fragments tie every area back
+      // to the title while each area's established motif retains its identity.
+      const reply =
+        beat % 8 === 0 ? titleNotesAtStep(this.titleTheme, step)[0] : undefined;
+      if (reply)
+        this.tone(
+          voice,
+          time,
+          frequency(reply.note - 12),
+          frequency(reply.note - 12),
+          length * 2.4,
+          "sine",
+          0.008,
+          0.02,
         );
       if (voice.pending === 0) this.release(voice);
     }
+    // One bounded shared power-chord voice: actual aggro, never biome/distance.
+    // Boss counter-notes follow the separate real boss blend; all old theme
+    // identities remain intact and at most two are selected for future notes.
+    if (this.titleBlend < 0.98 && combat > 0.12 && beat % 2 === 0) {
+      const guitar = this.createVoice(
+        "music",
+        time,
+        0.24,
+        combat * 0.8 * (1 - this.titleBlend),
+      );
+      if (guitar) {
+        guitar.cue = "music-combat";
+        const duration = length * (this.mix.boss > 0.1 ? 1.55 : 1.15);
+        this.mutedString(
+          guitar,
+          time,
+          frequency(chord[0] + 12),
+          duration,
+          0.026,
+        );
+        this.mutedString(
+          guitar,
+          time,
+          frequency(chord[0] + 19),
+          duration,
+          0.014,
+        );
+        if (this.mix.boss > 0.02 && beat % 4 === 0)
+          this.tone(
+            guitar,
+            time,
+            frequency(chord[2] + 24),
+            frequency(chord[2] + 24),
+            length * 1.3,
+            "triangle",
+            this.mix.boss * 0.012,
+            0.01,
+          );
+      }
+    }
     // Percussion follows actual aggro, once per shared clock, independent of
     // how many theme identities currently crossfade.
-    if (combat > 0.1) {
-      const drum = this.createVoice("music", time, 0.16, 1);
+    if (this.titleBlend < 0.98 && combat > 0.1) {
+      const drum = this.createVoice("music", time, 0.16, 1 - this.titleBlend);
       if (!drum) return;
       if (beat % 4 === 0)
         this.tone(drum, time, 105, 39, 0.13, "sine", combat * 0.11);
@@ -756,28 +964,368 @@ export class AudioEngine {
     }
   }
 
+  private titleStep(
+    time: number,
+    step: number,
+    length: number,
+    chord: readonly number[],
+  ): void {
+    if (!this.titleTheme.enabled) return;
+    const beat = step % 16;
+    const duration = (steps: number) =>
+      this.clock
+        ? this.clock.timeAtBeat((step + steps) / 4) -
+          this.clock.timeAtBeat(step / 4)
+        : length * steps;
+    if (beat === 0) {
+      const pad = this.createVoice(
+        "music",
+        time,
+        duration(15),
+        this.titleBlend * 0.7,
+      );
+      if (pad) {
+        pad.cue = "music-title";
+        pad.harmonicEndBeat = (step + 15) / 4;
+        pad.titlePad = { level: this.titleBlend * 0.7, points: [] };
+        this.titlePadGate(pad, time + duration(15));
+        // Four chord tones, two finite layers each. Spread warm body and a
+        // darker detuned harmonic layer without adding octaves or LFO sources.
+        chord.slice(0, 4).forEach((note, index) => {
+          const pan = [-0.3, 0.24, -0.2, 0.32][index]!;
+          this.tone(
+            pad,
+            time,
+            frequency(note + 12),
+            frequency(note + 12),
+            duration(15),
+            "triangle",
+            0.018,
+            0.18,
+            0,
+            pan,
+          );
+          this.titleLayer(
+            pad,
+            time,
+            frequency(note + 12) * 2 ** ((index % 2 ? 4 : -4) / 1200),
+            duration(15),
+            "sawtooth",
+            0.011,
+            0.23,
+            0,
+            -pan,
+            1200,
+          );
+        });
+      }
+    }
+    const voice = this.createVoice("music", time, duration(4), this.titleBlend);
+    if (!voice) return;
+    voice.cue = "music-title";
+    for (const note of titleNotesAtStep(this.titleTheme, step)) {
+      const pitch = frequency(note.note);
+      if (note.voice === "bubble")
+        this.bubble(
+          voice,
+          time,
+          pitch,
+          duration(note.steps + 1),
+          0.05 * note.level,
+          Math.floor(step / 16) % 2 ? -0.12 : 0.12,
+        );
+      else
+        this.chip(voice, time, pitch, duration(note.steps), 0.049 * note.level);
+    }
+    if (beat % 2 === 0) {
+      const pitch = frequency(
+        chord[[0, 2, 1, 3, 2, 1, 3, 2][Math.floor(beat / 2)]!]! + 24,
+      );
+      this.tone(
+        voice,
+        time,
+        pitch,
+        pitch,
+        duration(1.3),
+        "triangle",
+        0.027,
+        0.005,
+        duration(1.3) * 0.45,
+        Math.floor(beat / 2) % 2 ? 0.14 : -0.14,
+      );
+    }
+    const bass = SCORE_BASS[beat];
+    if (bass !== null && bass !== undefined) {
+      this.tone(
+        voice,
+        time,
+        frequency(chord[0]! + bass),
+        frequency(chord[0]! + bass),
+        duration(1.4),
+        "triangle",
+        0.051,
+        0.008,
+        duration(1.4) * 0.55,
+      );
+      this.tone(
+        voice,
+        time,
+        frequency(chord[0]! + bass),
+        frequency(chord[0]! + bass),
+        duration(1.4),
+        "sine",
+        0.032,
+        0.01,
+        duration(1.4) * 0.55,
+      );
+      this.titleLayer(
+        voice,
+        time,
+        frequency(chord[0]! + bass),
+        duration(1.4),
+        "sawtooth",
+        0.012,
+        0.014,
+        duration(1.4) * 0.55,
+        0,
+        520,
+      );
+    }
+    if (beat % 4 === 0) {
+      this.tone(voice, time, 112, 42, 0.18, "sine", 0.068);
+      this.tone(voice, time, 190, 70, 0.035, "triangle", 0.018);
+    }
+    if (beat === 4 || beat === 12) {
+      this.noiseBurst(voice, time, 0.085, 1950, 0.025, "bandpass");
+      this.tone(voice, time, 185, 125, 0.095, "triangle", 0.018);
+    }
+    if (beat % 2 === 1)
+      this.noiseBurst(voice, time, 0.025, 5100, 0.006, "highpass");
+    if (step % 64 === 63)
+      this.noiseBurst(voice, time, 0.034, 3300, 0.012, "bandpass");
+    if (voice.pending === 0) this.release(voice);
+  }
+
+  private chip(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    level: number,
+  ): void {
+    // Exactly two filtered pulses and one nominal-pitch body, all inside one
+    // existing voice/gate. Small detunes add width without changing score data.
+    this.titleLayer(
+      voice,
+      time,
+      pitch * 2 ** (3 / 1200),
+      duration,
+      "square",
+      level * 0.8,
+      0.009,
+      duration * 0.55,
+      -0.28,
+      2400,
+    );
+    this.titleLayer(
+      voice,
+      time,
+      pitch * 2 ** (-4 / 1200),
+      duration,
+      "square",
+      level * 0.7,
+      0.014,
+      duration * 0.55,
+      0.28,
+      2000,
+    );
+    this.tone(
+      voice,
+      time,
+      pitch,
+      pitch,
+      duration,
+      "triangle",
+      level * 0.55,
+      0.012,
+      duration * 0.55,
+    );
+  }
+
+  private titleLayer(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    type: OscillatorType,
+    level: number,
+    attack: number,
+    hold: number,
+    pan: number,
+    cutoff: number,
+  ): void {
+    const context = this.context;
+    if (!context || voice.released) return;
+    const source = context.createOscillator();
+    source.type = type;
+    source.frequency.setValueAtTime(pitch, time);
+    const filter = context.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.Q.value = 0.45;
+    // The harmonic body opens with the note, then settles instead of staying
+    // behind a fixed dull cutoff. Automation adds motion without extra voices.
+    const ceiling = context.sampleRate * 0.45;
+    filter.frequency.setValueAtTime(Math.min(ceiling, cutoff * 0.65), time);
+    filter.frequency.exponentialRampToValueAtTime(
+      Math.min(ceiling, cutoff * 1.7),
+      time + Math.max(0.006, Math.min(attack, duration * 0.2)),
+    );
+    filter.frequency.setTargetAtTime(
+      Math.min(ceiling, cutoff),
+      time + Math.max(0.006, Math.min(attack, duration * 0.2)),
+      Math.max(0.025, Math.min(0.18, duration * 0.2)),
+    );
+    source.connect(filter);
+    voice.nodes.push(filter);
+    this.attach(
+      voice,
+      source,
+      time,
+      duration,
+      level,
+      attack,
+      filter,
+      hold,
+      pan,
+    );
+  }
+
+  private bubble(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    level: number,
+    pan = 0,
+  ): void {
+    const context = this.context;
+    if (!context) return;
+    const source = context.createOscillator();
+    source.type = "sine";
+    source.frequency.setValueAtTime(pitch * 0.52, time);
+    // Reach the authored destination while the note still has body.
+    source.frequency.exponentialRampToValueAtTime(
+      pitch,
+      time + Math.min(0.09, duration * 0.45),
+    );
+    this.attach(
+      voice,
+      source,
+      time,
+      duration,
+      level,
+      0.008,
+      source,
+      duration * 0.55,
+      pan,
+    );
+  }
+
+  private titlePadGate(voice: Voice, end: number, now?: number): void {
+    const pad = voice.titlePad;
+    if (!pad) return;
+    const gain = voice.gain.gain;
+    if (now === undefined) {
+      pad.points = [
+        { time: voice.start, value: pad.level },
+        { time: end - 0.1, value: pad.level },
+        { time: end, value: FLOOR },
+      ];
+    } else {
+      // Evaluate our own piecewise-linear outer gate before cancellation. This
+      // preserves gain even on browsers without cancelAndHoldAtTime, and keeps
+      // the inner pad alive when deceleration extends the harmonic boundary.
+      let value = pad.points[0]!.value;
+      for (let i = 1; i < pad.points.length; i++) {
+        const previous = pad.points[i - 1]!,
+          point = pad.points[i]!;
+        if (now < point.time) {
+          value =
+            previous.value +
+            (point.value - previous.value) *
+              Math.min(
+                1,
+                Math.max(
+                  0,
+                  (now - previous.time) / (point.time - previous.time),
+                ),
+              );
+          break;
+        }
+        value = point.value;
+      }
+      gain.cancelScheduledValues(now);
+      end = Math.max(now + 0.015, end);
+      pad.points =
+        end - now > 0.13
+          ? [
+              { time: now, value },
+              { time: now + 0.025, value: pad.level },
+              { time: end - 0.1, value: pad.level },
+              { time: end, value: FLOOR },
+            ]
+          : [
+              { time: now, value },
+              { time: end, value: FLOOR },
+            ];
+    }
+    pad.points.forEach((point, index) => {
+      if (index === 0) gain.setValueAtTime(point.value, point.time);
+      else gain.linearRampToValueAtTime(point.value, point.time);
+    });
+    for (const source of voice.sources) source.stop(end + 0.025);
+    voice.end = end + 0.025;
+  }
+
   private advanceSound(): void {
     const context = this.context;
     if (!context || context.state !== "running" || this.paused || this.disposed)
       return;
     const now = context.currentTime;
-    this.mix = advanceMix(this.mix, this.state, now - this.mixTime);
+    const dt = Math.min(0.25, Math.max(0, now - this.mixTime));
+    this.titleBlend +=
+      ((this.titleScreen ? 1 : 0) - this.titleBlend) *
+      (1 - Math.exp(-dt / 0.4));
+    this.syncScoreMode(now);
+    this.mix = advanceMix(
+      this.mix,
+      this.titleScreen ? QUIET_STATE : this.state,
+      dt,
+    );
     this.mixTime = now;
     if (this.mix.engine > 0.008 && !this.engineVoice) {
       this.engineVoice = this.continuous("engine", now);
     }
     if (this.engineVoice) {
       this.engineVoice.gain.gain.setTargetAtTime(
-        this.mix.engine * ENGINE_LEVEL,
+        // Low-depth four-second breathing is continuous context-time motion,
+        // not a fabricated beat clock or a repeatedly restarted sound sample.
+        this.mix.engine *
+          ENGINE_LEVEL *
+          (0.97 + 0.03 * Math.sin((now * Math.PI) / 2)),
         now,
-        0.09,
+        0.18,
       );
-      const pitch = 45 + this.state.speed * 25 + this.state.throttle * 20;
+      const bend = 1 + this.state.speed * 0.025 + this.state.throttle * 0.015;
       this.engineOscillators.forEach((source, i) =>
-        source.frequency.setTargetAtTime(pitch * (i ? 1.985 : 1), now, 0.14),
+        source.frequency.setTargetAtTime(
+          frequency(ENGINE_NOTES[i]!) * bend,
+          now,
+          0.24,
+        ),
       );
       this.engineFilter?.frequency.setTargetAtTime(
-        260 + this.state.throttle * 500 + this.state.speed * 100,
+        260 + this.state.throttle * 120 + this.state.speed * 60,
         now,
         0.18,
       );
@@ -837,7 +1385,7 @@ export class AudioEngine {
       const filter = context.createBiquadFilter();
       filter.type = "lowpass";
       filter.frequency.value = 260;
-      filter.Q.value = 0.55;
+      filter.Q.value = 0.5;
       const duck = context.createGain();
       duck.gain.setValueAtTime(this.engineDuckTarget, time);
       filter.connect(duck);
@@ -850,14 +1398,14 @@ export class AudioEngine {
     const oscillators: OscillatorNode[] = [];
     for (let i = 0; i < 2; i++) {
       const source = context.createOscillator();
-      source.type = kind === "engine" ? (i ? "triangle" : "sine") : "sine";
+      source.type = "sine";
       source.frequency.setValueAtTime(
-        kind === "engine" ? 45 * (i ? 1.985 : 1) : i ? 660 : 440,
+        kind === "engine" ? frequency(ENGINE_NOTES[i]!) : i ? 660 : 440,
         time,
       );
       const envelope = context.createGain();
       envelope.gain.value =
-        kind === "engine" ? (i ? 0.025 : 0.055) : i ? 0.06 : 0.095;
+        kind === "engine" ? (i ? 0.014 : 0.045) : i ? 0.06 : 0.095;
       source.connect(envelope);
       envelope.connect(output);
       voice.nodes.push(source, envelope);
@@ -872,7 +1420,7 @@ export class AudioEngine {
       source.buffer = this.noise;
       source.loop = true;
       const envelope = context.createGain();
-      envelope.gain.value = 0.02;
+      envelope.gain.value = 0.008;
       source.connect(envelope);
       envelope.connect(output);
       voice.nodes.push(source, envelope);
@@ -883,6 +1431,35 @@ export class AudioEngine {
       this.engineOscillators = oscillators;
     }
     return voice;
+  }
+
+  private mutedString(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    level: number,
+  ): void {
+    const context = this.context;
+    if (!context || voice.released) return;
+    const source = context.createOscillator();
+    source.type = "triangle";
+    source.frequency.setValueAtTime(pitch * 1.003, time);
+    source.frequency.exponentialRampToValueAtTime(
+      pitch,
+      time + Math.min(0.045, duration),
+    );
+    const drive = context.createWaveShaper();
+    drive.curve = STRING_DRIVE;
+    drive.oversample = "none";
+    const filter = context.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = 1000 + this.mix.boss * 650;
+    filter.Q.value = 0.5;
+    source.connect(drive);
+    drive.connect(filter);
+    voice.nodes.push(drive, filter);
+    this.attach(voice, source, time, duration, level, 0.005, filter);
   }
 
   private createVoice(
@@ -911,11 +1488,14 @@ export class AudioEngine {
       nodes: [gain],
       sources: [],
       pending: 0,
+      start: time,
       end: time + duration,
       released: false,
       persistent,
       cue: null,
       theme: null,
+      harmonicEndBeat: null,
+      titlePad: null,
     };
     this.voices.add(voice);
     return voice;
@@ -930,6 +1510,8 @@ export class AudioEngine {
     type: OscillatorType,
     level: number,
     attack = 0.003,
+    hold = 0,
+    pan = 0,
   ): void {
     const context = this.context;
     if (!context || voice.released) return;
@@ -940,7 +1522,17 @@ export class AudioEngine {
       Math.max(20, end),
       time + duration,
     );
-    this.attach(voice, source, time, duration, level, attack);
+    this.attach(
+      voice,
+      source,
+      time,
+      duration,
+      level,
+      attack,
+      source,
+      hold,
+      pan,
+    );
   }
 
   private noiseBurst(
@@ -972,6 +1564,9 @@ export class AudioEngine {
     level: number,
     attack: number,
     output: AudioNode = source,
+    /** Optional seconds from onset to release; zero preserves existing curves. */
+    hold = 0,
+    pan = 0,
   ): void {
     const context = this.context;
     if (!context) return;
@@ -981,9 +1576,28 @@ export class AudioEngine {
       Math.max(FLOOR, level),
       time + Math.min(attack, duration * 0.25),
     );
-    envelope.gain.exponentialRampToValueAtTime(FLOOR, time + duration);
+    if (!voice.titlePad) {
+      if (hold > 0)
+        envelope.gain.setValueAtTime(
+          Math.max(FLOOR, level),
+          time +
+            Math.max(
+              Math.min(attack, duration * 0.25),
+              Math.min(hold, duration * 0.9),
+            ),
+        );
+      envelope.gain.exponentialRampToValueAtTime(FLOOR, time + duration);
+    }
     output.connect(envelope);
-    envelope.connect(voice.gain);
+    // Title components alone opt into bounded equal-power stereo routing. No
+    // inversion or channel delay: missing panner support keeps a mono sum.
+    if (pan !== 0 && typeof context.createStereoPanner === "function") {
+      const panner = context.createStereoPanner();
+      panner.pan.setValueAtTime(pan, time);
+      envelope.connect(panner);
+      panner.connect(voice.gain);
+      voice.nodes.push(panner);
+    } else envelope.connect(voice.gain);
     voice.nodes.push(source, envelope);
     voice.sources.push(source);
     voice.pending++;

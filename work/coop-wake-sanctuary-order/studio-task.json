@@ -1,0 +1,41 @@
+{
+  "item": {
+    "id": "task-b9daed25",
+    "title": "Avoid remote sanctuary generation for definite native Wake geometry misses",
+    "description": "Separate delta from frozen111a native trail candidate. Reorder existing exact target geometry rejection before remote sanctuary lookup, retaining protected-hit rejection before all damage/attribution. Preserve measured baseline and compare same configured native fixture; no global FPS claim. Author before/after release probes and actual native functional/regression/Clippy checks now passed; separate candidate ready for frozen independent delta review. Source/test-only runtime change, no cache/protocol/render/Root edit. Original111a retained.",
+    "department": "Native gameplay performance",
+    "owner": "/root/audio_score",
+    "status": "active",
+    "priority": "high",
+    "dependencies": [
+      "task-8508cfc5"
+    ],
+    "acceptanceCriteria": [
+      {
+        "text": "Exact native before/after allocation evidence, protected-hit/miss regressions and unchanged authoritative outcomes.",
+        "met": true
+      },
+      {
+        "text": "Separate frozen reviewed delta with appropriate native/Clippy checks; Root integration and matching build.",
+        "met": false
+      }
+    ],
+    "evidence": [
+      {
+        "label": "Actual frozen332nativebudget report and original/final logs",
+        "kind": "artifact",
+        "path": "artifacts/native-wake-budget-20261013/REPORT.md"
+      },
+      {
+        "label": "Actual111a native before/after and scoped source checks",
+        "kind": "note",
+        "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-sanctuary-order/HANDOFF.md SHA c47d7775c3d415de556df16c110c07af70f1b8f2a57473d935e5c86b40ff96af. Source pins a3abbd4e. Same work-only release fixture on frozen111a: distant-miss stage allocation requests removed3840 and requested bytes359424, empty3840 to0/full5712 to1872.15 Wake tests and129 co-op regressions passed,4 exports ignored; strict game-core all-target Clippy passed. Independent delta review, Root integration/build and product/RTC/physical performance remain open; original111a branch preserved."
+      }
+    ],
+    "blocker": "",
+    "revision": 2,
+    "createdAt": "2026-10-12T19:58:02.566Z",
+    "updatedAt": "2026-10-12T20:00:24.144Z"
+  },
+  "revision": 1051
+}

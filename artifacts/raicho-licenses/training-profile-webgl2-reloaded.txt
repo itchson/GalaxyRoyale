@@ -1,0 +1,27 @@
+> PROFILE
+
+SCHEMA 6 / revision 28 / seed 1605747236
+
+CURRENCY 1 / 1 / 2
+
+BOSS GENERATIONS 0,0,0,0,0 / 0,0,0,0,0 / 0,0,0,0,0
+
+DISCOVERIES 0 / missions 0 / relics 0
+
+PATCHES 0/8 / RAICHO 0 / Royale PENDING
+
+RAICHO XP 8 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0
+
+MATERIAL CARGO 0 / 0 / 0 / 0 / 0 / STASH 0 / 0 / 0 / 0 / 0
+
+NAMED T1 CARGO 0 / 0 / 0 / STASH 0 / 0 / 0
+
+TRAINING v2 / STAGE 3 / ASTEROIDS 10/10 / MATERIALS 0/10
+
+SLOTS EMPTY / 1 / EMPTY
+
+Progress stays on this device.
+
+> RENDERER
+
+WEBGL2 / 640 x 360 logical pixels / eight bounded lights

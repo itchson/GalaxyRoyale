@@ -1,0 +1,166 @@
+{
+  "frozenAt": "2026-10-12T19:17:45.727Z",
+  "node": "v24.18.0",
+  "checkout": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale",
+  "branch": "codex/private-room-negative-qa",
+  "base": "fbb8b1c640f0e11d495cf00c11bf557500701674",
+  "head": "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+  "trackedClean": true,
+  "priorHavenBranch": "5df19ae371cae78b167e64921d84040d64cb4011",
+  "productionRuntimeUnchanged": true,
+  "sources": {
+    "scripts/qa/co-op-transport/README.md": {
+      "workingBytes": 14692,
+      "workingSha256": "51c0be92863b3f12b6059120e577eaf0af2ca9fc78790fda54cc23d19684bf9f",
+      "lfBytes": 14692,
+      "lfSha256": "51c0be92863b3f12b6059120e577eaf0af2ca9fc78790fda54cc23d19684bf9f",
+      "canonicalGitBytes": 14692,
+      "canonicalGitSha256": "51c0be92863b3f12b6059120e577eaf0af2ca9fc78790fda54cc23d19684bf9f"
+    },
+    "scripts/qa/co-op-transport/client.js": {
+      "workingBytes": 26189,
+      "workingSha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825",
+      "lfBytes": 26189,
+      "lfSha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825",
+      "canonicalGitBytes": 26189,
+      "canonicalGitSha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    "scripts/qa/co-op-transport/server.mjs": {
+      "workingBytes": 18044,
+      "workingSha256": "3834be8d41892914150eb8ea657a724a68b8e98cc937b212dd5b42bb38466b2f",
+      "lfBytes": 18044,
+      "lfSha256": "3834be8d41892914150eb8ea657a724a68b8e98cc937b212dd5b42bb38466b2f",
+      "canonicalGitBytes": 18044,
+      "canonicalGitSha256": "3834be8d41892914150eb8ea657a724a68b8e98cc937b212dd5b42bb38466b2f"
+    },
+    "scripts/qa/co-op-transport/wasm-review.html": {
+      "workingBytes": 4945,
+      "workingSha256": "193dd816c8489022190f7185ce99aa3b96fda3698b5a422c4eb1d00201c997b1",
+      "lfBytes": 4945,
+      "lfSha256": "193dd816c8489022190f7185ce99aa3b96fda3698b5a422c4eb1d00201c997b1",
+      "canonicalGitBytes": 4945,
+      "canonicalGitSha256": "193dd816c8489022190f7185ce99aa3b96fda3698b5a422c4eb1d00201c997b1"
+    },
+    "scripts/qa/co-op-transport/wasm-review.js": {
+      "workingBytes": 23940,
+      "workingSha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7",
+      "lfBytes": 23940,
+      "lfSha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7",
+      "canonicalGitBytes": 23940,
+      "canonicalGitSha256": "a8e6e75e12b7856d68cdf97623093e73e8a299a8a1af48b7bd1283e2644918d7"
+    },
+    "scripts/test/coop-private-room-negative-qa.test.mjs": {
+      "workingBytes": 19081,
+      "workingSha256": "2729c2be2c6563b19895f6ebbc51e6898ff7a12206da2845b723de125739bc44",
+      "lfBytes": 19081,
+      "lfSha256": "2729c2be2c6563b19895f6ebbc51e6898ff7a12206da2845b723de125739bc44",
+      "canonicalGitBytes": 19081,
+      "canonicalGitSha256": "2729c2be2c6563b19895f6ebbc51e6898ff7a12206da2845b723de125739bc44"
+    }
+  },
+  "evidence": {
+    "HANDOFF.md": {
+      "bytes": 6158,
+      "sha256": "a9cf4d3a849ec1b2c5de7c616b1d80a56da71d75daec9f733645e844a97a859e"
+    },
+    "frozen-plan.md": {
+      "bytes": 7114,
+      "sha256": "b91155ba7319780717f8b72e27c518f7a545099c97e54f97e760e9b8d6c56370"
+    },
+    "negative-tests-original.log": {
+      "bytes": 1067,
+      "sha256": "e6bbe6ca5656c40e8e5c0fa020f95236937bdc1100a9f498bdd334f6b2012e08"
+    },
+    "negative-tests-expanded.log": {
+      "bytes": 1324,
+      "sha256": "e3fbf8371c7566479daef9b7fd5d9bac5e50be100f74abfd956b351e13f5a89c"
+    },
+    "negative-tests-final.log": {
+      "bytes": 1441,
+      "sha256": "8a1cf69972a8a64bbc41374ef42b089b263b05dba7eb8b900a89e88a7b66c7d6"
+    },
+    "existing-wasm-functions.log": {
+      "bytes": 2103,
+      "sha256": "4007a9ef4886a8848c6abf04f20e6999dd41513a6829d76c2fdcf3f0c85e5d30"
+    },
+    "existing-fifth-functions.log": {
+      "bytes": 1249,
+      "sha256": "a5814df089a26b99fa27834fbc2c80592cb27599d95a07ce8c091a663fe988ae"
+    },
+    "format.log": {
+      "bytes": 298,
+      "sha256": "191dbd64503307253bf634f81b782d5a5ee377a3e464ce605c7387d734166c06"
+    },
+    "final-format.log": {
+      "bytes": 118,
+      "sha256": "2c5fb1312c537208e861d994311252d26f5732ea22426c848266e32ff8081e5d"
+    },
+    "syntax-check.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diff-check.log": {
+      "bytes": 663,
+      "sha256": "362e27099d393832cb18f4992dd74e3aaf7af049a690b6f9a86a62ae37c3c790"
+    },
+    "original-commit-failure.log": {
+      "bytes": 771,
+      "sha256": "af03e05e697f9fe74a27c545760be0d4b09c5a7e9ef7e537adc6b27f98038b87"
+    },
+    "commit.log": {
+      "bytes": 220,
+      "sha256": "4fafee0e2408ce47d5afdd62050a493d8dfecc900c8c891e07320894d7a05d33"
+    },
+    "studio-start-input.json": {
+      "bytes": 254,
+      "sha256": "cff9751aa6a196adf6f14ee9264b2173de3b21268667bdf79b2b49af80be64e9"
+    },
+    "studio-start-result.json": {
+      "bytes": 1671,
+      "sha256": "3aac5fdb4ca50cd7db3a4398e32e477d8427c791009005a279a1392ee7d421d0"
+    },
+    "studio-run-input.json": {
+      "bytes": 965,
+      "sha256": "684d49100cc5e4edeb7c024234f3f8b824f59c23bad218a8a9efd70312486c3e"
+    },
+    "studio-run-result.json": {
+      "bytes": 1129,
+      "sha256": "46ea7f91764c9437bc573435eebfaaae71328f7fb7a5549b46b533a80d2eb829"
+    },
+    "candidate.diff.patch": {
+      "bytes": 42432,
+      "sha256": "91c7eec25fc2c0f11fcb094dd4fb7c7c3aa674d87d80421a99477d391263af64"
+    },
+    "pin-evidence.mjs": {
+      "bytes": 3921,
+      "sha256": "572af0624c59c4466b34cc91d16707249933c16ea3c4b54f74a06310e24b7636"
+    }
+  },
+  "commands": [
+    {
+      "command": "node --test scripts/test/coop-private-room-negative-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 11,
+      "pass": 11,
+      "fail": 0,
+      "log": "negative-tests-final.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test --test-name-pattern='^Actual initialization|^Actual client frame|^Actual rejoin|^Actual approval|^Actual client approval|^Actual child message|^Actual New session|^Actual Drive|^Actual localSpec|^Actual commit|^WASM report|^Owned reports|^WASM allowlist' scripts/test/coop-transport-wasm-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "log": "existing-wasm-functions.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test scripts/test/coop-transport-fifth-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 10,
+      "pass": 10,
+      "fail": 0,
+      "log": "existing-fifth-functions.log"
+    }
+  ],
+  "scope": "Author QA source/function implementation only. No independent acceptance, normal build/stage/listener/browser/native/RTC/stored-profile/live negative execution; prior captures preserved."
+}

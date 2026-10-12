@@ -1,0 +1,24 @@
+{
+  "scope": "Independent frozen source, preserved raw logs and compiled-input/measurement arithmetic review; no native rerun, whole-workspace/build/browser/RTC/GPU/listener or throughput claim",
+  "candidate": "d8ec6294976f54d26aab9ffaf5fc3dc251cb170a",
+  "parent": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "raw_author_evidence_pins": 19,
+  "compiled_snapshot_files_verified": 170,
+  "same_compiled_probe_verified": true,
+  "only_runtime_variant": "crates/game_core/src/co_op_wake.rs",
+  "canonical_probe_sha256": "a75b3d4e1c8159dafcc2fdaa103f9107b0e0cfec0624ee083aa3f4971017c6a9",
+  "raw_probe_sha256": "4e89e82aa07b1ec39d49fc5c6e7f5fe5cff429ce1ae3a816bef7ee53e6df394a",
+  "requests_removed_for_48_remote_misses_per_stage": 3840,
+  "requested_bytes_removed_per_stage": 359424,
+  "unchanged_full_link_baseline": {
+    "requests": 1872,
+    "requested_bytes": 179904
+  },
+  "author_recorded_checks": {
+    "Wake": 15,
+    "co_op": 129,
+    "co_op_ignored": 4,
+    "strict_game_core_all_targets_clippy": "passed"
+  },
+  "verdict": "No source/probe provenance blocker for bounded integration; protection and damage semantics remain authoritative before collection/damage; whole-tick/whole-game and real performance gates remain open"
+}

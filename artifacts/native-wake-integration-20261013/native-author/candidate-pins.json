@@ -1,0 +1,59 @@
+{
+  "base_commit": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "branch": "codex/coop-ion-wake",
+  "captured_at_utc": "2026-10-12T18:28:02.5378580Z",
+  "source": [
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "raw_file_sha256": "0c143ea67a33f353f275bbf38c479bafd968843bd32fed22577a6d0919d391e3",
+      "staged_git_blob": "fb2e63b21aa300e9e797776ee0bd8a2ad8e93c02"
+    },
+    {
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "raw_file_sha256": "c7a80ea0bdb885ef0527af29c310444b6ad767e8ce35b7a2c15c00115f8acca4",
+      "staged_git_blob": "1e08aa5dd2915f9c45fef0a5f2e81178e5410be9"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "raw_file_sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e",
+      "staged_git_blob": "209af19c77abb60d2dedb74eced0639ca075afda"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "raw_file_sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6",
+      "staged_git_blob": "2c1a3dcd8b55a71363415305622e5e9163504f11"
+    }
+  ],
+  "native_wire_fixtures": [
+    {
+      "path": "work/coop-ion-wake/wire-fixtures/legacy.json",
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f",
+      "bytes": 184
+    },
+    {
+      "path": "work/coop-ion-wake/wire-fixtures/ordinary-evolution-1.json",
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374",
+      "bytes": 200
+    },
+    {
+      "path": "work/coop-ion-wake/wire-fixtures/ordinary-evolution-2.json",
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab",
+      "bytes": 219
+    },
+    {
+      "path": "work/coop-ion-wake/wire-fixtures/ordinary-evolution-3.json",
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038",
+      "bytes": 219
+    },
+    {
+      "path": "work/coop-ion-wake/wire-fixtures/ordinary-evolution-4.json",
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78",
+      "bytes": 219
+    },
+    {
+      "path": "work/coop-ion-wake/wire-fixtures/ordinary-evolution-5.json",
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1",
+      "bytes": 219
+    }
+  ]
+}

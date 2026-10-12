@@ -1,0 +1,33 @@
+{
+  "commit": "91a18ab00c51efb6638404baaab6b389d58923b1",
+  "scope": "Actual game_web native co_op_bridge export: Game begin/join/input and four fixed ticks, no private placements or Profile payload. Fixture replay alone is not native replica execution.",
+  "source_export": "game_web co_op_bridge::tests::export_actual_publication_bridge_fixtures (explicit ignored native export), Engine work/co-op-publication/serialization",
+  "files": [
+    {
+      "file": "admissions.json",
+      "bytes": 182,
+      "sha256": "9a1593aa00e01ec8064121de92216e9e416559e30db2bb6443592bb0b4cb00bb"
+    },
+    {
+      "file": "body.json",
+      "bytes": 16773,
+      "sha256": "631cfddf1c234c97bab8c13838b3f331b92208c823d95d3434e751fc5f692d4c"
+    },
+    {
+      "file": "capture.json",
+      "bytes": 1237,
+      "sha256": "748e7523a738dbe7de94f4ba0b7ce6f7f2deb289f86e420c38830510dac83b5f"
+    },
+    {
+      "file": "entities.json",
+      "bytes": 28387,
+      "sha256": "d7b6d28a01cdfdecb06771b137efbddff942d81ba82b9937c79705eb9a348588"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 70,
+      "sha256": "cf1f7c9c061825dea01b16ebdf57e2a4bfff5101799b15922487fdf083022def"
+    }
+  ],
+  "pin_convention": "SHA256 and byte lengths are exact committed/native UTF-8 LF bytes. Tests normalize only Windows checkout CRLF to LF before pin verification; JSON values and numeric serialization remain unchanged."
+}

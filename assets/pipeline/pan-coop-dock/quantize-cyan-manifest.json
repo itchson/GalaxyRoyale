@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "quantize",
+    "max_colors": 9
+  },
+  "sprites": [
+    {
+      "name": "cyan",
+      "source": "sample-cyan.png",
+      "topology": "holes-allowed",
+      "components": {
+        "mode": "all"
+      }
+    }
+  ]
+}

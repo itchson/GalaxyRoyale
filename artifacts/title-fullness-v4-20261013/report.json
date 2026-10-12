@@ -1,0 +1,4035 @@
+{
+  "run": "qa-1791838846520-3f539dcd",
+  "scope": "native OfflineAudioContext PCM, declared fixtures; no human/mobile/gameplay acceptance",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "created_utc": "2026-10-12T21:00:46.520Z",
+  "cases": [
+    {
+      "key": "prior-engine",
+      "title": "Prior engine, default buses",
+      "seconds": 6,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 239,
+      "graph_nodes_created": 271,
+      "sources_created": 86,
+      "maximum_voices": {
+        "music": 7,
+        "effects": 1,
+        "continuous": 1
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 576000,
+        "peak": 0.06465665251016617,
+        "rms": 0.026843428684086162,
+        "peak_dbfs": -23.78773568022892,
+        "rms_dbfs": -31.42324025927344,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "stereo": {
+        "finitePairs": 288000,
+        "midRms": 0.026843428684085263,
+        "sideRms": 0,
+        "correlation": 1
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.06465665251016617,
+        "rms": 0.03319685061513018,
+        "peak_dbfs": -23.78773568022892,
+        "rms_dbfs": -29.578062317092773,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 3.230148285893013e-14,
+        "rms": 2.578931414375257e-15,
+        "peak_dbfs": -269.81555080249956,
+        "rms_dbfs": -291.7712041518472,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": 0.044886801415559716,
+      "wav_bytes": 2304044,
+      "wav_sha256": "5bbc3c19b647915661e7139f3f2c590a7c18161f05bd4b408a090d9884cf2e8b",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.28346868942621073,
+          "engineDuck": 1
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999973297363185,
+          "engineDuck": 1
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999900488,
+          "engineDuck": 1
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999999999,
+          "engineDuck": 1
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.728573572511394,
+          "engineDuck": 1
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008175,
+          "engineDuck": 1
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "warm-engine",
+      "title": "Warm engine, default buses",
+      "seconds": 6,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 239,
+      "graph_nodes_created": 314,
+      "sources_created": 103,
+      "maximum_voices": {
+        "music": 7,
+        "effects": 1,
+        "continuous": 1
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 576000,
+        "peak": 0.028534889221191406,
+        "rms": 0.007009322377554224,
+        "peak_dbfs": -30.892476182797168,
+        "rms_dbfs": -43.08647930375842,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "stereo": {
+        "finitePairs": 288000,
+        "midRms": 0.007009322377554224,
+        "sideRms": 0,
+        "correlation": 1
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.01574462652206421,
+        "rms": 0.00862051007681914,
+        "peak_dbfs": -36.05735273590013,
+        "rms_dbfs": -41.28934072296286,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0,
+        "rms": 0,
+        "peak_dbfs": null,
+        "rms_dbfs": null,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": 0.00000516953995317607,
+      "wav_bytes": 2304044,
+      "wav_sha256": "1f9dde0fc98f569d5d901650e5c6418a0176fe7236ba88f89b011ea5b1641bf8",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.28346868942621073,
+          "engineDuck": 1,
+          "score": {
+            "beat": 0,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 2,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999973297363185,
+          "engineDuck": 1,
+          "score": {
+            "beat": 1.9633333333333332,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 10,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999900488,
+          "engineDuck": 1,
+          "score": {
+            "beat": 3.963333333333334,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 18,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          }
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999999999,
+          "engineDuck": 1,
+          "score": {
+            "beat": 5.963333333333334,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 26,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.728573572511394,
+          "engineDuck": 1,
+          "score": {
+            "beat": 7.963333333333333,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 34,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          }
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008175,
+          "engineDuck": 1,
+          "score": {
+            "beat": 9.963333333333333,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 42,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "representative-mix",
+      "title": "Eight-theme score, propulsion, low hull and cues",
+      "seconds": 11,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 439,
+      "graph_nodes_created": 2231,
+      "sources_created": 705,
+      "maximum_voices": {
+        "music": 16,
+        "effects": 3,
+        "continuous": 2
+      },
+      "events_dispatched": 34,
+      "events_declared": 34,
+      "cue_calls": 34,
+      "dispatched": [
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 0.25,
+          "actual_native_time": 0.25066666666666665
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 0.55,
+          "actual_native_time": 0.552
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 0.85,
+          "actual_native_time": 0.8506666666666667
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 1.15,
+          "actual_native_time": 1.152
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 1.45,
+          "actual_native_time": 1.4506666666666668
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 1.75,
+          "actual_native_time": 1.752
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 2.05,
+          "actual_native_time": 2.050666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 2.35,
+          "actual_native_time": 2.352
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 2.65,
+          "actual_native_time": 2.6506666666666665
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 2.9499999999999997,
+          "actual_native_time": 2.952
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 3.25,
+          "actual_native_time": 3.2506666666666666
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 3.55,
+          "actual_native_time": 3.552
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 3.8499999999999996,
+          "actual_native_time": 3.8506666666666667
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 4.15,
+          "actual_native_time": 4.152
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 4.45,
+          "actual_native_time": 4.450666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 4.75,
+          "actual_native_time": 4.752
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 5.05,
+          "actual_native_time": 5.050666666666666
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 5.35,
+          "actual_native_time": 5.352
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 5.6499999999999995,
+          "actual_native_time": 5.650666666666667
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 5.95,
+          "actual_native_time": 5.952
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 6.25,
+          "actual_native_time": 6.250666666666667
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 6.55,
+          "actual_native_time": 6.552
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 6.85,
+          "actual_native_time": 6.850666666666666
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 7.1499999999999995,
+          "actual_native_time": 7.152
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 7.449999999999999,
+          "actual_native_time": 7.450666666666667
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 7.75,
+          "actual_native_time": 7.752
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 8.05,
+          "actual_native_time": 8.050666666666666
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 8.35,
+          "actual_native_time": 8.352
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 8.65,
+          "actual_native_time": 8.650666666666666
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 8.95,
+          "actual_native_time": 8.952
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 9.25,
+          "actual_native_time": 9.250666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 9.549999999999999,
+          "actual_native_time": 9.552
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 9.85,
+          "actual_native_time": 9.850666666666667
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 10.15,
+          "actual_native_time": 10.152
+        }
+      ],
+      "full": {
+        "samples": 1056000,
+        "peak": 0.29954618215560913,
+        "rms": 0.037067259669473974,
+        "peak_dbfs": -10.470724226150544,
+        "rms_dbfs": -28.620190391314072,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "stereo": {
+        "finitePairs": 528000,
+        "midRms": 0.037067259669436414,
+        "sideRms": 0,
+        "correlation": 1
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.23425018787384033,
+        "rms": 0.03740719288098264,
+        "peak_dbfs": -12.606401042524968,
+        "rms_dbfs": -28.54089762007265,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.11110478639602661,
+        "rms": 0.03486477817262705,
+        "peak_dbfs": -19.08534462485383,
+        "rms_dbfs": -29.152261873033535,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 4224044,
+      "wav_sha256": "1a2db8283b04d6c5ce52a2889e313e83ca50aa6924683d6d45e80615b219b09d",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": 0,
+          "hull": 0.08,
+          "engine": 0.2483185719373606,
+          "engineDuck": 0.9202949611667233,
+          "score": {
+            "beat": 0,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 2,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": 0,
+          "hull": 0.08,
+          "engine": 0.875997660849015,
+          "engineDuck": 0.6000769891321155,
+          "score": {
+            "beat": 2.7159444444444443,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 13,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 7
+          }
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": 1,
+          "hull": 0.08,
+          "engine": 0.8759999999912828,
+          "engineDuck": 0.6000000430572515,
+          "score": {
+            "beat": 5.482611111111112,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 24,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 6
+          }
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": 2,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.21000000000290056,
+          "score": {
+            "beat": 8.24927777777778,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 35,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000011,
+          "score": {
+            "beat": 11.015944444444443,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 47,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": 4,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001,
+          "score": {
+            "beat": 13.78261111111111,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 58,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 6
+          }
+        },
+        {
+          "time": 6.026666666666666,
+          "champion": 4,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007,
+          "score": {
+            "beat": 16.549277777777778,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 69,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 7
+          }
+        },
+        {
+          "time": 7.026666666666666,
+          "champion": 5,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007,
+          "score": {
+            "beat": 19.315944444444444,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 80,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 6
+          }
+        },
+        {
+          "time": 8.026666666666667,
+          "champion": 6,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001,
+          "score": {
+            "beat": 22.082611111111113,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 91,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          }
+        },
+        {
+          "time": 9.026666666666667,
+          "champion": 7,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007,
+          "score": {
+            "beat": 24.84927777777778,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 102,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 5
+          }
+        },
+        {
+          "time": 10.026666666666667,
+          "champion": 7,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001,
+          "score": {
+            "beat": 27.615944444444445,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 113,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 9
+          }
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "max-bus-burst",
+      "title": "Maximum buses with declared capped cue bursts",
+      "seconds": 5,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 199,
+      "graph_nodes_created": 1292,
+      "sources_created": 429,
+      "maximum_voices": {
+        "music": 15,
+        "effects": 16,
+        "continuous": 2
+      },
+      "events_dispatched": 3,
+      "events_declared": 3,
+      "cue_calls": 48,
+      "dispatched": [
+        {
+          "kind": "explosion",
+          "calls": 16,
+          "requested_time": 1,
+          "actual_native_time": 1
+        },
+        {
+          "kind": "death",
+          "calls": 16,
+          "requested_time": 2,
+          "actual_native_time": 2
+        },
+        {
+          "kind": "upgrade",
+          "calls": 16,
+          "requested_time": 3,
+          "actual_native_time": 3
+        }
+      ],
+      "full": {
+        "samples": 480000,
+        "peak": 0.9148409366607666,
+        "rms": 0.1158155864234555,
+        "peak_dbfs": -0.7730882025103923,
+        "rms_dbfs": -18.724659789341352,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "stereo": {
+        "finitePairs": 240000,
+        "midRms": 0.11581558642341566,
+        "sideRms": 0,
+        "correlation": 1
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.9148409366607666,
+        "rms": 0.13466193025912118,
+        "peak_dbfs": -0.7730882025103923,
+        "rms_dbfs": -17.415103291958708,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.2793877124786377,
+        "rms": 0.06703104995128198,
+        "peak_dbfs": -11.07585396301012,
+        "rms_dbfs": -23.474479558275917,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 1920044,
+      "wav_sha256": "3998fabc9e32c2113e61ac8e662362c99174f88ae5ed7648071574757defa79c",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.2483185719373606,
+          "engineDuck": 0.9202949611667233,
+          "score": {
+            "beat": 0,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 2,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.875997660849015,
+          "engineDuck": 0.21003365172669874,
+          "score": {
+            "beat": 2.7159444444444443,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 13,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 7
+          }
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999912828,
+          "engineDuck": 0.21000000808884792,
+          "score": {
+            "beat": 5.482611111111112,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 24,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          }
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000008244615,
+          "score": {
+            "beat": 8.24927777777778,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 35,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          }
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000008244615,
+          "score": {
+            "beat": 11.015944444444443,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "combat",
+            "nextStep": 47,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          }
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "current-score",
+      "title": "Current corporate homes, exploration, combat and boss release",
+      "seconds": 24,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 959,
+      "graph_nodes_created": 2748,
+      "sources_created": 875,
+      "maximum_voices": {
+        "music": 15,
+        "effects": 4,
+        "continuous": 2
+      },
+      "events_dispatched": 18,
+      "events_declared": 18,
+      "cue_calls": 18,
+      "dispatched": [
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 0.8,
+          "actual_native_time": 0.8
+        },
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 3.8,
+          "actual_native_time": 3.8
+        },
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 6.8,
+          "actual_native_time": 6.8
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 10,
+          "actual_native_time": 10
+        },
+        {
+          "kind": "pickup",
+          "calls": 1,
+          "requested_time": 11.2,
+          "actual_native_time": 11.2
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 12.2,
+          "actual_native_time": 12.2
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 12.7,
+          "actual_native_time": 12.701333333333332
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 13.2,
+          "actual_native_time": 13.2
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 14,
+          "actual_native_time": 14
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 15,
+          "actual_native_time": 15
+        },
+        {
+          "kind": "boss",
+          "calls": 1,
+          "requested_time": 16,
+          "actual_native_time": 16
+        },
+        {
+          "kind": "boss-charge",
+          "calls": 1,
+          "requested_time": 16.4,
+          "actual_native_time": 16.4
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 17,
+          "actual_native_time": 17
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 18,
+          "actual_native_time": 18
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 18.4,
+          "actual_native_time": 18.4
+        },
+        {
+          "kind": "explosion",
+          "calls": 1,
+          "requested_time": 19,
+          "actual_native_time": 19
+        },
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 20.1,
+          "actual_native_time": 20.101333333333333
+        },
+        {
+          "kind": "ability-repair",
+          "calls": 1,
+          "requested_time": 21.2,
+          "actual_native_time": 21.2
+        }
+      ],
+      "full": {
+        "samples": 2304000,
+        "peak": 0.23095953464508057,
+        "rms": 0.018467538223488303,
+        "peak_dbfs": -12.729282083523273,
+        "rms_dbfs": -34.67181986835923,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "stereo": {
+        "finitePairs": 1152000,
+        "midRms": 0.018467538223517908,
+        "sideRms": 0,
+        "correlation": 1
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.04164934158325195,
+        "rms": 0.004505613531869569,
+        "peak_dbfs": -27.60783719559797,
+        "rms_dbfs": -46.92492125079917,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.011716723442077637,
+        "rms": 0.0019842210292081532,
+        "peak_dbfs": -38.62387641819312,
+        "rms_dbfs": -54.048199038608416,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 9216044,
+      "wav_sha256": "6c1afced45eccd7eba4a6b86ed6e807e6126542ba0ad159399c702d8dcad5387",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 0,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 2,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.9811326405284632
+            }
+          ]
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 1.9633333333333332,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 10,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.5196946989102008
+            },
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.48030530108979913
+            }
+          ]
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 3.963333333333334,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 18,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.764870545810498
+            },
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.23512945418950212
+            }
+          ]
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 5.963333333333334,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 26,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "renko",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.8493509067582238
+            },
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.11510566321464943
+            }
+          ]
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 7.963333333333333,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 34,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "renko",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.5278583301648729
+            },
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.4157926524406237
+            }
+          ]
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 9.963333333333333,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 42,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "renko",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.7688669834029214
+            },
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.20354782510737018
+            }
+          ]
+        },
+        {
+          "time": 6.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 11.963333333333333,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 50,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 5
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.8513073294495346
+            },
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.09964514010227034
+            }
+          ]
+        },
+        {
+          "time": 7.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 13.963333333333333,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 58,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.5278583301648733
+            },
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.4167504028517227
+            }
+          ]
+        },
+        {
+          "time": 8.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 15.963333333333335,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 66,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.7688669834029216
+            },
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.20401668383306085
+            }
+          ]
+        },
+        {
+          "time": 9.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.2908919406515504,
+          "engineDuck": 1,
+          "score": {
+            "beat": 17.963333333333335,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 74,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          },
+          "area": "reach",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.65,
+          "speed": 0.4,
+          "themes": [
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.8513073294495347
+            },
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.09987466598094288
+            }
+          ]
+        },
+        {
+          "time": 10.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.6199987735284068,
+          "engineDuck": 1,
+          "score": {
+            "beat": 19.963333333333335,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 82,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "reach",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.65,
+          "speed": 0.4,
+          "themes": [
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.5278583301648724
+            },
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.41675040285172354
+            }
+          ]
+        },
+        {
+          "time": 11.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.6199999999954295,
+          "engineDuck": 1,
+          "score": {
+            "beat": 21.963333333333335,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "ambient",
+            "nextStep": 90,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          },
+          "area": "reach",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.65,
+          "speed": 0.4,
+          "themes": [
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.7688669834029205
+            },
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.20401668383306168
+            }
+          ]
+        },
+        {
+          "time": 12.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.7429253039527519,
+          "engineDuck": 1,
+          "score": {
+            "beat": 23.963333333333335,
+            "bpm": 120,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 98,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.08518831164490104,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.8513073294495342
+            },
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.09987466598094337
+            }
+          ]
+        },
+        {
+          "time": 13.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.8819994817168428,
+          "engineDuck": 1,
+          "score": {
+            "beat": 26.160186853328618,
+            "bpm": 144.8421488132791,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 107,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.7225372703570521,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.5278583301648724
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.4167504028517233
+            }
+          ]
+        },
+        {
+          "time": 14.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.8819999999980686,
+          "engineDuck": 0.35,
+          "score": {
+            "beat": 28.79858123586185,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 118,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 5
+          },
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.7916055171152218,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.7688669834029205
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.20401668383306162
+            }
+          ]
+        },
+        {
+          "time": 15.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.8819999999999999,
+          "engineDuck": 0.55,
+          "score": {
+            "beat": 31.565247902528515,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 129,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 9
+          },
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.7990903064838066,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.8868507594766609
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.09987466598094331
+            }
+          ]
+        },
+        {
+          "time": 16.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9373633048336821,
+          "engineDuck": 0.47422943411971313,
+          "score": {
+            "beat": 34.33191456919518,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 140,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 6
+          },
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.8211984962231376,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.11897270057689122,
+          "lowHull": 0.344411663092213,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.9090653029894691
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.04889280973200742
+            }
+          ]
+        },
+        {
+          "time": 17.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9999997665747613,
+          "engineDuck": 0.33004329553413814,
+          "score": {
+            "beat": 37.09858123586184,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 151,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.9806236344865991,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.9276808753392368,
+          "lowHull": 0.9998424165747106,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.5278583301648724
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.4450253370711097
+            }
+          ]
+        },
+        {
+          "time": 18.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9999999999991301,
+          "engineDuck": 0.33000001040692495,
+          "score": {
+            "beat": 39.865247902528516,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 162,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 7
+          },
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.9979002215720878,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.9940636847517398,
+          "lowHull": 0.9999999621217546,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.7688669834029205
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.21785844205468377
+            }
+          ]
+        },
+        {
+          "time": 19.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9999999999999999,
+          "engineDuck": 0.21000000000159186,
+          "score": {
+            "beat": 42.63191456919518,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 24,
+            "rampEndBeat": 28,
+            "segments": 2,
+            "mode": "combat",
+            "nextStep": 173,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 7
+          },
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.9997724511625631,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.9995127175710156,
+          "lowHull": 0.9999999999908952,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.8868507594766607
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.10665078327194233
+            }
+          ]
+        },
+        {
+          "time": 20.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.7285735725113859,
+          "engineDuck": 0.6733798481893702,
+          "score": {
+            "beat": 45.39858123586185,
+            "bpm": 166,
+            "targetBpm": 120,
+            "rampStartBeat": 48,
+            "rampEndBeat": 56,
+            "segments": 3,
+            "mode": "ambient",
+            "nextStep": 184,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 5
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.9688027338779571,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.9644127837123364,
+          "lowHull": 0.8165503795265744,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.9090653029894677
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.05221000143599565
+            }
+          ]
+        },
+        {
+          "time": 21.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008043,
+          "engineDuck": 0.994017743245653,
+          "score": {
+            "beat": 48.16477586835484,
+            "bpm": 165.05253875695968,
+            "targetBpm": 120,
+            "rampStartBeat": 48,
+            "rampEndBeat": 56,
+            "segments": 3,
+            "mode": "ambient",
+            "nextStep": 195,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.5185627352886186,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.47212023463647845,
+          "lowHull": 0.01495564188586759,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.5278605447937522
+            },
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.44502533707110903
+            }
+          ]
+        },
+        {
+          "time": 22.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.000002715141015092246,
+          "engineDuck": 0.9998904311455477,
+          "score": {
+            "beat": 50.78795043138627,
+            "bpm": 149.96928501952894,
+            "targetBpm": 120,
+            "rampStartBeat": 48,
+            "rampEndBeat": 56,
+            "segments": 3,
+            "mode": "ambient",
+            "nextStep": 205,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.2775666304673012,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.23112252317436008,
+          "lowHull": 0.0002739221361307785,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.7688680675560176
+            },
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.21785844205468344
+            }
+          ]
+        },
+        {
+          "time": 23.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 5.241455203026321e-9,
+          "engineDuck": 0.9999966868927583,
+          "score": {
+            "beat": 53.17140733948337,
+            "bpm": 136.2644077979706,
+            "targetBpm": 120,
+            "rampStartBeat": 48,
+            "rampEndBeat": 56,
+            "segments": 3,
+            "mode": "ambient",
+            "nextStep": 215,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          },
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.1485707111331304,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.11314410355576668,
+          "lowHull": 0.000005017058929002026,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.8868512902147675
+            },
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.1066507832719422
+            }
+          ]
+        }
+      ],
+      "declared_phases": [
+        {
+          "key": "pan-home",
+          "start": 0,
+          "end": 3,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 0,
+            "corporation": "pan"
+          }
+        },
+        {
+          "key": "renko-home",
+          "start": 3,
+          "end": 6,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 0,
+            "corporation": "renko"
+          }
+        },
+        {
+          "key": "hugo-home",
+          "start": 6,
+          "end": 9,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 0,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "quiet-expanse",
+          "start": 9,
+          "end": 12,
+          "state": {
+            "area": "reach",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0.4,
+            "throttle": 0.65,
+            "engines": 2,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "active-combat",
+          "start": 12,
+          "end": 16,
+          "state": {
+            "area": "reach",
+            "biome": 3,
+            "combat": 0.8,
+            "hostiles": 6,
+            "champion": null,
+            "boss": false,
+            "hull": 0.65,
+            "speed": 0.75,
+            "throttle": 0.9,
+            "engines": 2,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "boss-low-hull",
+          "start": 16,
+          "end": 20,
+          "state": {
+            "area": "reach",
+            "biome": 5,
+            "combat": 1,
+            "hostiles": 1,
+            "champion": null,
+            "boss": true,
+            "hull": 0.08,
+            "speed": 1,
+            "throttle": 1,
+            "engines": 2,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "home-healed-release",
+          "start": 20,
+          "end": 24,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 2,
+            "corporation": "pan"
+          }
+        }
+      ],
+      "phase_metrics": [
+        {
+          "key": "pan-home",
+          "start": 0,
+          "end": 3,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.11582767963409424,
+            "rms": 0.01262066279004318,
+            "peak_dbfs": -18.723752875060086,
+            "rms_dbfs": -37.97835673939715,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "renko-home",
+          "start": 3,
+          "end": 6,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.11483395099639893,
+            "rms": 0.01210037362208121,
+            "peak_dbfs": -18.798593850169475,
+            "rms_dbfs": -38.34402439614523,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "hugo-home",
+          "start": 6,
+          "end": 9,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.11507022380828857,
+            "rms": 0.012171058339519682,
+            "peak_dbfs": -18.780740844300425,
+            "rms_dbfs": -38.29343311735582,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "quiet-expanse",
+          "start": 9,
+          "end": 12,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.1649957299232483,
+            "rms": 0.009437610206829808,
+            "peak_dbfs": -15.650545902966378,
+            "rms_dbfs": -40.502759277981255,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "active-combat",
+          "start": 12,
+          "end": 16,
+          "pcm": {
+            "samples": 384000,
+            "peak": 0.23095953464508057,
+            "rms": 0.01503819928453129,
+            "peak_dbfs": -12.729282083523273,
+            "rms_dbfs": -36.45608328500925,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "boss-low-hull",
+          "start": 16,
+          "end": 20,
+          "pcm": {
+            "samples": 384000,
+            "peak": 0.1687350869178772,
+            "rms": 0.03522649318950947,
+            "peak_dbfs": -15.455892009106154,
+            "rms_dbfs": -29.062611776880196,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "home-healed-release",
+          "start": 20,
+          "end": 24,
+          "pcm": {
+            "samples": 384000,
+            "peak": 0.1657625436782837,
+            "rms": 0.013117509639591773,
+            "peak_dbfs": -15.610271949970594,
+            "rms_dbfs": -37.64297215963844,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "title-score",
+      "title": "Synthesized title draft, one complete loop and pickup",
+      "seconds": 48,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 1919,
+      "graph_nodes_created": 7275,
+      "sources_created": 2437,
+      "maximum_voices": {
+        "music": 7,
+        "effects": 0,
+        "continuous": 0
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 4608000,
+        "peak": 0.16148746013641357,
+        "rms": 0.025030782039565717,
+        "peak_dbfs": -15.837223919289237,
+        "rms_dbfs": -32.03051162935984,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "stereo": {
+        "finitePairs": 2304000,
+        "midRms": 0.024947715471286106,
+        "sideRms": 0.0020375333803569515,
+        "correlation": 0.9868108858271849
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.1100994348526001,
+        "rms": 0.025820858684446023,
+        "peak_dbfs": -19.16429820567435,
+        "rms_dbfs": -31.760586383362774,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.10674738883972168,
+        "rms": 0.025803539584537412,
+        "peak_dbfs": -19.43285479001563,
+        "rms_dbfs": -31.766414317484028,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 18432044,
+      "wav_sha256": "0915228f591604806700c16c695066d7c33b34cbbb7f0daf33d39daa5ef419c2",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 0,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 2,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 2.7695270833333328,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 14,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 5.590777083333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 25,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 8.412027083333335,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 36,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 11.233277083333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 47,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 14.054527083333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 59,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 6.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 16.875777083333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 70,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 7.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 19.697027083333335,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 81,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 8.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 22.518277083333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 93,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 9.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 25.339527083333337,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 104,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 10.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 28.160777083333336,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 115,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 11.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 30.982027083333335,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 126,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 12.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 33.803277083333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 138,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 13.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 36.624527083333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 149,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 14.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 39.44577708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 160,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 15.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 42.26702708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 172,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 16.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 45.08827708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 183,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 17.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 47.90952708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 194,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 18.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 50.73077708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 205,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 19.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 53.55202708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 217,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 20.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 56.37327708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 228,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 21.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 59.194527083333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 239,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 22.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 62.01577708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 251,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 23.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 64.83702708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 262,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 24.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 67.65827708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 273,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 25.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 70.47952708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 284,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 26.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 73.30077708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 296,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 27.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 76.12202708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 307,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 28.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 78.94327708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 318,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 29.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 81.76452708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 330,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 30.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 84.58577708333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 341,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 31.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 87.40702708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 352,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 32.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 90.22827708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 363,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 33.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 93.04952708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 375,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 34.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 95.87077708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 386,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 35.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 98.69202708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 397,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 36.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 101.51327708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 409,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 37.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 104.33452708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 420,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 38.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 107.15577708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 431,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 39.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 109.97702708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 442,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 40.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 112.79827708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 454,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 41.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 115.61952708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 465,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 42.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 118.44077708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 476,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 43.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 121.26202708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 488,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 44.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 124.08327708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 499,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 45.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 126.90452708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 510,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 46.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 129.72577708333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 521,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 47.026666666666664,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 132.54702708333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 533,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "title-transition",
+      "title": "Title to Haven, exploration, chase and release",
+      "seconds": 32,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 1279,
+      "graph_nodes_created": 3204,
+      "sources_created": 1025,
+      "maximum_voices": {
+        "music": 11,
+        "effects": 1,
+        "continuous": 1
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 3072000,
+        "peak": 0.16148746013641357,
+        "rms": 0.013266737830748415,
+        "peak_dbfs": -15.837223919289237,
+        "rms_dbfs": -37.54471706083137,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "stereo": {
+        "finitePairs": 1536000,
+        "midRms": 0.013230957642324548,
+        "sideRms": 0.0009737004352206621,
+        "correlation": 0.9892658696919023
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.1100994348526001,
+        "rms": 0.02582085952302093,
+        "peak_dbfs": -19.16429820567435,
+        "rms_dbfs": -31.760586101274207,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.016169309616088867,
+        "rms": 0.0018864072332426646,
+        "peak_dbfs": -35.82617045694168,
+        "rms_dbfs": -54.487290939727885,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 12288044,
+      "wav_sha256": "13400c2e2dcfd7928c7448f968dc088c0fa98d7a6790ddf317b4a7496acef17f",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 0,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 2,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 2.7695270833333328,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 14,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 5.590777083333334,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 25,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 8.412027083333335,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 36,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 11.233277083333332,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 47,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 14.054527083333333,
+            "bpm": 169.275,
+            "targetBpm": 169.275,
+            "rampStartBeat": 0,
+            "rampEndBeat": 0,
+            "segments": 1,
+            "mode": "title",
+            "nextStep": 59,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 6.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 16.875777083333332,
+            "bpm": 169.275,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 70,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 7.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 19.568914010194913,
+            "bpm": 153.4520952684557,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 81,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 7
+          }
+        },
+        {
+          "time": 8.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 21.99955451700555,
+            "bpm": 138.48086889681895,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 90,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 5
+          }
+        },
+        {
+          "time": 9.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 24.1930547671656,
+            "bpm": 124.9702782934894,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 99,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 0
+          }
+        },
+        {
+          "time": 10.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "score": {
+            "beat": 26.20931862218747,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 107,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 0
+          }
+        },
+        {
+          "time": 11.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.22896010812573642,
+          "engineDuck": 1,
+          "score": {
+            "beat": 28.20931862218747,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 115,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 12.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799903464816524,
+          "engineDuck": 1,
+          "score": {
+            "beat": 30.20931862218747,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 123,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 13.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.4879999999964025,
+          "engineDuck": 1,
+          "score": {
+            "beat": 32.20931862218747,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 131,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 14.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 34.20931862218747,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 17,
+            "rampEndBeat": 25,
+            "segments": 2,
+            "mode": "ambient",
+            "nextStep": 139,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 15.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 36.20931862218747,
+            "bpm": 120,
+            "targetBpm": 166,
+            "rampStartBeat": 37,
+            "rampEndBeat": 41,
+            "segments": 3,
+            "mode": "combat",
+            "nextStep": 147,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 16.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 38.282181810966904,
+            "bpm": 134.7450908261194,
+            "targetBpm": 166,
+            "rampStartBeat": 37,
+            "rampEndBeat": 41,
+            "segments": 3,
+            "mode": "combat",
+            "nextStep": 155,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 17.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 40.75758614879784,
+            "bpm": 163.21224071117518,
+            "targetBpm": 166,
+            "rampStartBeat": 37,
+            "rampEndBeat": 41,
+            "segments": 3,
+            "mode": "combat",
+            "nextStep": 166,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 4
+          }
+        },
+        {
+          "time": 18.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 43.52219421877673,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 37,
+            "rampEndBeat": 41,
+            "segments": 3,
+            "mode": "combat",
+            "nextStep": 177,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 6
+          }
+        },
+        {
+          "time": 19.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 46.2888608854434,
+            "bpm": 166,
+            "targetBpm": 166,
+            "rampStartBeat": 37,
+            "rampEndBeat": 41,
+            "segments": 3,
+            "mode": "combat",
+            "nextStep": 188,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 20.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 49.055527552110064,
+            "bpm": 166,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 199,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 21.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 51.81059668826759,
+            "bpm": 161.33906904246138,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 210,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 5
+          }
+        },
+        {
+          "time": 22.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 54.37475319941675,
+            "bpm": 146.59516910335367,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 220,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 23.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 56.704585394372884,
+            "bpm": 133.19863398235591,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 229,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 3
+          }
+        },
+        {
+          "time": 24.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 58.82150689781942,
+            "bpm": 121.02633533753834,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 237,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 25.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.48799999999999993,
+          "engineDuck": 1,
+          "score": {
+            "beat": 60.82226588068304,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 245,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 26.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.3555439033855563,
+          "engineDuck": 1,
+          "score": {
+            "beat": 62.82226588068304,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 253,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 1
+          }
+        },
+        {
+          "time": 27.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0006863611989011919,
+          "engineDuck": 1,
+          "score": {
+            "beat": 64.82226588068303,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 261,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 28.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0000013249888153650157,
+          "engineDuck": 1,
+          "score": {
+            "beat": 66.82226588068303,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 269,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 29.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 2.557830139076847e-9,
+          "engineDuck": 1,
+          "score": {
+            "beat": 68.82226588068303,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 277,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 30.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 4.937773771748795e-12,
+          "engineDuck": 1,
+          "score": {
+            "beat": 70.82226588068303,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 285,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        },
+        {
+          "time": 31.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 9.532145801429156e-15,
+          "engineDuck": 1,
+          "score": {
+            "beat": 72.82226588068303,
+            "bpm": 120,
+            "targetBpm": 120,
+            "rampStartBeat": 51,
+            "rampEndBeat": 59,
+            "segments": 4,
+            "mode": "ambient",
+            "nextStep": 293,
+            "lookaheadSeconds": 0.18,
+            "futureVoices": 2
+          }
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    }
+  ],
+  "sources": {
+    "schema_version": 1,
+    "purpose": "isolated native OfflineAudioContext review; not shipped",
+    "typescript": "5.9.3",
+    "lockfile_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+    "baseline_shared_state": "Historical AudioEngine uses the current shared state mixer, matching the declared engine-only comparison; this is not a historical score snapshot.",
+    "inputs": {
+      "apps/game/src/title-theme.ts": {
+        "bytes": 2917,
+        "sha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135",
+        "module": "title-theme.js",
+        "module_sha256": "0e41b37685d7dfb445216cd1068f1851b2f933c1a5b7d7790543896e154277d3"
+      },
+      "apps/game/src/audio.ts": {
+        "bytes": 50931,
+        "sha256": "698e4745ac2b3e301dd212c26cdd662c174ea4dc7b18ed7e28af49cddf754e6d",
+        "module": "audio.js",
+        "module_sha256": "f5610bacea682386f4d21949957beb80ae1f3ac607089d0bd5aedab2af33373c"
+      },
+      "apps/game/src/audio-state.ts": {
+        "bytes": 11471,
+        "sha256": "c3c9a3c5b34b1001e4d1dd1de531e70dbcd945826b31022e0619187d0ec1b76f",
+        "module": "audio-state.js",
+        "module_sha256": "c96642a0315e70dad18d051913918249985af60ef37b429f41253043edfec6e0"
+      },
+      "git:3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d:apps/game/src/audio.ts": {
+        "bytes": 28517,
+        "sha256": "6e06ef04f40367ab8519adfd445258b0c284d6b1c7ac3d955ea212962c629f64",
+        "module": "baseline-audio.js",
+        "module_sha256": "05fdaae0e6f4d87f331a14741ffa240c9c2a4dce304c212ca716f88432e698fb"
+      },
+      "apps/game/src/music-clock.ts": {
+        "bytes": 4084,
+        "sha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9",
+        "module": "music-clock.js",
+        "module_sha256": "5b9705a20048df7d1221e4b2feca5ca8f675f3248c30d4743b9f8af9242ed9de"
+      },
+      "apps/game/src/music-score.ts": {
+        "bytes": 807,
+        "sha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683",
+        "module": "music-score.js",
+        "module_sha256": "d7d7c522230bdc474e489d1b8ae5d98c4f2140e6b8e4922aa0e1b8466c9bb75b"
+      }
+    },
+    "helpers": {
+      "config.mjs": "f328b49cd098f8fce6dc80290eeda111cf2eba098b3e8c2f633537546aa046a0",
+      "prepare.mjs": "6854857ecb400fcf65b251559a27acab34184f90921bd6e518dbe80905ae062c",
+      "server.mjs": "901c97ac46a2153442648255d51765e0f033d1dd66da00349b8fe1756623cceb",
+      "review.js": "15aa75998c5da89826d538484ad88e7a5b7610962c3bc1f6d3a2e7d2ecc53855",
+      "metrics.js": "6b6b69a100fd6bbe02e756dc7c4beb62d46e7108dd2f95023892498e2604506b",
+      "index.html": "f84adde93d6e5dcc37ac580871723114ea3f7c4c51cdcc659a136d53119c3ee7"
+    }
+  },
+  "engine_comparison": {
+    "steady_rms_change_db": -11.711278405870093,
+    "high_frequency_power_ratio_before": 0.044886801415559716,
+    "high_frequency_power_ratio_after": 0.00000516953995317607
+  },
+  "status": "Completed; no over-unity/nonfinite samples in these declared fixtures"
+}
