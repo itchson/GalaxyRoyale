@@ -121,11 +121,13 @@ export interface ShipHangarActions {
   craft: (champion: number) => void;
   select: (ship: number) => void;
   busy?: boolean;
+  constructionOnly?: boolean;
 }
 
 const categories = ["OFFENSIVE", "DEFENSIVE", "PASSIVE"];
 const colors = ["offense", "defense", "passive"];
 interface ForgeView {
+  mode?: "abilities" | "components" | "hardware";
   category: number | null;
   ship: number;
   collection: boolean;
@@ -325,6 +327,7 @@ export function paintForge(
   target: HTMLElement,
   hud: ForgeHud,
   actions: ForgeActions,
+  mode?: "abilities" | "components" | "hardware",
 ): void {
   const current = views.get(target);
   const view: ForgeView =
@@ -336,7 +339,15 @@ export function paintForge(
           collection: false,
           workshop: false,
           filter: "all",
+          mode: mode ?? current?.mode,
         };
+  const desired = mode ?? view.mode;
+  if (desired && (view !== current || view.mode !== desired)) {
+    view.mode = desired;
+    view.category = null;
+    view.collection = desired === "abilities";
+    view.workshop = desired === "components";
+  }
   views.set(target, view);
   const active = document.activeElement;
   const focusKey =
@@ -384,6 +395,7 @@ export function paintForge(
       ),
       text("h3", "COMPONENT WORKSHOP"),
     );
+    if (view.mode) heading.firstElementChild?.remove();
     root.append(
       heading,
       shipSummary,
@@ -462,8 +474,9 @@ export function paintForge(
         `${ship?.name ?? "ACTIVE RAICHO"} / LV ${hud.ship_level} / RANK CAP ${hud.rank_cap}`,
       ),
     );
+    if (view.mode) back.remove();
     root.append(editorHeading);
-    if (hud.components.length) root.append(workshopButton());
+    if (hud.components.length && !view.mode) root.append(workshopButton());
     root.append(
       text(
         "p",
@@ -651,46 +664,49 @@ export function paintForge(
       );
     root.append(list);
   } else {
-    root.append(shipSummary, text("h3", "AUTOMATIC ABILITY SLOTS"));
-    const slots = section("loadout-slots");
-    for (let category = 0; category < 3; category++) {
-      const row = collectionCard(
-        "loadout-slot",
-        category,
-        !!hud.loadout[category],
-      );
-      const content = section("loadout-card-content");
-      content.append(categoryHeading(category, hud.currency[category] ?? 0));
-      const equipped = hud.loadout[category];
-      content.append(text("h3", equipped?.name ?? "EMPTY SLOT"));
-      if (equipped) content.append(text("p", rank(equipped)));
-      row.append(
-        content,
-        button(
-          "MANAGE",
-          `manage-${category}`,
-          () => navigate(category, "back"),
-          false,
+    if (view.mode === "hardware") root.append(shipSummary);
+    else {
+      root.append(shipSummary, text("h3", "AUTOMATIC ABILITY SLOTS"));
+      const slots = section("loadout-slots");
+      for (let category = 0; category < 3; category++) {
+        const row = collectionCard(
+          "loadout-slot",
           category,
-        ),
-      );
-      slots.append(row);
-    }
-    root.append(
-      slots,
-      button("BROWSE ABILITIES", "browse-abilities", () =>
-        navigate(null, "back", true),
-      ),
-    );
-    if (hud.components.length) root.append(workshopButton());
-    if (!hud.dock)
+          !!hud.loadout[category],
+        );
+        const content = section("loadout-card-content");
+        content.append(categoryHeading(category, hud.currency[category] ?? 0));
+        const equipped = hud.loadout[category];
+        content.append(text("h3", equipped?.name ?? "EMPTY SLOT"));
+        if (equipped) content.append(text("p", rank(equipped)));
+        row.append(
+          content,
+          button(
+            "MANAGE",
+            `manage-${category}`,
+            () => navigate(category, "back"),
+            false,
+            category,
+          ),
+        );
+        slots.append(row);
+      }
       root.append(
-        text(
-          "p",
-          "Return to Haven to craft, upgrade or equip.",
-          "loadout-note",
+        slots,
+        button("BROWSE ABILITIES", "browse-abilities", () =>
+          navigate(null, "back", true),
         ),
       );
+      if (hud.components.length) root.append(workshopButton());
+      if (!hud.dock)
+        root.append(
+          text(
+            "p",
+            "Return to Haven to craft, upgrade or equip.",
+            "loadout-note",
+          ),
+        );
+    }
     root.append(text("h3", "RAICHO MODULES"));
     root.append(
       text(
@@ -829,14 +845,15 @@ export function paintShipHangar(
       content.append(text("p", progress(ship.level, ship.xp, ship.next_xp)));
       if (ship.select_reason && !ship.selected)
         content.append(text("p", ship.select_reason, "loadout-reason"));
-      content.append(
-        button(
-          ship.selected ? "ACTIVE RAICHO" : "SELECT RAICHO",
-          `select-ship-${ship.id}`,
-          () => actions.select(ship.id),
-          !ship.can_select || ship.selected || actions.busy,
-        ),
-      );
+      if (!actions.constructionOnly)
+        content.append(
+          button(
+            ship.selected ? "ACTIVE RAICHO" : "SELECT RAICHO",
+            `select-ship-${ship.id}`,
+            () => actions.select(ship.id),
+            !ship.can_select || ship.selected || actions.busy,
+          ),
+        );
     } else {
       const hasRecipe = ship.point_cost > 0 || ship.material_cost > 0;
       if (hasRecipe)

@@ -8,6 +8,7 @@ export interface HangarSceneActions {
 }
 type Hull = Pick<LoadoutShipHud, "id" | "name" | "level" | "xp" | "can_select">;
 interface Model {
+  licensed: boolean;
   corporation: number;
   dock: boolean;
   busy: boolean;
@@ -73,6 +74,7 @@ function model(hud: ShipHangarHud, actions: HangarSceneActions): Model {
     ? hud.campaign.selected_ship
     : null;
   return {
+    licensed: hud.identity != null,
     corporation: Math.max(
       0,
       corporations.indexOf(hud.identity?.corporation ?? "pan"),
@@ -254,12 +256,12 @@ export function paintHangarScene(
     attribute(
       node,
       "data-pixel-kind",
-      id === 0 ? "licensed-ship" : "campaign-ship",
+      id === 0 && current.licensed ? "licensed-ship" : "campaign-ship",
     );
     attribute(
       node,
       "data-pixel-value",
-      String(id === 0 ? current.corporation : id - 1),
+      String(id === 0 ? (current.licensed ? current.corporation : 9) : id - 1),
     );
   };
   const progress = (ship: Hull) => `LV ${ship.level} / ${ship.xp} XP`;

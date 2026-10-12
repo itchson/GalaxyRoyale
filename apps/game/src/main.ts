@@ -10,7 +10,10 @@ import { TITLE_THEME } from "./title-theme";
 import { PixelUiBridge } from "./pixel-ui";
 import { paintFlightMenu, type FlightMenuHud } from "./flight-menu";
 import { paintMeishiCard } from "./meishi";
-import { paintCargo } from "./cargo";
+import { paintMissions } from "./missions";
+import { paintVault } from "./vault-scene";
+import { paintForgeScene, resetForgeScene } from "./forge-scene";
+import { paintHangarScene } from "./hangar-scene";
 import { paintUniverseMap, type UniverseMapData } from "./universe-map";
 import {
   bindWebglLifecycle,
@@ -22,17 +25,11 @@ import { DialoguePanel } from "./dialogue";
 import type { PortraitIdentity } from "./kikai-portrait";
 import { DroidCreation, type IdentityHud, type OnboardingHud } from "./kikai";
 import {
-  paintCampaign,
   paintCredits,
   type CampaignHud,
   type CampaignActions,
 } from "./campaign";
-import {
-  paintForge,
-  resetForge,
-  paintShipHangar,
-  type ForgeHud,
-} from "./loadout";
+import type { ForgeHud } from "./loadout";
 import {
   NarrativeDirector,
   splitPages,
@@ -224,8 +221,8 @@ type MenuTab =
   | "cargo"
   | "upgrades"
   | "hangar"
-  | "campaign"
-  | "journal"
+  | "ship"
+  | "missions"
   | "map"
   | "settings"
   | "archive"
@@ -233,12 +230,19 @@ type MenuTab =
   | "credits";
 let menuTab: MenuTab = "upgrades";
 let lastMapPaint = 0;
-const facilityPages = ["upgrades", "hangar", "journal", "campaign"] as const;
+const facilityPages = [
+  "upgrades",
+  "hangar",
+  "missions",
+  "coop",
+  "cargo",
+] as const;
 const facilityPositions = [
   [-120, -80],
   [120, -80],
   [-120, 95],
   [120, 95],
+  [0, 170],
 ] as const;
 let pendingSaves = 0;
 let saveFailed = false;
@@ -878,7 +882,7 @@ function openMenu(page: MenuTab): void {
     toast("Leave co-op to manage your local collection and missions.");
     page = "coop";
   }
-  if (page === "upgrades") resetForge(element("upgrade-content"));
+  if (page === "upgrades") resetForgeScene(element("upgrade-content"));
   if (launched) {
     pause(false, page);
     return;
@@ -895,10 +899,6 @@ function openMenu(page: MenuTab): void {
 }
 function interactDock(world: [number, number]): boolean {
   if (!launched || paused || !menu.hidden || !hud.dock) return false;
-  if (Math.hypot(...world) < 68) {
-    openMenu("coop");
-    return true;
-  }
   const index = galaxy.dock_facility_at(...world);
   if (index < 0 || index >= facilityPages.length) return false;
   openMenu(facilityPages[index]);
@@ -921,7 +921,8 @@ const campaignActions: CampaignActions = {
       galaxy.craft_ship(index);
       hud = galaxy.hud();
       save(galaxy.profile());
-      paintShipHangar(element("hangar-content"), hud, campaignActions);
+      if (menuTab === "hangar") refreshHangar();
+      if (menuTab === "upgrades") paintUpgrades(hud.dock);
       paintHud();
       toast("RAICHO CRAFTED / select it at Haven");
     } catch (error) {
@@ -935,7 +936,8 @@ const campaignActions: CampaignActions = {
       galaxy.switch_ship(id);
       hud = galaxy.hud();
       save(galaxy.profile());
-      paintShipHangar(element("hangar-content"), hud, campaignActions);
+      if (menuTab === "hangar") refreshHangar();
+      if (menuTab === "upgrades") paintUpgrades(hud.dock);
       paintUpgrades(true);
       paintHud();
       toast("RAICHO SELECTED");
@@ -1018,25 +1020,19 @@ function selectMenuTab(tab: MenuTab): void {
   }
   menuTab = tab;
   const headings: Record<MenuTab, [string, string]> = {
-    coop: ["HAVEN CO-OP", "One host / up to eight pilots."],
+    coop: ["MULTIPLAYER", "Private world / up to eight pilots."],
     pause: ["RAICHO", "FLIGHT LIVE"],
     meishi: ["MEISHI CARD", "FLIGHT LIVE"],
-    cargo: ["CARGO INVENTORY", "Materials and mission items."],
+    cargo: ["VAULT", "Banked materials / components / mission items."],
     upgrades: ["ABILITY COLLECTION", "Craft, equip and upgrade at Haven."],
     hangar: [
-      "HULL COLLECTION",
+      "HANGAR",
       hud.dock ? "Choose your RAICHO." : "Return to Haven to craft or switch.",
     ],
-    campaign: [
-      "ARENA CHAMPIONS",
-      "Eight patches reveal the Galaxy Royale tournament.",
-    ],
+    ship: ["RAICHO SYSTEMS", "Statistics / offensive / defensive / passive."],
+    missions: ["MISSIONS", "Expeditions / arena league."],
     settings: ["SETTINGS", ""],
     archive: ["SAVE & BACKUP", "Saved on this device."],
-    journal: [
-      "EXPEDITION JOURNAL",
-      "Discover sanctuaries and return to claim their rewards.",
-    ],
     map: ["UNIVERSE MAP", "Discovered beacons / flight live."],
     credits: [
       "GALAXY ROYALE WON",
@@ -1062,12 +1058,7 @@ function selectMenuTab(tab: MenuTab): void {
   );
   element("cargo-content").hidden = tab !== "cargo";
   element("coop-content").hidden = tab !== "coop";
-  element("collection-navigation").hidden = ![
-    "pause",
-    "cargo",
-    "hangar",
-    "upgrades",
-  ].includes(tab);
+  element("collection-navigation").hidden = tab !== "pause";
   for (const page of [
     "meishi",
     "cargo",
@@ -1083,10 +1074,11 @@ function selectMenuTab(tab: MenuTab): void {
   element("upgrade-content").hidden = tab !== "upgrades";
   element("settings-content").hidden = tab !== "settings";
   element("archive-content").hidden = tab !== "archive";
-  element("quest-content").hidden = tab !== "journal";
+  element("missions-content").hidden = tab !== "missions";
   element("map-content").hidden = tab !== "map";
   element("hangar-content").hidden = tab !== "hangar";
-  element("campaign-content").hidden = tab !== "campaign" && tab !== "credits";
+  element("ship-content").hidden = tab !== "ship";
+  element("campaign-content").hidden = tab !== "credits";
   menu.classList.toggle("pause-menu", tab === "pause");
   menu.setAttribute(
     "aria-labelledby",
@@ -1096,7 +1088,7 @@ function selectMenuTab(tab: MenuTab): void {
   if (tab === "pause") paintFlightMenu(element("flight-status"), hud);
   if (tab === "coop") paintCoop();
   if (tab === "meishi") paintMeishiCard(element("meishi-content"), hud);
-  if (tab === "cargo") paintCargo(element("cargo-content"), hud);
+  if (tab === "cargo") paintVault(element("cargo-content"), hud);
   if (tab === "map") {
     paintUniverseMap(
       element("map-content"),
@@ -1106,75 +1098,37 @@ function selectMenuTab(tab: MenuTab): void {
     lastMapPaint = performance.now();
   }
   if (tab === "upgrades") paintUpgrades(hud.dock);
-  if (tab === "campaign")
-    paintCampaign(element("campaign-content"), hud.campaign, campaignActions);
-  if (tab === "hangar")
-    paintShipHangar(element("hangar-content"), hud, campaignActions);
+  if (tab === "missions") refreshMissions();
+  if (tab === "hangar") refreshHangar();
+  if (tab === "ship") paintFlightMenu(element("ship-statistics"), hud, true);
   if (tab === "credits")
     paintCredits(element("campaign-content"), {
       ...campaignActions,
       credits: finishCredits,
     });
-  if (tab === "journal") {
-    const target = element("quest-content");
-    target.replaceChildren();
-    const heading = document.createElement("p");
-    heading.textContent = `${hud.discoveries} discoveries / ${hud.relics} relics. Each relic adds 1 hull, up to 20.`;
-    const missionHeading = document.createElement("h3");
-    missionHeading.textContent = "MISSIONS";
-    target.append(heading, missionHeading);
-    if (hud.onboarding) {
-      const training = document.createElement("section");
-      training.className = "upgrade-category passive";
-      const title = document.createElement("h3");
-      title.id = "training-title";
-      title.textContent = `APR-1337 / ${hud.onboarding.title}`;
-      const description = document.createElement("p");
-      description.id = "training-description";
-      description.textContent = hud.onboarding.description;
-      const contact = document.createElement("button");
-      contact.textContent = "CONTACT APR-1337";
-      contact.addEventListener("click", showDoraGuide);
-      training.append(title, description, contact);
-      target.append(training);
-    }
-    const list = document.createElement("ul");
-    const knownSites = new Map(
-      galaxy.universe_map().sites.map((site) => [site.id, site.name]),
-    );
-    for (const quest of hud.quest_log) {
-      const item = document.createElement("li");
-      item.textContent = `${knownSites.get(quest.site_id) ?? quest.site_id} / ${quest.event === "courier" ? "DELIVERY" : "FAMILY BOUNTY"} / ${quest.completed ? "REWARD CLAIMED" : `${quest.progress}/${quest.target} - return to source`}`;
-      list.append(item);
-    }
-    if (!hud.quest_log.length) {
-      const hint = document.createElement("p");
-      hint.textContent =
-        "Seek sanctuary beacons beyond Haven. Accept a delivery or bounty mission, then return for a unique relic.";
-      target.append(hint);
-    }
-    target.append(list);
-    const bossHeading = document.createElement("h3");
-    bossHeading.textContent = "HOSTILE EVOLUTION";
-    const bossHint = document.createElement("p");
-    bossHint.textContent =
-      "24 family kills summon the first boss. Two defeated bosses summon their next generation. Unfinished queues survive retreat and RAICHO loss.";
-    target.append(bossHeading, bossHint);
-    for (const family of hud.boss_progress ?? []) {
-      const familyHeading = document.createElement("h3");
-      familyHeading.textContent =
-        ["DART", "BASTION", "COIL"][family.family] ?? "HOSTILE";
-      const generations = document.createElement("ul");
-      for (let generation = 0; generation < 5; generation++) {
-        const item = document.createElement("li");
-        const queued = family.queued[generation] ?? 0;
-        item.textContent = `G${generation + 1} / ${family.defeats[generation] ?? 0} defeated${queued > 0 ? ` / ${queued} queued` : ""}`;
-        generations.append(item);
-      }
-      target.append(familyHeading, generations);
-    }
-  }
   pixelUi?.invalidate();
+}
+function refreshMissions(): void {
+  if (
+    paintMissions(
+      element("missions-content"),
+      hud,
+      galaxy.universe_map().sites,
+      campaignActions,
+      showDoraGuide,
+      () => pixelUi?.invalidate(),
+    )
+  )
+    pixelUi?.invalidate();
+}
+function refreshHangar(): void {
+  if (
+    paintHangarScene(element("hangar-content"), hud, {
+      select: campaignActions.select,
+      details: () => openMenu("ship"),
+    })
+  )
+    pixelUi?.invalidate();
 }
 function openLaunchSettings(): void {
   openMenu("settings");
@@ -1206,6 +1160,9 @@ function paintCoop(): void {
           coopActionEpoch++;
           return coop!.end();
         },
+        replaceCode: () => coop!.replaceCode(),
+        setJoiningLocked: (locked) => coop!.setJoiningLocked(locked),
+        approve: (peer, accept) => coop!.approve(peer, accept),
         invite: () => coop!.invite(),
         copy: (invitation) => navigator.clipboard.writeText(invitation),
         changed: () => pixelUi?.invalidate(),
@@ -1351,27 +1308,33 @@ function forgeMutation(action: () => void, message: string): void {
   }
 }
 function paintUpgrades(_dock: boolean): void {
-  paintForge(element("upgrade-content"), hud, {
-    purchase: (id) =>
-      forgeMutation(() => galaxy.purchase(id), "RAICHO HARDWARE UPGRADED"),
-    craftAbility: (id) =>
-      forgeMutation(
-        () => galaxy.craft_ability(id),
-        "ABILITY CRAFTED / choose EQUIP to install it",
-      ),
-    craftComponent: (id) =>
-      forgeMutation(
-        () => galaxy.craft_component(id),
-        "COMPONENT STORED AT HAVEN",
-      ),
-    upgradeAbility: (id) =>
-      forgeMutation(() => galaxy.upgrade_ability(id), "ABILITY UPGRADED"),
-    equipAbility: (slot, id) =>
-      forgeMutation(
-        () => galaxy.equip_ability(slot, id),
-        id ? "ABILITY EQUIPPED" : "ABILITY SLOT EMPTY",
-      ),
-  });
+  paintForgeScene(
+    element("upgrade-content"),
+    hud,
+    {
+      purchase: (id) =>
+        forgeMutation(() => galaxy.purchase(id), "RAICHO HARDWARE UPGRADED"),
+      craftAbility: (id) =>
+        forgeMutation(
+          () => galaxy.craft_ability(id),
+          "ABILITY CRAFTED / choose EQUIP to install it",
+        ),
+      craftComponent: (id) =>
+        forgeMutation(
+          () => galaxy.craft_component(id),
+          "COMPONENT STORED AT HAVEN",
+        ),
+      upgradeAbility: (id) =>
+        forgeMutation(() => galaxy.upgrade_ability(id), "ABILITY UPGRADED"),
+      equipAbility: (slot, id) =>
+        forgeMutation(
+          () => galaxy.equip_ability(slot, id),
+          id ? "ABILITY EQUIPPED" : "ABILITY SLOT EMPTY",
+        ),
+    },
+    campaignActions,
+    () => pixelUi?.invalidate(),
+  );
 }
 function paintHud(): void {
   if (!hud) return;
@@ -1470,6 +1433,7 @@ function paintFacilities(): void {
     "pause-button",
     "map-button",
     "flight-settings",
+    "multiplayer-button",
     ...(touchUi ? ["joystick", "fire-button"] : []),
   ]
     .map((id) => element(id).getBoundingClientRect())
@@ -1744,6 +1708,13 @@ function frame(time: number): void {
         if (paintFlightMenu(element("flight-status"), hud))
           pixelUi?.invalidate();
       }
+      if (!menu.hidden && menuTab === "hangar") refreshHangar();
+      if (
+        !menu.hidden &&
+        menuTab === "ship" &&
+        paintFlightMenu(element("ship-statistics"), hud, true)
+      )
+        pixelUi?.invalidate();
       if (
         !menu.hidden &&
         menuTab === "meishi" &&
@@ -1753,10 +1724,14 @@ function frame(time: number): void {
       if (
         !menu.hidden &&
         menuTab === "cargo" &&
-        paintCargo(element("cargo-content"), hud)
+        paintVault(element("cargo-content"), hud)
       )
         pixelUi?.invalidate();
       lastHudPaint = time;
+    }
+    if (!menu.hidden && menuTab === "missions" && time - lastMapPaint > 1000) {
+      refreshMissions();
+      lastMapPaint = time;
     }
     if (!menu.hidden && menuTab === "map" && time - lastMapPaint > 1000) {
       if (
@@ -2074,6 +2049,10 @@ launch.addEventListener("click", async () => {
 element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
 element("menu-close").addEventListener("click", () => void resume());
+element("ship-hangar-back").addEventListener("click", () => openMenu("hangar"));
+element("death-close").addEventListener("click", () =>
+  element("retry").click(),
+);
 element("pause-settings").addEventListener("click", () => openMenu("settings"));
 for (const page of [
   "meishi",
@@ -2102,6 +2081,7 @@ function showToolbarHint(button: HTMLButtonElement | null): void {
     "pause-button": "RAICHO MENU / ESC",
     "map-button": "UNIVERSE MAP",
     "flight-settings": "SETTINGS",
+    "multiplayer-button": "MULTIPLAYER",
     "save-indicator": "AUTOSAVE / BACKUP",
     fullscreen: "FULLSCREEN",
   };
@@ -2142,22 +2122,25 @@ document.addEventListener("focusin", (event) =>
 );
 window.addEventListener("resize", () => showToolbarHint(null));
 element("save-indicator").addEventListener("click", () => openMenu("archive"));
+element("multiplayer-button").addEventListener("click", () => openMenu("coop"));
 element("restart-flight").addEventListener("click", () => {
   void beginEncounter(() => galaxy.return_to_home()).catch((error) =>
     toast(String(error)),
   );
 });
 for (const [index, page] of facilityPages.entries()) {
-  element(`facility-${index}`).addEventListener("click", () => {
+  element(`facility-${index}`).addEventListener("click", (event) => {
+    const world =
+      event.detail === 0
+        ? ([...facilityPositions[index]] as [number, number])
+        : input.worldPoint(event.clientX, event.clientY);
     if (
       launched &&
       !paused &&
       menu.hidden &&
       hud.dock &&
-      galaxy.dock_facility_at(
-        facilityPositions[index][0],
-        facilityPositions[index][1],
-      ) === index
+      world &&
+      galaxy.dock_facility_at(...world) === index
     )
       openMenu(page);
   });
@@ -2426,7 +2409,7 @@ function commitSite(): void {
     toast(
       hud.site?.status === "completed"
         ? "RELIC ACQUIRED / +1 MAX HULL"
-        : "EVENT ACCEPTED / see Journal for progress",
+        : "MISSION ACCEPTED / see MISSIONS for progress",
     );
   } catch (error) {
     toast(String(error));

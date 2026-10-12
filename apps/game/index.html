@@ -58,6 +58,15 @@
             >
               SET
             </button>
+            <button
+              id="multiplayer-button"
+              class="icon-button"
+              data-pixel-icon="multiplayer-icon"
+              aria-label="Multiplayer"
+              title="Multiplayer"
+            >
+              CO-OP
+            </button>
           </nav>
           <button
             id="fullscreen"
@@ -146,20 +155,28 @@
       <button
         id="facility-2"
         class="dock-facility"
-        aria-label="Expedition journal"
+        aria-label="Missions and arena league"
         hidden
       >
-        <span aria-hidden="true">JOURNAL</span>
+        <span aria-hidden="true">MISSIONS</span>
       </button>
       <button
         id="facility-3"
         class="dock-facility"
-        aria-label="Arena campaign"
+        aria-label="Multiplayer"
         hidden
       >
-        <span aria-hidden="true">ARENAS</span>
+        <span aria-hidden="true">MULTIPLAYER</span>
       </button>
       <div id="destination-marker" hidden><i></i></div>
+      <button
+        id="facility-4"
+        class="dock-facility"
+        aria-label="Vault inventory"
+        hidden
+      >
+        <span aria-hidden="true">VAULT</span>
+      </button>
       <div id="joystick" aria-label="Movement joystick">
         <div class="joystick-ring"></div>
         <div id="joystick-stick"></div>
@@ -218,7 +235,7 @@
       aria-describedby="menu-description"
       hidden
     >
-      <div id="menu-surface" class="menu-card">
+      <div id="menu-surface" class="menu-card menu-scene">
         <button
           id="menu-close"
           class="icon-button menu-close"
@@ -247,7 +264,7 @@
             class="text-button"
             aria-pressed="false"
           >
-            CARGO
+            VAULT
           </button>
           <button
             id="collection-hangar"
@@ -326,9 +343,15 @@
           ></section>
         </div>
         <div id="upgrade-content" class="menu-page"></div>
-        <div id="quest-content" class="menu-page" hidden></div>
+        <div id="missions-content" class="menu-page" hidden></div>
         <div id="map-content" class="menu-page" hidden></div>
         <div id="hangar-content" class="menu-page" hidden></div>
+        <div id="ship-content" class="menu-page ship-detail-content" hidden>
+          <button id="ship-hangar-back" class="text-button">
+            BACK TO HANGAR
+          </button>
+          <div id="ship-statistics"></div>
+        </div>
         <div id="coop-content" class="menu-page" hidden></div>
         <div id="campaign-content" class="menu-page" hidden></div>
         <div id="settings-content" class="settings menu-page" hidden>
@@ -473,7 +496,15 @@
       </div>
     </section>
     <section id="death-screen" class="screen-overlay" hidden>
-      <div class="death-card">
+      <div class="death-card menu-scene">
+        <button
+          id="death-close"
+          class="icon-button menu-close"
+          data-pixel-icon="close-icon"
+          aria-label="Retry expedition"
+        >
+          X
+        </button>
         <div class="eyebrow">EXPEDITION ENDED</div>
         <h2>RAICHO LOST</h2>
         <p>

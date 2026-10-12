@@ -50,13 +50,8 @@ interface FlightView {
   affinity: HTMLElement;
   stats: HTMLElement[];
   slots: HTMLElement[];
-  cargo: HTMLElement;
-  tiers: HTMLElement;
-  stash: HTMLElement;
-  points: HTMLElement;
-  namedCargo: HTMLElement;
-  namedStash: HTMLElement;
   details: HTMLElement;
+  toggle: HTMLButtonElement;
 }
 const views = new WeakMap<HTMLElement, FlightView>();
 let nextDetailsId = 0;
@@ -100,40 +95,13 @@ function createView(target: HTMLElement): FlightView {
     abilities.append(row);
     return label;
   });
-  const inventory = element("section", "flight-status-inventory");
-  inventory.setAttribute(
-    "aria-label",
-    "Carried materials and retained inventory",
-  );
-  const cargo = element("p", "flight-cargo-risk");
-  const tiers = element("p");
-  const stash = element("p");
-  const points = element("p");
-  const namedCargo = element("p");
-  const namedStash = element("p");
-  inventory.append(cargo, points);
   const details = element("section", "flight-status-details");
   details.id = `flight-status-details-${++nextDetailsId}`;
   details.hidden = true;
-  details.setAttribute(
-    "aria-label",
-    "Detailed RAICHO statistics and inventory",
-  );
+  details.setAttribute("aria-label", "Detailed RAICHO statistics");
   const detailStats = element("div", "flight-status-detail-stats");
   detailStats.append(...stats.slice(2));
-  const detailInventory = element("div", "flight-status-detail-inventory");
-  detailInventory.append(
-    tiers,
-    namedCargo,
-    stash,
-    namedStash,
-    element(
-      "p",
-      "flight-status-note",
-      "HOME BANKS CARGO / DEATH, RESTART, TITLE OR RELOAD LOSES CARGO",
-    ),
-  );
-  details.append(fullLicense, affinity, detailStats, detailInventory);
+  details.append(fullLicense, affinity, detailStats);
   const toggle = element(
     "button",
     "flight-status-toggle",
@@ -147,14 +115,7 @@ function createView(target: HTMLElement): FlightView {
     toggle.setAttribute("aria-expanded", String(!details.hidden));
     toggle.textContent = details.hidden ? "DETAILS" : "HIDE DETAILS";
   });
-  target.replaceChildren(
-    identity,
-    vitals,
-    abilities,
-    inventory,
-    toggle,
-    details,
-  );
+  target.replaceChildren(identity, vitals, abilities, toggle, details);
   const view = {
     portrait,
     icon,
@@ -165,13 +126,8 @@ function createView(target: HTMLElement): FlightView {
     affinity,
     stats,
     slots,
-    cargo,
-    tiers,
-    stash,
-    points,
-    namedCargo,
-    namedStash,
     details,
+    toggle,
   };
   views.set(target, view);
   return view;
@@ -179,24 +135,20 @@ function createView(target: HTMLElement): FlightView {
 function number(value: number, decimals = 0): string {
   return Number.isFinite(value) ? value.toFixed(decimals) : "--";
 }
-function tiers(values: number[]): string {
-  return (
-    Array.from({ length: 5 }, (_, index) =>
-      values[index] === 0 ? "" : `T${index + 1} ${number(values[index])}`,
-    )
-      .filter(Boolean)
-      .join(" / ") || "NONE"
-  );
-}
-
 /** Displays authoritative HUD values. Stable nodes preserve live-menu scroll and focus. */
 export function paintFlightMenu(
   target: HTMLElement,
   hud: FlightMenuHud,
+  expanded = false,
 ): boolean {
   const previous = views.get(target);
   const view = previous ?? createView(target);
   let changed = !previous;
+  if (expanded && (!view.toggle.hidden || view.details.hidden)) {
+    view.toggle.hidden = true;
+    view.details.hidden = false;
+    changed = true;
+  }
   const write = (node: HTMLElement, value: string): void => {
     if (node.textContent !== value) {
       node.textContent = value;
@@ -277,34 +229,5 @@ export function paintFlightMenu(
       `${categories[index]} / ${slot ? `${slot.name} / R${number(slot.effective_rank)}` : "EMPTY"}`,
     );
   });
-  write(
-    view.cargo,
-    `CARGO ${number(hud.cargo_materials)}/${number(hud.cargo_capacity)}${hud.cargo_materials > 0 ? " / AT RISK" : ""}`,
-  );
-  write(view.tiers, `CARRIED / ${tiers(hud.material_cargo)}`);
-  write(view.stash, `BANKED / ${tiers(hud.material_stash)}`);
-  for (const [node, counts, label] of [
-    [view.namedCargo, hud.material_training_cargo, "CARRIED T1 PARTS"],
-    [view.namedStash, hud.material_training_stash, "BANKED T1 PARTS"],
-  ] as const) {
-    const parts =
-      counts?.flatMap((count, index) =>
-        count > 0
-          ? [
-              `${["PHASE SILICATE", "IRON FILAMENT", "COOLANT KESSHO"][index]} ${number(count)}`,
-            ]
-          : [],
-      ) ?? [];
-    const value = parts.length ? `${label} / ${parts.join(" / ")}` : "";
-    if (node.hidden !== !value) {
-      node.hidden = !value;
-      changed = true;
-    }
-    write(node, value);
-  }
-  write(
-    view.points,
-    `POINTS OFF ${number(hud.currency[0])} / DEF ${number(hud.currency[1])} / PASS ${number(hud.currency[2])}`,
-  );
   return changed;
 }

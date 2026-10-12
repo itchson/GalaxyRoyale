@@ -1029,6 +1029,7 @@ body:not(.engine-flight) #flight-status-strip {
 .pixel-ready #pause-button,
 .pixel-ready #map-button,
 .pixel-ready #flight-settings,
+.pixel-ready #multiplayer-button,
 .pixel-ready #save-indicator,
 .pixel-ready #toolbar-hint,
 .pixel-ready .dock-facility,
@@ -1228,4 +1229,158 @@ body.reduced-motion *::after {
 .coop-button-label {
   display: inline-block;
   flex: 0 0 auto;
+}
+
+/* Full-screen semantic stage; Rust paints the visible scene and fine chrome. */
+#menu-screen {
+  padding: 0;
+}
+#droid-screen,
+#death-screen {
+  padding: 0;
+}
+#droid-screen .droid-card,
+#death-screen .death-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border: 0;
+  padding: max(22px, var(--safe-top))
+    max(
+      24px,
+      env(safe-area-inset-left),
+      env(safe-area-inset-right),
+      calc((100vw - 1120px) / 2)
+    )
+    max(48px, var(--safe-bottom));
+  gap: 16px;
+}
+#droid-screen .droid-close,
+#death-screen .menu-close {
+  position: absolute;
+  top: max(18px, var(--safe-top));
+  right: max(18px, var(--safe-right));
+}
+#death-screen h2,
+#death-screen > .death-card > p {
+  max-width: calc(100% - var(--ui-hit) - 12px);
+}
+#menu-screen .menu-scene {
+  --scene-inline: max(
+    var(--safe-left),
+    var(--safe-right),
+    clamp(16px, 4vw, 64px),
+    calc((100vw - 1120px) / 2)
+  );
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border: 0;
+  padding: max(22px, var(--safe-top)) var(--scene-inline)
+    max(48px, var(--safe-bottom));
+  gap: 14px;
+  background: #0a0a0a;
+}
+#menu-screen .menu-scene > .menu-page {
+  width: 100%;
+  align-self: center;
+  padding-block: 6px 12px;
+}
+#menu-screen .menu-scene > h2 {
+  font-size: clamp(18px, 2vw, 24px);
+}
+#menu-screen .menu-close {
+  position: absolute;
+  top: max(18px, var(--safe-top));
+  right: max(18px, var(--safe-right));
+}
+#menu-screen .menu-scene > #menu-title,
+#menu-screen .menu-scene > #menu-description {
+  width: calc(100% - var(--ui-hit) - 12px);
+}
+#menu-screen .menu-scene > .menu-actions {
+  border: 0;
+}
+.ship-detail-content > #ship-hangar-back {
+  margin-bottom: 20px;
+  min-width: 180px;
+}
+.ship-detail-content > #ship-statistics {
+  max-width: 820px;
+}
+#menu-screen .meishi-surface {
+  align-items: center;
+  justify-content: center;
+}
+#menu-screen .meishi-surface > #meishi-content {
+  width: min(440px, 100%);
+  max-height: 100%;
+  padding: 22px 26px;
+  flex: 0 1 auto;
+}
+.coop-panel {
+  max-width: 760px;
+}
+.coop-panel .menu-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.coop-panel .menu-tabs > button {
+  flex: 0 1 180px;
+  min-height: var(--ui-hit);
+}
+.coop-panel button {
+  min-height: var(--ui-hit);
+  padding: 10px 16px;
+  font-size: var(--ui-text);
+}
+.coop-panel .coop-invitation {
+  gap: 12px;
+}
+.coop-panel .coop-requests {
+  display: grid;
+  gap: 12px;
+  margin-block: 20px;
+}
+.coop-panel .coop-request {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.coop-panel .coop-request > p {
+  flex: 1 1 220px;
+}
+@media (max-height: 560px) and (min-width: 601px) {
+  #menu-screen .meishi-surface > #meishi-content {
+    width: min(740px, 100%);
+  }
+}
+@media (max-height: 480px) {
+  #menu-screen .menu-scene {
+    padding-block: max(12px, var(--safe-top)) max(40px, var(--safe-bottom));
+    gap: 8px;
+  }
+  #menu-screen .menu-close {
+    top: max(12px, var(--safe-top));
+  }
+}
+body:has(#menu-screen:not([hidden])) #toast {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left));
+  right: max(16px, env(safe-area-inset-right));
+  top: auto;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  width: auto;
+  height: 24px;
+  line-height: 1.35;
+  font-size: var(--ui-caption);
+  white-space: normal;
+}
+@media (max-width: 390px) {
+  #menu-screen .meishi-surface > #meishi-content {
+    padding-inline: 16px;
+  }
 }

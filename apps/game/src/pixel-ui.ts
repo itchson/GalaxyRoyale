@@ -155,6 +155,7 @@ export class PixelUiBridge {
     const scale = this.scale();
     if (!Number.isFinite(scale) || scale <= 0) return;
     const groups: { position: number[]; nodes: Node[] }[] = [];
+    let feedback: { position: number[]; nodes: Node[] } | null = null;
     const buttonKind = (element: HTMLElement): string => {
       if (["site-button", "dock-button"].includes(element.id))
         return "status-text";
@@ -172,6 +173,7 @@ export class PixelUiBridge {
           "status-icon",
           "map-icon",
           "fullscreen-icon",
+          "multiplayer-icon",
         ].includes(icon ?? "")
       )
         return icon!;
@@ -187,9 +189,14 @@ export class PixelUiBridge {
       if (["return-title", "death-title", "quick-title"].includes(element.id))
         return "exit-button";
       const action = element.dataset.pixelAction;
-      return ["offense-button", "defense-button", "passive-button"].includes(
-        action ?? "",
-      )
+      return [
+        "primary-button",
+        "exit-button",
+        "restart-button",
+        "offense-button",
+        "defense-button",
+        "passive-button",
+      ].includes(action ?? "")
         ? action!
         : "button";
     };
@@ -275,7 +282,7 @@ export class PixelUiBridge {
           Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
         const scrollSelector =
-          ".menu-tabs,#collection-navigation,#meishi-content,#cargo-content,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#coop-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
+          ".menu-tabs,.hangar-index,#collection-navigation,#meishi-content,#cargo-content,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#missions-content,#settings-content,#archive-content,#hangar-content,#ship-content,#coop-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
         let clipX = bounds.x,
           clipY = bounds.y,
           clipRight = bounds.x + bounds.width,
@@ -350,7 +357,7 @@ export class PixelUiBridge {
         const coopButton = kind.startsWith("co-op-")
           ? element.closest<HTMLButtonElement>("button")
           : null;
-        nodes.push({
+        const node: Node = {
           kind,
           rect: [
             (box.x - bounds.x) / scale + (measuredWidth - width) / 2,
@@ -425,7 +432,10 @@ export class PixelUiBridge {
                 disabled: regions.control.disabled,
               }
             : {}),
-        });
+        };
+        if (element.id === "toast")
+          feedback = { position: [...position], nodes: [node] };
+        else nodes.push(node);
       };
       if (root.classList.contains("launch-card")) {
         const screen = document
@@ -452,9 +462,21 @@ export class PixelUiBridge {
           root,
           root.classList.contains("console-card")
             ? "console-panel"
-            : root.classList.contains("meishi-surface")
-              ? "meishi-panel"
-              : "panel",
+            : root.classList.contains("menu-scene")
+              ? "scene"
+              : root.classList.contains("meishi-surface")
+                ? "meishi-panel"
+                : "panel",
+          "",
+          Number(root.dataset.pixelValue ?? 0),
+        );
+      if (
+        root.classList.contains("menu-scene") &&
+        root.classList.contains("meishi-surface")
+      )
+        add(
+          root.querySelector<HTMLElement>("#meishi-content")!,
+          "meishi-panel",
           "",
           Number(root.dataset.pixelValue ?? 0),
         );
@@ -503,9 +525,9 @@ export class PixelUiBridge {
       const selectors =
         root.id === "game-ui"
           ? document.body.classList.contains("engine-flight")
-            ? ".dock-facility,#save-indicator,#site-button,#dock-button,#pause-button,#map-button,#flight-settings,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker,#toolbar-hint"
+            ? ".dock-facility,#save-indicator,#site-button,#dock-button,#pause-button,#map-button,#flight-settings,#multiplayer-button,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker,#toolbar-hint"
             : "#toast"
-          : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#quest-content li";
+          : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#missions-content li";
       for (const child of root.querySelectorAll<HTMLElement>(selectors)) {
         if (
           ["status-text", "warning-text"].includes(
@@ -544,7 +566,12 @@ export class PixelUiBridge {
         )) {
           // These accessible marker buttons were emitted once by the artwork
           // loop. Their hitboxes do not become generic frames or text objects.
-          if (["map-home", "map-site"].includes(button.dataset.pixelKind ?? ""))
+          if (
+            ["map-home", "map-site", "garage-bay"].includes(
+              button.dataset.pixelKind ?? "",
+            ) ||
+            button.classList.contains("hangar-hull")
+          )
             continue;
           add(
             button,
@@ -593,6 +620,8 @@ export class PixelUiBridge {
       );
       groups.push({ position, nodes: nodes.slice(0, 256) });
     }
+    // Feedback must remain above opaque menu stages and card artwork.
+    if (feedback) groups.push(feedback);
     this.runtime.set_ui_scene({ groups });
   }
 }

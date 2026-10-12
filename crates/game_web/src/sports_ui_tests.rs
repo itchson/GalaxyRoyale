@@ -117,6 +117,78 @@ fn panel_inherited_focus_and_corporation_cannot_tint_the_opaque_neutral_backing(
 }
 
 #[test]
+fn full_screen_stage_is_opaque_bounded_and_retains_fine_source_across_aspects() {
+    let mut count = None;
+    for rect in [
+        [0.0, 0.0, 640.0, 360.0],
+        [0.0, 0.0, 300.0, 640.0],
+        [3.125, 4.25, 848.0, 240.0],
+    ] {
+        let mut stage = input(Kind::Scene, rect);
+        let frame = extract(&stage);
+        assert!(frame.pixel_count < 1024);
+        assert_eq!(*count.get_or_insert(frame.pixel_count), frame.pixel_count);
+        let flat = signature(&frame);
+        // One occupied cell covers every screen corner; no translucent world
+        // or flight HUD can bleed through the menu's native stage.
+        let background = frame.batches[0].pixels[0];
+        assert_eq!(background.color, rgb(10, 10, 10));
+        let transform = frame.batches[0].transforms[background.transform_slot()];
+        for (corner, expected) in [
+            (Vec2::splat(-0.5), Vec2::new(rect[0], rect[1])),
+            (
+                Vec2::splat(0.5),
+                Vec2::new(rect[0] + rect[2], rect[1] + rect[3]),
+            ),
+        ] {
+            assert!((transform.point(corner) - expected).length() < 0.0001);
+        }
+        for batch in &frame.batches {
+            for pixel in &batch.pixels {
+                let transform = batch.transforms[pixel.transform_slot()];
+                for corner in [
+                    Vec2::splat(-0.5),
+                    Vec2::new(-0.5, 0.5),
+                    Vec2::new(0.5, -0.5),
+                    Vec2::splat(0.5),
+                ] {
+                    let point = transform.point(Vec2::from_array(pixel.local) + corner);
+                    assert!(
+                        point.x >= rect[0] - 0.0001
+                            && point.y >= rect[1] - 0.0001
+                            && point.x <= rect[0] + rect[2] + 0.0001
+                            && point.y <= rect[1] + rect[3] + 0.0001
+                    );
+                }
+            }
+        }
+        stage.active = true;
+        stage.selected = true;
+        stage.accent = rgb(255, 100, 60);
+        assert_eq!(
+            flat,
+            signature(&extract(&stage)),
+            "focus cannot recolor a full-screen scene"
+        );
+    }
+}
+
+#[test]
+fn full_screen_stage_rejects_incomplete_quota_without_occluding_existing_frame() {
+    let stage = input(Kind::Scene, [0.0, 0.0, 640.0, 360.0]);
+    let count = extract(&stage).pixel_count;
+    for (mut pixels, mut work) in [(count - 1, 120_000), (60_000, count - 1)] {
+        let mut frame = FrameBuilder::new();
+        frame.push_pixel(Vec2::ZERO, 1.0, 0xffffffff);
+        let before = signature(frame.frame());
+        let quotas = (pixels, work);
+        assert_eq!(append(&mut frame, &stage, &mut pixels, &mut work), 0);
+        assert_eq!(quotas, (pixels, work));
+        assert_eq!(before, signature(frame.frame()));
+    }
+}
+
+#[test]
 fn neutral_surface_survives_linear_eight_bit_ui_quantization_without_cyan_shift() {
     // Independent model of pixel.wgsl's source conversion into Rgba8Unorm.
     // It reproduces the observed old dark focus-fill failure; not a GPU test.

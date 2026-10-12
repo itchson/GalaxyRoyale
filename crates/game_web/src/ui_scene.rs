@@ -1084,14 +1084,64 @@ impl Painter<'_> {
         .body;
         self.fitted_body(node, body, true);
     }
-    fn licensed_ship(&mut self, node: &UiNode) {
+    fn licensed_ship(&mut self, node: &UiNode, time: f32, reduced: bool) {
         let corporation = [
             game_core::identity::Corporation::Pan,
             game_core::identity::Corporation::Renko,
             game_core::identity::Corporation::Hugo,
         ][selection(node.value, 3)];
         let body = game_core::identity::starter_body(corporation);
-        self.fitted_body(node, body, false);
+        let r = node.rect;
+        let scale = (r[2] / body.width as f32).min(r[3] / body.height as f32);
+        if !scale.is_finite() || scale <= 0.0 {
+            return;
+        }
+        let local = Transform {
+            position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
+            scale: Vec2::splat(scale),
+            ..Default::default()
+        };
+        let clip = self.clip;
+        let disabled = node.disabled;
+        let shade = |cell: Vec2, half: f32, color: u32| {
+            let p = local.point(cell);
+            let half = half * scale;
+            if clip.is_some_and(|c| {
+                p.x - half < c[0]
+                    || p.y - half < c[1]
+                    || p.x + half > c[0] + c[2]
+                    || p.y + half > c[1] + c[3]
+            }) {
+                0
+            } else if disabled {
+                muted(color)
+            } else {
+                color
+            }
+        };
+        let mut budget = game_core::identity::StarterPreviewBudget {
+            pixels: self.remaining,
+            work: self.work_remaining,
+            transforms: 2,
+        };
+        if game_core::identity::append_starter_preview(
+            self.frame,
+            corporation,
+            game_core::identity::StarterPreviewInput {
+                parent: self.parent.compose(local.affine()),
+                time,
+                reduced_motion: reduced,
+                ..Default::default()
+            },
+            &mut budget,
+            |cell, color| shade(cell, 0.5, color),
+            |cell, color| shade(cell, 0.25, color),
+        )
+        .is_ok()
+        {
+            self.remaining = budget.pixels;
+            self.work_remaining = budget.work;
+        }
     }
     fn fitted_body(&mut self, node: &UiNode, body: &PixelBody, highlight_active: bool) {
         let count = body.occupied_count();
@@ -1476,11 +1526,27 @@ impl Painter<'_> {
             WHITE
         };
         match node.kind.as_str() {
-            "co-op-invite" | "co-op-join" | "co-op-roster" => {
+            "garage-bay" => {
+                crate::garage_art::append(
+                    self.frame,
+                    &crate::garage_art::Input {
+                        parent: self.parent,
+                        rect: r,
+                        clip: self.clip,
+                        corporation: selection(node.value, 3),
+                        time,
+                        reduced_motion: reduced,
+                        active: node.active,
+                    },
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            }
+            "co-op-invite" | "co-op-join" | "co-op-roster" | "multiplayer-icon" => {
                 use crate::co_op_art::{self, Kind};
                 let kind = match node.kind.as_str() {
                     "co-op-invite" => Kind::Invite,
-                    "co-op-join" => Kind::Join,
+                    "co-op-join" | "multiplayer-icon" => Kind::Join,
                     _ if node.value.is_finite()
                         && node.value.fract() == 0.0
                         && (0.0..=8.0).contains(&node.value) =>
@@ -1617,13 +1683,14 @@ impl Painter<'_> {
                 false,
             ),
             "title-backdrop" => self.rect(r, u32::from_le_bytes([1, 2, 5, 246])),
+            "scene" => self.skin(node, sports_ui::Kind::Scene),
             "panel" => self.skin(node, sports_ui::Kind::Panel),
             "meishi-panel" | "meishi-portrait-frame" | "meishi-seal" | "meishi-socket" => {
                 self.meishi_fittings(node, time, reduced);
             }
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
-            "licensed-ship" => self.licensed_ship(node),
+            "licensed-ship" => self.licensed_ship(node, time, reduced),
             "craft-component" => {
                 if node.value.is_finite()
                     && node.value.fract() == 0.0
@@ -2064,6 +2131,64 @@ mod tests {
                     let p = t.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0)
                         - Vec2::new(100.0, 50.0);
                     assert!(p.x >= 5.0 && p.x < 65.0 && p.y >= 9.0 && p.y < 79.0);
+                }
+            }
+        }
+    }
+    #[test]
+    fn licensed_ui_preview_keeps_authored_fine_cells_and_clips_both_cell_extents() {
+        for (corp, count) in [(0, 1867), (1, 1864), (2, 2780)] {
+            for extent in [15.125, 120.25] {
+                for clipped in [false, true] {
+                    let mut input = scene("licensed-ship");
+                    let group = Vec2::from_array(input.groups[0].position);
+                    let node = &mut input.groups[0].nodes[0];
+                    node.value = corp as f32;
+                    node.rect = [5.125, 9.25, extent, extent * 1.25];
+                    let bounds = if clipped {
+                        [5.125, 9.25, extent * 0.63, extent * 1.25]
+                    } else {
+                        node.rect
+                    };
+                    node.clip = clipped.then_some(bounds);
+                    let mut frame = FrameBuilder::new();
+                    draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+                    assert_eq!(
+                        frame.frame().pixel_count,
+                        count,
+                        "UI retains both authored source grids at every fit"
+                    );
+                    let mut visible = 0;
+                    for batch in &frame.frame().batches {
+                        for pixel in &batch.pixels {
+                            if pixel.color >> 24 == 0 {
+                                continue;
+                            }
+                            visible += 1;
+                            let t = batch.transforms[pixel.transform_slot()];
+                            for corner in [
+                                Vec2::splat(-0.5),
+                                Vec2::new(-0.5, 0.5),
+                                Vec2::new(0.5, -0.5),
+                                Vec2::splat(0.5),
+                            ] {
+                                let p = t.point(Vec2::from_array(pixel.local) + corner)
+                                    + Vec2::new(320.0, 180.0)
+                                    - group;
+                                assert!(
+                                    p.x >= bounds[0] - 0.0001
+                                        && p.y >= bounds[1] - 0.0001
+                                        && p.x <= bounds[0] + bounds[2] + 0.0001
+                                        && p.y <= bounds[1] + bounds[3] + 0.0001
+                                );
+                            }
+                        }
+                    }
+                    if clipped {
+                        assert!(visible > 0 && visible < count);
+                    } else {
+                        assert_eq!(visible, count);
+                    }
                 }
             }
         }

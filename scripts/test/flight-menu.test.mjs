@@ -298,7 +298,7 @@ test("status clears nullable legacy affinity and labels Sovereign's licensed fal
   assert.equal(f.paint(f.target, data), false);
   assert.equal(f.writes(), 0);
 });
-test("live status displays selected-ship XP, effective stats, slots and actual cargo tiers", () => {
+test("live status displays selected-ship XP, effective stats and ability slots", () => {
   const f = fixture();
   const data = freeze(hud());
   assert.equal(f.paint(f.target, data), true);
@@ -316,10 +316,6 @@ test("live status displays selected-ship XP, effective stats, slots and actual c
     "OFFENSE / PULSE LENS / R1",
     "DEFENSE / EMPTY",
     "PASSIVE / FLUX DRIVE / R1",
-    "CARGO 3/16 / AT RISK",
-    "CARRIED / T1 2 / T2 1",
-    "BANKED / T1 8 / T2 2 / T5 1",
-    "POINTS OFF 9 / DEF 4 / PASS 2",
   ])
     assert.ok(text.includes(expected), expected);
   const icon = flatten(f.target).find(
@@ -360,8 +356,6 @@ test("compact default shows the short license and essentials while retaining ful
     "OFFENSE / PULSE LENS / R1",
     "DEFENSE / EMPTY",
     "PASSIVE / FLUX DRIVE / R1",
-    "CARGO 3/16 / AT RISK",
-    "POINTS OFF 9 / DEF 4 / PASS 2",
     "DETAILS",
   ])
     assert.ok(primary.includes(text), text);
@@ -386,10 +380,6 @@ test("compact default shows the short license and essentials while retaining ful
     "ACCEL 260",
     "PRIMARY 18.0",
     "SHIELD RECHARGE 1.8",
-    "BANKED / T1 8 / T2 2 / T5 1",
-    "PHASE SILICATE 1",
-    "PHASE SILICATE 2",
-    "TITLE OR RELOAD LOSES CARGO",
   ])
     assert.ok(visibleText(f.target).includes(text), text);
   assert.doesNotMatch(
@@ -441,48 +431,27 @@ test("Details expansion and button focus persist through real live HUD paints, s
   assert.equal(detailsSection(other.target).hidden, true); // No global expanded state leaks to another view.
 });
 
-test("empty cargo has no risk warning and its zero-tier detail remains explicit without repetitive rows", () => {
+test("RAICHO statistics do not expose material inventory, capacity slots or MEISHI currency", () => {
   const f = fixture(),
     data = hud();
-  data.cargo_materials = 0;
-  data.material_cargo = [0, 0, 0, 0, 0];
-  data.material_stash = [0, 0, 0, 0, 0];
-  f.paint(f.target, data);
-  assert.match(visibleText(f.target), /CARGO 0\/16/);
-  assert.doesNotMatch(visibleText(f.target), /AT RISK/);
-  detailsControl(f.target).click();
-  assert.match(visibleText(f.target), /CARRIED \/ NONE/);
-  assert.match(visibleText(f.target), /BANKED \/ NONE/);
-  assert.doesNotMatch(visibleText(f.target), /T[1-5] 0/);
-});
-
-test("named T1 inventory is shown inside existing totals and clears without recreating the menu", () => {
-  const f = fixture();
-  const data = hud();
   data.material_training_cargo = [1, 0, 1];
   data.material_training_stash = [2, 3, 3];
   f.paint(f.target, data);
-  assert.ok(f.target.textContent.includes("CARGO 3/16 / AT RISK"));
-  assert.ok(
-    f.target.textContent.includes(
-      "CARRIED T1 PARTS / PHASE SILICATE 1 / COOLANT KESSHO 1",
-    ),
+  detailsControl(f.target).click();
+  assert.doesNotMatch(
+    visibleText(f.target),
+    /CARGO|CARRIED|BANKED|POINTS|SILICATE|FILAMENT|KESSHO/,
   );
-  assert.ok(
-    f.target.textContent.includes(
-      "BANKED T1 PARTS / PHASE SILICATE 2 / IRON FILAMENT 3 / COOLANT KESSHO 3",
-    ),
-  );
+  assert.match(visibleText(f.target), /OFFENSE \/ PULSE LENS/);
+  assert.match(visibleText(f.target), /PRIMARY 18.0/);
   const nodes = flatten(f.target);
   f.resetWrites();
-  assert.equal(f.paint(f.target, structuredClone(data)), false);
+  data.cargo_materials = 0;
+  data.material_cargo = [0, 0, 0, 0, 0];
+  data.material_stash = [12, 9, 0, 0, 0];
+  assert.equal(f.paint(f.target, data), false);
   assert.equal(f.writes(), 0);
-  data.material_training_cargo = [0, 0, 0];
-  data.material_training_stash = [0, 0, 0];
-  assert.equal(f.paint(f.target, data), true);
   assert.deepEqual(flatten(f.target), nodes);
-  assert.ok(!f.target.textContent.includes("T1 PARTS"));
-  assert.ok(f.target.textContent.includes("CARGO 3/16 / AT RISK"));
 });
 
 test("identical or sub-display-resolution live readings perform zero DOM writes", () => {

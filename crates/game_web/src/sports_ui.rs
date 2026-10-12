@@ -125,6 +125,7 @@ static HEADER_WING: LazyLock<PixelBody> = LazyLock::new(|| {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Kind {
+    Scene,
     Panel,
     Button,
     Row,
@@ -207,20 +208,50 @@ pub fn append(
     // Focusing a descendant makes the semantic root active. A whole panel must
     // not change its backing or corporation tint merely because a slider owns
     // focus; small controls retain independent action/category accents.
-    let strong = input.kind != Kind::Panel && (input.active || input.selected) && !input.disabled;
+    let surface = matches!(input.kind, Kind::Panel | Kind::Scene);
+    let strong = !surface && (input.active || input.selected) && !input.disabled;
     let rail = if input.disabled {
         subdued(ENAMEL)
     } else {
-        accent(
-            if input.kind == Kind::Panel {
-                ENAMEL
-            } else {
-                input.accent
-            },
-            strong,
-        )
+        accent(if surface { ENAMEL } else { input.accent }, strong)
     };
-    if input.kind == Kind::Row {
+    if input.kind == Kind::Scene {
+        // Full-screen stage, rather than a dialog perimeter. Native fine-cell
+        // competition shoulders sit on an opaque neutral field; measured
+        // semantic content keeps its own safe-area padding and hit regions.
+        quad(r, rgb(10, 10, 10));
+        let edge = (r[2] * 0.04).clamp(4.0, 16.0).min(r[2] * 0.1);
+        let top = r[1] + 5.0_f32.min(r[3] * 0.05);
+        quad([r[0] + edge, top, (r[2] * 0.18).min(72.0), 0.4], ALLOY);
+        quad(
+            [r[0] + edge, top + 0.4, 12.0_f32.min(r[2] * 0.1), 0.35],
+            ENAMEL,
+        );
+        quad(
+            [
+                r[0] + edge,
+                r[1] + r[3] - 4.0_f32.min(r[3] * 0.05),
+                (r[2] * 0.08).min(28.0),
+                0.4,
+            ],
+            ALLOY,
+        );
+        let fit = (r[2] / 320.0).min(r[3] / 180.0).min(0.5);
+        parts[used] = Some(Part {
+            body: &HEADER_WING,
+            local: Transform {
+                position: Vec2::new(
+                    r[0] + r[2] - edge - 24.0 * fit,
+                    r[1] + r[3] - 4.0 * fit - 5.0_f32.min(r[3] * 0.05),
+                ),
+                scale: Vec2::splat(-fit),
+                ..Default::default()
+            }
+            .affine(),
+            color: None,
+        });
+        used += 1;
+    } else if input.kind == Kind::Row {
         if strong {
             quad(r, rgb(20, 20, 20));
         }
@@ -319,7 +350,7 @@ pub fn append(
             });
             used += 1;
         }
-    } else {
+    } else if input.kind != Kind::Scene {
         let body = if input.kind == Kind::Panel {
             &*PANEL_CORNER
         } else {

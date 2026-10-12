@@ -123,7 +123,7 @@ export class DroidCreation {
     this.screen.setAttribute("aria-modal", "true");
     this.screen.setAttribute("aria-labelledby", "droid-title");
     const card = document.createElement("div");
-    card.className = "droid-card";
+    card.className = "droid-card menu-scene";
     this.closeButton.type = "button";
     this.closeButton.className = "icon-button droid-close";
     this.closeButton.dataset.pixelIcon = "close-icon";

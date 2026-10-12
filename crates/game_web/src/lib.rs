@@ -9,6 +9,7 @@ pub mod co_op_bridge;
 pub mod co_op_replica_bridge;
 pub mod dock_art;
 pub mod flight_icons;
+mod garage_art;
 pub mod kikai_art;
 pub mod lighting;
 pub mod pixel_ui;

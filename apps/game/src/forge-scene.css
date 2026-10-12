@@ -1,0 +1,14 @@
+.forge-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.forge-sections > button {
+  min-width: min(150px, 100%);
+  flex: 0 1 auto;
+  padding-inline: 16px;
+}
+.forge-workbench {
+  min-width: 0;
+}
