@@ -1,0 +1,25 @@
+{
+  "item": {
+    "id": "run-8d44c9ec",
+    "title": "Strict browser Wake transfer · completed",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Strict browser Wake transfer",
+    "state": "completed",
+    "observedAt": "2026-10-12T20:23:02.379Z",
+    "taskIds": [
+      "task-d82150b9"
+    ],
+    "summary": "Bounded browser consumer candidate complete for independent review. Final73 listener-free tests and TypeScript check passed; all22 native fixtures preserved, raw32KiB and f32/halo/completion/backpressure/ACK/teardown covered. Execution deviation: an earlier transport test run opened temporary localhost HTTP servers and exited after successful teardown; raw evidence retained. No normal build, new browser/realRTC or native source change. Integration and physical/live acceptance remain open.",
+    "evidence": [
+      {
+        "label": "Actual scoped browser consumer pass and retained execution deviation",
+        "kind": "note",
+        "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-browser/HANDOFF.md SHA8d301e9f1964f4bbf4c8dffed9eac44eece7a406eaa98fb21baaeec4a962fb87. Final listener-free73 focused Node tests and tsc passed; exact22 native111a fixtures pinned. Raw page span/numeric/roster checks, cells-only cache skips, required complete Wake before commit/ACK and replica_wake routing. Red baseline and fixture-token failure retained. Accidental111-case transport run opened ephemeral HTTP listeners, closed via existing teardown and exited0; explicitly separate from final checks. No normal build/new browser/realRTC/native changes; independent review/integration/live gates open."
+      }
+    ],
+    "author": "Codex audio_score",
+    "source": "Actual three-consumer author pass; remaining review/integration/live scope explicit",
+    "createdAt": "2026-10-12T20:23:02.386Z"
+  },
+  "revision": 1060
+}

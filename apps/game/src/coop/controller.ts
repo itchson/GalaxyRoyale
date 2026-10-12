@@ -96,6 +96,28 @@ type Row = Record<string, Json> & {
 };
 const bodyKey = (r: Row): string =>
   `${r.body_signature}:${r.width}:${r.height}:${r.occupied}`;
+// Header/page shapes are validated at the wire/native boundary first.
+const wakeCount = (h: Publication): number =>
+  h.snapshot.wake_fx === undefined
+    ? 0
+    : Number(record(h.snapshot.wake_fx).points);
+function wakeMatches(p: Record<string, unknown>, h: Publication): void {
+  if (
+    p.session !== h.snapshot.session ||
+    p.tick !== h.snapshot.tick ||
+    p.revision !== h.snapshot.revision ||
+    !Array.isArray(p.points) ||
+    p.points.length !== wakeCount(h)
+  )
+    fail("publication_wake");
+  const members = new Map(
+    h.snapshot.participants.map((p) => [record(p).slot, record(p).epoch]),
+  );
+  for (const point of p.points) {
+    const value = record(point);
+    if (members.get(value.slot) !== value.epoch) fail("publication_wake");
+  }
+}
 type Piece = {
   kind: "publication" | "body" | "publication-end";
   payload: Json;
@@ -117,6 +139,7 @@ type Capture = {
   bodyIndex: number;
   bodyOffset: number;
   complete: boolean;
+  wakeAppended: boolean;
   started: number;
 };
 type Receiving = {
@@ -128,6 +151,7 @@ type Receiving = {
   lastCell: number;
   entityPages: number;
   bodyPages: number;
+  wakeReceived: boolean;
 };
 const MAX_BYTES = 1_048_576,
   MAX_FRAMES = 80,
@@ -660,6 +684,7 @@ export class CoopController {
           lastCell: -1,
           entityPages: 0,
           bodyPages: 0,
+          wakeReceived: wakeCount(h) === 0,
         };
         this.#lastPublication = this.#now();
         this.#ack = null;
@@ -696,7 +721,14 @@ export class CoopController {
       p.revision !== h.snapshot.revision
     )
       fail("publication_revision");
-    if (Array.isArray(p.entities)) {
+    if (Array.isArray(p.points)) {
+      if (r.wakeReceived || r.entityOffset !== h.counts.entities || r.bodyPages)
+        fail("publication_order");
+      wakeMatches(p, h);
+      if (!this.#options.replica!.page(payload)) fail("replica_page");
+      r.wakeReceived = true;
+      return;
+    } else if (Array.isArray(p.entities)) {
       if (
         r.bodyPages ||
         p.offset !== r.entityOffset ||
@@ -735,6 +767,7 @@ export class CoopController {
       const row = this.#nextBody(r);
       if (
         r.entityOffset !== h.counts.entities ||
+        !r.wakeReceived ||
         !row ||
         p.id !== row.id ||
         p.width !== row.width ||
@@ -770,6 +803,7 @@ export class CoopController {
       p.acquisition !== r.header.acquisition ||
       p.revision !== r.header.snapshot.revision ||
       r.entityOffset !== r.header.counts.entities ||
+      !r.wakeReceived ||
       r.bodyOffset ||
       this.#nextBody(r)
     )
@@ -923,6 +957,7 @@ export class CoopController {
           bodyIndex: 0,
           bodyOffset: 0,
           complete: false,
+          wakeAppended: wakeCount(h) === 0,
           started: this.#now(),
         };
         for (const p of this.#peers.values()) {
@@ -947,7 +982,7 @@ export class CoopController {
           const piece = c.pieces[p.index];
           if (
             piece.kind === "body" &&
-            !Array.isArray(record(piece.payload).entities)
+            Array.isArray(record(piece.payload).cells)
           ) {
             const row =
               c.rows[
@@ -1007,6 +1042,21 @@ export class CoopController {
       }
       c.entityOffset += p.entities.length;
       c.pieces.push({ kind: "body", payload: page as Json });
+      return;
+    }
+    if (!c.wakeAppended) {
+      const page = this.#batch([
+        {
+          op: "wake_page",
+          session: this.#session,
+          acquisition: h.acquisition,
+          revision: h.snapshot.revision,
+        },
+      ])[0];
+      validatePayload("body", page);
+      wakeMatches(record(page), h);
+      c.pieces.push({ kind: "body", payload: page });
+      c.wakeAppended = true;
       return;
     }
     while (

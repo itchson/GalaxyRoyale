@@ -3,6 +3,9 @@ export const PROTOCOL = "galaxy-coop-1";
 export const CHANNEL = "galaxy-coop-1";
 export const WIRE_VERSION = 1;
 export const MAX_FRAME_BYTES = 65_536;
+export const MAX_WAKE_PAGE_BYTES = 32_768;
+const MAX_WAKE_LIFE = Math.fround(3.4);
+const WAKE_POSITION_LIMIT = 1_000_014;
 export const MAX_BUFFERED_BYTES = 262_144;
 export const LOW_BUFFERED_BYTES = 65_536;
 export type Role = "host" | "guest";
@@ -328,10 +331,64 @@ function dimensions(o: Record<string, unknown>): void {
 }
 function page(value: unknown): void {
   const o = record(value);
+  if (!id(o.session) || !uint(o.tick) || !uint(o.revision))
+    fail("invalid_page");
+  // Active Wake state is a full bounded page, without geometry offsets.
+  if (Object.hasOwn(o, "points")) {
+    record(o, ["session", "tick", "revision", "points"]);
+    if (
+      Object.keys(o).length !== 4 ||
+      !Array.isArray(o.points) ||
+      o.points.length > 192
+    )
+      fail("wake_page_bound");
+    const counts = Array<number>(8).fill(0);
+    let previousSlot = -1,
+      previousBirth = -1;
+    for (const value of o.points) {
+      const p = record(value, [
+        "slot",
+        "epoch",
+        "born_tick",
+        "position",
+        "life",
+      ]);
+      if (
+        Object.keys(p).length !== 5 ||
+        !uint(p.slot) ||
+        p.slot > 7 ||
+        !uint(p.epoch) ||
+        p.epoch === 0 ||
+        !uint(p.born_tick) ||
+        p.born_tick > Number(o.tick) ||
+        p.slot < previousSlot ||
+        (p.slot === previousSlot && p.born_tick <= previousBirth) ||
+        ++counts[p.slot] > 24
+      )
+        fail("invalid_wake_point");
+      vector(p.position, WAKE_POSITION_LIMIT);
+      for (const n of p.position as number[]) {
+        const canonical = Math.fround(n);
+        if (
+          !Number.isFinite(canonical) ||
+          Math.abs(canonical) > WAKE_POSITION_LIMIT
+        )
+          fail("invalid_wake_point");
+      }
+      finite(p.life, Number.MIN_VALUE, MAX_WAKE_LIFE);
+      const life = Math.fround(Number(p.life));
+      if (!Number.isFinite(life) || life <= 0 || life > MAX_WAKE_LIFE)
+        fail("invalid_wake_point");
+      previousSlot = p.slot;
+      previousBirth = p.born_tick;
+    }
+    if (
+      new TextEncoder().encode(JSON.stringify(o)).length > MAX_WAKE_PAGE_BYTES
+    )
+      fail("wake_page_bound");
+    return;
+  }
   if (
-    !id(o.session) ||
-    !uint(o.tick) ||
-    !uint(o.revision) ||
     !uint(o.offset) ||
     (o.next_offset !== null &&
       (!uint(o.next_offset) || o.next_offset <= Number(o.offset)))
@@ -462,6 +519,7 @@ export function snapshot(value: unknown): void {
     "participants",
     "projectiles",
     "nova_fx",
+    "wake_fx",
   ]);
   if (
     s.protocol !== PROTOCOL ||
@@ -569,6 +627,15 @@ export function snapshot(value: unknown): void {
     finite(p.life, 0, 60);
   }
   if (Object.hasOwn(s, "nova_fx")) novaFx(s.nova_fx, Number(s.tick), epochs);
+  if (Object.hasOwn(s, "wake_fx")) {
+    const wake = record(s.wake_fx, ["points"]);
+    if (
+      Object.keys(wake).length !== 1 ||
+      !uint(wake.points) ||
+      wake.points > 192
+    )
+      fail("invalid_wake_meta");
+  }
 }
 
 /** Visual births only; native complete-commit code owns deduplication and aging. */
@@ -678,5 +745,62 @@ export function decode(text: unknown): Frame {
     return fail("invalid_json");
   }
   validateFrame(value);
+  if (
+    value.kind === "body" &&
+    Object.hasOwn(record(value.payload), "points") &&
+    new TextEncoder().encode(rawPayloadSpan(text)).length > MAX_WAKE_PAGE_BYTES
+  )
+    fail("wake_page_bound");
   return value;
+}
+
+/** Scan only the validated frame's top-level payload. Preserve its raw bytes,
+ * including whitespace/number spelling, and reject duplicate payload keys. */
+function rawPayloadSpan(text: string): string {
+  let i = 0,
+    span: string | null = null;
+  const whitespace = () => {
+    while (/[\x20\t\r\n]/.test(text[i] ?? "")) i++;
+  };
+  whitespace();
+  i++; // validated root object
+  while (i < text.length) {
+    whitespace();
+    if (text[i] === "}") break;
+    const keyStart = i++;
+    while (i < text.length) {
+      const c = text[i++];
+      if (c === "\\") i++;
+      else if (c === '"') break;
+    }
+    const key = JSON.parse(text.slice(keyStart, i)) as string;
+    whitespace();
+    i++;
+    whitespace(); // colon, then value
+    const start = i;
+    let depth = 0,
+      quoted = false;
+    while (i < text.length) {
+      const c = text[i];
+      if (quoted) {
+        i++;
+        if (c === "\\") i++;
+        else if (c === '"') quoted = false;
+        continue;
+      }
+      if (c === '"') quoted = true;
+      else if (c === "{" || c === "[") depth++;
+      else if ((c === "}" || c === "]") && depth > 0) depth--;
+      else if ((c === "," || c === "}") && depth === 0) break;
+      i++;
+    }
+    if (key === "payload") {
+      if (span !== null) fail("duplicate_payload");
+      span = text.slice(start, i).trimEnd();
+    }
+    if (text[i] !== ",") break;
+    i++;
+  }
+  if (span === null) fail("invalid_frame");
+  return span;
 }

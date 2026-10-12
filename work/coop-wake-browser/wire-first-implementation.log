@@ -1,0 +1,16 @@
+(node:8924) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"scope":"exact native fixture replay and JS serialization, no RTC","pageBytes":17953,"bodyFrameBytes":18038}
+✔ all exact modern native headers and diagnostic pages cross their distinct strict variants (5.1807ms)
+✔ Wake metadata distinguishes absence from malformed presence (1.0278ms)
+✔ Wake pages reject mixed shapes, bad raw/post-f32 numbers and chronology (2.336ms)
+✔ actual raw transport fixtures decode and both encoded wrapper budgets remain bounded (6.3246ms)
+✔ raw32KiB page span is enforced independently of normalized value/frame bytes (4.2629ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 113.2013

@@ -28,6 +28,156 @@ const session = capture.snapshot.session;
 const self = capture.snapshot.participants[1];
 const ok = JSON.stringify({ v: 1, ok: true, value: null });
 
+const wakeFixture = (name) =>
+  JSON.parse(
+    readFileSync(
+      new URL(`./fixtures/co-op-wake/${name}.json`, import.meta.url),
+      "utf8",
+    ),
+  );
+
+test("exact native maximum stage and Wake request use the third delegate with matching context", () => {
+  const stageRequest = wakeFixture("maximum-native-stage"),
+    wakeRequest = wakeFixture("maximum-native-wake");
+  const calls = [];
+  const galaxy = {
+    co_op_replica(text) {
+      calls.push(JSON.parse(text));
+      assert.ok(Buffer.byteLength(text) <= 65536);
+      return ok;
+    },
+  };
+  const port = createGalaxyCoopPorts(galaxy).replica;
+  assert.equal(
+    port.begin(
+      stageRequest.header.snapshot.session,
+      stageRequest.header.snapshot.participants[1].id,
+      stageRequest.header.snapshot.participants[1].epoch,
+      stageRequest.header.snapshot.world_seed,
+    ),
+    true,
+  );
+  assert.equal(port.stage(stageRequest.header), true);
+  assert.equal(port.page(wakeRequest.page), true);
+  assert.deepEqual(calls[1], stageRequest);
+  assert.deepEqual(calls[2], wakeRequest);
+  assert.equal(calls[2].op, "replica_wake");
+  console.log(
+    JSON.stringify({
+      scope: "recorded fake native delegate requests, not native execution",
+      stageBytes: Buffer.byteLength(JSON.stringify(calls[1])),
+      wakeBytes: Buffer.byteLength(JSON.stringify(calls[2])),
+    }),
+  );
+  port.end();
+});
+
+test("scalar stress Wake request requires its own maximal staged token and roster", () => {
+  const request = wakeFixture("scalar-stress-native-wake");
+  const header = wakeFixture("maximum-header");
+  header.acquisition = request.acquisition;
+  header.snapshot.tick = request.page.tick;
+  header.snapshot.revision = request.page.revision;
+  header.snapshot.participants.forEach((p) => (p.epoch = 0xffff_ffff));
+  header.snapshot.projectiles.forEach((p) => {
+    if (p.owner !== null) p.owner_epoch = 0xffff_ffff;
+  });
+  header.snapshot.nova_fx.records.forEach((r) => (r.epoch = 0xffff_ffff));
+  const calls = [];
+  const port = createGalaxyCoopPorts({
+    co_op_replica: (text) => {
+      calls.push(JSON.parse(text));
+      return ok;
+    },
+  }).replica;
+  const p = header.snapshot.participants[1];
+  port.begin(
+    header.snapshot.session,
+    p.id,
+    p.epoch,
+    header.snapshot.world_seed,
+  );
+  port.stage(header);
+  port.page(request.page);
+  assert.deepEqual(calls.at(-1), request);
+  assert.ok(Buffer.byteLength(JSON.stringify(calls.at(-1))) < 65536);
+  port.end();
+});
+
+test("Wake delegate rejection retains the ownership token for commit/end recovery", () => {
+  const header = wakeFixture("initial-header"),
+    page = wakeFixture("initial-page"),
+    calls = [];
+  let reject = true;
+  const port = createGalaxyCoopPorts({
+    co_op_replica: (text) => {
+      const r = JSON.parse(text);
+      calls.push(r);
+      return r.op === "replica_wake" && reject
+        ? JSON.stringify({ v: 1, ok: false, error: "invalid_wake_page" })
+        : ok;
+    },
+  }).replica;
+  const p = header.snapshot.participants[1];
+  port.begin(
+    header.snapshot.session,
+    p.id,
+    p.epoch,
+    header.snapshot.world_seed,
+  );
+  port.stage(header);
+  assert.equal(port.page(page), false);
+  reject = false;
+  assert.equal(port.page(page), true);
+  assert.deepEqual(
+    calls.filter((r) => r.op === "replica_wake").map((r) => r.acquisition),
+    [header.acquisition, header.acquisition],
+  );
+  const wrong = structuredClone(page);
+  wrong.revision++;
+  assert.throws(() => port.page(wrong), /replica_page/);
+  const mixed = { ...page, cells: [] };
+  assert.throws(() => port.page(mixed));
+  port.end();
+  assert.equal(calls.at(-1).op, "replica_end");
+});
+
+test("actual two-operation host response is preserved without pretending it is one result", () => {
+  const raw = readFileSync(
+    new URL(
+      "./fixtures/co-op-wake/actual-host-batch-response.json",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+  const header = wakeFixture("actual-host-header"),
+    page = wakeFixture("actual-host-page");
+  assert.equal(header.snapshot.participants.length, 1);
+  const request = {
+    v: 1,
+    operations: Array.from({ length: 2 }, () => ({
+      op: "wake_page",
+      session: header.snapshot.session,
+      acquisition: header.acquisition,
+      revision: header.snapshot.revision,
+    })),
+  };
+  const ports = createGalaxyCoopPorts({
+    co_op_batch: (text) => {
+      assert.deepEqual(JSON.parse(text), request);
+      return raw;
+    },
+  });
+  const response = JSON.parse(
+    ports.native.co_op_batch(JSON.stringify(request)),
+  );
+  assert.equal(response.results.length, 2);
+  assert.deepEqual(
+    response.results.map((r) => r.value),
+    [page, page],
+  );
+});
+
 const equipment = () => ({
   version: 1,
   selected_ship: 0,

@@ -1,0 +1,6 @@
+apps/game/src/coop/wire.ts 74ms
+apps/game/src/coop/controller.ts 66ms
+apps/game/src/coop/wasm-ports.ts 8ms
+scripts/test/coop-wake-wire.test.mjs 20ms
+scripts/test/coop-controller.test.mjs 56ms
+scripts/test/coop-wasm-ports.test.mjs 21ms

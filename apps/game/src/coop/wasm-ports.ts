@@ -138,7 +138,11 @@ export function createGalaxyCoopPorts(galaxy: GalaxyCoop): GalaxyCoopPorts {
       )
         fail("replica_page");
       return call({
-        op: Array.isArray(p.entities) ? "replica_entities" : "replica_body",
+        op: Array.isArray(p.points)
+          ? "replica_wake"
+          : Array.isArray(p.entities)
+            ? "replica_entities"
+            : "replica_body",
         acquisition,
         page,
       });

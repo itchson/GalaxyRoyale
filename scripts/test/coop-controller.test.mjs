@@ -264,6 +264,9 @@ class Native {
   failInput = null;
   failEnd = false;
   cellColor = 0xff556677;
+  // Optional declared authority fixture; never inferred in production JS.
+  wakeEnabled = false;
+  wakePoints = null;
   saved = {
     seed: local.local_seed,
     ship_xp: Array(10).fill(0),
@@ -379,6 +382,24 @@ class Native {
         rows,
         cells,
       };
+      if (this.wakeEnabled) {
+        const points =
+          this.wakePoints ??
+          this.participants.map((a) => ({
+            slot: a.slot,
+            epoch: a.epoch,
+            born_tick: this.tick,
+            position: [780, a.slot * 40],
+            life: Math.fround(3.4),
+          }));
+        this.capture.header.snapshot.wake_fx = { points: points.length };
+        this.capture.wake = {
+          session: this.session,
+          tick: this.tick,
+          revision: this.revision,
+          points: structuredClone(points),
+        };
+      }
       return this.capture.header;
     }
     assert.equal(o.acquisition, this.capture.header.acquisition);
@@ -392,6 +413,7 @@ class Native {
     };
     if (o.op === "entity_page")
       return { ...common, entities: this.capture.rows };
+    if (o.op === "wake_page") return this.capture.wake;
     if (o.op === "body_page")
       return {
         ...common,
@@ -437,6 +459,7 @@ async function pair({
   hostSpec = local,
   sessionCounter = 0,
   autoApproval = true,
+  wake = false,
 } = {}) {
   const network = new Network(),
     native = new Native(),
@@ -445,6 +468,7 @@ async function pair({
   network.session = sessionCounter;
   network.autoApproval = autoApproval;
   native.saved.seed = hostSpec.local_seed;
+  native.wakeEnabled = wake;
   const options = {
     service: "http://127.0.0.1:4176",
     localSpec: () => structuredClone(hostSpec),
@@ -488,6 +512,459 @@ async function pair({
     },
   };
 }
+
+test("positive Wake state is sent once per capture even when occupied bodies are cached", async () => {
+  const p = await pair({ wake: true });
+  await p.frame(12);
+  assert.equal(p.guest.state().phase, "connected");
+  const firstCells = p.native.calls.filter((c) => c.op === "body_page").length;
+  assert.equal(firstCells, 2);
+  const countBefore = p.replica.pages.filter((p) =>
+    Array.isArray(p.points),
+  ).length;
+  assert.ok(countBefore > 0);
+  await p.frame(12);
+  assert.equal(
+    p.native.calls.filter((c) => c.op === "body_page").length,
+    firstCells,
+  );
+  assert.ok(
+    p.replica.pages.filter((p) => Array.isArray(p.points)).length > countBefore,
+  );
+  const requests = p.native.calls.filter((c) => c.op === "wake_page");
+  assert.equal(
+    new Set(requests.map((c) => c.acquisition)).size,
+    requests.length,
+  );
+  const sent = p.network.sent.filter((f) => Array.isArray(f.payload.points));
+  assert.equal(sent.length, requests.length);
+  assert.equal(
+    sent.length,
+    p.replica.pages.filter((p) => Array.isArray(p.points)).length,
+  );
+  for (const f of sent) assert.equal(f.kind, "body");
+  await p.host.end();
+  await p.guest.dispose();
+  assert.equal(p.replica.ends, 1);
+  assert.equal(p.host.frameMode(), "solo");
+  assert.equal(p.guest.frameMode(), "solo");
+});
+
+test("Wake send refusal retries the retained piece without reacquiring or refetching", async () => {
+  const p = await pair({ wake: true });
+  const t = p.network.transports[0],
+    send = t.send.bind(t);
+  let refused = 0,
+    blocked = true;
+  t.send = (peer, kind, payload) => {
+    if (Array.isArray(payload.points) && blocked) {
+      refused++;
+      return false;
+    }
+    return send(peer, kind, payload);
+  };
+  await p.frame(6);
+  assert.ok(refused > 0);
+  assert.equal(p.replica.commits.length, 0);
+  assert.equal(p.native.calls.filter((c) => c.op === "wake_page").length, 1);
+  assert.equal(p.native.calls.filter((c) => c.op === "acquire").length, 1);
+  const original = structuredClone(p.native.capture.wake);
+  blocked = false;
+  await p.frame(2);
+  assert.deepEqual(
+    p.network.sent.find((f) => Array.isArray(f.payload.points)).payload,
+    original,
+  );
+  assert.equal(p.native.calls.filter((c) => c.op === "wake_page").length, 1);
+  assert.equal(p.replica.commits.length, 1);
+  await p.host.end();
+  await p.guest.dispose();
+});
+
+const deliver = (p, kind, payload) => {
+  validatePayload(kind, payload);
+  return p.network.transports[1].options.onFrame(pid(1), {
+    v: 1,
+    session: p.native.session,
+    seq: 1,
+    kind,
+    payload: structuredClone(payload),
+  });
+};
+test("required Wake missing or duplicate state never commits, ACKs or bypasses cells order", async () => {
+  for (const mutation of [
+    "missing",
+    "unexpected",
+    "duplicate",
+    "cells-first",
+    "before-entities",
+    "count",
+    "epoch",
+    "slot",
+    "tick",
+    "revision",
+    "session",
+  ]) {
+    const p = await pair({ wake: true });
+    await p.frame(1);
+    const h = p.native.capture.header,
+      w = structuredClone(p.native.capture.wake);
+    // First frame sends the header and complete entity rows, retaining cells.
+    assert.equal(p.replica.commits.length, 0);
+    if (mutation === "unexpected") {
+      const zero = structuredClone(h);
+      zero.acquisition++;
+      zero.snapshot.wake_fx = { points: 0 };
+      deliver(p, "publication", zero);
+      deliver(p, "body", {
+        session: w.session,
+        tick: w.tick,
+        revision: w.revision,
+        offset: 0,
+        next_offset: null,
+        entities: p.native.capture.rows,
+      });
+    } else if (mutation === "before-entities") {
+      const fresh = structuredClone(h);
+      fresh.acquisition++;
+      deliver(p, "publication", fresh);
+    }
+    if (mutation === "duplicate") deliver(p, "body", w);
+    if (mutation === "count") w.points.pop();
+    if (mutation === "epoch") w.points[0].epoch++;
+    if (mutation === "slot") w.points.at(-1).slot = 7;
+    if (mutation === "tick") w.tick++;
+    if (mutation === "revision") w.revision++;
+    if (mutation === "session") w.session = "f".repeat(32);
+    if (mutation === "missing")
+      assert.throws(
+        () =>
+          deliver(p, "publication-end", {
+            acquisition: h.acquisition,
+            revision: h.snapshot.revision,
+          }),
+        /publication_incomplete/,
+      );
+    else if (mutation === "cells-first")
+      assert.throws(
+        () =>
+          deliver(p, "body", {
+            session: w.session,
+            tick: w.tick,
+            revision: w.revision,
+            offset: 0,
+            next_offset: null,
+            id: eid(1),
+            width: 4,
+            height: 4,
+            occupied: 2,
+            cells: p.native.capture.cells,
+          }),
+        /publication_body/,
+      );
+    else assert.throws(() => deliver(p, "body", w));
+    assert.equal(p.replica.commits.length, 0, mutation);
+    assert.equal(
+      p.network.sent.filter((f) => f.kind === "publication-ack").length,
+      0,
+      mutation,
+    );
+    assert.equal(p.network.transports[1].sim.includes(true), false, mutation);
+    await p.host.end();
+    await p.guest.dispose();
+    assert.equal(p.replica.ends, 1);
+  }
+});
+
+test("accepted pending Wake followed by invalid cells or native commit refusal cannot promote a scene", async () => {
+  for (const kind of ["bad-cells", "native-refusal"]) {
+    const p = await pair({ wake: true });
+    await p.frame(1);
+    const h = p.native.capture.header;
+    deliver(p, "body", p.native.capture.wake);
+    if (kind === "bad-cells")
+      assert.throws(
+        () =>
+          deliver(p, "body", {
+            session: h.snapshot.session,
+            tick: h.snapshot.tick,
+            revision: h.snapshot.revision,
+            offset: 0,
+            next_offset: null,
+            id: eid(1),
+            width: 4,
+            height: 4,
+            occupied: 2,
+            cells: [[0, 1]],
+          }),
+        /publication_offset/,
+      );
+    else {
+      p.replica.commit = () => false;
+      for (const row of p.native.capture.rows)
+        deliver(p, "body", {
+          session: h.snapshot.session,
+          tick: h.snapshot.tick,
+          revision: h.snapshot.revision,
+          offset: 0,
+          next_offset: null,
+          id: row.id,
+          width: 4,
+          height: 4,
+          occupied: 2,
+          cells: p.native.capture.cells,
+        });
+      assert.throws(
+        () =>
+          deliver(p, "publication-end", {
+            acquisition: h.acquisition,
+            revision: h.snapshot.revision,
+          }),
+        /replica_commit/,
+      );
+    }
+    assert.equal(
+      p.network.sent.filter((f) => f.kind === "publication-ack").length,
+      0,
+    );
+    assert.equal(p.network.transports[1].sim.includes(true), false);
+    await p.host.end();
+    await p.guest.dispose();
+  }
+});
+
+test("zero and omitted Wake captures make no Wake request and keep legacy completion", async () => {
+  for (const wake of [true, false]) {
+    const p = await pair({ wake });
+    p.native.wakePoints = [];
+    await p.frame(8);
+    assert.equal(p.guest.state().phase, "connected");
+    assert.equal(p.native.calls.filter((c) => c.op === "wake_page").length, 0);
+    await p.host.end();
+    await p.guest.dispose();
+  }
+});
+
+test("Wake native page rejection leaves completeness unset and cannot ACK", async () => {
+  const p = await pair({ wake: true });
+  await p.frame(1);
+  p.replica.page = () => false;
+  assert.throws(
+    () => deliver(p, "body", p.native.capture.wake),
+    /replica_page/,
+  );
+  const h = p.native.capture.header;
+  assert.throws(
+    () =>
+      deliver(p, "publication-end", {
+        acquisition: h.acquisition,
+        revision: h.snapshot.revision,
+      }),
+    /publication_incomplete/,
+  );
+  assert.equal(p.replica.commits.length, 0);
+  assert.equal(
+    p.network.sent.filter((f) => f.kind === "publication-ack").length,
+    0,
+  );
+  await p.host.end();
+  await p.guest.dispose();
+});
+
+test("same-tick current-state Wake is forwarded unchanged and native set rejection stays decisive", async () => {
+  const p = await pair({ wake: true });
+  await p.frame(8);
+  const points = p.replica.pages.filter((p) => Array.isArray(p.points)).at(-1);
+  assert.ok(points);
+  const old = p.network.sent.find(
+    (f) =>
+      f.kind === "publication" &&
+      f.payload.snapshot.tick === points.tick &&
+      f.payload.snapshot.revision === points.revision,
+  ).payload;
+  const rows = p.network.sent.find(
+    (f) =>
+      Array.isArray(f.payload.entities) &&
+      f.payload.tick === points.tick &&
+      f.payload.revision === points.revision,
+  ).payload.entities;
+  const ackBefore = p.network.sent.filter(
+    (f) => f.kind === "publication-ack",
+  ).length;
+  const same = structuredClone(old);
+  same.acquisition = p.native.acquisition + 1;
+  deliver(p, "publication", same);
+  deliver(p, "body", {
+    session: old.snapshot.session,
+    tick: old.snapshot.tick,
+    revision: old.snapshot.revision,
+    offset: 0,
+    next_offset: null,
+    entities: rows,
+  });
+  deliver(p, "body", points);
+  assert.deepEqual(p.replica.pages.at(-1), points);
+  // Configured fake native rejection models the separate real Rust commit
+  // fence; JS neither reconstructs nor compares captured lifetime sets.
+  p.replica.commit = () => false;
+  assert.throws(
+    () =>
+      deliver(p, "publication-end", {
+        acquisition: same.acquisition,
+        revision: same.snapshot.revision,
+      }),
+    /replica_commit/,
+  );
+  assert.equal(
+    p.network.sent.filter((f) => f.kind === "publication-ack").length,
+    ackBefore,
+  );
+  await p.host.end();
+  await p.guest.dispose();
+});
+
+test("positive Wake quota and all-peer ACK still bound one shared capture", async () => {
+  const p = await pair({ wake: true });
+  await p.frame(8);
+  const thirdReplica = new Replica();
+  const third = new CoopController({
+    service: "http://127.0.0.1:4176",
+    localSpec: () => structuredClone(local),
+    native: new Native(),
+    replica: thirdReplica,
+    transportFactory: p.network.factory,
+    now: () => p.network.now ?? 0,
+  });
+  await third.join(p.host.invite());
+  await flush();
+  await p.frame(8);
+  assert.ok(thirdReplica.commits.length > 0);
+  const held = p.native.calls.filter((c) => c.op === "acquire").length;
+  await p.frame(8);
+  assert.equal(p.native.calls.filter((c) => c.op === "acquire").length, held);
+  third.beforeStep(1 / 60, empty);
+  await flush();
+  await p.frame(1);
+  assert.ok(p.native.calls.filter((c) => c.op === "acquire").length > held);
+  // Let the third peer ACK each ensuing complete model publication.
+  for (let i = 0; i < 240; i++) {
+    third.beforeStep(1 / 120, empty);
+    await p.frame(1, 1 / 120);
+  }
+  const pieces = p.network.sent.filter((f) =>
+    ["publication", "body", "publication-end"].includes(f.kind),
+  );
+  for (const piece of pieces) {
+    const window = pieces.filter(
+      (f) => f.to === piece.to && f.at > piece.at - 1000 && f.at <= piece.at,
+    );
+    assert.ok(window.length <= 80);
+    assert.ok(
+      window.reduce(
+        (n, f) => n + Buffer.byteLength(JSON.stringify(f.payload)) + 256,
+        0,
+      ) <= 1048576,
+    );
+  }
+  const requests = p.native.calls.filter((c) => c.op === "wake_page");
+  assert.equal(
+    new Set(requests.map((r) => r.acquisition)).size,
+    requests.length,
+  );
+  await p.host.end();
+  await p.guest.dispose();
+  await third.dispose();
+  assert.equal(thirdReplica.ends, 1);
+});
+
+test("same-tick life/key/position or absent set is never bypassed around a native refusal", async () => {
+  for (const change of ["life", "key", "position", "empty", "legacy"]) {
+    const p = await pair({ wake: true });
+    await p.frame(8);
+    const points = structuredClone(
+      p.replica.pages.filter((x) => Array.isArray(x.points)).at(-1),
+    );
+    const h = structuredClone(
+      p.network.sent.find(
+        (f) =>
+          f.kind === "publication" &&
+          f.payload.snapshot.tick === points.tick &&
+          f.payload.snapshot.revision === points.revision,
+      ).payload,
+    );
+    const rows = p.network.sent.find(
+      (f) =>
+        Array.isArray(f.payload.entities) &&
+        f.payload.tick === points.tick &&
+        f.payload.revision === points.revision,
+    ).payload.entities;
+    h.acquisition = p.native.acquisition + 1;
+    if (change === "life") points.points[0].life -= 0.1;
+    if (change === "key") points.points[0].born_tick = 0;
+    if (change === "position") points.points[0].position[0] += 1;
+    if (change === "empty") h.snapshot.wake_fx = { points: 0 };
+    if (change === "legacy") delete h.snapshot.wake_fx;
+    const ackBefore = p.network.sent.filter(
+      (f) => f.kind === "publication-ack",
+    ).length;
+    deliver(p, "publication", h);
+    deliver(p, "body", {
+      session: h.snapshot.session,
+      tick: h.snapshot.tick,
+      revision: h.snapshot.revision,
+      offset: 0,
+      next_offset: null,
+      entities: rows,
+    });
+    if (!["empty", "legacy"].includes(change)) {
+      deliver(p, "body", points);
+      assert.deepEqual(p.replica.pages.at(-1), points);
+    }
+    // Rejection is supplied by a declared delegate, not a JS reimplementation
+    // or claim that this test executes the Rust canonical-set comparison.
+    let attempts = 0;
+    p.replica.commit = () => {
+      attempts++;
+      return false;
+    };
+    assert.throws(
+      () =>
+        deliver(p, "publication-end", {
+          acquisition: h.acquisition,
+          revision: h.snapshot.revision,
+        }),
+      /replica_commit/,
+    );
+    assert.equal(attempts, 1);
+    assert.equal(
+      p.network.sent.filter((f) => f.kind === "publication-ack").length,
+      ackBefore,
+    );
+    await p.host.end();
+    await p.guest.dispose();
+  }
+});
+
+test("actual two-result host Wake replay cannot satisfy a one-operation capture call", async () => {
+  const p = await pair({ wake: true }),
+    original = p.native.co_op_batch;
+  const raw = readFileSync(
+    new URL(
+      "./fixtures/co-op-wake/actual-host-batch-response.json",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+  p.native.co_op_batch = (text) =>
+    JSON.parse(text).operations.some((o) => o.op === "wake_page")
+      ? raw
+      : original(text);
+  await p.frame(6);
+  assert.equal(p.host.state().reason, "publication_failed");
+  assert.equal(p.replica.commits.length, 0);
+  assert.equal(p.host.frameMode(), "solo");
+  await p.guest.dispose();
+});
 
 test("channel ready is separate from native admission and complete replica application", async () => {
   const p = await pair();
