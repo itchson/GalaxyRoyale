@@ -25,6 +25,245 @@ fn draw(input: DockInput) -> (RenderFrame, DockStats) {
 }
 type CellPacket = ([f32; 2], u32, [f32; 4], [f32; 4]);
 
+fn capture_live_hub(game: &Game, enabled: bool) -> (RenderFrame, std::ops::Range<usize>) {
+    let mut frame = FrameBuilder::new();
+    let mut span = 0..0;
+    game.render_into_with_home(1.0, &mut frame, |frame, parent, time| {
+        if !enabled {
+            frame.clear_planar_shadow();
+        }
+        span.start = frame.frame().pixel_count;
+        let stats = append(
+            frame,
+            &DockInput {
+                parent,
+                corporation: Some(Corporation::Pan),
+                time,
+                reduced_motion: true,
+            },
+            &mut DockBudget::default(),
+        )
+        .unwrap();
+        assert_eq!((stats.cells, stats.transforms), (28_549, 16));
+        span.end = frame.frame().pixel_count;
+        true
+    });
+    (frame.finish(), span)
+}
+
+fn live_shadow_at_hub_gap(gap: Vec2) -> (Game, RenderFrame, std::ops::Range<usize>) {
+    let profile =
+        game_core::identity::create_profile("dora", "pan", "renko", "0123456789abcdef").unwrap();
+    let mut game = Game::new(profile);
+    game.set_reduced_motion(true);
+    assert!(game.diagnostic("warp 0 0"));
+    let (initial, _) = capture_live_hub(&game, true);
+    let shadows = initial.shadows.as_ref().unwrap();
+    let caster = shadows.caster.unwrap();
+    let key = shadows.light.unwrap();
+    let cell = game_core::identity::starter_body(Corporation::Pan)
+        .cells()
+        .filter(|(_, color)| color >> 24 >= 128)
+        .min_by(|a, b| a.0.length_squared().total_cmp(&b.0.length_squared()))
+        .unwrap()
+        .0;
+    let fraction = caster.height / (key.radius * 0.35);
+    let intercept = gap.lerp(Vec2::from_array(key.position), fraction);
+    let position = intercept - caster.transform.vector(cell);
+    assert!(game.diagnostic(&format!("warp {} {}", position.x, position.y)));
+    let (frame, span) = capture_live_hub(&game, true);
+    (game, frame, span)
+}
+
+fn hub_cells(
+    frame: &RenderFrame,
+    span: std::ops::Range<usize>,
+) -> Vec<(engine_core::GpuTransform, Vec2, engine_core::ObjectMeta)> {
+    frame
+        .batches
+        .iter()
+        .flat_map(|batch| {
+            batch.pixels.iter().map(|pixel| {
+                let slot = pixel.transform_slot();
+                (
+                    batch.transforms[slot],
+                    Vec2::from_array(pixel.local),
+                    batch
+                        .objects
+                        .as_ref()
+                        .and_then(|objects| objects.get(slot))
+                        .copied()
+                        .unwrap_or_default(),
+                )
+            })
+        })
+        .skip(span.start)
+        .take(span.len())
+        .collect()
+}
+
+fn quad_covers(t: engine_core::GpuTransform, center: Vec2, point: Vec2) -> bool {
+    let affine = AffineTransform {
+        position: Vec2::new(t.a[0], t.a[1]),
+        basis_x: Vec2::new(t.a[2], t.a[3]),
+        basis_y: Vec2::new(t.b[0], t.b[1]),
+    };
+    affine
+        .try_inverse_point(point)
+        .is_some_and(|local| (local - center).abs().max_element() <= 0.5)
+}
+
+#[test]
+fn actual_hub_gap_blocks_live_shadow_rays_without_adding_receiver_or_quad() {
+    for gap in [Vec2::new(50.0, 50.0), Vec2::new(50.0, -50.0)] {
+        let (game, frame, span) = live_shadow_at_hub_gap(gap);
+        let shadows = frame.shadows.as_deref().unwrap();
+        let key = shadows.light.unwrap();
+        let cells = hub_cells(&frame, span.clone());
+        assert_eq!(span.len(), 28_549);
+        assert!(
+            !cells
+                .iter()
+                .any(|(t, center, _)| quad_covers(*t, *center, gap)),
+            "actual native256 opening must have no quad"
+        );
+        for offset in [
+            Vec2::new(-1.5, -1.5),
+            Vec2::new(1.5, -1.5),
+            Vec2::new(-1.5, 1.5),
+            Vec2::new(1.5, 1.5),
+        ] {
+            assert!(
+                shadows.blocks_ray(
+                    gap,
+                    0.0,
+                    Vec2::from_array(key.position) + offset,
+                    key.radius * 0.35
+                ),
+                "the empty-space exclusion must not be a vacuous unblocked ray"
+            );
+        }
+        let occupied_blocked = cells
+            .iter()
+            .filter(|(t, center, meta)| {
+                meta.flags == engine_core::shadow::SHADOW_RECEIVER
+                    && shadows.blocks_ray(
+                        t.point(*center),
+                        meta.height,
+                        Vec2::from_array(key.position),
+                        key.radius * 0.35,
+                    )
+            })
+            .count();
+        assert!(
+            occupied_blocked > 0,
+            "neighboring real receivers must still admit the same live shadow"
+        );
+        let (unshadowed, plain_span) = capture_live_hub(&game, false);
+        assert_eq!(span, plain_span);
+        assert_eq!(frame.pixel_count, unshadowed.pixel_count);
+        assert_eq!(
+            packet(&frame),
+            packet(&unshadowed),
+            "shadow presentation must add no offset sprite or quad anywhere in the actual Game frame"
+        );
+    }
+}
+
+#[test]
+fn actual_hub_gap_and_live_shadow_projection_survive_fractional_zoom_and_rebase() {
+    let gap = Vec2::new(50.0, 50.0);
+    let (game, frame, span) = live_shadow_at_hub_gap(gap);
+    let shadows = frame.shadows.as_deref().unwrap();
+    let key = shadows.light.unwrap();
+    let cells = hub_cells(&frame, span);
+    let lights = game.light_sources(1.0);
+    let home_slot = lights
+        .iter()
+        .position(|light| {
+            light.position == key.position
+                && light.radius == key.radius
+                && light.color == key.color
+                && light.intensity == key.intensity
+        })
+        .unwrap();
+    assert!(
+        home_slot > 0 && home_slot < crate::lighting::MAX_LIGHTS,
+        "actual exhaust light precedes the home beacon in this live fixture"
+    );
+    assert!(lights.iter().any(|light| light.position == key.position
+        && light.color == key.color
+        && light.intensity == key.intensity));
+    for camera in [
+        Vec2::from_array(game.render_camera(1.0)),
+        Vec2::new(51.125, 47.25),
+        Vec2::new(1024.125, -512.25),
+    ] {
+        let descriptors =
+            crate::shadow_uniforms::uniforms(Some(shadows), camera.to_array(), &lights);
+        assert_eq!(descriptors.header, [1, 1 << home_slot, 4, 1]);
+        let caster = descriptors.casters[0];
+        for zoom in [0.6, 1.125, 1.6] {
+            let view = CameraView::new(camera, Vec2::new(853.0, 480.0), zoom).unwrap();
+            let recovered = view.screen_to_world(view.world_to_screen(gap));
+            assert!(recovered.distance(gap) < 0.0005);
+            assert!(
+                !cells
+                    .iter()
+                    .any(|(t, center, _)| quad_covers(*t, *center, recovered))
+            );
+            for offset in [
+                Vec2::new(-1.5, -1.5),
+                Vec2::new(1.5, -1.5),
+                Vec2::new(-1.5, 1.5),
+                Vec2::new(1.5, 1.5),
+            ] {
+                let source = Vec2::from_array(key.position) + offset;
+                let fraction = caster.x[3] / (key.radius * 0.35);
+                let relative_intercept = recovered.lerp(source, fraction) - camera;
+                let local = Vec2::new(
+                    caster.x[0] * relative_intercept.x
+                        + caster.x[1] * relative_intercept.y
+                        + caster.x[2],
+                    caster.y[0] * relative_intercept.x
+                        + caster.y[1] * relative_intercept.y
+                        + caster.y[2],
+                );
+                let expected_local = shadows
+                    .caster
+                    .unwrap()
+                    .transform
+                    .try_inverse_point(recovered.lerp(source, fraction))
+                    .unwrap();
+                assert!(
+                    local.distance(expected_local) < 0.0005,
+                    "packed inverse must preserve the actual caster coordinates, not merely land on some occupied cell"
+                );
+                assert!(
+                    shadows.occupied(local),
+                    "rebased shader descriptor must retain the same occupied occluder across zoom"
+                );
+                assert!(shadows.blocks_ray(recovered, 0.0, source, key.radius * 0.35));
+            }
+            let receiver = cells
+                .iter()
+                .find(|(t, center, meta)| {
+                    meta.flags == engine_core::shadow::SHADOW_RECEIVER
+                        && shadows.blocks_ray(
+                            t.point(*center),
+                            0.0,
+                            Vec2::from_array(key.position),
+                            key.radius * 0.35,
+                        )
+                })
+                .unwrap();
+            let relative = view.relative_transform(receiver.0);
+            let screen = relative.point(receiver.1) * zoom + Vec2::new(853.0, 480.0) * 0.5;
+            assert!(screen.distance(view.world_to_screen(receiver.0.point(receiver.1))) < 0.001);
+        }
+    }
+}
+
 #[test]
 fn dock_receiver_metadata_is_occupied_role_only_and_preserves_all_artwork() {
     let (plain, _) = draw(input());
