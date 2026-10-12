@@ -1,20 +1,7 @@
-# Galaxy Royale title theme delivery
+# Galaxy Royale title composition reference
 
-The original theme recording is pending the user's composition. No substitute
-recording is shipped and no missing MP3 is requested by the game.
+The user supplied their original `Galaxy Royale (3).mp3` on2026-10-13 and explicitly requested recreation in the dynamic synthesizer, rather than runtime recording playback. The source remains an offline reference and is not shipped or decoded by the game.
 
-For integration, place the edited title loop in `apps/game/public/audio/`, set
-its local URL and decoded loop-in/loop-out seconds in `apps/game/src/title-theme.ts`,
-then rebuild normally so the game-only PWA asset manifest includes the file.
-Use an original/licensed MP3, OGG or WAV; keep the playable loop at 120 seconds
-or less, mono/stereo, below 16 MiB encoded and 64 MiB decoded. Keep the full master
-separately. Actual decoded memory and seam audibility must be measured on
-delivery; the loader's budget check is not a peak decoder-memory measurement.
+The current native note-score draft uses the existing AudioContext, music/master controls, bounded synth voices and shared tempo/harmonic clock. See `docs/TITLE_SCORE.md`, `apps/game/src/title-theme.ts`, `music-clock.ts` and `music-score.ts` for implementation and provenance. Title/Continue, corporate/area arrangements and120/166 BPM chase/release ramps use the same transport.
 
-The existing AudioContext and Master/Music controls own playback. A title
-gesture unlocks it; one loop source fades over 1.2 seconds against the procedural
-world score. Hidden tabs stop it; returning to title reuses the decoded loop.
-The score low-pass/echo does not process the mastered title track. Verify the
-chosen loop points by listening, including MP3 padding, and edit a seamless
-loop before acceptance. The code does not claim to make an arbitrary song's
-ends musically seamless.
+The authored draft is not an exact transcription or final listening acceptance. Actual native OfflineAudioContext exports are development audition files only. The user requested instrument sound and mix refinement after the first audition. Keep source-reference analysis, rendered source pins, mix revisions and listening feedback separate from shipped assets and verified scheduler behavior.
