@@ -1,0 +1,14 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.33s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 6 tests
+test pixel_assets::tests::actual_damage_opens_a_previously_opaque_crater_without_changing_other_rocks ... ok
+test pixel_assets::tests::asteroid_types_have_distinct_live_masks_and_deterministic_facets ... ok
+test pixel_assets::tests::dock_center_is_open_and_damage_never_changes_the_pristine_template ... ok
+test pixel_assets::tests::generated_assets_keep_exact_occupancy_dimensions_and_hard_palette ... ok
+test pixel_assets::tests::authored_dock_panel_detail_keeps_exact_generated_open_hull ... ok
+test pixel_assets::tests::seeded_solid_bodies_keep_real_radius_and_independent_damage ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 561 filtered out; finished in 0.29s
+

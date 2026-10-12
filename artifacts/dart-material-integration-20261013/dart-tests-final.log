@@ -1,0 +1,12 @@
+test_actual_indexed_png_and_exact_pack_reproduce_all_owned_outputs (__main__.DartDetailProof.test_actual_indexed_png_and_exact_pack_reproduce_all_owned_outputs) ... ok
+test_baseline_is_exact_recorded_git_sprite_and_palette (__main__.DartDetailProof.test_baseline_is_exact_recorded_git_sprite_and_palette) ... ok
+test_crlf_reference_reproduces_same_canonical_outputs (__main__.DartDetailProof.test_crlf_reference_reproduces_same_canonical_outputs) ... ok
+test_exact426mask_grid_palette_and_original_signal_sites (__main__.DartDetailProof.test_exact426mask_grid_palette_and_original_signal_sites) ... ok
+test_shipped_atlas_is_exact_frozen_candidate_with_original_other_bytes (__main__.DartDetailProof.test_shipped_atlas_is_exact_frozen_candidate_with_original_other_bytes) ... ok
+test_surgical_update_retains_all_other_actual_atlas_bytes (__main__.DartDetailProof.test_surgical_update_retains_all_other_actual_atlas_bytes) ... ok
+test_unreviewed_other_atlas_or_dart_changes_refuse_overwrite (__main__.DartDetailProof.test_unreviewed_other_atlas_or_dart_changes_refuse_overwrite) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.063s
+
+OK
